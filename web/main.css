@@ -1,0 +1,90 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0px;
+}
+
+header {
+  
+}
+
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient( to right top, transparent 33%, gray 33%, gray 66%, transparent 66%);
+    background-size: 3px 3px;
+    z-index: -1;
+}
+
+.remote {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color: black;
+    position: fixed;
+    top: 20%;
+    left: 3%;
+    height: 70%;
+    width: 10%;
+    text-align: center;
+}
+
+.remote h1 {
+    height: 15%;
+}
+
+.remote .category {
+    height: 80%;
+}
+
+.remote .category a {
+    text-decoration: none;
+}
+
+.remote .category a p {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bolder;
+    font-size: 1.5em;
+    padding: 13% 0%;
+}
+
+.remote .category div {
+    display: none;
+}
+
+.remote .category a:nth-child(1) {
+    color: rgb(52, 152, 219);
+}
+
+.remote .category a:nth-child(2) {
+    color: rgb(142, 68, 173);
+}
+
+.remote .category a:nth-child(3) {
+    color: rgb(192, 57, 43);
+}
+
+.remote .category .children a {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+    display: block;
+    font-weight: bolder;
+    font-size: 1.5em;
+    padding: 13% 0%;
+}
+
+.remote .category .children a:hover {
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    display: block;
+    font-weight: bolder;
+    font-size: 1.5em;
+    padding: 13% 0%;
+}
+
+.main {
+  position: relative;
+  top: 20%;
+  left: 16%;
+  height: 70%;
+  width: 80%;
+}
