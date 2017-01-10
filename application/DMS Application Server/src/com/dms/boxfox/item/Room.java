@@ -13,7 +13,6 @@ public class Room {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public void setDB(String db) {
 		this.db = db;
 	}
@@ -21,11 +20,9 @@ public class Room {
 	public String getTitle() {
 		return title;
 	}
-
 	public String getDB() {
 		return db;
 	}
-
 	public int getType() {
 		return type;
 	}

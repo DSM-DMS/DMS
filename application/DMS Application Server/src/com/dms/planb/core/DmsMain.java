@@ -4,8 +4,7 @@ package com.dms.planb.core;
  * Daedeok Software Meister High School
  * Domitory Management System(DMS) Project
  * 
- * Android Application HTTP Server based Vert.x Framework.
- * Communicate by POST
+ * Android Application HTTP Server based Vert.x Framework
  * Developed by Jo Mingyu : PlanB
  * Developer Blog : http://city7310.blog.me/
  * 

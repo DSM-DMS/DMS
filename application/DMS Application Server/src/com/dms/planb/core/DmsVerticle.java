@@ -2,8 +2,9 @@ package com.dms.planb.core;
 
 /*
  * Main verticle for main method in DmsMain class.
+ * Communicate by POST
  * 
- * 
+ * Judge any activity for command parameter.
  */
 
 import io.vertx.core.AbstractVerticle;
@@ -12,6 +13,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.http.HttpServerResponse;
 
 public class DmsVerticle extends AbstractVerticle {
 	private HttpServer server;
@@ -29,6 +31,8 @@ public class DmsVerticle extends AbstractVerticle {
 				// Process when http method is only POST
 				request.bodyHandler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
+					
+					HttpServerResponse response = request.response();
 					
 					MultiMap params = request.params();
 				});
