@@ -58,8 +58,10 @@ header .logo p:hover {
 }
 
 .remote {
+    border-radius: 5px;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    background-color: black;
+    background-color: white;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
     position: fixed;
     top: 20%;
     left: 3%;
@@ -121,13 +123,14 @@ header .logo p:hover {
 }
 
 .main {
-    background-image: linear-gradient( to right top, transparent 33%, gray 33%, gray 66%, transparent 66%);
-    background-size: 3px 3px;
+    background-color: white;
+    border-radius: 5px;
     position: absolute;
     top: 20vh;
     left: 16%;
     height: 70%;
     width: 80%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
 }
 
 .frame {
@@ -135,8 +138,49 @@ header .logo p:hover {
     width: 50%;
     height: 100%;
     float: left;
+    /*overflow-x: hidden;*/
 }
 
-.frame h1{
-    margin-left: 15px;
+.frame h1 {
+    margin-left: 7%;
+    margin-bottom: 1%;
+}
+
+.frame ul {
+    position: relative;
+    margin-left: 7%;
+    padding-left: 0%;
+}
+
+.frame ul li {
+    list-style-type: none;
+    margin: 4% 0%;
+}
+
+.frame ul li .title {
+    display: inline;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.frame ul li p.date {
+    text-align: right;
+    /*display: inline;*/
+    float: right;
+    vertical-align: bottom;
+    font-size: 0.5em;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.underline {
+
+    position: relative;
+    right: 0%;
+    height: 8px;
+    margin-left: 7%;
+    margin-right: 0%;
+    width: 90%;
+    background: rgb(211, 84, 0);
 }

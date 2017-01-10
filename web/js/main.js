@@ -90,7 +90,7 @@ $(".remote").mouseleave(() => {
 
     //remote backgroundColor를 원래대로
     $(".remote").animate({
-        backgroundColor: "black"
+        backgroundColor: "white"
     });
 
     // DMS복구
