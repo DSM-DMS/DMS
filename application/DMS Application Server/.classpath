@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="C:/Users/김성래/Desktop/DSM-Dormitory-System/application/Libraries/netty-resolver-dns-4.1.5.Final.jar"/>
 	<classpathentry kind="lib" path="C:/Users/김성래/Desktop/DSM-Dormitory-System/application/Libraries/netty-transport-4.1.5.Final.jar"/>
 	<classpathentry kind="lib" path="C:/Users/김성래/Desktop/DSM-Dormitory-System/application/Libraries/vertx-core-3.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/김성래/Desktop/DSM-Dormitory-System/application/Libraries/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/김성래/Desktop/DSM-Dormitory-System/application/Libraries/mysql-connector-java-5.1.37-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,11 +1,11 @@
-package com.boxfox.logging;
+package com.dms.boxfox.logging;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 
-import com.boxfox.database.DataBase;
+import com.dms.boxfox.database.DataBase;
 
 public class Log {
 	private static File logFile;
@@ -19,6 +19,7 @@ public class Log {
 		Calendar c = Calendar.getInstance();
 		String currentFileName = DataBase.getInstance().queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH),
 				".", c.get(Calendar.DAY_OF_MONTH), ".txt");
+		
 		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);
 			try {
