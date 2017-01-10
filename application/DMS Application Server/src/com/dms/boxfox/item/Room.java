@@ -1,4 +1,4 @@
-package com.boxfox.item;
+package com.dms.boxfox.item;
 
 public class Room {
 	private String title, db;

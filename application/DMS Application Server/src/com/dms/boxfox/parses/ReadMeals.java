@@ -13,8 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.boxfox.item.Meal;
 import com.dms.boxfox.database.DataBase;
+import com.dms.boxfox.item.Meal;
 import com.dms.boxfox.logging.Log;
 
 public class ReadMeals {

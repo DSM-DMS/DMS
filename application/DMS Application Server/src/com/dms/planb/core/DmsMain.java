@@ -2,14 +2,31 @@ package com.dms.planb.core;
 
 /*
  * Daedeok Software Meister High School
- * Domitory Management System Project
+ * Domitory Management System(DMS) Project
  * 
- * Android Application Server developed by Jo Mingyu - PlanB
+ * Android Application HTTP Server based Vert.x Framework.
+ * Communicate by POST
+ * Developed by Jo Mingyu : PlanB
+ * Developer Blog : http://city7310.blog.me/
  * 
- * Work started at 2017.01.10
+ * Work Started at 2017.01.10
  * 
- * Git repository : https://github.com/rlatjdfo112/DSM-Dormitory-System.git
- * branch : server
+ * Git Repository : https://github.com/rlatjdfo112/DSM-Dormitory-System.git
+ * Branch : server
+ */
+
+/* :: Library Uses ::
+ * [java-json.jar]
+ * [vertx-core-3.3.3.jar]
+ * [netty-buffer-4.1.5.Final.jar]
+ * [netty-codec-4.1.5.FInal.jar]
+ * [netty-codec-dns-4.1.5.Final.jar]
+ * [netty-codec-http-4.1.5.Final.jar]
+ * [netty-common-4.1.5.Final.jar]
+ * [netty-handler-4.1.5.Final.jar]
+ * [netty-resolver-4.1.5.Final.jar]
+ * [netty-resolver-dns-4.1.5.Final.jar]
+ * [netty-transport-4.1.5.Final.jar]
  */
 
 import io.vertx.core.Vertx;

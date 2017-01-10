@@ -1,4 +1,4 @@
-package com.boxfox.item;
+package com.dms.boxfox.item;
 
 import java.util.ArrayList;
 
@@ -90,9 +90,9 @@ public class Meal {
 	
 	private static class Args{
 		private static boolean allergy[] = new boolean[18];
-		private static final String[] checks1 = {"â‘ ","â‘¡","â‘¢","â‘£","â‘¤","â‘¥","â‘¦","â‘§","â‘¨","â‘©","â‘ª","â‘«","â‘¬","â‘­","â‘®","â‘¯","â‘°","â‘±"};
+		private static final String[] checks1 = {"?‘ ","?‘¡","?‘¢","?‘£","?‘¤","?‘¥","?‘¦","?‘§","?‘¨","?‘©","?‘ª","?‘«","?‘¬","?‘­","?‘®","?‘¯","?‘°","?‘±"};
 		private static final String[] checks2 = {"(1)","(2)","(3)","(4)","(5)","(6)","(7)","(8)","(9)","(10)","(11)","(12)","(13)","(14)","(15)","(16)","(17)","(18)"};
-		private static final String[] datas = {"ë‚œë¥˜","ìš°ìœ ","ë©”ë°€","ë•…ì½©","ëŒ€ë‘","ë°€","ê³ ë“±ì–´","ê²Œ","ìƒˆìš°","ë¼ì§€ê³ ê¸°","ë³µìˆ­ì•„","í† ë§ˆí† ","ì•„í™©ì‚°ì—¼","í˜¸ë‘","ë‹­ê³ ê¸°","ì‡ ê³ ê¸°","ì˜¤ì§•ì–´","ì¡°ê°œë¥˜"};
+		private static final String[] datas = {"?‚œë¥?","?š°?œ ","ë©”ë?","?•…ì½?","???‘","ë°?","ê³ ë“±?–´","ê²?","?ƒˆ?š°","?¼ì§?ê³ ê¸°","ë³µìˆ­?•„","?† ë§ˆí† ","?•„?™©?‚°?—¼","?˜¸?‘","?‹­ê³ ê¸°","?‡ ê³ ê¸°","?˜¤ì§•ì–´","ì¡°ê°œë¥?"};
 		
 		public static ArrayList<String> filter(String[] args){
 			ArrayList<String> before = new ArrayList<String>();
