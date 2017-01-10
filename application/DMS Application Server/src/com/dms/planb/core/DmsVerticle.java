@@ -4,8 +4,12 @@ package com.dms.planb.core;
  * Main verticle for main method in DmsMain class.
  * Communicate by POST
  * 
- * Judge any activity for command parameter.
+ * 1. Create HTTP Server
+ * 2. Discriminate HTTP Method
+ * 3. Analyze command in requester's parameter.
  */
+
+import com.dms.planb.support.CommandAnalyzer;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -32,9 +36,13 @@ public class DmsVerticle extends AbstractVerticle {
 				request.bodyHandler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
 					
-					HttpServerResponse response = request.response();
-					
 					MultiMap params = request.params();
+					// get parameters from request
+					CommandAnalyzer analyzer = new CommandAnalyzer(params);
+					// analyze parameter
+					analyzer.analyze();
+					
+					HttpServerResponse response = request.response();
 				});
 			} else {
 				/*
@@ -42,7 +50,7 @@ public class DmsVerticle extends AbstractVerticle {
 				 *  Communication fail.
 				 */
 			}
-		});
+		}).listen(10419);
 	}
 	
 	public void stop(Future stopFuture) throws Exception {
