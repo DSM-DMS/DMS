@@ -1,12 +1,51 @@
 body {
     width: 100vw;
     height: 100vh;
+    /*min-height: 100% !important;*/
     background-color: #f0f0f0;
-    margin: 0px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 header {
-  
+    position: relative;
+    height: 20vh;
+    width: 100vw;
+}
+
+header .logo {
+    position: relative;
+    left: 40%;
+    width: 20%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+}
+
+header .logo:hover {
+    color: white;
+    position: relative;
+    left: 40%;
+    width: 20%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+header .logo p {
+    margin: 0%;
+    font-size: 3em;
+    font-weight: 900;
+    transition: all 1s ease;
+}
+
+header .logo p:hover {
+    transform: skewX(5deg) rotateY(360deg) rotateZ(360deg);
 }
 
 .mask {
@@ -82,9 +121,22 @@ header {
 }
 
 .main {
-  position: relative;
-  top: 20%;
-  left: 16%;
-  height: 70%;
-  width: 80%;
+    background-image: linear-gradient( to right top, transparent 33%, gray 33%, gray 66%, transparent 66%);
+    background-size: 3px 3px;
+    position: absolute;
+    top: 20vh;
+    left: 16%;
+    height: 70%;
+    width: 80%;
+}
+
+.frame {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.frame h1{
+    margin-left: 15px;
 }
