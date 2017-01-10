@@ -97,12 +97,12 @@ header .logo p:hover {
     color: rgb(52, 152, 219);
 }
 
-.remote .category a:nth-child(2) {
-    color: rgb(142, 68, 173);
-}
-
 .remote .category a:nth-child(3) {
     color: rgb(192, 57, 43);
+}
+
+.remote .category a:nth-child(5) {
+    color: rgb(142, 68, 173);
 }
 
 .remote .category .children a {
@@ -175,7 +175,6 @@ header .logo p:hover {
 }
 
 .underline {
-
     position: relative;
     right: 0%;
     height: 8px;
