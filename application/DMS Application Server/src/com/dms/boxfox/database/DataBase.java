@@ -33,8 +33,14 @@ public class DataBase {
 		}
 		return false;
 	}
-
-	public String queryBuilder(Object... args) {
+	/*
+	 * 1. For example when without queryBuilder
+	 * String query = "select * from user id='" + id + "'";
+	 * 
+	 * 2. for example when use queryBuilder
+	 * String query = DataBase.queryBuilder("select * from user where id='",id,"'");
+	 * */
+	public static String queryBuilder(Object... args) {
 		StringBuilder s = new StringBuilder();
 		// scratch variable
 		for (Object str : args) {
