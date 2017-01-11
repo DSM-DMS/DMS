@@ -17,17 +17,21 @@ public class DataBase {
 	private Connection connection;
 
 	private DataBase() {
-		accept();
+		connect();
 	}
 	
 	public static DataBase getInstance() {
+		/*
+		 * Problems occur when more than one object accesses the database at the same time.
+		 * So use singleton pattern.
+		 */
 		if (instance == null) {
 			instance = new DataBase();
 		}
 		return instance;
 	}
 
-	private boolean accept() {
+	private boolean connect() {
 		try {
 			if (connection == null || connection.isClosed()) {
 				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET, DB_ID, DB_PASSWORD);
@@ -40,14 +44,18 @@ public class DataBase {
 		}
 		return false;
 	}
-	/*
-	 * 1. For example when without queryBuilder
-	 * String query = "select * from user id='" + id + "'";
-	 * 
-	 * 2. for example when use queryBuilder
-	 * String query = DataBase.queryBuilder("select * from user where id='",id,"'");
-	 * */
+	
 	public static String queryBuilder(Object... args) {
+		/*
+		 * This method is accessible anywhere.
+		 * 
+		 * 1. For example when without queryBuilder
+		 * String query = "select * from user id='" + id + "'";
+		 * 
+		 * 2. for example when use queryBuilder
+		 * String query = DataBase.queryBuilder("select * from user where id='",id,"'");
+		 */
+		
 		StringBuilder s = new StringBuilder();
 		// scratch variable
 		for (Object str : args) {
@@ -56,22 +64,23 @@ public class DataBase {
 		return s.toString();
 	}
 
-	public boolean execute(Object... args) throws SQLException {
+
+	public synchronized boolean execute(Object... args) throws SQLException {
 		String query = queryBuilder(args);
 		return statement.execute(query);
 	}
 
-	public int executeUpdate(Object... args) throws SQLException {
+	public synchronized int executeUpdate(Object... args) throws SQLException {
 		String query = queryBuilder(args);
 		return statement.executeUpdate(query);
 	}
 
-	public ResultSet executeQuery(Object... args) throws SQLException {
+	public synchronized ResultSet executeQuery(Object... args) throws SQLException {
 		String query = queryBuilder(args);
 		return statement.executeQuery(query);
 	}
 
-	public ResultSet getResultSet() throws SQLException {
+	public synchronized ResultSet getResultSet() throws SQLException {
 		return statement.getResultSet();
 	}
 }

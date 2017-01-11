@@ -1,5 +1,8 @@
 package com.dms.planb.core;
 
+import com.dms.boxfox.database.DataBase;
+import com.dms.boxfox.logging.Log;
+
 /*
  * Main verticle for main method in DmsMain class.
  * Communicate by POST
@@ -24,30 +27,37 @@ public class DmsVerticle extends AbstractVerticle {
 	
 	@Override
 	public void start() throws Exception {
-		System.out.println("Server started");
+		Log.l("Server started");
 		server = vertx.createHttpServer();
+		
 		server.requestHandler(request -> {
-			System.out.println("Received request");
-			// Logging : Request from client
+			Log.l("Received request");
 			
 			Buffer totalBuffer = Buffer.buffer();
 			
 			if(request.method() == HttpMethod.POST) {
-				// Process when http method is only POST
+				// The server will only work if the Http method is POST.
+				
 				request.bodyHandler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
 					
 					MultiMap params = request.params();
-					// get parameters from request
+					// Get parameters from request
+					
 					CommandAnalyzer analyzer = new CommandAnalyzer(params);
-					// analyze parameter
-					analyzer.analyze();
+					// Serve parameters to CommandAnalyzer class.
+					
+					String sql = analyzer.analyze();
+					// Analyze the parameters
+					
+					DataBase dataBase = DataBase.getInstance();
+					// Get instance from DataBase class's singleton pattern.
 					
 					HttpServerResponse response = request.response();
 				});
 			} else {
 				/*
-				 *  If method is CONNECT, DELETE, GET, HEAD, OPTIONS, or other ...
+				 *  If Http method is CONNECT, DELETE, GET, HEAD, OPTIONS, or other ...
 				 *  Communication fail.
 				 */
 			}
