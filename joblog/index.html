@@ -1,1 +1,66 @@
-<h1> test</h2>
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>DMS Project Job Log</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./lib/vendor.css">
+  <link rel="stylesheet" type="text/css" href="./lib/flat-admin.css">
+  <!--firebase-->
+  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+  <!--jquery-->
+  <script type="text/javascript" src="./lib/jquery-3.1.1.min.js"></script>
+  <!--tinymce-->
+  <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+</head>
+<body>
+  <div class="app app-default">
+
+<div class="app-container app-full">
+  <nav class="navbar navbar-default" id="navbar">
+  <div class="container-fluid">
+    <div class="navbar-collapse collapse in">
+      <ul class="nav navbar-nav navbar-left">
+        <li class="navbar-title">Job Log</li>
+        <li class="navbar-search hidden-sm">
+          <input id="add-item" type="text" placeholder="날짜 추가" autocomplete="off">
+          <button onclick="add()" class="btn-search"><i class="fa fa-plus"></i></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <div class="app-messaging-container">
+    <div class="app-messaging" id="collapseMessaging">
+      <div class="chat-group">
+        <div class="heading">List</div>
+        <ul id="section" class="group full-height">
+          <!--<li id="section" class="section"></li>-->
+        </ul>
+      </div>
+      <div id="messaging" class="messaging">
+        <div class="heading">
+          <div id="title" class="title">
+            
+          </div>
+          <div class="action"></div>
+        </div>
+        <ul id="normal-content" class="chat">
+          <div id="content"></div>
+        </ul>
+        <div id="editor-content" class="full_box" style="display:none;">
+          <textarea2 id="message-box-area"></textarea2>
+          </div>
+        <div class="footer">
+          <div class="message-box">
+            <button class="btn btn-default" style="width:100%;" onclick="update()"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>Update</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+  <script>tinymce.init({ selector:'textarea2' });</script>
+  <script type="text/javascript" src="./lib/script.js"></script>
+</body></html>
