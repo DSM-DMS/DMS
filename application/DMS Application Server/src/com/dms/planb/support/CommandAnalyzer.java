@@ -8,18 +8,47 @@ import io.vertx.core.MultiMap;
  */
 
 public class CommandAnalyzer {
+	private CommandAnalyzer instance;
+	
 	private MultiMap params;
+	
+	private int command;
+	private int prefixOfCommand;
+	
+	private String sql;
 	
 	public CommandAnalyzer(MultiMap params) {
 		this.params = params;
 	}
 	
-	public void analyze() {
+	public String analyze() {
 		/*
-		 * Analyze command before acting on the client's request
+		 * Analyze command before acting on the client's request.
 		 * The command is an integer type. (premise)
 		 */
-		int command = Integer.parseInt(params.get("command"));
+		command				= Integer.parseInt(params.get("command"));
+		prefixOfCommand	= command / 100;
 		
+		if(prefixOfCommand == 0) {
+			/*
+			 * Case that INSERT
+			 */
+		} else if(prefixOfCommand == 1) {
+			/*
+			 * Case that UPDATE
+			 */
+			
+		} else if(prefixOfCommand == 2) {
+			/*
+			 * Case that DELETE
+			 */
+			
+		} else if(prefixOfCommand == 3) {
+			/*
+			 * Case that SELECT
+			 */
+		}
+		
+		return sql;
 	}
 }

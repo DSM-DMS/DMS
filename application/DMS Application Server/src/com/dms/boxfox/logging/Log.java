@@ -17,8 +17,7 @@ public class Log {
 
 	public static File getLogFile() {
 		Calendar c = Calendar.getInstance();
-		String currentFileName = DataBase.getInstance().queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH),
-				".", c.get(Calendar.DAY_OF_MONTH), ".txt");
+		String currentFileName = DataBase.getInstance().queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH), ".", c.get(Calendar.DAY_OF_MONTH), ".txt");
 		
 		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);
