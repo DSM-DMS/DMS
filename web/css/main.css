@@ -135,7 +135,7 @@ header .logo p:hover {
 
 .frame {
     position: relative;
-    width: 50%;
+    width: 48%;
     height: 100%;
     float: left;
     /*overflow-x: hidden;*/
@@ -164,14 +164,17 @@ header .logo p:hover {
 }
 
 .frame ul li p.date {
-    text-align: right;
     /*display: inline;*/
+    color: gray;
     float: right;
     vertical-align: bottom;
-    font-size: 0.5em;
+    font-size: 0.8em;
     font-weight: 600;
-    margin-top: 15px;
-    margin-bottom: 10px;
+}
+
+.frame .frametitle {
+  position: relative;
+  height: 12%;
 }
 
 .underline {
@@ -180,6 +183,26 @@ header .logo p:hover {
     height: 8px;
     margin-left: 7%;
     margin-right: 0%;
-    width: 90%;
+    width: 93%;
     background: rgb(211, 84, 0);
+}
+
+.food .underline{
+    background: rgb(41,128,185);
+}
+
+.food .menues {
+  position: relative;
+  height: 88%;
+}
+
+.food .meal {
+  margin-left: 7%;
+  background-color: #f0f0f0;
+  position: relative;
+  height: 20%;
+}
+
+.food .meal h2{
+  padding: 5% 0%;
 }
