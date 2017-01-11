@@ -19,6 +19,13 @@ public class DataBase {
 	private DataBase() {
 		accept();
 	}
+	
+	public static DataBase getInstance() {
+		if (instance == null) {
+			instance = new DataBase();
+		}
+		return instance;
+	}
 
 	private boolean accept() {
 		try {
@@ -47,13 +54,6 @@ public class DataBase {
 			s.append((String) str);
 		}
 		return s.toString();
-	}
-
-	public static DataBase getInstance() {
-		if (instance == null) {
-			instance = new DataBase();
-		}
-		return instance;
 	}
 
 	public boolean execute(Object... args) throws SQLException {

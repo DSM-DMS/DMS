@@ -14,8 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.dms.boxfox.database.DataBase;
-import com.dms.boxfox.item.Meal;
 import com.dms.boxfox.logging.Log;
+import com.dms.boxfox.parses.item.Meal;
 
 public class ReadMeals {
 
