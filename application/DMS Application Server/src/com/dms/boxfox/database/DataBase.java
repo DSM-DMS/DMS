@@ -9,12 +9,12 @@ import java.sql.Statement;
 import com.dms.boxfox.logging.Log;
 
 public class DataBase {
-	private static final String DB_TARGET = "localhost/dsm_dms";
+	private static final String DB_TARGET = "localhost:3306/dsm_dms";
 	private static final String DB_ID = "";
 	private static final String DB_PASSWORD = "";
 	private static DataBase instance;
-	private Statement st;
-	private Connection con;
+	private Statement statement;
+	private Connection connection;
 
 	private DataBase() {
 		accept();
@@ -22,24 +22,25 @@ public class DataBase {
 
 	private boolean accept() {
 		try {
-			if (con == null || con.isClosed()) {
-				con = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET, DB_ID, DB_PASSWORD);
-				st = con.createStatement();
-				Log.l("DataBase connect success!");
+			if (connection == null || connection.isClosed()) {
+				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET, DB_ID, DB_PASSWORD);
+				statement = connection.createStatement();
+				Log.l("Database connected successfully!");
 			}
 			return true;
-		} catch (SQLException sqex) {
-			Log.e(sqex.toString());
+		} catch (SQLException e) {
+			Log.e(e.toString());
 		}
 		return false;
 	}
 
 	public String queryBuilder(Object... args) {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder s = new StringBuilder();
+		// scratch variable
 		for (Object str : args) {
-			builder.append((String) str);
+			s.append((String) str);
 		}
-		return builder.toString();
+		return s.toString();
 	}
 
 	public static DataBase getInstance() {
@@ -51,20 +52,20 @@ public class DataBase {
 
 	public boolean execute(Object... args) throws SQLException {
 		String query = queryBuilder(args);
-		return st.execute(query);
+		return statement.execute(query);
 	}
 
 	public int executeUpdate(Object... args) throws SQLException {
 		String query = queryBuilder(args);
-		return st.executeUpdate(query);
+		return statement.executeUpdate(query);
 	}
 
 	public ResultSet executeQuery(Object... args) throws SQLException {
 		String query = queryBuilder(args);
-		return st.executeQuery(query);
+		return statement.executeQuery(query);
 	}
-	
-	public ResultSet getResultSet() throws SQLException{
-		return st.getResultSet();
+
+	public ResultSet getResultSet() throws SQLException {
+		return statement.getResultSet();
 	}
 }

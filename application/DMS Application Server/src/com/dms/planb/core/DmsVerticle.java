@@ -41,7 +41,7 @@ public class DmsVerticle extends AbstractVerticle {
 					// get parameters from request
 					CommandAnalyzer analyzer = new CommandAnalyzer(params);
 					// analyze parameter
-//					analyzer.analyze();
+					analyzer.analyze();
 					
 					HttpServerResponse response = request.response();
 				});
