@@ -24,9 +24,10 @@ public class DmsVerticle extends AbstractVerticle {
 	
 	@Override
 	public void start() throws Exception {
-		// Logging : Server started
+		System.out.println("Server started");
 		server = vertx.createHttpServer();
 		server.requestHandler(request -> {
+			System.out.println("Received request");
 			// Logging : Request from client
 			
 			Buffer totalBuffer = Buffer.buffer();
@@ -40,7 +41,7 @@ public class DmsVerticle extends AbstractVerticle {
 					// get parameters from request
 					CommandAnalyzer analyzer = new CommandAnalyzer(params);
 					// analyze parameter
-					analyzer.analyze();
+//					analyzer.analyze();
 					
 					HttpServerResponse response = request.response();
 				});
