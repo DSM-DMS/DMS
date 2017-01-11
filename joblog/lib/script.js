@@ -37,9 +37,7 @@
 
   function addElement(key, data){
     words[key] = data;
-    var description = data.content+"";
-    if(description.length>30) description = description.substring(0,30)+'...';
-    addCommentElement(key,description);
+    addCommentElement(key);
   }
 
   function setElement(key, data){
@@ -53,13 +51,12 @@
     delete words[key];
   }
 
-  function addCommentElement(title, description){
+  function addCommentElement(title){
     $("#section").append('<li href="#messaging" class="message" onclick="view(\''+title+'\')">'
             +'<a data-toggle="collapse" href="#" aria-expanded="false" aria-controls="collapseMessaging">'
               +'<div class="message">'
                 +'<div class="content">'
                   +'<div id="'+title+'" class="title">'+title+'</div>'
-                  +'<div id="'+title+'-des" class="description">'+description+'</div>'
                 +'</div>'
               +'</div>'
             +'</a>'
@@ -95,7 +92,6 @@
 
   function add(){
     var text = $('#add-item').val();
-    console.log(text);
     $('#add-item').val('');
     firebase.database().ref('words/'+text).set({
       content: ''
