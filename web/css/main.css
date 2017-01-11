@@ -98,11 +98,11 @@ header .logo p:hover {
 }
 
 .remote .category a:nth-child(3) {
-    color: rgb(192, 57, 43);
+    color: rgb(142, 68, 173);
 }
 
 .remote .category a:nth-child(5) {
-    color: rgb(142, 68, 173);
+    color: rgb(192, 57, 43);
 }
 
 .remote .category .children a {
