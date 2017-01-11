@@ -17,7 +17,9 @@ public class CommandAnalyzer {
 	public void analyze() {
 		/*
 		 * Analyze command before acting on the client's request
+		 * The command is an integer type. (premise)
 		 */
-		String command = params.get("command");
+		int command = Integer.parseInt(params.get("command"));
+		
 	}
 }
