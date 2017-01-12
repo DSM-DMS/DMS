@@ -27,22 +27,28 @@ public class DmsVerticle extends AbstractVerticle {
 	
 	@Override
 	public void start() throws Exception {
-		Log.l("Server started");
+		System.out.println("Server started");
+//		Log.l("Server started");
 		server = vertx.createHttpServer();
 		
 		server.requestHandler(request -> {
-			Log.l("Received request");
+			System.out.println("Received request");
+//			Log.l("Received request");
 			
 			Buffer totalBuffer = Buffer.buffer();
 			
 			if(request.method() == HttpMethod.POST) {
+				System.out.println("Received POST method");
 				// The server will only work if the Http method is POST.
 				
 				request.bodyHandler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
+					// Meaningless code, under convention
 					
 					MultiMap params = request.params();
 					// Get parameters from request
+					
+					System.out.println(params);
 					
 					CommandAnalyzer analyzer = new CommandAnalyzer(params);
 					// Serve parameters to CommandAnalyzer class.

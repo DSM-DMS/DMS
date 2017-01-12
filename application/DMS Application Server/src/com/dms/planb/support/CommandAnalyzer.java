@@ -3,13 +3,11 @@ package com.dms.planb.support;
 import io.vertx.core.MultiMap;
 
 /*
- * Command describer for HTTP parameters.
+ * Command analyzer for parameters from request.
  * Please refer to the 'command list file' in this package.
  */
 
-public class CommandAnalyzer {
-	private CommandAnalyzer instance;
-	
+public class CommandAnalyzer {	
 	private MultiMap params;
 	
 	private int command;

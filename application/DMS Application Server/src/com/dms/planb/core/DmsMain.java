@@ -29,10 +29,13 @@ package com.dms.planb.core;
  */
 
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
 
 public class DmsMain {
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
+		VertxOptions options = new VertxOptions();
+		options.setMaxEventLoopExecuteTime(2100000000);
 		vertx.deployVerticle(new DmsVerticle());
 	}
 }
