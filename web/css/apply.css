@@ -156,26 +156,6 @@ header .logo p:hover {
     background: rgb(211, 84, 0);
 }
 
-.go_home_Apply {
-}
-
-#DateSelect {
-  margin-top: 3%;
-}
-
-#apply_form {
-  font-size: 22px;
-  margin: auto;
-  margin-left: 7%;
-}
-
-.check {
-  margin: 5%;
-}
-
-#apply_submit {
-}
-
 #calendar {
   width: 80%;
   text-align: center;
@@ -186,4 +166,23 @@ header .logo p:hover {
 #calendar td {
   width: calc(100%/7);
   height: 30px;
+}
+
+.go_home_apply {
+}
+
+#apply_form {
+  font-size: 22px;
+  margin: auto;
+  margin-left: 20%;
+  margin-top: 20%;
+}
+
+#apply_submit {
+  font-size: 20px;
+  margin-left: 55%;
+}
+
+.check {
+  margin: 5%;
 }

@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="main">
-        <div class="frame go_home_Apply">
+        <div class="frame calendar">
             <h1>귀가 신청</h1>
             <div class="underline"></div>
             <table id="calendar" border="1px solid black">
@@ -107,9 +107,9 @@
               </tr>
             </table>
         </div>
-        <div class="frame calendar">
+        <div class="frame go_home_apply">
           <form action="#" id="apply_form">
-            <input type="text" id="Date"><br>
+            <input type="text" name="date" id="date" readonly><br>
             <input class="check" type="radio" name="stay" value="StayDom" checked> 잔류 <br>
             <input class="check" type="radio" name="stay" value="FriGoHome"> 금요귀가 <br>
             <input class="check" type="radio" name="stay" value="SatGoHome"> 토요귀가 <br>
@@ -120,6 +120,7 @@
     </div>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/apply.js">
 </script>
 
