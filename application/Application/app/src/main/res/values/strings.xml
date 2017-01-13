@@ -18,5 +18,6 @@
     <string name="facility_report">시설고장신고</string>
     <string name="rule">기숙사규정</string>
     <string name="faq">FAQ</string>
-    <string name=""
+    <string name="qna">문의하기</string>
+    <string name="settings">설정</string>
 </resources>
