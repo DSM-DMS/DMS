@@ -1,36 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
+    <item android:title="@string/apply">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_extension_apply"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/extension_apply" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_stay_apply"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/stay_apply" />
+            <item
+                android:id="@+id/nav_goingout_apply"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="@string/goingout_apply" />
+            <item
+                android:id="@+id/nav_rewardscore_apply"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/rewardscore_apply" />
+            <item
+                android:id="@+id/nav_afterschool_apply"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/afterschool_apply" />
         </menu>
     </item>
+
+    <item android:title="@string/school">
+        <menu>
+            <item
+                android:id="@+id/nav_meal"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/meal" />
+            <item
+                android:id="@+id/nav_notice"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/notice" />
+            <item
+                android:id="@+id/nav_competition"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/competition" />
+        </menu>
+    </item>
+
+    <item android:title="@string/dormitory">
+        <menu>
+            <item
+                android:id="@+id/nav_facility_report"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/facility_report" />
+            <item
+                android:id="@+id/nav_rule"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/rule" />
+            <item
+                android:id="@+id/nav_faq"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/faq" />
+            <item
+                android:id="@+id/nav_qna"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/qna" />
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_mypage"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/mypage" />
+    </group>
 
 </menu>

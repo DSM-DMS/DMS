@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DMSButton">
+        <attr name="style" format="string">
+            <enum name="normal" value="0" />
+            <enum name="reverse" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>
