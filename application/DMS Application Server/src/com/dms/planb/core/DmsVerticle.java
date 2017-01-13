@@ -6,12 +6,12 @@ package com.dms.planb.core;
  * 
  * 1. Create HTTP Server
  * 2. Discriminate HTTP Method
- * 3. Analyze command in requester's parameter.
+ * 3. Analyze command in requester's integer parameter.
  * 4. And performs an operation corresponding to the command.
  * 
  * -- Prerequisites --
- * 1. The command is provided as a parameter.(Client)
- * 2. The data is provided in JSON format.(Both server and client)
+ * 1. The command is provided as a parameter.
+ * 2. All of the data is provided in JSON format.(Both server and client)
  */
 
 import com.dms.boxfox.database.DataBase;

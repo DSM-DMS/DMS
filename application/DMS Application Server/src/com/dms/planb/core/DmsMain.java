@@ -6,7 +6,7 @@ package com.dms.planb.core;
  * 
  * Android Application HTTP Server based Vert.x Framework.
  * Developed by Kim Seongrae : Boxfoxs, Jo Mingyu : PlanB
- * Developers' Blog : http://city7310.blog.me/ | http://boxfoxs.tistory.com/
+ * Developers' Blog : http://boxfoxs.tistory.com/ | http://city7310.blog.me/
  * 
  * Work Started at 2017.01.10
  * 
