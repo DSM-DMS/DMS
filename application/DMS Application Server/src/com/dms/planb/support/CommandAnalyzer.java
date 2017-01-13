@@ -23,7 +23,8 @@ public class CommandAnalyzer {
 		this.command = Integer.parseInt(command);
 		prefixOfCommand	= this.command / 100;
 		
-		if(prefixOfCommand == 0) {
+		//Switch 문을 쓰는건 어때?
+		if(prefixOfCommand == 0) { //int를 직접 쓰지 말고 Command 클래스를 만들어서 prefixOfCommand==Command.LOGIN 이런식으로 사용하도록
 			/*
 			 * Case that INSERT
 			 */
