@@ -227,36 +227,36 @@ function drawCalendar(date, lastDay) {
 function clearCalendar() {
   for(var i = 0; i < 35; i++) {
     $('#calendar td:eq('+(i+10)+')').text("");
-    $('#calendar tr').css("background-color", "white");
+    $('#calendar tbody tr').css("background-color", "white");
   }
 }
 
 $('#first_week').click(() => {
-  $('#calendar tr').css("background-color", "white");
+  $('#calendar tbody tr').css("background-color", "white");
   $('#first_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'first_week');
 });
 
 $('#second_week').click(() =>{
-  $('#calendar tr').css("background-color", "white");
+  $('#calendar tbody tr').css("background-color", "white");
   $('#second_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'second_week');
 });
 
 $('#third_week').click(() => {
-  $('#calendar tr').css("background-color", "white");
+  $('#calendar tbody tr').css("background-color", "white");
   $('#third_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'third_week');
 });
 
 $('#fourth_week').click(() => {
-  $('#calendar tr').css("background-color", "white");
+  $('#calendar tbody tr').css("background-color", "white");
   $('#fourth_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fourth_week');
 });
 
 $('#fifth_week').click(() => {
-  $('#calendar tr').css("background-color", "white");
+  $('#calendar tbody tr').css("background-color", "white");
   $('#fifth_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fifth_week');
 });

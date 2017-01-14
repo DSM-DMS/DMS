@@ -156,11 +156,39 @@ header .logo p:hover {
     background: rgb(211, 84, 0);
 }
 
+#calendar thead{
+  background-color: #00a9e0;
+}
+
 #calendar {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
   width: 80%;
   text-align: center;
   margin: auto;
   margin-top: 7%;
+  border : 0px solid black;
+}
+
+#calendar tbody td{
+  border: 0.1px solid #000;
+}
+
+#calendar .days, .days td{
+  border: 0 solid #fff;
+  background-color: #6fcef9;
+}
+
+#prev_month {
+  border-top-left-radius: 15px;
+}
+
+#next_month {
+  border-top-right-radius: 15px;
+}
+
+.weeks{
+    cursor: pointer;
 }
 
 #calendar td {
@@ -186,3 +214,8 @@ header .logo p:hover {
 .check {
   margin: 5%;
 }
+
+/*
+River-stone-jin Help this css code
+https://github.com/river-stone-jin
+*/

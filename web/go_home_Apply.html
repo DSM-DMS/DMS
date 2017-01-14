@@ -11,9 +11,9 @@
 
 <body>
     <header>
-      <div class="logo">
-        <p>신청</p>
-      </div>
+        <div class="logo">
+            <p>신청</p>
+        </div>
     </header>
     <div class="remote">
         <h1>DMS</h1>
@@ -45,77 +45,81 @@
         <div class="frame calendar">
             <h1>귀가 신청</h1>
             <div class="underline"></div>
-            <table id="calendar" border="1px solid black">
-              <tr>
-                <td id="prev_month"><i class="fa fa-toggle-left" style="font-size: 28px;"></i></td>
-                <td id="month" colspan="5" style="font-size: 28px; font-weight: bold;"></td>
-                <td id="next_month"><i class="fa fa-toggle-right" style="font-size: 28px;"></i></td>
-              </tr>
-              <tr>
-                <td>Sun</td>
-                <td>Mon</td>
-                <td>Tue</td>
-                <td>Wed</td>
-                <td>Thu</td>
-                <td>Fri</td>
-                <td>Sat</td>
-              </tr>
-              <tr id="first_week">
-                <td class="sun"></td>
-                <td class="mon"></td>
-                <td class="tue"></td>
-                <td class="wed"></td>
-                <td class="thu"></td>
-                <td class="fri"></td>
-                <td class="sat"></td>
-              </tr>
-              <tr id="second_week">
-                <td class="sun"></td>
-                <td class="mon"></td>
-                <td class="tue"></td>
-                <td class="wed"></td>
-                <td class="thu"></td>
-                <td class="fri"></td>
-                <td class="sat"></td>
-              </tr>
-              <tr id="third_week">
-                <td class="sun"></td>
-                <td class="mon"></td>
-                <td class="tue"></td>
-                <td class="wed"></td>
-                <td class="thu"></td>
-                <td class="fri"></td>
-                <td class="sat"></td>
-              </tr>
-              <tr id="fourth_week">
-                <td class="sun"></td>
-                <td class="mon"></td>
-                <td class="tue"></td>
-                <td class="wed"></td>
-                <td class="thu"></td>
-                <td class="fri"></td>
-                <td class="sat"></td>
-              </tr>
-              <tr id="fifth_week">
-                <td class="sun"></td>
-                <td class="mon"></td>
-                <td class="tue"></td>
-                <td class="wed"></td>
-                <td class="thu"></td>
-                <td class="fri"></td>
-                <td class="sat"></td>
-              </tr>
+            <table id="calendar" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td id="prev_month"><i class="fa fa-toggle-left" style="font-size: 28px;"></i></td>
+                        <td id="month" colspan="5" style="font-size: 28px; font-weight: bold;"></td>
+                        <td id="next_month"><i class="fa fa-toggle-right" style="font-size: 28px;"></i></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="days">
+                        <td>Sun</td>
+                        <td>Mon</td>
+                        <td>Tue</td>
+                        <td>Wed</td>
+                        <td>Thu</td>
+                        <td>Fri</td>
+                        <td>Sat</td>
+                    </tr>
+                    <tr id="first_week" class="weeks">
+                        <td class="sun"></td>
+                        <td class="mon"></td>
+                        <td class="tue"></td>
+                        <td class="wed"></td>
+                        <td class="thu"></td>
+                        <td class="fri"></td>
+                        <td class="sat"></td>
+                    </tr>
+                    <tr id="second_week" class="weeks">
+                        <td class="sun"></td>
+                        <td class="mon"></td>
+                        <td class="tue"></td>
+                        <td class="wed"></td>
+                        <td class="thu"></td>
+                        <td class="fri"></td>
+                        <td class="sat"></td>
+                    </tr>
+                    <tr id="third_week" class="weeks">
+                        <td class="sun"></td>
+                        <td class="mon"></td>
+                        <td class="tue"></td>
+                        <td class="wed"></td>
+                        <td class="thu"></td>
+                        <td class="fri"></td>
+                        <td class="sat"></td>
+                    </tr>
+                    <tr id="fourth_week" class="weeks">
+                        <td class="sun"></td>
+                        <td class="mon"></td>
+                        <td class="tue"></td>
+                        <td class="wed"></td>
+                        <td class="thu"></td>
+                        <td class="fri"></td>
+                        <td class="sat"></td>
+                    </tr>
+                    <tr id="fifth_week" class="weeks">
+                        <td class="sun"></td>
+                        <td class="mon"></td>
+                        <td class="tue"></td>
+                        <td class="wed"></td>
+                        <td class="thu"></td>
+                        <td class="fri"></td>
+                        <td class="sat"></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <div class="frame go_home_apply">
-          <form action="#" id="apply_form">
-            <input type="text" name="date" id="date" readonly><br>
-            <input class="check" type="radio" name="stay" value="StayDom" checked> 잔류 <br>
-            <input class="check" type="radio" name="stay" value="FriGoHome"> 금요귀가 <br>
-            <input class="check" type="radio" name="stay" value="SatGoHome"> 토요귀가 <br>
-            <input class="check" type="radio" name="stay" value="SatReturnDom"> 토요귀사 <br>
-            <input type="submit" value="신청" id="apply_submit">
-          </form>
+            <form action="#" id="apply_form">
+                <input type="text" name="date" id="date" readonly><br>
+                <input class="check" type="radio" name="stay" value="StayDom" checked> 잔류 <br>
+                <input class="check" type="radio" name="stay" value="FriGoHome"> 금요귀가 <br>
+                <input class="check" type="radio" name="stay" value="SatGoHome"> 토요귀가 <br>
+                <input class="check" type="radio" name="stay" value="SatReturnDom"> 토요귀사 <br>
+                <input type="submit" value="신청" id="apply_submit">
+            </form>
         </div>
     </div>
 </body>
