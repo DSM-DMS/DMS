@@ -24,7 +24,6 @@ public class DMSButton extends Button {
     private Drawable mOnTouchBackground;
     private int mNormalTextColor;
     private int mOnTouchTextColor;
-    private int mPrimaryColor;
 
     public DMSButton(Context context) {
         super(context);
@@ -37,6 +36,7 @@ public class DMSButton extends Button {
         int style = a.getInt(R.styleable.DMSButton_style, STYLE_NORMAL);
         a = context.obtainStyledAttributes(attrs, new int[] { android.R.attr.textSize });
         int textSize = a.getDimensionPixelSize(0, (int) DensityConverter.dpToPx(context, 14));
+
         init(context, style, textSize);
     }
 
@@ -48,6 +48,7 @@ public class DMSButton extends Button {
         int style = a.getInt(R.styleable.DMSButton_style, STYLE_NORMAL);
         a = context.obtainStyledAttributes(attrs, new int[] { android.R.attr.textSize }, defStyleAttr, 0);
         int textSize = a.getDimensionPixelSize(0, (int) DensityConverter.dpToPx(context, 14));
+
         init(context, style, textSize);
     }
 
@@ -74,8 +75,6 @@ public class DMSButton extends Button {
      * Initializes settings for button.
      */
     private void init(Context context, int style, int textSize) {
-        mPrimaryColor = ContextCompat.getColor(context, R.color.colorPrimary);
-
         if (style == STYLE_NORMAL) {
             mNormalBackground = ContextCompat.getDrawable(context, R.drawable.dmsbtn);
             mOnTouchBackground = ContextCompat.getDrawable(context, R.drawable.dmsbtn_touch);

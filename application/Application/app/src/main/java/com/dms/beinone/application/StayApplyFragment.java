@@ -39,6 +39,16 @@ public class StayApplyFragment extends Fragment {
             }
         });
 
+        DMSRadioButton fridayGoRadio =
+                (DMSRadioButton) view.findViewById(R.id.radio_stayapply_fridaygo);
+        DMSRadioButton saturdayGoRadio =
+                (DMSRadioButton) view.findViewById(R.id.radio_stayapply_saturdaygo);
+        DMSRadioButton saturdayComeRadio =
+                (DMSRadioButton) view.findViewById(R.id.radio_stayapply_saturdaycome);
+        DMSRadioButton stayRadio = (DMSRadioButton) view.findViewById(R.id.radio_stayapply_stay);
+
+
+
         return view;
     }
 
