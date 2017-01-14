@@ -173,8 +173,8 @@ header .logo p:hover {
 }
 
 .frame .frametitle {
-  position: relative;
-  height: 12%;
+    position: relative;
+    height: 12%;
 }
 
 .underline {
@@ -187,22 +187,46 @@ header .logo p:hover {
     background: rgb(211, 84, 0);
 }
 
-.food .underline{
-    background: rgb(41,128,185);
+.food .underline {
+    background: rgb(41, 128, 185);
 }
 
 .food .menues {
-  position: relative;
-  height: 88%;
+    position: relative;
+    height: 88%;
 }
 
 .food .meal {
-  margin-left: 7%;
-  background-color: #f0f0f0;
-  position: relative;
-  height: 20%;
+    margin-left: 7%;
+    position: relative;
+    height: 20%;
+    margin-top: 16px;
 }
 
-.food .meal h2{
-  padding: 5% 0%;
+.food .meal h2 {
+    /*float: left;*/
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 16px;
+    /*padding: 5% 0%;*/
+}
+
+.food .meal p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 79%;
+    margin-left: 4%;
+    /*float: right;*/
+}
+
+.food .info {
+    position: relative;
+    width: 93%;
+    background-color: #f0f0f0;
+    display: inline-block;
+}
+
+.food img {
+  vertical-align: middle;
+    height: 30%;
 }
