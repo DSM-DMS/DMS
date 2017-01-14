@@ -4,6 +4,8 @@
         <attr name="style" format="string">
             <enum name="normal" value="0" />
             <enum name="reverse" value="1" />
+            <enum name="round" value="2" />
+            <enum name="bottom" value="3" />
         </attr>
     </declare-styleable>
 </resources>

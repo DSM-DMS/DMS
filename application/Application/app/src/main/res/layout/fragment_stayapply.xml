@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
+    xmlns:cal="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@+id/btn_stayapply_apply">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/stayapply_defaultvalue" />
+
+            <TextView
+                android:id="@+id/tv_stayapply_defaultvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="72dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorPrimary" />
+
+            <com.dms.beinone.application.DMSButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/stayapply_change"
+                android:textSize="12sp"
+                dmsbtn:style="round" />
+
+        </RelativeLayout>
+
+        <com.samsistemas.calendarview.widget.CalendarView
+            android:id="@+id/calendar_stayapply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            cal:calendarBackgroundColor="@color/colorPrimary"
+            cal:calendarTitleTextColor="@android:color/white"
+            cal:currentDayOfMonthColor="@android:color/white"
+            cal:dayOfWeekTextColor="@android:color/white"
+            cal:disabledDayBackgroundColor="@color/colorPrimary"
+            cal:disabledDayTextColor="@android:color/darker_gray"
+            cal:selectedDayBackgroundColor="@color/colorPrimaryDark"
+            cal:titleLayoutBackgroundColor="@color/colorPrimary"
+            cal:weekLayoutBackgroundColor="@color/colorPrimary"
+            cal:weekendColor="@android:color/holo_red_light"
+            cal:weekend="saturday|sunday" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_stayapply_selectedweek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:drawable/divider_horizontal_bright" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp">
+                <com.dms.beinone.application.DMSButton
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="@string/stayapply_fridaygo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp">
+                <com.dms.beinone.application.DMSButton
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="@string/stayapply_saturdaygo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp">
+                <com.dms.beinone.application.DMSButton
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="@string/stayapply_saturdaycome" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp">
+                <com.dms.beinone.application.DMSButton
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="@string/stayapply_stay" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.dms.beinone.application.DMSButton
+        android:id="@+id/btn_stayapply_apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/stayapply_apply"
+        dmsbtn:style="bottom" />
+
+</RelativeLayout>

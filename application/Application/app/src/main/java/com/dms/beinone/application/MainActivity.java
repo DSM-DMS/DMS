@@ -40,6 +40,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.setCheckedItem(R.id.nav_home);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.relativelayout_main_container, new HomeFragment())
+                .commit();
     }
 
     @Override
@@ -80,22 +86,49 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+        if (id == R.id.nav_home) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.relativelayout_main_container, new HomeFragment())
+                    .commit();
+        } else if (id == R.id.nav_extension_apply) {
+
+        } else if (id == R.id.nav_stay_apply) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.relativelayout_main_container, new StayApplyFragment())
+                    .commit();
+        } else if (id == R.id.nav_goingout_apply) {
+
+        } else if (id == R.id.nav_rewardscore_apply) {
+
+        } else if (id == R.id.nav_afterschool_apply) {
+
+        } else if (id == R.id.nav_meal) {
+
+        } else if (id == R.id.nav_notice) {
+
+        } else if (id == R.id.nav_competition) {
+
+        } else if (id == R.id.nav_facility_report) {
+
+        } else if (id == R.id.nav_rule) {
+
+        } else if (id == R.id.nav_faq) {
+
+        } else if (id == R.id.nav_qna) {
+
+        } else if (id == R.id.nav_settings) {
+
+        } else if (id == R.id.nav_mypage) {
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
