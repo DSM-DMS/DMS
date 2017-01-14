@@ -32,7 +32,7 @@ package com.dms.planb.core;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 
-public class DmsMain {
+class DmsMain {
 	public static void main(String[] args) {
 		Vertx vertx = Vertx.vertx();
 		VertxOptions options = new VertxOptions();
