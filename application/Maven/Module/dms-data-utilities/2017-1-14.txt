@@ -1,0 +1,1 @@
+2017/1/14/6:47:27 [ERROR] java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
