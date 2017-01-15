@@ -11,6 +11,7 @@ import static org.boxfox.dms.utilities.database.QueryUtills.queryBuilder;
 
 public class DataBase {
 	private static final String DB_TARGET = "localhost:3306/dsm_dms";
+	private static final String DB_ATTRIBUTE = "?autoReconnect=true&amp;allowMultiQueries=true";
 	private static final String DB_ID = "";
 	private static final String DB_PASSWORD = "";
 	private static DataBase instance;
@@ -20,22 +21,27 @@ public class DataBase {
 	private DataBase() {
 		connect();
 	}
-	
+
 	public static DataBase getInstance() {
 		/*
-		 * Problems occur when more than one object accesses the database at the same time.
-		 * So use singleton pattern.
+		 * Problems occur when more than one object accesses the database at the
+		 * same time. So use singleton pattern.
 		 */
 		if (instance == null) {
 			instance = new DataBase();
 		}
 		return instance;
 	}
+	
+	public Statement getStatement(){
+		return statement;
+	}
 
 	private boolean connect() {
 		try {
 			if (connection == null || connection.isClosed()) {
-				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET, DB_ID, DB_PASSWORD);
+				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET + DB_ATTRIBUTE, DB_ID,
+						DB_PASSWORD);
 				statement = connection.createStatement();
 				Log.l("Database connected successfully!");
 			}
@@ -45,7 +51,7 @@ public class DataBase {
 		}
 		return false;
 	}
-	
+
 	public synchronized boolean execute(String query) throws SQLException {
 		return statement.execute(query);
 	}
@@ -76,9 +82,9 @@ public class DataBase {
 	public synchronized ResultSet getResultSet() throws SQLException {
 		return statement.getResultSet();
 	}
-	
-	public int executeUpdate(DataSaveAble data) throws SQLException{
+
+	public int executeUpdate(DataSaveAble data) throws SQLException {
 		return executeUpdate(data.toQuery());
 	}
-	
+
 }
