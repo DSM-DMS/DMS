@@ -2,6 +2,7 @@ package com.dms.beinone.application;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -58,6 +59,13 @@ public class DMSButton extends Button {
             case MotionEvent.ACTION_DOWN:
                 setBackground(mOnTouchBackground);
                 setTextColor(mOnTouchTextColor);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                Rect rect = new Rect(getLeft(), getTop(), getRight(), getBottom());
+                if (!rect.contains(getLeft() + (int) event.getX(), getTop() + (int) event.getY())) {
+                    setBackground(mNormalBackground);
+                    setTextColor(mNormalTextColor);
+                }
                 break;
             case MotionEvent.ACTION_UP:
                 setBackground(mNormalBackground);
