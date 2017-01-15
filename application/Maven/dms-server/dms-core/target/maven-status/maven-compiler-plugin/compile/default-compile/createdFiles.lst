@@ -1,0 +1,3 @@
+org\planb\dms\support\CommandAnalyzer.class
+org\planb\dms\core\DmsVerticle.class
+org\planb\dms\core\DmsMain.class
