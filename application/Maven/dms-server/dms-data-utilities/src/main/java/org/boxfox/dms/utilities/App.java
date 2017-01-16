@@ -12,6 +12,6 @@ public class App
     public static void main( String[] args )
     {
     	PlanParser parser = new PlanParser(2017, 2);
-    	parser.go();
+    	parser.parse();
     }
 }

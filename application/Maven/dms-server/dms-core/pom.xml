@@ -73,7 +73,7 @@
 		<!-- dms dependency -->
 		<dependency>
 			<groupId>com.dsm.dms</groupId>
-			<artifactId>dms-utilities</artifactId>
+			<artifactId>dms-data-utilities</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

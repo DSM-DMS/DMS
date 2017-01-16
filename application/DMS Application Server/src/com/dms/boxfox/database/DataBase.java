@@ -63,7 +63,18 @@ public class DataBase {
 		}
 		return s.toString();
 	}
+	
+	public synchronized boolean execute(String query) throws SQLException {
+		return statement.execute(query);
+	}
 
+	public synchronized int executeUpdate(String query) throws SQLException {
+		return statement.executeUpdate(query);
+	}
+
+	public synchronized ResultSet executeQuery(String query) throws SQLException {
+		return statement.executeQuery(query);
+	}
 
 	public synchronized boolean execute(Object... args) throws SQLException {
 		String query = queryBuilder(args);

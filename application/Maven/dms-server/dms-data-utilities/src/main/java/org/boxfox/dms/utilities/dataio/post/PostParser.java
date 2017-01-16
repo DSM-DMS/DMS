@@ -2,6 +2,8 @@ package org.boxfox.dms.utilities.dataio.post;
 
 import org.boxfox.dms.utilities.dataio.Parser;
 import org.boxfox.dms.utilities.dataio.ParserUtills;
+import org.boxfox.dms.utilities.datamodel.post.Attachment;
+import org.boxfox.dms.utilities.datamodel.post.AttachmentList;
 import org.boxfox.dms.utilities.datamodel.post.Post;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,27 +11,15 @@ import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
 
 public class PostParser<T> extends Parser {
-	private static final String link = "http://dsm.hs.kr/";
-	private PostCategory category;
+	public static int CATEGORY_BROAD = 0;
+	public static int CATEGORY_FAMILER = 1;
+	public static int CATEGORY_MISSION = 2;
+	public static int CATEGORY_CHALLENGE = 3;
+	private int category;
 
-	public PostParser(PostCategory category, String postKey) {
+	public PostParser(int category, String postKey) {
 		this.category = category;
-		String targetURL = null;
-		switch (category) {
-		case BROAD:
-			targetURL = URL_BROAD;
-			break;
-		case FAMILER:
-			targetURL = URL_FAMILER;
-			break;
-		case MISSION:
-			targetURL = URL_MISSION;
-			break;
-		case CHALLENGE:
-			targetURL = URL_CHALLENGE;
-			break;
-		}
-		url = targetURL.replaceFirst("?", postKey);
+		url = LINK + postKey;
 	}
 
 	public Post parse() {
@@ -39,17 +29,20 @@ public class PostParser<T> extends Parser {
 		String dateTime = doc.getElementsByClass("text").get(0).text();
 		String content = doc.getElementsByClass("context_view").get(0).html();
 		String html = doc.html();
-		html = html.substring(html.indexOf("var PostFiles = ") + "var PostFiles = ".length(),html.indexOf("var POST_ID="));
+		html = html.substring(html.indexOf("var PostFiles = ") + "var PostFiles = ".length(),
+				html.indexOf("var POST_ID="));
 		JSONArray files = (JSONArray) JSONValue.parse(html);
-		JSONArray pureFileList = new JSONArray();
+		AttachmentList<Attachment> list = new AttachmentList<Attachment>(Attachment.class);
+		
+		//post number key
+		int number = 1223;
+		
 		for (Object file : files) {
 			JSONArray arr = (JSONArray) file;
-			JSONObject fileObj = new JSONObject();
-			fileObj.put("Name", arr.get(0).toString());
-			fileObj.put("Link", arr.get(2).toString());
-			pureFileList.add(fileObj);
+			Attachment attachment = new Attachment(number, arr.get(0).toString(), arr.get(2).toString());
+			list.add(attachment);
 		}
-		Post post = new Post(title, writer, dateTime, content, pureFileList);
+		Post post = new Post(number, title, writer, dateTime, content, list);
 		return post;
 	}
 

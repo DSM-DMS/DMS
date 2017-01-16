@@ -20,7 +20,6 @@ public class PostChangeDetector{
 		});
 		thread.setDaemon(true);
 		thread.start();
-		list.add(thread);
 	}
 
 	/*html = doc.html();

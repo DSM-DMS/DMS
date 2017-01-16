@@ -75,7 +75,7 @@ public class QueryUtills {
 		return dateValidity;
 	}
 	
-	//should I make this?
+	/*//should I make this?
 	public static BoxFoxResultSet fixResultSet(ResultSet rs){
 		try {
 			int max = rs.getMetaData().getColumnCount();
@@ -85,5 +85,5 @@ public class QueryUtills {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
