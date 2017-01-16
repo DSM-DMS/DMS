@@ -48,12 +48,14 @@ public class DataBase {
 	public static String queryBuilder(Object... args) {
 		/*
 		 * This method is accessible anywhere.
+		 *
+		 * When create this query : select * from user id='id'
 		 * 
 		 * 1. For example when without queryBuilder
 		 * String query = "select * from user id='" + id + "'";
 		 * 
 		 * 2. for example when use queryBuilder
-		 * String query = DataBase.queryBuilder("select * from user where id='",id,"'");
+		 * String query = DataBase.queryBuilder("select * from user where id='", id, "'");
 		 */
 		
 		StringBuilder s = new StringBuilder();
@@ -72,21 +74,32 @@ public class DataBase {
 		return statement.executeUpdate(query);
 	}
 
+<<<<<<< HEAD
 	public synchronized ResultSet executeQuery(String query) throws SQLException {
 		return statement.executeQuery(query);
 	}
 
+=======
+>>>>>>> 9ceaf4a85233dd843469c34c8112968cccb7263a
 	public synchronized boolean execute(Object... args) throws SQLException {
 		String query = queryBuilder(args);
 		return statement.execute(query);
 	}
 
 	public synchronized int executeUpdate(Object... args) throws SQLException {
+		/*
+		 * Returns number of rows applied
+		 * Uses INSERT, UPDATE, DELETE query
+		 */
 		String query = queryBuilder(args);
 		return statement.executeUpdate(query);
 	}
 
 	public synchronized ResultSet executeQuery(Object... args) throws SQLException {
+		/*
+		 * Method to get ResultSet from result of query
+		 * Uses SELECT query
+		 */
 		String query = queryBuilder(args);
 		return statement.executeQuery(query);
 	}

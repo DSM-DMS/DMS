@@ -1,5 +1,7 @@
 package com.dms.planb.core;
 
+import java.sql.SQLException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,18 +76,31 @@ class DmsVerticle extends AbstractVerticle {
 					response.putHeader("content-type", "application/json; charset=utf-8");
 					
 					// 4. Performs the operation appropriate to the command.
-					if(prefixOfCommand				== Commands.INSERT) {
-						responseObject = ActionPerformer.doInsert(command, requestObject);
+					switch(prefixOfCommand) {
+					case Commands.INSERT:
+						try { responseObject = ActionPerformer.doInsert(command, requestObject); }
+						catch (JSONException | SQLException e) { e.printStackTrace(); }
+						
 						response.end(responseObject.toString());
-					} else if(prefixOfCommand	== Commands.UPDATE) {
-						responseObject = ActionPerformer.doUpdate(command, requestObject);
+						break;
+					case Commands.UPDATE:
+						try { responseObject = ActionPerformer.doUpdate(command, requestObject); }
+						catch (JSONException | SQLException e) { e.printStackTrace(); }
+						
 						response.end(responseObject.toString());
-					} else if(prefixOfCommand	== Commands.DELETE) {
-						responseObject = ActionPerformer.doDelete(command, requestObject);
+						break;
+					case Commands.DELETE:
+						try { responseObject = ActionPerformer.doDelete(command, requestObject); }
+						catch (JSONException | SQLException e) { e.printStackTrace(); }
+						
 						response.end(responseObject.toString());
-					} else if(prefixOfCommand	== Commands.SELECT) {
-						responseObject = ActionPerformer.doSelect(command, requestObject);
+						break;
+					case Commands.SELECT:
+						try { responseObject = ActionPerformer.doSelect(command, requestObject); }
+						catch (JSONException | SQLException e) { e.printStackTrace(); }
+						
 						response.end(responseObject.toString());
+						break;
 					}
 				}); // endHandler
 			} else {

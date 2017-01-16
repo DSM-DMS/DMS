@@ -1,5 +1,8 @@
 package com.dms.planb.support;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,147 +13,176 @@ public class ActionPerformer {
 	private static JSONObject responseObject;
 	private static DataBase database = DataBase.getInstance();
 
-	public static JSONObject doInsert(int command, JSONObject requestObject) {
+	public static JSONObject doInsert(int command, JSONObject requestObject) throws JSONException, SQLException {
 		responseObject = new JSONObject();
 		
-		if(command == Commands.REGISTER_ACCOUNT) {
+		switch(command) {
+		case Commands.REGISTER_ACCOUNT:
+			String id = requestObject.getString("id");
+			String password = requestObject.getString("password");
+			String sessionKey = requestObject.getString("session_key");
+			int permission = requestObject.getInt("permission");
 			
-		} else if(command == Commands.UPLOAD_NOTICE) {
+			database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', '", Integer.toString(permission), "')");
+			break;
+		case Commands.UPLOAD_NOTICE:
+			String title = requestObject.getString("title");
+			String content = requestObject.getString("content");
+			String writer = requestObject.getString("writer");
 			
-		} else if(command == Commands.UPLOAD_RULE) {
-			
-		} else if(command == Commands.UPLOAD_QNA) {
-			
-		} else if(command == Commands.UPLOAD_CONTACT) {
-			
-		} else if(command == Commands.UPLOAD_COMPETITION) {
-			
-		} else if(command == Commands.UPLOAD_REPORT_FACILITY) {
-			
-		} else if(command == Commands.UPLOAD_MEAL) {
-			
-		} else if(command == Commands.UPLOAD_PLAN) {
-			
-		} else if(command == Commands.APPLY_EXTENTION) {
-			
-		} else if(command == Commands.APPLY_STAY) {
-			
-		} else if(command == Commands.APPLY_GOINGOUT) {
-			
-		} else if(command == Commands.APPLY_MERIT) {
-			
-		} else if(command == Commands.APPLY_AFTERSCHOOL) {
+			database.executeUpdate("INSERT INTO notice(title, content, writer) VALUES('", title, "', '", content, "', '", writer, "')");
+			break;
+		case Commands.UPLOAD_RULE:
+			break;
+		case Commands.UPLOAD_QNA:
+			break;
+		case Commands.UPLOAD_CONTACT:
+			break;
+		case Commands.UPLOAD_COMPETITION:
+			break;
+		case Commands.UPLOAD_REPORT_FACILITY:
+			break;
+		case Commands.UPLOAD_MEAL:
+			break;
+		case Commands.UPLOAD_PLAN:
+			break;
+		case Commands.APPLY_EXTENTION:
+			break;
+		case Commands.APPLY_STAY:
+			break;
+		case Commands.APPLY_GOINGOUT:
+			break;
+		case Commands.APPLY_MERIT:
+			break;
+		case Commands.APPLY_AFTERSCHOOL:
+			break;
+		}
+
+		return responseObject;
+	}
+
+	public static JSONObject doUpdate(int command, JSONObject requestObject) throws JSONException, SQLException {
+		responseObject = new JSONObject();
+		
+		switch(command) {
+		case Commands.MODIFY_ACCOUNT:
+			break;
+		case Commands.MODIFY_NOTICE:
+			break;
+		case Commands.MODIFY_RULE:
+			break;
+		case Commands.MODIFY_QNA:
+			break;
+		case Commands.MODIFY_CONTACT:
+			break;
+		case Commands.MODIFY_COMPETITION:
+			break;
+		case Commands.MODIFY_REPORT_FACILITY:
+			break;
+		case Commands.MODIFY_EXTENTION:
+			break;
+		case Commands.MODIFY_STAY:
+			break;
+		case Commands.MODIFY_GOINGOUT:
+			break;
+		case Commands.MODIFY_MERIT:
+			break;
+		case Commands.MODIFY_AFTERSCHOOL:
 			
 		}
 
 		return responseObject;
 	}
 
-	public static JSONObject doUpdate(int command, JSONObject requestObject) {
+	public static JSONObject doDelete(int command, JSONObject requestObject) throws JSONException, SQLException {
 		responseObject = new JSONObject();
 		
-		if(command == Commands.MODIFY_ACCOUNT) {
+		switch(command) {
+		case Commands.DELETE_ACCOUNT:
+			String id = requestObject.getString("id");
 			
-		} else if(command == Commands.MODIFY_NOTICE) {
-			
-		} else if(command == Commands.MODIFY_RULE) {
-			
-		} else if(command == Commands.MODIFY_QNA) {
-			
-		} else if(command == Commands.MODIFY_CONTACT) {
-			
-		} else if(command == Commands.MODIFY_COMPETITION) {
-			
-		} else if(command == Commands.MODIFY_REPORT_FACILITY) {
-			
-		} else if(command == Commands.MODIFY_EXTENTION) {
-			
-		} else if(command == Commands.MODIFY_STAY) {
-			
-		} else if(command == Commands.MODIFY_GOINGOUT) {
-			
-		} else if(command == Commands.MODIFY_MERIT) {
-			
-		} else if(command == Commands.MODIFY_AFTERSCHOOL) {
-			
+			database.executeUpdate("DELETE FROM account WHERE id=", id);
+			break;
+		case Commands.DELETE_NOTICE:
+			break;
+		case Commands.DELETE_RULE:
+			break;
+		case Commands.DELETE_QNA:
+			break;
+		case Commands.DELETE_CONTACT:
+			break;
+		case Commands.DELETE_COMPETITION:
+			break;
+		case Commands.DELETE_REPORT_FACILITY:
+			break;
+		case Commands.DEAPPLY_EXTENTION:
+			break;
+		case Commands.DEAPPLY_GOINGOUT:
+			break;
+		case Commands.DEAPPLY_MERIT:
+			break;
 		}
 
 		return responseObject;
 	}
 
-	public static JSONObject doDelete(int command, JSONObject requestObject) {
+	public static JSONObject doSelect(int command, JSONObject requestObject) throws JSONException, SQLException {
 		responseObject = new JSONObject();
 		
-		if(command == Commands.DELETE_ACCOUNT) {
+		switch(command) {
+		case Commands.LOAD_MYPAGE:
+			break;
+		case Commands.LOAD_ACCOUNT:
+			// when login
+			String id = requestObject.getString("id");
+			String password = requestObject.getString("password");
 			
-		} else if(command == Commands.DELETE_NOTICE) {
+			ResultSet resultSet = database.executeQuery("SELECT FROM id=", id);
+			if(resultSet.getString("password").equals("password")) {
+				responseObject.put("status", true);
+			}
 			
-		} else if(command == Commands.DELETE_RULE) {
-			
-		} else if(command == Commands.DELETE_QNA) {
-			
-		} else if(command == Commands.DELETE_CONTACT) {
-			
-		} else if(command == Commands.DELETE_COMPETITION) {
-			
-		} else if(command == Commands.DELETE_REPORT_FACILITY) {
-			
-		} else if(command == Commands.DEAPPLY_EXTENTION) {
-			
-		} else if(command == Commands.DEAPPLY_MERIT) {
-			
-		}
-
-		return responseObject;
-	}
-
-	public static JSONObject doSelect(int command, JSONObject requestObject) {
-		responseObject = new JSONObject();
-		
-		if(command == Commands.LOAD_MYPAGE) {
-			
-		} else if(command == Commands.LOAD_ACCOUNT) {
-			
-		} else if(command == Commands.LOAD_POST_LIST) {
-			
-		} else if(command == Commands.LOAD_NOTICE_LIST) {
-			
-		} else if(command == Commands.LOAD_QNA_LIST) {
-			
-		} else if(command == Commands.LOAD_CONTACT_LIST) {
-			
-		} else if(command == Commands.LOAD_COMPETITION_LIST) {
-			
-		} else if(command == Commands.LOAD_REPORT_FACILITY_LIST) {
-			
-		} else if(command == Commands.LOAD_NOTICE) {
-			
-		} else if(command == Commands.LOAD_RULE) {
-			
-		} else if(command == Commands.LOAD_QNA) {
-			
-		} else if(command == Commands.LOAD_CONTACT) {
-			
-		} else if(command == Commands.LOAD_COMPETITION) {
-			
-		} else if(command == Commands.LOAD_REPORT_FACILITY) {
-			
-		} else if(command == Commands.LOAD_EXTENTION_STATUS) {
-			
-		} else if(command == Commands.LOAD_STAY_STATUS) {
-			
-		} else if(command == Commands.LOAD_GOINGOUT_STATUS) {
-			
-		} else if(command == Commands.LOAD_MERIT_APPLY_STATUS) {
-			
-		} else if(command == Commands.LOAD_AFTERSCHOOL_STATUS) {
-			
-		} else if(command == Commands.LOAD_MEAL) {
-			
-		} else if(command == Commands.LOAD_PLAN) {
-			
-		} else if(command == Commands.LOAD_SCORE) {
-			
+			break;
+		case Commands.LOAD_POST_LIST:
+			break;
+		case Commands.LOAD_NOTICE_LIST:
+			break;
+		case Commands.LOAD_QNA_LIST:
+			break;
+		case Commands.LOAD_CONTACT_LIST:
+			break;
+		case Commands.LOAD_COMPETITION_LIST:
+			break;
+		case Commands.LOAD_REPORT_FACILITY_LIST:
+			break;
+		case Commands.LOAD_NOTICE:
+			break;
+		case Commands.LOAD_RULE:
+			break;
+		case Commands.LOAD_QNA:
+			break;
+		case Commands.LOAD_CONTACT:
+			break;
+		case Commands.LOAD_COMPETITION:
+			break;
+		case Commands.LOAD_REPORT_FACILITY:
+			break;
+		case Commands.LOAD_EXTENTION_STATUS:
+			break;
+		case Commands.LOAD_STAY_STATUS:
+			break;
+		case Commands.LOAD_GOINGOUT_STATUS:
+			break;
+		case Commands.LOAD_MERIT_APPLY_STATUS:
+			break;
+		case Commands.LOAD_AFTERSCHOOL_STATUS:
+			break;
+		case Commands.LOAD_MEAL:
+			break;
+		case Commands.LOAD_PLAN:
+			break;
+		case Commands.LOAD_SCORE:
+			break;
 		}
 
 		return responseObject;
