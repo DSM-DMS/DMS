@@ -26,6 +26,10 @@ public class Post extends DataSaveAble{
 		this.fileList = fileList;
 	}
 
+	public Post() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -46,9 +50,7 @@ public class Post extends DataSaveAble{
 	public String toQuery() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(QueryUtills.querySetter(Query.POST.insertFormat, title, writer, dateTime, content)+";");
-		for(int i = 0 ;i<fileList.size(); i++){
-			builder.append(fileList.get(i).toQuery()+";");
-		}
+		builder.append(fileList.toQuery());
 		return builder.toString();
 	}
 
@@ -69,12 +71,36 @@ public class Post extends DataSaveAble{
 		content = rs.getString("content");
 		writer = rs.getString("writer");
 		dateTime = rs.getString("date");
-		DataBase.getInstance().executeQuery(QueryUtills.querySetter(Query.ATTACHMENT.selectFormat, "*", number));
+		fileList = (AttachmentList<Attachment>) new AttachmentList<Attachment>(Attachment.class).fromResultSet(DataBase.getInstance().executeQuery(QueryUtills.querySetter(Query.ATTACHMENT.selectFormat, "*", number)));
 		return this;
 	}
 	
 	public void setTitle(String text) {
 		title = text.replaceAll("'", "`");
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public AttachmentList<Attachment> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(AttachmentList<Attachment> fileList) {
+		this.fileList = fileList;
+	}
+
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public void setWriter(String str) {

@@ -21,6 +21,9 @@ public class MonthPlan extends DataSaveAble {
 		this.month = month;
 	}
 
+	public MonthPlan() {
+	}
+
 	public void addPlan(Plan plan) {
 		dayPlans.add(plan);
 	}
@@ -28,6 +31,30 @@ public class MonthPlan extends DataSaveAble {
 	@Override
 	public String toQuery() {
 		return QueryUtills.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString());
+	}
+
+	public ArrayList<Plan> getDayPlans() {
+		return dayPlans;
+	}
+
+	public void setDayPlans(ArrayList<Plan> dayPlans) {
+		this.dayPlans = dayPlans;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
 	}
 
 	@Override
@@ -47,6 +74,9 @@ public class MonthPlan extends DataSaveAble {
 		year = rs.getInt("year");
 		month = rs.getInt("month");
 		dayPlans = convertArrayList((JSONArray)JSONValue.parse(rs.getString("data")));
+		if(dayPlans.size()==0){
+			vaild = false;
+		}
 		return this;
 	}
 	

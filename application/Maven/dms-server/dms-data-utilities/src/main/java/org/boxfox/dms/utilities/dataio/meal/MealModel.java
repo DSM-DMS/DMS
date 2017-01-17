@@ -14,7 +14,7 @@ public class MealModel{
 	private static final int START_YEAR = 2015;
 
 	public static DayMeal getMealAtDate(int year, int month, int day) {
-		String query = QueryUtills.querySetter(Query.MEAL.selectFormat, "*", QueryUtills.queryCreateDate(year, month, day));
+		String query = QueryUtills.querySetter(Query.MEAL.selectFormat, QueryUtills.queryCreateDate(year, month, day));
 		try {
 			ResultSet rs = DataBase.getInstance().executeQuery(query);
 			if(rs.next()){

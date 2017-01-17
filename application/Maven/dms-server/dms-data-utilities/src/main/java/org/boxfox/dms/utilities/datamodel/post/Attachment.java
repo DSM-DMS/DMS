@@ -31,6 +31,30 @@ public class Attachment extends DataSaveAble {
 		return obj;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 	@Override
 	public DataSaveAble fromResultSet(ResultSet rs) throws SQLException {
 		this.number = rs.getInt("no");

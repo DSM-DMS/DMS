@@ -39,6 +39,7 @@ public class QueryUtills {
 	}
 
 	public static String querySetter(String format, Object... args) {
+		StringBuilder builder = new StringBuilder();
 		for (Object arg : args) {
 			String argStr;
 			if (arg instanceof String) {
@@ -48,9 +49,14 @@ public class QueryUtills {
 			} else {
 				argStr = arg.toString();
 			}
+			if(format.contains("?"))
 			format = format.replaceFirst("[?]", argStr);
+			else{
+				builder.append(" ");
+				builder.append(argStr);
+			}
 		}
-		return format;
+		return format + builder.toString();
 	}
 
 	public static String columnTargetCreater(String... targets) {

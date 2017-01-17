@@ -1,5 +1,12 @@
 package org.boxfox.dms.utilities.dataio.post;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
+
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.Query;
+import org.boxfox.dms.utilities.database.QueryUtills;
 import org.boxfox.dms.utilities.dataio.Parser;
 import org.boxfox.dms.utilities.dataio.ParserUtills;
 import org.boxfox.dms.utilities.datamodel.post.Attachment;
@@ -33,16 +40,30 @@ public class PostParser<T> extends Parser {
 				html.indexOf("var POST_ID="));
 		JSONArray files = (JSONArray) JSONValue.parse(html);
 		AttachmentList<Attachment> list = new AttachmentList<Attachment>(Attachment.class);
-		
-		//post number key
-		int number = 1223;
-		
-		for (Object file : files) {
-			JSONArray arr = (JSONArray) file;
-			Attachment attachment = new Attachment(number, arr.get(0).toString(), arr.get(2).toString());
-			list.add(attachment);
+
+		Post post = null;
+		try {
+			Calendar c = Calendar.getInstance();
+			String millis = c.getTimeInMillis() + "";
+			DataBase.getInstance()
+					.executeUpdate(QueryUtills.querySetter(Query.POST.insertFormat, millis, millis, millis, millis));
+			post = PostModel.getPost(millis);
+			if (post != null) {
+				for (Object file : files) {
+					JSONArray arr = (JSONArray) file;
+					Attachment attachment = new Attachment(post.getNumber(), arr.get(0).toString(),
+							arr.get(2).toString());
+					list.add(attachment);
+				}
+				post.setTitle(title);
+				post.setWriter(writer);
+				post.setDateTime(dateTime);
+				post.setContent(content);
+				post.setFileList(list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		Post post = new Post(number, title, writer, dateTime, content, list);
 		return post;
 	}
 
