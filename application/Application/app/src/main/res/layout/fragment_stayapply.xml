@@ -5,171 +5,148 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_stayapply_apply"
-        android:orientation="vertical">
+        android:layout_above="@+id/btn_stayapply_apply">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/stayapply_defaultvalue" />
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
 
-            <TextView
-                android:id="@+id/tv_stayapply_defaultvalue"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/stayapply_defaultvalue"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/tv_stayapply_defaultvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp"
+                    android:textColor="@color/colorPrimary" />
+
+                <com.dms.beinone.application.DMSButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/stayapply_change"
+                    android:textSize="12sp"
+                    dmsbtn:style="round" />
+
+            </RelativeLayout>
+
+            <com.samsistemas.calendarview.widget.CalendarView
+                android:id="@+id/calendar_stayapply"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="72dp"
-                android:textColor="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                cal:calendarBackgroundColor="@color/colorPrimary"
+                cal:calendarTitleTextColor="@android:color/white"
+                cal:currentDayOfMonthColor="@android:color/black"
+                cal:dayOfWeekTextColor="@android:color/white"
+                cal:disabledDayBackgroundColor="@color/colorPrimary"
+                cal:disabledDayTextColor="@android:color/darker_gray"
+                cal:selectedDayBackgroundColor="@color/colorAccent"
+                cal:titleLayoutBackgroundColor="@color/colorPrimary"
+                cal:weekLayoutBackgroundColor="@color/colorPrimary"
+                cal:weekend="saturday|sunday"
+                cal:weekendColor="@android:color/holo_red_light" />
 
-            <com.dms.beinone.application.DMSButton
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/stayapply_change"
-                android:textSize="12sp"
-                dmsbtn:style="round" />
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_stayapply_selectedweek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/black" />
 
-        <com.samsistemas.calendarview.widget.CalendarView
-            android:id="@+id/calendar_stayapply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            cal:calendarBackgroundColor="@color/colorPrimary"
-            cal:calendarTitleTextColor="@android:color/white"
-            cal:currentDayOfMonthColor="@android:color/white"
-            cal:dayOfWeekTextColor="@android:color/white"
-            cal:disabledDayBackgroundColor="@color/colorPrimary"
-            cal:disabledDayTextColor="@android:color/darker_gray"
-            cal:selectedDayBackgroundColor="@color/colorPrimaryDark"
-            cal:titleLayoutBackgroundColor="@color/colorPrimary"
-            cal:weekLayoutBackgroundColor="@color/colorPrimary"
-            cal:weekend="saturday|sunday"
-            cal:weekendColor="@android:color/holo_red_light" />
+                <TextView
+                    android:id="@+id/tv_stayapply_selectedweekvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorPrimary" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp">
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_stayapply_selectedweek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:drawable/divider_horizontal_bright" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorPrimary" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:drawable/divider_horizontal_bright" />
-
-        <com.dms.beinone.application.DMSRadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--<com.dms.beinone.application.DMSRadioButton-->
-                <!--android:id="@+id/radio_stayapply_fridaygo"-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:textOff="@string/stayapply_fridaygo"-->
-                <!--android:textOn="@string/stayapply_fridaygo" />-->
-
-            <!--<com.dms.beinone.application.DMSRadioButton-->
-                <!--android:id="@+id/radio_stayapply_saturdaygo"-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:textOff="@string/stayapply_saturdaygo"-->
-                <!--android:textOn="@string/stayapply_saturdaygo" />-->
-
-            <!--<com.dms.beinone.application.DMSRadioButton-->
-                <!--android:id="@+id/radio_stayapply_saturdaycome"-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:textOff="@string/stayapply_saturdaycome"-->
-                <!--android:textOn="@string/stayapply_saturdaycome" />-->
-
-            <!--<com.dms.beinone.application.DMSRadioButton-->
-                <!--android:id="@+id/radio_stayapply_stay"-->
-                <!--android:layout_width="64dp"-->
-                <!--android:layout_height="64dp"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:textOff="@string/stayapply_stay"-->
-                <!--android:textOn="@string/stayapply_stay" />-->
-
-            <LinearLayout
+            <com.dms.beinone.application.DMSRadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.dms.beinone.application.DMSRadioButton
-                    android:id="@+id/radio_stayapply_fridaygo"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:textOff="@string/stayapply_fridaygo"
-                    android:textOn="@string/stayapply_fridaygo" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <com.dms.beinone.application.DMSRadioButton
-                    android:id="@+id/radio_stayapply_saturdaygo"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:textOff="@string/stayapply_saturdaygo"
-                    android:textOn="@string/stayapply_saturdaygo" />
+                    <com.dms.beinone.application.DMSRadioButton
+                        android:id="@+id/radio_stayapply_fridaygo"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:textOff="@string/stayapply_fridaygo"
+                        android:textOn="@string/stayapply_fridaygo" />
 
-                <com.dms.beinone.application.DMSRadioButton
-                    android:id="@+id/radio_stayapply_saturdaycome"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:textOff="@string/stayapply_saturdaycome"
-                    android:textOn="@string/stayapply_saturdaycome" />
+                    <com.dms.beinone.application.DMSRadioButton
+                        android:id="@+id/radio_stayapply_saturdaygo"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:textOff="@string/stayapply_saturdaygo"
+                        android:textOn="@string/stayapply_saturdaygo" />
 
-                <com.dms.beinone.application.DMSRadioButton
-                    android:id="@+id/radio_stayapply_stay"
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:textOff="@string/stayapply_stay"
-                    android:textOn="@string/stayapply_stay" />
+                    <com.dms.beinone.application.DMSRadioButton
+                        android:id="@+id/radio_stayapply_saturdaycome"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:textOff="@string/stayapply_saturdaycome"
+                        android:textOn="@string/stayapply_saturdaycome" />
 
-            </LinearLayout>
+                    <com.dms.beinone.application.DMSRadioButton
+                        android:id="@+id/radio_stayapply_stay"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:textOff="@string/stayapply_stay"
+                        android:textOn="@string/stayapply_stay" />
 
-        </com.dms.beinone.application.DMSRadioGroup>
+                </LinearLayout>
 
-    </LinearLayout>
+            </com.dms.beinone.application.DMSRadioGroup>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.dms.beinone.application.DMSButton
         android:id="@+id/btn_stayapply_apply"

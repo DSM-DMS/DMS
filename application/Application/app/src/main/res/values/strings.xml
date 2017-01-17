@@ -36,4 +36,11 @@
     <string name="stayapply_saturdaycome">토요귀사</string>
     <string name="stayapply_stay">잔류</string>
     <string name="stayapply_apply">신청하기</string>
+
+    <!-- Goingout Apply Fragment -->
+    <string name="goingoutapply_desc">앱에서 외출신청 후, 별도로 사감실에 방문하여 확인받아야 합니다.</string>
+    <string name="goingoutapply_saturday">토요일</string>
+    <string name="goingoutapply_sunday">일요일</string>
+    <string name="goingoutapply_subdesc">(중복 선택 가능)</string>
+    <string name="goingoutapply_apply">신청하기</string>
 </resources>

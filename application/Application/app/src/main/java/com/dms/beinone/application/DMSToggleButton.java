@@ -6,24 +6,22 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewParent;
-import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 /**
- * Created by BeINone on 2017-01-15.
+ * Created by BeINone on 2017-01-16.
  */
 
-public class DMSRadioButton extends ToggleButton {
+public class DMSToggleButton extends ToggleButton {
 
     private int mNormalTextColor;
     private int mCheckedTextColor;
 
-    public DMSRadioButton(Context context) {
+    public DMSToggleButton(Context context) {
         super(context);
     }
 
-    public DMSRadioButton(Context context, AttributeSet attrs) {
+    public DMSToggleButton(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, new int[] { android.R.attr.textSize });
@@ -32,7 +30,7 @@ public class DMSRadioButton extends ToggleButton {
         init(context, textSize);
     }
 
-    public DMSRadioButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DMSToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         TypedArray a = context.obtainStyledAttributes(
@@ -43,7 +41,7 @@ public class DMSRadioButton extends ToggleButton {
     }
 
     /**
-     * Initializes settings for radio button.
+     * Initializes settings for check box.
      */
     private void init(Context context, int textSize) {
         setBackground(ContextCompat.getDrawable(context, R.drawable.dmstoggle));
@@ -53,21 +51,7 @@ public class DMSRadioButton extends ToggleButton {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ViewParent parent = getParent();
-                while (!(parent instanceof DMSRadioGroup)) {
-                    parent = parent.getParent();
-                }
-
-                // 버튼이 선택되었음을 RadioGroup에 알림
-                ((DMSRadioGroup) parent).check(view.getId());
-            }
-        });
-
-        setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                // 버튼이 선택되면 텍스트 색을 바꿈.
-                if (b) {
+                if (isChecked()) {
                     setTextColor(mCheckedTextColor);
                 } else {
                     setTextColor(mNormalTextColor);
