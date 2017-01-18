@@ -2,8 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_checked="false"
-        android:drawable="@drawable/dmstoggle_normal" />
+        android:drawable="@drawable/dmstb_normal" />
     <item
         android:state_checked="true"
-        android:drawable="@drawable/dmstoggle_select" />
+        android:drawable="@drawable/dmstb_checked" />
 </selector>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_recommend_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/rewardscoreapply_content"
+        android:textColor="@android:color/primary_text_light" />
+
+    <com.dms.beinone.application.DMSEditText
+        android:id="@+id/et_recommend_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_recommend_content"
+        android:lines="5"
+        android:inputType="textMultiLine"
+        android:textCursorDrawable="@drawable/dmset_cursor" />
+
+    <TextView
+        android:id="@+id/tv_recommend_recommendee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@id/et_recommend_content"
+        android:text="@string/rewardscoreapply_recommendee"
+        android:textColor="@android:color/primary_text_light" />
+
+    <com.dms.beinone.application.DMSEditText
+        android:id="@+id/et_recommend_recommendee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_recommend_recommendee"
+        android:textCursorDrawable="@drawable/dmset_cursor" />
+
+    <com.dms.beinone.application.DMSButton
+        android:id="@+id/btn_recommend_apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/rewardscoreapply_apply"
+        dmsbtn:style="bottom" />
+
+</RelativeLayout>

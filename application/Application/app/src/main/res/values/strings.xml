@@ -43,4 +43,13 @@
     <string name="goingoutapply_sunday">일요일</string>
     <string name="goingoutapply_subdesc">(중복 선택 가능)</string>
     <string name="goingoutapply_apply">신청하기</string>
+    
+    <!-- Rewardscore Apply Fragment -->
+    <string name="rewardscoreapply_rewardscore">상점</string>
+    <string name="rewardscoreapply_recommend">추천</string>
+    <string name="rewardscoreapply_content">내용</string>
+    <string name="rewardscoreapply_recommendee">추천인</string>
+    <string name="rewardscoreapply_apply">신청하기</string>
+    <string name="rewardscoreapply_nocontent">내용을 입력해주세요.</string>
+    <string name="rewardscoreapply_norecommendee">추천인을 입력해주세요.</string>
 </resources>

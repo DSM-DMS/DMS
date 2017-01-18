@@ -16,7 +16,7 @@
             android:padding="32dp"
             android:gravity="center"
             android:text="@string/goingoutapply_desc"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/primary_text_light" />
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,18 +30,20 @@
                 android:gravity="center">
 
                 <com.dms.beinone.application.DMSToggleButton
-                    android:id="@+id/toggle_goingoutapply_saturday"
+                    android:id="@+id/tb_goingoutapply_saturday"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_marginRight="32dp"
+                    android:layout_marginEnd="32dp"
                     android:textOff="@string/goingoutapply_saturday"
                     android:textOn="@string/goingoutapply_saturday" />
 
                 <com.dms.beinone.application.DMSToggleButton
-                    android:id="@+id/toggle_goingoutapply_sunday"
+                    android:id="@+id/tb_goingoutapply_sunday"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_marginLeft="32dp"
+                    android:layout_marginStart="32dp"
                     android:textOff="@string/goingoutapply_sunday"
                     android:textOn="@string/goingoutapply_sunday" />
 

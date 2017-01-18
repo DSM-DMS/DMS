@@ -35,9 +35,19 @@ public class StayApplyFragment extends Fragment {
         getActivity().setTitle(R.string.nav_stayapply);
         View view = inflater.inflate(R.layout.fragment_stayapply, container, false);
 
-        mSelectedWeekTV = (TextView) view.findViewById(R.id.tv_stayapply_selectedweek);
+        init(view);
 
-        final CalendarView calendarView = (CalendarView) view.findViewById(R.id.calendar_stayapply);
+        return view;
+    }
+
+    /**
+     * Initializes the selected week text view and the radio button and the apply button
+     * @param rootView view to find child views
+     */
+    private void init(View rootView) {
+        mSelectedWeekTV = (TextView) rootView.findViewById(R.id.tv_stayapply_selectedweek);
+
+        final CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_stayapply);
         calendarView.setOnDateLongClickListener(null);
         calendarView.setOnDateClickListener(new CalendarView.OnDateClickListener() {
             @Override
@@ -48,34 +58,32 @@ public class StayApplyFragment extends Fragment {
 
         setSelectedWeekTV(calendarView.getLastSelectedDay());
 
-        final DMSRadioButton fridayGoRadio =
-                (DMSRadioButton) view.findViewById(R.id.radio_stayapply_fridaygo);
-        final DMSRadioButton saturdayGoRadio =
-                (DMSRadioButton) view.findViewById(R.id.radio_stayapply_saturdaygo);
-        final DMSRadioButton saturdayComeRadio =
-                (DMSRadioButton) view.findViewById(R.id.radio_stayapply_saturdaycome);
-        final DMSRadioButton stayRadio = (DMSRadioButton) view.findViewById(R.id.radio_stayapply_stay);
+        final DMSRadioButton fridayGoRB =
+                (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_fridaygo);
+        final DMSRadioButton saturdayGoRB =
+                (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_saturdaygo);
+        final DMSRadioButton saturdayComeRB =
+                (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_saturdaycome);
+        final DMSRadioButton stayRB = (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_stay);
 
         // 초기에 금요귀가 버튼 자동 선택
-        fridayGoRadio.setChecked(true);
+        fridayGoRB.setChecked(true);
 
-        DMSButton applyBtn = (DMSButton) view.findViewById(R.id.btn_stayapply_apply);
+        DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_stayapply_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fridayGoRadio.isChecked()) apply(FRIDAY_GO);
-                else if (saturdayGoRadio.isChecked()) apply(SATURDAY_GO);
-                else if (saturdayComeRadio.isChecked()) apply(SATURDAY_COME);
-                else if (stayRadio.isChecked()) apply(STAY);
+                if (fridayGoRB.isChecked()) apply(FRIDAY_GO);
+                else if (saturdayGoRB.isChecked()) apply(SATURDAY_GO);
+                else if (saturdayComeRB.isChecked()) apply(SATURDAY_COME);
+                else if (stayRB.isChecked()) apply(STAY);
             }
         });
-
-        return view;
     }
 
     /**
      * Sets selected week on selectedweek textview
-     * @param date Date that selected.
+     * @param date Date that selected
      */
     private void setSelectedWeekTV(Date date) {
         // 토요일 기준으로 주 구분
@@ -95,8 +103,8 @@ public class StayApplyFragment extends Fragment {
     }
 
     /**
-     * Inserts or updates selected stay state value on database.
-     * @param stayState Stay state to insert or update on database.
+     * Inserts or updates selected stay state value on database
+     * @param stayState Stay state to insert or update on database
      */
     private void apply(int stayState) {
 

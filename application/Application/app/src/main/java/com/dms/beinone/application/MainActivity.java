@@ -95,7 +95,11 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.relativelayout_main_container, new GoingoutApplyFragment())
                     .commit();
         } else if (id == R.id.nav_rewardscore_apply) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.relativelayout_main_container, new RewardscoreApplyFragment())
+                    .commit();
         } else if (id == R.id.nav_afterschool_apply) {
 
         } else if (id == R.id.nav_meal) {

@@ -23,22 +23,30 @@ public class GoingoutApplyFragment extends Fragment {
         getActivity().setTitle(R.string.nav_goingoutapply);
         View view = inflater.inflate(R.layout.fragment_goingoutapply, container, false);
 
-        final DMSToggleButton saturdayToggle =
-                (DMSToggleButton) view.findViewById(R.id.toggle_goingoutapply_saturday);
-        final DMSToggleButton sundayToggle =
-                (DMSToggleButton) view.findViewById(R.id.toggle_goingoutapply_sunday);
+        init(view);
 
-        DMSButton applyBtn = (DMSButton) view.findViewById(R.id.btn_goingoutapply_apply);
+        return view;
+    }
+
+    /**
+     * Initializes the toggle button and the apply button
+     * @param rootView view to find child views
+     */
+    private void init(View rootView) {
+        final DMSToggleButton saturdayTB =
+                (DMSToggleButton) rootView.findViewById(R.id.tb_goingoutapply_saturday);
+        final DMSToggleButton sundayTB =
+                (DMSToggleButton) rootView.findViewById(R.id.tb_goingoutapply_sunday);
+
+        DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_goingoutapply_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (saturdayToggle.isChecked()) apply(SATURDAY);
-                else if (sundayToggle.isChecked()) apply(SUNDAY);
-                else if (saturdayToggle.isChecked() && sundayToggle.isChecked()) apply(BOTH);
+                if (saturdayTB.isChecked()) apply(SATURDAY);
+                else if (sundayTB.isChecked()) apply(SUNDAY);
+                else if (saturdayTB.isChecked() && sundayTB.isChecked()) apply(BOTH);
             }
         });
-
-        return view;
     }
 
     private void apply(int day) {

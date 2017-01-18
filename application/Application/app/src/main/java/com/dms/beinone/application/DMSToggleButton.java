@@ -44,7 +44,7 @@ public class DMSToggleButton extends ToggleButton {
      * Initializes settings for check box.
      */
     private void init(Context context, int textSize) {
-        setBackground(ContextCompat.getDrawable(context, R.drawable.dmstoggle));
+        setBackground(ContextCompat.getDrawable(context, R.drawable.dmstb));
         mNormalTextColor = ContextCompat.getColor(context, R.color.colorPrimary);
         mCheckedTextColor = ContextCompat.getColor(context, android.R.color.white);
 
