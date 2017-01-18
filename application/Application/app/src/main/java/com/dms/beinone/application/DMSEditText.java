@@ -27,18 +27,13 @@ public class DMSEditText extends EditText {
     }
 
     /**
-     * Initializes settings for edit text.
+     * 속성 초기화
      */
     private void init(Context context) {
         setBackground(ContextCompat.getDrawable(context, R.drawable.dmset));
 
         int padding = (int) DensityConverter.dpToPx(context, 8);
         setPadding(padding, padding, padding, padding);
-
-//        setMinWidth(0);
-//        setMinimumWidth(0);
-//        setMinHeight(0);
-//        setMinimumHeight(0);
     }
 
 }

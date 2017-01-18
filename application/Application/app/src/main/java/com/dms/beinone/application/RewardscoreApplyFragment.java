@@ -32,8 +32,8 @@ public class RewardscoreApplyFragment extends Fragment {
     }
 
     /**
-     * Initializes the first display and the tab layout.
-     * @param rootView view to find child views
+     * 초기화, Tab 선택 이벤트 설정
+     * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
         mRewardscoreFragment = new RewardscoreFragment();
@@ -68,8 +68,8 @@ public class RewardscoreApplyFragment extends Fragment {
     }
 
     /**
-     * Replaces old fragment with new fragment
-     * @param fragment fragment to replace
+     * 기존의 Fragment를 새로운 Fragment로 교체
+     * @param fragment 교체할 새로운 Fragment
      */
     private void replaceFragment(Fragment fragment) {
         getChildFragmentManager()

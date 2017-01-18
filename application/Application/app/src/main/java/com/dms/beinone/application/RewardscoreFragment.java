@@ -64,9 +64,8 @@ public class RewardscoreFragment extends Fragment {
     }
 
     /**
-     * Inserts selected reward score information on database
-     *
-     * @param content The reason why you should get reward score
+     * 데이터베이스에 상점신청 정보 기록
+     * @param content 상점을 받아야하는 이유
      */
     private void apply(String content) {
 

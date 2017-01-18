@@ -43,7 +43,7 @@ public class DMSRadioButton extends ToggleButton {
     }
 
     /**
-     * Initializes settings for radio button.
+     * 속성 초기화, 클릭 이벤트 설정
      */
     private void init(Context context, int textSize) {
         setBackground(ContextCompat.getDrawable(context, R.drawable.dmstb));

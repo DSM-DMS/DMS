@@ -29,8 +29,8 @@ public class GoingoutApplyFragment extends Fragment {
     }
 
     /**
-     * Initializes the toggle button and the apply button
-     * @param rootView view to find child views
+     * 초기화, 신청 버튼 클릭 이벤트 설정
+     * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
         final DMSToggleButton saturdayTB =

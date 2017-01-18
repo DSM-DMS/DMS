@@ -74,13 +74,11 @@ public class DMSButton extends Button {
             default: break;
         }
 
-
-
-        return super.onTouchEvent(event);
+        return false;
     }
 
     /**
-     * Initializes settings for button.
+     * 속성 초기화
      */
     private void init(Context context, int style, int textSize) {
         if (style == STYLE_NORMAL) {

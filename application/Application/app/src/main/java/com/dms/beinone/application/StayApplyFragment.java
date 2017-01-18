@@ -41,8 +41,8 @@ public class StayApplyFragment extends Fragment {
     }
 
     /**
-     * Initializes the selected week text view and the radio button and the apply button
-     * @param rootView view to find child views
+     * 초기화, 달력 날짜 클릭 이벤트 설정, 신청 버튼 클릭 이벤트 설정
+     * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
         mSelectedWeekTV = (TextView) rootView.findViewById(R.id.tv_stayapply_selectedweek);
@@ -66,9 +66,6 @@ public class StayApplyFragment extends Fragment {
                 (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_saturdaycome);
         final DMSRadioButton stayRB = (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_stay);
 
-        // 초기에 금요귀가 버튼 자동 선택
-        fridayGoRB.setChecked(true);
-
         DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_stayapply_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +78,6 @@ public class StayApplyFragment extends Fragment {
         });
     }
 
-    /**
-     * Sets selected week on selectedweek textview
-     * @param date Date that selected
-     */
     private void setSelectedWeekTV(Date date) {
         // 토요일 기준으로 주 구분
         Calendar cal = Calendar.getInstance(Locale.KOREA);
@@ -103,8 +96,8 @@ public class StayApplyFragment extends Fragment {
     }
 
     /**
-     * Inserts or updates selected stay state value on database
-     * @param stayState Stay state to insert or update on database
+     * 데이터베이스에 잔류 상태 정보 기록
+     * @param stayState 잔류 상태
      */
     private void apply(int stayState) {
 

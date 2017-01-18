@@ -27,8 +27,8 @@ public class RecommendFragment extends Fragment {
     }
 
     /**
-     * Initializes the edit text
-     * @param rootView view to find child views
+     * 초기화, 내용 및 추천인 EditText 포커스 이벤트 설정, 신청 버튼 클릭 이벤트 설정
+     * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
         final TextView contentTV = (TextView) rootView.findViewById(R.id.tv_recommend_content);
@@ -83,9 +83,9 @@ public class RecommendFragment extends Fragment {
     }
 
     /**
-     * Inserts selected recommend information on database
-     * @param content The reason why you recommend
-     * @param recommendee A student who recommended
+     * 데이터베이스에 상점추천 정보 기록
+     * @param content 추천하는 이유
+     * @param recommendee 추천인
      */
     private void apply(String content, String recommendee) {
 

@@ -2,6 +2,7 @@ package com.dms.beinone.application;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -75,35 +76,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.relativelayout_main_container, new HomeFragment())
-                    .commit();
+            replaceFragment(new HomeFragment());
         } else if (id == R.id.nav_extension_apply) {
 
         } else if (id == R.id.nav_stay_apply) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.relativelayout_main_container, new StayApplyFragment())
-                    .commit();
+            replaceFragment(new StayApplyFragment());
         } else if (id == R.id.nav_goingout_apply) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.relativelayout_main_container, new GoingoutApplyFragment())
-                    .commit();
+            replaceFragment(new GoingoutApplyFragment());
         } else if (id == R.id.nav_rewardscore_apply) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.relativelayout_main_container, new RewardscoreApplyFragment())
-                    .commit();
+            replaceFragment(new RewardscoreApplyFragment());
         } else if (id == R.id.nav_afterschool_apply) {
 
         } else if (id == R.id.nav_meal) {
-
+            replaceFragment(new MealFragment());
         } else if (id == R.id.nav_notice) {
 
         } else if (id == R.id.nav_competition) {
@@ -125,6 +110,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * 기존의 Fragment를 새로운 Fragment로 교체
+     * @param fragment 교체할 Fragment
+     */
+    private void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.relativelayout_main_container, fragment)
+                .commit();
     }
 
 }

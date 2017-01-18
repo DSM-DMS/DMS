@@ -52,4 +52,9 @@
     <string name="rewardscoreapply_apply">신청하기</string>
     <string name="rewardscoreapply_nocontent">내용을 입력해주세요.</string>
     <string name="rewardscoreapply_norecommendee">추천인을 입력해주세요.</string>
+
+    <!-- Meal Fragment -->
+    <string name="meal_breakfast">아침</string>
+    <string name="meal_lunch">점심</string>
+    <string name="meal_dinner">저녁</string>
 </resources>

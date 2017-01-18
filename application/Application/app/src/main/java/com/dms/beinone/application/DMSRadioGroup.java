@@ -32,9 +32,9 @@ public class DMSRadioGroup extends RadioGroup {
     };
 
     /**
-     * Search and set checked state of DMSRadioButton in this view
-     * @param viewGroup search in this ViewGroup
-     * @param id resource id to search
+     * 자식 뷰들을 검색하고 체크 상태를 설정
+     * @param viewGroup 자식 뷰들을 감싸는 ViewGroup
+     * @param id 검색할 Resource ID
      */
     private void setCheckedChildren(ViewGroup viewGroup, int id) {
         for (int index = 0; index < viewGroup.getChildCount(); index++) {
