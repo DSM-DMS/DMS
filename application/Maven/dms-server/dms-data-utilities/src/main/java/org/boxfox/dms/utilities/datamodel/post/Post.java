@@ -13,6 +13,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Post extends DataSaveAble{
+	public static int CATEGORY_BROAD = 0;
+	public static int CATEGORY_FAMILER = 1;
+	public static int CATEGORY_CHALLENGE = 2;
 	private String writer, dateTime, title, content;
 	private int number;
 	private AttachmentList<Attachment> fileList;
