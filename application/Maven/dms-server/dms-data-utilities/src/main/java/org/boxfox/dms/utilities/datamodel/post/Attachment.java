@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
 import org.boxfox.dms.utilities.database.QueryUtils;
+import org.boxfox.dms.utilities.dataio.Parser;
 import org.json.simple.JSONObject;
 
 public class Attachment extends DataSaveAble {
@@ -15,12 +16,12 @@ public class Attachment extends DataSaveAble {
 	public Attachment(int number, String name, String link) {
 		this.name = name;
 		this.number = number;
-		this.link = link;
+		this.link = Parser.LINK+link;
 	}
 
 	@Override
 	public String toQuery() {
-		return QueryUtils.querySetter(Query.ATTACHMENT.insertFormat, number, name, link);
+		return QueryUtils.querySetter(Query.ATTACHMENT.insertFormat, number, name, link)+";";
 	}
 
 	@Override

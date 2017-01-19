@@ -21,10 +21,11 @@ public class PostParser<T> extends Parser {
 	public static final int CATEGORY_BROAD = 0;
 	public static final int CATEGORY_FAMILER = 1;
 	public static final int CATEGORY_CHALLENGE = 2;
-	private int category;
+	private int category, postNum;
 
-	public PostParser(int category, String postKey) {
+	public PostParser(int category,int postNum, String postKey) {
 		this.category = category;
+		this.postNum = postNum;
 		url = LINK + postKey;
 	}
 
@@ -50,19 +51,19 @@ public class PostParser<T> extends Parser {
 		String writer = doc.getElementsByClass("user_icon").get(0).text();
 		String dateTime = doc.getElementsByClass("text").get(0).text();
 		String content = doc.getElementsByClass("context_view").get(0).html();
-		String html = doc.html();
+		String html = doc.html().replaceAll("\'", "&quot;");
 		html = html.substring(html.indexOf("var PostFiles = ") + "var PostFiles = ".length(),
 				html.indexOf("var POST_ID="));
+		html = html.substring(0, html.lastIndexOf(";"));
 		JSONArray files = (JSONArray) JSONValue.parse(html);
 		AttachmentList<Attachment> list = new AttachmentList<Attachment>(Attachment.class);
 
 		Post post = null;
 		try {
-			Calendar c = Calendar.getInstance();
-			String millis = c.getTimeInMillis() + "";
+			
 			DataBase.getInstance()
-					.executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat, millis, millis, millis, millis));
-			post = PostModel.getPost(millis);
+					.executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat,category, postNum, "", "", "1999-01-01", ""));
+			post = PostModel.getPost(category, postNum);
 			if (post != null) {
 				for (Object file : files) {
 					JSONArray arr = (JSONArray) file;
@@ -75,6 +76,7 @@ public class PostParser<T> extends Parser {
 				post.setDateTime(dateTime);
 				post.setContent(content);
 				post.setFileList(list);
+				DataBase.getInstance().execute(post);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

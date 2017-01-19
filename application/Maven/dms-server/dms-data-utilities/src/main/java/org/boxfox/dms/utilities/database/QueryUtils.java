@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class QueryUtils {
 
 	public static String queryBuilder(Object... args) {
@@ -20,12 +23,15 @@ public class QueryUtils {
 		 * DataBase.queryBuilder("select * from user where id='",id,"'");
 		 */
 
-		StringBuilder s = new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		// scratch variable
-		for (Object str : args) {
-			s.append(str.toString());
+		for (Object arg : args) {
+			if (arg instanceof DataSaveAble) {
+				builder.append(((DataSaveAble) arg).toQuery());
+			} else
+				builder.append(arg.toString());
 		}
-		return s.toString();
+		return builder.toString();
 	}
 
 	public static String queryCreateDate(int year, int month, int day) {
@@ -34,7 +40,7 @@ public class QueryUtils {
 		builder.append("-");
 		builder.append(month);
 		builder.append("-");
-		builder.append(year);
+		builder.append(day);
 		return builder.toString();
 	}
 
@@ -42,16 +48,16 @@ public class QueryUtils {
 		StringBuilder builder = new StringBuilder();
 		for (Object arg : args) {
 			String argStr;
-			if (arg instanceof String) {
+			if (arg instanceof String || arg instanceof JSONArray || arg instanceof JSONObject) {
 				argStr = "'" + arg.toString() + "'";
 				if (checkDate(arg.toString()))
-					argStr = "str_to_date(" + argStr + ")";
+					argStr = "str_to_date(" + argStr + ", '%Y-%m-%d %H:%i:%s')";
 			} else {
 				argStr = arg.toString();
 			}
-			if(format.contains("?"))
-			format = format.replaceFirst("[?]", argStr);
-			else{
+			if (format.contains("?"))
+				format = format.replaceFirst("[?]", argStr);
+			else {
 				builder.append(" ");
 				builder.append(argStr);
 			}
@@ -80,16 +86,12 @@ public class QueryUtils {
 		}
 		return dateValidity;
 	}
-	
-	/*//should I make this?
-	public static BoxFoxResultSet fixResultSet(ResultSet rs){
-		try {
-			int max = rs.getMetaData().getColumnCount();
-			String [] columns = new String[max];
-			for(int i = 0 ; i < max ; i ++){
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+
+	/*
+	 * //should I make this? public static BoxFoxResultSet
+	 * fixResultSet(ResultSet rs){ try { int max =
+	 * rs.getMetaData().getColumnCount(); String [] columns = new String[max];
+	 * for(int i = 0 ; i < max ; i ++){ } } catch (SQLException e) {
+	 * e.printStackTrace(); } }
+	 */
 }

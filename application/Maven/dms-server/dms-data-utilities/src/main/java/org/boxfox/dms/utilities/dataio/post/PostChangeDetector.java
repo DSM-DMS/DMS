@@ -68,7 +68,7 @@ public class PostChangeDetector {
 				JSONArray post = ((JSONArray)posts.get(i));
 				int postNum = Integer.valueOf(((String) ((JSONArray) ((JSONArray) post.get(0)).get(0)).get(1)));
 				if (!check(category, postNum)) {
-					PostParser parser = new PostParser(category,((String)((JSONArray)post.get(0)).get(2)));
+					PostParser parser = new PostParser(category, postNum,((String)((JSONArray)post.get(0)).get(2)));
 					parser.parse();
 				}
 			}

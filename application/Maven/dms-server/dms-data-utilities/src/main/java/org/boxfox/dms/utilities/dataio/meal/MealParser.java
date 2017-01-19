@@ -100,8 +100,11 @@ public class MealParser extends Parser {
 	private Meal cleanMenu(String menu) {
 		Pattern p = Pattern.compile("\\(([0-9]{1,})\\)");
 		String[] lines = menu.replaceAll("\\*", "").split("<br>");
-		JSONArray food = new JSONArray();
-		JSONArray allergy = new JSONArray();
+		JSONArray food = null;
+		JSONArray allergy = null;
+		if(lines.length>0){
+			food = new JSONArray();
+			allergy = new JSONArray();
 		JSONArray kcal = new JSONArray();
 		for (int i = 2; i < lines.length - 2; i++) {
 			food.add(clearHtml(lines[i].replaceAll("[(][0-9]{1,}[)]", "")));
@@ -115,6 +118,7 @@ public class MealParser extends Parser {
 		String[] kcals = lines[lines.length - 1].split("/");
 		for (int i = 0; i < kcals.length; i++) {
 			kcal.add(clearHtml(kcals[i]));
+		}
 		}
 		return new Meal(food, allergy);
 	}

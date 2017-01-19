@@ -11,7 +11,12 @@ import org.boxfox.dms.utilities.dataio.Model;
 import org.boxfox.dms.utilities.datamodel.meals.DayMeal;
 
 public class MealModel{
+	private static final DayMeal NULL_MEAL;
 	private static final int START_YEAR = 2015;
+	
+	static{
+		NULL_MEAL = new DayMeal();
+	}
 
 	public static DayMeal getMealAtDate(int year, int month, int day) {
 		String query = QueryUtils.querySetter(Query.MEAL.selectFormat, QueryUtils.queryCreateDate(year, month, day));

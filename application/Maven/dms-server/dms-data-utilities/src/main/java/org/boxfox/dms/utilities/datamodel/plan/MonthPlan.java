@@ -30,7 +30,7 @@ public class MonthPlan extends DataSaveAble {
 
 	@Override
 	public String toQuery() {
-		return QueryUtils.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString());
+		return QueryUtils.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString())+";";
 	}
 
 	public ArrayList<Plan> getDayPlans() {

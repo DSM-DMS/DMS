@@ -11,9 +11,9 @@ import static org.boxfox.dms.utilities.database.QueryUtils.queryBuilder;
 
 public class DataBase {
 	private static final String DB_TARGET = "localhost:3306/dsm_dms";
-	private static final String DB_ATTRIBUTE = "?autoReconnect=true&allowMultiQueries=true";
-	private static final String DB_ID = "";
-	private static final String DB_PASSWORD = "";
+	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true";
+	private static final String DB_ID = "root";
+	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
 	private static DataBase instance;
 	private Statement statement;
 	private Connection connection;
@@ -66,6 +66,7 @@ public class DataBase {
 
 	public synchronized boolean execute(Object... args) throws SQLException {
 		String query = queryBuilder(args);
+		System.out.println(query);
 		return statement.execute(query);
 	}
 

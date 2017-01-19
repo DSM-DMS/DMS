@@ -13,6 +13,7 @@ public class AttachmentList<E> extends DataSaveAble{
 	private Class<E> clazz;
 	
 	public AttachmentList(Class<E> clazz){
+		this();
 		this.clazz = clazz;
 	}
 	
@@ -36,7 +37,7 @@ public class AttachmentList<E> extends DataSaveAble{
 	public String toQuery() {
 		StringBuilder builder = new StringBuilder();
 		for(E file : list){
-			builder.append(((DataSaveAble)file).toQuery()+";");
+			builder.append(((DataSaveAble)file).toQuery());
 		}
 		return builder.toString();
 	}

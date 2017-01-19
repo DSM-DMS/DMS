@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 public abstract class DataSaveAble {
+	
 	protected boolean vaild;
 	{
 		vaild = true;
