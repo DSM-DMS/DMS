@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class QueryUtills {
+public class QueryUtils {
 
 	public static String queryBuilder(Object... args) {
 		/*

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -30,7 +30,7 @@ public class MonthPlan extends DataSaveAble {
 
 	@Override
 	public String toQuery() {
-		return QueryUtills.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString());
+		return QueryUtils.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString());
 	}
 
 	public ArrayList<Plan> getDayPlans() {

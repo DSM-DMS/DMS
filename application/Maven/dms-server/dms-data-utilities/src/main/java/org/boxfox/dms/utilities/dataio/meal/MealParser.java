@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.dataio.Parser;
-import org.boxfox.dms.utilities.dataio.ParserUtills;
+import org.boxfox.dms.utilities.dataio.ParserUtils;
 import org.boxfox.dms.utilities.datamodel.meals.DayMeal;
 import org.boxfox.dms.utilities.datamodel.meals.Meal;
 import org.json.simple.JSONArray;
@@ -25,8 +25,8 @@ public class MealParser extends Parser {
 		this.year = year;
 		this.month = month;
 		this.day = day;
-		url = ParserUtills.getUrl(URL_MEAL, year, month, day);
-		Document doc = ParserUtills.getDoc(url);
+		url = ParserUtils.getUrl(URL_MEAL, year, month, day);
+		Document doc = ParserUtils.getDoc(url);
 		mealTables = doc.getElementsByClass("meal_table");
 	}
 
@@ -55,7 +55,7 @@ public class MealParser extends Parser {
 	}
 
 	public DayMeal parse(int month, int day) {
-		DayMeal dayMeal = new DayMeal(QueryUtills.queryCreateDate(year, month, day),
+		DayMeal dayMeal = new DayMeal(QueryUtils.queryCreateDate(year, month, day),
 				parseDoc(dateFormating(month, day)));
 		try {
 			DataBase.getInstance().executeUpdate(dayMeal);

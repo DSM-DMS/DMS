@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.boxfox.dms.utilities.Log;
-import static org.boxfox.dms.utilities.database.QueryUtills.queryBuilder;
+import static org.boxfox.dms.utilities.database.QueryUtils.queryBuilder;
 
 public class DataBase {
 	private static final String DB_TARGET = "localhost:3306/dsm_dms";
-	private static final String DB_ATTRIBUTE = "?autoReconnect=true&amp;allowMultiQueries=true";
+	private static final String DB_ATTRIBUTE = "?autoReconnect=true&allowMultiQueries=true";
 	private static final String DB_ID = "";
 	private static final String DB_PASSWORD = "";
 	private static DataBase instance;

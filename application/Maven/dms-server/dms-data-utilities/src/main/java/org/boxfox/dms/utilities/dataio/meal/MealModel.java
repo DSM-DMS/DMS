@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.Query;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.dataio.Model;
 import org.boxfox.dms.utilities.datamodel.meals.DayMeal;
 
@@ -14,7 +14,7 @@ public class MealModel{
 	private static final int START_YEAR = 2015;
 
 	public static DayMeal getMealAtDate(int year, int month, int day) {
-		String query = QueryUtills.querySetter(Query.MEAL.selectFormat, QueryUtills.queryCreateDate(year, month, day));
+		String query = QueryUtils.querySetter(Query.MEAL.selectFormat, QueryUtils.queryCreateDate(year, month, day));
 		try {
 			ResultSet rs = DataBase.getInstance().executeQuery(query);
 			if(rs.next()){

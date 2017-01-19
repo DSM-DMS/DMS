@@ -12,7 +12,7 @@ import java.util.Date;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.dataio.Parser;
-import org.boxfox.dms.utilities.dataio.ParserUtills;
+import org.boxfox.dms.utilities.dataio.ParserUtils;
 import org.boxfox.dms.utilities.datamodel.plan.MonthPlan;
 import org.boxfox.dms.utilities.datamodel.plan.Plan;
 import org.json.simple.JSONArray;
@@ -25,7 +25,7 @@ public class PlanParser extends Parser {
 	private int year, month;
 
 	public PlanParser(int year, int month) {
-		this.url = (ParserUtills.getUrl(URL_PLAN, getTimeStemp(year, month)));
+		this.url = (ParserUtils.getUrl(URL_PLAN, getTimeStemp(year, month)));
 		this.year = year;
 		this.month = month;
 	}
@@ -54,14 +54,14 @@ public class PlanParser extends Parser {
 	}
 
 	public MonthPlan parse(int year, int month) {
-		this.url = (ParserUtills.getUrl(URL_PLAN, getTimeStemp(year, month)));
+		this.url = (ParserUtils.getUrl(URL_PLAN, getTimeStemp(year, month)));
 		this.year = year;
 		this.month = month;
 		return doParse();
 	}
 
 	private MonthPlan doParse() {
-		Element tbody = ParserUtills.getDoc(url).getElementsByClass("plist").get(0).getElementsByTag("tbody").get(0);
+		Element tbody = ParserUtils.getDoc(url).getElementsByClass("plist").get(0).getElementsByTag("tbody").get(0);
 		Elements tds = tbody.getElementsByTag("td");
 		boolean check = false;
 		MonthPlan monthPlan = new MonthPlan(year, month);

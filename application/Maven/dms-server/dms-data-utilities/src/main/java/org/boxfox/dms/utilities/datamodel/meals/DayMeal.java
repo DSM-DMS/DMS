@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -21,7 +21,7 @@ public class DayMeal extends DataSaveAble {
 
 	@Override
 	public String toQuery() {
-		return QueryUtills.querySetter(Query.MEAL.insertFormat, date, meals[0].getMenu(), meals[1].getMenu(),
+		return QueryUtils.querySetter(Query.MEAL.insertFormat, date, meals[0].getMenu(), meals[1].getMenu(),
 				meals[2].getMenu(), meals[0].getAllergies(), meals[1].getAllergies(), meals[2].getAllergies());
 	}
 

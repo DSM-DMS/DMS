@@ -10,7 +10,7 @@ import java.net.URLConnection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class ParserUtills {
+public class ParserUtils {
 
 	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
 	/// <date>2017-01-14</date>

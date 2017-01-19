@@ -6,9 +6,9 @@ import java.util.Calendar;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.Query;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.dataio.Parser;
-import org.boxfox.dms.utilities.dataio.ParserUtills;
+import org.boxfox.dms.utilities.dataio.ParserUtils;
 import org.boxfox.dms.utilities.datamodel.post.Attachment;
 import org.boxfox.dms.utilities.datamodel.post.AttachmentList;
 import org.boxfox.dms.utilities.datamodel.post.Post;
@@ -18,10 +18,9 @@ import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
 
 public class PostParser<T> extends Parser {
-	public static int CATEGORY_BROAD = 0;
-	public static int CATEGORY_FAMILER = 1;
-	public static int CATEGORY_MISSION = 2;
-	public static int CATEGORY_CHALLENGE = 3;
+	public static final int CATEGORY_BROAD = 0;
+	public static final int CATEGORY_FAMILER = 1;
+	public static final int CATEGORY_CHALLENGE = 2;
 	private int category;
 
 	public PostParser(int category, String postKey) {
@@ -29,8 +28,24 @@ public class PostParser<T> extends Parser {
 		url = LINK + postKey;
 	}
 
+	public static String getUrlFromCategory(int category) {
+		String url = null;
+		switch (category) {
+		case CATEGORY_BROAD:
+			url = URL_BROAD;
+			break;
+		case CATEGORY_FAMILER:
+			url = URL_FAMILER;
+			break;
+		case CATEGORY_CHALLENGE:
+			url = URL_CHALLENGE;
+			break;
+		}
+		return url;
+	}
+
 	public Post parse() {
-		Document doc = ParserUtills.getDoc(url);
+		Document doc = ParserUtils.getDoc(url);
 		String title = doc.getElementsByClass("read_title").get(0).text();
 		String writer = doc.getElementsByClass("user_icon").get(0).text();
 		String dateTime = doc.getElementsByClass("text").get(0).text();
@@ -46,7 +61,7 @@ public class PostParser<T> extends Parser {
 			Calendar c = Calendar.getInstance();
 			String millis = c.getTimeInMillis() + "";
 			DataBase.getInstance()
-					.executeUpdate(QueryUtills.querySetter(Query.POST.insertFormat, millis, millis, millis, millis));
+					.executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat, millis, millis, millis, millis));
 			post = PostModel.getPost(millis);
 			if (post != null) {
 				for (Object file : files) {

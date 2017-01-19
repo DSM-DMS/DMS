@@ -1,0 +1,2 @@
+2017/1/19/13:13:32 [ERROR] java.sql.SQLNonTransientConnectionException: Cannot load connection class because of underlying exception: com.mysql.cj.core.exceptions.WrongArgumentException: Malformed database URL, failed to parse the connection string near ';allowMultiQueries=true'.
+2017/1/19/13:14:27 [ERROR] java.sql.SQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.

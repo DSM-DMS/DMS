@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.json.simple.JSONObject;
 
 public class Attachment extends DataSaveAble {
@@ -20,7 +20,7 @@ public class Attachment extends DataSaveAble {
 
 	@Override
 	public String toQuery() {
-		return QueryUtills.querySetter(Query.ATTACHMENT.insertFormat, number, name, link);
+		return QueryUtils.querySetter(Query.ATTACHMENT.insertFormat, number, name, link);
 	}
 
 	@Override

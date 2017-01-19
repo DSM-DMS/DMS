@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtills;
+import org.boxfox.dms.utilities.database.QueryUtils;
 
 public class Log {
 	private static File logFile;
@@ -18,7 +18,7 @@ public class Log {
 
 	public static File getLogFile() {
 		Calendar c = Calendar.getInstance();
-		String currentFileName = QueryUtills.queryBuilder(c.get(Calendar.YEAR), "-", c.get(Calendar.MONTH) + 1, "-",
+		String currentFileName = QueryUtils.queryBuilder(c.get(Calendar.YEAR), "-", c.get(Calendar.MONTH) + 1, "-",
 				c.get(Calendar.DAY_OF_MONTH), ".txt");
 
 		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
@@ -55,7 +55,7 @@ public class Log {
 	/// </remarks>
 	private static String setFormat(String str, String type) {
 		Calendar c = Calendar.getInstance();
-		return QueryUtills.queryBuilder(c.get(Calendar.YEAR), "/", (c.get(Calendar.MONTH) + 1), "/",
+		return QueryUtils.queryBuilder(c.get(Calendar.YEAR), "/", (c.get(Calendar.MONTH) + 1), "/",
 				c.get(Calendar.DAY_OF_MONTH), "/", c.get(Calendar.HOUR_OF_DAY), ":", c.get(Calendar.MINUTE), ":",
 				c.get(Calendar.SECOND), " [", type, "] ", str, "\r\n");
 	}
