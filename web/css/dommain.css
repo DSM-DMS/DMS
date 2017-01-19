@@ -2,7 +2,7 @@ body {
     width: 100vw;
     height: 100vh;
     /*min-height: 100% !important;*/
-    background-color: #f0f0f0;
+    background-color: rgb(142, 68, 173);
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -38,6 +38,7 @@ header .logo:hover {
 }
 
 header .logo p {
+    color: white;
     margin: 0%;
     font-size: 3em;
     font-weight: 900;
@@ -184,55 +185,60 @@ header .logo p:hover {
     margin-left: 7%;
     margin-right: 0%;
     width: 93%;
-    background: rgb(211, 84, 0);
+    background: rgb(142, 68, 173);
 }
 
-.food .underline {
-    background: rgb(41, 128, 185);
+.right {
+    text-align: center;
 }
 
-.food .menues {
-    position: relative;
-    height: 88%;
+table {
+    width: 100%;
 }
 
-.food .meal {
-    margin-left: 7%;
-    position: relative;
-    height: 20%;
-    margin-top: 16px;
+table .tableheader {
+    background-color: rgb(244, 244, 244);
+    /*border-top: 1px solid rgb(142, 68, 173);
+    border-bottom: 2px solid rgb(142, 68, 173);*/
+
+
 }
 
-.food .meal h2 {
-    /*float: left;*/
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 16px;
-    /*padding: 5% 0%;*/
+table {
+  /*border: 1px solid red;*/
+  border-collapse: collapse;
+  margin-top: 17%;
+  width: 93%;
+  margin-left: 7%;
 }
 
-.food .meal p {
-    display: inline-block;
-    vertical-align: middle;
-    width: 79%;
-    margin-left: 4%;
-    /*float: right;*/
+
+table .tableheader th {
+    padding: 0;
+    border: 0;
+    border-top: 1px solid rgb(142, 68, 173);
+    border-bottom: 2px solid rgb(142, 68, 173);
+    color: rgb(142, 68, 173);
+    height: 32px;
 }
 
-.food .info {
-    position: relative;
-    width: 93%;
-    background-color: #f0f0f0;
-    display: inline-block;
-    transition: all 0.5s ease;
+table td {
+    border-bottom: 1px solid rgb(142, 68, 173);
+    height: 32px;
 }
 
-.food .info:hover {
-    background-color: rgb(41, 128, 185);
-    color: white;
+table tr:hover {
+    background-color: rgb(244, 244, 244);
 }
 
-.food img {
-    vertical-align: middle;
-    height: 30%;
+table td:nth-child(2) {
+  text-align: left;
+  font-weight: 900;
+  font-size: 0.9em;
+}
+
+table td:nth-child(3), table td:nth-child(1)  {
+  color: rgb(100, 100, 100);
+  font-size: 0.8em;
+  font-weight: 900;
 }
