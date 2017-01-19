@@ -19,7 +19,7 @@
         cal:titleLayoutBackgroundColor="@color/colorPrimary"
         cal:weekLayoutBackgroundColor="@color/colorPrimary"
         cal:weekend="saturday|sunday"
-        cal:weekendColor="@android:color/holo_red_light" />
+        cal:weekendColor="@android:color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +72,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
