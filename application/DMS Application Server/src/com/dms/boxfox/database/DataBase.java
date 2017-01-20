@@ -74,13 +74,10 @@ public class DataBase {
 		return statement.executeUpdate(query);
 	}
 
-<<<<<<< HEAD
 	public synchronized ResultSet executeQuery(String query) throws SQLException {
 		return statement.executeQuery(query);
 	}
 
-=======
->>>>>>> 9ceaf4a85233dd843469c34c8112968cccb7263a
 	public synchronized boolean execute(Object... args) throws SQLException {
 		String query = queryBuilder(args);
 		return statement.execute(query);
