@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.dataio.Parser;
 import org.boxfox.dms.utilities.dataio.ParserUtils;
 import org.boxfox.dms.utilities.datamodel.plan.MonthPlan;
@@ -41,11 +42,13 @@ public class PlanParser extends Parser {
 		return ResultData;
 	}
 
-	public MonthPlan parse() {
+	@Override
+	public DataSaveAble parse() {
 		return doParse();
 	}
 
-	public MonthPlan[] parseAll() {
+	@Override
+	public DataSaveAble[] parseAll() {
 		MonthPlan[] plans = new MonthPlan[12];
 		for (int i = 1; i < 13; i++) {
 			plans[i - 1] = parse(year, i);
@@ -67,14 +70,14 @@ public class PlanParser extends Parser {
 		MonthPlan monthPlan = new MonthPlan(year, month);
 		for (Element td : tds) {
 			Plan plan = getDayPlan(td);
-			if (plan == null)
-				continue;
 			if (plan.getDay() == 1) {
 				if (check)
 					break;
 				else
 					check = true;
 			} else if (!check)
+				continue;
+			if (plan.getDayPlan() == null)
 				continue;
 			monthPlan.addPlan(plan);
 		}
@@ -88,15 +91,16 @@ public class PlanParser extends Parser {
 
 	private Plan getDayPlan(Element td) {
 		Plan planObj = null;
+		JSONArray plan = null;
 		int day = Integer.valueOf(td.getElementsByClass("left").get(0).text());
 		Elements elements = td.getElementsByClass("mday_pl");
 		if (elements.size() - 1 > 0) {
-			JSONArray plan = new JSONArray();
+			plan = new JSONArray();
 			for (int i = 0; i < elements.size() - 1; i++) {
 				plan.add(elements.get(i).text());
 			}
-			planObj = new Plan(day, plan);
 		}
+		planObj = new Plan(day, plan);
 		return planObj;
 	}
 }

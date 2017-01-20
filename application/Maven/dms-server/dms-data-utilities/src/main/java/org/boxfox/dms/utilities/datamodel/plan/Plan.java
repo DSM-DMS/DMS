@@ -13,7 +13,7 @@ public class Plan {
 	}
 
 	public Plan(JSONObject jsonObject) {
-		day = (int)jsonObject.get("Day");
+		day = Integer.valueOf(jsonObject.get("Day").toString());
 		dayPlan = (JSONArray)jsonObject.get("Plan");
 	}
 

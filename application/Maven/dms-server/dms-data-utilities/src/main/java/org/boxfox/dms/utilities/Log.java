@@ -19,7 +19,7 @@ public class Log {
 	public static File getLogFile() {
 		Calendar c = Calendar.getInstance();
 		String currentFileName = QueryUtils.queryBuilder(c.get(Calendar.YEAR), "-", c.get(Calendar.MONTH) + 1, "-",
-				c.get(Calendar.DAY_OF_MONTH), ".txt");
+				c.get(Calendar.DAY_OF_MONTH), ".log");
 
 		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);
@@ -59,6 +59,14 @@ public class Log {
 				c.get(Calendar.DAY_OF_MONTH), "/", c.get(Calendar.HOUR_OF_DAY), ":", c.get(Calendar.MINUTE), ":",
 				c.get(Calendar.SECOND), " [", type, "] ", str, "\r\n");
 	}
+	
+	public static String cleanStringBuilder(Object ... args){
+		StringBuilder builder = new StringBuilder();
+		for(Object obj : args){
+			builder.append(obj.toString());
+		}
+		return builder.toString();
+	}
 
 	/// <summary>
 	/// �Ϲ� �α� ���
@@ -68,8 +76,9 @@ public class Log {
 	/// <remarks>
 	/// �Ϲ� �α׸� ǥ�� ��Ʈ���� �α� ���Ͽ� ����Ѵ�
 	/// </remarks>
-	public static void l(String str) {
+	public static void l(Object ... args) {
 		getLogFile();
+		String str = cleanStringBuilder(args);
 		str = setFormat(str, LOG_INFO);
 		System.out.println(str);
 		try {
@@ -87,8 +96,9 @@ public class Log {
 	/// <remarks>
 	/// ���� �α׸� ǥ�� ��Ʈ���� �α� ���Ͽ� ����Ѵ�
 	/// </remarks>
-	public static void e(String str) {
+	public static void e(Object ... args) {
 		getLogFile();
+		String str = cleanStringBuilder(args);
 		str = setFormat(str, LOG_ERROR);
 		System.err.println(str);
 		try {
@@ -97,17 +107,10 @@ public class Log {
 		} catch (IOException | NullPointerException e) {
 		}
 	}
-
-	/// <summary>
-	/// �԰� ���� ���
-	/// </summary>
-	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
-	/// <date>2016-9-24</date>
-	/// <remarks>
-	/// �԰� ���� �α׸� ����Ѵ�.
-	/// </remarks>
-	public static void printClear(String str) {
+	
+	public static void printClear(Object ... args) {
 		getLogFile();
+		String str = cleanStringBuilder(args);
 		System.out.print(str);
 		try {
 			fw.write(str);

@@ -1,31 +1,25 @@
 package org.boxfox.dms.utilities.datamodel.post;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class AttachmentList<E> extends DataSaveAble{
-	private ArrayList<E> list;
-	private Class<E> clazz;
-	
-	public AttachmentList(Class<E> clazz){
-		this();
-		this.clazz = clazz;
-	}
+public class AttachmentList extends DataSaveAble{
+	private ArrayList<Attachment> list;
 	
 	public AttachmentList(){
-		list = new ArrayList<E>();
+		list = new ArrayList<Attachment>();
 	}
 	
-	public void add(E file){
+	public void add(Attachment file){
 		list.add(file);
 	}
 	
-	public E get(int index){
+	public Attachment get(int index){
 		return list.get(index);
 	}
 	
@@ -36,7 +30,7 @@ public class AttachmentList<E> extends DataSaveAble{
 	@Override
 	public String toQuery() {
 		StringBuilder builder = new StringBuilder();
-		for(E file : list){
+		for(Attachment file : list){
 			builder.append(((DataSaveAble)file).toQuery());
 		}
 		return builder.toString();
@@ -46,7 +40,7 @@ public class AttachmentList<E> extends DataSaveAble{
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
 		JSONArray arr = new JSONArray();
-		for(E file : list){
+		for(Attachment file : list){
 			arr.add(((DataSaveAble)file).toQuery());
 		}
 		obj.put("List", arr);
@@ -55,13 +49,9 @@ public class AttachmentList<E> extends DataSaveAble{
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(ResultSet rs) throws SQLException {
+	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
 		while(rs.next()){
-			try {
-				list.add((E) ((DataSaveAble)clazz.newInstance()).fromResultSet(rs));
-			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
+				list.add((Attachment) new Attachment().fromResultSet(rs));
 		}
 		return this;
 	}

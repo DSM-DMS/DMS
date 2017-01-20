@@ -1,15 +1,14 @@
 package org.boxfox.dms.utilities.datamodel.plan;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
 import org.boxfox.dms.utilities.database.QueryUtils;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 public class MonthPlan extends DataSaveAble {
 	private ArrayList<Plan> dayPlans;
@@ -26,11 +25,6 @@ public class MonthPlan extends DataSaveAble {
 
 	public void addPlan(Plan plan) {
 		dayPlans.add(plan);
-	}
-
-	@Override
-	public String toQuery() {
-		return QueryUtils.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString())+";";
 	}
 
 	public ArrayList<Plan> getDayPlans() {
@@ -56,6 +50,11 @@ public class MonthPlan extends DataSaveAble {
 	public void setMonth(int month) {
 		this.month = month;
 	}
+	
+	@Override
+	public String toQuery() {
+		return QueryUtils.querySetter(Query.PLAN.insertFormat, year, month, toJSONObject().toJSONString())+";";
+	}
 
 	@Override
 	public JSONObject toJSONObject() {
@@ -66,14 +65,15 @@ public class MonthPlan extends DataSaveAble {
 		}
 		obj.put("Year", year);
 		obj.put("Month", month);
+		obj.put("Plans", arr);
 		return obj;
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(ResultSet rs) throws SQLException {
+	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
 		year = rs.getInt("year");
 		month = rs.getInt("month");
-		dayPlans = convertArrayList((JSONArray)JSONValue.parse(rs.getString("data")));
+		dayPlans = convertArrayList((JSONArray)((JSONObject)tryJsonParse(rs, "data")).get("Plans"));
 		if(dayPlans.size()==0){
 			vaild = false;
 		}

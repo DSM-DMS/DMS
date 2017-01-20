@@ -1,10 +1,11 @@
 package org.boxfox.dms.utilities.datamodel.meals;
 
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
 import org.boxfox.dms.utilities.database.QueryUtils;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -42,8 +43,9 @@ public class DayMeal extends DataSaveAble {
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(ResultSet rs) {
+	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
 		vaild = false;
+		date = rs.getString("date");
 		meals = new Meal[3];
 		meals[0] = new Meal((JSONArray) tryJsonParse(rs, "breakfast"),
 				(JSONArray) tryJsonParse(rs, "breakfast_allergy"));
@@ -52,6 +54,7 @@ public class DayMeal extends DataSaveAble {
 		for (int i = 0; i < meals.length; i++)
 			if (meals[i].getMenu().size() > 0) {
 				vaild = true;
+				break;
 			}
 		return this;
 	}

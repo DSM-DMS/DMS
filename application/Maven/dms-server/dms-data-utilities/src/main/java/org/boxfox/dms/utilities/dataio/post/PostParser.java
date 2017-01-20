@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.dataio.Parser;
@@ -21,6 +22,7 @@ public class PostParser<T> extends Parser {
 	public static final int CATEGORY_BROAD = 0;
 	public static final int CATEGORY_FAMILER = 1;
 	public static final int CATEGORY_CHALLENGE = 2;
+	
 	private int category, postNum;
 
 	public PostParser(int category,int postNum, String postKey) {
@@ -44,25 +46,29 @@ public class PostParser<T> extends Parser {
 		}
 		return url;
 	}
+	@Override
+	public DataSaveAble[] parseAll(){
+		throw new RuntimeException("Is not Implemented method!");
+	};
 
-	public Post parse() {
+	@Override
+	public DataSaveAble parse() {
 		Document doc = ParserUtils.getDoc(url);
-		String title = doc.getElementsByClass("read_title").get(0).text();
-		String writer = doc.getElementsByClass("user_icon").get(0).text();
-		String dateTime = doc.getElementsByClass("text").get(0).text();
-		String content = doc.getElementsByClass("context_view").get(0).html();
-		String html = doc.html().replaceAll("\'", "&quot;");
+		String title = doc.getElementsByClass("read_title").get(0).text().replaceAll("'", "&quot;");
+		String writer = doc.getElementsByClass("user_icon").get(0).text().replaceAll("'", "&quot;");
+		String dateTime = doc.getElementsByClass("text").get(0).text().replaceAll("'", "&quot;");
+		String content = doc.getElementsByClass("context_view").get(0).html().replaceAll("'", "&quot;");
+		String html = doc.html();
 		html = html.substring(html.indexOf("var PostFiles = ") + "var PostFiles = ".length(),
 				html.indexOf("var POST_ID="));
-		html = html.substring(0, html.lastIndexOf(";"));
+		html = html.substring(0, html.lastIndexOf(";")).replaceAll("'", "&quot;");
 		JSONArray files = (JSONArray) JSONValue.parse(html);
-		AttachmentList<Attachment> list = new AttachmentList<Attachment>(Attachment.class);
+		AttachmentList list = new AttachmentList();
 
 		Post post = null;
 		try {
-			
-			DataBase.getInstance()
-					.executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat,category, postNum, "", "", "1999-01-01", ""));
+			int num = DataBase.getInstance().executeQuery(Query.POST.selectFormat, " ORDER BY `no` DESC LIMIT 1").nextAndReturn().getInt(1)+1;
+			DataBase.getInstance().executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat, num, category, postNum, "", "", "1999-01-01", ""));
 			post = PostModel.getPost(category, postNum);
 			if (post != null) {
 				for (Object file : files) {
@@ -80,6 +86,8 @@ public class PostParser<T> extends Parser {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println(post.getTitle());
+			System.out.println(post.getContent());
 		}
 		return post;
 	}

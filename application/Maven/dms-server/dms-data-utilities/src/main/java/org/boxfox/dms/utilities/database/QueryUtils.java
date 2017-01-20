@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,13 +38,13 @@ public class QueryUtils {
 	}
 
 	public static String queryCreateDate(int year, int month, int day) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(year);
-		builder.append("-");
-		builder.append(month);
-		builder.append("-");
-		builder.append(day);
-		return builder.toString();
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate date = LocalDate.of(year, month, day);
+		return dateFormat.format(date);
+	}
+	
+	public static String queryCreateDate(int year, int month, int day, int hour, int minute, int second) {
+		return queryCreateDate(year,month,day) +String.format(" %02d-%02d-%02d",hour,minute,second);
 	}
 
 	public static String querySetter(String format, Object... args) {
@@ -63,16 +66,6 @@ public class QueryUtils {
 			}
 		}
 		return format + builder.toString();
-	}
-
-	public static String columnTargetCreater(String... targets) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < targets.length - 1; i++) {
-			builder.append(targets[i]);
-			builder.append(",");
-		}
-		builder.append(targets[targets.length - 1]);
-		return builder.toString();
 	}
 
 	public static boolean checkDate(String str) {

@@ -17,20 +17,21 @@ public abstract class DataSaveAble {
 
 	public abstract JSONObject toJSONObject();
 
-	public abstract DataSaveAble fromResultSet(ResultSet rs) throws SQLException;
+	public abstract DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException;
 
 	public boolean isVaild() {
 		return vaild;
 	}
 
-	protected Object tryJsonParse(ResultSet rs, String key) {
+	protected Object tryJsonParse(SafeResultSet rs, String key)throws SQLException {
 		Object resultVal = null;
-		try {
 			resultVal = JSONValue.parse(rs.getString(key));
-		} catch (SQLException e) {
-			vaild = false;
-		}
 		return resultVal;
+	}
+	
+	@Override
+	public String toString(){
+		return toJSONObject().toJSONString();
 	}
 
 }
