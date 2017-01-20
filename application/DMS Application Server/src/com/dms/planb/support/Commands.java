@@ -14,10 +14,14 @@ public class Commands {
 	
 	public static final int UPLOAD_NOTICE						= 111;
 	public static final int UPLOAD_RULE							= 112;
-	public static final int UPLOAD_QNA							= 113;
-	public static final int UPLOAD_CONTACT					= 114;
-	public static final int UPLOAD_COMPETITION			= 115;
-	public static final int UPLOAD_REPORT_FACILITY	= 116;
+	public static final int UPLOAD_QUESTION				= 113;
+	public static final int UPLOAD_ANSWER					= 114;
+	public static final int UPLOAD_QNA_COMMENT		= 115;
+	public static final int UPLOAD_FAQ							= 116;
+	public static final int UPLOAD_COMPETITION			= 117;
+	public static final int UPLOAD_AFTERSCHOOL			= 118;
+	public static final int UPLOAD_REPORT_FACILITY	= 119;
+	public static final int UPLOAD_REPORT_RESULT 		= 120;
 	
 	public static final int UPLOAD_MEAL 						= 121;
 	public static final int UPLOAD_PLAN 						= 122;
@@ -35,10 +39,12 @@ public class Commands {
 	 * 
 	 * [111] 공지사항 업로드
 	 * [112] 기숙사 규정 업로드
-	 * [113] Q&A 업로드
-	 * [114] 문의하기 업로드
-	 * [115] 대회 정보 업로드
-	 * [116] 시설 고장 신고 업로드
+	 * [113] Q&A 질문 업로드
+	 * [114] Q&A 답변 업로드
+	 * [115] Q&A 댓글 업로드
+	 * [116] FAQ(기숙사 생활 - 자주 하는 질문) 업로드
+	 * [117] 대회 정보 업로드
+	 * [118] 시설 고장 신고 업로드
 	 * 
 	 * [121] 파싱된 급식 정보 저장
 	 * [122] 파싱된 학사 일정 저장
@@ -58,10 +64,12 @@ public class Commands {
 	
 	public static final int MODIFY_NOTICE							= 211;
 	public static final int MODIFY_RULE								= 212;
-	public static final int MODIFY_QNA								= 213;
-	public static final int MODIFY_CONTACT						= 214;
-	public static final int MODIFY_COMPETITION				= 215;
-	public static final int MODIFY_REPORT_FACILITY		= 216;
+	public static final int MODIFY_QUESTION						= 213;
+	public static final int MODIFY_ANSWER						= 214;
+	public static final int MODIFY_QNA_COMMENT			= 215;
+	public static final int MODIFY_FAQ									= 216;
+	public static final int MODIFY_COMPETITION				= 217;
+	public static final int MODIFY_REPORT_FACILITY		= 218;
 	
 	public static final int MODIFY_EXTENTION					= 221;
 	public static final int MODIFY_STAY								= 222;
@@ -94,10 +102,12 @@ public class Commands {
 	
 	public static final int DELETE_NOTICE							= 311;
 	public static final int DELETE_RULE								= 312;
-	public static final int DELETE_QNA									= 313;
-	public static final int DELETE_CONTACT						= 314;
-	public static final int DELETE_COMPETITION				= 315;
-	public static final int DELETE_REPORT_FACILITY			= 316;
+	public static final int DELETE_QUESTION						= 313;
+	public static final int DELETE_ANSWER							= 314;
+	public static final int DELETE_QNA_COMMENT			= 315;
+	public static final int DELETE_FAQ									= 316;
+	public static final int DELETE_COMPETITION				= 317;
+	public static final int DELETE_REPORT_FACILITY			= 318;
 	
 	public static final int DEAPPLY_EXTENTION					= 321;
 	public static final int DEAPPLY_GOINGOUT					= 322;
@@ -132,16 +142,17 @@ public class Commands {
 	public static final int LOAD_POST_LIST							= 411;
 	public static final int LOAD_NOTICE_LIST						= 412;
 	public static final int LOAD_QNA_LIST							= 413;
-	public static final int LOAD_CONTACT_LIST					= 414;
+	public static final int LOAD_FAQ_LIST							= 414;
 	public static final int LOAD_COMPETITION_LIST			= 415;
 	public static final int LOAD_REPORT_FACILITY_LIST	= 416;
 	
 	public static final int LOAD_NOTICE								= 421;
 	public static final int LOAD_RULE									= 422;
 	public static final int LOAD_QNA									= 423;
-	public static final int LOAD_CONTACT							= 424;
-	public static final int LOAD_COMPETITION					= 425;
-	public static final int LOAD_REPORT_FACILITY			= 426;
+	public static final int LOAD_QNA_COMMENT				= 424;
+	public static final int LOAD_FAQ										= 425;
+	public static final int LOAD_COMPETITION					= 426;
+	public static final int LOAD_REPORT_FACILITY			= 427;
 	
 	public static final int LOAD_EXTENTION_STATUS		= 431;
 	public static final int LOAD_STAY_STATUS					= 432;

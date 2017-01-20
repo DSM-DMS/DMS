@@ -17,12 +17,10 @@ public class Log {
 
 	public static File getLogFile() {
 		Calendar c = Calendar.getInstance();
-<<<<<<< HEAD
-		String currentFileName = DataBase.queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH),
-				".", c.get(Calendar.DAY_OF_MONTH), ".txt");
-=======
+
+		String currentFileName = DataBase.queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH), ".", c.get(Calendar.DAY_OF_MONTH), ".txt");
+
 		String currentFileName = DataBase.getInstance().queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH), ".", c.get(Calendar.DAY_OF_MONTH), ".txt");
->>>>>>> 378e7a0b14e2af53b3ba90abf00df28710700281
 		
 		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);

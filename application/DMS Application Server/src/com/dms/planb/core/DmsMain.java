@@ -10,8 +10,10 @@ package com.dms.planb.core;
  * 
  * Work Started at 2017.01.10
  * 
- * Git Repository : https://github.com/rlatjdfo112/DSM-Dormitory-System.git
- * Branch : server
+ * Git Repository				: https://github.com/rlatjdfo112/DSM-Dormitory-System.git
+ * Branch							: server
+ * 
+ * Issues Management	: https://app.asana.com/0/238698310665123/board
  */
 
 /* :: Library Uses ::
