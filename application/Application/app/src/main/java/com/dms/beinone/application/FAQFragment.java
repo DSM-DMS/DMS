@@ -8,18 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by BeINone on 2017-01-18.
+ * Created by BeINone on 2017-01-19.
  */
 
-public class NoticeFragment extends Fragment {
+public class FAQFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle(R.string.nav_notice);
-        View view = inflater.inflate(R.layout.fragment_notice, container, false);
-
-        init(view);
+        getActivity().setTitle(R.string.nav_faq);
+        View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
         return view;
     }
@@ -30,13 +28,12 @@ public class NoticeFragment extends Fragment {
      */
     private void init(View rootView) {
         EmptySupportedRecyclerView recyclerView =
-                (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_notice);
+                (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_faq);
 
-        View emptyView = rootView.findViewById(R.id.view_notice_empty);
+        View emptyView = rootView.findViewById(R.id.view_faq_empty);
         recyclerView.setEmptyView(emptyView);
 //        recyclerView.setHasFixedSize(true);
-//        recyclerView.setAdapter(new NoticeAdapter());
-
+//        recyclerView.setAdapter(new FAQAdapter(getContext(), ));
     }
 
 }

@@ -55,7 +55,7 @@
             android:id="@+id/tv_meal_breakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -98,7 +98,7 @@
             android:id="@+id/tv_meal_lunch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -141,7 +141,7 @@
             android:id="@+id/tv_meal_dinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 

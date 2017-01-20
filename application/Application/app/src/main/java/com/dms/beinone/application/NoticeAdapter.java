@@ -12,7 +12,7 @@ import java.util.List;
  * Created by BeINone on 2017-01-18.
  */
 
-public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
 
     private static final int TYPE_IMPORTANT = 0;
     private static final int TYPE_COMMON = 1;
@@ -26,7 +26,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NoticeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_IMPORTANT) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.viewholder_notice_important, parent, false);
@@ -41,13 +41,13 @@ public class NoticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(NoticeAdapter.ViewHolder holder, int position) {
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mNoticeList.size();
     }
 
     @Override
