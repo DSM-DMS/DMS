@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.dms.beinone.application.DMSButton
+    <com.dms.beinone.application.dmsview.DMSButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nav_login"

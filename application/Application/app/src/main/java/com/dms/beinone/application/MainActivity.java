@@ -11,6 +11,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dms.beinone.application.facilityreport.FacilityReportFragment;
+import com.dms.beinone.application.faq.FAQFragment;
+import com.dms.beinone.application.goingoutapply.GoingoutApplyFragment;
+import com.dms.beinone.application.home.HomeFragment;
+import com.dms.beinone.application.meal.MealFragment;
+import com.dms.beinone.application.notice.NoticeFragment;
+import com.dms.beinone.application.rewardscore.RewardscoreApplyFragment;
+import com.dms.beinone.application.rule.RuleFragment;
+import com.dms.beinone.application.stayapply.StayApplyFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -94,9 +104,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_competition) {
 
         } else if (id == R.id.nav_facility_report) {
-
+            replaceFragment(new FacilityReportFragment());
         } else if (id == R.id.nav_rule) {
-
+            replaceFragment(new RuleFragment());
         } else if (id == R.id.nav_faq) {
             replaceFragment(new FAQFragment());
         } else if (id == R.id.nav_qna) {

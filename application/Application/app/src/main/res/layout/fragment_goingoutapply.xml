@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center">
 
-                <com.dms.beinone.application.DMSToggleButton
+                <com.dms.beinone.application.dmsview.DMSToggleButton
                     android:id="@+id/tb_goingoutapply_saturday"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
@@ -38,7 +38,7 @@
                     android:textOff="@string/goingoutapply_saturday"
                     android:textOn="@string/goingoutapply_saturday" />
 
-                <com.dms.beinone.application.DMSToggleButton
+                <com.dms.beinone.application.dmsview.DMSToggleButton
                     android:id="@+id/tb_goingoutapply_sunday"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
@@ -60,7 +60,7 @@
 
     </LinearLayout>
 
-    <com.dms.beinone.application.DMSButton
+    <com.dms.beinone.application.dmsview.DMSButton
         android:id="@+id/btn_goingoutapply_apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

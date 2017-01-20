@@ -6,4 +6,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Text size of Empty View -->
+    <dimen name="emptyview_textsize">16sp</dimen>
+
+    <!-- Text size of Rounded Button -->
+    <dimen name="roundedbtn_textsize">12sp</dimen>
 </resources>

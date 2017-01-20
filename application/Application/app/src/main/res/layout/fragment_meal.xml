@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cal="http://schemas.android.com/apk/res-auto"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -39,15 +40,18 @@
                 android:text="@string/meal_breakfast"
                 android:textColor="@color/colorPrimary" />
 
-            <ImageButton
+            <com.dms.beinone.application.dmsview.DMSButton
                 android:id="@+id/btn_meal_expandbreakfast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_expand_more_black_24dp" />
+                android:drawableRight="@drawable/ic_expand_more_white_18dp"
+                android:drawableEnd="@drawable/ic_expand_more_white_18dp"
+                android:text="@string/meal_allergy"
+                android:textSize="@dimen/roundedbtn_textsize"
+                dmsbtn:style="round" />
 
         </RelativeLayout>
 
@@ -82,15 +86,18 @@
                 android:text="@string/meal_lunch"
                 android:textColor="@color/colorPrimary" />
 
-            <ImageButton
+            <com.dms.beinone.application.dmsview.DMSButton
                 android:id="@+id/btn_meal_expandlunch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_expand_more_black_24dp" />
+                android:drawableRight="@drawable/ic_expand_more_white_18dp"
+                android:drawableEnd="@drawable/ic_expand_more_white_18dp"
+                android:text="@string/meal_allergy"
+                android:textSize="@dimen/roundedbtn_textsize"
+                dmsbtn:style="round" />
 
         </RelativeLayout>
 
@@ -125,15 +132,18 @@
                 android:text="@string/meal_dinner"
                 android:textColor="@color/colorPrimary" />
 
-            <ImageButton
+            <com.dms.beinone.application.dmsview.DMSButton
                 android:id="@+id/btn_meal_expanddinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_expand_more_black_24dp" />
+                android:drawableRight="@drawable/ic_expand_more_white_18dp"
+                android:drawableEnd="@drawable/ic_expand_more_white_18dp"
+                android:text="@string/meal_allergy"
+                android:textSize="@dimen/roundedbtn_textsize"
+                dmsbtn:style="round" />
 
         </RelativeLayout>
 

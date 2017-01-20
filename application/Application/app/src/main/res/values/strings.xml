@@ -30,7 +30,7 @@
 
     <!-- Stay Apply Fragment -->
     <string name="stayapply_defaultvalue">기본값</string>
-    <string name="stayapply_change">변경</string>
+    <string name="stayapply_changedefvalue">변경</string>
     <string name="stayapply_fridaygo">금요귀가</string>
     <string name="stayapply_saturdaygo">토요귀가</string>
     <string name="stayapply_saturdaycome">토요귀사</string>
@@ -57,6 +57,7 @@
     <string name="meal_breakfast">아침</string>
     <string name="meal_lunch">점심</string>
     <string name="meal_dinner">저녁</string>
+    <string name="meal_allergy">알레르기</string>
 
     <!-- Notice Fragment -->
     <string name="notice_nonotice">공지사항을 불러오지 못했습니다.</string>
@@ -64,4 +65,10 @@
 
     <!-- FAQ Fragment -->
     <string name="faq_nofaq">FAQ를 불러오지 못했습니다.</string>
+
+    <!-- Rule Fragment -->
+    <string name="rule_norule">기숙사 규정을 불러오지 못했습니다.</string>
+
+    <!-- Facility Report Fragment -->
+    <string name="facilityreport_noreport">신고 내역을 불러오지 못했습니다.</string>
 </resources>
