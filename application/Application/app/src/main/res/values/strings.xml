@@ -57,4 +57,11 @@
     <string name="meal_breakfast">아침</string>
     <string name="meal_lunch">점심</string>
     <string name="meal_dinner">저녁</string>
+
+    <!-- Notice Fragment -->
+    <string name="notice_nonotice">공지사항을 불러오지 못했습니다.</string>
+    <string name="notice_important">중요</string>
+
+    <!-- FAQ Fragment -->
+    <string name="faq_nofaq">FAQ를 불러오지 못했습니다.</string>
 </resources>

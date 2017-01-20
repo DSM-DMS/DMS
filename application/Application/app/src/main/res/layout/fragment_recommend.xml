@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:text="@string/rewardscoreapply_content"
-        android:textColor="@android:color/primary_text_light" />
+        android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.DMSEditText
         android:id="@+id/et_recommend_content"
@@ -34,7 +34,7 @@
         android:layout_marginBottom="8dp"
         android:layout_below="@id/et_recommend_content"
         android:text="@string/rewardscoreapply_recommendee"
-        android:textColor="@android:color/primary_text_light" />
+        android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.DMSEditText
         android:id="@+id/et_recommend_recommendee"

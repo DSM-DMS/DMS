@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_meal) {
             replaceFragment(new MealFragment());
         } else if (id == R.id.nav_notice) {
-
+            replaceFragment(new NoticeFragment());
         } else if (id == R.id.nav_competition) {
 
         } else if (id == R.id.nav_facility_report) {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_rule) {
 
         } else if (id == R.id.nav_faq) {
-
+            replaceFragment(new FAQFragment());
         } else if (id == R.id.nav_qna) {
 
         } else if (id == R.id.nav_settings) {

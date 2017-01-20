@@ -1,14 +1,10 @@
 package com.dms.beinone.application;
 
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -43,9 +39,9 @@ public class MealFragment extends Fragment {
         ImageButton lunchExpandBtn = (ImageButton) rootView.findViewById(R.id.btn_meal_expandlunch);
         ImageButton dinnerExpandBtn = (ImageButton) rootView.findViewById(R.id.btn_meal_expanddinner);
 
-        breakfastExpandBtn.setOnTouchListener(expandBtnOnTouchListener);
-        lunchExpandBtn.setOnTouchListener(expandBtnOnTouchListener);
-        dinnerExpandBtn.setOnTouchListener(expandBtnOnTouchListener);
+        breakfastExpandBtn.setOnTouchListener(Listeners.getExpandBtnOnTouchListener(getContext()));
+        lunchExpandBtn.setOnTouchListener(Listeners.getExpandBtnOnTouchListener(getContext()));
+        dinnerExpandBtn.setOnTouchListener(Listeners.getExpandBtnOnTouchListener(getContext()));
 
         breakfastExpandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,29 +70,5 @@ public class MealFragment extends Fragment {
             }
         });
     }
-
-    private View.OnTouchListener expandBtnOnTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    ((ImageButton) v).setColorFilter(
-                            ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    Rect rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                    if (!rect.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())) {
-                        ((ImageButton) v).setColorFilter(Color.BLACK);
-                    }
-                    break;
-                case MotionEvent.ACTION_UP:
-                    ((ImageButton) v).setColorFilter(Color.BLACK);
-                    break;
-                default: break;
-            }
-
-            return false;
-        }
-    };
 
 }
