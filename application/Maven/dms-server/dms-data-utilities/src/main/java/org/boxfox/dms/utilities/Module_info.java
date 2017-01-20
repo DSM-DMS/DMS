@@ -41,5 +41,6 @@ package org.boxfox.dms.utilities;
  *  - DataSaveAble obj = PostModel.get(title) //게시글의 제목을 통한 탐색
  *  
  * 7. DataSaveAble 사용법 
- *  
+ *  JSONObject obj = dataSaveAbleObj.toJSONObject() //전송을 위한 JSONObject화
+ *  DataBase.getInstance().execute(dataSaveAbleObj) //Query로 바로 수행
  */
