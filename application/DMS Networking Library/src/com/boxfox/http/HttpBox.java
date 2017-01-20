@@ -7,9 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.boxfox.http.datamodel.PostRequest;
-import com.boxfox.http.datamodel.Request;
-import com.boxfox.http.datamodel.Response;
+import com.boxfox.http.datamodel.request.PostRequest;
+import com.boxfox.http.datamodel.request.Request;
+import com.boxfox.http.datamodel.response.Response;
 
 public class HttpBox {
 
@@ -21,12 +21,16 @@ public class HttpBox {
 		URL serverUrl = new URL(request.getUrl());
 		HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
 		
-		urlConnection.setRequestProperty("Cache-Control", "no-cache");
-		urlConnection.setRequestProperty("Content-Type", "application/json");
-		urlConnection.setRequestProperty("Accept", "application/json");
+		urlConnection.setRequestProperty(Request.CONTENT_TYPE, request.getProperty(Request.CONTENT_TYPE));
+		urlConnection.setRequestProperty(Request.ACCEPT_TYPE, request.getProperty(Request.ACCEPT_TYPE));
+		for(int i = 0 ; i <request.getHeaderPropertiesSize(); i++){
+			
+		}
+		
+		
 		// Indicate that we want to write to the HTTP request body
 		urlConnection.setDoOutput(true);
-		urlConnection.setRequestMethod("POST");
+		urlConnection.setRequestMethod(request.getType());
 
 		// Writing the post data to the HTTP request body
 		BufferedWriter httpRequestBodyWriter = new BufferedWriter(

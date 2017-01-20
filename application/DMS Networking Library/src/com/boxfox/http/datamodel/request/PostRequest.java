@@ -1,4 +1,4 @@
-package com.boxfox.http.datamodel;
+package com.boxfox.http.datamodel.request;
 
 public class PostRequest extends Request{
 
