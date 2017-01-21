@@ -26,6 +26,12 @@ public class ActionPerformer {
 		
 		switch(command) {
 		case Commands.REGISTER_ACCOUNT:
+			
+			// êµ¬í˜„ ì œì•ˆ - ì´ë ‡ê²Œ ActionPerformerì—ì„œ ëª¨ë“  ëª…ë ¹ì„ ë‹¤ ì²˜ë¦¬í•˜ë„ë¡ êµ¬í˜„í•˜ì§€ ë§ê³ 
+			// Action í´ë˜ìŠ¤ë¥¼ ì´ìš©í•´ì„œ ì•„ë˜ ì˜ˆì œì½”ë“œì²˜ëŸ¼ êµ¬í˜„í•˜ëŠ” ê²ƒì„ ì¶”ì²œ
+			// com.dms.planb.action ì°¸ê³ 
+			//JSONObject obj = new TestAction(requestObject, command).actionPerform();
+			
 			String accountId = requestObject.getString("id");
 			String accountPassword = requestObject.getString("password");
 			String sessionKey = requestObject.getString("session_key");
@@ -34,7 +40,7 @@ public class ActionPerformer {
 			database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", accountId, "', '", accountPassword, "', '", sessionKey, "', ", permission, ")");
 			break;
 		case Commands.UPLOAD_NOTICE:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String noticeTitle = requestObject.getString("title");
 			String noticeContent = requestObject.getString("content");
 			String noticeWriter = requestObject.getString("writer");
@@ -42,14 +48,14 @@ public class ActionPerformer {
 			database.executeUpdate("INSERT INTO notice(title, content, writer) VALUES('", noticeTitle, "', '", noticeContent, "', '", noticeWriter, "')");
 			break;
 		case Commands.UPLOAD_RULE:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String ruleTitle = requestObject.getString("title");
 			String ruleContent = requestObject.getString("content");
 			
 			database.executeUpdate("INSERT INTO rule(title, content) VALUES('", ruleTitle, "', '", ruleContent, "')");
 			break;
 		case Commands.UPLOAD_QUESTION:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String qnaTitle = requestObject.getString("title");
 			String questionContent = requestObject.getString("question_content");
 			String questionDate = requestObject.getString("question_date");
@@ -74,19 +80,19 @@ public class ActionPerformer {
 			database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(",targetQnaNo, ", '", qnaCommentWriter, "', now(), '", qnaCommentContent, "')");
 			break;
 		case Commands.UPLOAD_FAQ:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String faqTitle = requestObject.getString("title");
 			String faqContent = requestObject.getString("content");
 			
 			database.executeUpdate("INSERT INTO faq(title, content) VALUES('", faqTitle, "', '", faqContent, "')");
 			break;
 		case Commands.UPLOAD_COMPETITION:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
-			// app_content Å×ÀÌºíÀ» ÂüÁ¶ÇØ¾ß µÉ°Í °°Àºµ¥ µğÅ×ÀÏÇÑ ºÎºĞÀ» ¸ğ¸£°ÚÀ½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
+			// app_content ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½É°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ğ¸£°ï¿½ï¿½ï¿½
 			
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String reportTitle = requestObject.getString("title");
 			String reportContent = requestObject.getString("content");
 			int roomNo = requestObject.getInt("room");
@@ -101,11 +107,11 @@ public class ActionPerformer {
 			database.executeUpdate("UPDATE facility_report SET result='", reportResult, "', result_date=NOW() WHERE no=", targetReportNo);
 			break;
 		case Commands.UPLOAD_MEAL:
-			// ÇÊ¿äÇÑ Ä¿¸ÇµåÀÏ±î?
+			// ï¿½Ê¿ï¿½ï¿½ï¿½ Ä¿ï¿½Çµï¿½ï¿½Ï±ï¿½?
 			
 			break;
 		case Commands.UPLOAD_PLAN:
-			// ÇÊ¿äÇÑ Ä¿¸ÇµåÀÏ±î?
+			// ï¿½Ê¿ï¿½ï¿½ï¿½ Ä¿ï¿½Çµï¿½ï¿½Ï±ï¿½?
 			
 			break;
 		case Commands.UPLOAD_AFTERSCHOOL:
@@ -127,7 +133,7 @@ public class ActionPerformer {
 			break;
 		case Commands.APPLY_STAY:
 			String applierId1 = requestObject.getString("id");
-			// º¯¼ö¸í ±³Ã¼ ¿ä¸Á
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
 			int extensionValue = requestObject.getInt("value");
 			
 			database.executeUpdate("INSERT INTO stay_apply(id, value) VALUES('", applierId1, "', ", extensionValue, ")");
@@ -137,16 +143,16 @@ public class ActionPerformer {
 			 * Date Format : YYYY-MM-DD
 			 */
 			String applierId2 = requestObject.getString("id");
-			// º¯¼ö¸í ±³Ã¼ ¿ä¸Á
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
 			String deptDate = requestObject.getString("dept_date");
 			String reason = requestObject.getString("reason");
 			
 			database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES('", applierId2, "', STR_TO_DATE(", deptDate, ", %Y-%m-%d), '", reason, "')");
 			break;
 		case Commands.APPLY_MERIT:
-			// no ÄÃ·³ Auto Increment ÇØ¾ßµÉ°Í °°À½
+			// no ï¿½Ã·ï¿½ Auto Increment ï¿½Ø¾ßµÉ°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String applierId3 = requestObject.getString("id");
-			// º¯¼ö¸í ±³Ã¼ ¿ä¸Á
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
 			String applyContent = requestObject.getString("content");
 			
 			if(requestObject.has("target")) {

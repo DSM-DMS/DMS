@@ -20,8 +20,6 @@ public class Log {
 
 		String currentFileName = DataBase.queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH), ".", c.get(Calendar.DAY_OF_MONTH), ".txt");
 
-		String currentFileName = DataBase.getInstance().queryBuilder(c.get(Calendar.YEAR), ".", c.get(Calendar.MONTH), ".", c.get(Calendar.DAY_OF_MONTH), ".txt");
-		
 		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);
 			try {
@@ -42,12 +40,12 @@ public class Log {
 	}
 
 	/// <summary>
-	/// ·Î±× ±Ô°Ý
+	/// ï¿½Î±ï¿½ ï¿½Ô°ï¿½
 	/// </summary>
 	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
 	/// <date>2016-9-24</date>
 	/// <remarks>
-	/// ·Î±× ³»¿ë¿¡ ¿¡·¯/ÀÏ¹Ý/µð¹ö±× Á¤º¸¿Í ³¯Â¥¸¦ Ãß°¡ÇÏ¿© ±Ô°Ý(Æ÷¸Ë)À» ¸ÂÃá´Ù.
+	/// ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ë¿¡ ï¿½ï¿½ï¿½ï¿½/ï¿½Ï¹ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ ï¿½Ô°ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	/// </remarks>
 	private static String setFormat(String str, String type) {
 		Calendar c = Calendar.getInstance();
@@ -57,12 +55,12 @@ public class Log {
 	}
 
 	/// <summary>
-	/// ÀÏ¹Ý ·Î±× ±â·Ï
+	/// ï¿½Ï¹ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½
 	/// </summary>
 	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
 	/// <date>2016-9-24</date>
 	/// <remarks>
-	/// ÀÏ¹Ý ·Î±×¸¦ Ç¥ÁØ ½ºÆ®¸²°ú ·Î±× ÆÄÀÏ¿¡ ±â·ÏÇÑ´Ù
+	/// ï¿½Ï¹ï¿½ ï¿½Î±×¸ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	/// </remarks>
 	public static void l(String str) {
 		getLogFile();
@@ -76,12 +74,12 @@ public class Log {
 	}
 
 	/// <summary>
-	/// ¿¡·¯ ·Î±× ±â·Ï
+	/// ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½
 	/// </summary>
 	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
 	/// <date>2016-9-24</date>
 	/// <remarks>
-	/// ¿¡·¯ ·Î±×¸¦ Ç¥ÁØ ½ºÆ®¸²°ú ·Î±× ÆÄÀÏ¿¡ ±â·ÏÇÑ´Ù
+	/// ï¿½ï¿½ï¿½ï¿½ ï¿½Î±×¸ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	/// </remarks>
 	public static void e(String str) {
 		getLogFile();
@@ -95,12 +93,12 @@ public class Log {
 	}
 
 	/// <summary>
-	/// ±Ô°Ý ¾øÀÌ ±â·Ï
+	/// ï¿½Ô°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	/// </summary>
 	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
 	/// <date>2016-9-24</date>
 	/// <remarks>
-	/// ±Ô°Ý ¾øÀÌ ·Î±×¸¦ ±â·ÏÇÑ´Ù.
+	/// ï¿½Ô°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	/// </remarks>
 	public static void printClear(String str) {
 		getLogFile();
