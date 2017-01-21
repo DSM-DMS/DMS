@@ -68,40 +68,21 @@ class DmsVerticle extends AbstractVerticle {
 						e.printStackTrace();
 					}
 					
-					// 2. Get prefix of command before acting on the client's request.
-					int prefixOfCommand = command / 100;
-					
-					// 3. Ready the response to client.
+					// 2. Ready the response to client.
 					response = request.response();
 					response.putHeader("content-type", "application/json; charset=utf-8");
 					
-					// 4. Performs the operation appropriate to the command.
-					switch(prefixOfCommand) {
-					case Commands.INSERT:
-						try { responseObject = ActionPerformer.doInsert(command, requestObject); }
-						catch (JSONException | SQLException e) { e.printStackTrace(); }
-						
-						response.end(responseObject.toString());
-						break;
-					case Commands.UPDATE:
-						try { responseObject = ActionPerformer.doUpdate(command, requestObject); }
-						catch (JSONException | SQLException e) { e.printStackTrace(); }
-						
-						response.end(responseObject.toString());
-						break;
-					case Commands.DELETE:
-						try { responseObject = ActionPerformer.doDelete(command, requestObject); }
-						catch (JSONException | SQLException e) { e.printStackTrace(); }
-						
-						response.end(responseObject.toString());
-						break;
-					case Commands.SELECT:
-						try { responseObject = ActionPerformer.doSelect(command, requestObject); }
-						catch (JSONException | SQLException e) { e.printStackTrace(); }
-						
-						response.end(responseObject.toString());
-						break;
+					/*
+					 *  3. Performs the operation.
+					 *  Branch off the ActionPerformer class' perform method.
+					 */
+					try {
+						responseObject = ActionPerformer.perform(command, requestObject);
+					} catch (JSONException | SQLException e) {
+						e.printStackTrace();
 					}
+					
+					response.end(responseObject.toString());
 				}); // endHandler
 			} else {
 				/*
