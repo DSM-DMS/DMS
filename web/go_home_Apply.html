@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <div class="logo">
+        <div class="logo" style="color: white">
             <p>신청</p>
         </div>
     </header>
@@ -69,17 +69,17 @@
                         <td class="tue"></td>
                         <td class="wed"></td>
                         <td class="thu"></td>
-                        <td class="fri"></td>
+                        <td class="fri go_home"></td>
                         <td class="sat"></td>
                     </tr>
                     <tr id="second_week" class="weeks">
-                        <td class="sun"></td>
+                        <td class="sun go_dom"></td>
                         <td class="mon"></td>
                         <td class="tue"></td>
                         <td class="wed"></td>
                         <td class="thu"></td>
-                        <td class="fri"></td>
-                        <td class="sat"></td>
+                        <td class="fri go_home"></td>
+                        <td class="sat go_dom"></td>
                     </tr>
                     <tr id="third_week" class="weeks">
                         <td class="sun"></td>
@@ -88,10 +88,10 @@
                         <td class="wed"></td>
                         <td class="thu"></td>
                         <td class="fri"></td>
-                        <td class="sat"></td>
+                        <td class="sat go_home"></td>
                     </tr>
                     <tr id="fourth_week" class="weeks">
-                        <td class="sun"></td>
+                        <td class="sun go_dom"></td>
                         <td class="mon"></td>
                         <td class="tue"></td>
                         <td class="wed"></td>
@@ -113,11 +113,11 @@
         </div>
         <div class="frame go_home_apply">
             <form action="#" id="apply_form">
-                <input type="text" name="date" id="date" readonly><br>
                 <input class="check" type="radio" name="stay" value="StayDom" checked> 잔류 <br>
                 <input class="check" type="radio" name="stay" value="FriGoHome"> 금요귀가 <br>
                 <input class="check" type="radio" name="stay" value="SatGoHome"> 토요귀가 <br>
-                <input class="check" type="radio" name="stay" value="SatReturnDom"> 토요귀사 <br>
+                <input class="check" type="radio" name="stay" value="SatReturnDom"> 토요귀사 <br><br>
+                <input type="text" name="date" id="date" size="15" readonly>
                 <input type="submit" value="신청" id="apply_submit">
             </form>
         </div>
