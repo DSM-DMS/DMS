@@ -46,21 +46,29 @@ class DmsVerticle extends AbstractVerticle {
 				// The server will only work if the Http method is POST.
 				System.out.println("Received POST method");
 				
-				request.bodyHandler(buffer -> {
-					// The bodyHandler is called once when all the body has been received
+				request.handler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
-				}); // bodyHandler
+				});
 				
 				request.endHandler(v -> {
 					 // The endHandler of the request is invoked when the entire request, including any body has been fully read.
 					System.out.println("fully read");
 					
-					// 1-1. Get command from parameter.
-					int command = Integer.parseInt(params.get("command"));
+					// 1-1. Get command from header.
+					int command = Integer.parseInt(request.getHeader("command"));
 					
-					// 1-2. Get request object from buffer.
+					// 1-2. Get client's info
 					try {
-//						requestObject = new JSONObject(totalBuffer.getString(0, totalBuffer.length()));
+						JSONObject clientObject = new JSONObject(request.getHeader("User-Agent"));
+//						clientObject.getString("Version");
+//						clientObject.getString("UUID");
+					} catch	(JSONException e) {
+						e.printStackTrace();
+					}
+					
+					// 1-3. Get request object from buffer.
+					try {
+//						requestObject = new JSONObject(totalBuffer.toString());
 						requestObject = new JSONObject().put("testKey", "testValue");
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -78,8 +86,13 @@ class DmsVerticle extends AbstractVerticle {
 					
 					// 3. Response to client.
 					response = request.response();
-					response.putHeader("content-type", "application/json; charset=utf-8");
+					response.putHeader("Content-type", "application/json; charset=utf-8");
+					
+					response.setStatusCode(1);
+					// Success, Fail, etc..
+					
 					response.end(responseObject.toString());
+					response.close();
 				}); // endHandler
 			} else {
 				/*

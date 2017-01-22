@@ -76,7 +76,7 @@ public class SelectAction implements Actionable {
 			responseObject.put("questioner", resultSet.getString("questioner"));
 			responseObject.put("privacy", resultSet.getInt("privacy"));
 			if(!resultSet.getString("answer_content").isEmpty()) {
-				responseObject.put("hasAnswer", true);
+				responseObject.put("has_answer", true);
 				responseObject.put("answer_content", resultSet.getString("answer_content"));
 				responseObject.put("answer_date", resultSet.getString("answer_date"));
 			}
@@ -111,11 +111,11 @@ public class SelectAction implements Actionable {
 			responseObject.put("write_date", resultSet.getString("write_date"));
 			responseObject.put("writer", resultSet.getString("writer"));
 			if(!resultSet.getString("result").isEmpty()){
-				responseObject.put("hasResult", true);
+				responseObject.put("has_result", true);
 				responseObject.put("result", resultSet.getString("result"));
 				responseObject.put("result_date", resultSet.getString("result_date"));
 			} else {
-				responseObject.put("hasResult", false);
+				responseObject.put("has_result", false);
 			}
 			
 			break;
@@ -154,7 +154,7 @@ public class SelectAction implements Actionable {
 			
 			responseObject.put("content", resultSet.getString("content"));
 			if(!resultSet.getString("target").isEmpty()) {
-				responseObject.put("hasTarget", true);
+				responseObject.put("has_target", true);
 				responseObject.put("target", resultSet.getString("target"));
 			} else {
 				responseObject.put("hasTarget", false);

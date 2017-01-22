@@ -10,7 +10,8 @@ package com.dms.planb.support;
 public class Commands {
 	public static final int INSERT										= 1; // prefix
 	
-	public static final int REGISTER_ACCOUNT				= 100;
+	public static final int REGISTER_STUDENT_ACC		= 100;
+	public static final int REGISTER_TEACHER_ACC		= 101;
 	
 	public static final int UPLOAD_NOTICE						= 111;
 	public static final int UPLOAD_RULE							= 112;
@@ -60,7 +61,8 @@ public class Commands {
 	
 	public static final int UPDATE											= 2; // prefix
 	
-	public static final int MODIFY_ACCOUNT						= 200;
+	public static final int MODIFY_PASSWORD					= 200;
+	public static final int MODIFY_STUDENT_DATA			= 201;
 	
 	public static final int MODIFY_NOTICE							= 211;
 	public static final int MODIFY_RULE								= 212;
