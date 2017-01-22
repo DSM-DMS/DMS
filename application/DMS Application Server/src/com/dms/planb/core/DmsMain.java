@@ -5,7 +5,7 @@ package com.dms.planb.core;
  * Domitory Management System(DMS) Project
  * 
  * Android Application HTTP Server based Vert.x Framework.
- * Developed by Kim Seongrae : Boxfoxs, Jo Mingyu : PlanB
+ * Developed by : Kim Seongrae - Boxfoxs | Jo Mingyu - PlanB
  * Developers' Blog : http://boxfoxs.tistory.com/ | http://city7310.blog.me/
  * 
  * Work Started at 2017.01.10
@@ -24,6 +24,7 @@ package com.dms.planb.core;
  * [netty-codec-4.1.5.FInal.jar]
  * [netty-codec-dns-4.1.5.Final.jar]
  * [netty-codec-http-4.1.5.Final.jar]
+ * [netty-codec-http2-4.1.5.Final.jar]
  * [netty-common-4.1.5.Final.jar]
  * [netty-handler-4.1.5.Final.jar]
  * [netty-resolver-4.1.5.Final.jar]

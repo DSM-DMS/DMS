@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.dms.planb.action.Action;
+import com.dms.planb.action.Actionable;
 import com.dms.planb.action.DeleteAction;
 import com.dms.planb.action.InsertAction;
 import com.dms.planb.action.SelectAction;
@@ -22,7 +22,7 @@ import com.dms.planb.action.UpdateAction;
  */
 
 public class ActionPerformer {
-	private static Action action;
+	private static Actionable action;
 
 	public static JSONObject perform(int command, JSONObject requestObject) throws JSONException, SQLException {
 		// 1. Get prefix of command
@@ -31,21 +31,21 @@ public class ActionPerformer {
 		// 2. Get instance of Action appropriate to the command.
 		switch(prefixOfCommand) {
 		case Commands.INSERT:
-			action = new InsertAction(command, requestObject);
+			action = new InsertAction();
 			break;
 		case Commands.UPDATE:
-			action = new UpdateAction(command, requestObject);
+			action = new UpdateAction();
 			break;
 		case Commands.DELETE:
-			action = new DeleteAction(command, requestObject);
+			action = new DeleteAction();
 			break;
 		case Commands.SELECT:
-			action = new SelectAction(command, requestObject);
+			action = new SelectAction();
 			break;
 		}
 		
 		// 3. Action, branch off one of four Action classes
-		return action.action();
+		return action.action(command, requestObject);
 	}
 
 	// Class for test

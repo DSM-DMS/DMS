@@ -8,17 +8,9 @@ import org.json.JSONObject;
 import com.dms.boxfox.database.DataBase;
 import com.dms.planb.support.Commands;
 
-public class DeleteAction implements Action {
-	private int command;
-	private JSONObject requestObject;
-	
-	public DeleteAction(int command, JSONObject requestObject) {
-		this.command = command;
-		this.requestObject = requestObject;
-	}
-	
+public class DeleteAction implements Actionable {
 	@Override
-	public JSONObject action() throws JSONException, SQLException {
+	public JSONObject action(int command, JSONObject requestObject) throws JSONException, SQLException {
 		JSONObject responseObject = new JSONObject();
 		DataBase database = DataBase.getInstance();
 		

@@ -9,17 +9,9 @@ import org.json.JSONObject;
 import com.dms.boxfox.database.DataBase;
 import com.dms.planb.support.Commands;
 
-public class SelectAction implements Action {
-	private int command;
-	private JSONObject requestObject;
-	
-	public SelectAction(int command, JSONObject requestObject) {
-		this.command = command;
-		this.requestObject = requestObject;
-	}
-	
+public class SelectAction implements Actionable {
 	@Override
-	public JSONObject action() throws JSONException, SQLException {
+	public JSONObject action(int command, JSONObject requestObject) throws JSONException, SQLException {
 		ResultSet resultSet;
 		JSONObject responseObject = new JSONObject();
 		DataBase database = DataBase.getInstance();
@@ -65,16 +57,67 @@ public class SelectAction implements Action {
 		case Commands.LOAD_NOTICE:
 			break;
 		case Commands.LOAD_RULE:
+			int ruleNo = requestObject.getInt("no");
+			
+			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", ruleNo);
+			
+			responseObject.put("title", resultSet.getString("resultSet"));
+			responseObject.put("content", resultSet.getString("content"));
+			
 			break;
 		case Commands.LOAD_QNA:
+			int qnaNo = requestObject.getInt("no");
+			
+			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", qnaNo);
+			
+			responseObject.put("title", resultSet.getString("title"));
+			responseObject.put("question_content", resultSet.getString("question_content"));
+			responseObject.put("question_date", resultSet.getString("question_date"));
+			responseObject.put("questioner", resultSet.getString("questioner"));
+			responseObject.put("privacy", resultSet.getInt("privacy"));
+			if(!resultSet.getString("answer_content").isEmpty()) {
+				responseObject.put("hasAnswer", true);
+				responseObject.put("answer_content", resultSet.getString("answer_content"));
+				responseObject.put("answer_date", resultSet.getString("answer_date"));
+			}
+			else {
+				responseObject.put("hasAnswer", false);
+			}
+			
 			break;
 		case Commands.LOAD_QNA_COMMENT:
 			break;
 		case Commands.LOAD_FAQ:
+			int faqNo = requestObject.getInt("no");
+			
+			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", faqNo);
+			
+			responseObject.put("title", resultSet.getString("title"));
+			responseObject.put("content", resultSet.getString("content"));
+			
 			break;
 		case Commands.LOAD_COMPETITION:
+			// Should SELECT * FROM app_content but I can't find any ways.
+			
 			break;
 		case Commands.LOAD_REPORT_FACILITY:
+			int reportNo = requestObject.getInt("no");
+			
+			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", reportNo);
+			
+			responseObject.put("title", resultSet.getString("title"));
+			responseObject.put("content", resultSet.getString("content"));
+			responseObject.put("room", resultSet.getInt("room"));
+			responseObject.put("write_date", resultSet.getString("write_date"));
+			responseObject.put("writer", resultSet.getString("writer"));
+			if(!resultSet.getString("result").isEmpty()){
+				responseObject.put("hasResult", true);
+				responseObject.put("result", resultSet.getString("result"));
+				responseObject.put("result_date", resultSet.getString("result_date"));
+			} else {
+				responseObject.put("hasResult", false);
+			}
+			
 			break;
 		case Commands.LOAD_EXTENTION_STATUS:
 			int applierId = requestObject.getInt("id");
@@ -109,14 +152,17 @@ public class SelectAction implements Action {
 			
 			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id=", applierId3);
 			
-			if(!resultSet.getString("target").isEmpty()) {
-				responseObject.put("target", resultSet.getString("target"));
-			}
 			responseObject.put("content", resultSet.getString("content"));
+			if(!resultSet.getString("target").isEmpty()) {
+				responseObject.put("hasTarget", true);
+				responseObject.put("target", resultSet.getString("target"));
+			} else {
+				responseObject.put("hasTarget", false);
+			}
 			
 			break;
 		case Commands.LOAD_AFTERSCHOOL_STATUS:
-			// Need modify
+			// Need modify. Separate by the day of the week.
 			int applierId4 = requestObject.getInt("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id=", applierId4);

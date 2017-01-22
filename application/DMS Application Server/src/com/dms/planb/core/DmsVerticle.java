@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.dms.planb.support.ActionPerformer;
-import com.dms.planb.support.Commands;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -17,7 +16,6 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
 
 class DmsVerticle extends AbstractVerticle {
-	
 	private HttpServer server;
 	private HttpServerResponse response;
 	
@@ -68,12 +66,8 @@ class DmsVerticle extends AbstractVerticle {
 						e.printStackTrace();
 					}
 					
-					// 2. Ready the response to client.
-					response = request.response();
-					response.putHeader("content-type", "application/json; charset=utf-8");
-					
 					/*
-					 *  3. Performs the operation.
+					 *  2. Performs the operation.
 					 *  Branch off the ActionPerformer class' perform method.
 					 */
 					try {
@@ -82,6 +76,9 @@ class DmsVerticle extends AbstractVerticle {
 						e.printStackTrace();
 					}
 					
+					// 3. Response to client.
+					response = request.response();
+					response.putHeader("content-type", "application/json; charset=utf-8");
 					response.end(responseObject.toString());
 				}); // endHandler
 			} else {
@@ -93,7 +90,7 @@ class DmsVerticle extends AbstractVerticle {
 		}).listen(10419);
 	}
 	
-	public void stop(Future stopFuture) throws Exception {
+	public void stop(@SuppressWarnings("rawtypes") Future stopFuture) throws Exception {
 		
 	}
 }

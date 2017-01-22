@@ -8,17 +8,9 @@ import org.json.JSONObject;
 import com.dms.boxfox.database.DataBase;
 import com.dms.planb.support.Commands;
 
-public class InsertAction implements Action {
-	private int command = 0;
-	private JSONObject requestObject = null;
-	
-	public InsertAction(int command, JSONObject requestObject) {
-		this.command = command;
-		this.requestObject = requestObject;
-	}
-	
+public class InsertAction implements Actionable {
 	@Override
-	public JSONObject action() throws JSONException, SQLException {
+	public JSONObject action(int command, JSONObject requestObject) throws JSONException, SQLException {
 		JSONObject responseObject = new JSONObject();
 		DataBase database = DataBase.getInstance();
 		
@@ -76,7 +68,9 @@ public class InsertAction implements Action {
 			database.executeUpdate("UPDATE qna SET answer_content='", answerContent, "', answer_date='", answerDate, "' WHERE no=", targetQuestionNo);
 			break;
 		case Commands.UPLOAD_QNA_COMMENT:
+			// Upload comment based QNA no
 			int targetQnaNo = requestObject.getInt("no");
+			// no is primary key, one QNA post can have 2 or more comments.
 			String qnaCommentWriter = requestObject.getString("writer");
 			String qnaCommentContent = requestObject.getString("content");
 			
@@ -91,7 +85,7 @@ public class InsertAction implements Action {
 			break;
 		case Commands.UPLOAD_COMPETITION:
 			// I think auto-increment the no column
-			// app_content ���̺��� �����ؾ� �ɰ� ������ �������� �κ��� �𸣰���
+			// Should INSERT INTO app_content but I can't find any ways.
 			
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
@@ -169,6 +163,7 @@ public class InsertAction implements Action {
 			break;
 		case Commands.APPLY_AFTERSCHOOL:
 			int applierId4 = requestObject.getInt("id");
+			// Need to change variable name
 			int targetNo = requestObject.getInt("no");
 			
 			database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES(", applierId4, ", ", targetNo, ")");
