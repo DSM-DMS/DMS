@@ -47,11 +47,9 @@ class DmsVerticleEdit extends AbstractVerticle {
 				System.out.println("Received POST method");
 				
 				request.handler(new Handler<Buffer>(){
-
 					@Override
 					public void handle(Buffer buffer) {
 						totalBuffer.appendBuffer(buffer);
-						
 					}
 					
 				});
@@ -59,16 +57,27 @@ class DmsVerticleEdit extends AbstractVerticle {
 				request.endHandler(v -> {
 					System.out.println("fully read");
 					
-					//command´Â Çì´õ¿¡ ´ã°ÜÀÖÀ½
-					int command = Integer.parseInt(request.getHeader("command"));
+					int command = Integer.parseInt(request.getHeader("Command"));
 					
-					//User-Agent´Â Å¬¶óÀÌ¾ğÆ®ÀÇ Á¤º¸(¾Û ¹öÀü, UUID µî)
-					JsonObject obj = new JsonObject(request.getHeader("User-Agent"));
-					obj.getString("Version");
-					obj.getString("UUID");
+					//í´ë¼ì´ì–¸íŠ¸ ì •ë³´
+					try {
+						JSONObject obj = new JSONObject(request.getHeader("User-Agent"));
+						obj.getString("Version");
+						obj.getString("UUID");
+					} catch (JSONException e1) {
+						e1.printStackTrace();
+					}
 					
 					try {
 						requestObject = new JSONObject().put("testKey", "testValue");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+
+					//í´ë¼ì´ì–¸íŠ¸ê°€ ì „ì†¡í•œ ë°ì´í„°(JSON)
+					try {
+						JSONObject requestObject = new JSONObject(totalBuffer.toString());
+						System.out.println(requestObject.toString());
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -80,20 +89,18 @@ class DmsVerticleEdit extends AbstractVerticle {
 					}*/
 					
 					response = request.response();
-					response.putHeader("content-type", "application/json; charset=utf-8");
-					response.setStatusCode(200);
-					response.setStatusMessage("Message");
+					//ì–´ì°¨í”¼ JSONìœ¼ë¡œ í†µì‹ í•˜ì§€ë§Œ ê·œê²©ìƒ í¬í•¨ì‹œí‚¤ëŠ” ì •ë³´
+					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
-					response.end("response result like json");
-					
-					//reponse»ç¿ëÀ» ³¡³½µÚ¿¡´Â closeÇØÁà¾ß Å¬¶óÀÌ¾ğÆ®·Î Àü¼ÛµÊ
+					//ì•„ë˜ 3ê°€ì§€ ì •ë³´ëŠ” ë°˜ë“œì‹œ ë“¤ì–´ê°€ì•¼ í•˜ëŠ” ì •ë³´ì„
+					response.setStatusCode(200); //ì„±ê³µ, ì‹¤íŒ¨ë“± ìƒíƒœ ì½”ë“œ
+					response.setStatusMessage("Message"); //í•´ë‹¹ ìƒíƒœì— ëŒ€í•œ ë©”ì†Œë“œ
+					//í´ë¼ì´ì–¸íŠ¸í•œí…Œ ì „ì†¡
+					response.end(requestObject.toString());
 					response.close();
-				}); // endHandler
+				});
 			} else {
-				/*
-				 *  If Http method is CONNECT, DELETE, GET, HEAD, OPTIONS, or other ...
-				 *  Communication fail.
-				 */
+				
 			}
 		}).listen(10419);
 	}
