@@ -19,15 +19,14 @@ public class SelectAction implements Actionable {
 		DataBase database = DataBase.getInstance();
 		
 		// For account
-		String id;
-		String password;
+		String id = null;
+		String password = null;
 		int number;
 		
 		// For post
 		int no;
 		int qnaNo;
 		int category;
-		String date;
 		
 		// For apply
 		int applierId;
@@ -147,18 +146,18 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_RULE:
-			int ruleNo = requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
-			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", ruleNo);
+			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
 			
 			responseObject.put("title", resultSet.getString("resultSet"));
 			responseObject.put("content", resultSet.getString("content"));
 			
 			break;
 		case Commands.LOAD_QNA:
-			qnaNo = requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
-			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", qnaNo);
+			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("question_content", resultSet.getString("question_content"));
@@ -178,9 +177,9 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_QNA_COMMENT:
 			count = 1;
 			
-			qnaNo = requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
-			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", qnaNo);
+			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", no);
 			rowCount = resultSet.getRow();
 			
 			responseObject.put("row_count", rowCount);
@@ -192,18 +191,18 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_FAQ:
-			int faqNo = requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
-			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", faqNo);
+			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY:
-			int reportNo = requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
-			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", reportNo);
+			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));

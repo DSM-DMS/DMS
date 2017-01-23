@@ -20,13 +20,13 @@ public class UpdateAction implements Actionable {
 		DataBase database = DataBase.getInstance();
 		
 		// For account
-		String id;
+		String id = null;
 		
 		// For post
 		int modifierId;
 		int no;
 		
-		String date;
+		String date = null;
 		
 		switch(command) {
 		case Commands.MODIFY_PASSWORD:

@@ -12,13 +12,6 @@ import com.dms.planb.action.SelectAction;
 import com.dms.planb.action.UpdateAction;
 
 /*
- * Check between this code and database's tables, and match data type.
- * Having foreign key : afterschool_apply, attachment, qna_comment table
- * DATE Format			: YYYY-MM-DD
- * DATETIME Format	: YYYY-MM-DD hh:mm:ss (AM/PM)
- * 
- * Be sure to review the code.
- * 
  * Date Time Functions	: http://www.java2s.com/Tutorial/MySQL/0280__Date-Time-Functions/STRTODATEstrformat.htm
  * MySQL Commands		: https://opentutorials.org/course/195/1537 | http://city7310.blog.me/220902269838
  */
