@@ -15,7 +15,6 @@
  */
 package com.samsistemas.calendarview.widget;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Resources;
@@ -303,6 +302,8 @@ public class CalendarView extends LinearLayout {
 
         setFirstDayOfWeek(Calendar.SUNDAY);
         refreshCalendar(Calendar.getInstance(getLocale()));
+
+        setDateAsSelected(mCalendar.getTime());
     }
 
     /**
@@ -314,7 +315,8 @@ public class CalendarView extends LinearLayout {
 
         TextView dateTitle = (TextView) mView.findViewById(R.id.dateTitle);
 
-        String dateText = CalendarUtility.getCurrentMonth(mCurrentMonthIndex).toUpperCase(Locale.getDefault()) + " " + getCurrentYear();
+        String dateText = getCurrentYear() + "년 " +
+                CalendarUtility.getCurrentMonth(mCurrentMonthIndex).toUpperCase(Locale.KOREA);
         dateTitle.setText(dateText);
         dateTitle.setTextColor(mCalendarTitleTextColor);
 
@@ -510,7 +512,6 @@ public class CalendarView extends LinearLayout {
 
             if (CalendarUtility.isSameMonth(calendar, startCalendar)) {
                 dayOfMonthContainer.setOnClickListener(onDayOfMonthClickListener);
-                dayOfMonthContainer.setOnLongClickListener(onDayOfMonthLongClickListener);
                 dayView.setBackgroundColor(mCalendarBackgroundColor);
                 mIsCommonDay = true;
                 if(totalDayOfWeekend().length != 0) {
@@ -537,8 +538,8 @@ public class CalendarView extends LinearLayout {
             }
             dayView.decorate();
 
-            //Set the current day color
-            if(mCalendar.get(Calendar.MONTH) == startCalendar.get(Calendar.MONTH) )
+            // Set the current day color
+            if (mCalendar.get(Calendar.MONTH) == startCalendar.get(Calendar.MONTH))
                 setCurrentDay(mCalendar.getTime());
 
             startCalendar.add(Calendar.DATE, 1);
@@ -640,7 +641,6 @@ public class CalendarView extends LinearLayout {
             final DayView dayOfMonth = findViewByCalendar(calendar);
 
             dayOfMonth.setTextColor(mCurrentDayOfMonth);
-            dayOfMonth.setBackgroundColor(mSelectedDayBackground);
         }
     }
 
@@ -658,35 +658,12 @@ public class CalendarView extends LinearLayout {
         // Mark current day as selected
         DayView view = findViewByCalendar(currentCalendar);
         view.setBackgroundColor(mSelectedDayBackground);
-        view.setTextColor(mSelectedDayTextColor);
-    }
-
-    private OnLongClickListener onDayOfMonthLongClickListener = new OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View view) {
-            // Extract day selected
-            ViewGroup dayOfMonthContainer = (ViewGroup) view;
-            String tagId = (String) dayOfMonthContainer.getTag();
-            tagId = tagId.substring(mContext.getString(R.string.day_of_month_container).length(), tagId.length());
-            final TextView dayOfMonthText = (TextView) view.findViewWithTag(mContext.getString(R.string.day_of_month_text) + tagId);
-
-            // Fire event
-            final Calendar calendar = Calendar.getInstance();
-            calendar.setFirstDayOfWeek(mFirstDayOfWeek);
-            calendar.setTime(mCalendar.getTime());
-            calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(dayOfMonthText.getText().toString()));
-            setDateAsSelected(calendar.getTime());
-
-            //Set the current day color
-            setCurrentDay(mCalendar.getTime());
-
-            if (mOnDateLongClickListener != null) {
-                mOnDateLongClickListener.onDateLongClick(calendar.getTime());
-            }
-
-            return false;
+        if (CalendarUtility.isToday(currentCalendar)) {
+            view.setTextColor(mCurrentDayOfMonth);
+        } else {
+            view.setTextColor(mSelectedDayTextColor);
         }
-    };
+    }
 
     private OnClickListener onDayOfMonthClickListener = new OnClickListener() {
         @Override
@@ -1195,6 +1172,10 @@ public class CalendarView extends LinearLayout {
 
     public String getCurrentYear() {
         return String.valueOf(mCalendar.get(Calendar.YEAR));
+    }
+
+    public Date getLastSelectedDay() {
+        return mLastSelectedDay;
     }
 
     public boolean isOverflowDateVisible() {
