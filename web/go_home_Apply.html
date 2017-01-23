@@ -113,12 +113,35 @@
         </div>
         <div class="frame go_home_apply">
             <form action="#" id="apply_form">
-                <input class="check" type="radio" name="stay" value="StayDom" checked> 잔류 <br>
-                <input class="check" type="radio" name="stay" value="FriGoHome"> 금요귀가 <br>
-                <input class="check" type="radio" name="stay" value="SatGoHome"> 토요귀가 <br>
-                <input class="check" type="radio" name="stay" value="SatReturnDom"> 토요귀사 <br><br>
-                <input type="text" name="date" id="date" size="15" readonly>
-                <input type="submit" value="신청" id="apply_submit">
+              <table cellspacing="0">
+                <thead>
+                  <tr>
+                    <td>신청</td>
+                    <td>귀가</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input class="check" type="radio" name="stay" value="StayDom" checked></td>
+                    <td>잔류</td>
+                  </tr>
+                  <tr>
+                    <td><input class="check" type="radio" name="stay" value="FriGoHome"></td>
+                    <td>금요귀가</td>
+                  </tr>
+                  <tr>
+                    <td><input class="check" type="radio" name="stay" value="SatGoHome"></td>
+                    <td>토요귀가</td>
+                  </tr>
+                  <tr>
+                    <td><input class="check" type="radio" name="stay" value="SatReturnDom"></td>
+                    <td>토요귀사</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><input type="text" name="date" id="date" size="15" readonly><input type="submit" value="신청" id="apply_submit"></td>
+                  </tr>
+                </tbody>
+              </table>
             </form>
         </div>
     </div>

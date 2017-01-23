@@ -163,11 +163,12 @@ header .logo p:hover {
 #calendar {
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
-  width: 80%;
+  width: 70%;
   text-align: center;
   margin: auto;
   margin-top: 7%;
   border : 0px solid black;
+  height: 65%;
 }
 
 #calendar tbody td{
@@ -206,9 +207,32 @@ header .logo p:hover {
   margin-top: 30%;
 }
 
+#apply_form table {
+  width: 80%;
+}
+
+#apply_form table td, table {
+  border: 0.1px solid black;
+}
+
+#apply_form table thead {
+  font-weight: bold;
+  text-align: center;
+}
+
+#apply_form table td:nth-child(1) {
+  text-align: center;
+  width: 20%;
+}
+
+#date {
+  margin: auto;
+  font-size: 80%;
+}
+
 #apply_submit {
   font-size: 20px;
-  margin-left: 20%;
+  margin-left: 10%;
 }
 
 .check {
