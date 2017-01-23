@@ -3,6 +3,7 @@ package com.dms.planb.action;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,13 +15,32 @@ public class SelectAction implements Actionable {
 	public JSONObject action(int command, JSONObject requestObject) throws JSONException, SQLException {
 		ResultSet resultSet;
 		JSONObject responseObject = new JSONObject();
+		JSONArray array = new JSONArray();
 		DataBase database = DataBase.getInstance();
+		
+		// For account
+		String id;
+		String password;
+		int number;
+		
+		// For post
+		int no;
+		int qnaNo;
+		int category;
+		String date;
+		
+		// For apply
+		int applierId;
+		
+		// For post list
+		int count; // JSON Object's sequence count
+		int rowCount; // ResultSet's row count
 		
 		switch(command) {
 		case Commands.LOAD_MYPAGE:
-			String requesterNumber = requestObject.getString("number");
+			number = requestObject.getInt("number");
 			
-			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", requesterNumber);
+			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
 			
 			responseObject.put("sex", resultSet.getInt("sex"));
 			responseObject.put("status", resultSet.getInt("status"));
@@ -33,28 +53,98 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_ACCOUNT:
 			// when login
-			String accountId = requestObject.getString("id");
-			String accountPassword = requestObject.getString("password");
+			id = requestObject.getString("id");
+			password = requestObject.getString("password");
 			
-			resultSet = database.executeQuery("SELECT * FROM account WHERE id=", accountId);
-			if(resultSet.getString("password").equals(accountPassword)) {
+			resultSet = database.executeQuery("SELECT * FROM account WHERE id='", id, "'");
+			if(resultSet.getString("password").equals(password)) {
 				responseObject.put("status", true);
 			}
 			
 			break;
-		case Commands.LOAD_POST_LIST:
-			break;
 		case Commands.LOAD_NOTICE_LIST:
+		case Commands.LOAD_ANNOUNCEMENT_LIST:
+		case Commands.LOAD_COMPETITION_LIST:
+			count = 1;
+			category = requestObject.getInt("category");
+			
+			resultSet = database.executeQuery("SELECT number, title, writer, date FROM app_content WHERE category=", category);
+			rowCount = resultSet.getRow();
+			
+			responseObject.put("row_count", rowCount);
+			while(resultSet.next()) {
+				array.put(resultSet.getInt("number"));
+				array.put(resultSet.getString("title"));
+				array.put(resultSet.getString("writer"));
+				array.put(resultSet.getString("date"));
+				
+				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+			}
 			break;
 		case Commands.LOAD_QNA_LIST:
+			count = 1;
+			
+			resultSet = database.executeQuery("SELECT no, title, question_date, writer, privacy FROM qna");
+			rowCount = resultSet.getRow();
+			
+			responseObject.put("row_count", rowCount);
+			while(resultSet.next()) {
+				array.put(resultSet.getInt("no"));
+				array.put(resultSet.getString("title"));
+				array.put(resultSet.getString("question_date"));
+				array.put(resultSet.getString("wrtier"));
+				array.put(resultSet.getInt("privacy"));
+				
+				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+			}
 			break;
 		case Commands.LOAD_FAQ_LIST:
-			break;
-		case Commands.LOAD_COMPETITION_LIST:
+			count = 1;
+			
+			resultSet = database.executeQuery("SELECT no, title FROM faq");
+			rowCount = resultSet.getRow();
+			
+			responseObject.put("row_count", rowCount);
+			while(resultSet.next()) {
+				array.put(resultSet.getInt("no"));
+				array.put(resultSet.getString("title"));
+				
+				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+			}
 			break;
 		case Commands.LOAD_REPORT_FACILITY_LIST:
+			count = 1;
+			
+			resultSet = database.executeQuery("SELECT no, title, room, write_date, writer, result FROM facility_report");
+			rowCount = resultSet.getRow();
+			
+			responseObject.put("row_count", rowCount);
+			while(resultSet.next()) {
+				array.put(resultSet.getInt("no"));
+				array.put(resultSet.getString("title"));
+				array.put(resultSet.getString("room"));
+				array.put(resultSet.getString("write_date"));
+				array.put(resultSet.getInt("writer"));
+				if(!resultSet.getString("result").isEmpty()) {
+					responseObject.put("has_result", true);
+				}
+				
+				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+			}
 			break;
 		case Commands.LOAD_NOTICE:
+		case Commands.LOAD_ANNOUNCEMENT:
+		case Commands.LOAD_COMPETITION:
+			number = requestObject.getInt("number");
+			category = requestObject.getInt("category");
+			
+			resultSet = database.executeQuery("SELECT * FROM app_content WHERE number=", number, " AND category=", category);
+			
+			responseObject.put("title", resultSet.getString("title"));
+			responseObject.put("content", resultSet.getString("content"));
+			responseObject.put("writer", resultSet.getString("writer"));
+			responseObject.put("date", resultSet.getString("date"));
+			
 			break;
 		case Commands.LOAD_RULE:
 			int ruleNo = requestObject.getInt("no");
@@ -66,7 +156,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_QNA:
-			int qnaNo = requestObject.getInt("no");
+			qnaNo = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", qnaNo);
 			
@@ -86,6 +176,20 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_QNA_COMMENT:
+			count = 1;
+			
+			qnaNo = requestObject.getInt("no");
+			
+			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", qnaNo);
+			rowCount = resultSet.getRow();
+			
+			responseObject.put("row_count", rowCount);
+			while(resultSet.next()) {
+				array.put(resultSet.getString("writer"));
+				array.put(resultSet.getString("comment_date"));
+				array.put(resultSet.getString("content"));
+			}
+			
 			break;
 		case Commands.LOAD_FAQ:
 			int faqNo = requestObject.getInt("no");
@@ -94,10 +198,6 @@ public class SelectAction implements Actionable {
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
-			
-			break;
-		case Commands.LOAD_COMPETITION:
-			// Should SELECT * FROM app_content but I can't find any ways.
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY:
@@ -120,7 +220,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_EXTENTION_STATUS:
-			int applierId = requestObject.getInt("id");
+			applierId = requestObject.getInt("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id=", applierId);
 			
@@ -130,27 +230,27 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_STAY_STATUS:
 			// Apply on a monthly basis
-			int applierId1 = requestObject.getInt("id");
+			applierId = requestObject.getInt("id");
 			
-			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id=", applierId1);
+			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id=", applierId);
 			
 			responseObject.put("value", resultSet.getInt("value"));
 			responseObject.put("date", resultSet.getString("date"));
 			
 			break;
 		case Commands.LOAD_GOINGOUT_STATUS:
-			int applierId2 = requestObject.getInt("id");
+			applierId = requestObject.getInt("id");
 			
-			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id=", applierId2);
+			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id=", applierId);
 			
 			responseObject.put("dept_date", resultSet.getDate("dept_date"));
 			responseObject.put("reason", resultSet.getString("reason"));
 			
 			break;
 		case Commands.LOAD_MERIT_APPLY_STATUS:
-			int applierId3 = requestObject.getInt("id");
+			applierId = requestObject.getInt("id");
 			
-			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id=", applierId3);
+			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id=", applierId);
 			
 			responseObject.put("content", resultSet.getString("content"));
 			if(!resultSet.getString("target").isEmpty()) {
@@ -163,9 +263,9 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_AFTERSCHOOL_STATUS:
 			// Need modify. Separate by the day of the week.
-			int applierId4 = requestObject.getInt("id");
+			applierId = requestObject.getInt("id");
 			
-			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id=", applierId4);
+			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id=", applierId);
 			
 			responseObject.put("no", resultSet.getInt("no"));
 			
@@ -191,7 +291,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_SCORE:
-			int number = requestObject.getInt("number");
+			number = requestObject.getInt("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
 			

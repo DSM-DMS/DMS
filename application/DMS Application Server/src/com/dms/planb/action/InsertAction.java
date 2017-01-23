@@ -22,6 +22,9 @@ public class InsertAction implements Actionable {
 		
 		// For upload a post
 		int no;
+		int number;
+		int category;
+		
 		String title;
 		String content;
 		String writer;
@@ -59,23 +62,24 @@ public class InsertAction implements Actionable {
 			database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
 			break;
 		case Commands.UPLOAD_NOTICE:
-			// I think auto-increment the no column
+		case Commands.UPLOAD_ANNOUNCEMENT:
+		case Commands.UPLOAD_COMPETITION:
+			number = requestObject.getInt("number");
+			category = requestObject.getInt("category");
 			title = requestObject.getString("title");
 			content = requestObject.getString("content");
+			writer = requestObject.getString("writer");
+			date = requestObject.getString("date");
 			
-			String noticeWriter = requestObject.getString("writer");
-			
-			database.executeUpdate("INSERT INTO notice(title, content, writer) VALUES('", title, "', '", content, "', '", noticeWriter, "')");
+			database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', STR_TO_DATE('", date, "', %Y-%m-%d-%r))");
 			break;
 		case Commands.UPLOAD_RULE:
-			// I think auto-increment the no column
 			title = requestObject.getString("title");
 			content = requestObject.getString("content");
 			
 			database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
 			break;
 		case Commands.UPLOAD_QUESTION:
-			// I think auto-increment the no column
 			title = requestObject.getString("title");
 			content = requestObject.getString("question_content");
 			date = requestObject.getString("question_date");
@@ -102,19 +106,12 @@ public class InsertAction implements Actionable {
 			database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
 			break;
 		case Commands.UPLOAD_FAQ:
-			// I think auto-increment the no column
 			title = requestObject.getString("title");
 			content = requestObject.getString("content");
 			
 			database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
 			break;
-		case Commands.UPLOAD_COMPETITION:
-			// I think auto-increment the no column
-			// Should INSERT INTO app_content but I can't find any ways.
-			
-			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
-			// I think auto-increment the no column
 			title = requestObject.getString("title");
 			content = requestObject.getString("content");
 			no = requestObject.getInt("room");
@@ -155,6 +152,9 @@ public class InsertAction implements Actionable {
 			database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES(", applierId, ", ", classId, ", ", seatId, ")");
 			break;
 		case Commands.APPLY_STAY:
+			/*
+			 * Date Format : in ActionPerformer
+			 */
 			applierId = requestObject.getInt("id");
 			int extensionValue = requestObject.getInt("value");
 			date = requestObject.getString("date");
@@ -162,17 +162,13 @@ public class InsertAction implements Actionable {
 			database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES(", applierId, ", ", extensionValue, ", '", date, "')");
 			break;
 		case Commands.APPLY_GOINGOUT:
-			/*
-			 * Date Format : YYYY-MM-DD
-			 */
 			applierId = requestObject.getInt("id");
 			String deptDate = requestObject.getString("dept_date");
 			String reason = requestObject.getString("reason");
 			
-			database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES(", applierId, ", STR_TO_DATE(", deptDate, ", %Y-%m-%d), '", reason, "')");
+			database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES(", applierId, ", STR_TO_DATE('", deptDate, "', %Y-%m-%d), '", reason, "')");
 			break;
 		case Commands.APPLY_MERIT:
-			// I think auto-increment the no column
 			applierId = requestObject.getInt("id");
 			content = requestObject.getString("content");
 			

@@ -14,6 +14,8 @@ import com.dms.planb.action.UpdateAction;
 /*
  * Check between this code and database's tables, and match data type.
  * Having foreign key : afterschool_apply, attachment, qna_comment table
+ * DATE Format			: YYYY-MM-DD
+ * DATETIME Format	: YYYY-MM-DD hh:mm:ss (AM/PM)
  * 
  * Be sure to review the code.
  * 
