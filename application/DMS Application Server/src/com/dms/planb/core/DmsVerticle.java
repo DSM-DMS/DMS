@@ -39,7 +39,7 @@ class DmsVerticle extends AbstractVerticle {
 			System.out.println("Received request");
 			
 			Buffer totalBuffer = Buffer.buffer();
-			MultiMap params = request.params();
+//			MultiMap params = request.params();
 			// Get parameters from request
 			
 			if(request.method() == HttpMethod.POST) {
@@ -88,7 +88,12 @@ class DmsVerticle extends AbstractVerticle {
 					response = request.response();
 					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
-					response.setStatusCode(1);
+					try {
+						response.setStatusCode(responseObject.getInt("status"));
+						responseObject.remove("status");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 					// Success, Fail, etc..
 					
 					response.end(responseObject.toString());

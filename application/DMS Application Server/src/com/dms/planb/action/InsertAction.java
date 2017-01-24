@@ -33,6 +33,9 @@ public class InsertAction implements Actionable {
 		// For apply
 		int applierId;
 		
+		// For status
+		int status = 0;
+		
 		switch(command) {
 		case Commands.REGISTER_STUDENT_ACC:
 			 /*
@@ -49,7 +52,7 @@ public class InsertAction implements Actionable {
 			sessionKey = requestObject.getString("session_key");
 			permission = requestObject.getInt("permission");
 			
-			database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
+			status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
 			
 			/*
 			 * Table Name : student_data
@@ -81,7 +84,7 @@ public class InsertAction implements Actionable {
 				parentPhone = requestObject.getString("p_phone");
 			}
 			
-			database.executeUpdate("INSERT INTO student_data(number, sex, status, name, phone, p_name, p_phone) VALUES(", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
+			status = database.executeUpdate("INSERT INTO student_data(number, sex, status, name, phone, p_name, p_phone) VALUES(", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
 			break;
 		case Commands.REGISTER_TEACHER_ACC:
 			/*
@@ -100,7 +103,7 @@ public class InsertAction implements Actionable {
 			permission = requestObject.getInt("permission");
 			String teacherName = requestObject.getString("name");
 			
-			database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
+			status = database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
 			break;
 		case Commands.UPLOAD_NOTICE:
 		case Commands.UPLOAD_NEWSLETTER:
@@ -134,7 +137,7 @@ public class InsertAction implements Actionable {
 			writer = requestObject.getString("writer");
 			date = requestObject.getString("date");
 			
-			database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', '", date, "')");
+			status = database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', '", date, "')");
 			break;
 		case Commands.UPLOAD_RULE:
 			/*
@@ -147,7 +150,7 @@ public class InsertAction implements Actionable {
 			title = requestObject.getString("title");
 			content = requestObject.getString("content");
 			
-			database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
+			status = database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
 			break;
 		case Commands.UPLOAD_QUESTION:
 			/*
@@ -171,7 +174,7 @@ public class InsertAction implements Actionable {
 			
 			int privacy = requestObject.getInt("privacy");
 			
-			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, questioner, privacy) VALUES('", title, "', '", content, "', '", date, "', '", writer, "', ", privacy, ")");
+			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, questioner, privacy) VALUES('", title, "', '", content, "', '", date, "', '", writer, "', ", privacy, ")");
 			break;
 		case Commands.UPLOAD_ANSWER:
 			/*
@@ -182,7 +185,7 @@ public class InsertAction implements Actionable {
 			content = requestObject.getString("answer_content");
 			date = requestObject.getString("answer_date");
 			
-			database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date='", date, "' WHERE no=", no);
+			status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date='", date, "' WHERE no=", no);
 			break;
 		case Commands.UPLOAD_QNA_COMMENT:
 			/*
@@ -204,7 +207,7 @@ public class InsertAction implements Actionable {
 			writer = requestObject.getString("writer");
 			content = requestObject.getString("content");
 			
-			database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
+			status = database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
 			break;
 		case Commands.UPLOAD_FAQ:
 			/*
@@ -217,7 +220,7 @@ public class InsertAction implements Actionable {
 			title = requestObject.getString("title");
 			content = requestObject.getString("content");
 			
-			database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
+			status = database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
 			break;
 		case Commands.UPLOAD_AFTERSCHOOL:
 			/*
@@ -238,7 +241,7 @@ public class InsertAction implements Actionable {
 			int day = requestObject.getInt("day");
 			String instructor = requestObject.getString("instructor");
 			
-			database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, day, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", day, ", '", instructor, "')");
+			status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, day, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", day, ", '", instructor, "')");
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
 			/*
@@ -260,7 +263,7 @@ public class InsertAction implements Actionable {
 			no = requestObject.getInt("room");
 			writer = requestObject.getString("writer");
 			
-			database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", no, ", NOW(), '", writer, "')");
+			status = database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", no, ", NOW(), '", writer, "')");
 			break;
 		case Commands.UPLOAD_REPORT_RESULT:
 			/*
@@ -270,7 +273,7 @@ public class InsertAction implements Actionable {
 			no = requestObject.getInt("no");
 			content = requestObject.getString("result");
 			
-			database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
+			status = database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
 			break;
 		case Commands.UPLOAD_MEAL:
 			/*
@@ -294,7 +297,7 @@ public class InsertAction implements Actionable {
 			String lunch_allergy = requestObject.getString("lunch_allergy");
 			String dinner_allergy = requestObject.getString("dinner_allergy");
 			
-			database.executeUpdate("INSERT INTO meal(date, breakfast, lunch, dinner, breakfast_allergy, lunch_allergy, dinner_allergy) VALUES('", date, "', '", breakfast, "', '", lunch, "', '", dinner, "', '", breakfast_allergy, "', '", lunch_allergy, "', '", dinner_allergy, "')");			
+			status = database.executeUpdate("INSERT INTO meal(date, breakfast, lunch, dinner, breakfast_allergy, lunch_allergy, dinner_allergy) VALUES('", date, "', '", breakfast, "', '", lunch, "', '", dinner, "', '", breakfast_allergy, "', '", lunch_allergy, "', '", dinner_allergy, "')");			
 			break;
 		case Commands.UPLOAD_PLAN:
 			/*
@@ -318,7 +321,7 @@ public class InsertAction implements Actionable {
 			int classId = requestObject.getInt("class");
 			int seatId = requestObject.getInt("seat");
 			
-			database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES(", applierId, ", ", classId, ", ", seatId, ")");
+			status = database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES(", applierId, ", ", classId, ", ", seatId, ")");
 			break;
 		case Commands.APPLY_STAY:
 			/*
@@ -334,7 +337,7 @@ public class InsertAction implements Actionable {
 			int extensionValue = requestObject.getInt("value");
 			date = requestObject.getString("date");
 			
-			database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES(", applierId, ", ", extensionValue, ", '", date, "')");
+			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES(", applierId, ", ", extensionValue, ", '", date, "')");
 			break;
 		case Commands.APPLY_GOINGOUT:
 			/*
@@ -350,7 +353,7 @@ public class InsertAction implements Actionable {
 			String deptDate = requestObject.getString("dept_date");
 			String reason = requestObject.getString("reason");
 			
-			database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES(", applierId, ", '", deptDate, "', '", reason, "')");
+			status = database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES(", applierId, ", '", deptDate, "', '", reason, "')");
 			break;
 		case Commands.APPLY_MERIT:
 			/*
@@ -367,9 +370,9 @@ public class InsertAction implements Actionable {
 			if(requestObject.has("target")) {
 				// Case that recommendation
 				String recommendTarget = requestObject.getString("target");
-				database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES(", applierId, ", '", recommendTarget, "', '", content, "')");
+				status = database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES(", applierId, ", '", recommendTarget, "', '", content, "')");
 			} else {
-				database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES(", applierId, ", '", content, "')");
+				status = database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES(", applierId, ", '", content, "')");
 			}
 			break;
 		case Commands.APPLY_AFTERSCHOOL:
@@ -382,10 +385,11 @@ public class InsertAction implements Actionable {
 			applierId = requestObject.getInt("id");
 			no = requestObject.getInt("no");
 			
-			database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES(", applierId, ", ", no, ")");
+			status = database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES(", applierId, ", ", no, ")");
 			break;
 		}
 		
+		responseObject.put("status", status);
 		return responseObject;
 	}
 }
