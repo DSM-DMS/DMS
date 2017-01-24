@@ -28,6 +28,9 @@ public class DeleteAction implements Actionable {
 		// For status
 		int status = 0;
 		
+		//String query;
+		//remove the code overlap
+		
 		switch(command) {
 		case Commands.DELETE_ACCOUNT:
 			id = requestObject.getString("id");
@@ -75,7 +78,7 @@ public class DeleteAction implements Actionable {
 		case Commands.DEAPPLY_EXTENTION:
 			applierId = requestObject.getInt("id");
 			
-			status = database.executeUpdate("DELETE extension_apply WHERE id=", applierId);
+			status = database.executeUpdate("DELETE extension_apply WHERE id=", applierId); //String type => 'string'
 			break;
 		case Commands.DEAPPLY_GOINGOUT:
 			applierId = requestObject.getInt("id");
