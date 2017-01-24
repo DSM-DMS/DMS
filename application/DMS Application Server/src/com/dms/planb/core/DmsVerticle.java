@@ -68,8 +68,8 @@ class DmsVerticle extends AbstractVerticle {
 					
 					// 1-3. Get request object from buffer.
 					try {
-//						requestObject = new JSONObject(totalBuffer.toString());
-						requestObject = new JSONObject().put("testKey", "testValue");
+						requestObject = new JSONObject(totalBuffer.toString());
+//						requestObject = new JSONObject().put("testKey", "testValue");
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}

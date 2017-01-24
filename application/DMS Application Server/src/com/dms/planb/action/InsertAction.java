@@ -328,10 +328,14 @@ public class InsertAction implements Actionable {
 			 * Table Name : stay_apply
 			 * 
 			 * id INT(11) PK NN
-			 * value INT(1) NN
+			 * value INT(1) NN Default 4
 			 * date VARCHAR(10) NN Default 'all'
 			 * 
 			 * DATE format : YYYY-MM-DD
+			 * Friday home coming : 1
+			 * Saturday home coming : 2
+			 * Saturday dormitory coming : 3
+			 * Stay : 4
 			 */
 			applierId = requestObject.getInt("id");
 			int extensionValue = requestObject.getInt("value");
