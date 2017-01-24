@@ -54,7 +54,7 @@ public class DataBase {
 		 * 1. For example when without queryBuilder
 		 * String query = "select * from user id='" + id + "'";
 		 * 
-		 * 2. for example when use queryBuilder
+		 * 2. For example when use queryBuilder
 		 * String query = DataBase.queryBuilder("select * from user where id='", id, "'");
 		 */
 		

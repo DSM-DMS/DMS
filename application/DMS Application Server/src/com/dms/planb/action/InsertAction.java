@@ -103,7 +103,7 @@ public class InsertAction implements Actionable {
 			database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
 			break;
 		case Commands.UPLOAD_NOTICE:
-		case Commands.UPLOAD_ANNOUNCEMENT:
+		case Commands.UPLOAD_NEWSLETTER:
 		case Commands.UPLOAD_COMPETITION:
 			/*
 			 * Table Name : app_content
@@ -219,6 +219,27 @@ public class InsertAction implements Actionable {
 			
 			database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
 			break;
+		case Commands.UPLOAD_AFTERSCHOOL:
+			/*
+			 * Table Name : afterschool_list
+			 * 
+			 * no INT(11) PK NN
+			 * title VARCHAR(45) NN
+			 * target INT(1) NN
+			 * place VARCHAR(10) NN
+			 * day INT(1) NN
+			 * instructor VARCHAR(10)
+			 */
+			no = requestObject.getInt("no");
+			title = requestObject.getString("title");
+			
+			int target = requestObject.getInt("target");
+			String place = requestObject.getString("place");
+			int day = requestObject.getInt("day");
+			String instructor = requestObject.getString("instructor");
+			
+			database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, day, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", day, ", '", instructor, "')");
+			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
 			/*
 			 * Table Name : facility_report
@@ -284,27 +305,6 @@ public class InsertAction implements Actionable {
 			 * date VARCHAR(5000) NN
 			 */
 			
-			break;
-		case Commands.UPLOAD_AFTERSCHOOL:
-			/*
-			 * Table Name : afterschool_list
-			 * 
-			 * no INT(11) PK NN
-			 * title VARCHAR(45) NN
-			 * target INT(1) NN
-			 * place VARCHAR(10) NN
-			 * day INT(1) NN
-			 * instructor VARCHAR(10)
-			 */
-			no = requestObject.getInt("no");
-			title = requestObject.getString("title");
-			
-			int target = requestObject.getInt("target");
-			String place = requestObject.getString("place");
-			int day = requestObject.getInt("day");
-			String instructor = requestObject.getString("instructor");
-			
-			database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, day, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", day, ", '", instructor, "')");
 			break;
 		case Commands.APPLY_EXTENTION:
 			/*

@@ -58,7 +58,7 @@ public class UpdateAction implements Actionable {
 			}
 			break;
 		case Commands.MODIFY_NOTICE:
-		case Commands.MODIFY_ANNOUNCEMENT:
+		case Commands.MODIFY_NEWSLETTER:
 		case Commands.MODIFY_COMPETITION:
 			no = requestObject.getInt("no");
 			

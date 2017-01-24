@@ -14,7 +14,7 @@ public class Commands {
 	public static final int REGISTER_TEACHER_ACC		= 101;
 	
 	public static final int UPLOAD_NOTICE						= 111;
-	public static final int UPLOAD_ANNOUNCEMENT	= 112;
+	public static final int UPLOAD_NEWSLETTER			= 112;
 	public static final int UPLOAD_COMPETITION			= 113;
 	public static final int UPLOAD_RULE							= 114;
 	public static final int UPLOAD_QUESTION				= 115;
@@ -65,7 +65,7 @@ public class Commands {
 	public static final int MODIFY_STUDENT_DATA			= 201;
 	
 	public static final int MODIFY_NOTICE							= 211;
-	public static final int MODIFY_ANNOUNCEMENT		= 212;
+	public static final int MODIFY_NEWSLETTER				= 212;
 	public static final int MODIFY_COMPETITION				= 213;
 	public static final int MODIFY_RULE								= 214;
 	public static final int MODIFY_QUESTION						= 215;
@@ -104,7 +104,7 @@ public class Commands {
 	public static final int DELETE_ACCOUNT						= 300;
 	
 	public static final int DELETE_NOTICE							= 311;
-	public static final int DELETE_ANNOUNCEMENT			= 312;
+	public static final int DELETE_NEWSLETTER					= 312;
 	public static final int DELETE_COMPETITION				= 313;
 	public static final int DELETE_RULE								= 314;
 	public static final int DELETE_QUESTION						= 315;
@@ -144,14 +144,15 @@ public class Commands {
 	public static final int LOAD_ACCOUNT							= 401;
 	
 	public static final int LOAD_NOTICE_LIST						= 411;
-	public static final int LOAD_ANNOUNCEMENT_LIST	= 412;
+	public static final int LOAD_NEWSLETTER_LIST			= 412;
 	public static final int LOAD_COMPETITION_LIST			= 413;
 	public static final int LOAD_QNA_LIST							= 414;
 	public static final int LOAD_FAQ_LIST							= 415;
 	public static final int LOAD_REPORT_FACILITY_LIST	= 416;
+	public static final int LOAD_AFTERSCHOOL_LIST			= 417;
 	
 	public static final int LOAD_NOTICE								= 421;
-	public static final int LOAD_ANNOUNCEMENT			= 422;
+	public static final int LOAD_NEWSLETTER					= 422;
 	public static final int LOAD_COMPETITION					= 423;
 	public static final int LOAD_RULE									= 424;
 	public static final int LOAD_QNA									= 425;
