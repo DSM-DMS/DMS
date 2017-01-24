@@ -22,9 +22,6 @@ public class DeleteAction implements Actionable {
 		int number;
 		int category;
 		
-		// For apply
-		int applierId;
-		
 		// For status
 		int status = 0;
 		
@@ -73,19 +70,19 @@ public class DeleteAction implements Actionable {
 			status = database.executeUpdate("DELETE facility_report WHERE no=", no);
 			break;
 		case Commands.DEAPPLY_EXTENTION:
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			
-			status = database.executeUpdate("DELETE extension_apply WHERE id=", applierId);
+			status = database.executeUpdate("DELETE extension_apply WHERE id='", id, "'");
 			break;
 		case Commands.DEAPPLY_GOINGOUT:
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			
-			status = database.executeUpdate("DELETE goingout_apply WHERE id=", applierId);
+			status = database.executeUpdate("DELETE goingout_apply WHERE id='", id, "'");
 			break;
 		case Commands.DEAPPLY_MERIT:
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			
-			status = database.executeUpdate("DELETE merit_apply WHERE id=", applierId);
+			status = database.executeUpdate("DELETE merit_apply WHERE id='", id, "'");
 			break;
 		}
 		

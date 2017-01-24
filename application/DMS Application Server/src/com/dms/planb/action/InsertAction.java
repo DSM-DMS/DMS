@@ -30,9 +30,6 @@ public class InsertAction implements Actionable {
 		String writer = null;
 		String date = null;
 		
-		// For apply
-		int applierId;
-		
 		// For status
 		int status = 0;
 		
@@ -317,11 +314,11 @@ public class InsertAction implements Actionable {
 			 * class INT(1) NN
 			 * seat INT(2) NN
 			 */
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			int classId = requestObject.getInt("class");
 			int seatId = requestObject.getInt("seat");
 			
-			status = database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES(", applierId, ", ", classId, ", ", seatId, ")");
+			status = database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES('", id, "', ", classId, ", ", seatId, ")");
 			break;
 		case Commands.APPLY_STAY:
 			/*
@@ -337,11 +334,11 @@ public class InsertAction implements Actionable {
 			 * Saturday dormitory coming : 3
 			 * Stay : 4
 			 */
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			int extensionValue = requestObject.getInt("value");
 			date = requestObject.getString("date");
 			
-			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES(", applierId, ", ", extensionValue, ", '", date, "')");
+			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", extensionValue, ", '", date, "')");
 			break;
 		case Commands.APPLY_GOINGOUT:
 			/*
@@ -353,11 +350,11 @@ public class InsertAction implements Actionable {
 			 * 
 			 * DATE format : YYYY-MM-DD
 			 */
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			String deptDate = requestObject.getString("dept_date");
 			String reason = requestObject.getString("reason");
 			
-			status = database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES(", applierId, ", '", deptDate, "', '", reason, "')");
+			status = database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES('", id, "', '", deptDate, "', '", reason, "')");
 			break;
 		case Commands.APPLY_MERIT:
 			/*
@@ -368,15 +365,15 @@ public class InsertAction implements Actionable {
 			 * target VARCHAR(45) Default NULL
 			 * content VARCHAR(500) NN
 			 */
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			content = requestObject.getString("content");
 			
 			if(requestObject.has("target")) {
 				// Case that recommendation
 				String recommendTarget = requestObject.getString("target");
-				status = database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES(", applierId, ", '", recommendTarget, "', '", content, "')");
+				status = database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES('", id, "', '", recommendTarget, "', '", content, "')");
 			} else {
-				status = database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES(", applierId, ", '", content, "')");
+				status = database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES('", id, "', '", content, "')");
 			}
 			break;
 		case Commands.APPLY_AFTERSCHOOL:
@@ -386,10 +383,10 @@ public class InsertAction implements Actionable {
 			 * id INT(11) NN
 			 * no INT(11) NN
 			 */
-			applierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			no = requestObject.getInt("no");
 			
-			status = database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES(", applierId, ", ", no, ")");
+			status = database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
 			break;
 		}
 		

@@ -23,7 +23,6 @@ public class UpdateAction implements Actionable {
 		String id = null;
 		
 		// For post
-		int modifierId;
 		int no;
 		
 		String date = null;
@@ -128,42 +127,41 @@ public class UpdateAction implements Actionable {
 			}
 			break;
 		case Commands.MODIFY_EXTENTION:
-			modifierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			
 			if(requestObject.has("class")) {
-				status = database.executeUpdate("UPDATE extension_apply SET class=", requestObject.getInt("class"), " WHERE id=", modifierId);
+				status = database.executeUpdate("UPDATE extension_apply SET class=", requestObject.getInt("class"), " WHERE id='", id, "'");
 			}
 			if(requestObject.has("seat")) {
-				status = database.executeUpdate("UPDATE extension_apply SET seat=", requestObject.getInt("seat"), " WHERE id=", modifierId);
+				status = database.executeUpdate("UPDATE extension_apply SET seat=", requestObject.getInt("seat"), " WHERE id='", id, "'");
 			}
 			break;
 		case Commands.MODIFY_STAY:
 			/*
 			 * Date Format : YYYY-MM-DD
 			 */
-			modifierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			date = requestObject.getString("date");
 			
-			status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id=", modifierId, " AND date='", date, "'");
+			status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id='", id, "' AND date='", date, "'");
 			break;
 		case Commands.MODIFY_GOINGOUT:
-			modifierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			date = requestObject.getString("date");
 			
 			if(requestObject.has("reason")) {
-				status = database.executeUpdate("UPDATE stay_apply SET reason='", requestObject.getString("reason"), "' WHERE id=", modifierId, " AND date='", date, "'");
+				status = database.executeUpdate("UPDATE stay_apply SET reason='", requestObject.getString("reason"), "' WHERE id='", id, "' AND date='", date, "'");
 			}
 			break;
 		case Commands.MODIFY_MERIT:
-			modifierId = requestObject.getInt("id");
+			id = requestObject.getString("id");
 			date = requestObject.getString("date");
 			
 			if(requestObject.has("value")) {
-				status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id=", modifierId, " AND date='", date, "'");
+				status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id='", id, "' AND date='", date, "'");
 			}
 			break;
 		case Commands.MODIFY_AFTERSCHOOL:
-			modifierId = requestObject.getInt("id");
 			int targetNo = requestObject.getInt("target_no");
 			
 			if(requestObject.has("no")) {
