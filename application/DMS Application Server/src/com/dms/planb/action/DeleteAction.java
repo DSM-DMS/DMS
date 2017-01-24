@@ -42,17 +42,17 @@ public class DeleteAction implements Actionable {
 		case Commands.DELETE_RULE:
 			no = requestObject.getInt("no");
 			
-			status = database.executeUpdate("DELETE FROM app_content WHERE no=", no);
+			status = database.executeUpdate("DELETE FROM rule WHERE no=", no);
 			break;
 		case Commands.DELETE_QUESTION:
 			no = requestObject.getInt("no");
 			
-			status = database.executeUpdate("DELETE FROM app_content WHERE no=", no);
+			status = database.executeUpdate("DELETE FROM qna WHERE no=", no);
 			break;
 		case Commands.DELETE_ANSWER:
 			no = requestObject.getInt("no");
 			
-			status = database.executeUpdate("UPDATE app_content SET answer_content=NULL, answer_date=NULL WHERE no=", no);
+			status = database.executeUpdate("UPDATE qna SET answer_content=NULL, answer_date=NULL WHERE no=", no);
 			break;
 		case Commands.DELETE_QNA_COMMENT:
 			no = requestObject.getInt("no");
