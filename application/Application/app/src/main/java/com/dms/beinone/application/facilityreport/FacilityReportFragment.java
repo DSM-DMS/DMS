@@ -1,5 +1,6 @@
 package com.dms.beinone.application.facilityreport;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,10 @@ import android.view.ViewGroup;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.RecyclerViewUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by BeINone on 2017-01-20.
@@ -37,14 +42,26 @@ public class FacilityReportFragment extends Fragment {
     private void init(View rootView) {
         mFAB = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         mFAB.setVisibility(View.VISIBLE);
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), FacilityReportWriteActivity.class));
+            }
+        });
 
         EmptySupportedRecyclerView recyclerView =
                 (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_facilityreport);
 
         View emptyView = rootView.findViewById(R.id.view_facilityreport_empty);
-        recyclerView.setEmptyView(emptyView);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setAdapter(new FacilityReportAdapter());
+        RecyclerViewUtils.setupRecyclerView(recyclerView, getContext(), emptyView);
+
+        List<FacilityReport> facilityReportList = new ArrayList<>();
+        facilityReportList.add(new FacilityReport("314호 히터 고장", "314호 히터 고장났어요", 314,
+                "2017-01-23", "조성빈", "고쳤단다.", "2017-01-23"));
+        facilityReportList.add(new FacilityReport("314호 히터 고장", "314호 히터 고장났어요", 314,
+                "2017-01-23", "조성빈", "고쳤단다.", "2017-01-23"));
+
+        recyclerView.setAdapter(new FacilityReportAdapter(getContext(), facilityReportList));
     }
 
     @Override

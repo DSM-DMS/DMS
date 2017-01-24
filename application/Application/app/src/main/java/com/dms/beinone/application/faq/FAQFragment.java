@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.RecyclerViewUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by BeINone on 2017-01-19.
@@ -22,6 +26,8 @@ public class FAQFragment extends Fragment {
         getActivity().setTitle(R.string.nav_faq);
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
+        init(view);
+
         return view;
     }
 
@@ -34,9 +40,14 @@ public class FAQFragment extends Fragment {
                 (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_faq);
 
         View emptyView = rootView.findViewById(R.id.view_faq_empty);
-        recyclerView.setEmptyView(emptyView);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setAdapter(new FAQAdapter(getContext(), ));
+        RecyclerViewUtils.setupRecyclerView(recyclerView, getContext(), emptyView);
+
+        List<FAQTitle> faqTitleList = new ArrayList<>();
+        List<FAQContent> faqContentList = new ArrayList<>();
+        faqContentList.add(new FAQContent("질문입니다~"));
+        faqTitleList.add(new FAQTitle("질문이요", faqContentList));
+        faqTitleList.add(new FAQTitle("질문이요", faqContentList));
+        recyclerView.setAdapter(new FAQAdapter(getContext(), faqTitleList));
     }
 
 }

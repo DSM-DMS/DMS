@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class HttpBox {
 	//아래와 같이 사용
-	//HttpBox.post().setCommand(1234).putBodydata(JSonObject).push();
+	//HttpBox.post().setCommand(1234).putBodyData(JSonObject).push();
 
 	//해당 url 수정 필요
 	public static final String SERVER_URL = "http://localhost";

@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cal="http://schemas.android.com/apk/res-auto"
     xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.samsistemas.calendarview.widget.CalendarView
         android:id="@+id/calendar_meal"
@@ -22,137 +23,150 @@
         cal:weekend="saturday|sunday"
         cal:weekendColor="@android:color/white" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/meal_breakfast"
-                android:textColor="@color/colorPrimary" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <com.dms.beinone.application.dmsview.DMSButton
-                android:id="@+id/btn_meal_expandbreakfast"
-                android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/meal_breakfast"
+                        android:textColor="@color/colorPrimary" />
+
+                    <com.dms.beinone.application.dmsview.DMSButton
+                        android:id="@+id/btn_meal_expandbreakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawableEnd="@drawable/ic_expand_more_white_18dp"
+                        android:drawableRight="@drawable/ic_expand_more_white_18dp"
+                        android:text="@string/meal_allergy"
+                        android:textSize="@dimen/text_roundedbtn"
+                        dmsbtn:style="round" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_meal_breakfast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:drawable/divider_horizontal_bright" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:drawableRight="@drawable/ic_expand_more_white_18dp"
-                android:drawableEnd="@drawable/ic_expand_more_white_18dp"
-                android:text="@string/meal_allergy"
-                android:textSize="@dimen/roundedbtn_textsize"
-                dmsbtn:style="round" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
 
-        <TextView
-            android:id="@+id/tv_meal_breakfast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/meal_lunch"
+                        android:textColor="@color/colorPrimary" />
 
-    </LinearLayout>
+                    <com.dms.beinone.application.dmsview.DMSButton
+                        android:id="@+id/btn_meal_expandlunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawableEnd="@drawable/ic_expand_more_white_18dp"
+                        android:drawableRight="@drawable/ic_expand_more_white_18dp"
+                        android:text="@string/meal_allergy"
+                        android:textSize="@dimen/text_roundedbtn"
+                        dmsbtn:style="round" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@android:drawable/divider_horizontal_bright" />
+                </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+                <TextView
+                    android:id="@+id/tv_meal_lunch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:drawable/divider_horizontal_bright" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/meal_lunch"
-                android:textColor="@color/colorPrimary" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <com.dms.beinone.application.dmsview.DMSButton
-                android:id="@+id/btn_meal_expandlunch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:drawableRight="@drawable/ic_expand_more_white_18dp"
-                android:drawableEnd="@drawable/ic_expand_more_white_18dp"
-                android:text="@string/meal_allergy"
-                android:textSize="@dimen/roundedbtn_textsize"
-                dmsbtn:style="round" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
 
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/meal_dinner"
+                        android:textColor="@color/colorPrimary" />
 
-        <TextView
-            android:id="@+id/tv_meal_lunch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black" />
+                    <com.dms.beinone.application.dmsview.DMSButton
+                        android:id="@+id/btn_meal_expanddinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:drawableEnd="@drawable/ic_expand_more_white_18dp"
+                        android:drawableRight="@drawable/ic_expand_more_white_18dp"
+                        android:text="@string/meal_allergy"
+                        android:textSize="@dimen/text_roundedbtn"
+                        dmsbtn:style="round" />
 
-    </LinearLayout>
+                </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@android:drawable/divider_horizontal_bright" />
+                <TextView
+                    android:id="@+id/tv_meal_dinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+            </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/meal_dinner"
-                android:textColor="@color/colorPrimary" />
-
-            <com.dms.beinone.application.dmsview.DMSButton
-                android:id="@+id/btn_meal_expanddinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:drawableRight="@drawable/ic_expand_more_white_18dp"
-                android:drawableEnd="@drawable/ic_expand_more_white_18dp"
-                android:text="@string/meal_allergy"
-                android:textSize="@dimen/roundedbtn_textsize"
-                dmsbtn:style="round" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_meal_dinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

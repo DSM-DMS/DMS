@@ -13,8 +13,9 @@ public class RuleTitle implements Parent<RuleContent> {
     private String title;
     private List<RuleContent> ruleContentList;
 
-    public RuleTitle(String title) {
+    public RuleTitle(String title, List<RuleContent> ruleContentList) {
         setTitle(title);
+        setChildList(ruleContentList);
     }
 
     @Override

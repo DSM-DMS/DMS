@@ -13,8 +13,9 @@ public class FAQTitle implements Parent<FAQContent> {
     private String title;
     private List<FAQContent> faqContentList;
 
-    public FAQTitle(String title) {
+    public FAQTitle(String title, List<FAQContent> faqContentList) {
         setTitle(title);
+        setChildList(faqContentList);
     }
 
     @Override

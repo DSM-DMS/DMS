@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.dms.beinone.application.R;
+
 /**
  * Created by BeINone on 2017-01-20.
  */
@@ -34,33 +36,39 @@ public class DMSImageButton extends ImageButton {
      * 속성 초기화, 터치 이벤트 설정
      */
     private void init(final Context context) {
-//        setBackground(ContextCompat.getDrawable(context, R.drawable.dmsib));
+        setBackground(ContextCompat.getDrawable(context, R.drawable.dmsib));
+        setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary));
 
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        ((ImageButton) v).setColorFilter(
-                                ContextCompat.getColor(context, android.R.color.white));
+                        setBackground(ContextCompat.getDrawable(context, R.drawable.dmsib_touch));
+                        setColorFilter(ContextCompat.getColor(context, android.R.color.white));
                         break;
+
                     case MotionEvent.ACTION_MOVE:
                         Rect rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                        if (!rect.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())) {
-                            ((ImageButton) v).clearColorFilter();
+                        if (!rect.contains(v.getLeft() + (int) event.getX(),
+                                v.getTop() + (int) event.getY())) {
+
+                            setBackground(ContextCompat.getDrawable(context, R.drawable.dmsib));
+                            setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary));
                         }
                         break;
+
                     case MotionEvent.ACTION_UP:
-                        ((ImageButton) v).clearColorFilter();
+                        setBackground(ContextCompat.getDrawable(context, R.drawable.dmsib));
+                        setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary));
                         break;
+
                     default: break;
                 }
 
                 return true;
             }
         });
-//        setMinimumWidth(0);
-//        setMinimumHeight(0);
     }
 
 }

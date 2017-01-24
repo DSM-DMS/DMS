@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSToggleButton;
@@ -34,6 +35,7 @@ public class GoingoutApplyFragment extends Fragment {
 
     /**
      * 초기화, 신청 버튼 클릭 이벤트 설정
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -46,9 +48,16 @@ public class GoingoutApplyFragment extends Fragment {
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (saturdayTB.isChecked()) apply(SATURDAY);
-                else if (sundayTB.isChecked()) apply(SUNDAY);
-                else if (saturdayTB.isChecked() && sundayTB.isChecked()) apply(BOTH);
+                if (saturdayTB.isChecked()) {
+                    apply(SATURDAY);
+                } else if (sundayTB.isChecked()) {
+                    apply(SUNDAY);
+                } else if (saturdayTB.isChecked() && sundayTB.isChecked()) {
+                    apply(BOTH);
+                } else {
+                    Toast.makeText(getContext(), R.string.goingoutapply_nochecked, Toast.LENGTH_SHORT)
+                            .show();
+                }
             }
         });
     }

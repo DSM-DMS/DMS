@@ -19,6 +19,7 @@
     <string name="nav_school">학교 소식</string>
     <string name="nav_meal">급식</string>
     <string name="nav_notice">공지사항</string>
+    <string name="nav_newsletter">가정통신문</string>
     <string name="nav_competition">대회정보</string>
     <string name="nav_dormitory">기숙사</string>
     <string name="nav_facilityreport">시설고장신고</string>
@@ -36,6 +37,8 @@
     <string name="stayapply_saturdaycome">토요귀사</string>
     <string name="stayapply_stay">잔류</string>
     <string name="stayapply_apply">신청하기</string>
+    <string name="stayapply_nochecked">값을 선택해주세요.</string>
+    <string name="stayapply_error">잔류상태 정보를 불러오지 못했습니다.</string>
 
     <!-- Goingout Apply Fragment -->
     <string name="goingoutapply_desc">앱에서 외출신청 후, 별도로 사감실에 방문하여 확인받아야 합니다.</string>
@@ -43,6 +46,7 @@
     <string name="goingoutapply_sunday">일요일</string>
     <string name="goingoutapply_subdesc">(중복 선택 가능)</string>
     <string name="goingoutapply_apply">신청하기</string>
+    <string name="goingoutapply_nochecked">값을 선택해주세요.</string>
     
     <!-- Rewardscore Apply Fragment -->
     <string name="rewardscoreapply_rewardscore">상점</string>
@@ -57,18 +61,38 @@
     <string name="meal_breakfast">아침</string>
     <string name="meal_lunch">점심</string>
     <string name="meal_dinner">저녁</string>
+    <string name="meal_meal">급식</string>
     <string name="meal_allergy">알레르기</string>
+    <string name="meal_error">급식 정보를 불러오지 못했습니다.</string>
 
     <!-- Notice Fragment -->
-    <string name="notice_nonotice">공지사항을 불러오지 못했습니다.</string>
+    <string name="notice_empty">공지사항을 불러오지 못했습니다.</string>
     <string name="notice_important">중요</string>
 
-    <!-- FAQ Fragment -->
-    <string name="faq_nofaq">FAQ를 불러오지 못했습니다.</string>
-
-    <!-- Rule Fragment -->
-    <string name="rule_norule">기숙사 규정을 불러오지 못했습니다.</string>
+    <!-- Newsletter Fragment -->
+    <string name="newsletter_empty">가정통신문을 불러오지 못했습니다.</string>
 
     <!-- Facility Report Fragment -->
-    <string name="facilityreport_noreport">신고 내역을 불러오지 못했습니다.</string>
+    <string name="facilityreport_empty">신고 내역을 불러오지 못했습니다.</string>
+    <string name="facilityreport_title">제목</string>
+    <string name="facilityreport_room">호실</string>
+    <string name="facilityreport_content">고장 내용</string>
+    <string name="facilityreport_submit">제출하기</string>
+
+    <!-- Rule Fragment -->
+    <string name="rule_empty">기숙사 규정을 불러오지 못했습니다.</string>
+
+    <!-- FAQ Fragment -->
+    <string name="faq_empty">FAQ를 불러오지 못했습니다.</string>
+
+    <!-- QnA Fragment -->
+    <string name="qna_empty">Q<![CDATA[&]]>A를 불러오지 못했습니다.</string>
+    <string name="qna_private">비공개 글입니다.</string>
+    <string name="qna_comment">댓글</string>
+    
+    <!-- Extra Keys -->
+    <string name="EXTRA_NOTICE">com.dms.beinone.extra.NOTICE</string>
+    <string name="EXTRA_NEWSLETTER">com.dms.beinone.extra.NEWSLETTER</string>
+    <string name="EXTRA_FACILITYREPORT">com.dms.beinone.extra.FACILITYREPORT</string>
+    <string name="EXTRA_QNA">com.dms.beinone.extra.QNA</string>
 </resources>

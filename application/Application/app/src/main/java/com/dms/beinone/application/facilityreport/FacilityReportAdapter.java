@@ -1,11 +1,14 @@
 package com.dms.beinone.application.facilityreport;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dms.beinone.application.Listeners;
 import com.dms.beinone.application.R;
 
 import java.util.List;
@@ -16,9 +19,11 @@ import java.util.List;
 
 public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAdapter.ViewHolder> {
 
+    private Context mContext;
     private List<FacilityReport> mFacilityReportList;
 
-    public FacilityReportAdapter(List<FacilityReport> facilityReportList) {
+    public FacilityReportAdapter(Context context, List<FacilityReport> facilityReportList) {
+        mContext = context;
         mFacilityReportList = facilityReportList;
     }
 
@@ -31,7 +36,9 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
 
     @Override
     public void onBindViewHolder(FacilityReportAdapter.ViewHolder holder, int position) {
+        FacilityReport facilityReport = mFacilityReportList.get(position);
 
+        holder.bind(facilityReport.getTitle(), facilityReport.getWriter(), facilityReport.getWriteDate());
     }
 
     @Override
@@ -43,18 +50,38 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
 
         private TextView mTitleTV;
         private TextView mWriterTV;
-        private TextView mDateTV;
+        private TextView mWriteDateTV;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             mTitleTV = (TextView) itemView.findViewById(R.id.tv_facilityreport_title);
             mWriterTV = (TextView) itemView.findViewById(R.id.tv_facilityreport_writer);
-            mDateTV = (TextView) itemView.findViewById(R.id.tv_facilityreport_date);
+            mWriteDateTV = (TextView) itemView.findViewById(R.id.tv_facilityreport_writedate);
+
+            itemView.setOnTouchListener(Listeners.changeTextColorOnTouchListener(mContext, mTitleTV));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewArticle(mFacilityReportList.get(getAdapterPosition()));
+                }
+            });
         }
 
-        public void bind() {
+        public void bind(String title, String writer, String writeDate) {
+            mTitleTV.setText(title);
+            mWriterTV.setText(writer);
+            mWriteDateTV.setText(writeDate);
+        }
 
+        /**
+         * start a new activity to display article
+         * @param facilityReport FacilityReport object that contains information of article
+         */
+        private void viewArticle(FacilityReport facilityReport) {
+            Intent intent = new Intent(mContext, FacilityReportArticleActivity.class);
+            intent.putExtra(mContext.getString(R.string.EXTRA_FACILITYREPORT), facilityReport);
+            mContext.startActivity(intent);
         }
 
     }

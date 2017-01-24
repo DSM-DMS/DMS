@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.RecyclerViewUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by BeINone on 2017-01-18.
@@ -36,9 +40,13 @@ public class NoticeFragment extends Fragment {
                 (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_notice);
 
         View emptyView = rootView.findViewById(R.id.view_notice_empty);
-        recyclerView.setEmptyView(emptyView);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setAdapter(new NoticeAdapter());
+        RecyclerViewUtils.setupRecyclerView(recyclerView, getContext(), emptyView);
+
+        List<Notice> noticeList = new ArrayList<>();
+        noticeList.add(new Notice("공지사항입니다.", "안녕하세요", "조성빈", "2017-01-23"));
+        noticeList.add(new Notice("공지사항입니다.", "안녕하세요", "조성빈", "2017-01-23"));
+
+        recyclerView.setAdapter(new NoticeAdapter(getContext(), noticeList, 1));
 
     }
 

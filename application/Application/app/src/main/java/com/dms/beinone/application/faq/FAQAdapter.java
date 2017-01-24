@@ -74,27 +74,52 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
             mExpandBtn = (ImageButton) itemView.findViewById(R.id.btn_faq_expand);
 
             // changes color of expand button on touch row
-            itemView.setOnTouchListener(new View.OnTouchListener() {
+            View overlayView = itemView.findViewById(R.id.relativeLayout_faq_overlay);
+            overlayView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
+                            mExpandBtn.setBackground(
+                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_touch));
+                            mExpandBtn.setColorFilter(
+                                    ContextCompat.getColor(mContext, android.R.color.white));
+                            break;
+
+                        case MotionEvent.ACTION_MOVE:
+                            Rect rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                            if (!rect.contains(v.getLeft() + (int) event.getX(),
+                                    v.getTop() + (int) event.getY())) {
+
+                                mExpandBtn.setBackground(
+                                        ContextCompat.getDrawable(mContext, R.drawable.dmsib));
+                                mExpandBtn.setColorFilter(
+                                        ContextCompat.getColor(mContext, R.color.colorPrimary));
+                            }
+                            break;
+
+                        case MotionEvent.ACTION_UP:
+                            mExpandBtn.setBackground(
+                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib));
                             mExpandBtn.setColorFilter(
                                     ContextCompat.getColor(mContext, R.color.colorPrimary));
                             break;
-                        case MotionEvent.ACTION_MOVE:
-                            Rect rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                            if (!rect.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())) {
-                                mExpandBtn.setColorFilter(Color.BLACK);
-                            }
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            mExpandBtn.setColorFilter(Color.BLACK);
-                            break;
+
                         default: break;
                     }
 
-                    return true;
+                    return false;
+                }
+            });
+
+            overlayView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isExpanded()) {
+                        collapseView();
+                    } else {
+                        expandView();
+                    }
                 }
             });
         }
@@ -104,10 +129,12 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
             super.setExpanded(expanded);
 
             if (expanded) {
-                mExpandBtn.setImageResource(R.drawable.ic_expand_less_black_24dp);
+                // changes image of button to less when view is expended
+                mExpandBtn.setImageResource(R.drawable.ic_expand_less_white_18dp);
                 mTitleTV.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
             } else {
-                mExpandBtn.setImageResource(R.drawable.ic_expand_more_black_24dp);
+                // changes image of button to more when view is collapsed
+                mExpandBtn.setImageResource(R.drawable.ic_expand_more_white_18dp);
                 mTitleTV.setTextColor(Color.BLACK);
             }
         }

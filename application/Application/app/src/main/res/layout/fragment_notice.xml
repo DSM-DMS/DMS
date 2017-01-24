@@ -8,15 +8,14 @@
     <com.dms.beinone.application.EmptySupportedRecyclerView
         android:id="@+id/rv_notice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/view_notice_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/notice_nonotice"
-        android:textSize="@dimen/emptyview_textsize" />
+        android:text="@string/notice_empty"
+        android:textSize="@dimen/text_emptyview" />
 
 </RelativeLayout>

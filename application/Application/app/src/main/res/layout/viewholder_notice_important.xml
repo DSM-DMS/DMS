@@ -2,16 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:padding="16dp">
+    android:paddingLeft="16dp"
+    android:paddingStart="16dp"
+    android:paddingRight="16dp"
+    android:paddingEnd="16dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp">
 
-        <com.dms.beinone.application.dmsview.DMSBadge
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notice_important" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="2dp">
+            <com.dms.beinone.application.dmsview.DMSBadge
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/notice_important"
+                android:textSize="@dimen/text_badge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -23,19 +42,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:paddingBottom="2dp">
             <TextView
                 android:id="@+id/tv_notice_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="2dp"
-                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:textSize="@dimen/text_title"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:paddingTop="2dp">
@@ -43,19 +62,15 @@
                 android:id="@+id/tv_notice_writer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginEnd="4dp"
-                android:textSize="16sp" />
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="@dimen/text_subtext" />
 
             <TextView
                 android:id="@+id/tv_notice_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginTop="2dp"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_subtext" />
         </LinearLayout>
 
     </LinearLayout>

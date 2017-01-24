@@ -1,10 +1,13 @@
 package com.dms.beinone.application.facilityreport;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by BeINone on 2017-01-20.
  */
 
-public class FacilityReport {
+public class FacilityReport implements Parcelable {
 
     private String title;
     private String content;
@@ -23,6 +26,32 @@ public class FacilityReport {
         setWriter(writer);
         setResult(result);
         setResultDate(resultDate);
+    }
+
+    public FacilityReport(Parcel in) {
+        setTitle(in.readString());
+        setContent(in.readString());
+        setRoom(in.readInt());
+        setWriteDate(in.readString());
+        setWriter(in.readString());
+        setResult(in.readString());
+        setResultDate(in.readString());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(content);
+        dest.writeInt(room);
+        dest.writeString(writeDate);
+        dest.writeString(writer);
+        dest.writeString(result);
+        dest.writeString(resultDate);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getTitle() {
@@ -80,5 +109,17 @@ public class FacilityReport {
     public void setResultDate(String resultDate) {
         this.resultDate = resultDate;
     }
+
+    public static final Creator<FacilityReport> CREATOR = new Creator<FacilityReport>() {
+        @Override
+        public FacilityReport createFromParcel(Parcel source) {
+            return new FacilityReport(source);
+        }
+
+        @Override
+        public FacilityReport[] newArray(int size) {
+            return new FacilityReport[size];
+        }
+    };
 
 }

@@ -48,7 +48,7 @@
                     android:drawableRight="@drawable/ic_chevron_right_white_18dp"
                     android:drawableEnd="@drawable/ic_chevron_right_white_18dp"
                     android:text="@string/stayapply_changedefvalue"
-                    android:textSize="@dimen/roundedbtn_textsize"
+                    android:textSize="@dimen/text_roundedbtn"
                     dmsbtn:style="round" />
 
             </RelativeLayout>
@@ -86,7 +86,7 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_stayapply_selectedweekvalue"
+                    android:id="@+id/tv_stayapply_selectedweekstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

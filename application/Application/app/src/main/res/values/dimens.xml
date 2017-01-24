@@ -7,9 +7,27 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!-- Text size of title -->
+    <dimen name="text_title">16sp</dimen>
+
+    <!-- Text size of subtext -->
+    <dimen name="text_subtext">13sp</dimen>
+
+    <!-- Text size of content -->
+    <dimen name="text_content">13sp</dimen>
+
     <!-- Text size of Empty View -->
-    <dimen name="emptyview_textsize">16sp</dimen>
+    <dimen name="text_emptyview">16sp</dimen>
 
     <!-- Text size of Rounded Button -->
-    <dimen name="roundedbtn_textsize">12sp</dimen>
+    <dimen name="text_roundedbtn">12sp</dimen>
+
+    <!-- Text size of article title -->
+    <dimen name="text_article_title">24sp</dimen>
+
+    <!-- Text size of article subtext -->
+    <dimen name="text_article_subtext">14sp</dimen>
+
+    <!-- Text size of badge -->
+    <dimen name="text_badge">12sp</dimen>
 </resources>

@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 
 import com.dms.beinone.application.DensityConverter;
@@ -73,46 +74,46 @@ public class DMSButton extends Button {
         init(context, style, textSize);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                setBackground(mOnTouchBackground);
-                setTextColor(mOnTouchTextColor);
-
-                if (hasImage) {
-                    // get drawable having drawableRight attribute (drawableRight is in index 2)
-                    // and clear color filter
-                    getCompoundDrawables()[2].clearColorFilter();
-                }
-                break;
-            case MotionEvent.ACTION_MOVE:
-                Rect rect = new Rect(getLeft(), getTop(), getRight(), getBottom());
-
-                if (!rect.contains(getLeft() + (int) event.getX(), getTop() + (int) event.getY())) {
-                    setBackground(mNormalBackground);
-                    setTextColor(mNormalTextColor);
-
-                    if (hasImage) {
-                        getCompoundDrawables()[2].setColorFilter(
-                                mNormalTextColor, PorterDuff.Mode.MULTIPLY);
-                    }
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                setBackground(mNormalBackground);
-                setTextColor(mNormalTextColor);
-
-                if (hasImage) {
-                    getCompoundDrawables()[2].setColorFilter(
-                            mNormalTextColor, PorterDuff.Mode.MULTIPLY);
-                }
-                break;
-            default: break;
-        }
-
-        return true;
-    }
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                setBackground(mOnTouchBackground);
+//                setTextColor(mOnTouchTextColor);
+//
+//                if (hasImage) {
+//                    // get drawable having drawableRight attribute (drawableRight is in index 2)
+//                    // and clear color filter
+//                    getCompoundDrawables()[2].clearColorFilter();
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                Rect rect = new Rect(getLeft(), getTop(), getRight(), getBottom());
+//
+//                if (!rect.contains(getLeft() + (int) event.getX(), getTop() + (int) event.getY())) {
+//                    setBackground(mNormalBackground);
+//                    setTextColor(mNormalTextColor);
+//
+//                    if (hasImage) {
+//                        getCompoundDrawables()[2].setColorFilter(
+//                                mNormalTextColor, PorterDuff.Mode.MULTIPLY);
+//                    }
+//                }
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                setBackground(mNormalBackground);
+//                setTextColor(mNormalTextColor);
+//
+//                if (hasImage) {
+//                    getCompoundDrawables()[2].setColorFilter(
+//                            mNormalTextColor, PorterDuff.Mode.MULTIPLY);
+//                }
+//                break;
+//            default: break;
+//        }
+//
+//        return false;
+//    }
 
     /**
      * 속성 초기화
@@ -152,6 +153,49 @@ public class DMSButton extends Button {
         setMinimumWidth(0);
         setMinHeight(0);
         setMinimumHeight(0);
+
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        setBackground(mOnTouchBackground);
+                        setTextColor(mOnTouchTextColor);
+
+                        if (hasImage) {
+                            // get drawable having drawableRight attribute (drawableRight is in index 2)
+                            // and clear color filter
+                            getCompoundDrawables()[2].clearColorFilter();
+                        }
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        Rect rect = new Rect(getLeft(), getTop(), getRight(), getBottom());
+
+                        if (!rect.contains(getLeft() + (int) event.getX(), getTop() + (int) event.getY())) {
+                            setBackground(mNormalBackground);
+                            setTextColor(mNormalTextColor);
+
+                            if (hasImage) {
+                                getCompoundDrawables()[2].setColorFilter(
+                                        mNormalTextColor, PorterDuff.Mode.MULTIPLY);
+                            }
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        setBackground(mNormalBackground);
+                        setTextColor(mNormalTextColor);
+
+                        if (hasImage) {
+                            getCompoundDrawables()[2].setColorFilter(
+                                    mNormalTextColor, PorterDuff.Mode.MULTIPLY);
+                        }
+                        break;
+                    default: break;
+                }
+
+                return false;
+            }
+        });
     }
 
 }

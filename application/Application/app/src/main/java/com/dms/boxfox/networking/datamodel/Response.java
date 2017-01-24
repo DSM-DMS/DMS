@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Created by boxfox on 2017-01-22.
  */
 public class Response {
-    //�� �ܿ� �ٸ� �ڵ� �߰� �ʿ�
+    //ÀÌ ¿Ü¿¡ ´Ù¸¥ ÄÚµå Ãß°¡ ÇÊ¿ä
     public static final int SUCCESS = 200;
 
     private int code;

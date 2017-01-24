@@ -16,7 +16,9 @@ import com.dms.beinone.application.faq.FAQFragment;
 import com.dms.beinone.application.goingoutapply.GoingoutApplyFragment;
 import com.dms.beinone.application.home.HomeFragment;
 import com.dms.beinone.application.meal.MealFragment;
+import com.dms.beinone.application.newsletter.NewsletterFragment;
 import com.dms.beinone.application.notice.NoticeFragment;
+import com.dms.beinone.application.qna.QnAFragment;
 import com.dms.beinone.application.rewardscore.RewardscoreApplyFragment;
 import com.dms.beinone.application.rule.RuleFragment;
 import com.dms.beinone.application.stayapply.StayApplyFragment;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.setCheckedItem(R.id.nav_item_home);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.relativelayout_main_container, new HomeFragment())
@@ -85,35 +87,37 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_item_home) {
             replaceFragment(new HomeFragment());
-        } else if (id == R.id.nav_extension_apply) {
+        } else if (id == R.id.nav_item_extensionapply) {
 
-        } else if (id == R.id.nav_stay_apply) {
+        } else if (id == R.id.nav_item_stayapply) {
             replaceFragment(new StayApplyFragment());
-        } else if (id == R.id.nav_goingout_apply) {
+        } else if (id == R.id.nav_item_goingoutapply) {
             replaceFragment(new GoingoutApplyFragment());
-        } else if (id == R.id.nav_rewardscore_apply) {
+        } else if (id == R.id.nav_item_rewardscoreapply) {
             replaceFragment(new RewardscoreApplyFragment());
-        } else if (id == R.id.nav_afterschool_apply) {
+        } else if (id == R.id.nav_item_afterschoolapply) {
 
-        } else if (id == R.id.nav_meal) {
+        } else if (id == R.id.nav_item_meal) {
             replaceFragment(new MealFragment());
-        } else if (id == R.id.nav_notice) {
+        } else if (id == R.id.nav_item_notice) {
             replaceFragment(new NoticeFragment());
-        } else if (id == R.id.nav_competition) {
+        } else if (id == R.id.nav_item_newsletter) {
+            replaceFragment(new NewsletterFragment());
+        } else if (id == R.id.nav_item_competition) {
 
-        } else if (id == R.id.nav_facility_report) {
+        } else if (id == R.id.nav_item_facilityreport) {
             replaceFragment(new FacilityReportFragment());
-        } else if (id == R.id.nav_rule) {
+        } else if (id == R.id.nav_item_rule) {
             replaceFragment(new RuleFragment());
-        } else if (id == R.id.nav_faq) {
+        } else if (id == R.id.nav_item_faq) {
             replaceFragment(new FAQFragment());
-        } else if (id == R.id.nav_qna) {
+        } else if (id == R.id.nav_item_qna) {
+            replaceFragment(new QnAFragment());
+        } else if (id == R.id.nav_item_settings) {
 
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_mypage) {
+        } else if (id == R.id.nav_item_mypage) {
 
         }
 
