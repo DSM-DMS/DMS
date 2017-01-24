@@ -1,5 +1,5 @@
 //신청탭 over 이벤트
-$(".remote .category").children("a").eq(0).mouseover(function(){
+$(".remote .category").children("a").eq(0).mouseover(() => {
     //신청 text를 white로
     $(".remote .category").children("a").eq(0).animate({
         fontSize: "1.5em",
@@ -26,7 +26,7 @@ $(".remote .category").children("a").eq(0).mouseover(function(){
 })
 
 //기숙사탭 over 이벤트
-$(".remote .category").children("a").eq(1).mouseover(function(){
+$(".remote .category").children("a").eq(1).mouseover(() => {
     //기숙사 text를 white로
     $(".remote .category").children("a").eq(1).animate({
         fontSize: "1.5em",
@@ -49,7 +49,7 @@ $(".remote .category").children("a").eq(1).mouseover(function(){
     $(".remote .category").children("a").eq(2).hide();
 })
 
-$(".remote .category").children("a").eq(2).mouseover(function(){
+$(".remote .category").children("a").eq(2).mouseover(() => {
     //remote background-color를 마이페이지색으로
     $(".remote").animate({
         backgroundColor: "rgb(192, 57, 43)"
@@ -70,7 +70,7 @@ $(".remote .category").children("a").eq(2).mouseover(function(){
 })
 
 //리모트 leave 이벤트
-$(".remote").mouseleave(function(){
+$(".remote").mouseleave(() => {
     //모든 탭 글자색을 윈대래로
     $(".remote .category").children("a").eq(0).animate({
         color: "rgb(52, 152, 219)",

@@ -1,111 +1,3 @@
-//신청탭 over 이벤트
-$(".remote .category").children("a").eq(0).mouseover(() => {
-    //신청 text를 white로
-    $(".remote .category").children("a").eq(0).animate({
-        fontSize: "1.5em",
-        color: "white"
-    })
-
-    //remote background-color를 신청색으로
-    $(".remote").animate({
-        backgroundColor: "rgb(52, 152, 219)",
-        backgroundImage: "linear-gradient( to right top, transparent 33%, gray 33%, gray 66%, transparent 66%)"
-
-    });
-
-    //DMS hide
-    $(".remote h1").slideUp();
-
-    //신청탭 하위메뉴 show
-    $(".remote .category .application").show();
-
-    //기숙사, 마이페이지탭 hide
-    $(".remote .category").children("a").eq(1).hide();
-    $(".remote .category").children("a").eq(2).hide();
-
-})
-
-//기숙사탭 over 이벤트
-$(".remote .category").children("a").eq(1).mouseover(() => {
-    //기숙사 text를 white로
-    $(".remote .category").children("a").eq(1).animate({
-        fontSize: "1.5em",
-        color: "white"
-    })
-
-    //remote background-color를 신청색으로
-    $(".remote").animate({
-        backgroundColor: "rgb(142, 68, 173)"
-    }, 500);
-
-    //DMS hide
-    $(".remote h1").slideUp();
-
-    //기숙사탭 하위메뉴 show
-    $(".remote .category .dom").show();
-
-    //공지사항, 마이페이지탭 hide
-    $(".remote .category").children("a").eq(0).hide();
-    $(".remote .category").children("a").eq(2).hide();
-})
-
-$(".remote .category").children("a").eq(2).mouseover(() => {
-    //remote background-color를 마이페이지색으로
-    $(".remote").animate({
-        backgroundColor: "rgb(192, 57, 43)"
-    });
-
-    //마이페이지 text를 white로
-    $(".remote .category").children("a").eq(2).animate({
-        fontSize: "1em",
-        color: "white"
-    })
-
-    //DMS hide
-    $(".remote h1").slideUp();
-
-    //공지사항, 기숙사 hide
-    $(".remote .category").children("a").eq(0).hide();
-    $(".remote .category").children("a").eq(1).hide();
-})
-
-//리모트 leave 이벤트
-$(".remote").mouseleave(() => {
-    //모든 탭 글자색을 윈대래로
-    $(".remote .category").children("a").eq(0).animate({
-        color: "rgb(52, 152, 219)",
-        fontSize: "1em"
-    })
-
-    $(".remote .category").children("a").eq(1).animate({
-        color: "rgb(142, 68, 173)",
-        fontSize: "1em"
-
-    },500)
-
-    $(".remote .category").children("a").eq(2).animate({
-        color: "color: rgb(192, 57, 43)",
-        fontSize: "1em"
-    })
-
-    //remote backgroundColor를 원래대로
-    $(".remote").animate({
-        backgroundColor: "white"
-    });
-
-    // DMS복구
-    $(".remote h1").slideDown();
-
-    //모든 탭 show
-    $(".remote .category").children("a").eq(0).show()
-    $(".remote .category").children("a").eq(1).show()
-    $(".remote .category").children("a").eq(2).show();
-
-    //탭 하부메뉴 hide
-    $(".remote .category .application").hide(0);
-    $(".remote .category .dom").hide(0);
-})
-
 //***********************달력*********************
 var date = new Date();
 var currentYear = date.getFullYear();
@@ -118,7 +10,7 @@ $('#month').text(currentYear+'.'+currentMonth); //달력 년, 월 표시
 drawCalendar(newDate, lastDay);
 
 //이전 달
-$('#prev_month').click(() => {
+$('#prev_month').click(function(){
   if(currentMonth == 1) {
     currentYear--;
     currentMonth = 12;
@@ -133,7 +25,7 @@ $('#prev_month').click(() => {
 });
 
 //다음 달
-$('#next_month').click(() => {
+$('#next_month').click(function(){
   if(currentMonth == 12) {
     currentYear++;
     currentMonth = 1;
@@ -231,31 +123,31 @@ function clearCalendar() {
   }
 }
 
-$('#first_week').click(() => {
+$('#first_week').click(function(){
   $('#calendar tbody tr').css("background-color", "white");
   $('#first_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'first_week');
 });
 
-$('#second_week').click(() =>{
+$('#second_week').click(function(){
   $('#calendar tbody tr').css("background-color", "white");
   $('#second_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'second_week');
 });
 
-$('#third_week').click(() => {
+$('#third_week').click(function(){
   $('#calendar tbody tr').css("background-color", "white");
   $('#third_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'third_week');
 });
 
-$('#fourth_week').click(() => {
+$('#fourth_week').click(function(){
   $('#calendar tbody tr').css("background-color", "white");
   $('#fourth_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fourth_week');
 });
 
-$('#fifth_week').click(() => {
+$('#fifth_week').click(function(){
   $('#calendar tbody tr').css("background-color", "white");
   $('#fifth_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fifth_week');
