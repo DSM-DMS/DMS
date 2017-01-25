@@ -201,42 +201,28 @@ header .logo p:hover {
 }
 
 #apply_form {
-  font-size: 22px;
-  margin: auto;
   margin-left: 20%;
-  margin-top: 30%;
+  margin-top: 20%;
 }
 
-#apply_form table {
+#apply_field {
   width: 80%;
 }
 
-#apply_form table td, table {
-  border: 0.1px solid black;
-}
-
-#apply_form table thead {
-  font-weight: bold;
-  text-align: center;
-}
-
-#apply_form table td:nth-child(1) {
-  text-align: center;
-  width: 20%;
-}
-
 #date {
-  margin: auto;
-  font-size: 80%;
+  font-size: 120%;
 }
 
 #apply_submit {
-  font-size: 20px;
-  margin-left: 10%;
+  float: right;
+  margin-right: 7%;
 }
 
-.check {
-  margin: 5%;
+.color {
+  display: inline-block;
+  width:2vw;
+  height:2vw;
+  border-radius: 50%;
 }
 
 .go_home {
@@ -246,6 +232,12 @@ header .logo p:hover {
 .go_dom {
   background-color: rgb(255, 151, 49);
 }
+
+.go_home_duty {
+  background-color: rgb(255, 238, 34);
+}
+
+
 
 /*
 River-stone-jin Help this css code

@@ -152,3 +152,6 @@ $('#fifth_week').click(function() {
   $('#fifth_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fifth_week');
 });
+
+//***********************신청*********************
+$('#apply_form input[type="radio"]').checkboxradio();
