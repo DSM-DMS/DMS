@@ -1,0 +1,9 @@
+com\dms\planb\action\DeleteAction.class
+com\dms\planb\core\DmsMain.class
+com\dms\planb\support\ActionPerformer.class
+com\dms\planb\action\Actionable.class
+com\dms\planb\action\SelectAction.class
+com\dms\planb\action\InsertAction.class
+com\dms\planb\action\UpdateAction.class
+com\dms\planb\core\DmsVerticle.class
+com\dms\planb\support\Commands.class
