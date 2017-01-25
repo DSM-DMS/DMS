@@ -1,5 +1,9 @@
 @import "remote.css";
 
+body {
+    background-color: rgb(142, 68, 173);
+}
+
 .main {
     background-color: white;
     border-radius: 5px;

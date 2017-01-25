@@ -68,10 +68,13 @@ header .logo p:hover {
     height: 70%;
     width: 10%;
     text-align: center;
+    overflow: hidden;
 }
 
-.remote h1 {
+.remote h1 a {
     height: 15%;
+    text-decoration: none;
+    color: black;
 }
 
 .remote .category {
@@ -116,8 +119,29 @@ header .logo p:hover {
 
 .remote .category .children a:hover {
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    display: block;
-    font-weight: bolder;
-    font-size: 1.5em;
-    padding: 13% 0%;
+}
+
+.bg {
+    z-index: -1;
+    transition: all 1s ease;
+    transform: scale(0.01);
+    animation-name: bigger;
+    animation-duration: 1.5s;
+}
+
+@keyframes bigger {
+    from {
+        transform: scale(0.01);
+        /*width: 30px;
+        height: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;*/
+    }
+    to {
+        transform: scale(1);
+        /*width: 300px;
+        height: 300px;
+        margin-right: 300px;
+        margin-bottom: 300px;*/
+    }
 }
