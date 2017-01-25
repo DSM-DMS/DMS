@@ -12,7 +12,7 @@ public class DataBase {
 	private static final String DB_TARGET = "localhost:3306/dsm_dms";
 	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true";
 	private static final String DB_ID = "root";
-	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
+	private static final String DB_PASSWORD = "password";
 	private static DataBase instance;
 	private Statement statement;
 	private Connection connection;
