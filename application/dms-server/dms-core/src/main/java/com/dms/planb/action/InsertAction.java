@@ -57,10 +57,10 @@ public class InsertAction implements Actionable {
 			  * session_key VARCHAR(300) Default NULL
 			  * permission TINYINT(1) NN
 			  */
-			id = (String)requestObject.get("id");
-			password = (String)requestObject.get("password");
-			sessionKey = (String)requestObject.get("session_key");
-			permission = (int)requestObject.get("permission");
+			id = requestObject.getString("id");
+			password = requestObject.getString("password");
+			sessionKey = requestObject.getString("session_key");
+			permission = requestObject.getInt("permission");
 			
 			status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
 			
@@ -77,21 +77,21 @@ public class InsertAction implements Actionable {
 			 * merit INT(11) Default NULL
 			 * demerit INT(11) Default NULL
 			 */
-			int studentNumber = (int)requestObject.get("number");
-			int studentSex = (int)requestObject.get("sex");
-			int studentStatus = (int)requestObject.get("status");
-			String studentName = (String)requestObject.get("name");
+			int studentNumber = requestObject.getInt("number");
+			int studentSex = requestObject.getInt("sex");
+			int studentStatus = requestObject.getInt("status");
+			String studentName = requestObject.getString("name");
 			String studentPhone = null;
 			String parentName = null;
 			String parentPhone = null;
 			if(requestObject.containsKey("phone")) {
-				studentPhone = (String)requestObject.get("phone");
+				studentPhone = requestObject.getString("phone");
 			}
 			if(requestObject.containsKey("p_name")) {
-				parentName = (String)requestObject.get("p_name");
+				parentName = requestObject.getString("p_name");
 			}
 			if(requestObject.containsKey("p_phone")) {
-				parentPhone = (String)requestObject.get("p_phone");
+				parentPhone = requestObject.getString("p_phone");
 			}
 			
 			status = database.executeUpdate("INSERT INTO student_data(number, sex, status, name, phone, p_name, p_phone) VALUES(", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
@@ -107,11 +107,11 @@ public class InsertAction implements Actionable {
 			 * permission INT(11) NN Default 0
 			 * name VARCHAR(20) NN
 			 */
-			id = (String)requestObject.get("id");
-			password = (String)requestObject.get("password");
-			sessionKey = (String)requestObject.get("session_key");
-			permission = (int)requestObject.get("permission");
-			String teacherName = (String)requestObject.get("name");
+			id = requestObject.getString("id");
+			password = requestObject.getString("password");
+			sessionKey = requestObject.getString("session_key");
+			permission = requestObject.getInt("permission");
+			String teacherName = requestObject.getString("name");
 			
 			status = database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
 			break;
@@ -138,14 +138,14 @@ public class InsertAction implements Actionable {
 			 ** announcement : 2
 			 ** competition : 3
 			 */
-			number = (int)requestObject.get("number");
-			category = (int)requestObject.get("category");
+			number = requestObject.getInt("number");
+			category = requestObject.getInt("category");
 			if(requestObject.containsKey("title")) {
-				title = (String)requestObject.get("title");
+				title = requestObject.getString("title");
 			}
-			content = (String)requestObject.get("content");
-			writer = (String)requestObject.get("writer");
-			date = (String)requestObject.get("date");
+			content = requestObject.getString("content");
+			writer = requestObject.getString("writer");
+			date = requestObject.getString("date");
 			
 			status = database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', '", date, "')");
 			break;
@@ -157,8 +157,8 @@ public class InsertAction implements Actionable {
 			 * title VARCHAR(45) NN
 			 * content VARCHAR(5000) NN
 			 */
-			title = (String)requestObject.get("title");
-			content = (String)requestObject.get("content");
+			title = requestObject.getString("title");
+			content = requestObject.getString("content");
 			
 			status = database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
 			break;
@@ -177,12 +177,12 @@ public class InsertAction implements Actionable {
 			 * 
 			 * DATETIME format : YYYY-MM-DD hh:mm:ss
 			 */
-			title = (String)requestObject.get("title");
-			content = (String)requestObject.get("question_content");
-			date = (String)requestObject.get("question_date");
-			writer = (String)requestObject.get("questioner");
+			title = requestObject.getString("title");
+			content = requestObject.getString("question_content");
+			date = requestObject.getString("question_date");
+			writer = requestObject.getString("questioner");
 			
-			int privacy = (int)requestObject.get("privacy");
+			int privacy = requestObject.getInt("privacy");
 			
 			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, questioner, privacy) VALUES('", title, "', '", content, "', '", date, "', '", writer, "', ", privacy, ")");
 			break;
@@ -191,9 +191,9 @@ public class InsertAction implements Actionable {
 			 * Reference UPLOAD_QUESTION
 			 * Upload answer based question no
 			 */
-			no = (int)requestObject.get("no");
-			content = (String)requestObject.get("answer_content");
-			date = (String)requestObject.get("answer_date");
+			no = requestObject.getInt("no");
+			content = requestObject.getString("answer_content");
+			date = requestObject.getString("answer_date");
 			
 			status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date='", date, "' WHERE no=", no);
 			break;
@@ -213,9 +213,9 @@ public class InsertAction implements Actionable {
 			 * 
 			 * Upload comment based qna no
 			 */
-			no = (int)requestObject.get("no");
-			writer = (String)requestObject.get("writer");
-			content = (String)requestObject.get("content");
+			no = requestObject.getInt("no");
+			writer = requestObject.getString("writer");
+			content = requestObject.getString("content");
 			
 			status = database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
 			break;
@@ -227,8 +227,8 @@ public class InsertAction implements Actionable {
 			 * title VARCHAR(45) NN
 			 * content VARCHAR(5000) NN
 			 */
-			title = (String)requestObject.get("title");
-			content = (String)requestObject.get("content");
+			title = requestObject.getString("title");
+			content = requestObject.getString("content");
 			
 			status = database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
 			break;
@@ -243,13 +243,13 @@ public class InsertAction implements Actionable {
 			 * day INT(1) NN
 			 * instructor VARCHAR(10)
 			 */
-			no = (int)requestObject.get("no");
-			title = (String)requestObject.get("title");
+			no = requestObject.getInt("no");
+			title = requestObject.getString("title");
 			
-			int target = (int)requestObject.get("target");
-			String place = (String)requestObject.get("place");
-			int day = (int)requestObject.get("day");
-			String instructor = (String)requestObject.get("instructor");
+			int target = requestObject.getInt("target");
+			String place = requestObject.getString("place");
+			int day = requestObject.getInt("day");
+			String instructor = requestObject.getString("instructor");
 			
 			status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, day, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", day, ", '", instructor, "')");
 			break;
@@ -268,10 +268,10 @@ public class InsertAction implements Actionable {
 			 * 
 			 * DATETIME format : YYYY-MM-DD hh:mm:ss
 			 */
-			title = (String)requestObject.get("title");
-			content = (String)requestObject.get("content");
-			no = (int)requestObject.get("room");
-			writer = (String)requestObject.get("writer");
+			title = requestObject.getString("title");
+			content = requestObject.getString("content");
+			no = requestObject.getInt("room");
+			writer = requestObject.getString("writer");
 			
 			status = database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", no, ", NOW(), '", writer, "')");
 			break;
@@ -280,8 +280,8 @@ public class InsertAction implements Actionable {
 			 * Reference UPLOAD_REPORT_FACILITY
 			 * Upload result based report no
 			 */
-			no = (int)requestObject.get("no");
-			content = (String)requestObject.get("result");
+			no = requestObject.getInt("no");
+			content = requestObject.getString("result");
 			
 			status = database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
 			break;
@@ -299,13 +299,13 @@ public class InsertAction implements Actionable {
 //			 * 
 //			 * DATE format : YYYY-MM-DD
 //			 */
-//			date = (String)requestObject.get("no");
-//			String breakfast = (String)requestObject.get("breakfast");
-//			String lunch = (String)requestObject.get("lunch");
-//			String dinner = (String)requestObject.get("dinner");
-//			String breakfast_allergy = (String)requestObject.get("breakfast_allergy");
-//			String lunch_allergy = (String)requestObject.get("lunch_allergy");
-//			String dinner_allergy = (String)requestObject.get("dinner_allergy");
+//			date = requestObject.getString("no");
+//			String breakfast = requestObject.getString("breakfast");
+//			String lunch = requestObject.getString("lunch");
+//			String dinner = requestObject.getString("dinner");
+//			String breakfast_allergy = requestObject.getString("breakfast_allergy");
+//			String lunch_allergy = requestObject.getString("lunch_allergy");
+//			String dinner_allergy = requestObject.getString("dinner_allergy");
 //			
 //			status = database.executeUpdate("INSERT INTO meal(date, breakfast, lunch, dinner, breakfast_allergy, lunch_allergy, dinner_allergy) VALUES('", date, "', '", breakfast, "', '", lunch, "', '", dinner, "', '", breakfast_allergy, "', '", lunch_allergy, "', '", dinner_allergy, "')");			
 //			break;
@@ -327,9 +327,9 @@ public class InsertAction implements Actionable {
 			 * class INT(1) NN
 			 * seat INT(2) NN
 			 */
-			id = (String)requestObject.get("id");
-			int classId = (int)requestObject.get("class");
-			int seatId = (int)requestObject.get("seat");
+			id = requestObject.getString("id");
+			int classId = requestObject.getInt("class");
+			int seatId = requestObject.getInt("seat");
 			
 			status = database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES('", id, "', ", classId, ", ", seatId, ")");
 			break;
@@ -347,9 +347,9 @@ public class InsertAction implements Actionable {
 			 * Saturday dormitory coming : 3
 			 * Stay : 4
 			 */
-			id = (String)requestObject.get("id");
-			int extensionValue = (int)requestObject.get("value");
-			date = (String)requestObject.get("date");
+			id = requestObject.getString("id");
+			int extensionValue = requestObject.getInt("value");
+			date = requestObject.getString("date");
 			
 			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", extensionValue, ", '", date, "')");
 			break;
@@ -363,9 +363,9 @@ public class InsertAction implements Actionable {
 			 * 
 			 * DATE format : YYYY-MM-DD
 			 */
-			id = (String)requestObject.get("id");
-			String deptDate = (String)requestObject.get("dept_date");
-			String reason = (String)requestObject.get("reason");
+			id = requestObject.getString("id");
+			String deptDate = requestObject.getString("dept_date");
+			String reason = requestObject.getString("reason");
 			
 			status = database.executeUpdate("INSERT INTO goingout_apply(id, dept_date, reason) VALUES('", id, "', '", deptDate, "', '", reason, "')");
 			break;
@@ -378,12 +378,12 @@ public class InsertAction implements Actionable {
 			 * target VARCHAR(45) Default NULL
 			 * content VARCHAR(500) NN
 			 */
-			id = (String)requestObject.get("id");
-			content = (String)requestObject.get("content");
+			id = requestObject.getString("id");
+			content = requestObject.getString("content");
 			
 			if(requestObject.containsKey("target")) {
 				// Case that recommendation
-				String recommendTarget = (String)requestObject.get("target");
+				String recommendTarget = requestObject.getString("target");
 				status = database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES('", id, "', '", recommendTarget, "', '", content, "')");
 			} else {
 				status = database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES('", id, "', '", content, "')");
@@ -396,8 +396,8 @@ public class InsertAction implements Actionable {
 			 * id INT(11) NN
 			 * no INT(11) NN
 			 */
-			id = (String)requestObject.get("id");
-			no = (int)requestObject.get("no");
+			id = requestObject.getString("id");
+			no = requestObject.getInt("no");
 			
 			status = database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
 			break;

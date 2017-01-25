@@ -35,13 +35,13 @@ public class UpdateAction implements Actionable {
 		
 		switch(command) {
 		case Commands.MODIFY_PASSWORD:
-			id = (String)requestObject.get("id");
-			String password = (String)requestObject.get("password");
+			id = requestObject.getString("id");
+			String password = requestObject.getString("password");
 			
 			status = database.executeUpdate("UPDATE account SET password='", password, "' WHERE id='", id, "'");
 			break;
 		case Commands.MODIFY_STUDENT_DATA:
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			if(requestObject.containsKey("sex")) {
 				status = database.executeUpdate("UPDATE student_data SET sex=", (int)requestObject.get("sex"), " WHERE id='", id, "'");
@@ -50,87 +50,87 @@ public class UpdateAction implements Actionable {
 				status = database.executeUpdate("UPDATE student_data SET status=", (int)requestObject.get("status"), " WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("name")) {
-				status = database.executeUpdate("UPDATE student_data SET name='", (String)requestObject.get("name"), "' WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET name='", requestObject.getString("name"), "' WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("phone")) {
-				status = database.executeUpdate("UPDATE student_data SET phone='", (String)requestObject.get("phone"), "' WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET phone='", requestObject.getString("phone"), "' WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("p_name")) {
-				status = database.executeUpdate("UPDATE student_data SET p_name='", (String)requestObject.get("p_name"), "' WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET p_name='", requestObject.getString("p_name"), "' WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("p_phone")) {
-				status = database.executeUpdate("UPDATE student_data SET p_phone='", (String)requestObject.get("p_phone"), "'WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET p_phone='", requestObject.getString("p_phone"), "'WHERE id='", id, "'");
 			}
 			break;
 		case Commands.MODIFY_NOTICE:
 		case Commands.MODIFY_NEWSLETTER:
 		case Commands.MODIFY_COMPETITION:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			if(requestObject.containsKey("title")) {
-				status = database.executeUpdate("UPDATE notice SET title='", (String)requestObject.get("title"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE notice SET title='", requestObject.getString("title"), "' WHERE no=", no);
 			}
 			if(requestObject.containsKey("content")) {
-				status = database.executeUpdate("UPDATE notice SET content='", (String)requestObject.get("content"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE notice SET content='", requestObject.getString("content"), "' WHERE no=", no);
 			}
 			break;
 		case Commands.MODIFY_RULE:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			if(requestObject.containsKey("title")) {
-				status = database.executeUpdate("UPDATE rule SET title='", (String)requestObject.get("title"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE rule SET title='", requestObject.getString("title"), "' WHERE no=", no);
 			}
 			if(requestObject.containsKey("content")) {
-				status = database.executeUpdate("UPDATE rule SET content='", (String)requestObject.get("content"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE rule SET content='", requestObject.getString("content"), "' WHERE no=", no);
 			}
 			break;
 		case Commands.MODIFY_QUESTION:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			if(requestObject.containsKey("title")) {
-				status = database.executeUpdate("UPDATE qna SET title='", (String)requestObject.get("title"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE qna SET title='", requestObject.getString("title"), "' WHERE no=", no);
 			}
 			if(requestObject.containsKey("question_content")) {
-				status = database.executeUpdate("UPDATE qna SET question_content='", (String)requestObject.get("question_content"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE qna SET question_content='", requestObject.getString("question_content"), "' WHERE no=", no);
 			}
 			if(requestObject.containsKey("writer")) {
-				status = database.executeUpdate("UPDATE qna SET writer='", (String)requestObject.get("writer"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE qna SET writer='", requestObject.getString("writer"), "' WHERE no=", no);
 			}
 			break;
 		case Commands.MODIFY_ANSWER:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			if(requestObject.containsKey("content")) {
-				status = database.executeUpdate("UPDATE qna SET answer_content='", (String)requestObject.get("content"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE qna SET answer_content='", requestObject.getString("content"), "' WHERE no=", no);
 			}
 			break;
 		case Commands.MODIFY_QNA_COMMENT:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
-			status = database.executeUpdate("UPDATE qna_comment SET content='", (String)requestObject.get("content"), "' WHERE no=", no);
+			status = database.executeUpdate("UPDATE qna_comment SET content='", requestObject.getString("content"), "' WHERE no=", no);
 			break;
 		case Commands.MODIFY_FAQ:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			if(requestObject.containsKey("title")) {
-				status = database.executeUpdate("UPDATE faq SET title='", (String)requestObject.get("title"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE faq SET title='", requestObject.getString("title"), "' WHERE no=", no);
 			}
 			if(requestObject.containsKey("content")) {
-				status = database.executeUpdate("UPDATE faq SET content='", (String)requestObject.get("content"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE faq SET content='", requestObject.getString("content"), "' WHERE no=", no);
 			}
 			break;
 		case Commands.MODIFY_REPORT_FACILITY:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			if(requestObject.containsKey("title")) {
-				status = database.executeUpdate("UPDATE facility_report SET title='", (String)requestObject.get("title"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE facility_report SET title='", requestObject.getString("title"), "' WHERE no=", no);
 			}
 			if(requestObject.containsKey("content")) {
-				status = database.executeUpdate("UPDATE facility_report SET title='", (String)requestObject.get("content"), "' WHERE no=", no);
+				status = database.executeUpdate("UPDATE facility_report SET title='", requestObject.getString("content"), "' WHERE no=", no);
 			}
 			break;
 		case Commands.MODIFY_EXTENTION:
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			if(requestObject.containsKey("class")) {
 				status = database.executeUpdate("UPDATE extension_apply SET class=", (int)requestObject.get("class"), " WHERE id='", id, "'");
@@ -143,29 +143,29 @@ public class UpdateAction implements Actionable {
 			/*
 			 * Date Format : YYYY-MM-DD
 			 */
-			id = (String)requestObject.get("id");
-			date = (String)requestObject.get("date");
+			id = requestObject.getString("id");
+			date = requestObject.getString("date");
 			
 			status = database.executeUpdate("UPDATE stay_apply SET value=", (int)requestObject.get("value"), " WHERE id='", id, "' AND date='", date, "'");
 			break;
 		case Commands.MODIFY_GOINGOUT:
-			id = (String)requestObject.get("id");
-			date = (String)requestObject.get("date");
+			id = requestObject.getString("id");
+			date = requestObject.getString("date");
 			
 			if(requestObject.containsKey("reason")) {
-				status = database.executeUpdate("UPDATE stay_apply SET reason='", (String)requestObject.get("reason"), "' WHERE id='", id, "' AND date='", date, "'");
+				status = database.executeUpdate("UPDATE stay_apply SET reason='", requestObject.getString("reason"), "' WHERE id='", id, "' AND date='", date, "'");
 			}
 			break;
 		case Commands.MODIFY_MERIT:
-			id = (String)requestObject.get("id");
-			date = (String)requestObject.get("date");
+			id = requestObject.getString("id");
+			date = requestObject.getString("date");
 			
 			if(requestObject.containsKey("value")) {
 				status = database.executeUpdate("UPDATE stay_apply SET value=", (int)requestObject.get("value"), " WHERE id='", id, "' AND date='", date, "'");
 			}
 			break;
 		case Commands.MODIFY_AFTERSCHOOL:
-			int targetNo = (int)requestObject.get("target_no");
+			int targetNo = requestObject.getInt("target_no");
 			
 			if(requestObject.containsKey("no")) {
 				status = database.executeUpdate("UPDATE afterschool_apply SET no=", (int)requestObject.get("no"), " WHERE no=", targetNo);

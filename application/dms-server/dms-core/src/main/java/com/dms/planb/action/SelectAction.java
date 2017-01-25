@@ -288,7 +288,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_EXTENTION_STATUS:
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id='", id, "'");
 			resultSet.next();
@@ -299,7 +299,7 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_STAY_STATUS:
 			// Apply on a monthly basis
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
 			resultSet.next();
@@ -309,7 +309,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_GOINGOUT_STATUS:
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
 			resultSet.next();
@@ -319,7 +319,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_MERIT_APPLY_STATUS:
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id='", id, "'");
 			resultSet.next();
@@ -336,7 +336,7 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_AFTERSCHOOL_STATUS:
 			count = 1;
 			
-			id = (String)requestObject.get("id");
+			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
 			
@@ -346,9 +346,9 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_MEAL:
-			year = (int) requestObject.get("year");
-			month = (int) requestObject.get("month");
-			date = (int) requestObject.get("date");
+			year = requestObject.getInt("year");
+			month = requestObject.getInt("month");
+			date = requestObject.getInt("date");
 			
 			responseObject.put("result", MealModel.getMealAtDate(year, month, date).toJSONObject());
 			
