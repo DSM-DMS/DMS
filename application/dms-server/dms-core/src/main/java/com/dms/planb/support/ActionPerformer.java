@@ -41,12 +41,4 @@ public class ActionPerformer {
 		// 3. Action, branch off one of four Action classes
 		return action.action(command, requestObject);
 	}
-
-	// Class for test
-//	public static JSONObject accept() throws JSONException {
-//		responseObject = new JSONObject();
-//		responseObject.put("Command", 3);
-//
-//		return responseObject;
-//	}
 }

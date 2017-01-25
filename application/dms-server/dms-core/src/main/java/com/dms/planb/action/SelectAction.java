@@ -1,6 +1,5 @@
 package com.dms.planb.action;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
@@ -11,10 +10,12 @@ import org.json.simple.JSONObject;
 import com.dms.planb.support.Commands;
 
 public class SelectAction implements Actionable {
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject action(int command, JSONObject requestObject) throws SQLException {
 		SafeResultSet resultSet;
 		JSONObject responseObject = new JSONObject();
+		JSONObject tempObject = new JSONObject();
 		JSONArray array = new JSONArray();
 		DataBase database = DataBase.getInstance();
 		
@@ -66,80 +67,95 @@ public class SelectAction implements Actionable {
 			
 			resultSet = database.executeQuery("SELECT * FROM app_content WHERE category=", category);
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
-				array.add(resultSet.getInt("number"));
-				array.add(resultSet.getString("title"));
-				array.add(resultSet.getString("writer"));
-				array.add(resultSet.getString("date"));
+				tempObject.clear();
 				
-				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+				tempObject.put("number", resultSet.getInt("number"));
+				tempObject.put("title", resultSet.getString("title"));
+				tempObject.put("wrtier", resultSet.getString("writer"));
+				tempObject.put("date", resultSet.getString("date"));
+				
+				array.add(tempObject);
 			}
+			responseObject.put("result", array);
+			
 			break;
 		case Commands.LOAD_QNA_LIST:
 			count = 1;
 			
 			resultSet = database.executeQuery("SELECT * FROM qna");
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
-				array.add(resultSet.getInt("no"));
-				array.add(resultSet.getString("title"));
-				array.add(resultSet.getString("question_date"));
-				array.add(resultSet.getString("wrtier"));
-				array.add(resultSet.getInt("privacy"));
+				tempObject.clear();
 				
-				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+				tempObject.put("no", resultSet.getInt("no"));
+				tempObject.put("title", resultSet.getString("title"));
+				tempObject.put("question_date", resultSet.getString("question_date"));
+				tempObject.put("writer", resultSet.getString("wrtier"));
+				tempObject.put("privacy", resultSet.getInt("privacy"));
+				
+				array.add(tempObject);
 			}
+			responseObject.put("result", array);
+			
 			break;
 		case Commands.LOAD_FAQ_LIST:
 			count = 1;
 			
 			resultSet = database.executeQuery("SELECT * FROM faq");
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
-				array.add(resultSet.getInt("no"));
-				array.add(resultSet.getString("title"));
+				tempObject.clear();
 				
-				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+				tempObject.put("no", resultSet.getInt("no"));
+				tempObject.put("title", resultSet.getString("title"));
+				
+				array.add(tempObject);
 			}
+			responseObject.put("result", array);
+			
 			break;
 		case Commands.LOAD_REPORT_FACILITY_LIST:
 			count = 1;
 			
 			resultSet = database.executeQuery("SELECT * FROM facility_report");
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
-				array.add(resultSet.getInt("no"));
-				array.add(resultSet.getString("title"));
-				array.add(resultSet.getString("room"));
-				array.add(resultSet.getString("write_date"));
-				array.add(resultSet.getInt("writer"));
+				tempObject.clear();
+				
+				tempObject.put("no", resultSet.getInt("no"));
+				tempObject.put("title", resultSet.getString("title"));
+				tempObject.put("room", resultSet.getString("room"));
+				tempObject.put("write_date", resultSet.getString("write_date"));
+				tempObject.put("writer", resultSet.getInt("writer"));
 				if(!resultSet.getString("result").isEmpty()) {
-					responseObject.put("has_result", true);
+					tempObject.put("has_result", true);
 				}
 				
-				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+				array.add(tempObject);
 			}
+			responseObject.put("result", array);
+			
 			break;
 		case Commands.LOAD_AFTERSCHOOL_LIST:
 			count = 1;
 			
 			resultSet = database.executeQuery("SELECT * FROM afterschool_list");
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
-				array.add(resultSet.getInt("no"));
-				array.add(resultSet.getString("title"));
-				array.add(resultSet.getInt("target"));
-				array.add(resultSet.getString("place"));
-				array.add(resultSet.getInt("day"));
-				array.add(resultSet.getString("instructor"));
+				tempObject.clear();
 				
-				responseObject.put("sequence".concat(Integer.toString(count++)), array);
+				tempObject.put("no", resultSet.getInt("no"));
+				tempObject.put("title", resultSet.getString("title"));
+				tempObject.put("target", resultSet.getInt("target"));
+				tempObject.put("place", resultSet.getString("place"));
+				tempObject.put("day", resultSet.getInt("day"));
+				tempObject.put("instuctor", resultSet.getString("instructor"));
+
+				array.add(tempObject);
 			}
+			responseObject.put("result", array);
+			
 			break;
 		case Commands.LOAD_NOTICE:
 		case Commands.LOAD_NEWSLETTER:
@@ -191,12 +207,17 @@ public class SelectAction implements Actionable {
 			
 			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", qnaNo);
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
-				array.add(resultSet.getString("writer"));
-				array.add(resultSet.getString("comment_date"));
-				array.add(resultSet.getString("content"));
+				tempObject.clear();
+				
+				tempObject.put("writer", resultSet.getString("writer"));
+				tempObject.put("comment_date", resultSet.getString("comment_date"));
+				tempObject.put("content", resultSet.getString("content"));
+				
+				array.add(tempObject);
 			}
+			
+			responseObject.put("result", array);
 			
 			break;
 		case Commands.LOAD_FAQ:
@@ -276,14 +297,15 @@ public class SelectAction implements Actionable {
 			
 			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
 			
-			responseObject.put("row_count", resultSet.getRow());
 			while(resultSet.next()) {
 				responseObject.put("sequence".concat(Integer.toString(count++)), resultSet.getInt("no"));
 			}
 			
 			break;
 		case Commands.LOAD_MEAL:
-			resultSet = database.executeQuery("SELECT * FROM meal WHERE date=curDate()");
+			String date = (String)requestObject.get("date");
+			
+			resultSet = database.executeQuery("SELECT * FROM meal WHERE date='", date, "'");
 			
 			responseObject.put("breakfast", resultSet.getString("breakfast"));
 			responseObject.put("lunch", resultSet.getString("lunch"));
@@ -315,5 +337,4 @@ public class SelectAction implements Actionable {
 		
 		return responseObject;
 	}
-
 }
