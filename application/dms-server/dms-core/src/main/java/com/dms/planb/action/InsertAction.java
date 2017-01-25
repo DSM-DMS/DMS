@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import com.dms.planb.support.Commands;
 
 public class InsertAction implements Actionable {
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject action(int command, JSONObject requestObject) throws SQLException {
 		JSONObject responseObject = new JSONObject();
@@ -32,6 +33,16 @@ public class InsertAction implements Actionable {
 		// For status
 		int status = 0;
 		
+		/*
+		 * PK : Primary Key
+		 * NN : Not Null
+		 * UQ : Unique index
+		 * B : Is binary column
+		 * UN : Unsigned data type
+		 * ZF : Fill up values for that column with 0's if it is numeric
+		 * AI : Auto Incremental
+		 * G : Generated column
+		 */
 		switch(command) {
 		case Commands.REGISTER_STUDENT_ACC:
 			 /*
@@ -222,7 +233,7 @@ public class InsertAction implements Actionable {
 			/*
 			 * Table Name : afterschool_list
 			 * 
-			 * no INT(11) PK NN
+			 * no INT(11) PK NN AI
 			 * title VARCHAR(45) NN
 			 * target INT(1) NN
 			 * place VARCHAR(10) NN
@@ -271,40 +282,40 @@ public class InsertAction implements Actionable {
 			
 			status = database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
 			break;
-		case Commands.UPLOAD_MEAL:
-			/*
-			 * Table Name : meal
-			 * 
-			 * date DATE PK NN
-			 * breakfast VARCHAR(100) NN
-			 * lunch VARCHAR(100) NN
-			 * dinner VARCHAR(100) NN
-			 * breakfast_allergy VARCHAR(100) NN
-			 * lunch_allergy VARCHAR(100) NN
-			 * dinner_allergy VARCHAR(100) NN
-			 * 
-			 * DATE format : YYYY-MM-DD
-			 */
-			date = (String)requestObject.get("no");
-			String breakfast = (String)requestObject.get("breakfast");
-			String lunch = (String)requestObject.get("lunch");
-			String dinner = (String)requestObject.get("dinner");
-			String breakfast_allergy = (String)requestObject.get("breakfast_allergy");
-			String lunch_allergy = (String)requestObject.get("lunch_allergy");
-			String dinner_allergy = (String)requestObject.get("dinner_allergy");
-			
-			status = database.executeUpdate("INSERT INTO meal(date, breakfast, lunch, dinner, breakfast_allergy, lunch_allergy, dinner_allergy) VALUES('", date, "', '", breakfast, "', '", lunch, "', '", dinner, "', '", breakfast_allergy, "', '", lunch_allergy, "', '", dinner_allergy, "')");			
-			break;
-		case Commands.UPLOAD_PLAN:
-			/*
-			 * Table Name : plan
-			 * 
-			 * year INT(4) PK NN
-			 * month INT(2) PK NN
-			 * date VARCHAR(5000) NN
-			 */
-			
-			break;
+//		case Commands.UPLOAD_MEAL:
+//			/*
+//			 * Table Name : meal
+//			 * 
+//			 * date DATE PK NN
+//			 * breakfast VARCHAR(100) NN
+//			 * lunch VARCHAR(100) NN
+//			 * dinner VARCHAR(100) NN
+//			 * breakfast_allergy VARCHAR(100) NN
+//			 * lunch_allergy VARCHAR(100) NN
+//			 * dinner_allergy VARCHAR(100) NN
+//			 * 
+//			 * DATE format : YYYY-MM-DD
+//			 */
+//			date = (String)requestObject.get("no");
+//			String breakfast = (String)requestObject.get("breakfast");
+//			String lunch = (String)requestObject.get("lunch");
+//			String dinner = (String)requestObject.get("dinner");
+//			String breakfast_allergy = (String)requestObject.get("breakfast_allergy");
+//			String lunch_allergy = (String)requestObject.get("lunch_allergy");
+//			String dinner_allergy = (String)requestObject.get("dinner_allergy");
+//			
+//			status = database.executeUpdate("INSERT INTO meal(date, breakfast, lunch, dinner, breakfast_allergy, lunch_allergy, dinner_allergy) VALUES('", date, "', '", breakfast, "', '", lunch, "', '", dinner, "', '", breakfast_allergy, "', '", lunch_allergy, "', '", dinner_allergy, "')");			
+//			break;
+//		case Commands.UPLOAD_PLAN:
+//			/*
+//			 * Table Name : plan
+//			 * 
+//			 * year INT(4) PK NN
+//			 * month INT(2) PK NN
+//			 * date VARCHAR(5000) NN
+//			 */
+//			
+//			break;
 		case Commands.APPLY_EXTENTION:
 			/*
 			 * Table Name : extension_apply
@@ -325,7 +336,7 @@ public class InsertAction implements Actionable {
 			 * 
 			 * id INT(11) PK NN
 			 * value INT(1) NN Default 4
-			 * date VARCHAR(10) NN Default 'all'
+			 * date DATE NN Default 'all'
 			 * 
 			 * DATE format : YYYY-MM-DD
 			 * Friday home coming : 1
@@ -359,7 +370,7 @@ public class InsertAction implements Actionable {
 			/*
 			 * Table Name : merit_apply
 			 * 
-			 * no INT(11) PK NN
+			 * no INT(11) PK NN AI
 			 * id INT(11) NN
 			 * target VARCHAR(45) Default NULL
 			 * content VARCHAR(500) NN

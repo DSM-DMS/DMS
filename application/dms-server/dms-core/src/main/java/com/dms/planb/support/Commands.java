@@ -21,41 +21,15 @@ public class Commands {
 	public static final int UPLOAD_ANSWER					= 116;
 	public static final int UPLOAD_QNA_COMMENT		= 117;
 	public static final int UPLOAD_FAQ							= 118;
-	public static final int UPLOAD_AFTERSCHOOL			= 119;
+	public static final int UPLOAD_AFTERSCHOOL		= 119;
 	public static final int UPLOAD_REPORT_FACILITY	= 120;
-	public static final int UPLOAD_REPORT_RESULT 		= 121;
-	
-	public static final int UPLOAD_MEAL 						= 131;
-	public static final int UPLOAD_PLAN 						= 132;
-//	public static final int SAVE_ACADEMIC_CALENDAR	= 122;
+	public static final int UPLOAD_REPORT_RESULT 	= 121;
 	
 	public static final int APPLY_EXTENTION					= 141;
 	public static final int APPLY_STAY								= 142;
 	public static final int APPLY_GOINGOUT					= 143;
 	public static final int APPLY_MERIT							= 144;
-	public static final int APPLY_AFTERSCHOOL				= 145;
-	
-	/*
-	 * [100] 회원가입
-	 * 
-	 * [111] 공지사항 업로드
-	 * [112] 기숙사 규정 업로드
-	 * [113] Q&A 질문 업로드
-	 * [114] Q&A 답변 업로드
-	 * [115] Q&A 댓글 업로드
-	 * [116] FAQ(기숙사 생활 - 자주 하는 질문) 업로드
-	 * [117] 대회 정보 업로드
-	 * [118] 시설 고장 신고 업로드
-	 * 
-	 * [121] 파싱된 급식 정보 저장
-	 * [122] 파싱된 학사 일정 저장
-	 * 
-	 * [131] 연장학습 신청
-	 * [132] 잔류 신청
-	 * [133] 주말 외출 신청
-	 * [134] 상점 신청
-	 * [135] 방과후 신청
-	 */
+	public static final int APPLY_AFTERSCHOOL			= 145;
 	
 /* --------------------------------------------------------------------- */
 	
@@ -68,34 +42,17 @@ public class Commands {
 	public static final int MODIFY_NEWSLETTER				= 212;
 	public static final int MODIFY_COMPETITION				= 213;
 	public static final int MODIFY_RULE								= 214;
-	public static final int MODIFY_QUESTION						= 215;
+	public static final int MODIFY_QUESTION					= 215;
 	public static final int MODIFY_ANSWER						= 216;
 	public static final int MODIFY_QNA_COMMENT			= 217;
-	public static final int MODIFY_FAQ									= 218;
+	public static final int MODIFY_FAQ								= 218;
 	public static final int MODIFY_REPORT_FACILITY		= 219;
 	
 	public static final int MODIFY_EXTENTION					= 231;
 	public static final int MODIFY_STAY								= 232;
 	public static final int MODIFY_GOINGOUT					= 233;
-	public static final int MODIFY_MERIT								= 234;
+	public static final int MODIFY_MERIT							= 234;
 	public static final int MODIFY_AFTERSCHOOL				= 235;
-	
-	/*
-	 * [200] 사용자 정보 수정
-	 * 
-	 * [211] 공지사항 수정
-	 * [212] 기숙사 규정 수정
-	 * [213] Q&A 수정
-	 * [214] 문의하기 수정
-	 * [215] 대회 정보 수정
-	 * [216] 시설 고장 신고 수정
-	 * 
-	 * [221] 연장학습 신청 수정
-	 * [222] 잔류 신청 수정
-	 * [223] 주말 외출 신청 수정
-	 * [224] 상점 신청 수정
-	 * [225] 방과후 신청 수정
-	 */
 	
 /* --------------------------------------------------------------------- */
 	
@@ -104,14 +61,14 @@ public class Commands {
 	public static final int DELETE_ACCOUNT						= 300;
 	
 	public static final int DELETE_NOTICE							= 311;
-	public static final int DELETE_NEWSLETTER					= 312;
+	public static final int DELETE_NEWSLETTER				= 312;
 	public static final int DELETE_COMPETITION				= 313;
 	public static final int DELETE_RULE								= 314;
 	public static final int DELETE_QUESTION						= 315;
 	public static final int DELETE_ANSWER							= 316;
 	public static final int DELETE_QNA_COMMENT			= 317;
 	public static final int DELETE_FAQ									= 318;
-	public static final int DELETE_REPORT_FACILITY			= 319;
+	public static final int DELETE_REPORT_FACILITY		= 319;
 	
 	public static final int DEAPPLY_EXTENTION					= 331;
 	public static final int DEAPPLY_GOINGOUT					= 332;
@@ -121,35 +78,22 @@ public class Commands {
 	 * 철회하다 : Withdraw, Waive
 	 */
 	
-	/*
-	 * [300] 사용자 삭제
-	 * 
-	 * [311] 공지사항 삭제
-	 * [312] 기숙사 규정 삭제
-	 * [313] Q&A 삭제
-	 * [314] 문의하기 삭제
-	 * [315] 대회 정보 삭제
-	 * [316] 시설 고장 신고 삭제
-	 * 
-	 * [321] 연장학습 신청 철회
-	 * [322] 주말 외출 철회
-	 * [323] 상점 신청 철회
-	 */
-	
 /* --------------------------------------------------------------------- */
 	
 	public static final int SELECT											= 4; // prefix
 	
-	public static final int LOAD_MYPAGE								= 400;
-	public static final int LOAD_ACCOUNT							= 401;
+	public static final int LOAD_MYPAGE								= 401;
+//	public static final int LOAD_TEACHER_MYPAGE			= 402;
+	public static final int LOAD_ACCOUNT							= 403;
+	public static final int LOAD_TEACHER_ACCOUNT		= 404;
 	
 	public static final int LOAD_NOTICE_LIST						= 411;
 	public static final int LOAD_NEWSLETTER_LIST			= 412;
-	public static final int LOAD_COMPETITION_LIST			= 413;
+	public static final int LOAD_COMPETITION_LIST		= 413;
 	public static final int LOAD_QNA_LIST							= 414;
 	public static final int LOAD_FAQ_LIST							= 415;
 	public static final int LOAD_REPORT_FACILITY_LIST	= 416;
-	public static final int LOAD_AFTERSCHOOL_LIST			= 417;
+	public static final int LOAD_AFTERSCHOOL_LIST		= 417;
 	
 	public static final int LOAD_NOTICE								= 421;
 	public static final int LOAD_NEWSLETTER					= 422;
@@ -168,33 +112,4 @@ public class Commands {
 	public static final int LOAD_MEAL									= 436;
 	public static final int LOAD_PLAN									= 437;
 	public static final int LOAD_SCORE								= 438;
-	
-	/*
-	 * [400] 마이페이지
-	 * [401] 로그인 시 정보 비교
-	 * 
-	 * [411] 공지사항 리스트 불러오기
-	 * [412] 기숙사 규정 리스트 불러오기
-	 * [413] Q&A 리스트 불러오기
-	 * [414] 문의하기 리스트 불러오기
-	 * [415] 대회 정보 리스트 불러오기
-	 * [416] 시설 고장 신고 리스트 불러오기
-	 * 
-	 * 
-	 * [421] 공지사항 게시글 열람
-	 * [422] 기숙사 규정 게시글 열람
-	 * [423] Q&A 게시글 열람
-	 * [424] 문의하기 게시글 열람
-	 * [425] 대회 정보 게시글 열람
-	 * [426] 시설 고장 신고 게시글 열람
-	 * 
-	 * [431] 연장학습 신청 상태 조회
-	 * [432] 잔류 신청 상태 조회
-	 * [433] 주말 외출 신청 상태 조회
-	 * [434] 상점 신청 상태 조회
-	 * [435] 방과후 신청 상태 조회
-	 * [436] 급식 열람
-	 * [437] 학사일정 열람
-	 * [438] 상∙벌점 조회
-	 */
 }

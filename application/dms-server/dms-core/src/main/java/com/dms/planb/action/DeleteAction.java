@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import com.dms.planb.support.Commands;
 
 public class DeleteAction implements Actionable {
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject action(int command, JSONObject requestObject) throws SQLException {
 		JSONObject responseObject = new JSONObject();

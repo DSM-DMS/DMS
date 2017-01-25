@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.dataio.meal.MealModel;
+import org.boxfox.dms.utilities.dataio.plan.PlanModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -43,6 +44,7 @@ public class SelectAction implements Actionable {
 			number = (int)requestObject.get("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
+			resultSet.next();
 			
 			responseObject.put("sex", resultSet.getInt("sex"));
 			responseObject.put("status", resultSet.getInt("status"));
@@ -53,14 +55,37 @@ public class SelectAction implements Actionable {
 			responseObject.put("demerit", resultSet.getInt("demerit"));
 			
 			break;
+//		case Commands.LOAD_TEACHER_MYPAGE:
+//			id = (String) requestObject.get("id");
+//			
+//			resultSet = database.executeQuery("SELECT * FROM teacher_account WHERE id='", id, "'");
+//			
+//			break;
 		case Commands.LOAD_ACCOUNT:
 			// when login
-			id = (String)requestObject.get("id");
-			password = (String)requestObject.get("password");
+			id = (String) requestObject.get("id");
+			password = (String) requestObject.get("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM account WHERE id='", id, "'");
-			if(resultSet.getString("password").equals(password)) {
-				responseObject.put("status", true);
+			if(!resultSet.next() || !resultSet.getString("password").equals(password)) {
+				responseObject.put("permit", false);
+			}
+			else if(resultSet.getString("password").equals(password)) {
+				responseObject.put("permit", true);
+			}
+			
+			break;
+		case Commands.LOAD_TEACHER_ACCOUNT:
+			// when login
+			id = (String) requestObject.get("id");
+			password = (String) requestObject.get("password");
+			
+			resultSet = database.executeQuery("SELECT password FROM FROM teacher_account WHERE id='", id, "'");
+			if(!resultSet.next() || resultSet.getString("password").equals(password)) {
+				responseObject.put("permit", false);
+			}
+			else if(resultSet.getString("password").equals(password)) {
+				responseObject.put("permit", true);
 			}
 			
 			break;
@@ -170,6 +195,7 @@ public class SelectAction implements Actionable {
 			category = (int)requestObject.get("category");
 			
 			resultSet = database.executeQuery("SELECT * FROM app_content WHERE number=", number, " AND category=", category);
+			resultSet.next();
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
@@ -181,6 +207,7 @@ public class SelectAction implements Actionable {
 			no = (int)requestObject.get("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
+			resultSet.next();
 			
 			responseObject.put("title", resultSet.getString("resultSet"));
 			responseObject.put("content", resultSet.getString("content"));
@@ -190,6 +217,7 @@ public class SelectAction implements Actionable {
 			no = (int)requestObject.get("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+			resultSet.next();
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("question_content", resultSet.getString("question_content"));
@@ -230,6 +258,7 @@ public class SelectAction implements Actionable {
 			no = (int)requestObject.get("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
+			resultSet.next();
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
@@ -239,6 +268,7 @@ public class SelectAction implements Actionable {
 			no = (int)requestObject.get("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
+			resultSet.next();
 			
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
@@ -258,6 +288,7 @@ public class SelectAction implements Actionable {
 			id = (String)requestObject.get("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id='", id, "'");
+			resultSet.next();
 			
 			responseObject.put("class", resultSet.getInt("class"));
 			responseObject.put("seat", resultSet.getInt("seat"));
@@ -268,6 +299,7 @@ public class SelectAction implements Actionable {
 			id = (String)requestObject.get("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
+			resultSet.next();
 			
 			responseObject.put("value", resultSet.getInt("value"));
 			responseObject.put("date", resultSet.getString("date"));
@@ -277,6 +309,7 @@ public class SelectAction implements Actionable {
 			id = (String)requestObject.get("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
+			resultSet.next();
 			
 			responseObject.put("dept_date", resultSet.getString("dept_date"));
 			responseObject.put("reason", resultSet.getString("reason"));
@@ -286,6 +319,7 @@ public class SelectAction implements Actionable {
 			id = (String)requestObject.get("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id='", id, "'");
+			resultSet.next();
 			
 			responseObject.put("content", resultSet.getString("content"));
 			if(!resultSet.getString("target").isEmpty()) {
@@ -320,15 +354,14 @@ public class SelectAction implements Actionable {
 			year = (int)requestObject.get("year");
 			month = (int)requestObject.get("month");
 			
-			resultSet = database.executeQuery("SELECT * FROM plan WHERE year=", year, "and month=", month);
-			
-			responseObject.put("data", resultSet.getString("data"));
+			responseObject.put("result", PlanModel.getPlan(year, month));
 			
 			break;
 		case Commands.LOAD_SCORE:
 			number = (int)requestObject.get("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
+			resultSet.next();
 			
 			responseObject.put("merit", resultSet.getInt("merit"));
 			responseObject.put("demerit", resultSet.getInt("demerit"));

@@ -13,6 +13,7 @@ public class UpdateAction implements Actionable {
 	 * If there is key in request object, do action automatically.
 	 * Reference : case Commands.MODIFY_STUDENT_DATA
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject action(int command, JSONObject requestObject) throws SQLException {
 		JSONObject responseObject = new JSONObject();

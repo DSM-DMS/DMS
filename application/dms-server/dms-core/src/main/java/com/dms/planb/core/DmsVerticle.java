@@ -37,17 +37,19 @@ class DmsVerticle extends AbstractVerticle {
 	@Override
 	public void start() throws Exception {
 		Log.l("Server started");
+		// org.boxfox.dms.utilities.Log
 		
 		server = vertx.createHttpServer();
 		server.requestHandler(request -> {
-			System.out.println("Received request");
+			Log.l("Received request : " + request.host());
 			
 			Buffer totalBuffer = Buffer.buffer();
 //			MultiMap params = request.params();
 			
 			if(request.method() == HttpMethod.POST) {
 				// The server will only work if the Http method is POST.
-				System.out.println("Received POST method");
+				Log.l("Received POST method : " + request.host());
+				Log.l("Headers : " + request.headers());
 				
 				request.handler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
@@ -55,7 +57,7 @@ class DmsVerticle extends AbstractVerticle {
 				
 				request.endHandler(v -> {
 					 // The endHandler of the request is invoked when the entire request, including any body has been fully read.
-					System.out.println("fully read");
+					Log.l("Fully read : " + totalBuffer);
 					
 					// 1-1. Get command from header.
 					int command = Integer.parseInt(request.getHeader("command"));
@@ -76,18 +78,20 @@ class DmsVerticle extends AbstractVerticle {
 					try {
 						responseObject = ActionPerformer.perform(command, requestObject);
 					} catch (SQLException e) {
-						e.printStackTrace();
+						Log.l("SQLException");
 					}
 					
 					// 3. Response to client.
 					response = request.response();
 					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
-						response.setStatusCode((int)responseObject.get("status"));
-						responseObject.remove("status");
-					// Success, Fail, etc..
+					response.setStatusCode((int)responseObject.get("status"));
+					// Success : 1, Fail : 2
+					Log.l("Responsed status code : " + responseObject.get("status"));
+					responseObject.remove("status");
 					
 					response.end(responseObject.toString());
+					Log.l("Responsed object : " + responseObject.toString());
 					response.close();
 				}); // endHandler
 			} else {
