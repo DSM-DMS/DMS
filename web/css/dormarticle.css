@@ -189,10 +189,12 @@ font-weight: 600;
 
 }
 */
+
 .frame .frametitle {
     position: relative;
     height: 12%;
 }
+
 .underline {
     position: relative;
     right: 0%;
@@ -202,48 +204,82 @@ font-weight: 600;
     width: 93%;
     background: rgb(142, 68, 173);
 }
+
 .article {
     line-height: 150%;
     margin-left: 7%;
     margin-top: 30px;
 }
+
 .frame hr {
     margin-left: 7%;
 }
+
 .commentinput {
     margin-left: 7%;
     /*margin-bottom: 100px;*/
 }
+
+.commentinput table {
+    width: 100%;
+}
+
+.commentinput table tr td:nth-child(1) {
+    width: 80%;
+}
+
+.commentinput table tr td:nth-child(2) {
+    width: 20%;
+}
+
 .commentinput input {
     height: 30px;
 }
+
 .commentinput button {
     background-color: rgb(142, 68, 173);
     border: none;
     height: 36px;
-    width: 15%;
+    width: 99%;
     border: 2px solid rgb(142, 68, 173);
     border-radius: 4px;
+    transition: all 1s ease;
 }
+
+.commentinput button:focus {
+    background-color: rgb(162, 88, 193);
+}
+
 .commentinput input[type="text"] {
     height: 30px;
-    width: 80%;
+    width: 97%;
     border: 2px solid rgb(142, 68, 173);
     border-radius: 4px;
+    padding-left: 2%;
+    transition: all 1s ease;
 }
+
+.commentinput input[type="text"]:focus {
+  border: 2px solid rgb(162, 88, 193);
+}
+
 .comment {
     margin-left: 7%;
 }
+
 .comment ul {
     padding-left: 0;
 }
+
 .comment ul li {
     list-style-type: none;
 }
+
 .comment ul li h3 {
     margin-right: 30px;
     display: inline-block;
 }
+
 .comment ul li p {
     display: inline-block;
     /*float: right;*/
@@ -258,5 +294,8 @@ font-weight: 600;
 }
 
 .comment hr {
-   margin-left: 0;
+    margin-left: 0;
 }
+
+
+/*--------placeholder-------------------------------------------------------------*/
