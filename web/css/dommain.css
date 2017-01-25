@@ -1,4 +1,5 @@
 @import "remote.css";
+@import "table.css";
 
 .main {
     background-color: white;
@@ -24,32 +25,6 @@
     margin-bottom: 1%;
 }
 
-.frame ul {
-    position: relative;
-    margin-left: 7%;
-    padding-left: 0%;
-}
-
-.frame ul li {
-    list-style-type: none;
-    margin: 4% 0%;
-}
-
-.frame ul li .title {
-    display: inline;
-    font-size: 1.3em;
-    font-weight: 600;
-}
-
-.frame ul li p.date {
-    /*display: inline;*/
-    color: gray;
-    float: right;
-    vertical-align: bottom;
-    font-size: 0.8em;
-    font-weight: 600;
-}
-
 .frame .frametitle {
     position: relative;
     height: 12%;
@@ -67,55 +42,4 @@
 
 .right {
     text-align: center;
-}
-
-table {
-    width: 100%;
-}
-
-table .tableheader {
-    background-color: rgb(244, 244, 244);
-    /*border-top: 1px solid rgb(142, 68, 173);
-    border-bottom: 2px solid rgb(142, 68, 173);*/
-
-
-}
-
-table {
-  /*border: 1px solid red;*/
-  border-collapse: collapse;
-  margin-top: 17%;
-  width: 93%;
-  margin-left: 7%;
-}
-
-
-table .tableheader th {
-    padding: 0;
-    border: 0;
-    border-top: 1px solid rgb(142, 68, 173);
-    border-bottom: 2px solid rgb(142, 68, 173);
-    color: rgb(142, 68, 173);
-    height: 32px;
-}
-
-table td {
-    border-bottom: 1px solid rgb(142, 68, 173);
-    height: 32px;
-}
-
-table tr:hover {
-    background-color: rgb(244, 244, 244);
-}
-
-table td:nth-child(2) {
-  text-align: left;
-  font-weight: 900;
-  font-size: 0.9em;
-}
-
-table td:nth-child(3), table td:nth-child(1)  {
-  color: rgb(100, 100, 100);
-  font-size: 0.8em;
-  font-weight: 900;
 }
