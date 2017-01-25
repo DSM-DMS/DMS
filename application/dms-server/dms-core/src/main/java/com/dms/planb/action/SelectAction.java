@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.dataio.meal.MealModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -28,6 +29,11 @@ public class SelectAction implements Actionable {
 		int no;
 		int qnaNo;
 		int category;
+		
+		// For meal&plan
+		int year;
+		int month;
+		int date;
 		
 		// For post list
 		int count; // JSON Object's sequence count
@@ -303,21 +309,16 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_MEAL:
-			String date = (String)requestObject.get("date");
+			year = (int) requestObject.get("year");
+			month = (int) requestObject.get("month");
+			date = (int) requestObject.get("date");
 			
-			resultSet = database.executeQuery("SELECT * FROM meal WHERE date='", date, "'");
-			
-			responseObject.put("breakfast", resultSet.getString("breakfast"));
-			responseObject.put("lunch", resultSet.getString("lunch"));
-			responseObject.put("dinner", resultSet.getString("dinner"));
-			responseObject.put("breakfast_allergy", resultSet.getString("breakfast_allergy"));
-			responseObject.put("lunch_allergy", resultSet.getString("lunch_allergy"));
-			responseObject.put("dinner_allergy", resultSet.getString("dinner_allergy"));
+			responseObject.put("result", MealModel.getMealAtDate(year, month, date).toJSONObject());
 			
 			break;
 		case Commands.LOAD_PLAN:
-			int year = (int)requestObject.get("year");
-			int month = (int)requestObject.get("month");
+			year = (int)requestObject.get("year");
+			month = (int)requestObject.get("month");
 			
 			resultSet = database.executeQuery("SELECT * FROM plan WHERE year=", year, "and month=", month);
 			

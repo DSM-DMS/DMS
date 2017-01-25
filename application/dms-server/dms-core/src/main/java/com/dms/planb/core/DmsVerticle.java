@@ -1,15 +1,22 @@
 package com.dms.planb.core;
 
+/*
+ * Communication : HTTP Protocol, POST method, JSON exchange
+ * 
+ * Action Request : Command in header, reference Commands class
+ * Request Data : JSON
+ */
+
 import java.sql.SQLException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.dms.planb.support.ActionPerformer;
+import org.boxfox.dms.utilities.Log;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -21,10 +28,7 @@ class DmsVerticle extends AbstractVerticle {
 	
 	private JSONObject requestObject;
 	private JSONObject responseObject;
-	/*
-	 *  org.json.JSONObject
-	 *  I created instance of io.vertx.core.json.JsonObject, but can't find a way about serialize
-	 */
+	// org.json.simple.JSONObject
 
 	/*
 	 * (non-Javadoc)
@@ -32,7 +36,7 @@ class DmsVerticle extends AbstractVerticle {
 	 */
 	@Override
 	public void start() throws Exception {
-		System.out.println("Server started");
+		Log.l("Server started");
 		
 		server = vertx.createHttpServer();
 		server.requestHandler(request -> {
@@ -40,7 +44,6 @@ class DmsVerticle extends AbstractVerticle {
 			
 			Buffer totalBuffer = Buffer.buffer();
 //			MultiMap params = request.params();
-			// Get parameters from request
 			
 			if(request.method() == HttpMethod.POST) {
 				// The server will only work if the Http method is POST.

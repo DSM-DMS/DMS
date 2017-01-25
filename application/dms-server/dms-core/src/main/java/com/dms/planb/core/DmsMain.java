@@ -2,9 +2,10 @@ package com.dms.planb.core;
 
 /*
  * -- Daedeok Software Meister High School --
- * Domitory Management System(DMS) Project
+ * Dormitory Management System(DMS) Project
  * 
  * Android Application HTTP Server based Vert.x Framework.
+ * Managed by Maven
  * Developed by : Kim Seongrae - Boxfoxs | Jo Mingyu - PlanB
  * Developers' Blog : http://boxfoxs.tistory.com/ | http://city7310.blog.me/
  * 
@@ -17,19 +18,7 @@ package com.dms.planb.core;
  */
 
 /* :: Library Uses ::
- * [java-json.jar]
- * [mysql-connector-java-5.1.37-bin.jar]
- * [vertx-core-3.3.3.jar]
- * [netty-buffer-4.1.5.Final.jar]
- * [netty-codec-4.1.5.FInal.jar]
- * [netty-codec-dns-4.1.5.Final.jar]
- * [netty-codec-http-4.1.5.Final.jar]
- * [netty-codec-http2-4.1.5.Final.jar]
- * [netty-common-4.1.5.Final.jar]
- * [netty-handler-4.1.5.Final.jar]
- * [netty-resolver-4.1.5.Final.jar]
- * [netty-resolver-dns-4.1.5.Final.jar]
- * [netty-transport-4.1.5.Final.jar]
+ * Reference pom.xml
  */
 
 import io.vertx.core.Vertx;
@@ -41,5 +30,6 @@ class DmsMain {
 		VertxOptions options = new VertxOptions();
 		options.setMaxEventLoopExecuteTime(2100000000);
 		vertx.deployVerticle(new DmsVerticle());
+		// Branch off DmsVerticle class
 	}
 }
