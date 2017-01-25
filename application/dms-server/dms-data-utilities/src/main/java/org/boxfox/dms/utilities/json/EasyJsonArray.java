@@ -10,6 +10,18 @@ public class EasyJsonArray extends EasyJson{
     public EasyJsonArray(JSONArray arr){
         super(arr);
     }
+    
+    public EasyJsonArray(){
+    	super(new JSONArray());
+    }
+    
+    public JSONArray getContext(){
+    	return arr;
+    }
+    
+    public void add(Object obj){
+    	arr.add(obj);
+    }
 
     public EasyJsonArray(String str) throws JsonException{
         super(str);

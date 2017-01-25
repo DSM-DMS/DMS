@@ -7,6 +7,10 @@ import org.json.simple.JSONObject;
  * Created by user on 2017-01-25.
  */
 public class EasyJsonObject extends EasyJson{
+	
+	public EasyJsonObject(){
+		super(new JSONObject());
+	}
 
     public EasyJsonObject(JSONObject obj){
         super(obj);
@@ -17,6 +21,14 @@ public class EasyJsonObject extends EasyJson{
         if(obj==null){
             throw new JsonException("JSONObject 형식이 아닙니다!");
         }
+    }
+    
+    public JSONObject getContext(){
+    	return obj;
+    }
+    
+    public void put(String key, Object obj){
+    	super.obj.put(key, obj);
     }
 
     public String getString(String key) throws JsonException{
