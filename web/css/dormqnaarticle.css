@@ -189,10 +189,12 @@ font-weight: 600;
 
 }
 */
+
 .frame .frametitle {
     position: relative;
     height: 12%;
 }
+
 .underline {
     position: relative;
     right: 0%;
@@ -202,14 +204,17 @@ font-weight: 600;
     width: 93%;
     background: rgb(142, 68, 173);
 }
+
 .article {
     line-height: 150%;
     margin-left: 7%;
     margin-top: 30px;
 }
+
 .frame hr {
     margin-left: 7%;
 }
+
 .commentinput {
     margin-left: 7%;
     /*margin-bottom: 100px;*/
@@ -255,7 +260,7 @@ font-weight: 600;
 }
 
 .commentinput input[type="text"]:focus {
-  border: 2px solid rgb(162, 88, 193);
+    border: 2px solid rgb(162, 88, 193);
 }
 
 .comment {

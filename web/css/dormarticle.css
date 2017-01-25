@@ -260,7 +260,7 @@ font-weight: 600;
 }
 
 .commentinput input[type="text"]:focus {
-  border: 2px solid rgb(162, 88, 193);
+    border: 2px solid rgb(162, 88, 193);
 }
 
 .comment {
