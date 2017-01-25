@@ -9,6 +9,7 @@ import android.os.Parcelable;
 
 public class QnA implements Parcelable {
 
+    private int no;
     private String title;
     private String questionContent;
     private String questionDate;
@@ -17,8 +18,9 @@ public class QnA implements Parcelable {
     private String answerDate;
     private boolean privacy;
 
-    public QnA(String title, String questionContent, String questionDate, String questioner,
+    public QnA(int no, String title, String questionContent, String questionDate, String questioner,
                String answerContent, String answerDate, boolean privacy) {
+        setNo(no);
         setTitle(title);
         setQuestionContent(questionContent);
         setQuestionDate(questionDate);
@@ -29,6 +31,7 @@ public class QnA implements Parcelable {
     }
 
     public QnA(Parcel in) {
+        setNo(in.readInt());
         setTitle(in.readString());
         setQuestionContent(in.readString());
         setQuestionDate(in.readString());
@@ -42,6 +45,7 @@ public class QnA implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(no);
         dest.writeString(title);
         dest.writeString(questionContent);
         dest.writeString(questionDate);
@@ -56,6 +60,14 @@ public class QnA implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 
     public String getTitle() {
