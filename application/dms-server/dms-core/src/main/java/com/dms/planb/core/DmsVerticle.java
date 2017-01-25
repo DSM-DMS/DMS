@@ -9,6 +9,7 @@ package com.dms.planb.core;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -26,8 +27,8 @@ class DmsVerticle extends AbstractVerticle {
 	private HttpServer server;
 	private HttpServerResponse response;
 	
-	private JSONObject requestObject;
-	private JSONObject responseObject;
+	private EasyJsonObject requestObject;
+	private EasyJsonObject responseObject;
 	// org.json.simple.JSONObject
 
 	/*
@@ -63,12 +64,12 @@ class DmsVerticle extends AbstractVerticle {
 					int command = Integer.parseInt(request.getHeader("command"));
 					
 					// 1-2. Get client's info
-						JSONObject clientObject = (JSONObject)JSONValue.parse(request.getHeader("User-Agent"));
+						EasyJsonObject clientObject = new EasyJsonObject(request.getHeader("User-Agent"));
 //						clientObject.getString("Version");
 //						clientObject.getString("UUID");
 					
 					// 1-3. Get request object from buffer.
-						requestObject = (JSONObject)JSONValue.parse(totalBuffer.toString());
+						requestObject = new EasyJsonObject(totalBuffer.toString());
 //						requestObject = new JSONObject().put("testKey", "testValue");
 					
 					/*
@@ -85,7 +86,7 @@ class DmsVerticle extends AbstractVerticle {
 					response = request.response();
 					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
-					response.setStatusCode((int)responseObject.get("status"));
+					response.setStatusCode(responseObject.getInt("status"));
 					// Success : 1, Fail : 2
 					Log.l("Responsed status code : " + responseObject.get("status"));
 					responseObject.remove("status");
