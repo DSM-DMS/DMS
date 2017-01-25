@@ -2,8 +2,8 @@ package com.dms.planb.action;
 
 import java.sql.SQLException;
 
-import org.json.simple.JSONObject;
+import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 public interface Actionable {
-	public abstract JSONObject action(int command, JSONObject requestObject) throws SQLException;
+	public abstract EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException;
 }

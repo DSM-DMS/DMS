@@ -22,11 +22,13 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.json.JsonObject;
 
 class DmsVerticle extends AbstractVerticle {
 	private HttpServer server;
 	private HttpServerResponse response;
 	
+	private EasyJsonObject clientObject;
 	private EasyJsonObject requestObject;
 	private EasyJsonObject responseObject;
 	// org.json.simple.JSONObject
@@ -64,7 +66,7 @@ class DmsVerticle extends AbstractVerticle {
 					int command = Integer.parseInt(request.getHeader("command"));
 					
 					// 1-2. Get client's info
-						EasyJsonObject clientObject = new EasyJsonObject(request.getHeader("User-Agent"));
+						clientObject = new EasyJsonObject(request.getHeader("User-Agent"));
 //						clientObject.getString("Version");
 //						clientObject.getString("UUID");
 					
@@ -88,7 +90,7 @@ class DmsVerticle extends AbstractVerticle {
 					
 					response.setStatusCode(responseObject.getInt("status"));
 					// Success : 1, Fail : 2
-					Log.l("Responsed status code : " + responseObject.get("status"));
+					Log.l("Responsed status code : " + responseObject.getInt("status"));
 					responseObject.remove("status");
 					
 					response.end(responseObject.toString());

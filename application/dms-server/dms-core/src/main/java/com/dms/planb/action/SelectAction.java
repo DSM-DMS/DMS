@@ -6,6 +6,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.dataio.meal.MealModel;
 import org.boxfox.dms.utilities.dataio.plan.PlanModel;
+import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,11 +15,13 @@ import com.dms.planb.support.Commands;
 public class SelectAction implements Actionable {
 	@SuppressWarnings("unchecked")
 	@Override
-	public JSONObject action(int command, JSONObject requestObject) throws SQLException {
+	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
 		SafeResultSet resultSet;
 		JSONObject responseObject = new JSONObject();
+		EasyJsonObject readOnlyJsonObject;
 		JSONObject tempObject = new JSONObject();
 		JSONArray array = new JSONArray();
+		
 		DataBase database = DataBase.getInstance();
 		
 		// For account
@@ -41,7 +44,7 @@ public class SelectAction implements Actionable {
 		
 		switch(command) {
 		case Commands.LOAD_MYPAGE:
-			number = (int)requestObject.get("number");
+			number = requestObject.getInt("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
 			resultSet.next();
@@ -94,7 +97,7 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_COMPETITION_LIST:
 			count = 1;
 			
-			category = (int)requestObject.get("category");
+			category = requestObject.getInt("category");
 			
 			resultSet = database.executeQuery("SELECT * FROM app_content WHERE category=", category);
 			
@@ -191,8 +194,8 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_NOTICE:
 		case Commands.LOAD_NEWSLETTER:
 		case Commands.LOAD_COMPETITION:
-			number = (int)requestObject.get("number");
-			category = (int)requestObject.get("category");
+			number = requestObject.getInt("number");
+			category = requestObject.getInt("category");
 			
 			resultSet = database.executeQuery("SELECT * FROM app_content WHERE number=", number, " AND category=", category);
 			resultSet.next();
@@ -204,7 +207,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_RULE:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
 			resultSet.next();
@@ -214,7 +217,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_QNA:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
 			resultSet.next();
@@ -237,7 +240,7 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_QNA_COMMENT:
 			count = 1;
 			
-			qnaNo = (int)requestObject.get("no");
+			qnaNo = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", qnaNo);
 			
@@ -255,7 +258,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_FAQ:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
 			resultSet.next();
@@ -265,7 +268,7 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY:
-			no = (int)requestObject.get("no");
+			no = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
 			resultSet.next();
@@ -351,14 +354,14 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_PLAN:
-			year = (int)requestObject.get("year");
-			month = (int)requestObject.get("month");
+			year = requestObject.getInt("year");
+			month = requestObject.getInt("month");
 			
 			responseObject.put("result", PlanModel.getPlan(year, month));
 			
 			break;
 		case Commands.LOAD_SCORE:
-			number = (int)requestObject.get("number");
+			number = requestObject.getInt("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
 			resultSet.next();
@@ -369,6 +372,7 @@ public class SelectAction implements Actionable {
 			break;
 		}
 		
-		return responseObject;
+		readOnlyJsonObject = new EasyJsonObject(responseObject);
+		return readOnlyJsonObject;
 	}
 }

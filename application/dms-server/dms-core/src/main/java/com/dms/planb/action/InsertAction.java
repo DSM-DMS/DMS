@@ -3,6 +3,7 @@ package com.dms.planb.action;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.json.simple.JSONObject;
 
 import com.dms.planb.support.Commands;
@@ -10,8 +11,10 @@ import com.dms.planb.support.Commands;
 public class InsertAction implements Actionable {
 	@SuppressWarnings("unchecked")
 	@Override
-	public JSONObject action(int command, JSONObject requestObject) throws SQLException {
+	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
 		JSONObject responseObject = new JSONObject();
+		EasyJsonObject readOnlyResponseObject;
+		
 		DataBase database = DataBase.getInstance();
 		
 		// For register account
@@ -401,6 +404,8 @@ public class InsertAction implements Actionable {
 		}
 		
 		responseObject.put("status", status);
-		return responseObject;
+		readOnlyResponseObject = new EasyJsonObject(responseObject);
+		
+		return readOnlyResponseObject;
 	}
 }

@@ -2,6 +2,7 @@ package com.dms.planb.support;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.json.simple.JSONObject;
 
 import com.dms.planb.action.Actionable;
@@ -18,7 +19,7 @@ import com.dms.planb.action.UpdateAction;
 public class ActionPerformer {
 	private static Actionable action;
 
-	public static JSONObject perform(int command, JSONObject requestObject) throws SQLException {
+	public static EasyJsonObject perform(int command, EasyJsonObject requestObject) throws SQLException {
 		// 1. Get prefix of command
 		int prefixOfCommand = command / 100;
 		

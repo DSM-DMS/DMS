@@ -27,6 +27,10 @@ public class EasyJsonObject extends EasyJson{
     	return obj;
     }
     
+    public boolean containsKey(String key) {
+    	return obj.containsKey(key);
+    }
+    
     public void put(String key, Object obj){
     	super.obj.put(key, obj);
     }
