@@ -157,7 +157,7 @@ public class SelectAction implements Actionable {
 				
 				tempObject.put("no", resultSet.getInt("no"));
 				tempObject.put("title", resultSet.getString("title"));
-				tempObject.put("room", resultSet.getString("room"));
+				tempObject.put("room", resultSet.getInt("room"));
 				tempObject.put("write_date", resultSet.getString("write_date"));
 				tempObject.put("writer", resultSet.getInt("writer"));
 				if(!resultSet.getString("result").isEmpty()) {
@@ -210,7 +210,7 @@ public class SelectAction implements Actionable {
 			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
 			resultSet.next();
 			
-			responseObject.put("title", resultSet.getString("resultSet"));
+			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
 			
 			break;
