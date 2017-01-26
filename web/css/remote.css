@@ -65,8 +65,8 @@ header .logo p:hover {
     position: fixed;
     top: 20%;
     left: 3%;
-    height: 70%;
-    width: 10%;
+    min-height: 70%;
+    min-width: 10%;
     text-align: center;
     overflow: hidden;
 }
@@ -89,6 +89,7 @@ header .logo p:hover {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     font-weight: bolder;
     font-size: 1.5em;
+    margin: 16% 0;
     padding: 13% 0%;
 }
 
@@ -114,7 +115,8 @@ header .logo p:hover {
     display: block;
     font-weight: bolder;
     font-size: 1.5em;
-    padding: 13% 0%;
+    padding: 10% 0%;
+
 }
 
 .remote .category .children a:hover {

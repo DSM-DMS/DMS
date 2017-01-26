@@ -1,9 +1,12 @@
 //신청탭 over 이벤트
 $(".remote .category").children("a").eq(0).click(function() {
-    //신청 text를 white로
+    // 신청 text를 white로
     $(".remote .category").children("a").eq(0).animate({
         fontSize: "1.5em",
-        color: "white",
+        color: "white"
+    })
+
+    $(".remote .category").children("a").eq(0).css({
     })
 
     $(".remote .category").children("a").eq(0).children("p").animate({
@@ -140,7 +143,7 @@ $(".remote .category .children a").click(function(e) {
             "position": "absolute",
             "top": $(this).offset().top - 1500 + 30 + "px",
             "left": $(this).offset().left - 1500 + 30 + "px",
-            "background":  $(".remote").css("background-color"),
+            "background": $(".remote").css("background-color"),
             "width": "3000px",
             "height": "3000px",
             "border-radius": "50%",
@@ -154,8 +157,8 @@ $(".remote .category .children a").click(function(e) {
             // "z-index": "100",
             "position": "relative",
             "top": $(this).offset().top - $(".remote").offset().top - 1500 + "px",
-            "left": - 1500 + "px",
-            "background":  "white",
+            "left": -1500 + "px",
+            "background": "white",
             "width": "3000px",
             "height": "3000px",
             "border-radius": "50%",
