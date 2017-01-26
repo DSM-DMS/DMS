@@ -84,7 +84,7 @@ body {
 
 #apply_form {
   margin-left: 20%;
-  margin-top: 20%;
+  margin-top: 17%;
 }
 
 #apply_field {
@@ -101,6 +101,7 @@ body {
 }
 
 .color {
+  vertical-align: -35%;
   display: inline-block;
   width:2vw;
   height:2vw;

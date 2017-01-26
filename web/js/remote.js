@@ -39,7 +39,7 @@ $(".remote .category").children("a").eq(1).click(function() {
         padding: "0"
     })
 
-    //remote background-color를 신청색으로
+    //remote background-color를 기숙사색으로
     $(".remote").animate({
         backgroundColor: "rgb(142, 68, 173)"
     }, 500);

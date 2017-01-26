@@ -1,0 +1,39 @@
+@import "remote.css";
+
+body {
+  background-color: rgb(52, 152, 219);
+}
+
+.main {
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 20vh;
+    left: 16%;
+    height: 70%;
+    width: 80%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+
+.frame {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+    /*overflow-x: hidden;*/
+}
+
+.frame h1 {
+    margin-left: 7%;
+    margin-bottom: 1%;
+}
+
+.underline {
+    position: relative;
+    right: 0%;
+    height: 8px;
+    margin-left: 7%;
+    margin-right: 0%;
+    width: 90%;
+    background: rgb(211, 84, 0);
+}
