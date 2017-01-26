@@ -6,21 +6,19 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.dataio.meal.MealModel;
 import org.boxfox.dms.utilities.dataio.plan.PlanModel;
+import org.boxfox.dms.utilities.dataio.post.PostModel;
+import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import com.dms.planb.support.Commands;
 
 public class SelectAction implements Actionable {
-	@SuppressWarnings("unchecked")
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
 		SafeResultSet resultSet;
-		JSONObject responseObject = new JSONObject();
-		EasyJsonObject readOnlyJsonObject;
-		JSONObject tempObject = new JSONObject();
-		JSONArray array = new JSONArray();
+		EasyJsonObject responseObject = new EasyJsonObject();
+		EasyJsonObject tempObject = new EasyJsonObject();
+		EasyJsonArray array = new EasyJsonArray();
 		
 		DataBase database = DataBase.getInstance();
 		
@@ -196,14 +194,14 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_COMPETITION:
 			number = requestObject.getInt("number");
 			category = requestObject.getInt("category");
+			/*
+			 * Categories
+			 * Notice : 0
+			 * Newsletter : 1
+			 * Competition : 2
+			 */
 			
-			resultSet = database.executeQuery("SELECT * FROM app_content WHERE number=", number, " AND category=", category);
-			resultSet.next();
-			
-			responseObject.put("title", resultSet.getString("title"));
-			responseObject.put("content", resultSet.getString("content"));
-			responseObject.put("writer", resultSet.getString("writer"));
-			responseObject.put("date", resultSet.getString("date"));
+			responseObject.put("result", PostModel.getPost(category, number));
 			
 			break;
 		case Commands.LOAD_RULE:
@@ -372,7 +370,6 @@ public class SelectAction implements Actionable {
 			break;
 		}
 		
-		readOnlyJsonObject = new EasyJsonObject(responseObject);
-		return readOnlyJsonObject;
+		return responseObject;
 	}
 }

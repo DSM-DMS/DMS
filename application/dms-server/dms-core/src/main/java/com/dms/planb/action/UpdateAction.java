@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.json.simple.JSONObject;
 
 import com.dms.planb.support.Commands;
 
@@ -14,11 +13,9 @@ public class UpdateAction implements Actionable {
 	 * If there is key in request object, do action automatically.
 	 * Reference : case Commands.MODIFY_STUDENT_DATA
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		JSONObject responseObject = new JSONObject();
-		EasyJsonObject readOnlyJsonObject;
+		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		DataBase database = DataBase.getInstance();
 		
@@ -62,18 +59,18 @@ public class UpdateAction implements Actionable {
 				status = database.executeUpdate("UPDATE student_data SET p_phone='", requestObject.getString("p_phone"), "'WHERE id='", id, "'");
 			}
 			break;
-		case Commands.MODIFY_NOTICE:
-		case Commands.MODIFY_NEWSLETTER:
-		case Commands.MODIFY_COMPETITION:
-			no = requestObject.getInt("no");
-			
-			if(requestObject.containsKey("title")) {
-				status = database.executeUpdate("UPDATE notice SET title='", requestObject.getString("title"), "' WHERE no=", no);
-			}
-			if(requestObject.containsKey("content")) {
-				status = database.executeUpdate("UPDATE notice SET content='", requestObject.getString("content"), "' WHERE no=", no);
-			}
-			break;
+//		case Commands.MODIFY_NOTICE:
+//		case Commands.MODIFY_NEWSLETTER:
+//		case Commands.MODIFY_COMPETITION:
+//			no = requestObject.getInt("no");
+//			
+//			if(requestObject.containsKey("title")) {
+//				status = database.executeUpdate("UPDATE notice SET title='", requestObject.getString("title"), "' WHERE no=", no);
+//			}
+//			if(requestObject.containsKey("content")) {
+//				status = database.executeUpdate("UPDATE notice SET content='", requestObject.getString("content"), "' WHERE no=", no);
+//			}
+//			break;
 		case Commands.MODIFY_RULE:
 			no = requestObject.getInt("no");
 			
@@ -173,8 +170,7 @@ public class UpdateAction implements Actionable {
 		}
 		
 		responseObject.put("status", status);
-		readOnlyJsonObject = new EasyJsonObject(responseObject);
 		
-		return readOnlyJsonObject;
+		return responseObject;
 	}
 }

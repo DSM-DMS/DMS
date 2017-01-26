@@ -46,6 +46,10 @@ public class EasyJsonObject extends EasyJson{
     public void remove(String key){
         obj.remove(key);
     }
+    
+    public void clear() {
+    	obj.clear();
+    }
 
     public int getInt(String key) throws JsonException{
         return toInt(get(key));

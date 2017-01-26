@@ -4,16 +4,13 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.json.simple.JSONObject;
 
 import com.dms.planb.support.Commands;
 
 public class InsertAction implements Actionable {
-	@SuppressWarnings("unchecked")
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		JSONObject responseObject = new JSONObject();
-		EasyJsonObject readOnlyResponseObject;
+		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		DataBase database = DataBase.getInstance();
 		
@@ -25,8 +22,8 @@ public class InsertAction implements Actionable {
 		
 		// For upload a post
 		int no;
-		int number;
-		int category;
+//		int number;
+//		int category;
 		
 		String title = null;
 		String content = null;
@@ -115,40 +112,40 @@ public class InsertAction implements Actionable {
 			
 			status = database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
 			break;
-		case Commands.UPLOAD_NOTICE:
-		case Commands.UPLOAD_NEWSLETTER:
-		case Commands.UPLOAD_COMPETITION:
-			/*
-			 * Table Name : app_content
-			 * 
-			 * no INT(11) PK NN AI
-			 * number INT(11) NN
-			 * category INT(1) NN
-			 * title VARCHAR(100) Default NULL
-			 * content VARCHAR(5000) NN
-			 * writer VARCHAR(10) NN
-			 * date DATETIME NN
-			 * 
-			 * DATETIME format : YYYY-MM-DD hh:mm:ss
-			 * 
-			 ** diff between no & number : number is from school notice board
-			 *
-			 ** category
-			 ** notice : 1
-			 ** announcement : 2
-			 ** competition : 3
-			 */
-			number = requestObject.getInt("number");
-			category = requestObject.getInt("category");
-			if(requestObject.containsKey("title")) {
-				title = requestObject.getString("title");
-			}
-			content = requestObject.getString("content");
-			writer = requestObject.getString("writer");
-			date = requestObject.getString("date");
-			
-			status = database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', '", date, "')");
-			break;
+//		case Commands.UPLOAD_NOTICE:
+//		case Commands.UPLOAD_NEWSLETTER:
+//		case Commands.UPLOAD_COMPETITION:
+//			/*
+//			 * Table Name : app_content
+//			 * 
+//			 * no INT(11) PK NN AI
+//			 * number INT(11) NN
+//			 * category INT(1) NN
+//			 * title VARCHAR(100) Default NULL
+//			 * content VARCHAR(5000) NN
+//			 * writer VARCHAR(10) NN
+//			 * date DATETIME NN
+//			 * 
+//			 * DATETIME format : YYYY-MM-DD hh:mm:ss
+//			 * 
+//			 ** diff between no & number : number is from school notice board
+//			 *
+//			 ** category
+//			 ** notice : 0
+//			 ** newsletter : 1
+//			 ** competition : 2
+//			 */
+//			number = requestObject.getInt("number");
+//			category = requestObject.getInt("category");
+//			if(requestObject.containsKey("title")) {
+//				title = requestObject.getString("title");
+//			}
+//			content = requestObject.getString("content");
+//			writer = requestObject.getString("writer");
+//			date = requestObject.getString("date");
+//			
+//			status = database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', '", date, "')");
+//			break;
 		case Commands.UPLOAD_RULE:
 			/*
 			 * Table Name : rule
@@ -404,8 +401,7 @@ public class InsertAction implements Actionable {
 		}
 		
 		responseObject.put("status", status);
-		readOnlyResponseObject = new EasyJsonObject(responseObject);
 		
-		return readOnlyResponseObject;
+		return responseObject;
 	}
 }

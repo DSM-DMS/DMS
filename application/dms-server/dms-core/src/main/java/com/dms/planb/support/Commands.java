@@ -8,14 +8,17 @@ package com.dms.planb.support;
  */
 
 public class Commands {
+	/*
+	 * Notice, Newsletter, Competition, Plan, Meal will parsed in dms-data-utilities
+	 */
 	public static final int INSERT										= 1; // prefix
 	
 	public static final int REGISTER_STUDENT_ACC		= 100;
 	public static final int REGISTER_TEACHER_ACC		= 101;
 	
-	public static final int UPLOAD_NOTICE						= 111;
-	public static final int UPLOAD_NEWSLETTER			= 112;
-	public static final int UPLOAD_COMPETITION			= 113;
+//	public static final int UPLOAD_NOTICE						= 111;
+//	public static final int UPLOAD_NEWSLETTER			= 112;
+//	public static final int UPLOAD_COMPETITION			= 113;
 	public static final int UPLOAD_RULE							= 114;
 	public static final int UPLOAD_QUESTION				= 115;
 	public static final int UPLOAD_ANSWER					= 116;
@@ -38,9 +41,9 @@ public class Commands {
 	public static final int MODIFY_PASSWORD					= 200;
 	public static final int MODIFY_STUDENT_DATA			= 201;
 	
-	public static final int MODIFY_NOTICE							= 211;
-	public static final int MODIFY_NEWSLETTER				= 212;
-	public static final int MODIFY_COMPETITION				= 213;
+//	public static final int MODIFY_NOTICE							= 211;
+//	public static final int MODIFY_NEWSLETTER				= 212;
+//	public static final int MODIFY_COMPETITION				= 213;
 	public static final int MODIFY_RULE								= 214;
 	public static final int MODIFY_QUESTION					= 215;
 	public static final int MODIFY_ANSWER						= 216;
@@ -60,9 +63,9 @@ public class Commands {
 	
 	public static final int DELETE_ACCOUNT						= 300;
 	
-	public static final int DELETE_NOTICE							= 311;
-	public static final int DELETE_NEWSLETTER				= 312;
-	public static final int DELETE_COMPETITION				= 313;
+//	public static final int DELETE_NOTICE							= 311;
+//	public static final int DELETE_NEWSLETTER				= 312;
+//	public static final int DELETE_COMPETITION				= 313;
 	public static final int DELETE_RULE								= 314;
 	public static final int DELETE_QUESTION						= 315;
 	public static final int DELETE_ANSWER							= 316;

@@ -4,16 +4,13 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.json.simple.JSONObject;
 
 import com.dms.planb.support.Commands;
 
 public class DeleteAction implements Actionable {
-	@SuppressWarnings("unchecked")
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		JSONObject responseObject = new JSONObject();
-		EasyJsonObject readOnlyJsonObject;
+		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		DataBase database = DataBase.getInstance();
 		
@@ -22,8 +19,8 @@ public class DeleteAction implements Actionable {
 		
 		// For post
 		int no;
-		int number;
-		int category;
+//		int number;
+//		int category;
 		
 		// For status
 		int status = 0;
@@ -34,14 +31,14 @@ public class DeleteAction implements Actionable {
 			
 			status = database.executeUpdate("DELETE FROM account WHERE id=", id);
 			break;
-		case Commands.DELETE_NOTICE:
-		case Commands.DELETE_NEWSLETTER:
-		case Commands.DELETE_COMPETITION:
-			number = requestObject.getInt("number");
-			category = requestObject.getInt("category");
-			
-			status = database.executeUpdate("DELETE FROM app_content WHERE number=", number, " AND category=", category);
-			break;
+//		case Commands.DELETE_NOTICE:
+//		case Commands.DELETE_NEWSLETTER:
+//		case Commands.DELETE_COMPETITION:
+//			number = requestObject.getInt("number");
+//			category = requestObject.getInt("category");
+//			
+//			status = database.executeUpdate("DELETE FROM app_content WHERE number=", number, " AND category=", category);
+//			break;
 		case Commands.DELETE_RULE:
 			no = requestObject.getInt("no");
 			
@@ -90,8 +87,7 @@ public class DeleteAction implements Actionable {
 		}
 		
 		responseObject.put("status", status);
-		readOnlyJsonObject = new EasyJsonObject(responseObject);
 		
-		return readOnlyJsonObject;
+		return responseObject;
 	}
 }
