@@ -6,8 +6,7 @@ $(".remote .category").children("a").eq(0).click(function() {
         color: "white"
     })
 
-    $(".remote .category").children("a").eq(0).css({
-    })
+    $(".remote .category").children("a").eq(0).css({})
 
     $(".remote .category").children("a").eq(0).children("p").animate({
         padding: "0"
@@ -101,17 +100,20 @@ $(".remote").mouseleave(function() {
         fontSize: "1em"
     })
 
-    $(".remote .category").children("a").eq(0).children("p").animate({
-        padding: "13% 0%"
-    })
+    if ($(window).width() > 992) {
+        $(".remote .category").children("a").eq(0).children("p").animate({
+            padding: "13% 0%"
+        })
 
-    $(".remote .category").children("a").eq(1).children("p").animate({
-        padding: "13% 0%"
-    })
+        $(".remote .category").children("a").eq(1).children("p").animate({
+            padding: "13% 0%"
+        })
 
-    $(".remote .category").children("a").eq(2).children("p").animate({
-        padding: "13% 0%"
-    })
+        $(".remote .category").children("a").eq(2).children("p").animate({
+            padding: "13% 0%"
+        })
+    }
+
 
     //remote backgroundColor를 원래대로
     $(".remote").animate({

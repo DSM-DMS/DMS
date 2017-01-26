@@ -116,7 +116,6 @@ header .logo p:hover {
     font-weight: bolder;
     font-size: 1.5em;
     padding: 10% 0%;
-
 }
 
 .remote .category .children a:hover {
@@ -145,5 +144,165 @@ header .logo p:hover {
         height: 300px;
         margin-right: 300px;
         margin-bottom: 300px;*/
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .remote {
+        top: 1%;
+        left: 5%;
+        width: 90%;
+        min-height: 17vh;
+        z-index: 2;
+    }
+    .remote .category {
+        display: inline-block;
+    }
+
+    .remote h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .remote a {
+        display: inline-block;
+    }
+    .remote div a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category {
+        /*float: right;*/
+    }
+    .remote .category a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category .children a {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .remote {
+        top: 1%;
+        left: 5%;
+        width: 90%;
+        min-height: 17vh;
+        z-index: 2;
+    }
+    .remote .category {
+        display: inline-block;
+    }
+
+    .remote h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .remote a {
+        display: inline-block;
+    }
+    .remote div a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category {
+        /*float: right;*/
+    }
+    .remote .category a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category .children a {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .remote {
+        top: 1%;
+        left: 5%;
+        width: 90%;
+        min-height: 17vh;
+        z-index: 2;
+    }
+    .remote .category {
+        display: inline-block;
+    }
+
+    .remote h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .remote a {
+        display: inline-block;
+    }
+    .remote div a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category {
+        /*float: right;*/
+    }
+    .remote .category a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category .children a {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .remote {
+        top: 1%;
+        left: 5%;
+        width: 90%;
+        min-height: 17vh;
+        z-index: 2;
+    }
+    .remote .category {
+        display: inline-block;
+    }
+
+    .remote h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .remote a {
+        display: inline-block;
+    }
+    .remote div a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category {
+        /*float: right;*/
+    }
+    .remote .category a p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .remote .category .children a {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
     }
 }
