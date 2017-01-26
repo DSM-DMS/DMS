@@ -79,8 +79,6 @@ public class SafeResultSet {
 
 	public int getIndexByLabel(String label) throws SQLException {
 		if (columns.indexOf(label) < 0){
-			for(String col : columns)
-				System.out.println(col);
 			throw new SQLException(INVALID_COLUMN + label);
 		}
 		return columns.indexOf(label) + 1;

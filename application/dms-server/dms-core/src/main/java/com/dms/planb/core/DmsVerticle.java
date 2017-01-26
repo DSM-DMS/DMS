@@ -10,11 +10,11 @@ package com.dms.planb.core;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.dms.planb.support.ActionPerformer;
-import org.boxfox.dms.utilities.Log;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -39,7 +39,7 @@ class DmsVerticle extends AbstractVerticle {
 	 */
 	@Override
 	public void start() throws Exception {
-		Log.l("Server started");
+		Log.l("Server started "+ ApplicationInfo.VERSION);
 		// org.boxfox.dms.utilities.Log
 		
 		server = vertx.createHttpServer();
@@ -88,9 +88,10 @@ class DmsVerticle extends AbstractVerticle {
 					response = request.response();
 					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
-					response.setStatusCode(responseObject.getInt("status"));
-					// Success : 1, Fail : 2
-					Log.l("Responsed status code : " + responseObject.getInt("status"));
+					response.setStatusCode(200);
+					// Success : 200, Fail : 2 님아 HTTP response code 검색좀 해봐요..
+					//"status"는 없는 key 입니다..
+					//Log.l("Responsed status code : " + responseObject.getInt("status"));
 					responseObject.remove("status");
 					
 					response.end(responseObject.toString());

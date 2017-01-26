@@ -19,6 +19,15 @@ public abstract class EasyJson {
             this.arr = (JSONArray)unknownObject;
         }
     }
+    
+    public String toString(){
+    	if(obj!=null){
+    		return obj.toJSONString();
+    	}else if(arr !=null){
+    		return arr.toJSONString();
+    	}
+    	return null;
+    }
 
     protected EasyJson(JSONObject obj){
         this.obj = obj;

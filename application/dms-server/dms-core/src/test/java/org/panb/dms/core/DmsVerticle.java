@@ -20,6 +20,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.dataio.meal.MealModel;
 
 public class DmsVerticle extends AbstractVerticle {
 	private HttpServer server;

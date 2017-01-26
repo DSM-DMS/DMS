@@ -1,0 +1,26 @@
+2017/1/26/9:34:23 [INFO] Server started Test 1.0.0
+2017/1/26/9:35:1 [INFO] Server started Test 1.0.0
+2017/1/26/9:35:40 [INFO] Server started Test 1.0.0
+2017/1/26/9:36:5 [INFO] Server started Test 1.0.0
+2017/1/26/9:36:5 [ERROR] java.sql.SQLException: The server time zone value '���ѹα� ǥ�ؽ�' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+2017/1/26/9:36:38 [INFO] Server started Test 1.0.0
+2017/1/26/9:36:39 [ERROR] java.sql.SQLException: The server time zone value '���ѹα� ǥ�ؽ�' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+2017/1/26/9:37:54 [INFO] Server started Test 1.0.0
+2017/1/26/9:37:55 [ERROR] java.sql.SQLException: The server time zone value '���ѹα� ǥ�ؽ�' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+2017/1/26/9:37:55 [ERROR] java.sql.SQLException: The server time zone value '���ѹα� ǥ�ؽ�' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+2017/1/26/9:38:55 [INFO] Server started Test 1.0.0
+2017/1/26/9:38:55 [INFO] Database connected successfully!
+2017/1/26/9:39:32 [INFO] Server started Test 1.0.0
+2017/1/26/9:39:32 [INFO] Database connected successfully!
+2017/1/26/9:40:19 [INFO] Server started Test 1.0.0
+2017/1/26/9:40:19 [INFO] Database connected successfully!
+2017/1/26/9:40:57 [INFO] Server started Test 1.0.0
+2017/1/26/9:40:58 [INFO] Database connected successfully!
+2017/1/26/9:41:0 [INFO] Server started Test 1.0.0
+2017/1/26/9:41:0 [INFO] Database connected successfully!
+2017/1/26/9:42:10 [INFO] Server started Test 1.0.0
+2017/1/26/9:42:10 [INFO] Database connected successfully!
+2017/1/26/9:43:19 [INFO] Server started Test 1.0.0
+2017/1/26/9:43:19 [INFO] Database connected successfully!
+2017/1/26/9:43:39 [INFO] Server started Test 1.0.0
+2017/1/26/9:43:39 [ERROR] java.sql.SQLException: The server time zone value '���ѹα� ǥ�ؽ�' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.

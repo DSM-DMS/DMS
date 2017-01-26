@@ -5,12 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.boxfox.dms.utilities.Log;
+import org.boxfox.dms.utilities.log.Log;
+
 import static org.boxfox.dms.utilities.database.QueryUtils.queryBuilder;
 
 public class DataBase {
 	private static final String DB_TARGET = "localhost:3306/dsm_dms";
-	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true";
+	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	private static final String DB_ID = "root";
 	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
 	private static DataBase instance;

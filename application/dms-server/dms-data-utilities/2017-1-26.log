@@ -1,0 +1,9 @@
+2017/1/26/9:19:38 [ERROR] java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+2017/1/26/9:20:43 [INFO] Database connected successfully!
+2017/1/26/9:22:40 [INFO] Database connected successfully!
+2017/1/26/9:25:24 [INFO] Database connected successfully!
+2017/1/26/9:25:41 [INFO] Database connected successfully!
+2017/1/26/9:32:29 [INFO] Database connected successfully!
+2017/1/26/9:33:7 [INFO] Database connected successfully!
+2017/1/26/9:44:17 [INFO] Database connected successfully!
+2017/1/26/9:45:13 [ERROR] java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)

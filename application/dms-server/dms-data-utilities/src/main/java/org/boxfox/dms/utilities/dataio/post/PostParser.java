@@ -8,6 +8,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.boxfox.dms.utilities.database.Query;
 import org.boxfox.dms.utilities.database.QueryUtils;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.dataio.Parser;
 import org.boxfox.dms.utilities.dataio.ParserUtils;
 import org.boxfox.dms.utilities.datamodel.post.Attachment;
@@ -67,7 +68,11 @@ public class PostParser<T> extends Parser {
 
 		Post post = null;
 		try {
-			int num = DataBase.getInstance().executeQuery(Query.POST.selectFormat, " ORDER BY `no` DESC LIMIT 1").nextAndReturn().getInt(1)+1;
+			int num = 0;
+			SafeResultSet rs =DataBase.getInstance().executeQuery(Query.POST.selectFormat, " ORDER BY `no` DESC LIMIT 1");
+			if(rs.next()){
+				num = rs.getInt(1)+1;
+			}
 			DataBase.getInstance().executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat, num, category, postNum, "", "", "1999-01-01", ""));
 			post = PostModel.getPost(category, postNum);
 			if (post != null) {
@@ -86,8 +91,6 @@ public class PostParser<T> extends Parser {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(post.getTitle());
-			System.out.println(post.getContent());
 		}
 		return post;
 	}

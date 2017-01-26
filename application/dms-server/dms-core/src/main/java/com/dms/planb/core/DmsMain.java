@@ -1,5 +1,8 @@
 package com.dms.planb.core;
 
+import org.boxfox.dms.utilities.dataio.post.PostChangeDetector;
+import org.boxfox.dms.utilities.log.LogErrorOutputStream;
+
 /*
  * -- Daedeok Software Meister High School --
  * Dormitory Management System(DMS) Project
@@ -26,6 +29,8 @@ import io.vertx.core.VertxOptions;
 
 class DmsMain {
 	public static void main(String[] args) {
+		PostChangeDetector.getInstance().start();
+		//System.setErr(new LogErrorOutputStream(System.err));
 		Vertx vertx = Vertx.vertx();
 		VertxOptions options = new VertxOptions();
 		options.setMaxEventLoopExecuteTime(2100000000);

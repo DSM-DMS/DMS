@@ -16,7 +16,6 @@ public class MealModel{
 			SafeResultSet rs = DataBase.getInstance().executeQuery(query);
 			if(rs.next()){
 				DayMeal dayMeal = (DayMeal)new DayMeal().fromResultSet(rs);
-				System.out.println(dayMeal);
 				if(dayMeal.isVaild()){
 					return dayMeal;
 				}

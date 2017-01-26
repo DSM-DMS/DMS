@@ -2,12 +2,12 @@ package org.boxfox.dms.utilities.dataio.post;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.Log;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.dataio.ParserUtils;
 import org.boxfox.dms.utilities.datamodel.post.Post;
+import org.boxfox.dms.utilities.log.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
@@ -79,6 +79,7 @@ public class PostChangeDetector {
 				}
 			}
 		}
+		if(count>0)
 		Log.l(QueryUtils.queryBuilder(categoryToString(category), " finish parse count : ", count));
 	}
 

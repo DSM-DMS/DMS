@@ -14,7 +14,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.*;
-import org.boxfox.dms.utilities.Log;
+import org.boxfox.dms.utilities.log.Log;
 
 
 public class AES256 {

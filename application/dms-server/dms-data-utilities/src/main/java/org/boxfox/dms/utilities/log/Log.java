@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities;
+package org.boxfox.dms.utilities.log;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,8 +20,7 @@ public class Log {
 		Calendar c = Calendar.getInstance();
 		String currentFileName = QueryUtils.queryBuilder(c.get(Calendar.YEAR), "-", c.get(Calendar.MONTH) + 1, "-",
 				c.get(Calendar.DAY_OF_MONTH), ".log");
-
-		if (logFile == null || fw == null || logFile.getName().equals(currentFileName)) {
+		if (logFile == null || fw == null || !logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);
 			try {
 				System.out.println(logFile.getPath());
