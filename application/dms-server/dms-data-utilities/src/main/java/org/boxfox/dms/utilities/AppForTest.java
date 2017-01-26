@@ -10,7 +10,7 @@ public class AppForTest {
 //	public static void main(String args[]){
 //		System.out.println(MealModel.getMealAtDate(2015, 12, 23));
 //		System.out.println(PostModel.getPost(0, 287));
-//		System.out.println(PlanModel.getPlan(2016, 12));
+//		System.out.println(PlanModel.getPlan(2016, 11));
 //		PostChangeDetector.getInstance().start();
 //		while(true){
 //			try {

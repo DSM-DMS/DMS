@@ -87,14 +87,12 @@ class DmsVerticle extends AbstractVerticle {
 					response = request.response();
 					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
-					if(requestObject.getInt("status") == 1) {
+					if(responseObject.getInt("status") == 1) {
 						response.setStatusCode(200);
 					} else {
 						response.setStatusCode(500);
 						// 500 : Internal Server Error
 					}
-					// Success : 200, Fail : 2 님아 HTTP response code 검색좀 해봐요..
-					// 아 그렇구나..
 					//	Log.l("Responsed status code : " + responseObject.getInt("status"));
 					responseObject.remove("status");
 					
