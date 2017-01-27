@@ -47,7 +47,10 @@ body {
 
 
 /*------------------------------------------ index------------------------------------------*/
+
+
 /*--------------------------notice--------------------------------*/
+
 .left .notice {
     position: relative;
     padding-left: 0%;
@@ -78,7 +81,10 @@ body {
     font-size: 0.8em;
     font-weight: 600;
 }
+
+
 /*--------------------------right--------------------------------*/
+
 .right .underline {
     background: rgb(41, 128, 185);
 }
@@ -129,4 +135,95 @@ body {
     vertical-align: middle;
     /*height: 30%;*/
     height: 25px;
+}
+
+
+/*------------------------------------------ dorm main------------------------------------------*/
+
+
+/*--------------------------etc--------------------------------*/
+
+body {
+    background-color: rgb(142, 68, 173);
+}
+
+.underline {
+    background: rgb(142, 68, 173);
+}
+
+
+/*--------------------------articlelist--------------------------------*/
+
+.articlelist {
+    width: 100%;
+}
+
+
+/*--------------------------table--------------------------------*/
+
+.articlelist table {
+    border-collapse: collapse;
+    width: 86%;
+    margin-top: 2%;
+    margin-left: 7%;
+}
+
+.articlelist table th:nth-child(1) {
+    width: 5%;
+}
+
+.articlelist table th:nth-child(2) {
+    width: 85%;
+}
+
+.articlelist table th:nth-child(3) {
+    width: 10%;
+}
+
+.articlelist table .tableheader {
+    background-color: rgb(244, 244, 244);
+}
+
+.articlelist table .tableheader th {
+    padding: 0;
+    border: 0;
+    border-top: 1px solid rgb(142, 68, 173);
+    border-bottom: 2px solid rgb(142, 68, 173);
+    color: rgb(142, 68, 173);
+    height: 32px;
+}
+
+.articlelist table td {
+    border-bottom: 1px solid rgb(142, 68, 173);
+    height: 32px;
+}
+
+.articlelist table tr:hover {
+    background-color: rgb(244, 244, 244);
+}
+
+.articlelist table td:nth-child(2) {
+    text-align: left;
+    font-weight: 900;
+    font-size: 0.9em;
+}
+
+.articlelist table td:nth-child(3), table td:nth-child(1) {
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+}
+
+
+/*------------------------------------------ dorm main article------------------------------------------*/
+.articlecontainer {
+    width: 100%;
+}
+
+/*--------------------------article--------------------------------*/
+.article {
+    line-height: 150%;
+    margin-left: 7%;
+    margin-top: 30px;
 }
