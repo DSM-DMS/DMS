@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.boxfox.dms.board.mapper.NoticeMapper">
+
+	<resultMap type="com.boxfox.dms.board.dto.DatePostContext" id="SummaryResultList">
+        <result property="title" column="title" />
+        <result property="no" column="no" />
+        <result property="writer" column="writer" />
+        <result property="date" column="date" />
+    </resultMap>
+    
+    <resultMap type="com.boxfox.dms.board.dto.DatePostContext" id="PostResultList">
+        <result property="title" column="title" />
+        <result property="no" column="no" />
+        <result property="writer" column="writer" />
+        <result property="content" column="content" />
+        <result property="date" column="date" />
+    </resultMap>
+
+	<select id="getPostsAtPage" resultMap="SummaryResultList">
+        SELECT no, title, writer FROM notice order by `no` asc LIMIT #{page}, 10;
+    </select>
+    
+    <select id="getPost" resultMap="PostResultList">
+        SELECT * FROM notice WHERE `no`=#{number}
+    </select>
+    
+</mapper>

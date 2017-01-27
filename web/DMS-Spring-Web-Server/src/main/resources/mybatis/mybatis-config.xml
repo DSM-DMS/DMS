@@ -6,5 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
     <mappers >
         <mapper resource ="/mybatis/users-mapper.xml"/>
+        <mapper resource ="/mybatis/notice-mapper.xml"/>
+        <mapper resource ="/mybatis/meal-mapper.xml"/>
     </mappers >
 </configuration>

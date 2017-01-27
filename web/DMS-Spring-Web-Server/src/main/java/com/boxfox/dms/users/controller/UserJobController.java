@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.boxfox.dms.users.dao.UserDAO;
 import com.boxfox.dms.users.dao.UserDAOImpl;
 
 @Controller
@@ -13,7 +14,7 @@ import com.boxfox.dms.users.dao.UserDAOImpl;
 public class UserJobController {
 
 	@Autowired
-	private UserDAOImpl userDAO;
+	private UserDAO userDAO;
 
 	@RequestMapping("/login")
 	public @ResponseBody String login(@RequestParam String id, @RequestParam String password) {

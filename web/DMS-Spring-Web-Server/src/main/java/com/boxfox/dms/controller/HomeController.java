@@ -1,0 +1,57 @@
+package com.boxfox.dms.controller;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.boxfox.dms.board.dao.NoticeDAOImpl;
+import com.boxfox.dms.board.dto.DatePostContext;
+import com.boxfox.dms.meal.dao.MealDAOImpl;
+import com.boxfox.dms.meal.dto.DayMealDTO;
+import com.boxfox.dms.users.dao.UserDAOImpl;
+import com.boxfox.dms.users.dto.UserDTO;
+import com.boxfox.dms.users.mapper.UserMapper;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+	@Autowired
+    private NoticeDAOImpl noticeDAO;
+	
+	@Autowired
+	private MealDAOImpl mealDAO;
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		List<DatePostContext> list = noticeDAO.getPostsAtPage(0);
+		for(int i=1; i<=5&& i <=list.size();i++){
+			model.addAttribute("title"+i, list.get(i-1).getTitle());
+		}
+		DayMealDTO meal = mealDAO.getMealToday();
+		System.out.println(meal.getDate());
+		model.addAttribute("breakfast", meal.getBreakfast());
+		model.addAttribute("lunch", meal.getLunch());
+		model.addAttribute("dinner", meal.getDinner());
+		return "index";
+	}
+	
+}
