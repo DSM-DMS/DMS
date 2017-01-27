@@ -16,10 +16,10 @@ body {
 
 .frame {
     position: relative;
-    width: 48%;
+    width: 50%;
     height: 100%;
     float: left;
-    margin-left: 2%;
+    /*margin-left: 2%;*/
     /*overflow-x: hidden;*/
 }
 
@@ -30,6 +30,7 @@ body {
 .frame ul {
     position: relative;
     padding-left: 0%;
+    margin-left: 7%;
 }
 
 .frame ul li {
@@ -60,6 +61,7 @@ body {
 
 .frame .frametitle {
     position: relative;
+    margin-left: 7%;
     /*height: 16%;*/
 }
 
@@ -80,6 +82,7 @@ body {
     position: relative;
     height: 88%;
     width: 93%;
+    margin-left: 7%;
 }
 
 .food .meal {

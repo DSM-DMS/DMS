@@ -167,6 +167,7 @@ $(".remote .category .children a").click(function(e) {
             "border": "2px solid white"
         }
     }).appendTo(".remote");
+
     console.log($(this).offset().top - $(".remote").offset().top);
     console.log($(this).offset().top);
     console.log($(".remote").offset().top);

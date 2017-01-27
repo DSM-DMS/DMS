@@ -1,4 +1,6 @@
-@import "../css/remote.css"; /*remote.css로 수정필요*/
+@import "../css/remote.css";
+
+/*remote.css로 수정필요*/
 
 body {
     /*배경색
@@ -13,7 +15,7 @@ body {
     position: absolute;
     top: 20vh;
     left: 16%;
-    height: 70%;
+    min-height: 70%;
     width: 80%;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
 }
@@ -26,8 +28,11 @@ body {
     /*overflow-x: hidden;*/
 }
 
-.frame h1 {
+.frame .frametitle {
     margin-left: 7%;
+}
+
+.frame h1 {
     margin-bottom: 1%;
 }
 
@@ -35,8 +40,93 @@ body {
     position: relative;
     right: 0%;
     height: 8px;
-    margin-left: 7%;
     margin-right: 0%;
-    width: 90%;
+    width: 93%;
     background: rgb(211, 84, 0);
+}
+
+
+/*------------------------------------------ index------------------------------------------*/
+/*--------------------------notice--------------------------------*/
+.left .notice {
+    position: relative;
+    padding-left: 0%;
+    margin-left: 7%;
+}
+
+.left .notice li {
+    list-style-type: none;
+    margin: 4% 0%;
+    width: 93%;
+}
+
+.left .notice li .title {
+    display: inline-block;
+    font-size: 1.3em;
+    font-weight: 600;
+    width: 80%;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.left .notice li p.date {
+    color: gray;
+    float: right;
+    vertical-align: bottom;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+/*--------------------------right--------------------------------*/
+.right .underline {
+    background: rgb(41, 128, 185);
+}
+
+.right .menues {
+    position: relative;
+    height: 88%;
+    width: 93%;
+    margin-left: 7%;
+}
+
+.right .meal {
+    position: relative;
+    height: 20%;
+    margin: 16px 0;
+}
+
+.right .meal h2 {
+    /*float: left;*/
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 16px;
+    /*padding: 5% 0%;*/
+}
+
+.right .meal p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70%;
+    margin-left: 4%;
+    /*float: right;*/
+}
+
+.right .info {
+    position: relative;
+    width: 90%;
+    background-color: #f0f0f0;
+    display: inline-block;
+    transition: all 0.5s ease;
+}
+
+.right .info:hover {
+    background-color: rgb(41, 128, 185);
+    color: white;
+}
+
+.right img {
+    vertical-align: middle;
+    /*height: 30%;*/
+    height: 25px;
 }
