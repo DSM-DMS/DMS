@@ -37,9 +37,6 @@ public class SelectAction implements Actionable {
 		int month;
 		int date;
 		
-		// For post list
-		int count; // JSON Object's sequence count
-		
 		switch(command) {
 		case Commands.LOAD_MYPAGE:
 			number = requestObject.getInt("number");
@@ -93,8 +90,6 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_NOTICE_LIST:
 		case Commands.LOAD_NEWSLETTER_LIST:
 		case Commands.LOAD_COMPETITION_LIST:
-			count = 1;
-			
 			category = requestObject.getInt("category");
 			
 			resultSet = database.executeQuery("SELECT * FROM app_content WHERE category=", category);
@@ -112,9 +107,18 @@ public class SelectAction implements Actionable {
 			responseObject.put("result", array);
 			
 			break;
-		case Commands.LOAD_QNA_LIST:
-			count = 1;
+		case Commands.LOAD_RULE_LIST:
+			resultSet = database.executeQuery("SELECT * FROM rule");
 			
+			while(resultSet.next()) {
+				tempObject.clear();
+				
+				tempObject.put("no", resultSet.getInt("no"));
+				tempObject.put("title", resultSet.getString("title"));
+			}
+			
+			break;
+		case Commands.LOAD_QNA_LIST:
 			resultSet = database.executeQuery("SELECT * FROM qna");
 			
 			while(resultSet.next()) {
@@ -132,8 +136,6 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_FAQ_LIST:
-			count = 1;
-			
 			resultSet = database.executeQuery("SELECT * FROM faq");
 			
 			while(resultSet.next()) {
@@ -148,8 +150,6 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY_LIST:
-			count = 1;
-			
 			resultSet = database.executeQuery("SELECT * FROM facility_report");
 			
 			while(resultSet.next()) {
@@ -170,8 +170,6 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_AFTERSCHOOL_LIST:
-			count = 1;
-			
 			resultSet = database.executeQuery("SELECT * FROM afterschool_list");
 			
 			while(resultSet.next()) {
@@ -236,8 +234,6 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_QNA_COMMENT:
-			count = 1;
-			
 			qnaNo = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", qnaNo);
@@ -295,17 +291,17 @@ public class SelectAction implements Actionable {
 			responseObject.put("seat", resultSet.getInt("seat"));
 			
 			break;
-		case Commands.LOAD_STAY_STATUS:
-			// Apply on a monthly basis
-			id = requestObject.getString("id");
-			
-			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
-			resultSet.next();
-			
-			responseObject.put("value", resultSet.getInt("value"));
-			responseObject.put("date", resultSet.getString("date"));
-			
-			break;
+//		case Commands.LOAD_STAY_STATUS:
+//			// Apply on a monthly basis
+//			id = requestObject.getString("id");
+//			
+//			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
+//			resultSet.next();
+//			
+//			responseObject.put("value", resultSet.getInt("value"));
+//			responseObject.put("date", resultSet.getString("date"));
+//			
+//			break;
 		case Commands.LOAD_GOINGOUT_STATUS:
 			id = requestObject.getString("id");
 			
@@ -331,18 +327,18 @@ public class SelectAction implements Actionable {
 			}
 			
 			break;
-		case Commands.LOAD_AFTERSCHOOL_STATUS:
-			count = 1;
-			
-			id = requestObject.getString("id");
-			
-			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
-			
-			while(resultSet.next()) {
-				responseObject.put("sequence".concat(Integer.toString(count++)), resultSet.getInt("no"));
-			}
-			
-			break;
+//		case Commands.LOAD_AFTERSCHOOL_STATUS:
+//			count = 1;
+//			
+//			id = requestObject.getString("id");
+//			
+//			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
+//			
+//			while(resultSet.next()) {
+//				responseObject.put("sequence".concat(Integer.toString(count++)), resultSet.getInt("no"));
+//			}
+//			
+//			break;
 		case Commands.LOAD_MEAL:
 			year = requestObject.getInt("year");
 			month = requestObject.getInt("month");

@@ -93,10 +93,11 @@ public class Commands {
 	public static final int LOAD_NOTICE_LIST						= 411;
 	public static final int LOAD_NEWSLETTER_LIST			= 412;
 	public static final int LOAD_COMPETITION_LIST		= 413;
-	public static final int LOAD_QNA_LIST							= 414;
-	public static final int LOAD_FAQ_LIST							= 415;
-	public static final int LOAD_REPORT_FACILITY_LIST	= 416;
-	public static final int LOAD_AFTERSCHOOL_LIST		= 417;
+	public static final int LOAD_RULE_LIST							= 414;
+	public static final int LOAD_QNA_LIST							= 415;
+	public static final int LOAD_FAQ_LIST							= 416;
+	public static final int LOAD_REPORT_FACILITY_LIST	= 417;
+	public static final int LOAD_AFTERSCHOOL_LIST		= 418;
 	
 	public static final int LOAD_NOTICE								= 421;
 	public static final int LOAD_NEWSLETTER					= 422;
