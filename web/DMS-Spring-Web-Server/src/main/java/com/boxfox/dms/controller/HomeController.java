@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.boxfox.dms.board.dao.FacilityDAOImpl;
 import com.boxfox.dms.board.dao.NoticeDAOImpl;
+import com.boxfox.dms.board.dao.QnaDAOImpl;
 import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.mapper.UserMapper;
 import com.boxfox.dms.meal.dao.MealDAOImpl;
@@ -41,6 +42,9 @@ public class HomeController {
 	
 	@Autowired
 	private MealDAOImpl mealDAO;
+
+	@Autowired
+	private QnaDAOImpl qnaDAO;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -52,11 +56,11 @@ public class HomeController {
 			model.addAttribute("title"+i, list.get(i-1).getTitle());
 		}
 		DayMealDTO meal = mealDAO.getMealToday();
-		System.out.println(meal.getDate());
 		model.addAttribute("breakfast", meal.getBreakfast());
 		model.addAttribute("lunch", meal.getLunch());
 		model.addAttribute("dinner", meal.getDinner());
 		facilityDAO.getPostsAtPage(0);
+		qnaDAO.getPostsAtPage(0);
 		return "index";
 	}
 	

@@ -16,8 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="com.boxfox.dms.board.dto.FacilityReportContext" id="ResultList">
         <result property="title" column="title" />
         <result property="no" column="no" />
+        <result property="room" column="room"/>
         <result property="writer" column="writer" />
         <result property="date" column="write_date" />
+        <result property="content" column="content" />
         <result property="result" column="result" />
         <result property="resultDate" column="result_date" />
     </resultMap>
@@ -35,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <update id="setResult" parameterType="com.boxfox.dms.board.dto.FacilityReportContext">
-    	UPDATE facility_report set result=#{result}, result_date=#{resultDate}
+    	UPDATE facility_report set result=#{result}, result_date=#{resultDate} WHERE `no`=#{no}
     </update>
     
 </mapper>

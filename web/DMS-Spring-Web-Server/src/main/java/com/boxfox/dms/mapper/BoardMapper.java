@@ -8,4 +8,5 @@ public interface BoardMapper<T> {
 
 	public List<T> getPostsAtPage(@Param("page")int page);
 	public List<T> getPost(@Param("number")int number);
+	public void writePost(T obj);
 }
