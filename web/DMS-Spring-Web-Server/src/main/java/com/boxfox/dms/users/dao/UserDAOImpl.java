@@ -7,12 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.boxfox.dms.mapper.UserMapper;
 import com.boxfox.dms.response.JsonBuilder;
 import com.boxfox.dms.response.ResponseCode;
 import com.boxfox.dms.users.dto.UserDTO;
 import com.boxfox.dms.users.dto.UserModifyPasswordDTO;
 import com.boxfox.dms.users.dto.UserRenameDTO;
-import com.boxfox.dms.users.mapper.UserMapper;
 
 @Repository
 public class UserDAOImpl implements UserDAO {

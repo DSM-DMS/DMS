@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.boxfox.dms.meal.mapper.MealMapper">
+<mapper namespace="com.boxfox.dms.mapper.MealMapper">
 
 	<resultMap type="com.boxfox.dms.meal.dto.DayMealTest" id="MealResultList">
         <result property="date" column="date" />
@@ -20,8 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT * FROM meal where `date`=#{date};
     </select>
     
-    <select id="insertMealAtDate" parameterType="com.boxfox.dms.meal.dto.DayMealDTO">
-        SELECT * FROM meal where `date`='2017-1-5';
-    </select>
+    <insert id="insertMealAtDate" parameterType="com.boxfox.dms.meal.dto.DayMealDTO">
+    	REPLACE into meal values(#{date}, #{breakfast}, #{lunch}, #{dinner}, #{breakfastAllergy}, #{lunchAllergy}, #{dinnerAllergy})
+    </insert>
     
 </mapper>

@@ -8,10 +8,10 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.boxfox.dms.mapper.MealMapper;
 import com.boxfox.dms.meal.dto.DayMealDTO;
 import com.boxfox.dms.meal.dto.DayMealTest;
 import com.boxfox.dms.meal.dto.Meal;
-import com.boxfox.dms.meal.mapper.MealMapper;
 
 @Repository
 public class MealDAOImpl implements MealDAO{

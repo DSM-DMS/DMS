@@ -1,4 +1,4 @@
-package com.boxfox.dms.users.mapper;
+package com.boxfox.dms.mapper;
 
 import java.util.List;
 

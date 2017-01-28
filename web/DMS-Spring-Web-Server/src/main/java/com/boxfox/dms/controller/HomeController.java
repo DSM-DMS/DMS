@@ -15,13 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.boxfox.dms.board.dao.FacilityDAOImpl;
 import com.boxfox.dms.board.dao.NoticeDAOImpl;
 import com.boxfox.dms.board.dto.DatePostContext;
+import com.boxfox.dms.mapper.UserMapper;
 import com.boxfox.dms.meal.dao.MealDAOImpl;
 import com.boxfox.dms.meal.dto.DayMealDTO;
 import com.boxfox.dms.users.dao.UserDAOImpl;
 import com.boxfox.dms.users.dto.UserDTO;
-import com.boxfox.dms.users.mapper.UserMapper;
 
 /**
  * Handles requests for the application home page.
@@ -33,6 +34,10 @@ public class HomeController {
 
 	@Autowired
     private NoticeDAOImpl noticeDAO;
+	
+
+	@Autowired
+    private FacilityDAOImpl facilityDAO;
 	
 	@Autowired
 	private MealDAOImpl mealDAO;
@@ -51,6 +56,7 @@ public class HomeController {
 		model.addAttribute("breakfast", meal.getBreakfast());
 		model.addAttribute("lunch", meal.getLunch());
 		model.addAttribute("dinner", meal.getDinner());
+		facilityDAO.getPostsAtPage(0);
 		return "index";
 	}
 	

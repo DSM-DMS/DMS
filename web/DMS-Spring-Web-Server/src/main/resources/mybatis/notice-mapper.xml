@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.boxfox.dms.board.mapper.NoticeMapper">
+<mapper namespace="com.boxfox.dms.mapper.NoticeMapper">
 
 	<resultMap type="com.boxfox.dms.board.dto.DatePostContext" id="SummaryResultList">
         <result property="title" column="title" />
@@ -21,11 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
 	<select id="getPostsAtPage" resultMap="SummaryResultList">
-        SELECT no, title, writer FROM notice order by `no` asc LIMIT #{page}, 10;
+        SELECT no, title, writer, date FROM notice order by `no` asc LIMIT #{page}, 10;
     </select>
     
     <select id="getPost" resultMap="PostResultList">
         SELECT * FROM notice WHERE `no`=#{number}
     </select>
+    
+    <insert id="writePost" parameterType="com.boxfox.dms.board.dto.DatePostContext">
+    	INSERT into notice (title, content, writer) values(#{title}, #{content}, #{writer})
+    </insert>
     
 </mapper>

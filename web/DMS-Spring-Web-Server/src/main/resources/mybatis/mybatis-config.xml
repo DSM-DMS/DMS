@@ -8,5 +8,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource ="/mybatis/users-mapper.xml"/>
         <mapper resource ="/mybatis/notice-mapper.xml"/>
         <mapper resource ="/mybatis/meal-mapper.xml"/>
+        <mapper resource ="/mybatis/facility-mapper.xml"/>
     </mappers >
 </configuration>
