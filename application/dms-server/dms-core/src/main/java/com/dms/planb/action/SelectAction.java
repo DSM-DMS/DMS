@@ -107,17 +107,6 @@ public class SelectAction implements Actionable {
 			responseObject.put("result", array);
 			
 			break;
-		case Commands.LOAD_RULE_LIST:
-			resultSet = database.executeQuery("SELECT * FROM rule");
-			
-			while(resultSet.next()) {
-				tempObject.clear();
-				
-				tempObject.put("no", resultSet.getInt("no"));
-				tempObject.put("title", resultSet.getString("title"));
-			}
-			
-			break;
 		case Commands.LOAD_QNA_LIST:
 			resultSet = database.executeQuery("SELECT * FROM qna");
 			
@@ -129,20 +118,6 @@ public class SelectAction implements Actionable {
 				tempObject.put("question_date", resultSet.getString("question_date"));
 				tempObject.put("writer", resultSet.getString("wrtier"));
 				tempObject.put("privacy", resultSet.getInt("privacy"));
-				
-				array.add(tempObject);
-			}
-			responseObject.put("result", array);
-			
-			break;
-		case Commands.LOAD_FAQ_LIST:
-			resultSet = database.executeQuery("SELECT * FROM faq");
-			
-			while(resultSet.next()) {
-				tempObject.clear();
-				
-				tempObject.put("no", resultSet.getInt("no"));
-				tempObject.put("title", resultSet.getString("title"));
 				
 				array.add(tempObject);
 			}
@@ -203,11 +178,10 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_RULE:
-			no = requestObject.getInt("no");
-			
-			resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
+			resultSet = database.executeQuery("SELECT * FROM rule");
 			resultSet.next();
 			
+			responseObject.put("no", resultSet.getInt("no"));
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
 			
@@ -221,7 +195,7 @@ public class SelectAction implements Actionable {
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("question_content", resultSet.getString("question_content"));
 			responseObject.put("question_date", resultSet.getString("question_date"));
-			responseObject.put("questioner", resultSet.getString("questioner"));
+			responseObject.put("writer", resultSet.getString("writer"));
 			responseObject.put("privacy", resultSet.getInt("privacy"));
 			if(!resultSet.getString("answer_content").isEmpty()) {
 				responseObject.put("has_answer", true);
@@ -252,11 +226,10 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_FAQ:
-			no = requestObject.getInt("no");
-			
-			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
+			resultSet = database.executeQuery("SELECT * FROM faq");
 			resultSet.next();
 			
+			responseObject.put("no", resultSet.getInt("no"));
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
 			

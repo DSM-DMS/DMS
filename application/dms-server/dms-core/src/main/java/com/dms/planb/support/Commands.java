@@ -19,6 +19,7 @@ public class Commands {
 //	public static final int UPLOAD_NOTICE						= 111;
 //	public static final int UPLOAD_NEWSLETTER			= 112;
 //	public static final int UPLOAD_COMPETITION			= 113;
+	// notice, newsletter, competition : parsing
 	public static final int UPLOAD_RULE							= 114;
 	public static final int UPLOAD_QUESTION				= 115;
 	public static final int UPLOAD_ANSWER					= 116;
@@ -93,9 +94,9 @@ public class Commands {
 	public static final int LOAD_NOTICE_LIST						= 411;
 	public static final int LOAD_NEWSLETTER_LIST			= 412;
 	public static final int LOAD_COMPETITION_LIST		= 413;
-	public static final int LOAD_RULE_LIST							= 414;
+//	public static final int LOAD_RULE_LIST							= 414;
 	public static final int LOAD_QNA_LIST							= 415;
-	public static final int LOAD_FAQ_LIST							= 416;
+//	public static final int LOAD_FAQ_LIST							= 416;
 	public static final int LOAD_REPORT_FACILITY_LIST	= 417;
 	public static final int LOAD_AFTERSCHOOL_LIST		= 418;
 	

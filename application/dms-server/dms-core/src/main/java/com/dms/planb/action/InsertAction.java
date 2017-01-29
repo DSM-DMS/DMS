@@ -177,11 +177,11 @@ public class InsertAction implements Actionable {
 			title = requestObject.getString("title");
 			content = requestObject.getString("question_content");
 			date = requestObject.getString("question_date");
-			writer = requestObject.getString("questioner");
+			writer = requestObject.getString("writerr");
 			
 			int privacy = requestObject.getInt("privacy");
 			
-			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, questioner, privacy) VALUES('", title, "', '", content, "', '", date, "', '", writer, "', ", privacy, ")");
+			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', '", date, "', '", writer, "', ", privacy, ")");
 			break;
 		case Commands.UPLOAD_ANSWER:
 			/*
