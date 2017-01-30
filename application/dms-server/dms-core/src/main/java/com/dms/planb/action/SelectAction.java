@@ -42,15 +42,18 @@ public class SelectAction implements Actionable {
 			number = requestObject.getInt("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
-			resultSet.next();
 			
-			responseObject.put("sex", resultSet.getInt("sex"));
-			responseObject.put("status", resultSet.getInt("status"));
-			responseObject.put("name", resultSet.getString("name"));
-			responseObject.put("phone", resultSet.getString("phone"));
-			responseObject.put("p_name", resultSet.getString("p_name"));
-			responseObject.put("merit", resultSet.getInt("merit"));
-			responseObject.put("demerit", resultSet.getInt("demerit"));
+			if(resultSet.next()) {
+				responseObject.put("sex", resultSet.getInt("sex"));
+				responseObject.put("status", resultSet.getInt("status"));
+				responseObject.put("name", resultSet.getString("name"));
+				responseObject.put("phone", resultSet.getString("phone"));
+				responseObject.put("p_name", resultSet.getString("p_name"));
+				responseObject.put("merit", resultSet.getInt("merit"));
+				responseObject.put("demerit", resultSet.getInt("demerit"));
+			} else {
+				responseObject.put("status", 2);
+			}
 			
 			break;
 //		case Commands.LOAD_TEACHER_MYPAGE:
@@ -65,6 +68,7 @@ public class SelectAction implements Actionable {
 			password = (String) requestObject.get("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM account WHERE id='", id, "'");
+			
 			if(!resultSet.next() || !resultSet.getString("password").equals(password)) {
 				responseObject.put("permit", false);
 			}
@@ -79,6 +83,7 @@ public class SelectAction implements Actionable {
 			password = (String) requestObject.get("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM FROM teacher_account WHERE id='", id, "'");
+			
 			if(!resultSet.next() || resultSet.getString("password").equals(password)) {
 				responseObject.put("permit", false);
 			}
@@ -94,7 +99,8 @@ public class SelectAction implements Actionable {
 			
 			resultSet = database.executeQuery("SELECT * FROM app_content WHERE category=", category);
 			
-			while(resultSet.next()) {
+			if(resultSet.next()) {
+				do {
 				tempObject.clear();
 				
 				tempObject.put("number", resultSet.getInt("number"));
@@ -103,62 +109,79 @@ public class SelectAction implements Actionable {
 				tempObject.put("date", resultSet.getString("date"));
 				
 				array.add(tempObject);
+				} while(resultSet.next());
+			} else {
+				responseObject.put("status", 2);
 			}
+			
 			responseObject.put("result", array);
 			
 			break;
 		case Commands.LOAD_QNA_LIST:
 			resultSet = database.executeQuery("SELECT * FROM qna");
 			
-			while(resultSet.next()) {
-				tempObject.clear();
-				
-				tempObject.put("no", resultSet.getInt("no"));
-				tempObject.put("title", resultSet.getString("title"));
-				tempObject.put("question_date", resultSet.getString("question_date"));
-				tempObject.put("writer", resultSet.getString("wrtier"));
-				tempObject.put("privacy", resultSet.getInt("privacy"));
-				
-				array.add(tempObject);
+			if(resultSet.next()) {
+				do {
+					tempObject.clear();
+					
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("question_date", resultSet.getString("question_date"));
+					tempObject.put("writer", resultSet.getString("wrtier"));
+					tempObject.put("privacy", resultSet.getInt("privacy"));
+					
+					array.add(tempObject);
+				} while(resultSet.next());
+			} else {
+				responseObject.put("status", 2);
 			}
+			
 			responseObject.put("result", array);
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY_LIST:
 			resultSet = database.executeQuery("SELECT * FROM facility_report");
 			
-			while(resultSet.next()) {
-				tempObject.clear();
-				
-				tempObject.put("no", resultSet.getInt("no"));
-				tempObject.put("title", resultSet.getString("title"));
-				tempObject.put("room", resultSet.getInt("room"));
-				tempObject.put("write_date", resultSet.getString("write_date"));
-				tempObject.put("writer", resultSet.getInt("writer"));
-				if(!resultSet.getString("result").isEmpty()) {
-					tempObject.put("has_result", true);
-				}
-				
-				array.add(tempObject);
+			if(resultSet.next()) {
+				do {
+					tempObject.clear();
+					
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("room", resultSet.getInt("room"));
+					tempObject.put("write_date", resultSet.getString("write_date"));
+					tempObject.put("writer", resultSet.getInt("writer"));
+					if(!resultSet.getString("result").isEmpty()) {
+						tempObject.put("has_result", true);
+					}
+					
+					array.add(tempObject);
+				} while(resultSet.next());
 			}
+			
 			responseObject.put("result", array);
 			
 			break;
 		case Commands.LOAD_AFTERSCHOOL_LIST:
 			resultSet = database.executeQuery("SELECT * FROM afterschool_list");
 			
-			while(resultSet.next()) {
-				tempObject.clear();
-				
-				tempObject.put("no", resultSet.getInt("no"));
-				tempObject.put("title", resultSet.getString("title"));
-				tempObject.put("target", resultSet.getInt("target"));
-				tempObject.put("place", resultSet.getString("place"));
-				tempObject.put("day", resultSet.getInt("day"));
-				tempObject.put("instuctor", resultSet.getString("instructor"));
-
-				array.add(tempObject);
+			if(resultSet.next()) {
+				do {
+					tempObject.clear();
+					
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("target", resultSet.getInt("target"));
+					tempObject.put("place", resultSet.getString("place"));
+					tempObject.put("day", resultSet.getInt("day"));
+					tempObject.put("instuctor", resultSet.getString("instructor"));
+	
+					array.add(tempObject);
+				} while(resultSet.next());
+			} else {
+				responseObject.put("status", 2);
 			}
+			
 			responseObject.put("result", array);
 			
 			break;
@@ -179,31 +202,37 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_RULE:
 			resultSet = database.executeQuery("SELECT * FROM rule");
-			resultSet.next();
 			
-			responseObject.put("no", resultSet.getInt("no"));
-			responseObject.put("title", resultSet.getString("title"));
-			responseObject.put("content", resultSet.getString("content"));
+			if(resultSet.next()) {
+				responseObject.put("no", resultSet.getInt("no"));
+				responseObject.put("title", resultSet.getString("title"));
+				responseObject.put("content", resultSet.getString("content"));
+			} else {
+				responseObject.put("status", 2);
+			}
 			
 			break;
 		case Commands.LOAD_QNA:
 			no = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
-			resultSet.next();
 			
-			responseObject.put("title", resultSet.getString("title"));
-			responseObject.put("question_content", resultSet.getString("question_content"));
-			responseObject.put("question_date", resultSet.getString("question_date"));
-			responseObject.put("writer", resultSet.getString("writer"));
-			responseObject.put("privacy", resultSet.getInt("privacy"));
-			if(!resultSet.getString("answer_content").isEmpty()) {
-				responseObject.put("has_answer", true);
-				responseObject.put("answer_content", resultSet.getString("answer_content"));
-				responseObject.put("answer_date", resultSet.getString("answer_date"));
-			}
-			else {
-				responseObject.put("hasAnswer", false);
+			if(resultSet.next()) {
+				responseObject.put("title", resultSet.getString("title"));
+				responseObject.put("question_content", resultSet.getString("question_content"));
+				responseObject.put("question_date", resultSet.getString("question_date"));
+				responseObject.put("writer", resultSet.getString("writer"));
+				responseObject.put("privacy", resultSet.getInt("privacy"));
+				if(!resultSet.getString("answer_content").isEmpty()) {
+					responseObject.put("has_answer", true);
+					responseObject.put("answer_content", resultSet.getString("answer_content"));
+					responseObject.put("answer_date", resultSet.getString("answer_date"));
+				}
+				else {
+					responseObject.put("hasAnswer", false);
+				}
+			} else {
+				responseObject.put("status", 2);
 			}
 			
 			break;
@@ -212,7 +241,8 @@ public class SelectAction implements Actionable {
 			
 			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", qnaNo);
 			
-			while(resultSet.next()) {
+			if(resultSet.next()) {
+				do {
 				tempObject.clear();
 				
 				tempObject.put("writer", resultSet.getString("writer"));
@@ -220,6 +250,9 @@ public class SelectAction implements Actionable {
 				tempObject.put("content", resultSet.getString("content"));
 				
 				array.add(tempObject);
+				} while(resultSet.next());
+			} else {
+				responseObject.put("status", 2);
 			}
 			
 			responseObject.put("result", array);
@@ -227,30 +260,36 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_FAQ:
 			resultSet = database.executeQuery("SELECT * FROM faq");
-			resultSet.next();
 			
-			responseObject.put("no", resultSet.getInt("no"));
-			responseObject.put("title", resultSet.getString("title"));
-			responseObject.put("content", resultSet.getString("content"));
+			if(resultSet.next()) {
+				responseObject.put("no", resultSet.getInt("no"));
+				responseObject.put("title", resultSet.getString("title"));
+				responseObject.put("content", resultSet.getString("content"));
+			} else {
+				responseObject.put("status", 2);
+			}
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY:
 			no = requestObject.getInt("no");
 			
 			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
-			resultSet.next();
 			
-			responseObject.put("title", resultSet.getString("title"));
-			responseObject.put("content", resultSet.getString("content"));
-			responseObject.put("room", resultSet.getInt("room"));
-			responseObject.put("write_date", resultSet.getString("write_date"));
-			responseObject.put("writer", resultSet.getString("writer"));
-			if(!resultSet.getString("result").isEmpty()){
-				responseObject.put("has_result", true);
-				responseObject.put("result", resultSet.getString("result"));
-				responseObject.put("result_date", resultSet.getString("result_date"));
+			if(resultSet.next()) {
+				responseObject.put("title", resultSet.getString("title"));
+				responseObject.put("content", resultSet.getString("content"));
+				responseObject.put("room", resultSet.getInt("room"));
+				responseObject.put("write_date", resultSet.getString("write_date"));
+				responseObject.put("writer", resultSet.getString("writer"));
+				if(!resultSet.getString("result").isEmpty()){
+					responseObject.put("has_result", true);
+					responseObject.put("result", resultSet.getString("result"));
+					responseObject.put("result_date", resultSet.getString("result_date"));
+				} else {
+					responseObject.put("has_result", false);
+				}
 			} else {
-				responseObject.put("has_result", false);
+				responseObject.put("status", 2);
 			}
 			
 			break;
@@ -258,45 +297,57 @@ public class SelectAction implements Actionable {
 			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id='", id, "'");
-			resultSet.next();
 			
-			responseObject.put("class", resultSet.getInt("class"));
-			responseObject.put("seat", resultSet.getInt("seat"));
+			if(resultSet.next()) {
+				responseObject.put("class", resultSet.getInt("class"));
+				responseObject.put("seat", resultSet.getInt("seat"));
+			} else {
+				responseObject.put("status", 2);
+			}
 			
 			break;
-//		case Commands.LOAD_STAY_STATUS:
-//			// Apply on a monthly basis
-//			id = requestObject.getString("id");
-//			
-//			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
-//			resultSet.next();
-//			
-//			responseObject.put("value", resultSet.getInt("value"));
-//			responseObject.put("date", resultSet.getString("date"));
-//			
-//			break;
+		case Commands.LOAD_STAY_STATUS:
+			// Apply on a monthly basis
+			id = requestObject.getString("id");
+			
+			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
+			
+			if(resultSet.next()) {
+				responseObject.put("value", resultSet.getInt("value"));
+				responseObject.put("date", resultSet.getString("date"));
+			} else {
+				responseObject.put("status", 2);
+			}
+			
+			break;
 		case Commands.LOAD_GOINGOUT_STATUS:
 			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
-			resultSet.next();
 			
-			responseObject.put("dept_date", resultSet.getString("dept_date"));
-			responseObject.put("reason", resultSet.getString("reason"));
+			if(resultSet.next()) {
+				responseObject.put("dept_date", resultSet.getString("dept_date"));
+				responseObject.put("reason", resultSet.getString("reason"));
+			} else {
+				responseObject.put("status", 2);
+			}
 			
 			break;
 		case Commands.LOAD_MERIT_APPLY_STATUS:
 			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id='", id, "'");
-			resultSet.next();
 			
-			responseObject.put("content", resultSet.getString("content"));
-			if(!resultSet.getString("target").isEmpty()) {
-				responseObject.put("has_target", true);
-				responseObject.put("target", resultSet.getString("target"));
+			if(resultSet.next()) {
+				responseObject.put("content", resultSet.getString("content"));
+				if(!resultSet.getString("target").isEmpty()) {
+					responseObject.put("has_target", true);
+					responseObject.put("target", resultSet.getString("target"));
+				} else {
+					responseObject.put("hasTarget", false);
+				}
 			} else {
-				responseObject.put("hasTarget", false);
+				responseObject.put("status", 2);
 			}
 			
 			break;
@@ -331,10 +382,13 @@ public class SelectAction implements Actionable {
 			number = requestObject.getInt("number");
 			
 			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
-			resultSet.next();
 			
-			responseObject.put("merit", resultSet.getInt("merit"));
-			responseObject.put("demerit", resultSet.getInt("demerit"));
+			if(resultSet.next()) {
+				responseObject.put("merit", resultSet.getInt("merit"));
+				responseObject.put("demerit", resultSet.getInt("demerit"));
+			} else {
+				responseObject.put("status", 2);
+			}
 			
 			break;
 		}

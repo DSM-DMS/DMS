@@ -88,11 +88,15 @@ class DmsVerticle extends AbstractVerticle {
 					response.putHeader("Content-type", "application/json; charset=utf-8");
 					
 					if(responseObject.containsKey("status")) {
-						if(responseObject.getInt("status") == 1) {
-							response.setStatusCode(200);
-						} else {
+						if(responseObject.getInt("status") == 0) {
 							response.setStatusCode(500);
 							// 500 : Internal Server Error
+						} else if(responseObject.getInt("status") == 1) {
+							response.setStatusCode(200);
+							// 200 : Success
+						} else if(responseObject.getInt("status") == 2) {
+							response.setStatusCode(404);
+							// 404 : Can't find
 						}
 					}
 					else {
