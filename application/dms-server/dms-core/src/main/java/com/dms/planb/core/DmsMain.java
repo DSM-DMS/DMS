@@ -1,7 +1,6 @@
 package com.dms.planb.core;
 
 import org.boxfox.dms.utilities.dataio.post.PostChangeDetector;
-import org.boxfox.dms.utilities.log.LogErrorOutputStream;
 
 /*
  * -- Daedeok Software Meister High School --

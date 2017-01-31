@@ -25,6 +25,9 @@ public class InsertAction implements Actionable {
 //		int number;
 //		int category;
 		
+		// For stay_apply
+		int value;
+		
 		String title = null;
 		String content = null;
 		String writer = null;
@@ -45,6 +48,14 @@ public class InsertAction implements Actionable {
 		 */
 		switch(command) {
 		case Commands.REGISTER_STUDENT_ACC:
+			/*
+			 * Table Name : stay_apply_default
+			 * 
+			 * id VARCHAR(20) PK NN
+			 * value INT(1) Default 4
+			 */
+			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4)");
+			
 			 /*
 			  * Table Name : account
 			  * 
@@ -356,10 +367,10 @@ public class InsertAction implements Actionable {
 			 * Stay : 4
 			 */
 			id = requestObject.getString("id");
-			int extensionValue = requestObject.getInt("value");
+			value = requestObject.getInt("value");
 			date = requestObject.getString("date");
 			
-			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", extensionValue, ", '", date, "')");
+			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", value, ", '", date, "')");
 			
 			break;
 		case Commands.APPLY_GOINGOUT:

@@ -53,6 +53,10 @@ public class SelectAction implements Actionable {
 				responseObject.put("demerit", resultSet.getInt("demerit"));
 			} else {
 				responseObject.put("status", 2);
+				/*
+				 *  Can't find from DB, set status 2 and return 404 status code.
+				 *  Below from here, same about this context will same meaning.
+				 */
 			}
 			
 			break;
@@ -307,14 +311,31 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_STAY_STATUS:
-			// Apply on a monthly basis
 			id = requestObject.getString("id");
 			
 			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
 			
 			if(resultSet.next()) {
-				responseObject.put("value", resultSet.getInt("value"));
-				responseObject.put("date", resultSet.getString("date"));
+				do {
+					tempObject.clear();
+					
+					tempObject.put("value", resultSet.getInt("value"));
+					tempObject.put("date", resultSet.getString("date"));
+					
+					array.add(tempObject);
+				} while(resultSet.next());
+			}
+			
+			responseObject.put("result", array);
+			
+			break;
+		case Commands.LOAD_STAY_DEFAULT:
+			id = requestObject.getString("id");
+			
+			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHEER id='", id, "'");
+			
+			if(resultSet.next()) {
+				responseObject.put("value", resultSet.getString("value"));
 			} else {
 				responseObject.put("status", 2);
 			}
