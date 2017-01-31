@@ -49,6 +49,8 @@ public class InsertAction implements Actionable {
 		switch(command) {
 		case Commands.REGISTER_STUDENT_ACC:
 			/*
+			 * Set stay apply default value when register account
+			 * 
 			 * Table Name : stay_apply_default
 			 * 
 			 * id VARCHAR(20) PK NN
@@ -57,6 +59,8 @@ public class InsertAction implements Actionable {
 			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4)");
 			
 			 /*
+			  * Set id, password, .. to account table
+			  * 
 			  * Table Name : account
 			  * 
 			  * idx INT(11) PK NN AI
@@ -73,6 +77,8 @@ public class InsertAction implements Actionable {
 			status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
 			
 			/*
+			 * Set student's data to student_data table
+			 * 
 			 * Table Name : student_data
 			 * 
 			 * number INT(11) PK NN
@@ -125,42 +131,10 @@ public class InsertAction implements Actionable {
 			status = database.executeUpdate("INSERT INTO teacher_account(id, password, session_key, permission, name) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ", '", teacherName, "')");
 			
 			break;
-//		case Commands.UPLOAD_NOTICE:
-//		case Commands.UPLOAD_NEWSLETTER:
-//		case Commands.UPLOAD_COMPETITION:
-//			/*
-//			 * Table Name : app_content
-//			 * 
-//			 * no INT(11) PK NN AI
-//			 * number INT(11) NN
-//			 * category INT(1) NN
-//			 * title VARCHAR(100) Default NULL
-//			 * content VARCHAR(5000) NN
-//			 * writer VARCHAR(10) NN
-//			 * date DATETIME NN
-//			 * 
-//			 * DATETIME format : YYYY-MM-DD hh:mm:ss
-//			 * 
-//			 ** diff between no & number : number is from school notice board
-//			 *
-//			 ** category
-//			 ** notice : 0
-//			 ** newsletter : 1
-//			 ** competition : 2
-//			 */
-//			number = requestObject.getInt("number");
-//			category = requestObject.getInt("category");
-//			if(requestObject.containsKey("title")) {
-//				title = requestObject.getString("title");
-//			}
-//			content = requestObject.getString("content");
-//			writer = requestObject.getString("writer");
-//			date = requestObject.getString("date");
-//			
-//			status = database.executeUpdate("INSERT INTO app_content(number, category, title, content, writer, date) VALUES(", number, ", ", category, ", '", title, "', '", content, "', '", writer, "', '", date, "')");
-//			break;
 		case Commands.UPLOAD_RULE:
 			/*
+			 * Rules of dormitory
+			 * 
 			 * Table Name : rule
 			 * 
 			 * no INT(11) PK NN AI
@@ -175,6 +149,8 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_QUESTION:
 			/*
+			 * Question in Q&A
+			 * 
 			 * Table Name : qna
 			 * 
 			 * no INT(11) PK NN AI
@@ -200,6 +176,8 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_ANSWER:
 			/*
+			 * Answer in Q&A
+			 * 
 			 * Reference UPLOAD_QUESTION
 			 * Upload answer based question no
 			 */
@@ -212,6 +190,8 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_QNA_COMMENT:
 			/*
+			 * Q&A comment in Q&A
+			 * 
 			 * Table Name : qna_comment
 			 * 
 			 * idx INT(11) PK NN AI
@@ -235,6 +215,8 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_FAQ:
 			/*
+			 * Frequently asked questions
+			 * 
 			 * Table Name : faq
 			 * 
 			 * no INT(11) PK NN AI
@@ -249,6 +231,8 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_AFTERSCHOOL:
 			/*
+			 * After school list
+			 * 
 			 * Table Name : afterschool_list
 			 * 
 			 * no INT(11) PK NN AI
@@ -271,6 +255,8 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
 			/*
+			 * Report facilities in dormitory
+			 * 
 			 * Table Name : facility_report
 			 * 
 			 * no INT(11) PK NN AI
@@ -294,7 +280,7 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.UPLOAD_REPORT_RESULT:
 			/*
-			 * Reference UPLOAD_REPORT_FACILITY
+			 * Table Name : Reference UPLOAD_REPORT_FACILITY
 			 * Upload result based report no
 			 */
 			no = requestObject.getInt("no");
@@ -303,45 +289,13 @@ public class InsertAction implements Actionable {
 			status = database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
 			
 			break;
-//		case Commands.UPLOAD_MEAL:
-//			/*
-//			 * Table Name : meal
-//			 * 
-//			 * date DATE PK NN
-//			 * breakfast VARCHAR(100) NN
-//			 * lunch VARCHAR(100) NN
-//			 * dinner VARCHAR(100) NN
-//			 * breakfast_allergy VARCHAR(100) NN
-//			 * lunch_allergy VARCHAR(100) NN
-//			 * dinner_allergy VARCHAR(100) NN
-//			 * 
-//			 * DATE format : YYYY-MM-DD
-//			 */
-//			date = requestObject.getString("no");
-//			String breakfast = requestObject.getString("breakfast");
-//			String lunch = requestObject.getString("lunch");
-//			String dinner = requestObject.getString("dinner");
-//			String breakfast_allergy = requestObject.getString("breakfast_allergy");
-//			String lunch_allergy = requestObject.getString("lunch_allergy");
-//			String dinner_allergy = requestObject.getString("dinner_allergy");
-//			
-//			status = database.executeUpdate("INSERT INTO meal(date, breakfast, lunch, dinner, breakfast_allergy, lunch_allergy, dinner_allergy) VALUES('", date, "', '", breakfast, "', '", lunch, "', '", dinner, "', '", breakfast_allergy, "', '", lunch_allergy, "', '", dinner_allergy, "')");			
-//			break;
-//		case Commands.UPLOAD_PLAN:
-//			/*
-//			 * Table Name : plan
-//			 * 
-//			 * year INT(4) PK NN
-//			 * month INT(2) PK NN
-//			 * date VARCHAR(5000) NN
-//			 */
-//			
-//			break;
 		case Commands.APPLY_EXTENTION:
 			/*
+			 * Apply extension - about class and seat
+			 * 
 			 * Table Name : extension_apply
 			 * 
-			 * id INT(11) PK NN
+			 * id VARCHAR(20) PK NN
 			 * class INT(1) NN
 			 * seat INT(2) NN
 			 */
@@ -354,9 +308,11 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.APPLY_STAY:
 			/*
+			 * Apply stay - about value of date
+			 * 
 			 * Table Name : stay_apply
 			 * 
-			 * id INT(11) PK NN
+			 * id VARCHAR(20) NN
 			 * value INT(1) NN Default 4
 			 * date DATE NN Default 'all'
 			 * 
@@ -375,9 +331,11 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.APPLY_GOINGOUT:
 			/*
+			 * Apply goingout - about departure date and reason
+			 * 
 			 * Table Name : goingout_apply
 			 * 
-			 * id INT(11) PK NN
+			 * id VARCHAR(20) PK NN
 			 * dept_date DATE NN
 			 * reason VARCHAR(100) NN
 			 * 
@@ -392,10 +350,12 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.APPLY_MERIT:
 			/*
+			 * Apply merit - about target and content
+			 * 
 			 * Table Name : merit_apply
 			 * 
 			 * no INT(11) PK NN AI
-			 * id INT(11) NN
+			 * id VARCHAR(20) NN
 			 * target VARCHAR(45) Default NULL
 			 * content VARCHAR(500) NN
 			 */
@@ -413,9 +373,11 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.APPLY_AFTERSCHOOL:
 			/*
+			 * Apply after school - target number 
+			 * 
 			 * Table Name : afterschool_apply
 			 * 
-			 * id INT(11) NN
+			 * id VARCHAR(20) NN
 			 * no INT(11) NN
 			 */
 			id = requestObject.getString("id");
