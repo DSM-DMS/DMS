@@ -30,15 +30,8 @@ public class DeleteAction implements Actionable {
 			id = requestObject.getString("id");
 			
 			status = database.executeUpdate("DELETE FROM account WHERE id=", id);
+			
 			break;
-//		case Commands.DELETE_NOTICE:
-//		case Commands.DELETE_NEWSLETTER:
-//		case Commands.DELETE_COMPETITION:
-//			number = requestObject.getInt("number");
-//			category = requestObject.getInt("category");
-//			
-//			status = database.executeUpdate("DELETE FROM app_content WHERE number=", number, " AND category=", category);
-//			break;
 		case Commands.DELETE_RULE:
 			no = requestObject.getInt("no");
 			
@@ -52,13 +45,13 @@ public class DeleteAction implements Actionable {
 			
 			break;
 		case Commands.DELETE_ANSWER:
-			no = (int)requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
 			status = database.executeUpdate("UPDATE qna SET answer_content=NULL, answer_date=NULL WHERE no=", no);
 			
 			break;
 		case Commands.DELETE_QNA_COMMENT:
-			no = (int)requestObject.getInt("no");
+			no = requestObject.getInt("no");
 			
 			status = database.executeUpdate("DELETE qna_comment WHERE no=", no);
 			

@@ -42,10 +42,10 @@ public class UpdateAction implements Actionable {
 			id = requestObject.getString("id");
 			
 			if(requestObject.containsKey("sex")) {
-				status = database.executeUpdate("UPDATE student_data SET sex=", (int)requestObject.get("sex"), " WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET sex=", requestObject.getInt("sex"), " WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("status")) {
-				status = database.executeUpdate("UPDATE student_data SET status=", (int)requestObject.get("status"), " WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET status=", requestObject.getInt("status"), " WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("name")) {
 				status = database.executeUpdate("UPDATE student_data SET name='", requestObject.getString("name"), "' WHERE id='", id, "'");
@@ -57,23 +57,10 @@ public class UpdateAction implements Actionable {
 				status = database.executeUpdate("UPDATE student_data SET p_name='", requestObject.getString("p_name"), "' WHERE id='", id, "'");
 			}
 			if(requestObject.containsKey("p_phone")) {
-				status = database.executeUpdate("UPDATE student_data SET p_phone='", requestObject.getString("p_phone"), "'WHERE id='", id, "'");
+				status = database.executeUpdate("UPDATE student_data SET p_phone='", requestObject.getString("p_phone"), "' WHERE id='", id, "'");
 			}
 			
 			break;
-//		case Commands.MODIFY_NOTICE:
-//		case Commands.MODIFY_NEWSLETTER:
-//		case Commands.MODIFY_COMPETITION:
-//			no = requestObject.getInt("no");
-//			
-//			if(requestObject.containsKey("title")) {
-//				status = database.executeUpdate("UPDATE notice SET title='", requestObject.getString("title"), "' WHERE no=", no);
-//			}
-//			if(requestObject.containsKey("content")) {
-//				status = database.executeUpdate("UPDATE notice SET content='", requestObject.getString("content"), "' WHERE no=", no);
-//			}
-//			
-//			break;
 		case Commands.MODIFY_RULE:
 			no = requestObject.getInt("no");
 			

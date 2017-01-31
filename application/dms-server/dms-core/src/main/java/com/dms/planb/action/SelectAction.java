@@ -68,30 +68,44 @@ public class SelectAction implements Actionable {
 //			break;
 		case Commands.LOAD_ACCOUNT:
 			// when login
-			id = (String) requestObject.get("id");
-			password = (String) requestObject.get("password");
+			id = requestObject.getString("id");
+			password = requestObject.getString("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM account WHERE id='", id, "'");
 			
 			if(!resultSet.next() || !resultSet.getString("password").equals(password)) {
+				/*
+				 * !resultSet.next() : Can't find id
+				 * !resultSet.getString("password").equals(password) : Incorrect password
+				 * 
+				 * Can't find id or incorrect password, set permit to false
+				 */
 				responseObject.put("permit", false);
 			}
 			else if(resultSet.getString("password").equals(password)) {
+				// Correct password
 				responseObject.put("permit", true);
 			}
 			
 			break;
 		case Commands.LOAD_TEACHER_ACCOUNT:
 			// when login
-			id = (String) requestObject.get("id");
-			password = (String) requestObject.get("password");
+			id = requestObject.getString("id");
+			password = requestObject.getString("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM FROM teacher_account WHERE id='", id, "'");
 			
 			if(!resultSet.next() || resultSet.getString("password").equals(password)) {
+				/*
+				 * !resultSet.next() : Can't find id
+				 * !resultSet.getString("password").equals(password) : Incorrect password
+				 * 
+				 * Can't find id or incorrect password, set permit to false
+				 */
 				responseObject.put("permit", false);
 			}
 			else if(resultSet.getString("password").equals(password)) {
+				// Correct password
 				responseObject.put("permit", true);
 			}
 			
@@ -100,31 +114,16 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_NEWSLETTER_LIST:
 		case Commands.LOAD_COMPETITION_LIST:
 			category = requestObject.getInt("category");
+			no = requestObject.getInt("page");
 			
-			resultSet = database.executeQuery("SELECT * FROM app_content WHERE category=", category);
-			
-			if(resultSet.next()) {
-				do {
-				tempObject.clear();
-				
-				tempObject.put("number", resultSet.getInt("number"));
-				tempObject.put("title", resultSet.getString("title"));
-				tempObject.put("wrtier", resultSet.getString("writer"));
-				tempObject.put("date", resultSet.getString("date"));
-				
-				array.add(tempObject);
-				} while(resultSet.next());
-			} else {
-				responseObject.put("status", 2);
-			}
-			
-			responseObject.put("result", array);
+			responseObject.put("result", PostModel.getPostsAtPage(category, no));
 			
 			break;
 		case Commands.LOAD_QNA_LIST:
 			resultSet = database.executeQuery("SELECT * FROM qna");
 			
 			if(resultSet.next()) {
+				// There're any posts in qna
 				do {
 					tempObject.clear();
 					
@@ -141,6 +140,7 @@ public class SelectAction implements Actionable {
 			}
 			
 			responseObject.put("result", array);
+			// Arrays in object
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY_LIST:
@@ -207,15 +207,24 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_RULE:
+			// Both list and content
 			resultSet = database.executeQuery("SELECT * FROM rule");
 			
 			if(resultSet.next()) {
-				responseObject.put("no", resultSet.getInt("no"));
-				responseObject.put("title", resultSet.getString("title"));
-				responseObject.put("content", resultSet.getString("content"));
+				do {
+					tempObject.clear();
+					
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("content", resultSet.getString("content"));
+					
+					array.add(tempObject);
+				} while(resultSet.next());
 			} else {
 				responseObject.put("status", 2);
 			}
+			
+			responseObject.put("result", array);
 			
 			break;
 		case Commands.LOAD_QNA:
@@ -265,15 +274,24 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_FAQ:
+			// Both list and content
 			resultSet = database.executeQuery("SELECT * FROM faq");
 			
 			if(resultSet.next()) {
-				responseObject.put("no", resultSet.getInt("no"));
-				responseObject.put("title", resultSet.getString("title"));
-				responseObject.put("content", resultSet.getString("content"));
+				do {
+					tempObject.clear();
+					
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("content", resultSet.getString("content"));
+					
+					array.add(tempObject);
+				} while(resultSet.next());
 			} else {
 				responseObject.put("status", 2);
 			}
+			
+			responseObject.put("result", array);
 			
 			break;
 		case Commands.LOAD_REPORT_FACILITY:
@@ -334,7 +352,7 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_STAY_DEFAULT:
 			id = requestObject.getString("id");
 			
-			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHEER id='", id, "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE id='", id, "'");
 			
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getString("value"));
@@ -367,7 +385,7 @@ public class SelectAction implements Actionable {
 					responseObject.put("has_target", true);
 					responseObject.put("target", resultSet.getString("target"));
 				} else {
-					responseObject.put("hasTarget", false);
+					responseObject.put("has_target", false);
 				}
 			} else {
 				responseObject.put("status", 2);
