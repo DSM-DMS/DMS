@@ -372,18 +372,26 @@ public class SelectAction implements Actionable {
 			}
 			
 			break;
-//		case Commands.LOAD_AFTERSCHOOL_STATUS:
-//			count = 1;
-//			
-//			id = requestObject.getString("id");
-//			
-//			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
-//			
-//			while(resultSet.next()) {
-//				responseObject.put("sequence".concat(Integer.toString(count++)), resultSet.getInt("no"));
-//			}
-//			
-//			break;
+		case Commands.LOAD_AFTERSCHOOL_STATUS:
+			id = requestObject.getString("id");
+			
+			resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
+			
+			if(resultSet.next()) {
+				do {
+					tempObject.clear();
+				
+					tempObject.put("no", resultSet.getInt("no"));
+					
+					array.add(tempObject);
+				} while(resultSet.next());
+			} else {
+				responseObject.put("status", 2);
+			}
+			
+			responseObject.put("result", array);
+			
+			break;
 		case Commands.LOAD_MEAL:
 			year = requestObject.getInt("year");
 			month = requestObject.getInt("month");

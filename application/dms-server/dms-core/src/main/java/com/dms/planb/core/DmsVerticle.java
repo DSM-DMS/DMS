@@ -98,8 +98,7 @@ class DmsVerticle extends AbstractVerticle {
 							response.setStatusCode(404);
 							// 404 : Can't find
 						}
-					}
-					else {
+					} else {
 						response.setStatusCode(200);
 					}
 
