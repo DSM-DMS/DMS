@@ -155,3 +155,7 @@ $('#fifth_week').click(function() {
 
 //***********************신청*********************
 $('#apply_form input[type="radio"]').checkboxradio();
+
+$("#date").keydown(function(e){
+        e.preventDefault();
+});

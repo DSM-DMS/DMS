@@ -1,7 +1,9 @@
 @import "remote.css";
 
+/*remote.css로 수정필요*/
+
 body {
-  background-color: rgb(52, 152, 219);
+    background-color: rgb(52, 152, 219)
 }
 
 .main {
@@ -10,7 +12,7 @@ body {
     position: absolute;
     top: 20vh;
     left: 16%;
-    height: 70%;
+    min-height: 70%;
     width: 80%;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
 }
@@ -23,8 +25,11 @@ body {
     /*overflow-x: hidden;*/
 }
 
-.frame h1 {
+.frame .frametitle {
     margin-left: 7%;
+}
+
+.frame h1 {
     margin-bottom: 1%;
 }
 
@@ -32,8 +37,25 @@ body {
     position: relative;
     right: 0%;
     height: 8px;
-    margin-left: 7%;
     margin-right: 0%;
-    width: 90%;
+    width: 93%;
     background: rgb(211, 84, 0);
+}
+
+.right form {
+  width: 80%;
+  margin-top: 17%;
+}
+
+.right fieldset {
+  height: 300px;
+}
+
+#apply_table {
+  width: 100%;
+  text-align: center;
+}
+
+#apply_submit {
+  float: right;
 }
