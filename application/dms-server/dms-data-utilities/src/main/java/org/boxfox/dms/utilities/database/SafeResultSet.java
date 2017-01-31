@@ -108,5 +108,4 @@ public class SafeResultSet {
 			return datas[index - 1];
 		}
 	}
-
 }

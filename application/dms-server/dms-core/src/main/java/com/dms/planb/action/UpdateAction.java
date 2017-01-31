@@ -176,7 +176,7 @@ public class UpdateAction implements Actionable {
 			date = requestObject.getString("date");
 			
 			if(requestObject.containsKey("value")) {
-				status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id='", id, "' AND date='", date, "'");
+				status = database.executeUpdate("UPDATE merit_apply SET value=", requestObject.getInt("value"), " WHERE id='", id, "' AND date='", date, "'");
 			}
 			
 			break;

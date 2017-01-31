@@ -177,7 +177,9 @@ public class SelectAction implements Actionable {
 					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("target", resultSet.getInt("target"));
 					tempObject.put("place", resultSet.getString("place"));
-					tempObject.put("day", resultSet.getInt("day"));
+					tempObject.put("on_monday", resultSet.getBoolean("on_monday"));
+					tempObject.put("on_tuesday", resultSet.getBoolean("on_tuesday"));
+					tempObject.put("on_wednesday", resultSet.getBoolean("on_wednesday"));
 					tempObject.put("instuctor", resultSet.getString("instructor"));
 	
 					array.add(tempObject);

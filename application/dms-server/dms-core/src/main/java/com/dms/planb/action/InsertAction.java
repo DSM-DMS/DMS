@@ -235,11 +235,13 @@ public class InsertAction implements Actionable {
 			 * 
 			 * Table Name : afterschool_list
 			 * 
-			 * no INT(11) PK NN AI
+			 * no INT(11) PK NN
 			 * title VARCHAR(45) NN
 			 * target INT(1) NN
 			 * place VARCHAR(10) NN
-			 * day INT(1) NN
+			 * on_monday BOOLEAN
+			 * on_tuesday BOOLEAN
+			 * on_wednesday BOOLEAN
 			 * instructor VARCHAR(10)
 			 */
 			no = requestObject.getInt("no");
@@ -247,10 +249,12 @@ public class InsertAction implements Actionable {
 			
 			int target = requestObject.getInt("target");
 			String place = requestObject.getString("place");
-			int day = requestObject.getInt("day");
+			boolean onMonday = requestObject.getBoolean("on_monday");
+			boolean onTuesday = requestObject.getBoolean("on_tuesday");
+			boolean onWednesday = requestObject.getBoolean("on_wednesday");
 			String instructor = requestObject.getString("instructor");
 			
-			status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, day, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", day, ", '", instructor, "')");
+			status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", '", instructor, "')");
 			
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
