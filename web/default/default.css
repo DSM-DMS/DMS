@@ -215,7 +215,6 @@ body {
     font-weight: 900;
 }
 
-
 /*------------------------------------------ dorm main article------------------------------------------*/
 .articlecontainer {
     width: 100%;
@@ -225,5 +224,35 @@ body {
 .article {
     line-height: 150%;
     margin-left: 7%;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.article p {
+    width: 93%;
+}
+
+.articlecontainer hr {
+    width: 86%;
+}
+
+.articlecontainer .frametitle {
+    position: relative;
+}
+
+.articlecontainer .frametitle p {
+    font-size: 0.8em;
+    font-weight: 900;
+    color: rgb(100, 100, 100);
+    margin-bottom: 0;
+    position: absolute;
+    margin-bottom: 1%;
+    right: 7%;
+    bottom: 0%;
+    /*float: right;*/
+}
+
+.articlecontainer h2 {
+    display: inline-block;
+    margin-bottom: 1%;
 }
