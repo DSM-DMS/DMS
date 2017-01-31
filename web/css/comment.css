@@ -42,6 +42,10 @@
     transition: all 1s ease;
 }
 
+.commentinput input[type="text"] p{
+    padding-left: 2%;
+}
+
 .commentinput input[type="text"]:focus {
     border: 2px solid rgb(162, 88, 193);
 }

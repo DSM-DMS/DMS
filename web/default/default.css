@@ -25,6 +25,7 @@ body {
     width: 50%;
     height: 100%;
     float: left;
+    padding-top: 15px;
     /*overflow-x: hidden;*/
 }
 
@@ -215,12 +216,16 @@ body {
     font-weight: 900;
 }
 
+
 /*------------------------------------------ dorm main article------------------------------------------*/
+
 .articlecontainer {
     width: 100%;
 }
 
+
 /*--------------------------article--------------------------------*/
+
 .article {
     line-height: 150%;
     margin-left: 7%;
@@ -246,7 +251,7 @@ body {
     color: rgb(100, 100, 100);
     margin-bottom: 0;
     position: absolute;
-    margin-bottom: 1%;
+    margin-bottom: 10px;
     right: 7%;
     bottom: 0%;
     /*float: right;*/
@@ -255,4 +260,226 @@ body {
 .articlecontainer h2 {
     display: inline-block;
     margin-bottom: 1%;
+}
+
+
+/*-------------------------------------qna list.-------------------------------*/
+
+.qna table tr:nth-child(2), .qna table tr:nth-child(3) {
+    background-color: rgb(142, 68, 173);
+}
+
+.qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+
+/*-------------------------------------comment.-------------------------------*/
+
+.commentinput {
+    margin-left: 7%;
+    /*margin-bottom: 100px;*/
+}
+
+.commentinput table {
+    width: 93%;
+}
+
+.commentinput table tr td:nth-child(1) {
+    width: 80%;
+}
+
+.commentinput table tr td:nth-child(2) {
+    width: 20%;
+}
+
+.commentinput input {
+    height: 30px;
+}
+
+.commentinput button {
+    background-color: rgb(142, 68, 173);
+    border: none;
+    height: 36px;
+    width: 99%;
+    border: 2px solid rgb(142, 68, 173);
+    border-radius: 4px;
+    transition: all 1s ease;
+    color: white;
+}
+
+.commentinput button:focus {
+    background-color: rgb(162, 88, 193);
+}
+
+.commentinput input[type="text"] {
+    height: 30px;
+    width: 97%;
+    border: 2px solid rgb(142, 68, 173);
+    border-radius: 4px;
+    padding-left: 1%;
+    transition: all 1s ease;
+}
+
+.commentinput input[type="text"]:focus {
+    border: 2px solid rgb(162, 88, 193);
+}
+
+.commentinput table td:nth-child(3), .commentinput table td:nth-child(1) {
+    text-align: left;
+}
+
+.comment {
+    margin-left: 7%;
+}
+
+.comment table {
+    width: 93%;
+    border-collapse: collapse;
+}
+
+.comment tr {
+    border-bottom: 1px solid gray;
+}
+
+.comment table tr td:nth-child(1) {
+    width: 8%;
+    min-width: 60px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.comment table tr td:nth-child(3) {
+    width: 5%;
+    text-align: right;
+    font-size: 0.9em;
+}
+
+.comment table tr td:nth-child(2) {
+    width: 87%;
+    font-size: 0.9em;
+}
+
+.comment table .date {
+    display: inline-block;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+}
+
+.comment table td p, .comment table td h3 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+
+/* All Device */
+
+
+/* Large Devices, Wide Screens : ~ 1200px */
+
+@media only screen and (max-width: 1200px) {}
+
+
+/* Medium Devices, Desktops : ~ 992px */
+
+@media only screen and (max-width: 992px) {
+    .main {
+        /*width: 50%;*/
+        top: 20vh;
+        left: 5%;
+        width: 90%;
+    }
+    .frame {
+        width: 50%;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    /*.frame {
+        width: 100%;
+    }
+
+    .food {
+        float: none;
+    }*/
+}
+
+
+/* Small Devices, Tablets : ~ 768px */
+
+@media only screen and (max-width: 768px) {
+    .main {
+        /*width: 50%;*/
+        top: 20vh;
+        left: 5%;
+        width: 90%;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .right {
+        float: none;
+    }
+}
+
+
+/* Extra Small Devices, Phones : ~ 480px */
+
+@media only screen and (max-width: 480px) {
+    .main {
+        /*width: 50%;*/
+        top: 20vh;
+        left: 5%;
+        width: 90%;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .right {
+        float: none;
+    }
+}
+
+
+/* Custom, iPhone Retina : ~ 320px */
+
+@media only screen and (max-width: 320px) {
+    .main {
+        /*width: 50%;*/
+        top: 20vh;
+        left: 5%;
+        width: 90%;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .right {
+        float: none;
+    }
 }
