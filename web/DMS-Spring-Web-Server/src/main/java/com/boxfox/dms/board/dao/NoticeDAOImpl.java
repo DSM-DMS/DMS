@@ -46,4 +46,14 @@ public class NoticeDAOImpl implements NoticeDAO{
 		noticeMapper.writePost(post);
 	}
 
+	@Override
+	public void editPost(int no, String title, String content) {
+		NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		DatePostContext post = new DatePostContext();
+		post.setNo(no);
+		post.setTitle(title);
+		post.setContent(content);
+		noticeMapper.editPost(post);
+	}
+
 }

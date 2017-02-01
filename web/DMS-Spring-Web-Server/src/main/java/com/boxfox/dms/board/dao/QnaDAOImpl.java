@@ -69,6 +69,28 @@ public class QnaDAOImpl implements QnaDAO{
 		comment.setDate(date);
 		qnaMapper.writeComment(comment);
 	}
+
+	@Override
+	public void editPost(int no, String title, String content, boolean privacy) {
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		QnaPostContext post = new QnaPostContext();
+		post.setNo(no);
+		post.setContent(content);
+		post.setTitle(title);
+		post.setPrivacy(privacy);
+		qnaMapper.editPost(post);
+	}
+
+	@Override
+	public void editAnswer(int no, String content) {
+		
+	}
+
+	@Override
+	public void editComment(int no, int number, String content) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
