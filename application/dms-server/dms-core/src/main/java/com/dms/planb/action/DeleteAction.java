@@ -19,8 +19,6 @@ public class DeleteAction implements Actionable {
 		
 		// For post
 		int no;
-//		int number;
-//		int category;
 		
 		// For status
 		int status = 0;

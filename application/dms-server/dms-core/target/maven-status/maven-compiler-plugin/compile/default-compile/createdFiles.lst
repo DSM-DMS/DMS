@@ -1,4 +1,5 @@
 com\dms\planb\action\DeleteAction.class
+com\dms\planb\core\ApplicationInfo.class
 com\dms\planb\core\DmsMain.class
 com\dms\planb\support\ActionPerformer.class
 com\dms\planb\action\Actionable.class

@@ -76,6 +76,14 @@ public class SafeResultSet {
 		checkVaildIndex(index);
 		return getObject(index).toString();
 	}
+	
+	public boolean getBoolean(String label) throws SQLException {
+		return getBoolean(getIndexByLabel(label));
+	}
+	
+	public boolean getBoolean(int index) throws SQLException {
+		return Boolean.valueOf(getObject(index).toString());
+	}
 
 	public int getIndexByLabel(String label) throws SQLException {
 		if (columns.indexOf(label) < 0){

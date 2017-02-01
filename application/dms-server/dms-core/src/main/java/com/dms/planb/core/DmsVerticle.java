@@ -51,7 +51,7 @@ class DmsVerticle extends AbstractVerticle {
 			if(request.method() == HttpMethod.POST) {
 				// The server will only work if the Http method is POST.
 				Log.l("Received POST method : " + request.host());
-				Log.l("Headers : " + request.headers());
+				Log.l("Header : " + request.getHeader("Command"));
 				
 				request.handler(buffer -> {
 					totalBuffer.appendBuffer(buffer);

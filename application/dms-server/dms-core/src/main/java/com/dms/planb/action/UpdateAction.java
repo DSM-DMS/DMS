@@ -168,6 +168,7 @@ public class UpdateAction implements Actionable {
 			
 			break;
 		case Commands.MODIFY_AFTERSCHOOL:
+			// Modify apply
 			int targetNo = requestObject.getInt("target_no");
 			
 			if(requestObject.containsKey("no")) {
