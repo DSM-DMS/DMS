@@ -71,6 +71,7 @@ header .logo p:hover {
     width: 10%;
     text-align: center;
     overflow: hidden;
+    transition: all 0.5s ease;
 }
 
 .remote h1 a {

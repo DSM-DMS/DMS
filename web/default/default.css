@@ -7,6 +7,7 @@ body {
     신청 : background-color: rgb(52, 152, 219)
     기숙사 : background-color: rgb(142, 68, 173)
     마이페이지 : background-color: rgb(192, 57, 43)*/
+    font-size: 0.9em;
 }
 
 .main {
@@ -81,6 +82,7 @@ body {
     vertical-align: bottom;
     font-size: 0.8em;
     font-weight: 600;
+    margin-bottom: 0;
 }
 
 
@@ -374,6 +376,56 @@ body {
 }
 
 
+/*-------------------------------------mypage.-------------------------------*/
+
+body {
+    background-color: rgb(192, 57, 43);
+}
+
+.mypage {
+    width: 100%;
+}
+
+.left .frametitle .underline {
+    background-color: rgb(192, 57, 43);
+}
+
+.left .info {
+    width: 39.5%;
+    height: 80%;
+    margin-left: 7%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+}
+
+.mypage .info table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.mypage .info table tr {
+    border-bottom: 1px solid gray;
+}
+
+.mypage .info table tr:nth-child(3) {
+    border-bottom: 1px solid black;
+}
+
+.mypage .info table tr td:nth-child(1) {
+    text-align: left;
+    padding-left: 10px;
+    min-width: 40px;
+}
+
+.mypage .info table tr td:nth-child(2) {
+    font-size: 0.8em;
+    padding: 10px;
+}
+
+
 /*==========  Non-Mobile First Method  ==========*/
 
 
@@ -388,6 +440,9 @@ body {
 /* Medium Devices, Desktops : ~ 992px */
 
 @media only screen and (max-width: 992px) {
+    .logo {
+        display: none;
+    }
     .main {
         /*width: 50%;*/
         top: 20vh;
@@ -403,19 +458,21 @@ body {
     .left ul li .title {
         width: 70%;
     }
-    /*.frame {
+    .frame {
         width: 100%;
     }
-
     .food {
         float: none;
-    }*/
+    }
 }
 
 
 /* Small Devices, Tablets : ~ 768px */
 
 @media only screen and (max-width: 768px) {
+    .logo {
+        display: none;
+    }
     .main {
         /*width: 50%;*/
         top: 20vh;
@@ -433,6 +490,9 @@ body {
     }
     .right {
         float: none;
+    }
+    .mypage .info {
+        width: 86%;
     }
 }
 
@@ -440,6 +500,9 @@ body {
 /* Extra Small Devices, Phones : ~ 480px */
 
 @media only screen and (max-width: 480px) {
+    .logo {
+        display: none;
+    }
     .main {
         /*width: 50%;*/
         top: 20vh;
@@ -457,6 +520,12 @@ body {
     }
     .right {
         float: none;
+    }
+    .mypage .info {
+        width: 86%;
+    }
+    .left .notice li .title {
+        width: 70%;
     }
 }
 
@@ -464,6 +533,9 @@ body {
 /* Custom, iPhone Retina : ~ 320px */
 
 @media only screen and (max-width: 320px) {
+    .logo {
+        display: none;
+    }
     .main {
         /*width: 50%;*/
         top: 20vh;
@@ -481,5 +553,21 @@ body {
     }
     .right {
         float: none;
+    }
+    .right .info {
+        width: 85%;
+    }
+    .mypage .info {
+        width: 86%;
+    }
+    .left .notice li .title {
+        font-size: 1.2em;
+        width: 70%;
+    }
+    .right .meal h2 {
+        font-size: 1.2em;
+    }
+    .right .meal p {
+        font-size: 0.9em;
     }
 }
