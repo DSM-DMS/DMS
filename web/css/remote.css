@@ -2,7 +2,7 @@ body {
     width: 100vw;
     height: 100vh;
     /*min-height: 100% !important;*/
-    background-color: rgb(52, 152, 219);
+    background-color: rgb(134,193,233);
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -71,7 +71,7 @@ header .logo p:hover {
     width: 10%;
     text-align: center;
     overflow: hidden;
-    transition: all 0.5s ease;
+    transition: all 0.1s ease;
 }
 
 .remote h1 a {
@@ -109,7 +109,7 @@ header .logo p:hover {
 }
 
 .remote .category a:nth-child(5) {
-    color: rgb(192, 57, 43);
+    color: rgb(224,136,127);
 }
 
 .remote .category .children a {
@@ -131,6 +131,16 @@ header .logo p:hover {
     transform: scale(0.01);
     animation-name: bigger;
     animation-duration: 1.5s;
+}
+
+.mbremotebg {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background: $("body").css("background-color");
+    width: 100vw;
+    height: 12vh;
+    z-index: 1;
 }
 
 @keyframes bigger {
@@ -162,12 +172,10 @@ header .logo p:hover {
     .remote .category {
         display: inline-block;
     }
-
     .remote h1 {
         margin: 0;
         padding: 0;
     }
-
     .remote a {
         display: inline-block;
     }
@@ -204,12 +212,10 @@ header .logo p:hover {
     .remote .category {
         display: inline-block;
     }
-
     .remote h1 {
         margin: 0;
         padding: 0;
     }
-
     .remote a {
         display: inline-block;
     }
@@ -238,19 +244,20 @@ header .logo p:hover {
         top: 1%;
         left: 5%;
         width: 90%;
-        min-height: 17vh;
-        height: 17vh;
+        min-height: 12vh;
+        height: 12vh;
         z-index: 2;
+    }
+    .mbremotebg {
+        height: 14vh;
     }
     .remote .category {
         display: inline-block;
     }
-
     .remote h1 {
         margin: 0;
         padding: 0;
     }
-
     .remote a {
         display: inline-block;
     }
@@ -279,19 +286,20 @@ header .logo p:hover {
         top: 1%;
         left: 5%;
         width: 90%;
-        min-height: 17vh;
-        height: 17vh;
+        min-height: 13vh;
+        height: 13vh;
         z-index: 2;
+    }
+    .mbremotebg {
+        height: 15vh;
     }
     .remote .category {
         display: inline-block;
     }
-
     .remote h1 {
         margin: 0;
         padding: 0;
     }
-
     .remote a {
         display: inline-block;
     }

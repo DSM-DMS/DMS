@@ -4,9 +4,9 @@
 
 body {
     /*배경색
-    신청 : background-color: rgb(52, 152, 219)
-    기숙사 : background-color: rgb(142, 68, 173)
-    마이페이지 : background-color: rgb(192, 57, 43)*/
+    신청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
+    기숙사 : background-color: rgb(191,148,208) -> rgb(191,148,208)
+    마이페이지 : background-color: rgb(192, 57, 43) -> rgb(224,136,127)*/
     font-size: 0.9em;
 }
 
@@ -19,6 +19,7 @@ body {
     min-height: 70%;
     width: 80%;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+    margin-bottom: 20px;
 }
 
 .frame {
@@ -27,6 +28,7 @@ body {
     height: 100%;
     float: left;
     padding-top: 15px;
+    margin-bottom: 20px;
     /*overflow-x: hidden;*/
 }
 
@@ -44,7 +46,7 @@ body {
     height: 8px;
     margin-right: 0%;
     width: 93%;
-    background: rgb(211, 84, 0);
+    background: rgb(191,148,208);
 }
 
 
@@ -130,7 +132,7 @@ body {
 }
 
 .right .info:hover {
-    background-color: rgb(41, 128, 185);
+    background-color: rgb(191,148,208);
     color: white;
 }
 
@@ -147,11 +149,11 @@ body {
 /*--------------------------etc--------------------------------*/
 
 body {
-    background-color: rgb(142, 68, 173);
+    background-color: rgb(191,148,208);
 }
 
 .underline {
-    background: rgb(142, 68, 173);
+    background: rgb(191,148,208);
 }
 
 
@@ -190,14 +192,14 @@ body {
 .articlelist table .tableheader th {
     padding: 0;
     border: 0;
-    border-top: 1px solid rgb(142, 68, 173);
-    border-bottom: 2px solid rgb(142, 68, 173);
-    color: rgb(142, 68, 173);
+    border-top: 1px solid rgb(191,148,208);
+    border-bottom: 2px solid rgb(191,148,208);
+    color: rgb(191,148,208);
     height: 32px;
 }
 
 .articlelist table td {
-    border-bottom: 1px solid rgb(142, 68, 173);
+    border-bottom: 1px solid rgb(191,148,208);
     height: 32px;
 }
 
@@ -255,7 +257,7 @@ body {
     position: absolute;
     margin-bottom: 10px;
     right: 7%;
-    bottom: 0%;
+    /*bottom: 0%;*/
     /*float: right;*/
 }
 
@@ -268,7 +270,7 @@ body {
 /*-------------------------------------qna list.-------------------------------*/
 
 .qna table tr:nth-child(2), .qna table tr:nth-child(3) {
-    background-color: rgb(142, 68, 173);
+    background-color: rgb(191,148,208);
 }
 
 .qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
@@ -301,11 +303,11 @@ body {
 }
 
 .commentinput button {
-    background-color: rgb(142, 68, 173);
+    background-color: rgb(191,148,208);
     border: none;
     height: 36px;
     width: 99%;
-    border: 2px solid rgb(142, 68, 173);
+    border: 2px solid rgb(191,148,208);
     border-radius: 4px;
     transition: all 1s ease;
     color: white;
@@ -318,7 +320,7 @@ body {
 .commentinput input[type="text"] {
     height: 30px;
     width: 97%;
-    border: 2px solid rgb(142, 68, 173);
+    border: 2px solid rgb(191,148,208);
     border-radius: 4px;
     padding-left: 1%;
     transition: all 1s ease;
@@ -379,7 +381,7 @@ body {
 /*-------------------------------------mypage.-------------------------------*/
 
 body {
-    background-color: rgb(192, 57, 43);
+    background-color: rgb(224,136,127);
 }
 
 .mypage {
@@ -387,7 +389,7 @@ body {
 }
 
 .left .frametitle .underline {
-    background-color: rgb(192, 57, 43);
+    background-color: rgb(224,136,127);
 }
 
 .left .info {
@@ -505,7 +507,7 @@ body {
     }
     .main {
         /*width: 50%;*/
-        top: 20vh;
+        top: 14vh;
         left: 5%;
         width: 90%;
     }
@@ -527,6 +529,10 @@ body {
     .left .notice li .title {
         width: 70%;
     }
+    .commentinput input[type="text"] {
+        width: 90%;
+    }
+
 }
 
 
@@ -538,7 +544,7 @@ body {
     }
     .main {
         /*width: 50%;*/
-        top: 20vh;
+        top: 15vh;
         left: 5%;
         width: 90%;
     }

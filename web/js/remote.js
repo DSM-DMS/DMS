@@ -1,10 +1,20 @@
 //신청탭 over 이벤트
 $(".remote .category").children("a").eq(0).click(function() {
     // 신청 text를 white로
-    $(".remote .category").children("a").eq(0).animate({
-        fontSize: "1.5em",
-        color: "white"
-    })
+    if ($(window).width() > 480) {
+        $(".remote .category").children("a").eq(0).animate({
+            fontSize: "1.5em",
+            color: "white"
+        })
+    } else {
+        $(".remote .category").children("a").eq(0).animate({
+            fontSize: "0.9em",
+            color: "white"
+        })
+        $(".children a").animate({
+            fontSize: "1.1em"
+        })
+    }
 
     $(".remote .category").children("a").eq(0).css({})
 
@@ -14,7 +24,7 @@ $(".remote .category").children("a").eq(0).click(function() {
 
     //remote background-color를 신청색으로
     $(".remote").animate({
-        backgroundColor: "rgb(52, 152, 219)",
+        backgroundColor: "rgb(134,193,233)",
     });
 
     //DMS hide
@@ -32,10 +42,20 @@ $(".remote .category").children("a").eq(0).click(function() {
 //기숙사탭 over 이벤트
 $(".remote .category").children("a").eq(1).click(function() {
     //기숙사 text를 white로
-    $(".remote .category").children("a").eq(1).animate({
-        fontSize: "1.5em",
-        color: "white"
-    })
+    if ($(window).width() > 480) {
+        $(".remote .category").children("a").eq(1).animate({
+            fontSize: "1.5em",
+            color: "white"
+        })
+    } else {
+        $(".remote .category").children("a").eq(2).animate({
+            fontSize: "0.9em",
+            color: "white"
+        })
+        $(".children a").animate({
+            fontSize: "1.1em"
+        })
+    }
 
     $(".remote .category").children("a").eq(1).children("p").animate({
         padding: "0"
@@ -43,7 +63,7 @@ $(".remote .category").children("a").eq(1).click(function() {
 
     //remote background-color를 기숙사색으로
     $(".remote").animate({
-        backgroundColor: "rgb(142, 68, 173)"
+        backgroundColor: "rgb(191,148,208)"
     }, 500);
 
     //DMS hide
@@ -60,7 +80,7 @@ $(".remote .category").children("a").eq(1).click(function() {
 $(".remote .category").children("a").eq(2).click(function() {
     //remote background-color를 마이페이지색으로
     $(".remote").animate({
-        backgroundColor: "rgb(192, 57, 43)"
+        backgroundColor: "rgb(224,136,127)"
     });
 
     //마이페이지 text를 white로
@@ -95,17 +115,17 @@ if (!isMobile) {
         //모든 탭 글자색을 윈대래로
 
         $(".remote .category").children("a").eq(0).animate({
-            color: "rgb(52, 152, 219)",
+            color: "rgb(134,193,233)",
             fontSize: "1em"
         })
 
         $(".remote .category").children("a").eq(1).animate({
-            color: "rgb(142, 68, 173)",
+            color: "rgb(191,148,208)",
             fontSize: "1em"
         })
 
         $(".remote .category").children("a").eq(2).animate({
-            color: "color: rgb(192, 57, 43)",
+            color: "color: rgb(224,136,127)",
             fontSize: "1em"
         })
 
@@ -147,17 +167,17 @@ if (!isMobile) {
         //모든 탭 글자색을 윈대래로
 
         $(".remote .category").children("a").eq(0).animate({
-            color: "rgb(52, 152, 219)",
+            color: "rgb(134,193,233)",
             fontSize: "1em"
         })
 
         $(".remote .category").children("a").eq(1).animate({
-            color: "rgb(142, 68, 173)",
+            color: "rgb(191,148,208)",
             fontSize: "1em"
         })
 
         $(".remote .category").children("a").eq(2).animate({
-            color: "color: rgb(192, 57, 43)",
+            color: "color: rgb(224,136,127)",
             fontSize: "1em"
         })
 
@@ -175,7 +195,6 @@ if (!isMobile) {
             })
         }
 
-
         //remote backgroundColor를 원래대로
         $(".remote").animate({
             backgroundColor: "white"
@@ -192,35 +211,26 @@ if (!isMobile) {
         //탭 하부메뉴 hide
         $(".remote .category .application").hide(0);
         $(".remote .category .dom").hide(0);
+    });
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 2) {
+            $('<div/>', {
+                "class": "mbremotebg",
+                css: {
+                    "background": $("body").css("background-color"),
+                }
+            }).appendTo("body");
+        } else if ($(window).scrollTop() <= 3) {
+            var mbbgArr = $(".mbremotebg");
+            for (var i = 0; i < mbbgArr.length; i++) {
+                $(mbbgArr[i]).remove();
+            }
+        }
     })
 
 
 }
-
-$(window).scroll(function() {
-    var vh = $(window).height()/100;
-    var vw = $(window).width()/100;
-
-    console.log("scroll " + $(window).scrollTop() + ", "+ 17*vh);
-    if ($(window).scrollTop() > 17*vh) {
-        $(".remote").css({
-            "background-color": $("body").css("background-color"),
-            "border-radius": "0",
-            "top": "0",
-            "width": "100vw",
-            "left": "0"
-        });
-    } else if ($(window).scrollTop() <= 6*vh) {
-      $(".remote").css({
-          "background-color": "white",
-          "border-radius": "5px",
-          "top": "1%",
-          "left": "5%",
-          "width": "90%"
-      });
-    }
-})
-
 
 $(".remote .category .children a").click(function(e) {
     e.preventDefault(); // prevent default anchor behavior
@@ -239,7 +249,7 @@ $(".remote .category .children a").click(function(e) {
             "width": "3000px",
             "height": "3000px",
             "border-radius": "50%",
-            "border": "2px solid rgb(52, 152, 219)"
+            "border": "2px solid rgb(134,193,233)"
         }
     }).appendTo("body");
 
