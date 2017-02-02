@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	INSERT into notice (title, content, writer) values(#{title}, #{content}, #{writer})
     </insert>
     
-    <update id="writePost" parameterType="com.boxfox.dms.board.dto.DatePostContext">
+    <update id="editPost" parameterType="com.boxfox.dms.board.dto.DatePostContext">
     	update notice set title=#{title}, content=#{content} where no=#{no}
     </update>
     

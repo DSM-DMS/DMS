@@ -1,7 +1,7 @@
 package com.boxfox.dms.board.dto;
 
 public class Comment {
-	private int no;
+	private int no,index;
 	private String content;
 	private String writer;
 	private String date;
@@ -29,6 +29,12 @@ public class Comment {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 	
 }

@@ -61,12 +61,21 @@ public class FacilityDAOImpl implements FacilityDAO{
 	@Override
 	public void editPost(int no, String title, String content, int room) {
 		FacilityMapper facilityMapper = sqlSession.getMapper(FacilityMapper.class);
-		
+		FacilityReportContext post = new FacilityReportContext();
+		post.setNo(no);
+		post.setTitle(title);
+		post.setContent(content);
+		post.setRoom(room);
+		facilityMapper.editPost(post);
 	}
 
 	@Override
 	public void editResult(int no, String result) {
-		
+		FacilityMapper facilityMapper = sqlSession.getMapper(FacilityMapper.class);
+		FacilityReportContext post = new FacilityReportContext();
+		post.setNo(no);
+		post.setResult(result);
+		facilityMapper.editResult(post);
 	}
 
 

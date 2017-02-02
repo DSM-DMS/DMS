@@ -44,4 +44,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	INSERT into qna_comment (no, date, content, writer) values(#{no}, #{date}, #{content}, #{writer})
     </insert>
     
+    <update id="editPost" parameterType="com.boxfox.dms.board.dto.QnaPostContext">
+    	UPDATE qna set title=#{title}, content=#{content}, privacy=#{privacy} WHERE `no`=#{no}
+    </update>
+    
+    <update id="editAnswer" parameterType="com.boxfox.dms.board.dto.QnaPostContext">
+    	UPDATE qna set answer_content=#{result} WHERE `no`=#{no}
+    </update>
+    
+    <update id="editComment" parameterType="com.boxfox.dms.board.dto.Comment">
+    	UPDATE qna_comment set content=#{content} WHERE `idx`=#{index}
+    </update>
+    
 </mapper>

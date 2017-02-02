@@ -83,13 +83,21 @@ public class QnaDAOImpl implements QnaDAO{
 
 	@Override
 	public void editAnswer(int no, String content) {
-		
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		QnaPostContext post = new QnaPostContext();
+		post.setNo(no);
+		post.setResult(content);
+		qnaMapper.editPost(post);
 	}
 
 	@Override
 	public void editComment(int no, int number, String content) {
-		// TODO Auto-generated method stub
-		
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		Comment comment = new Comment();
+		comment.setNo(no);
+		comment.setIndex(number);
+		comment.setContent(content);
+		qnaMapper.editComment(comment);
 	}
 	
 	
