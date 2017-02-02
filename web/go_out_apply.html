@@ -49,30 +49,14 @@
             </div>
         </div>
         <div class="frame right">
-          <form>
-            <fieldset>
-              <legend>외출신청</legend>
-              <table id="apply_table">
-                <thead>
-                  <tr>
-                    <th colspan="2">외출 신청서</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>목적</td>
-                    <td><input type="text"></td>
-                  </tr>
-                  <tr>
-                    <td>외출날짜</td>
-                    <td><input type="text" id="date_picker"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><input type="submit" class="ui-button ui-widget ui-corner-all" value="신청" id="apply_submit"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </fieldset>
+          <form action="#" method="post">
+            <input id="day" type="hidden">
+            <table id="select_table">
+              <tr>
+                <td id="selection">신청</td>
+              </tr>
+            </table>
+            <input type="submit" value="신청">
           </form>
         </div>
     </div>

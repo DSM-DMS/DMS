@@ -1,9 +1,26 @@
-$('#date_picker').datepicker({
-  dateFormat: 'yy.MM.dd',
-  monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-  showMonthAfterYear: true,
-  yearSuffix: '년'
-});
+clickable = true;
+
+$('#selection').on("click", function () {
+  if(clickable) {
+    $('#select_table').append('<tr><td id="sat" style="border-radius: 0 0 10% 10%">토요일</td></tr><tr><td id="sun" style="border-radius: 0 0 10% 10%">일요일</tr></td>');
+    clickable = false;
+
+    $("#sat").on("click", function () {
+      $('#selection').text('토요일')
+      $('#day').attr('value', '토요일');
+      $("#select_table tr:eq(1), tr:eq(2)").remove();
+      clickable = true;
+    })
+
+    $('#sun').on("click", function () {
+      $('#selection').text('일요일');
+      $('#day').attr('value', '일요일');
+      $("#select_table tr:eq(1), tr:eq(2)").remove();
+      clickable = true;
+    })
+
+  } else {
+    $("#select_table tr:eq(1), tr:eq(2)").remove();
+    clickable = true;
+  }
+})

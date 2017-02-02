@@ -3,7 +3,7 @@
 /*remote.css로 수정필요*/
 
 body {
-    background-color: rgb(52, 152, 219)
+    background-color: rgb(52, 152, 219);
 }
 
 .main {
@@ -43,19 +43,21 @@ body {
 }
 
 .right form {
-  width: 80%;
   margin-top: 17%;
 }
 
-.right fieldset {
-  height: 300px;
+#select_table td {
+  border-radius: 10%;
+  background-color: rgb(52, 152, 219);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    width: 60px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
-#apply_table {
-  width: 100%;
-  text-align: center;
-}
-
-#apply_submit {
-  float: right;
+#select_table td:hover {
+  background-color: rgba(52, 152, 219, 0.5);
 }
