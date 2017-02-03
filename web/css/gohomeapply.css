@@ -50,7 +50,6 @@ body {
   margin: auto;
   margin-top: 7%;
   border : 0px solid black;
-  height: 65%;
 }
 
 #calendar tbody td{
@@ -76,10 +75,7 @@ body {
 
 #calendar td {
   width: calc(100%/7);
-  height: 30px;
-}
-
-.go_home_apply {
+  height: 40px;
 }
 
 #apply_form {
