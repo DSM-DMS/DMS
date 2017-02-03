@@ -61,3 +61,7 @@ body {
 #select_table td:hover {
   background-color: rgba(52, 152, 219, 0.5);
 }
+
+#sat, #sun {
+  border-radius: 0 0 10% 10%;
+}
