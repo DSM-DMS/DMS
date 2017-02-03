@@ -21,7 +21,7 @@ public abstract class EasyJson {
     }
     
     public String toString(){
-    	if(obj!=null){
+    	if(obj != null){
     		return obj.toJSONString();
     	}else if(arr !=null){
     		return arr.toJSONString();

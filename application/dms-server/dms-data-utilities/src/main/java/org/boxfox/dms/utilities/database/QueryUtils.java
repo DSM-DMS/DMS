@@ -29,10 +29,13 @@ public class QueryUtils {
 		StringBuilder builder = new StringBuilder();
 		// scratch variable
 		for (Object arg : args) {
-			if (arg instanceof DataSaveAble) {
+			if(arg == null) {
+				builder.append("null");
+			} else if (arg instanceof DataSaveAble) {
 				builder.append(((DataSaveAble) arg).toQuery());
-			} else
+			} else {
 				builder.append(arg.toString());
+			}
 		}
 		return builder.toString();
 	}

@@ -48,6 +48,31 @@ public class InsertAction implements Actionable {
 		 */
 		switch(command) {
 		case Commands.REGISTER_STUDENT_ACC:
+			// account
+			id = requestObject.getString("id");
+			password = requestObject.getString("password");
+			sessionKey = requestObject.getString("session_key");
+			permission = requestObject.getInt("permission");
+			
+			// student data
+			String studentName = requestObject.getString("name");
+			int studentNumber = requestObject.getInt("number");
+			int studentSex = requestObject.getInt("sex");
+			int studentStatus = requestObject.getInt("status");
+			
+			String studentPhone = null;
+			String parentName = null;
+			String parentPhone = null;
+			if(requestObject.containsKey("phone")) {
+				studentPhone = requestObject.getString("phone");
+			}
+			if(requestObject.containsKey("p_name")) {
+				parentName = requestObject.getString("p_name");
+			}
+			if(requestObject.containsKey("p_phone")) {
+				parentPhone = requestObject.getString("p_phone");
+			}
+			
 			/*
 			 * Set stay apply default value when register account
 			 * 
@@ -56,6 +81,7 @@ public class InsertAction implements Actionable {
 			 * id VARCHAR(20) PK NN
 			 * value INT(1) Default 4
 			 */
+			
 			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4)");
 			
 			 /*
@@ -69,12 +95,8 @@ public class InsertAction implements Actionable {
 			  * session_key VARCHAR(300) Default NULL
 			  * permission TINYINT(1) NN
 			  */
-			id = requestObject.getString("id");
-			password = requestObject.getString("password");
-			sessionKey = requestObject.getString("session_key");
-			permission = requestObject.getInt("permission");
 			
-			status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
+			database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
 			
 			/*
 			 * Set student's data to student_data table
@@ -91,22 +113,6 @@ public class InsertAction implements Actionable {
 			 * merit INT(11) Default NULL
 			 * demerit INT(11) Default NULL
 			 */
-			int studentNumber = requestObject.getInt("number");
-			int studentSex = requestObject.getInt("sex");
-			int studentStatus = requestObject.getInt("status");
-			String studentName = requestObject.getString("name");
-			String studentPhone = null;
-			String parentName = null;
-			String parentPhone = null;
-			if(requestObject.containsKey("phone")) {
-				studentPhone = requestObject.getString("phone");
-			}
-			if(requestObject.containsKey("p_name")) {
-				parentName = requestObject.getString("p_name");
-			}
-			if(requestObject.containsKey("p_phone")) {
-				parentPhone = requestObject.getString("p_phone");
-			}
 			
 			status = database.executeUpdate("INSERT INTO student_data(number, sex, status, name, phone, p_name, p_phone) VALUES(", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
 			
@@ -117,7 +123,7 @@ public class InsertAction implements Actionable {
 			 * 
 			 * idx INT(11) PK NN AI
 			 * id VARCHAR(20) NN UQ
-			 * password VARCHAR(300) NN
+			 * password VARCHAR(500) NN
 			 * session_key VARCHAR(40) NN
 			 * permission INT(11) NN Default 0
 			 * name VARCHAR(20) NN
@@ -295,8 +301,6 @@ public class InsertAction implements Actionable {
 			break;
 		case Commands.APPLY_EXTENTION:
 			/*
-			 * Apply extension - about class and seat
-			 * 
 			 * Table Name : extension_apply
 			 * 
 			 * id VARCHAR(20) PK NN
@@ -317,8 +321,8 @@ public class InsertAction implements Actionable {
 			 * Table Name : stay_apply
 			 * 
 			 * id VARCHAR(20) NN
-			 * value INT(1) NN Default 4
-			 * date DATE NN Default 'all'
+			 * value INT(1) NN
+			 * date DATE NN
 			 * 
 			 * DATE format : YYYY-MM-DD
 			 * Friday home coming : 1
@@ -383,6 +387,7 @@ public class InsertAction implements Actionable {
 			 * 
 			 * id VARCHAR(20) NN
 			 * no INT(11) NN
+			 * CONSTRAINT afterschool_apply_ibfk_1 FOREIGN KEY no REFERENCES afterschool_list(no)
 			 */
 			id = requestObject.getString("id");
 			no = requestObject.getInt("no");

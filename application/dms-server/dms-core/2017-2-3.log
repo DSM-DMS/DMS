@@ -1,0 +1,245 @@
+2017/2/3/9:23:13 [ERROR] java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+2017/2/3/9:23:14 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:23:27 [ERROR] java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+2017/2/3/9:23:28 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:23:45 [INFO] Database connected successfully!
+2017/2/3/9:23:45 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:24:1 [INFO] Database connected successfully!
+2017/2/3/9:24:1 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:26:27 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:26:27 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:26:27 [INFO] Header : null
+2017/2/3/9:26:27 [INFO] Fully read : 
+2017/2/3/9:32:36 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:32:36 [INFO] Database connected successfully!
+2017/2/3/9:32:42 [INFO] Database connected successfully!
+2017/2/3/9:32:42 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:33:4 [INFO] Database connected successfully!
+2017/2/3/9:33:4 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:35:17 [INFO] Database connected successfully!
+2017/2/3/9:35:17 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:35:37 [INFO] Broad finish parse count : 18
+2017/2/3/9:35:55 [INFO] Database connected successfully!
+2017/2/3/9:35:55 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:36:1 [INFO] Broad finish parse count : 1
+2017/2/3/9:36:3 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:36:3 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:36:3 [INFO] Header : 101
+2017/2/3/9:36:3 [INFO] Fully read : 
+2017/2/3/9:36:49 [INFO] Database connected successfully!
+2017/2/3/9:36:49 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:36:55 [INFO] Broad finish parse count : 1
+2017/2/3/9:37:50 [INFO] Database connected successfully!
+2017/2/3/9:37:50 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:37:56 [INFO] Broad finish parse count : 1
+2017/2/3/9:39:15 [INFO] Database connected successfully!
+2017/2/3/9:39:15 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:39:23 [INFO] Broad finish parse count : 1
+2017/2/3/9:40:36 [INFO] Database connected successfully!
+2017/2/3/9:40:36 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:40:43 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:40:43 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:40:43 [INFO] Header : 101
+2017/2/3/9:40:43 [INFO] Broad finish parse count : 1
+2017/2/3/9:40:43 [INFO] Fully read : {"testKey":true}
+2017/2/3/9:42:18 [INFO] Familer finish parse count : 126
+2017/2/3/9:42:44 [INFO] Challenge finish parse count : 36
+2017/2/3/9:42:50 [INFO] Broad finish parse count : 1
+2017/2/3/9:43:2 [INFO] Broad finish parse count : 1
+2017/2/3/9:43:13 [INFO] Broad finish parse count : 1
+2017/2/3/9:43:25 [INFO] Broad finish parse count : 1
+2017/2/3/9:43:36 [INFO] Broad finish parse count : 1
+2017/2/3/9:43:47 [INFO] Broad finish parse count : 1
+2017/2/3/9:43:59 [INFO] Broad finish parse count : 1
+2017/2/3/9:44:11 [INFO] Broad finish parse count : 1
+2017/2/3/9:44:22 [INFO] Broad finish parse count : 1
+2017/2/3/9:44:33 [INFO] Broad finish parse count : 1
+2017/2/3/9:44:44 [INFO] Broad finish parse count : 1
+2017/2/3/9:44:55 [INFO] Broad finish parse count : 1
+2017/2/3/9:45:6 [INFO] Broad finish parse count : 1
+2017/2/3/9:45:18 [INFO] Broad finish parse count : 1
+2017/2/3/9:45:29 [INFO] Broad finish parse count : 1
+2017/2/3/9:45:40 [INFO] Broad finish parse count : 1
+2017/2/3/9:45:51 [INFO] Broad finish parse count : 1
+2017/2/3/9:46:2 [INFO] Broad finish parse count : 1
+2017/2/3/9:46:14 [INFO] Broad finish parse count : 1
+2017/2/3/9:46:25 [INFO] Broad finish parse count : 1
+2017/2/3/9:46:36 [INFO] Broad finish parse count : 1
+2017/2/3/9:46:48 [INFO] Broad finish parse count : 1
+2017/2/3/9:47:0 [INFO] Broad finish parse count : 1
+2017/2/3/9:47:11 [INFO] Broad finish parse count : 1
+2017/2/3/9:47:23 [INFO] Broad finish parse count : 1
+2017/2/3/9:47:34 [INFO] Broad finish parse count : 1
+2017/2/3/9:47:45 [INFO] Broad finish parse count : 1
+2017/2/3/9:47:56 [INFO] Broad finish parse count : 1
+2017/2/3/9:48:8 [INFO] Broad finish parse count : 1
+2017/2/3/9:48:19 [INFO] Broad finish parse count : 1
+2017/2/3/9:51:49 [INFO] Database connected successfully!
+2017/2/3/9:51:49 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:51:59 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:51:59 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:51:59 [INFO] Header : 100
+2017/2/3/9:51:59 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/9:52:27 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:52:27 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:52:27 [INFO] Header : 100
+2017/2/3/9:52:27 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/9:54:51 [INFO] Database connected successfully!
+2017/2/3/9:54:51 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:54:59 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:54:59 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:54:59 [INFO] Header : 100
+2017/2/3/9:54:59 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/9:55:30 [INFO] Broad finish parse count : 49
+2017/2/3/9:56:30 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:56:30 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:56:30 [INFO] Header : 100
+2017/2/3/9:56:30 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/9:56:30 [INFO] SQLException
+2017/2/3/9:56:57 [INFO] Database connected successfully!
+2017/2/3/9:56:57 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:57:7 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:57:7 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:57:7 [INFO] Header : 100
+2017/2/3/9:57:7 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/9:57:7 [INFO] SQLException
+2017/2/3/9:58:52 [INFO] Database connected successfully!
+2017/2/3/9:58:52 [INFO] Server started 1.0.3 TEST
+2017/2/3/9:59:2 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/9:59:2 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/9:59:2 [INFO] Header : 100
+2017/2/3/9:59:2 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/9:59:2 [INFO] SQLException
+2017/2/3/9:59:53 [INFO] Database connected successfully!
+2017/2/3/9:59:53 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:0:2 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:0:2 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:0:2 [INFO] Header : 100
+2017/2/3/10:0:2 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:0:2 [INFO] SQLException
+2017/2/3/10:0:17 [INFO] Database connected successfully!
+2017/2/3/10:0:17 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:0:26 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:0:26 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:0:26 [INFO] Header : 100
+2017/2/3/10:0:26 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:0:26 [INFO] SQLException
+2017/2/3/10:1:11 [INFO] Familer finish parse count : 67
+2017/2/3/10:1:21 [INFO] Database connected successfully!
+2017/2/3/10:1:21 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:1:29 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:1:29 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:1:29 [INFO] Header : 100
+2017/2/3/10:1:29 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:1:29 [INFO] SQLException
+2017/2/3/10:2:13 [INFO] Database connected successfully!
+2017/2/3/10:2:13 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:2:22 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:2:22 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:2:22 [INFO] Header : 100
+2017/2/3/10:2:22 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:2:22 [INFO] SQLException
+2017/2/3/10:2:34 [INFO] Challenge finish parse count : 16
+2017/2/3/10:4:8 [INFO] Database connected successfully!
+2017/2/3/10:4:9 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:4:17 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:4:17 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:4:17 [INFO] Header : 100
+2017/2/3/10:4:17 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:4:17 [INFO] SQLException
+2017/2/3/10:4:45 [INFO] Database connected successfully!
+2017/2/3/10:4:45 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:4:59 [INFO] Database connected successfully!
+2017/2/3/10:4:59 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:5:8 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:5:8 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:5:8 [INFO] Header : 100
+2017/2/3/10:5:8 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:5:8 [INFO] SQLException
+2017/2/3/10:5:40 [INFO] Database connected successfully!
+2017/2/3/10:5:41 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:5:51 [INFO] Database connected successfully!
+2017/2/3/10:5:51 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:6:1 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:6:1 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:6:1 [INFO] Header : 100
+2017/2/3/10:6:1 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:6:1 [INFO] SQLException
+2017/2/3/10:7:29 [INFO] Database connected successfully!
+2017/2/3/10:7:30 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:7:40 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:7:40 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:7:40 [INFO] Header : 100
+2017/2/3/10:7:40 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:7:40 [INFO] SQLException
+2017/2/3/10:8:49 [INFO] Database connected successfully!
+2017/2/3/10:8:50 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:9:20 [INFO] Database connected successfully!
+2017/2/3/10:9:21 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:9:30 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:9:30 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:9:30 [INFO] Header : 100
+2017/2/3/10:9:30 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:9:30 [INFO] SQLException
+2017/2/3/10:10:9 [INFO] Database connected successfully!
+2017/2/3/10:10:9 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:10:19 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:10:19 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:10:19 [INFO] Header : 100
+2017/2/3/10:10:19 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:10:19 [INFO] SQLException
+2017/2/3/10:10:35 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:10:35 [INFO] Database connected successfully!
+2017/2/3/10:10:44 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:10:44 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:10:44 [INFO] Header : 100
+2017/2/3/10:10:44 [INFO] Fully read : {"number":10419,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId","status":1}
+2017/2/3/10:10:44 [INFO] SQLException
+2017/2/3/10:11:53 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:12:4 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:12:4 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:12:4 [INFO] Header : 100
+2017/2/3/10:12:4 [INFO] Fully read : {"number":10417,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId2","status":1}
+2017/2/3/10:12:4 [INFO] Database connected successfully!
+2017/2/3/10:14:25 [INFO] Database connected successfully!
+2017/2/3/10:14:25 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:14:34 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:14:34 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:14:34 [INFO] Header : 100
+2017/2/3/10:14:34 [INFO] Fully read : {"number":10414,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"Mingyu","permission":"1","id":"testId3","status":1}
+2017/2/3/10:15:35 [INFO] Database connected successfully!
+2017/2/3/10:15:36 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:15:50 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:15:50 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:15:50 [INFO] Header : 100
+2017/2/3/10:15:50 [INFO] Fully read : {"number":10414,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId3","status":1}
+2017/2/3/10:15:50 [INFO] SQLException
+2017/2/3/10:17:44 [INFO] Database connected successfully!
+2017/2/3/10:17:44 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:18:1 [INFO] Database connected successfully!
+2017/2/3/10:18:2 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:18:11 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:18:11 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:18:11 [INFO] Header : 100
+2017/2/3/10:18:11 [INFO] Fully read : {"number":10411,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"testId4","status":1}
+2017/2/3/10:19:47 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:19:47 [INFO] Database connected successfully!
+2017/2/3/10:19:57 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:19:57 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:19:57 [INFO] Header : 100
+2017/2/3/10:19:57 [INFO] Fully read : {"number":10,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"test1","status":1}
+2017/2/3/10:20:18 [INFO] Database connected successfully!
+2017/2/3/10:20:18 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:20:26 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:20:26 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:20:26 [INFO] Header : 100
+2017/2/3/10:20:26 [INFO] Fully read : {"number":10,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"test1","status":1}
+2017/2/3/10:20:26 [INFO] SQLException
+2017/2/3/10:20:51 [INFO] Database connected successfully!
+2017/2/3/10:20:51 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:21:0 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:21:0 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:21:0 [INFO] Header : 100
+2017/2/3/10:21:0 [INFO] Fully read : {"number":11,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"test2","status":1}
+2017/2/3/10:21:0 [INFO] Responsed status code : 1
+2017/2/3/10:21:0 [INFO] Responsed object : {}

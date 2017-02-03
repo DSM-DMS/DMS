@@ -19,6 +19,7 @@ public class DeleteAction implements Actionable {
 		
 		// For post
 		int no;
+		String date;
 		
 		// For status
 		int status = 0;
@@ -50,8 +51,9 @@ public class DeleteAction implements Actionable {
 			break;
 		case Commands.DELETE_QNA_COMMENT:
 			no = requestObject.getInt("no");
+			date = requestObject.getString("date");
 			
-			status = database.executeUpdate("DELETE qna_comment WHERE no=", no);
+			status = database.executeUpdate("DELETE qna_comment WHERE no=", no, " AND date='", date, "'");
 			
 			break;
 		case Commands.DELETE_FAQ:

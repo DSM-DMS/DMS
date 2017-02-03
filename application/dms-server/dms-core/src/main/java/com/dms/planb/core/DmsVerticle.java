@@ -46,12 +46,11 @@ class DmsVerticle extends AbstractVerticle {
 			Log.l("Received request : " + request.host());
 			
 			Buffer totalBuffer = Buffer.buffer();
-//			MultiMap params = request.params();
 			
 			if(request.method() == HttpMethod.POST) {
 				// The server will only work if the Http method is POST.
 				Log.l("Received POST method : " + request.host());
-				Log.l("Header : " + request.getHeader("Command"));
+				Log.l("Header : " + request.getHeader("command"));
 				
 				request.handler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
@@ -65,13 +64,12 @@ class DmsVerticle extends AbstractVerticle {
 					int command = Integer.parseInt(request.getHeader("command"));
 					
 					// 1-2. Get client's info
-						clientObject = new EasyJsonObject(request.getHeader("User-Agent"));
-//						clientObject.getString("Version");
-//						clientObject.getString("UUID");
+//					clientObject = new EasyJsonObject(request.getHeader("User-Agent"));
+//					clientObject.getString("Version");
+//					clientObject.getString("UUID");
 					
 					// 1-3. Get request object from buffer.
-						requestObject = new EasyJsonObject(totalBuffer.toString());
-//						requestObject = new JSONObject().put("testKey", "testValue");
+					requestObject = new EasyJsonObject(totalBuffer.toString());
 					
 					/*
 					 *  2. Performs the operation.
@@ -98,13 +96,15 @@ class DmsVerticle extends AbstractVerticle {
 							response.setStatusCode(404);
 							// 404 : Can't find
 						}
+						
+						Log.l("Responsed status code : " + responseObject.getInt("status"));
+						responseObject.remove("status");
 					} else {
 						response.setStatusCode(200);
+						
+						Log.l("Responsed status code : 200");
 					}
 
-					//	Log.l("Responsed status code : " + responseObject.getInt("status"));
-					responseObject.remove("status");
-					
 					response.end(responseObject.toString());
 					Log.l("Responsed object : " + responseObject.toString());
 					response.close();

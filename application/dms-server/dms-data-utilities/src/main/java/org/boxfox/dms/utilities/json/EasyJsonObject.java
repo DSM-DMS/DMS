@@ -31,6 +31,10 @@ public class EasyJsonObject extends EasyJson{
     	return obj.containsKey(key);
     }
     
+    public boolean isEmpty() {
+    	return obj.isEmpty();
+    }
+    
     public void put(String key, Object obj){
     	super.obj.put(key, obj);
     }
