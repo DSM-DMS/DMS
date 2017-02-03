@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMS</title>
+    <link rel="stylesheet" href="default.css">
+    <!--css파일 위치로 수정필요-->
+</head>
+
+<body>
+    <header>
+        <div class="logo" style="color: white">
+            <p>로고</p>
+            <!--수정필요-->
+        </div>
+    </header>
+    <div class="remote">
+        <h1><a href="index.html">DSM</a></h1>
+        <div class="category">
+            <a href="#">
+                <p>신청</p>
+            </a>
+            <div class="application children">
+                <a href="extention_apply.html">연장신청</a>
+                <a href="go_home_apply.html">귀가신청</a>
+                <a href="#">외출신청</a>
+                <a href="#">상점신청</a>
+                <a href="#">방과후신청</a>
+            </div>
+            <a href="#">
+                <p>기숙사</p>
+            </a>
+            <div class="dom children">
+                <a href="dorm_main.html">공지사항</a>
+                <a href="dorm_life.html">FAQ</a>
+                <a href="#">기숙사규칙</a>
+                <a href="dorm_QNA.html">문의하기</a>
+            </div>
+            <a href="#">
+                <p>마이페이지</p>
+            </a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="frame left pointapply">
+            <div class="frametitle">
+                <h1>상점신청</h1>
+                <div class="underline"></div>
+            </div>
+            <div class="selecter">
+                <div class="selectmenu">
+                    <p>상점신청</p>
+                </div>
+                <div class="selectmenu">
+                    <p>상점추천</p>
+                </div>
+            </div>
+            <form class="individual" action="index.html" method="post">
+                <input type="text" name="reason" placeholder="이유를 입력해 주세요" value="">
+                <button type="button" name="button">피융!</button>
+            </form>
+            <form class="group individual" action="index.html" method="post">
+                <input type="text" name="reason" placeholder="이유를 입력해 주세요" value="">
+                <input type="text" name="person" placeholder="추천자를 입력해 주세요(피추천자)" value="">
+                <button type="button" name="button">피융!</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/remote.js"></script>
+    <script type="text/javascript" src="../js/point.js"></script>
+    <!--remote.js로 수정필요-->
+</body>
+
+</html>

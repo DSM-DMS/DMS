@@ -6,7 +6,7 @@ body {
     /*배경색
     신청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙사 : background-color: rgb(191,148,208) -> rgb(191,148,208)
-    마이페이지 : background-color: rgb(192, 57, 43) -> rgb(224,136,127)*/
+    마이페이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> rgb(231,160,153)*/
     font-size: 0.9em;
 }
 
@@ -46,7 +46,7 @@ body {
     height: 8px;
     margin-right: 0%;
     width: 93%;
-    background: rgb(191,148,208);
+    background: rgb(191, 148, 208);
 }
 
 
@@ -132,7 +132,7 @@ body {
 }
 
 .right .info:hover {
-    background-color: rgb(191,148,208);
+    background-color: rgb(191, 148, 208);
     color: white;
 }
 
@@ -149,11 +149,11 @@ body {
 /*--------------------------etc--------------------------------*/
 
 body {
-    background-color: rgb(191,148,208);
+    background-color: rgb(191, 148, 208);
 }
 
 .underline {
-    background: rgb(191,148,208);
+    background: rgb(191, 148, 208);
 }
 
 
@@ -169,7 +169,7 @@ body {
 .articlelist table {
     border-collapse: collapse;
     width: 86%;
-    margin-top: 2%;
+    margin-top: 25px;
     margin-left: 7%;
 }
 
@@ -192,14 +192,14 @@ body {
 .articlelist table .tableheader th {
     padding: 0;
     border: 0;
-    border-top: 1px solid rgb(191,148,208);
-    border-bottom: 2px solid rgb(191,148,208);
-    color: rgb(191,148,208);
+    border-top: 1px solid rgb(191, 148, 208);
+    border-bottom: 2px solid rgb(191, 148, 208);
+    color: rgb(191, 148, 208);
     height: 32px;
 }
 
 .articlelist table td {
-    border-bottom: 1px solid rgb(191,148,208);
+    border-bottom: 1px solid rgb(191, 148, 208);
     height: 32px;
 }
 
@@ -218,6 +218,7 @@ body {
     color: rgb(100, 100, 100);
     font-size: 0.8em;
     font-weight: 900;
+    min-width: 27px;
 }
 
 
@@ -270,7 +271,7 @@ body {
 /*-------------------------------------qna list.-------------------------------*/
 
 .qna table tr:nth-child(2), .qna table tr:nth-child(3) {
-    background-color: rgb(191,148,208);
+    background-color: rgb(191, 148, 208);
 }
 
 .qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
@@ -303,11 +304,11 @@ body {
 }
 
 .commentinput button {
-    background-color: rgb(191,148,208);
+    background-color: rgb(191, 148, 208);
     border: none;
     height: 36px;
     width: 99%;
-    border: 2px solid rgb(191,148,208);
+    border: 2px solid rgb(191, 148, 208);
     border-radius: 4px;
     transition: all 1s ease;
     color: white;
@@ -320,7 +321,7 @@ body {
 .commentinput input[type="text"] {
     height: 30px;
     width: 97%;
-    border: 2px solid rgb(191,148,208);
+    border: 2px solid rgb(191, 148, 208);
     border-radius: 4px;
     padding-left: 1%;
     transition: all 1s ease;
@@ -381,7 +382,7 @@ body {
 /*-------------------------------------mypage.-------------------------------*/
 
 body {
-    background-color: rgb(224,136,127);
+    background-color: rgb(231, 160, 153);
 }
 
 .mypage {
@@ -389,7 +390,7 @@ body {
 }
 
 .left .frametitle .underline {
-    background-color: rgb(224,136,127);
+    background-color: rgb(231, 160, 153);
 }
 
 .left .info {
@@ -425,6 +426,82 @@ body {
 .mypage .info table tr td:nth-child(2) {
     font-size: 0.8em;
     padding: 10px;
+}
+
+
+/*------------------------------------- point ----------*/
+
+.pointapply {
+    width: 100%;
+}
+
+.pointapply .selecter {
+    /*margin-left: 57%;*/
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.pointapply .selecter .selectmenu {
+    display: inline-block;
+    /*font-size: 0px;
+    letter-spacing: 0px;
+    word-spacing: -1;*/
+    width: 30%;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.pointapply .selecter .selectmenu:nth-child(1) {
+    background-color: rgb(134, 193, 233);
+    border: 1px solid rgb(134, 193, 233);
+    border-radius: 5px 0px 0px 5px;
+    color: white;
+}
+
+.pointapply .selecter .selectmenu:nth-child(2) {
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid rgb(134, 193, 233);
+}
+
+.pointapply .selecter .selectmenu p {
+    margin: 1%;
+}
+
+.pointapply .individual input[type="text"] {
+    height: 30px;
+    margin-top: 50px;
+    margin-left: 7%;
+    width: 85.5%;
+    border: 2px solid rgb(134, 193, 233);
+    border-radius: 4px;
+    transition: all 1s ease;
+    padding-left: 1%;
+}
+
+.pointapply .individual button {
+    background-color: rgb(134, 193, 233);
+    border: none;
+    height: 36px;
+    width: 87%;
+    border: 2px solid rgb(134, 193, 233);
+    margin-top: 50px;
+    margin-left: 7%;
+    border-radius: 4px;
+    transition: all 1s ease;
+    color: white;
+}
+
+.pointapply .individual button:hover {
+    background-color: rgb(160, 200, 255);
+}
+
+.pointapply .group input:nth-child(2) {
+    margin-top: 20px;
+}
+
+.pointapply .group {
+    display: none;
 }
 
 
@@ -532,7 +609,6 @@ body {
     .commentinput input[type="text"] {
         width: 90%;
     }
-
 }
 
 

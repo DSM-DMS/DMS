@@ -80,7 +80,7 @@ $(".remote .category").children("a").eq(1).click(function() {
 $(".remote .category").children("a").eq(2).click(function() {
     //remote background-color를 마이페이지색으로
     $(".remote").animate({
-        backgroundColor: "rgb(224,136,127)"
+        backgroundColor: "rgb(231,160,153)"
     });
 
     //마이페이지 text를 white로
@@ -125,7 +125,7 @@ if (!isMobile) {
         })
 
         $(".remote .category").children("a").eq(2).animate({
-            color: "color: rgb(224,136,127)",
+            color: "color: rgb(231,160,153)",
             fontSize: "1em"
         })
 
@@ -177,7 +177,7 @@ if (!isMobile) {
         })
 
         $(".remote .category").children("a").eq(2).animate({
-            color: "color: rgb(224,136,127)",
+            color: "color: rgb(231,160,153)",
             fontSize: "1em"
         })
 
