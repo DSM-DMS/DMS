@@ -570,34 +570,27 @@ body {
     width: 100%;
 }
 
-.afterapplypage .afterinfo {
-    background-color: rgb(134, 193, 233);
+.aftercontainer {
     text-align: center;
-    margin-left: 7%;
-    width: 86.5%
+}
+
+.afterapplypage .afterinfo {
+    background-color: #2979FF;
+    display: inline-block;
+    width: 30%;
+    margin-top: 30px;
+    color: white;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
+    text-align: left;
+    border-radius: 5px;
 }
 
 .afterapplypage h2 {
-    text-align: center;
-    font-size: 3em;
-    margin-left: 7%;
-    width: 86%;
-    margin-bottom: 20px;
+    margin-left: 15px;
 }
 
 .afterapplypage .afterinfo p {
-    /*margin-left: -5px;
-    margin-right: -5px;*/
-    /*width: 7%;
-    height: 3%;
-    background-color: gray;*/
-    font-weight: 900;
-    font-size: 1.2em;
-    margin-left: 5%;
-    margin-right: 5%;
-    color: white;
-    display: inline-block;
-    /*text-align: left;*/
+    margin-left: 15px;
 }
 
 .afterapplypage .afternotice {
@@ -609,18 +602,19 @@ body {
 }
 
 .afterapplypage .afterform button {
-    background-color: rgb(134, 193, 233);
+    background-color: #2979FF;
     border: none;
     height: 36px;
     width: 30%;
-    border: 2px solid rgb(134, 193, 233);
+    border: 2px solid #2979FF;
     border-radius: 4px;
     transition: all 1s ease;
     color: white;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
 }
 
 .afterapplypage .frametitle img {
-      width: 25px;
+    width: 25px;
 }
 
 .afterapplypage .frametitle h1 {
