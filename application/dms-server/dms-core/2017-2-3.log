@@ -243,3 +243,116 @@
 2017/2/3/10:21:0 [INFO] Fully read : {"number":11,"password":"testPassword","sex":1,"session_key":"dfoodf","name":"조민규","permission":"1","id":"test2","status":1}
 2017/2/3/10:21:0 [INFO] Responsed status code : 1
 2017/2/3/10:21:0 [INFO] Responsed object : {}
+2017/2/3/10:24:51 [INFO] Database connected successfully!
+2017/2/3/10:24:51 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:25:2 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:25:2 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:25:2 [INFO] Header : 101
+2017/2/3/10:25:2 [INFO] Fully read : {"password":"testPassword","session_key":"dfoodf","name":"이름이름","permission":"1","id":"test2"}
+2017/2/3/10:25:2 [INFO] SQLException
+2017/2/3/10:25:49 [INFO] Database connected successfully!
+2017/2/3/10:25:49 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:25:58 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:25:58 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:25:58 [INFO] Header : 101
+2017/2/3/10:25:58 [INFO] Fully read : {"password":"testPassword","session_key":"dfoodf","name":"이름이름","permission":"1","id":"test2"}
+2017/2/3/10:25:58 [INFO] SQLException
+2017/2/3/10:28:44 [INFO] Database connected successfully!
+2017/2/3/10:28:44 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:28:52 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:28:52 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:28:52 [INFO] Header : 101
+2017/2/3/10:28:52 [INFO] Fully read : {"password":"testPassword","session_key":"dfoodf","name":"이름이름","permission":"1","id":"test2"}
+2017/2/3/10:28:53 [INFO] Responsed status code : 200
+2017/2/3/10:28:53 [INFO] Responsed object : {}
+2017/2/3/10:29:49 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:29:49 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:29:49 [INFO] Header : 111
+2017/2/3/10:29:49 [INFO] Fully read : {"title":"제목제목","content":"히히"}
+2017/2/3/10:29:50 [INFO] Responsed status code : 200
+2017/2/3/10:29:50 [INFO] Responsed object : {}
+2017/2/3/10:30:5 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:30:5 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:30:5 [INFO] Header : 111
+2017/2/3/10:30:5 [INFO] Fully read : {"title":"제목제목ㅇ","content":"히히"}
+2017/2/3/10:30:5 [INFO] Responsed status code : 200
+2017/2/3/10:30:5 [INFO] Responsed object : {}
+2017/2/3/10:33:43 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:33:43 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:33:43 [INFO] Header : 112
+2017/2/3/10:33:43 [INFO] Fully read : {"question_content":"치킨 먹게 해주시면 안돼요?","privacy":2,"writer":"치킨먹고싶다","title":"제목제목ㅇ"}
+2017/2/3/10:34:3 [INFO] Database connected successfully!
+2017/2/3/10:34:3 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:34:12 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:34:12 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:34:12 [INFO] Header : 112
+2017/2/3/10:34:12 [INFO] Fully read : {"question_content":"치킨 먹게 해주시면 안돼요?","privacy":2,"writer":"치킨먹고싶다","title":"제목제목ㅇ"}
+2017/2/3/10:34:12 [INFO] Responsed status code : 200
+2017/2/3/10:34:12 [INFO] Responsed object : {}
+2017/2/3/10:35:58 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:35:58 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:35:58 [INFO] Header : 113
+2017/2/3/10:35:58 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:36:18 [INFO] Database connected successfully!
+2017/2/3/10:36:19 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:36:27 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:36:27 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:36:27 [INFO] Header : 113
+2017/2/3/10:36:27 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:36:27 [INFO] SQLException
+2017/2/3/10:37:17 [INFO] Database connected successfully!
+2017/2/3/10:37:18 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:37:24 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:37:24 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:37:24 [INFO] Header : 113
+2017/2/3/10:37:24 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:37:24 [INFO] SQLException
+2017/2/3/10:38:0 [INFO] Database connected successfully!
+2017/2/3/10:38:1 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:38:15 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:38:15 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:38:15 [INFO] Header : 113
+2017/2/3/10:38:15 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:38:15 [INFO] SQLException
+2017/2/3/10:39:32 [INFO] Database connected successfully!
+2017/2/3/10:39:32 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:39:41 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:39:41 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:39:41 [INFO] Header : 113
+2017/2/3/10:39:41 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:39:41 [INFO] SQLException
+2017/2/3/10:40:42 [INFO] Database connected successfully!
+2017/2/3/10:40:42 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:40:51 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:40:51 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:40:51 [INFO] Header : 113
+2017/2/3/10:40:51 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:40:51 [INFO] SQLException
+2017/2/3/10:41:28 [INFO] Database connected successfully!
+2017/2/3/10:41:28 [INFO] Server started 1.0.3 TEST
+2017/2/3/10:41:37 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:41:37 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:41:37 [INFO] Header : 113
+2017/2/3/10:41:37 [INFO] Fully read : {"no":1,"answer_content":"그런거 없다"}
+2017/2/3/10:41:37 [INFO] Responsed status code : 200
+2017/2/3/10:41:37 [INFO] Responsed object : {}
+2017/2/3/10:43:2 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:43:2 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:43:2 [INFO] Header : 114
+2017/2/3/10:43:2 [INFO] Fully read : {"no":1,"writer":"치킨교주","content":"너무했다"}
+2017/2/3/10:43:2 [INFO] Responsed status code : 200
+2017/2/3/10:43:2 [INFO] Responsed object : {}
+2017/2/3/10:45:37 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/10:45:37 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/10:45:37 [INFO] Header : 115
+2017/2/3/10:45:37 [INFO] Fully read : {"title":"기숙사에서 치킨 먹지마","content":"이유는 내맘"}
+2017/2/3/10:45:37 [INFO] Responsed status code : 200
+2017/2/3/10:45:37 [INFO] Responsed object : {}
+2017/2/3/11:17:26 [INFO] Database connected successfully!
+2017/2/3/11:17:27 [INFO] Server started 1.0.3 TEST
+2017/2/3/11:18:13 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/11:18:13 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/11:18:13 [INFO] Header : 116
+2017/2/3/11:18:13 [INFO] Fully read : {"on_saturday":false,"no":1,"on_tuesday":false,"instructor":"갓정범","on_wednesday":true,"place":"다과실","title":"빠이썬반","on_monday":true,"target":1}
+2017/2/3/11:18:13 [INFO] Responsed status code : 200
+2017/2/3/11:18:13 [INFO] Responsed object : {}

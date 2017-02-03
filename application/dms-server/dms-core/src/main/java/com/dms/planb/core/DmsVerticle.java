@@ -71,43 +71,45 @@ class DmsVerticle extends AbstractVerticle {
 					// 1-3. Get request object from buffer.
 					requestObject = new EasyJsonObject(totalBuffer.toString());
 					
-					/*
-					 *  2. Performs the operation.
-					 *  Branch off the ActionPerformer class' perform method.
-					 */
 					try {
+						/*
+						 *  2. Performs the operation.
+						 *  Branch off the ActionPerformer class' perform method.
+						 */
 						responseObject = ActionPerformer.perform(command, requestObject);
+						
+						// 3. Response to client.
+						response = request.response();
+						response.putHeader("Content-type", "application/json; charset=utf-8");
+						
+						if(responseObject.containsKey("status")) {
+							if(responseObject.getInt("status") == 0) {
+								response.setStatusCode(500);
+								Log.l("Responsed status code : 500");
+								// 500 : Internal Server Error
+							} else if(responseObject.getInt("status") == 1) {
+								response.setStatusCode(200);
+								Log.l("Responsed status code : 200");
+								// 200 : Success
+							} else if(responseObject.getInt("status") == 2) {
+								response.setStatusCode(404);
+								Log.l("Responsed status code : 404");
+								// 404 : Can't find
+							}
+							responseObject.remove("status");
+						} else {
+							response.setStatusCode(200);
+							Log.l("Responsed status code : 200");
+						}
+
+						response.end(responseObject.toString());
+						Log.l("Responsed object : " + responseObject.toString());
+						
+						response.close();
 					} catch (SQLException e) {
+						e.printStackTrace();
 						Log.l("SQLException");
 					}
-					
-					// 3. Response to client.
-					response = request.response();
-					response.putHeader("Content-type", "application/json; charset=utf-8");
-					
-					if(responseObject.containsKey("status")) {
-						if(responseObject.getInt("status") == 0) {
-							response.setStatusCode(500);
-							// 500 : Internal Server Error
-						} else if(responseObject.getInt("status") == 1) {
-							response.setStatusCode(200);
-							// 200 : Success
-						} else if(responseObject.getInt("status") == 2) {
-							response.setStatusCode(404);
-							// 404 : Can't find
-						}
-						
-						Log.l("Responsed status code : " + responseObject.getInt("status"));
-						responseObject.remove("status");
-					} else {
-						response.setStatusCode(200);
-						
-						Log.l("Responsed status code : 200");
-					}
-
-					response.end(responseObject.toString());
-					Log.l("Responsed object : " + responseObject.toString());
-					response.close();
 				}); // endHandler
 			} else {
 				response = request.response();

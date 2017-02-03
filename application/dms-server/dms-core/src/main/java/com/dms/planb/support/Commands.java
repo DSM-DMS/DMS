@@ -22,7 +22,7 @@ public class Commands {
 	public static final int UPLOAD_ANSWER						= 113;
 	public static final int UPLOAD_QNA_COMMENT			= 114;
 	public static final int UPLOAD_FAQ								= 115;
-	public static final int UPLOAD_AFTERSCHOOL				= 116;
+	public static final int UPLOAD_AFTERSCHOOL_ITEM	= 116;
 	public static final int UPLOAD_REPORT_FACILITY		= 117;
 	public static final int UPLOAD_REPORT_RESULT 			= 118;
 	

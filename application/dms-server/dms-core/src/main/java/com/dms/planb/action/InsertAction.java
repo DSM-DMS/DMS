@@ -172,12 +172,11 @@ public class InsertAction implements Actionable {
 			 */
 			title = requestObject.getString("title");
 			content = requestObject.getString("question_content");
-			date = requestObject.getString("question_date");
-			writer = requestObject.getString("writerr");
+			writer = requestObject.getString("writer");
 			
 			int privacy = requestObject.getInt("privacy");
 			
-			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', '", date, "', '", writer, "', ", privacy, ")");
+			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");
 			
 			break;
 		case Commands.UPLOAD_ANSWER:
@@ -189,9 +188,8 @@ public class InsertAction implements Actionable {
 			 */
 			no = requestObject.getInt("no");
 			content = requestObject.getString("answer_content");
-			date = requestObject.getString("answer_date");
 			
-			status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date='", date, "' WHERE no=", no);
+			status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date= now()", " WHERE no=", no);
 			
 			break;
 		case Commands.UPLOAD_QNA_COMMENT:
@@ -213,8 +211,8 @@ public class InsertAction implements Actionable {
 			 * Upload comment based qna no
 			 */
 			no = requestObject.getInt("no");
-			writer = requestObject.getString("writer");
 			content = requestObject.getString("content");
+			writer = requestObject.getString("writer");
 			
 			status = database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
 			
@@ -235,7 +233,7 @@ public class InsertAction implements Actionable {
 			status = database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
 			
 			break;
-		case Commands.UPLOAD_AFTERSCHOOL:
+		case Commands.UPLOAD_AFTERSCHOOL_ITEM:
 			/*
 			 * After school list
 			 * 
@@ -245,9 +243,10 @@ public class InsertAction implements Actionable {
 			 * title VARCHAR(45) NN
 			 * target INT(1) NN
 			 * place VARCHAR(10) NN
-			 * on_monday BOOLEAN
-			 * on_tuesday BOOLEAN
-			 * on_wednesday BOOLEAN
+			 * on_monday TINYINT(1) NN
+			 * on_tuesday TINYINT(1) NN
+			 * on_wednesday TINYINT(1) NN
+			 * on_saturday TINYINT(1) NN
 			 * instructor VARCHAR(10)
 			 */
 			no = requestObject.getInt("no");
@@ -258,9 +257,10 @@ public class InsertAction implements Actionable {
 			boolean onMonday = requestObject.getBoolean("on_monday");
 			boolean onTuesday = requestObject.getBoolean("on_tuesday");
 			boolean onWednesday = requestObject.getBoolean("on_wednesday");
+			boolean onSaturday = requestObject.getBoolean("on_saturday");
 			String instructor = requestObject.getString("instructor");
 			
-			status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", '", instructor, "')");
+			status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "')");
 			
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
