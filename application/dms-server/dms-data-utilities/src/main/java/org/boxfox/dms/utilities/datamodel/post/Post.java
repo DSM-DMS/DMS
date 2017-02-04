@@ -10,9 +10,9 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONObject;
 
 public class Post extends DataSaveAble {
-	public static final int CATEGORY_BROAD = 0;
-	public static final int CATEGORY_FAMILER = 1;
-	public static final int CATEGORY_CHALLENGE = 2;
+	public static final int CATEGORY_NOTICE = 0;
+	public static final int CATEGORY_NEWSLETTER = 1;
+	public static final int CATEGORY_COMPETITION = 2;
 	private String writer, dateTime, title, content;
 	private int number, homePageNumber, category;
 	private AttachmentList  fileList;

@@ -37,12 +37,12 @@ public class PostChangeDetector {
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int currentCategory = Post.CATEGORY_BROAD;
+				int currentCategory = Post.CATEGORY_NOTICE;
 				while (run) {
 					postDataSave(currentCategory);
 					currentCategory++;
-					if (currentCategory > Post.CATEGORY_CHALLENGE) {
-						currentCategory = Post.CATEGORY_BROAD;
+					if (currentCategory > Post.CATEGORY_COMPETITION) {
+						currentCategory = Post.CATEGORY_NOTICE;
 					}
 				}
 				run = false;
@@ -98,11 +98,11 @@ public class PostChangeDetector {
 
 	private String categoryToString(int category) {
 		switch (category) {
-		case Post.CATEGORY_BROAD:
+		case Post.CATEGORY_NOTICE:
 			return BROAD;
-		case Post.CATEGORY_FAMILER:
+		case Post.CATEGORY_NEWSLETTER:
 			return FAMILER;
-		case Post.CATEGORY_CHALLENGE:
+		case Post.CATEGORY_COMPETITION:
 			return CHALLENGE;
 		}
 		return null;

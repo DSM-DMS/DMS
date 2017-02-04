@@ -294,7 +294,7 @@ public class InsertAction implements Actionable {
 			 * Upload result based report no
 			 */
 			no = requestObject.getInt("no");
-			content = requestObject.getString("result");
+			content = requestObject.getString("content");
 			
 			status = database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
 			

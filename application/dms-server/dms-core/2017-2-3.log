@@ -356,3 +356,61 @@
 2017/2/3/11:18:13 [INFO] Fully read : {"on_saturday":false,"no":1,"on_tuesday":false,"instructor":"갓정범","on_wednesday":true,"place":"다과실","title":"빠이썬반","on_monday":true,"target":1}
 2017/2/3/11:18:13 [INFO] Responsed status code : 200
 2017/2/3/11:18:13 [INFO] Responsed object : {}
+2017/2/3/18:39:27 [ERROR] java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+2017/2/3/18:39:28 [INFO] Server started 1.0.5 TEST
+2017/2/3/18:39:46 [INFO] Database connected successfully!
+2017/2/3/18:39:46 [INFO] Server started 1.0.5 TEST
+2017/2/3/18:40:8 [INFO] Broad finish parse count : 20
+2017/2/3/18:40:14 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:40:14 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:40:14 [INFO] Header : 117
+2017/2/3/18:40:14 [INFO] Fully read : {"writer":"김동현","title":"여기 좀 이상해요","content":"문이 안닫혀요","room":324}
+2017/2/3/18:40:14 [INFO] Responsed status code : 200
+2017/2/3/18:40:14 [INFO] Responsed object : {}
+2017/2/3/18:44:3 [INFO] Familer finish parse count : 221
+2017/2/3/18:44:22 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:44:22 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:44:22 [INFO] Header : 118
+2017/2/3/18:44:22 [INFO] Fully read : {"no":1,"content":"문 열려있는 채로 살아"}
+2017/2/3/18:44:38 [INFO] Database connected successfully!
+2017/2/3/18:44:39 [INFO] Server started 1.0.5 TEST
+2017/2/3/18:44:48 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:44:48 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:44:48 [INFO] Header : 118
+2017/2/3/18:44:48 [INFO] Fully read : {"no":1,"content":"문 열려있는 채로 살아"}
+2017/2/3/18:44:48 [INFO] Responsed status code : 200
+2017/2/3/18:44:48 [INFO] Responsed object : {}
+2017/2/3/18:44:57 [INFO] Challenge finish parse count : 8
+2017/2/3/18:46:27 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:46:27 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:46:27 [INFO] Header : 131
+2017/2/3/18:46:27 [INFO] Fully read : {"seat":15,"id":"dsm201671","class":1}
+2017/2/3/18:46:27 [INFO] Responsed status code : 500
+2017/2/3/18:46:27 [INFO] Responsed object : {}
+2017/2/3/18:46:57 [INFO] Database connected successfully!
+2017/2/3/18:46:58 [INFO] Server started 1.0.5 TEST
+2017/2/3/18:47:18 [INFO] Database connected successfully!
+2017/2/3/18:47:18 [INFO] Server started 1.0.5 TEST
+2017/2/3/18:47:35 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:47:35 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:47:35 [INFO] Header : 131
+2017/2/3/18:47:35 [INFO] Fully read : {"seat":15,"id":"dsm201671","class":1}
+2017/2/3/18:47:35 [INFO] Responsed status code : 200
+2017/2/3/18:47:35 [INFO] Responsed object : {}
+2017/2/3/18:50:0 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:50:0 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:50:0 [INFO] Header : 132
+2017/2/3/18:50:0 [INFO] Fully read : {"date":"2017-02-03","id":"dsm201671","value":4}
+2017/2/3/18:50:0 [INFO] Responsed status code : 200
+2017/2/3/18:50:0 [INFO] Responsed object : {}
+2017/2/3/18:50:20 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:50:20 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:50:20 [INFO] Header : 132
+2017/2/3/18:50:20 [INFO] Fully read : {"date":"2017-02-10","id":"dsm201671","value":4}
+2017/2/3/18:50:20 [INFO] SQLException
+2017/2/3/18:51:13 [INFO] Received request : 127.0.0.1:10419
+2017/2/3/18:51:13 [INFO] Received POST method : 127.0.0.1:10419
+2017/2/3/18:51:13 [INFO] Header : 132
+2017/2/3/18:51:13 [INFO] Fully read : {"date":"2017-02-10","id":"dsm201671","value":4}
+2017/2/3/18:51:13 [INFO] Responsed status code : 200
+2017/2/3/18:51:13 [INFO] Responsed object : {}

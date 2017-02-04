@@ -180,6 +180,7 @@ public class SelectAction implements Actionable {
 					tempObject.put("on_monday", resultSet.getBoolean("on_monday"));
 					tempObject.put("on_tuesday", resultSet.getBoolean("on_tuesday"));
 					tempObject.put("on_wednesday", resultSet.getBoolean("on_wednesday"));
+					tempObject.put("on_saturday", resultSet.getBoolean("on_saturday"));
 					tempObject.put("instuctor", resultSet.getString("instructor"));
 
 					array.add(tempObject);
