@@ -24,3 +24,7 @@ $('#selection').on("click", function () {
     clickable = true;
   }
 })
+
+$('#submit_button').on('click', function () {
+  $('#apply_form').submit();
+})
