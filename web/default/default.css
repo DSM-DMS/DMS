@@ -5,7 +5,7 @@
         /*배경색
     신청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙사 : background-color: rgb(191,148,208) -> rgb(191,148,208)
-    마이페이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> rgb(231,160,153)*/
+    마이페이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
         font-size: 0.9em;
     }
 
@@ -690,23 +690,54 @@
     .afterapplypage .frametitle h1 {
         display: inline-block;
     }
+
+    /*------------------------------- extention ---------------------*/
+    .extentionapply {
+        width: 100%;
+    }
+
+    .extentionapply .seatcontainer {
+        width: 100%;
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .extentionapply .seatcontainer .seat {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        display: inline-block;
+        margin: 8px;
+        text-align: center;
+        line-height: 60px;
+        overflow: hidden;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+    }
+
+
     /*----------------------------- each colors -------------------*/
 
-    .frame .frametitle .puple {
+    .frame .frametitle .puple, .puple {
         background-color: rgb(191, 148, 208);
     }
 
-    .frame .frametitle .red {
+    .frame .frametitle .red, .red {
         background-color: rgb(231, 160, 153);
     }
 
-    .frame .frametitle .blue {
+    .frame .frametitle .blue, .blue {
         background-color: rgb(134, 193, 233);
     }
+
+
+
+
+
     /*==========  Non-Mobile First Method  ==========*/
     /* All Device */
     /* Large Devices, Wide Screens : ~ 1200px */
-
     @media only screen and (max-width: 1200px) {}
     /* Medium Devices, Desktops : ~ 992px */
 
