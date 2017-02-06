@@ -1,787 +1,901 @@
-@import "../css/remote.css";
+    @import "../css/remote.css";
+    /*remote.css로 수정필요*/
 
-/*remote.css로 수정필요*/
-
-body {
-    /*배경색
+    body {
+        /*배경색
     신청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙사 : background-color: rgb(191,148,208) -> rgb(191,148,208)
     마이페이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> rgb(231,160,153)*/
-    font-size: 0.9em;
-}
-
-.main {
-    background-color: white;
-    border-radius: 5px;
-    position: absolute;
-    top: 20vh;
-    left: 16%;
-    min-height: 70%;
-    width: 80%;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
-    margin-bottom: 20px;
-}
-
-.frame {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    float: left;
-    padding-top: 15px;
-    margin-bottom: 20px;
-    /*overflow-x: hidden;*/
-}
-
-.frame .frametitle {
-    margin-left: 7%;
-}
-
-.frame h1 {
-    margin-bottom: 1%;
-}
-
-.underline {
-    position: relative;
-    right: 0%;
-    height: 8px;
-    margin-right: 0%;
-    width: 93%;
-    background: rgb(191, 148, 208);
-}
-
-
-/*------------------------------------------ index------------------------------------------*/
-
-
-/*--------------------------notice--------------------------------*/
-
-.left .notice {
-    position: relative;
-    padding-left: 0%;
-    margin-left: 7%;
-}
-
-.left .notice li {
-    list-style-type: none;
-    margin: 4% 0%;
-    width: 93%;
-}
-
-.left .notice li .title {
-    display: inline-block;
-    font-size: 1.3em;
-    font-weight: 600;
-    width: 80%;
-    margin: 0;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.left .notice li p.date {
-    color: gray;
-    float: right;
-    vertical-align: bottom;
-    font-size: 0.8em;
-    font-weight: 600;
-    margin-bottom: 0;
-}
-
-
-/*--------------------------right--------------------------------*/
-
-.right .underline {
-    background: rgb(41, 128, 185);
-}
-
-.right .menues {
-    position: relative;
-    height: 88%;
-    width: 93%;
-    margin-left: 7%;
-}
-
-.right .meal {
-    position: relative;
-    height: 20%;
-    margin: 16px 0;
-}
-
-.right .meal h2 {
-    /*float: left;*/
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 16px;
-    /*padding: 5% 0%;*/
-}
-
-.right .meal p {
-    display: inline-block;
-    vertical-align: middle;
-    width: 70%;
-    margin-left: 4%;
-    /*float: right;*/
-}
-
-.right .info {
-    position: relative;
-    width: 90%;
-    background-color: #f0f0f0;
-    display: inline-block;
-    transition: all 0.5s ease;
-}
-
-.right .info:hover {
-    background-color: rgb(191, 148, 208);
-    color: white;
-}
-
-.right img {
-    vertical-align: middle;
-    /*height: 30%;*/
-    height: 25px;
-}
-
-
-/*------------------------------------------ dorm main------------------------------------------*/
-
-
-/*--------------------------etc--------------------------------*/
-
-body {
-    background-color: rgb(191, 148, 208);
-}
-
-.underline {
-    background: rgb(191, 148, 208);
-}
-
-
-/*--------------------------articlelist--------------------------------*/
-
-.articlelist {
-    width: 100%;
-}
-
-
-/*--------------------------table--------------------------------*/
-
-.articlelist table {
-    border-collapse: collapse;
-    width: 86.5%;
-    margin-top: 25px;
-    margin-left: 7%;
-}
-
-.articlelist table th:nth-child(1) {
-    width: 5%;
-}
-
-.articlelist table th:nth-child(2) {
-    width: 85%;
-}
-
-.articlelist table th:nth-child(3) {
-    width: 10%;
-}
-
-.articlelist table .tableheader {
-    background-color: rgb(244, 244, 244);
-}
-
-.articlelist table .tableheader th {
-    padding: 0;
-    border: 0;
-    border-top: 1px solid rgb(191, 148, 208);
-    border-bottom: 2px solid rgb(191, 148, 208);
-    color: rgb(191, 148, 208);
-    height: 32px;
-}
-
-.articlelist table td {
-    border-bottom: 1px solid rgb(191, 148, 208);
-    height: 50px;
-}
-
-.articlelist table tr:hover {
-    background-color: rgb(244, 244, 244);
-}
-
-.articlelist table td:nth-child(2) {
-    text-align: left;
-    font-weight: 900;
-    font-size: 0.9em;
-}
-
-.articlelist table td:nth-child(3), table td:nth-child(1) {
-    text-align: center;
-    color: rgb(100, 100, 100);
-    font-size: 0.8em;
-    font-weight: 900;
-    min-width: 27px;
-}
-
-
-/*------------------------------------------ dorm main article------------------------------------------*/
-
-.articlecontainer {
-    width: 100%;
-}
-
-
-/*--------------------------article--------------------------------*/
-
-.article {
-    line-height: 150%;
-    margin-left: 7%;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.article p {
-    width: 93%;
-}
-
-.articlecontainer hr {
-    width: 86%;
-}
-
-.articlecontainer .frametitle {
-    position: relative;
-}
-
-.articlecontainer .frametitle p {
-    font-size: 0.8em;
-    font-weight: 900;
-    color: rgb(100, 100, 100);
-    margin-bottom: 0;
-    position: absolute;
-    margin-bottom: 10px;
-    right: 7%;
-    /*bottom: 0%;*/
-    /*float: right;*/
-}
-
-.articlecontainer h2 {
-    display: inline-block;
-    margin-bottom: 1%;
-}
-
-
-/*-------------------------------------qna list.-------------------------------*/
-
-.qna table tr:nth-child(2), .qna table tr:nth-child(3) {
-    background-color: rgb(191, 148, 208);
-}
-
-.qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
-    color: white;
-    border-bottom: 1px solid white;
-}
-
-
-/*-------------------------------------comment.-------------------------------*/
-
-.commentinput {
-    margin-left: 7%;
-    /*margin-bottom: 100px;*/
-}
-
-.commentinput table {
-    width: 93%;
-}
-
-.commentinput table tr td:nth-child(1) {
-    width: 80%;
-}
-
-.commentinput table tr td:nth-child(2) {
-    width: 20%;
-}
-
-.commentinput input {
-    height: 30px;
-}
-
-.commentinput button {
-    background-color: rgb(191, 148, 208);
-    border: none;
-    height: 36px;
-    width: 99%;
-    border: 2px solid rgb(191, 148, 208);
-    border-radius: 4px;
-    transition: all 1s ease;
-    color: white;
-}
-
-.commentinput button:focus {
-    background-color: rgb(162, 88, 193);
-}
-
-.commentinput input[type="text"] {
-    height: 30px;
-    width: 97%;
-    border: 2px solid rgb(191, 148, 208);
-    border-radius: 4px;
-    padding-left: 1%;
-    transition: all 1s ease;
-}
-
-.commentinput input[type="text"]:focus {
-    border: 2px solid rgb(162, 88, 193);
-}
-
-.commentinput table td:nth-child(3), .commentinput table td:nth-child(1) {
-    text-align: left;
-}
-
-.comment {
-    margin-left: 7%;
-}
-
-.comment table {
-    width: 93%;
-    border-collapse: collapse;
-}
-
-.comment tr {
-    border-bottom: 1px solid gray;
-}
-
-.comment table tr td:nth-child(1) {
-    width: 8%;
-    min-width: 60px;
-    text-align: left;
-    font-size: 0.9em;
-}
-
-.comment table tr td:nth-child(3) {
-    width: 5%;
-    text-align: right;
-    font-size: 0.9em;
-}
-
-.comment table tr td:nth-child(2) {
-    width: 87%;
-    font-size: 0.9em;
-}
-
-.comment table .date {
-    display: inline-block;
-    color: rgb(100, 100, 100);
-    font-size: 0.8em;
-    font-weight: 900;
-}
-
-.comment table td p, .comment table td h3 {
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-
-/*-------------------------------------mypage.-------------------------------*/
-
-body {
-    background-color: rgb(231, 160, 153);
-}
-
-.mypage {
-    width: 100%;
-}
-
-.left .frametitle .underline {
-    background-color: rgb(231, 160, 153);
-}
-
-.left .info {
-    width: 39.5%;
-    height: 80%;
-    margin-left: 7%;
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 20px;
-}
-
-.mypage .info table {
-    width: 100%;
-    border-collapse: collapse;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
-
-.mypage .info table tr {
-    border-bottom: 1px solid gray;
-}
-
-.mypage .info table tr:nth-child(3) {
-    border-bottom: 1px solid black;
-}
-
-.mypage .info table tr td:nth-child(1) {
-    text-align: left;
-    padding-left: 10px;
-    min-width: 40px;
-}
-
-.mypage .info table tr td:nth-child(2) {
-    font-size: 0.8em;
-    padding: 10px;
-}
-
-
-/*------------------------------------- point ----------*/
-
-.pointapply {
-    width: 100%;
-}
-
-.pointapply .selecter {
-    /*margin-left: 57%;*/
-    margin-top: 15px;
-    width: 100%;
-    text-align: center;
-}
-
-.pointapply .selecter .selectmenu {
-    display: inline-block;
-    /*font-size: 0px;
+        font-size: 0.9em;
+    }
+
+    .main {
+        background-color: white;
+        border-radius: 5px;
+        position: absolute;
+        top: 20vh;
+        left: 16%;
+        min-height: 70%;
+        width: 80%;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+        margin-bottom: 20px;
+    }
+
+    .frame {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        float: left;
+        padding-top: 15px;
+        margin-bottom: 20px;
+        /*overflow-x: hidden;*/
+    }
+
+    .frame .frametitle {
+        margin-left: 7%;
+    }
+
+    .frame h1 {
+        margin-bottom: 1%;
+    }
+
+    .underline {
+        position: relative;
+        right: 0%;
+        height: 8px;
+        margin-right: 0%;
+        width: 93%;
+        background: rgb(191, 148, 208);
+    }
+    /*------------------------------------------ index------------------------------------------*/
+    /*--------------------------notice--------------------------------*/
+
+    .left .notice {
+        position: relative;
+        padding-left: 0%;
+        margin-left: 7%;
+    }
+
+    .left .notice li {
+        list-style-type: none;
+        margin: 4% 0%;
+        width: 93%;
+    }
+
+    .left .notice li .title {
+        display: inline-block;
+        font-size: 1.3em;
+        font-weight: 600;
+        width: 80%;
+        margin: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .left .notice li p.date {
+        color: gray;
+        float: right;
+        vertical-align: bottom;
+        font-size: 0.8em;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    /*--------------------------right--------------------------------*/
+
+    .right .underline {
+        background: rgb(41, 128, 185);
+    }
+
+    .right .menues {
+        position: relative;
+        height: 88%;
+        width: 93%;
+        margin-left: 7%;
+    }
+
+    .right .meal {
+        position: relative;
+        height: 20%;
+        margin: 16px 0;
+    }
+
+    .right .meal h2 {
+        /*float: left;*/
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 16px;
+        /*padding: 5% 0%;*/
+    }
+
+    .right .meal p {
+        display: inline-block;
+        vertical-align: middle;
+        width: 70%;
+        margin-left: 4%;
+        /*float: right;*/
+    }
+
+    .right .info {
+        position: relative;
+        width: 90%;
+        background-color: #f0f0f0;
+        display: inline-block;
+        transition: all 0.5s ease;
+    }
+
+    .right .info:hover {
+        background-color: rgb(191, 148, 208);
+        color: white;
+    }
+
+    .right img {
+        vertical-align: middle;
+        /*height: 30%;*/
+        height: 25px;
+    }
+    /*------------------------------------------ dorm main------------------------------------------*/
+    /*--------------------------etc--------------------------------*/
+
+    body {
+        background-color: rgb(191, 148, 208);
+    }
+
+    .underline {
+        background: rgb(191, 148, 208);
+    }
+    /*--------------------------articlelist--------------------------------*/
+
+    .articlelist {
+        width: 100%;
+    }
+    /*--------------------------table--------------------------------*/
+
+    .articlelist table {
+        border-collapse: collapse;
+        width: 86.5%;
+        margin-top: 25px;
+        margin-left: 7%;
+    }
+
+    .articlelist table th:nth-child(1) {
+        width: 5%;
+    }
+
+    .articlelist table th:nth-child(2) {
+        width: 85%;
+    }
+
+    .articlelist table th:nth-child(3) {
+        width: 10%;
+    }
+
+    .articlelist table .tableheader {
+        background-color: rgb(244, 244, 244);
+    }
+
+    .articlelist table .tableheader th {
+        padding: 0;
+        border: 0;
+        border-top: 1px solid rgb(191, 148, 208);
+        border-bottom: 2px solid rgb(191, 148, 208);
+        color: rgb(191, 148, 208);
+        height: 32px;
+    }
+
+    .articlelist table td {
+        border-bottom: 1px solid rgb(191, 148, 208);
+        height: 50px;
+    }
+
+    .articlelist table tr:hover {
+        background-color: rgb(244, 244, 244);
+    }
+
+    .articlelist table td:nth-child(2) {
+        text-align: left;
+        font-weight: 900;
+        font-size: 0.9em;
+    }
+
+    .articlelist table td:nth-child(3), table td:nth-child(1) {
+        text-align: center;
+        color: rgb(100, 100, 100);
+        font-size: 0.8em;
+        font-weight: 900;
+        min-width: 27px;
+    }
+    /*------------------------------------------ dorm main article------------------------------------------*/
+
+    .articlecontainer {
+        width: 100%;
+    }
+    /*--------------------------article--------------------------------*/
+
+    .article {
+        line-height: 150%;
+        margin-left: 7%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .article p {
+        width: 93%;
+    }
+
+    .articlecontainer hr {
+        width: 86%;
+    }
+
+    .articlecontainer .frametitle {
+        position: relative;
+    }
+
+    .articlecontainer .frametitle p {
+        font-size: 0.8em;
+        font-weight: 900;
+        color: rgb(100, 100, 100);
+        margin-bottom: 0;
+        position: absolute;
+        margin-bottom: 10px;
+        right: 7%;
+        /*bottom: 0%;*/
+        /*float: right;*/
+    }
+
+    .articlecontainer h2 {
+        display: inline-block;
+        margin-bottom: 1%;
+    }
+    /*-------------------------------------qna list.-------------------------------*/
+
+    .qna table tr:nth-child(2), .qna table tr:nth-child(3) {
+        background-color: rgb(191, 148, 208);
+    }
+
+    .qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
+        color: white;
+        border-bottom: 1px solid white;
+    }
+    /*-------------------------------------comment.-------------------------------*/
+
+    .commentinput {
+        margin-left: 7%;
+        /*margin-bottom: 100px;*/
+    }
+
+    .commentinput table {
+        width: 93%;
+    }
+
+    .commentinput table tr td:nth-child(1) {
+        width: 80%;
+    }
+
+    .commentinput table tr td:nth-child(2) {
+        width: 20%;
+    }
+
+    .commentinput input {
+        height: 30px;
+    }
+
+    .commentinput button {
+        background-color: rgb(191, 148, 208);
+        border: none;
+        height: 36px;
+        width: 99%;
+        border: 2px solid rgb(191, 148, 208);
+        border-radius: 4px;
+        transition: all 1s ease;
+        color: white;
+    }
+
+    .commentinput button:focus {
+        background-color: rgb(162, 88, 193);
+    }
+
+    .commentinput input[type="text"] {
+        height: 30px;
+        width: 97%;
+        border: 2px solid rgb(191, 148, 208);
+        border-radius: 4px;
+        padding-left: 1%;
+        transition: all 1s ease;
+    }
+
+    .commentinput input[type="text"]:focus {
+        border: 2px solid rgb(162, 88, 193);
+    }
+
+    .commentinput table td:nth-child(3), .commentinput table td:nth-child(1) {
+        text-align: left;
+    }
+
+    .comment {
+        margin-left: 7%;
+    }
+
+    .comment table {
+        width: 93%;
+        border-collapse: collapse;
+    }
+
+    .comment tr {
+        border-bottom: 1px solid gray;
+    }
+
+    .comment table tr td:nth-child(1) {
+        width: 8%;
+        min-width: 60px;
+        text-align: left;
+        font-size: 0.9em;
+    }
+
+    .comment table tr td:nth-child(3) {
+        width: 5%;
+        text-align: right;
+        font-size: 0.9em;
+    }
+
+    .comment table tr td:nth-child(2) {
+        width: 87%;
+        font-size: 0.9em;
+    }
+
+    .comment table .date {
+        display: inline-block;
+        color: rgb(100, 100, 100);
+        font-size: 0.8em;
+        font-weight: 900;
+    }
+
+    .comment table td p, .comment table td h3 {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    /*-------------------------------------mypage.-------------------------------*/
+
+    body {
+        background-color: rgb(231, 160, 153);
+    }
+
+    .mypage {
+        width: 100%;
+    }
+
+    .left .frametitle .underline {
+        background-color: rgb(231, 160, 153);
+    }
+
+    .left .info {
+        width: 39.5%;
+        height: 80%;
+        margin-left: 7%;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 20px;
+    }
+
+    .mypage .info table {
+        width: 100%;
+        border-collapse: collapse;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .mypage .info table tr {
+        border-bottom: 1px solid gray;
+    }
+
+    .mypage .info table tr:nth-child(3) {
+        border-bottom: 1px solid black;
+    }
+
+    .mypage .info table tr td:nth-child(1) {
+        text-align: left;
+        padding-left: 10px;
+        min-width: 40px;
+    }
+
+    .mypage .info table tr td:nth-child(2) {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+    /*------------------------------------- point ----------*/
+
+    .pointapply {
+        width: 100%;
+    }
+
+    .pointapply .selecter {
+        /*margin-left: 57%;*/
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .pointapply .selecter .selectmenu {
+        display: inline-block;
+        /*font-size: 0px;
     letter-spacing: 0px;
     word-spacing: -1;*/
-    width: 30%;
-    margin-right: -5px;
-    margin-left: -5px;
-}
+        width: 30%;
+        margin-right: -5px;
+        margin-left: -5px;
+    }
 
-.pointapply .selecter .selectmenu:nth-child(1) {
-    background-color: rgb(134, 193, 233);
-    border: 1px solid rgb(134, 193, 233);
-    border-radius: 5px 0px 0px 5px;
-    color: white;
-}
+    .pointapply .selecter .selectmenu:nth-child(1) {
+        background-color: rgb(134, 193, 233);
+        border: 1px solid rgb(134, 193, 233);
+        border-radius: 5px 0px 0px 5px;
+        color: white;
+    }
 
-.pointapply .selecter .selectmenu:nth-child(2) {
-    border-radius: 0px 5px 5px 0px;
-    border: 1px solid rgb(134, 193, 233);
-}
+    .pointapply .selecter .selectmenu:nth-child(2) {
+        border-radius: 0px 5px 5px 0px;
+        border: 1px solid rgb(134, 193, 233);
+    }
 
-.pointapply .selecter .selectmenu p {
-    margin: 1%;
-}
+    .pointapply .selecter .selectmenu p {
+        margin: 1%;
+    }
 
-.pointapply .individual input[type="text"] {
-    height: 30px;
-    margin-top: 50px;
-    margin-left: 7%;
-    width: 85.5%;
-    border: 2px solid rgb(134, 193, 233);
-    border-radius: 4px;
-    transition: all 1s ease;
-    padding-left: 1%;
-}
+    .pointapply .individual input[type="text"] {
+        height: 30px;
+        margin-top: 50px;
+        margin-left: 7%;
+        width: 85.5%;
+        border: 2px solid rgb(134, 193, 233);
+        border-radius: 4px;
+        transition: all 1s ease;
+        padding-left: 1%;
+    }
 
-.pointapply .individual button {
-    background-color: rgb(134, 193, 233);
-    border: none;
-    height: 36px;
-    width: 87%;
-    border: 2px solid rgb(134, 193, 233);
-    margin-top: 50px;
-    margin-left: 7%;
-    border-radius: 4px;
-    transition: all 1s ease;
-    color: white;
-}
+    .pointapply .individual button {
+        background-color: rgb(134, 193, 233);
+        border: none;
+        height: 36px;
+        width: 87%;
+        border: 2px solid rgb(134, 193, 233);
+        margin-top: 50px;
+        margin-left: 7%;
+        border-radius: 4px;
+        transition: all 1s ease;
+        color: white;
+    }
 
-.pointapply .individual button:hover {
-    background-color: rgb(160, 200, 255);
-}
+    .pointapply .individual button:hover {
+        background-color: rgb(160, 200, 255);
+    }
 
-.pointapply .group input:nth-child(2) {
-    margin-top: 20px;
-}
+    .pointapply .group input:nth-child(2) {
+        margin-top: 20px;
+    }
 
-.pointapply .group {
-    display: none;
-}
-
-
-/*----------------------------------------- after ------------------------*/
-
-
-/*.afterapply table .tableheader {
+    .pointapply .group {
+        display: none;
+    }
+    /*----------------------------------------- after ------------------------*/
+    /*.afterapply table .tableheader {
     background-color: rgb(134,193,233);
     color: white;
 }*/
 
-.afterapply .frametitle .underline {
-    background-color: rgb(134, 193, 233);
-}
-
-.afterapply table .tableheader th:nth-child(1) {
-    min-width: 50px;
-    width: 10%;
-}
-
-.afterapply table .tableheader th:nth-child(2) {
-    width: 70%;
-}
-
-.afterapply table .tableheader th:nth-child(3) {
-    min-width: 25px;
-    width: 5%;
-}
-
-.afterapply table .tableheader th:nth-child(4) {
-    min-width: 50px;
-    width: 10%;
-}
-
-.afterapply table .tableheader th:nth-child(5) {
-    min-width: 25px;
-    width: 5%:
-}
-
-.afterapply table td:nth-child(4), .afterapply table td:nth-child(5) {
-    text-align: center;
-    color: rgb(100, 100, 100);
-    font-size: 0.8em;
-    font-weight: 900;
-    min-width: 27px;
-}
-
-..afterapply table .tableheader {
-    background-color: rgb(244, 244, 244);
-}
-
-.afterapply table .tableheader th {
-    border-top: 1px solid rgb(134, 193, 233);
-    border-bottom: 2px solid rgb(134, 193, 233);
-    color: rgb(134, 193, 233);
-}
-
-.afterapply table td {
-    border-bottom: 1px solid rgb(134, 193, 233);
-}
-
-
-/*--------------- afterapplypage ----------------------------------*/
-
-.afterapplypage {
-    width: 100%;
-}
-
-.aftercontainer {
-    text-align: center;
-}
-
-.afterapplypage .afterinfo {
-    background-color: #2979FF;
-    display: inline-block;
-    width: 30%;
-    margin-top: 30px;
-    color: white;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
-    text-align: left;
-    border-radius: 5px;
-}
-
-.afterapplypage h2 {
-    margin-left: 15px;
-}
-
-.afterapplypage .afterinfo p {
-    margin-left: 15px;
-}
-
-.afterapplypage .afternotice {
-    text-align: center;
-}
-
-.afterapplypage .afterform {
-    text-align: center;
-}
-
-.afterapplypage .afterform button {
-    background-color: #2979FF;
-    border: none;
-    height: 36px;
-    width: 30%;
-    border: 2px solid #2979FF;
-    border-radius: 4px;
-    transition: all 1s ease;
-    color: white;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
-}
-
-.afterapplypage .frametitle img {
-    width: 25px;
-}
-
-.afterapplypage .frametitle h1 {
-    display: inline-block;
-}
-
-
-/*----------------------------- each colors -------------------*/
-
-.frame .frametitle .puple {
-    background-color: rgb(191, 148, 208);
-}
-
-.frame .frametitle .red {
-    background-color: rgb(231, 160, 153);
-}
-
-.frame .frametitle .blue {
-    background-color: rgb(134, 193, 233);
-}
-
-
-/*==========  Non-Mobile First Method  ==========*/
-
-
-/* All Device */
-
-
-/* Large Devices, Wide Screens : ~ 1200px */
-
-@media only screen and (max-width: 1200px) {}
-
-
-/* Medium Devices, Desktops : ~ 992px */
-
-@media only screen and (max-width: 992px) {
-    .logo {
-        display: none;
+    .afterapply .frametitle .underline {
+        background-color: rgb(134, 193, 233);
     }
-    .main {
-        /*width: 50%;*/
-        top: 20vh;
-        left: 5%;
-        width: 90%;
+
+    .afterapply table .tableheader th:nth-child(1) {
+        min-width: 50px;
+        width: 10%;
     }
-    .frame {
+
+    .afterapply table .tableheader th:nth-child(2) {
+        width: 70%;
+    }
+
+    .afterapply table .tableheader th:nth-child(3) {
+        min-width: 40px;
+        width: 5%;
+    }
+
+    .afterapply table .tableheader th:nth-child(4) {
+        min-width: 70px;
+        width: 10%;
+    }
+
+    .afterapply table .tableheader th:nth-child(5) {
+        min-width: 45px;
+        width: 5%:
+    }
+
+    .afterapply table td:nth-child(4), .afterapply table td:nth-child(5) {
+        text-align: center;
+        color: rgb(100, 100, 100);
+        font-size: 0.8em;
+        font-weight: 900;
+        min-width: 27px;
+    }
+
+    ..afterapply table .tableheader {
+        background-color: rgb(244, 244, 244);
+    }
+
+    .afterapply table .tableheader th {
+        border-top: 1px solid rgb(134, 193, 233);
+        border-bottom: 2px solid rgb(134, 193, 233);
+        color: rgb(134, 193, 233);
+    }
+
+    .afterapply table td {
+        border-bottom: 1px solid rgb(134, 193, 233);
+    }
+
+    .afterapply table {
+        margin-top: 45px;
+    }
+
+    .afterapply .frametitle p {
+        font-size: 1em;
+        font-weight: 900;
+        color: rgb(100, 100, 100);
+        margin-bottom: 0;
+        position: absolute;
+        margin-bottom: 10px;
+        right: 7%;
+    }
+    /*--------------- afterapplypage ----------------------------------*/
+
+    .afterapplypage {
+        width: 100%;
+    }
+
+    .aftercontainer {}
+
+    .afterapplypage .afterinfo {
+        position: relative;
+        margin-left: 7%;
+        background-color: #2979FF;
+        display: inline-block;
+        width: 86.5%;
+        margin-top: 50px;
+        color: white;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+        text-align: left;
+        /*border-radius: 5px;*/
+    }
+
+    .afterapplypage .afterinfo h3 {
+        background-color: #4AD6AC;
+        display: inline-block;
+        margin-left: 15px;
+        padding: 15px;
+        box-shadow: 1.5px 1.5px 10px rgba(0, 0, 0, .5);
+        position: absolute;
+        top: -46px;
+        left: 30px;
+    }
+
+    .afterapplypage .afterinfo .header {
+        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+        height: 100%;
+        background-color: #222635;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, .5);
+    }
+
+    .afterapplypage .afterinfo .header p {
+        margin-top: 10%;
+        margin-bottom: 10%;
+        margin-left: 0;
+    }
+
+    .afterapplypage .afterinfo p.grade {
+        background-color: rgb(134, 193, 233);
+        display: inline-block;
+        border-radius: 6px;
+        padding: 2px;
+        margin: 0;
+        margin-right: 10px;
+    }
+
+    .afterapplypage .afterinfo p#first {
+        margin-left: 40%;
+    }
+
+    .afterapplypage .afterinfo p#second, .afterapplypage .afterinfo p#third {
+        background-color: gray;
+    }
+
+    .afterapplypage .afterinfo p#class {
+        margin-top: 2.5%;
+    }
+
+    .afterapplypage .afterinfo .bar {
+        display: inline-block;
+        border-radius: 3px;
+        position: relative;
+        display: inline-block;
+        width: 40%;
+        background-color: gray;
+        height: 20px;
+        vertical-align: middle;
+    }
+
+    .afterapplypage .afterinfo table {
+        margin-left: 40%;
+    }
+
+    .afterapplypage .afterinfo #member {
+        display: inline-block;
+        margin: 0;
+        margin-left: 40%;
+        margin-right: 10px;
+    }
+
+    .afterapplypage .afterinfo .bar .in {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 3px;
+        margin: 0;
+        display: inline-block;
         width: 50%;
+        background-color: #1DE9B6;
     }
-    .right .info {
-        width: 89%;
-    }
-    .left ul li .title {
-        width: 70%;
-    }
-    .frame {
-        width: 100%;
-    }
-    .food {
-        float: none;
-    }
-}
 
+    .afterapplypage .afterinfo p:nth-child(1) {
+        /*margin-top: 50px;*/
+    }
 
-/* Small Devices, Tablets : ~ 768px */
+    .afterapplypage .afterinfo p {
+        margin-left: 40%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
 
-@media only screen and (max-width: 768px) {
-    .logo {
-        display: none;
+    .afterapplypage .afterform {
+        margin-left: 30%;
+        margin-top: 22px;
     }
-    .main {
-        /*width: 50%;*/
-        top: 20vh;
-        left: 5%;
-        width: 90%;
-    }
-    .right .info {
-        width: 89%;
-    }
-    .left ul li .title {
-        width: 70%;
-    }
-    .frame {
-        width: 100%;
-    }
-    .right {
-        float: none;
-    }
-    .mypage .info {
-        width: 86%;
-    }
-}
 
+    .afterapplypage .afterform button {
+        background-color: #2979FF;
+        border: none;
+        height: 36px;
+        width: 50.75%;
+        border: 2px solid #222635;
+        border-bottom: none;
+        transition: all 1s ease;
+        color: white;
+        box-sizing: border-box;
+        margin-right: -5px;
+        margin-left: -5px;
+        border-right: none;
+    }
+    /*-------------------------------------------------- apply -------*/
 
-/* Extra Small Devices, Phones : ~ 480px */
+    .afterapplypage .afternotice {
+        text-align: center;
+    }
 
-@media only screen and (max-width: 480px) {
-    .logo {
-        display: none;
+    .afterapplypage .frametitle img {
+        width: 25px;
     }
-    .main {
-        /*width: 50%;*/
-        top: 14vh;
-        left: 5%;
-        width: 90%;
-    }
-    .right .info {
-        width: 89%;
-    }
-    .left ul li .title {
-        width: 70%;
-    }
-    .frame {
-        width: 100%;
-    }
-    .right {
-        float: none;
-    }
-    .mypage .info {
-        width: 86%;
-    }
-    .left .notice li .title {
-        width: 70%;
-    }
-    .commentinput input[type="text"] {
-        width: 90%;
-    }
-}
 
+    .afterapplypage .frametitle h1 {
+        display: inline-block;
+    }
+    /*----------------------------- each colors -------------------*/
 
-/* Custom, iPhone Retina : ~ 320px */
+    .frame .frametitle .puple {
+        background-color: rgb(191, 148, 208);
+    }
 
-@media only screen and (max-width: 320px) {
-    .logo {
-        display: none;
+    .frame .frametitle .red {
+        background-color: rgb(231, 160, 153);
     }
-    .main {
-        /*width: 50%;*/
-        top: 15vh;
-        left: 5%;
-        width: 90%;
+
+    .frame .frametitle .blue {
+        background-color: rgb(134, 193, 233);
     }
-    .right .info {
-        width: 89%;
+    /*==========  Non-Mobile First Method  ==========*/
+    /* All Device */
+    /* Large Devices, Wide Screens : ~ 1200px */
+
+    @media only screen and (max-width: 1200px) {}
+    /* Medium Devices, Desktops : ~ 992px */
+
+    @media only screen and (max-width: 992px) {
+        .logo {
+            display: none;
+        }
+        .main {
+            /*width: 50%;*/
+            top: 20vh;
+            left: 5%;
+            width: 90%;
+        }
+        .frame {
+            width: 50%;
+        }
+        .right .info {
+            width: 89%;
+        }
+        .left ul li .title {
+            width: 70%;
+        }
+        .frame {
+            width: 100%;
+        }
+        .food {
+            float: none;
+        }
+        .afterapplypage .afterinfo h3 {
+            background-color: #4AD6AC;
+            display: inline-block;
+            margin-left: 15px;
+            padding: 15px;
+            box-shadow: 1.5px 1.5px 10px rgba(0, 0, 0, .5);
+            position: absolute;
+            top: -46px;
+            left: 50%;
+        }
     }
-    .left ul li .title {
-        width: 70%;
+    /* Small Devices, Tablets : ~ 768px */
+
+    @media only screen and (max-width: 768px) {
+        .logo {
+            display: none;
+        }
+        .main {
+            /*width: 50%;*/
+            top: 20vh;
+            left: 5%;
+            width: 90%;
+        }
+        .right .info {
+            width: 89%;
+        }
+        .left ul li .title {
+            width: 70%;
+        }
+        .frame {
+            width: 100%;
+        }
+        .right {
+            float: none;
+        }
+        .mypage .info {
+            width: 86%;
+        }
+        .afterapplypage .afterinfo h3 {
+            left: 50%;
+        }
+        .afterapplypage .afterform button {
+            margin-left: -2px;
+        }
+        .afterapply table .tableheader th:nth-child(1) {
+            min-width: 60px;
+        }
+        .afterapply table .tableheader th:nth-child(3) {
+            min-width: 40px;
+        }
+        .afterapply table .tableheader th:nth-child(4) {
+            min-width: 70px;
+        }
+        .afterapply table .tableheader th:nth-child(5) {
+            min-width: 45px;
+        }
     }
-    .frame {
-        width: 100%;
+    /* Extra Small Devices, Phones : ~ 480px */
+
+    @media only screen and (max-width: 480px) {
+        .logo {
+            display: none;
+        }
+        .main {
+            /*width: 50%;*/
+            top: 14vh;
+            left: 5%;
+            width: 90%;
+        }
+        .right .info {
+            width: 89%;
+        }
+        .left ul li .title {
+            width: 70%;
+        }
+        .frame {
+            width: 100%;
+        }
+        .right {
+            float: none;
+        }
+        .mypage .info {
+            width: 86%;
+        }
+        .left .notice li .title {
+            width: 70%;
+        }
+        .commentinput input[type="text"] {
+            width: 90%;
+        }
+        .afterapplypage .afterinfo p#first {
+            margin-left: 34%;
+        }
+        .afterapplypage .afterinfo p {
+            margin-left: 35%;
+        }
+        .afterapplypage .afterinfo #member {
+            margin-left: 35%;
+        }
+        .afterapplypage .afterinfo p {
+            margin-left: 35%;
+        }
+        .afterapplypage .afterform button {
+            margin-left: -2px;
+        }
+        .afterapplypage .afterinfo {
+            margin-top: 65px;
+        }
+        .afterapplypage .afterinfo h3 {
+            top: -61px;
+            left: 6%;
+            width: 66%;
+        }
+        .afterapply table .tableheader th:nth-child(3), .afterapply table .tableheader th:nth-child(5) {
+            display: none;
+        }
+        .afterapply table tr td:nth-child(3), .afterapply table tr td:nth-child(5) {
+            display: none;
+        }
+        .afterapply table .tableheader th:nth-child(1) {
+            min-width: 43px;
+        }
     }
-    .right {
-        float: none;
+    /* Custom, iPhone Retina : ~ 320px */
+
+    @media only screen and (max-width: 320px) {
+        .logo {
+            display: none;
+        }
+        .main {
+            /*width: 50%;*/
+            top: 15vh;
+            left: 5%;
+            width: 90%;
+        }
+        .right .info {
+            width: 89%;
+        }
+        .left ul li .title {
+            width: 70%;
+        }
+        .frame {
+            width: 100%;
+        }
+        .right {
+            float: none;
+        }
+        .right .info {
+            width: 85%;
+        }
+        .mypage .info {
+            width: 86%;
+        }
+        .left .notice li .title {
+            font-size: 1.2em;
+            width: 70%;
+        }
+        .right .meal h2 {
+            font-size: 1.2em;
+        }
+        .right .meal p {
+            font-size: 0.9em;
+        }
     }
-    .right .info {
-        width: 85%;
-    }
-    .mypage .info {
-        width: 86%;
-    }
-    .left .notice li .title {
-        font-size: 1.2em;
-        width: 70%;
-    }
-    .right .meal h2 {
-        font-size: 1.2em;
-    }
-    .right .meal p {
-        font-size: 0.9em;
-    }
-}
