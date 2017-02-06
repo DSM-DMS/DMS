@@ -42,29 +42,25 @@
         </div>
     </div>
     <div class="main">
-        <div class="frame left">
-            <div class="frametitle">
-                <h1>외출신청</h1>
-                <div class="underline"></div>
-            </div>
-        </div>
-        <div class="frame right">
-          <form>
-            <input id="day" type="hidden">
-            <table id="select_table">
-              <tr>
-                <td id="selection">신청</td>
-              </tr>
-              <tr>
-                <td id="sat" hidden>토요일</td>
-              </tr>
-              <tr>
-                <td id="sun" hidden>토요일</td>
-              </tr>
-            </table>
-            <input type="submit" name="go_out" value="신청">
-          </form>
-        </div>
+      <div class="frametitle">
+        <h1>외출신청</h1>
+        <div class="underline"></div>
+      </div>
+        <form id="apply_form">
+          <input id="day" type="hidden" name="day">
+          <table id="select_table">
+            <tr>
+              <td id="selection">신청</td>
+            </tr>
+            <tr>
+              <td id="sat" hidden>토요일</td>
+            </tr>
+            <tr>
+              <td id="sun" hidden>일요일</td>
+            </tr>
+          </table>
+        </form>
+        <div id="submit_button">신청</div>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
