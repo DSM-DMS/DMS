@@ -71,16 +71,16 @@ class DmsVerticle extends AbstractVerticle {
 					// 1-3. Get request object from buffer.
 					requestObject = new EasyJsonObject(totalBuffer.toString());
 					
+					// 2. Ready to response to client. Set status code in try-catch
+					response = request.response();
+					response.putHeader("Content-type", "application/json; charset=utf-8");
+					
 					try {
 						/*
-						 *  2. Performs the operation.
+						 *  3. Performs the operation.
 						 *  Branch off the ActionPerformer class' perform method.
 						 */
 						responseObject = ActionPerformer.perform(command, requestObject);
-						
-						// 3. Response to client.
-						response = request.response();
-						response.putHeader("Content-type", "application/json; charset=utf-8");
 						
 						if(responseObject.containsKey("status")) {
 							if(responseObject.getInt("status") == 0) {
@@ -101,15 +101,17 @@ class DmsVerticle extends AbstractVerticle {
 							response.setStatusCode(200);
 							Log.l("Responsed status code : 200");
 						}
-
-						response.end(responseObject.toString());
-						Log.l("Responsed object : " + responseObject.toString());
 						
-						response.close();
+						Log.l("Responsed object : " + responseObject.toString());
 					} catch (SQLException e) {
+						response.setStatusCode(404);
+						
 						e.printStackTrace();
 						Log.l("SQLException");
 					}
+					
+					response.end(responseObject.toString());
+					response.close();
 				}); // endHandler
 			} else {
 				response = request.response();
