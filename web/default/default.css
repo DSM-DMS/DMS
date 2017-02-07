@@ -14,9 +14,9 @@
         border-radius: 5px;
         position: absolute;
         top: 20vh;
-        left: 16%;
-        min-height: 70%;
-        width: 80%;
+        left: 16vw;
+        min-height: 70vh;
+        width: 80vw;
         box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
         margin-bottom: 20px;
     }
@@ -748,8 +748,8 @@
         .main {
             /*width: 50%;*/
             top: 20vh;
-            left: 5%;
-            width: 90%;
+            left: 5vw;
+            width: 90vw;
         }
         .frame {
             width: 50%;
@@ -786,8 +786,8 @@
         .main {
             /*width: 50%;*/
             top: 20vh;
-            left: 5%;
-            width: 90%;
+            left: 5vw;
+            width: 90vw;
         }
         .right .info {
             width: 89%;
@@ -822,6 +822,19 @@
         .afterapply table .tableheader th:nth-child(5) {
             min-width: 45px;
         }
+        .extentionapply .seatcontainer .seat {
+            width: 46px;
+            height: 46px;
+            border-radius: 23px;
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            line-height: 46px;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+        }
     }
     /* Extra Small Devices, Phones : ~ 480px */
 
@@ -832,8 +845,8 @@
         .main {
             /*width: 50%;*/
             top: 14vh;
-            left: 5%;
-            width: 90%;
+            left: 5vw;
+            width: 90vw;
         }
         .right .info {
             width: 89%;
@@ -888,6 +901,21 @@
         .afterapply table .tableheader th:nth-child(1) {
             min-width: 43px;
         }
+        .extentionapply .seatcontainer .seat {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 4px;
+            text-align: center;
+            line-height: 30px;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-size: 0.65em;
+            /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+        }
+
     }
     /* Custom, iPhone Retina : ~ 320px */
 
@@ -898,8 +926,8 @@
         .main {
             /*width: 50%;*/
             top: 15vh;
-            left: 5%;
-            width: 90%;
+            left: 5vw;
+            width: 90vw;
         }
         .right .info {
             width: 89%;

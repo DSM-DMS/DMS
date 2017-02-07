@@ -1,6 +1,21 @@
 var selected;
 var selectableSeat = [];
 
+function getBorderSize() {
+    var windowWidth = $(window).width();
+    console.log(windowWidth)
+    if (windowWidth > 992) {
+        return "15px";
+    } else if (windowWidth > 768) {
+        return "12.5px";
+    } else {
+        return "7.5px";
+    }
+}
+
+var borderSize = getBorderSize();
+console.log(borderSize);
+
 function drawSeat(seatArr) {
     for (var loop = 0; loop < seatArr.length; loop++) {
         for (var innerLoop = 0; innerLoop < seatArr[0].length; innerLoop++) {
@@ -10,7 +25,6 @@ function drawSeat(seatArr) {
                     $('<div/>', {
                         "class": "seat",
                         css: {
-                            // "border": "15px solid rgb(191,148,208)"
                             "background": "rgb(134,193,233)"
                         },
                         text: seatArr[loop][innerLoop]
@@ -19,7 +33,7 @@ function drawSeat(seatArr) {
                     var newSeat = $('<div/>', {
                         "class": "seat",
                         css: {
-                            "border": "15px solid rgb(134,193,233)"
+                            "border": borderSize + " solid rgb(134,193,233)"
                         },
                     });
                     newSeat.appendTo(".seatcontainer");
@@ -28,7 +42,7 @@ function drawSeat(seatArr) {
                             console.log(selected);
                             selected.css({
                                 "background": "white",
-                                "border": "15px solid rgb(134,193,233)"
+                                "border": borderSize + " solid rgb(134,193,233)"
                             });
                             selected.text("");
                         }
@@ -37,30 +51,31 @@ function drawSeat(seatArr) {
                         if (selected !== undefined && selected.get(0) == this) {
                             console.log("ASD");
                             selected.css({
-                                "background": "rgb(231,160,153)",
-                                "border": "0 solid #FFD180"
+                                "border": "0 solid black",
+                                "background": "rgb(231,160,153)"
                             })
-                           selected.text("신청됨");
-                           selected = $(this);
+                            selected.text("신청됨");
+                            selected = $(this);
                         } else {
-                        console.log("wht");
-                        selected = $(this);
-                        $(this).css({
-                            "background": "#FFD180",
-                            "border": "0 solid #FFD180"
-                        });
-                        $(this).text("신청?");
-                         }
+                            console.log("wht");
+                            selected = $(this);
+                            $(this).css({
+                                "border": "0 solid black",
+                                "background": "#FFD180"
+                            });
+                            $(this).text("신청?");
+                        }
 
                     })
                 }
             } else {
+
                 $('<div/>', {
                     "class": "seat",
                     css: {
                         // "z-index": "100",
                         // "background": "#f6f6f6",
-                        "border": "15px solid #757575"
+                        "border": borderSize + " solid #757575"
                     }
                 }).appendTo(".seatcontainer");
             }

@@ -271,7 +271,6 @@ $(".remote .category .children a").click(function(e) {
     }).appendTo(".remote");
 
     setTimeout(function() {
-        //window.location = goTo;
         console.log($(".remote").css("background-color"));
         $("body").css({
             'background-color': rollBackColor
@@ -282,5 +281,7 @@ $(".remote .category .children a").click(function(e) {
         for (var i = 0; i < bgArr.length; i++) {
             $(bgArr[i]).remove();
         }
+        window.location = goTo;
+
     }, 1500);
 })

@@ -63,15 +63,14 @@ header .logo p:hover {
     background-color: white;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
     position: fixed;
-    top: 20%;
-    left: 3%;
-    min-height: 70%;
-    min-width: 10%;
-    height: 70%;
-    width: 10%;
+    top: 20vh;
+    left: 3vw;
+    min-height: 70vh;
+    min-width: 10vw;
+    height: 70vh;
+    width: 10vw;
     text-align: center;
     overflow: hidden;
-    /*transition: all 0.1s ease;*/
 }
 
 .remote h1 a {
@@ -80,8 +79,18 @@ header .logo p:hover {
     color: black;
 }
 
+.remote .inner {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
 .remote .category {
-    height: 80%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .remote .category a {
@@ -162,9 +171,9 @@ header .logo p:hover {
 
 @media only screen and (max-width: 992px) {
     .remote {
-        top: 1%;
-        left: 5%;
-        width: 90%;
+        top: 1vh;
+        left: 5vw;
+        width: 90vw;
         min-height: 17vh;
         height: 17vh;
         z-index: 2;
@@ -201,9 +210,9 @@ header .logo p:hover {
 
 @media only screen and (max-width: 768px) {
     .remote {
-        top: 1%;
-        left: 5%;
-        width: 90%;
+        top: 1vh;
+        left: 5vw;
+        width: 90vw;
         min-height: 17vh;
         height: 17vh;
         z-index: 2;
@@ -241,9 +250,9 @@ header .logo p:hover {
 
 @media only screen and (max-width: 480px) {
     .remote {
-        top: 1%;
-        left: 5%;
-        width: 90%;
+        top: 1vh;
+        left: 5vw;
+        width: 90vw;
         min-height: 12vh;
         height: 12vh;
         z-index: 2;
@@ -283,9 +292,9 @@ header .logo p:hover {
 
 @media only screen and (max-width: 320px) {
     .remote {
-        top: 1%;
-        left: 5%;
-        width: 90%;
+        top: 1vh;
+        left: 5vw;
+        width: 90vw;
         min-height: 13vh;
         height: 13vh;
         z-index: 2;
