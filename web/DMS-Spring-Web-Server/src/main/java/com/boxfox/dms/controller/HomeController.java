@@ -35,7 +35,6 @@ public class HomeController {
 
 	@Autowired
     private NoticeDAOImpl noticeDAO;
-	
 
 	@Autowired
     private FacilityDAOImpl facilityDAO;
@@ -52,7 +51,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<DatePostContext> list = noticeDAO.getPostsAtPage(0);
-		for(int i=1; i<=5&& i <=list.size();i++){
+		for(int i=1;i <=list.size();i++){
 			model.addAttribute("title"+i, list.get(i-1).getTitle());
 		}
 		DayMealDTO meal = mealDAO.getMealToday();

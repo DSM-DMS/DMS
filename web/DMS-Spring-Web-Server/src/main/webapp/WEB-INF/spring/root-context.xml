@@ -8,7 +8,7 @@
 		<property name="driver" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dsm_dms" />
 		<property name="username" value="root" />
-		<property name="password" value="sotkfkddmsdjeldp" />
+		<property name="password" value="testdatabase" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
