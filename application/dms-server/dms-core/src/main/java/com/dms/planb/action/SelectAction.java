@@ -130,7 +130,7 @@ public class SelectAction implements Actionable {
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("question_date", resultSet.getString("question_date"));
-					tempObject.put("writer", resultSet.getString("wrtier"));
+					tempObject.put("writer", resultSet.getString("writer"));
 					tempObject.put("privacy", resultSet.getInt("privacy"));
 					
 					array.add(tempObject);
@@ -154,9 +154,11 @@ public class SelectAction implements Actionable {
 					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("room", resultSet.getInt("room"));
 					tempObject.put("write_date", resultSet.getString("write_date"));
-					tempObject.put("writer", resultSet.getInt("writer"));
-					if(!resultSet.getString("result").isEmpty()) {
+					tempObject.put("writer", resultSet.getString("writer"));
+					if(resultSet.getString("result") != null) {
 						tempObject.put("has_result", true);
+					} else {
+						tempObject.put("has_result", false);
 					}
 					
 					array.add(tempObject);
@@ -239,13 +241,12 @@ public class SelectAction implements Actionable {
 				responseObject.put("question_date", resultSet.getString("question_date"));
 				responseObject.put("writer", resultSet.getString("writer"));
 				responseObject.put("privacy", resultSet.getInt("privacy"));
-				if(!resultSet.getString("answer_content").isEmpty()) {
+				if(resultSet.getString("answer_content") != null) {
 					responseObject.put("has_answer", true);
 					responseObject.put("answer_content", resultSet.getString("answer_content"));
 					responseObject.put("answer_date", resultSet.getString("answer_date"));
-				}
-				else {
-					responseObject.put("hasAnswer", false);
+				} else {
+					responseObject.put("has_answer", false);
 				}
 			} else {
 				responseObject.put("status", 2);
@@ -306,7 +307,7 @@ public class SelectAction implements Actionable {
 				responseObject.put("room", resultSet.getInt("room"));
 				responseObject.put("write_date", resultSet.getString("write_date"));
 				responseObject.put("writer", resultSet.getString("writer"));
-				if(!resultSet.getString("result").isEmpty()){
+				if(resultSet.getString("result") != null){
 					responseObject.put("has_result", true);
 					responseObject.put("result", resultSet.getString("result"));
 					responseObject.put("result_date", resultSet.getString("result_date"));
