@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmset="http://schemas.android.com/apk/res-auto"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginEnd="48dp">
+
+        <com.dms.beinone.application.dmsview.DMSEditText
+            android:id="@+id/et_login_id"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:hint="@string/login_id"
+            android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@drawable/dmset_cursor_login"
+            dmset:et_style="login" />
+
+        <com.dms.beinone.application.dmsview.DMSEditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:hint="@string/login_password"
+            android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@drawable/dmset_cursor_login"
+            dmset:et_style="login" />
+
+        <com.dms.beinone.application.dmsview.DMSButton
+            android:id="@+id/btn_login_login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_login"
+            dmsbtn:dmsbtn_style="rectangle"
+            dmsbtn:dmsbtn_backgroundColor="@color/colorAccent"
+            dmsbtn:dmsbtn_strokeColor="@color/colorAccent"
+            dmsbtn:dmsbtn_touchBackgroundColor="@android:color/white"
+            dmsbtn:dmsbtn_touchStrokeColor="@android:color/white"
+            dmsbtn:dmsbtn_textColor="@android:color/black"
+            dmsbtn:dmsbtn_touchTextColor="@android:color/black" />
+
+    </LinearLayout>
+
+</RelativeLayout>

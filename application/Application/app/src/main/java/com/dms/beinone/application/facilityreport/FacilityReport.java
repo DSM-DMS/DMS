@@ -9,42 +9,72 @@ import android.os.Parcelable;
 
 public class FacilityReport implements Parcelable {
 
+    private int no;
     private String title;
     private String content;
     private int room;
     private String writeDate;
     private String writer;
+    private boolean hasResult;
     private String result;
     private String resultDate;
 
-    public FacilityReport(String title, String content, int room, String writeDate, String writer,
-                          String result, String resultDate) {
+    public FacilityReport(int no, String title, int room, String writeDate, String writer,
+                          boolean hasResult) {
+        setNo(no);
+        setTitle(title);
+        setRoom(room);
+        setWriteDate(writeDate);
+        setWriter(writer);
+        setHasResult(hasResult);
+    }
+
+    public FacilityReport(int no, String title, int room, String writeDate, String writer,
+                          boolean hasResult, String result, String resultDate) {
+        setNo(no);
+        setTitle(title);
+        setRoom(room);
+        setWriteDate(writeDate);
+        setWriter(writer);
+        setHasResult(hasResult);
+        setResult(result);
+        setResultDate(resultDate);
+    }
+
+    public FacilityReport(int no, String title, String content, int room, String writeDate,
+                          String writer, boolean hasResult, String result, String resultDate) {
+        setNo(no);
         setTitle(title);
         setContent(content);
         setRoom(room);
         setWriteDate(writeDate);
         setWriter(writer);
+        setHasResult(hasResult);
         setResult(result);
         setResultDate(resultDate);
     }
 
     public FacilityReport(Parcel in) {
+        setNo(in.readInt());
         setTitle(in.readString());
         setContent(in.readString());
         setRoom(in.readInt());
         setWriteDate(in.readString());
         setWriter(in.readString());
+        setHasResult(in.readByte() != 0);
         setResult(in.readString());
         setResultDate(in.readString());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(no);
         dest.writeString(title);
         dest.writeString(content);
         dest.writeInt(room);
         dest.writeString(writeDate);
         dest.writeString(writer);
+        dest.writeByte((byte) (hasResult ? 1 : 0));
         dest.writeString(result);
         dest.writeString(resultDate);
     }
@@ -52,6 +82,14 @@ public class FacilityReport implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 
     public String getTitle() {
@@ -92,6 +130,14 @@ public class FacilityReport implements Parcelable {
 
     public void setWriter(String writer) {
         this.writer = writer;
+    }
+
+    public boolean hasResult() {
+        return hasResult;
+    }
+
+    public void setHasResult(boolean hasResult) {
+        this.hasResult = hasResult;
     }
 
     public String getResult() {

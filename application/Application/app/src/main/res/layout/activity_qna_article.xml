@@ -29,7 +29,7 @@
                 android:paddingTop="12dp">
 
                 <TextView
-                    android:id="@+id/tv_qna_article_questioner"
+                    android:id="@+id/tv_qna_article_writer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_article_subtext" />
@@ -77,6 +77,6 @@
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:text="@string/qna_comment"
-        dmsbtn:style="normal" />
+        dmsbtn:dmsbtn_style="rectangle" />
 
 </RelativeLayout>

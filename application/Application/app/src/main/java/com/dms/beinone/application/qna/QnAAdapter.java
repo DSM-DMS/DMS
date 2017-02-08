@@ -42,7 +42,7 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
     public void onBindViewHolder(QnAAdapter.ViewHolder holder, int position) {
         QnA qna = mQnAList.get(position);
 
-        holder.bind(qna.getTitle(), qna.getQuestioner(), qna.getQuestionDate(), qna.isPrivacy());
+        holder.bind(qna.getTitle(), qna.getWriter(), qna.getQuestionDate(), qna.isPrivacy());
     }
 
     @Override
@@ -53,7 +53,7 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTitleTV;
-        private TextView mQuestionerTV;
+        private TextView mWriterTV;
         private TextView mQuestionDateTV;
         private ImageView mPrivacyIV;
 
@@ -61,7 +61,7 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
             super(itemView);
 
             mTitleTV = (TextView) itemView.findViewById(R.id.tv_qna_title);
-            mQuestionerTV = (TextView) itemView.findViewById(R.id.tv_qna_questioner);
+            mWriterTV = (TextView) itemView.findViewById(R.id.tv_qna_writer);
             mQuestionDateTV = (TextView) itemView.findViewById(R.id.tv_qna_questiondate);
             mPrivacyIV = (ImageView) itemView.findViewById(R.id.iv_privacy);
 
@@ -74,15 +74,15 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
                     if (qna.isPrivacy()) {
                         Toast.makeText(mContext, R.string.qna_private, Toast.LENGTH_SHORT).show();
                     } else {
-                        viewArticle(qna);
+                        viewArticle(qna.getNo());
                     }
                 }
             });
         }
 
-        public void bind(String title, String questioner, String questionDate, boolean privacy) {
+        public void bind(String title, String writer, String questionDate, boolean privacy) {
             mTitleTV.setText(title);
-            mQuestionerTV.setText(questioner);
+            mWriterTV.setText(writer);
             mQuestionDateTV.setText(questionDate);
 
             if (privacy) {
@@ -96,11 +96,11 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
 
         /**
          * start a new activity to display article
-         * @param qna QnA object that contains information of article
+         * @param no index of QnA article
          */
-        private void viewArticle(QnA qna) {
+        private void viewArticle(int no) {
             Intent intent = new Intent(mContext, QnAArticleActivity.class);
-            intent.putExtra(mContext.getString(R.string.EXTRA_QNA), qna);
+            intent.putExtra(mContext.getString(R.string.EXTRA_NO), no);
             mContext.startActivity(intent);
         }
 

@@ -24,11 +24,11 @@ import java.util.List;
  */
 
 public class RuleAdapter extends ExpandableRecyclerAdapter<
-        RuleTitle, RuleContent, RuleAdapter.RuleTitleVH, RuleAdapter.RuleContentVH> {
+        Rule, RuleContent, RuleAdapter.RuleTitleVH, RuleAdapter.RuleContentVH> {
 
     private Context mContext;
 
-    public RuleAdapter(Context context, @NonNull List<RuleTitle> parentList) {
+    public RuleAdapter(Context context, @NonNull List<Rule> parentList) {
         super(parentList);
         mContext = context;
     }
@@ -50,7 +50,7 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
     }
 
     @Override
-    public void onBindParentViewHolder(@NonNull RuleTitleVH parentViewHolder, int parentPosition, @NonNull RuleTitle parent) {
+    public void onBindParentViewHolder(@NonNull RuleTitleVH parentViewHolder, int parentPosition, @NonNull Rule parent) {
         parentViewHolder.bind(parent.getTitle());
     }
 
@@ -62,7 +62,7 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
     /**
      * ViewHolder for Rule Title
      */
-    public class RuleTitleVH extends ParentViewHolder<RuleTitle, RuleContent> {
+    public class RuleTitleVH extends ParentViewHolder<Rule, RuleContent> {
 
         private TextView mTitleTV;
         private ImageButton mExpandBtn;
@@ -81,7 +81,7 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             mExpandBtn.setBackground(
-                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_touch));
+                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_oval_touch));
                             mExpandBtn.setColorFilter(
                                     ContextCompat.getColor(mContext, android.R.color.white));
                             break;
@@ -92,7 +92,7 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
                                     v.getTop() + (int) event.getY())) {
 
                                 mExpandBtn.setBackground(
-                                        ContextCompat.getDrawable(mContext, R.drawable.dmsib));
+                                        ContextCompat.getDrawable(mContext, R.drawable.dmsib_oval));
                                 mExpandBtn.setColorFilter(
                                         ContextCompat.getColor(mContext, R.color.colorPrimary));
                             }
@@ -100,7 +100,7 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
 
                         case MotionEvent.ACTION_UP:
                             mExpandBtn.setBackground(
-                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib));
+                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_oval));
                             mExpandBtn.setColorFilter(
                                     ContextCompat.getColor(mContext, R.color.colorPrimary));
                             break;

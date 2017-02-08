@@ -27,11 +27,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/stayapply_defaultvalue"
+                    android:text="@string/stayapply_defaultstatus"
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_stayapply_defaultvalue"
+                    android:id="@+id/tv_stayapply_defstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -40,16 +40,16 @@
                     android:textColor="@color/colorPrimary" />
 
                 <com.dms.beinone.application.dmsview.DMSButton
-                    android:id="@+id/btn_stayapply_changedefvalue"
+                    android:id="@+id/btn_stayapply_changedefaultstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:drawableRight="@drawable/ic_chevron_right_white_18dp"
                     android:drawableEnd="@drawable/ic_chevron_right_white_18dp"
-                    android:text="@string/stayapply_changedefvalue"
+                    android:text="@string/stayapply_changedefaultstatus"
                     android:textSize="@dimen/text_roundedbtn"
-                    dmsbtn:style="round" />
+                    dmsbtn:dmsbtn_style="round" />
 
             </RelativeLayout>
 
@@ -156,9 +156,15 @@
     <com.dms.beinone.application.dmsview.DMSButton
         android:id="@+id/btn_stayapply_apply"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:text="@string/stayapply_apply"
-        dmsbtn:style="bottom" />
+        dmsbtn:dmsbtn_style="rectangle"
+        dmsbtn:dmsbtn_backgroundColor="@android:color/black"
+        dmsbtn:dmsbtn_strokeColor="@android:color/black"
+        dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"
+        dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"
+        dmsbtn:dmsbtn_textColor="@android:color/white"
+        dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
 
 </RelativeLayout>

@@ -3,6 +3,7 @@
     package="com.dms.beinone.application">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,12 +22,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".notice.NoticeArticleActivity" />
-        <activity android:name=".newsletter.NewsletterArticleActivity" />
+        <activity android:name=".login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".facilityreport.FacilityReportArticleActivity" />
         <activity android:name=".facilityreport.FacilityReportWriteActivity" />
         <activity android:name=".qna.QnAArticleActivity" />
-        <activity android:name=".qna.QnACommentActivity" />
+        <activity android:name=".comment.CommentActivity" />
     </application>
 
 </manifest>

@@ -63,7 +63,7 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewArticle(mFacilityReportList.get(getAdapterPosition()));
+                    viewArticle(mFacilityReportList.get(getAdapterPosition()).getNo());
                 }
             });
         }
@@ -76,11 +76,11 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
 
         /**
          * start a new activity to display article
-         * @param facilityReport FacilityReport object that contains information of article
+         * @param no index of FacilityReport article
          */
-        private void viewArticle(FacilityReport facilityReport) {
+        private void viewArticle(int no) {
             Intent intent = new Intent(mContext, FacilityReportArticleActivity.class);
-            intent.putExtra(mContext.getString(R.string.EXTRA_FACILITYREPORT), facilityReport);
+            intent.putExtra(mContext.getString(R.string.EXTRA_NO), no);
             mContext.startActivity(intent);
         }
 

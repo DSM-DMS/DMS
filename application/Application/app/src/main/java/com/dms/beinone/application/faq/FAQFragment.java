@@ -1,17 +1,26 @@
 package com.dms.beinone.application.faq;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
+import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Response;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,12 +29,12 @@ import java.util.List;
 
 public class FAQFragment extends Fragment {
 
+    private EmptySupportedRecyclerView mRecyclerView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle(R.string.nav_faq);
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
-
         init(view);
 
         return view;
@@ -36,18 +45,50 @@ public class FAQFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        EmptySupportedRecyclerView recyclerView =
-                (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_faq);
+        getActivity().setTitle(R.string.nav_faq);
+
+        mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_faq);
 
         View emptyView = rootView.findViewById(R.id.view_faq_empty);
-        RecyclerViewUtils.setupRecyclerView(recyclerView, getContext(), emptyView);
+        RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
 
-        List<FAQTitle> faqTitleList = new ArrayList<>();
-        List<FAQContent> faqContentList = new ArrayList<>();
-        faqContentList.add(new FAQContent("질문입니다~"));
-        faqTitleList.add(new FAQTitle("질문이요", faqContentList));
-        faqTitleList.add(new FAQTitle("질문이요", faqContentList));
-        recyclerView.setAdapter(new FAQAdapter(getContext(), faqTitleList));
+        new LoadFAQListTask().execute();
+    }
+
+    private class LoadFAQListTask extends AsyncTask<Void, Void, List<FAQ>> {
+
+        @Override
+        protected List<FAQ> doInBackground(Void... params) {
+            List<FAQ> faqList = null;
+
+            try {
+                faqList = loadFAQList();
+            } catch (IOException ie) {
+                return null;
+            } catch (JSONException je) {
+                return null;
+            }
+
+            return faqList;
+        }
+
+        @Override
+        protected void onPostExecute(List<FAQ> faqList) {
+            super.onPostExecute(faqList);
+
+            if (faqList == null) {
+                Toast.makeText(getContext(), R.string.faq_error, Toast.LENGTH_SHORT).show();
+            } else {
+                mRecyclerView.setAdapter(new FAQAdapter(getContext(), faqList));
+            }
+        }
+
+        private List<FAQ> loadFAQList() throws IOException, JSONException {
+            Response response = HttpBox.post().setCommand(Commands.LOAD_FAQ).putBodyData().push();
+            JSONObject responseJSONObject = response.getJsonObject();
+
+            return JSONParser.parseFAQJSON(responseJSONObject);
+        }
     }
 
 }

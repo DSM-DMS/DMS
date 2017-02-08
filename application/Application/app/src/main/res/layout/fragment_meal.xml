@@ -61,7 +61,7 @@
                         android:drawableRight="@drawable/ic_expand_more_white_18dp"
                         android:text="@string/meal_allergy"
                         android:textSize="@dimen/text_roundedbtn"
-                        dmsbtn:style="round" />
+                        dmsbtn:dmsbtn_style="round" />
 
                 </RelativeLayout>
 
@@ -107,7 +107,7 @@
                         android:drawableRight="@drawable/ic_expand_more_white_18dp"
                         android:text="@string/meal_allergy"
                         android:textSize="@dimen/text_roundedbtn"
-                        dmsbtn:style="round" />
+                        dmsbtn:dmsbtn_style="round" />
 
                 </RelativeLayout>
 
@@ -153,7 +153,7 @@
                         android:drawableRight="@drawable/ic_expand_more_white_18dp"
                         android:text="@string/meal_allergy"
                         android:textSize="@dimen/text_roundedbtn"
-                        dmsbtn:style="round" />
+                        dmsbtn:dmsbtn_style="round" />
 
                 </RelativeLayout>
 

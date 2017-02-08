@@ -17,7 +17,7 @@ public class HttpBox {
 	//HttpBox.post().setCommand(1234).putBodyData(JSonObject).push();
 
 	//해당 url 수정 필요
-	public static final String SERVER_URL = "http://localhost";
+	public static final String SERVER_URL = "http://dsm2015.cafe24.com:10419";
 
 	public static Request post(){return new Request(SERVER_URL, Request.TYPE_GET);}
 	public static Request post(String url) {
@@ -29,7 +29,7 @@ public class HttpBox {
 		HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
 		urlConnection.setRequestMethod(request.getType());
 
-		for(int i = 0 ; i <request.getHeaderPropertiesSize(); i++){
+		for(int i = 0 ; i <request.getHeaderPropertiesSize(); i++) {
 			HeaderProperty property = request.getProperty(i);
 			urlConnection.setRequestProperty(property.getKey(), property.getValue());
 		}

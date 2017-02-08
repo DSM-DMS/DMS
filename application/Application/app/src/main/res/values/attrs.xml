@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="DMSButton">
-        <attr name="style" format="string">
-            <enum name="normal" value="0" />
-            <enum name="reverse" value="1" />
-            <enum name="round" value="2" />
-            <enum name="bottom" value="3" />
+        <attr name="dmsbtn_style" format="string">
+            <enum name="rectangle" value="0" />
+            <enum name="round" value="1" />
         </attr>
+        <attr name="dmsbtn_backgroundColor" format="color" />
+        <attr name="dmsbtn_strokeColor" format="color" />
+        <attr name="dmsbtn_touchBackgroundColor" format="color" />
+        <attr name="dmsbtn_touchStrokeColor" format="color" />
+        <attr name="dmsbtn_textColor" format="color" />
+        <attr name="dmsbtn_touchTextColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="DMSImageButton">
+        <attr name="ib_style" format="string">
+            <enum name="rectangle" value="0" />
+            <enum name="oval" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="DMSEditText">
+        <attr name="et_style" format="string">
+            <enum name="normal" value="0" />
+            <enum name="login" value="1" />
+        </attr>
+        <attr name="dmset_backgroundColor" format="color" />
+        <attr name="dmset_strokeColor" format="color" />
+        <attr name="dmset_focusStrokeColor" format="color" />
+        <attr name="dmset_cursorColor" format="color" />
     </declare-styleable>
 </resources>

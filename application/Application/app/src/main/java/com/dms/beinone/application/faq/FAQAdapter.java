@@ -24,21 +24,21 @@ import java.util.List;
  */
 
 public class FAQAdapter extends ExpandableRecyclerAdapter<
-        FAQTitle, FAQContent,FAQAdapter.FAQTitleVH, FAQAdapter.FAQContentVH> {
+        FAQ, FAQContent,FAQAdapter.FAQVH, FAQAdapter.FAQContentVH> {
 
     private Context mContext;
 
-    public FAQAdapter(Context context, @NonNull List<FAQTitle> parentItemList) {
+    public FAQAdapter(Context context, @NonNull List<FAQ> parentItemList) {
         super(parentItemList);
         mContext = context;
     }
 
     @NonNull
     @Override
-    public FAQTitleVH onCreateParentViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FAQVH onCreateParentViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext)
                 .inflate(R.layout.viewholder_faq_title, parent, false);
-        return new FAQTitleVH(view);
+        return new FAQVH(view);
     }
 
     @NonNull
@@ -50,7 +50,7 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
     }
 
     @Override
-    public void onBindParentViewHolder(@NonNull FAQTitleVH parentViewHolder, int parentPosition, @NonNull FAQTitle parent) {
+    public void onBindParentViewHolder(@NonNull FAQVH parentViewHolder, int parentPosition, @NonNull FAQ parent) {
         parentViewHolder.bind(parent.getTitle());
     }
 
@@ -62,12 +62,12 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
     /**
      * ViewHolder for FAQ Title
      */
-    public class FAQTitleVH extends ParentViewHolder<FAQTitle, FAQContent> {
+    public class FAQVH extends ParentViewHolder<FAQ, FAQContent> {
 
         private TextView mTitleTV;
         private ImageButton mExpandBtn;
 
-        public FAQTitleVH(@NonNull View itemView) {
+        public FAQVH(@NonNull View itemView) {
             super(itemView);
 
             mTitleTV = (TextView) itemView.findViewById(R.id.tv_faq_title);
@@ -81,7 +81,7 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             mExpandBtn.setBackground(
-                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_touch));
+                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_oval_touch));
                             mExpandBtn.setColorFilter(
                                     ContextCompat.getColor(mContext, android.R.color.white));
                             break;
@@ -92,7 +92,7 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
                                     v.getTop() + (int) event.getY())) {
 
                                 mExpandBtn.setBackground(
-                                        ContextCompat.getDrawable(mContext, R.drawable.dmsib));
+                                        ContextCompat.getDrawable(mContext, R.drawable.dmsib_oval));
                                 mExpandBtn.setColorFilter(
                                         ContextCompat.getColor(mContext, R.color.colorPrimary));
                             }
@@ -100,7 +100,7 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
 
                         case MotionEvent.ACTION_UP:
                             mExpandBtn.setBackground(
-                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib));
+                                    ContextCompat.getDrawable(mContext, R.drawable.dmsib_oval));
                             mExpandBtn.setColorFilter(
                                     ContextCompat.getColor(mContext, R.color.colorPrimary));
                             break;

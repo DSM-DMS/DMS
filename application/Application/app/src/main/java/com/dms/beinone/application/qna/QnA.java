@@ -13,18 +13,26 @@ public class QnA implements Parcelable {
     private String title;
     private String questionContent;
     private String questionDate;
-    private String questioner;
+    private String writer;
     private String answerContent;
     private String answerDate;
     private boolean privacy;
 
-    public QnA(int no, String title, String questionContent, String questionDate, String questioner,
+    public QnA(int no, String title, String questionDate, String writer, boolean privacy) {
+        setNo(no);
+        setTitle(title);
+        setQuestionDate(questionDate);
+        setWriter(writer);
+        setPrivacy(privacy);
+    }
+
+    public QnA(int no, String title, String questionContent, String questionDate, String writer,
                String answerContent, String answerDate, boolean privacy) {
         setNo(no);
         setTitle(title);
         setQuestionContent(questionContent);
         setQuestionDate(questionDate);
-        setQuestioner(questioner);
+        setWriter(writer);
         setAnswerContent(answerContent);
         setAnswerDate(answerDate);
         setPrivacy(privacy);
@@ -35,7 +43,7 @@ public class QnA implements Parcelable {
         setTitle(in.readString());
         setQuestionContent(in.readString());
         setQuestionDate(in.readString());
-        setQuestioner(in.readString());
+        setWriter(in.readString());
         setAnswerContent(in.readString());
         setAnswerDate(in.readString());
 
@@ -49,7 +57,7 @@ public class QnA implements Parcelable {
         dest.writeString(title);
         dest.writeString(questionContent);
         dest.writeString(questionDate);
-        dest.writeString(questioner);
+        dest.writeString(writer);
         dest.writeString(answerContent);
         dest.writeString(answerDate);
 
@@ -94,12 +102,12 @@ public class QnA implements Parcelable {
         this.questionDate = questionDate;
     }
 
-    public String getQuestioner() {
-        return questioner;
+    public String getWriter() {
+        return writer;
     }
 
-    public void setQuestioner(String questioner) {
-        this.questioner = questioner;
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 
     public String getAnswerContent() {

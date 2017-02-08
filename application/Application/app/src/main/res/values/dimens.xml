@@ -13,6 +13,12 @@
     <!-- Text size of subtext -->
     <dimen name="text_subtext">13sp</dimen>
 
+    <!-- Text size of card title -->
+    <dimen name="text_card_title">24sp</dimen>
+
+    <!-- Text size of card subtext -->
+    <dimen name="text_card_subtext">14sp</dimen>
+
     <!-- Text size of content -->
     <dimen name="text_content">13sp</dimen>
 

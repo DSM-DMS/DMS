@@ -25,9 +25,7 @@ public class GoingoutApplyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle(R.string.nav_goingoutapply);
         View view = inflater.inflate(R.layout.fragment_goingoutapply, container, false);
-
         init(view);
 
         return view;
@@ -39,6 +37,8 @@ public class GoingoutApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
+        getActivity().setTitle(R.string.nav_goingoutapply);
+
         final DMSToggleButton saturdayTB =
                 (DMSToggleButton) rootView.findViewById(R.id.tb_goingoutapply_saturday);
         final DMSToggleButton sundayTB =

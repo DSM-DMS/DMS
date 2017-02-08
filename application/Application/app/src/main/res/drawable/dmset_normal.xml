@@ -11,7 +11,7 @@
             <solid android:color="@android:color/transparent" />
             <stroke
                 android:width="2dp"
-                android:color="@android:color/secondary_text_light_nodisable" />
+                android:color="@android:color/secondary_text_dark" />
         </shape>
     </item>
 </layer-list>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmsib="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="56dp">
 
@@ -26,7 +27,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_expand_more_white_18dp" />
+            android:src="@drawable/ic_expand_more_white_18dp"
+            dmsib:ib_style="oval" />
 
     </RelativeLayout>
 
