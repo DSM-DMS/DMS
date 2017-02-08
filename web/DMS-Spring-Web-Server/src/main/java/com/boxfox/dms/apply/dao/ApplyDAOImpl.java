@@ -1,6 +1,5 @@
 package com.boxfox.dms.apply.dao;
 
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,9 +11,7 @@ import com.boxfox.dms.apply.dto.ExtensionApplyDTO;
 import com.boxfox.dms.apply.dto.OutApplyDTO;
 import com.boxfox.dms.apply.dto.RewardApplyDTO;
 import com.boxfox.dms.apply.dto.StayApplyDTO;
-import com.boxfox.dms.board.dto.FacilityReportContext;
 import com.boxfox.dms.mapper.ApplyMapper;
-import com.boxfox.dms.mapper.FacilityMapper;
 
 @Repository
 public class ApplyDAOImpl implements ApplyDAO{
@@ -28,7 +25,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		ExtensionApplyDTO apply = new ExtensionApplyDTO(id, room, seat);
 		mapper.extensionApply(apply);
 	}
-
+	
 	@Override
 	public void afterschoolApply(String id, int no) {
 		ApplyMapper mapper = sqlSession.getMapper(ApplyMapper.class);
@@ -57,6 +54,42 @@ public class ApplyDAOImpl implements ApplyDAO{
 		OutApplyDTO apply = new OutApplyDTO(id, date, reason);
 		mapper.goingoutApply(apply);
 		
+	}
+
+	@Override
+	public List<AfterSchoolApplyDTO> lookupAfterSchoolApply(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ExtensionApplyDTO lookupExtensionApply(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ExtensionApplyDTO> lookupExtensionApplyAtRoom(int room) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OutApplyDTO> lookupOutApply(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RewardApplyDTO> lookupRewardApply(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StayApplyDTO> lookupStayApply(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

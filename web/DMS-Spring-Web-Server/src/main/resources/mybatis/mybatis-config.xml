@@ -10,5 +10,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource ="/mybatis/meal-mapper.xml"/>
         <mapper resource ="/mybatis/facility-mapper.xml"/>
         <mapper resource ="/mybatis/qna-mapper.xml"/>
+        <mapper resource ="/mybatis/apply-mapper.xml"/>
     </mappers >
 </configuration>
