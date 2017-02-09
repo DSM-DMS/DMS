@@ -7,7 +7,8 @@ var lastDay = noofdays(currentMonth, currentYear);
 var newDate = new Date(currentYear, currentMonth - 1, 1);
 
 $('#month').text(currentYear+'.'+currentMonth); //달력 년, 월 표시
-drawCalendar(newDate, lastDay);
+
+drawCalendar(newDate, lastDay); //달력 날짜 표시
 
 //이전 달
 $('#prev_month').click(function() {
@@ -152,6 +153,18 @@ $('#fifth_week').click(function() {
   $('#fifth_week').css("background-color", "yellow");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fifth_week');
 });
+
+//********************이전 데이터 표시*********************
+function prevDate(year, month, week, sel) {
+  this.year = year;
+  this.month = month;
+  this.week = week;
+  this.sel = sel; // 0.잔류 1.금요귀가 2.토요귀가 3.토요귀사
+}
+
+function drawPrev(date[]) {
+
+}
 
 //***********************신청*********************
 $('#apply_form input[type="radio"]').checkboxradio();
