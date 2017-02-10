@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.dms.beinone.application.R;
@@ -74,14 +73,6 @@ public class RewardscoreApplyFragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        Button applyBtn = (Button) rootView.findViewById(R.id.btn_rewardscore_apply);
-        applyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
 
             }
         });

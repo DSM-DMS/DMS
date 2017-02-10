@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.datamodel.Commands;
@@ -38,9 +39,24 @@ public class LoginActivity extends AppCompatActivity {
 
         mPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
 
-        Button loginBtn = (Button) findViewById(R.id.btn_login_login);
+
         mIdET = (EditText) findViewById(R.id.et_login_id);
+        mIdET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditTextUtils.hideKeyboard(LoginActivity.this, (EditText) v);
+            }
+        });
+
         mPasswordET = (EditText) findViewById(R.id.et_login_password);
+        mPasswordET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditTextUtils.hideKeyboard(LoginActivity.this, (EditText) v);
+            }
+        });
+
+        Button loginBtn = (Button) findViewById(R.id.btn_login_login);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

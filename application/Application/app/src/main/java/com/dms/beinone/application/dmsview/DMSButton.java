@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -27,6 +28,8 @@ public class DMSButton extends Button {
 
     private static final int STYLE_RECTANGLE = 0;
     private static final int STYLE_ROUND = 1;
+
+    private GestureDetectorCompat mGestureDetector;
 
     private Drawable mNormalBackground;
     private Drawable mOnTouchBackground;
@@ -77,6 +80,11 @@ public class DMSButton extends Button {
                 touchStrokeColor, textColor, touchTextColor, textSize);
     }
 
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        return mGestureDetector.onTouchEvent(event);
+//    }
+
     private void init(Context context, int style, int backgroundColor, int strokeColor,
                       int touchBackgroundColor, int touchStrokeColor, int textColor,
                       int touchTextColor, int textSize) {
@@ -116,7 +124,7 @@ public class DMSButton extends Button {
         setMinHeight(0);
         setMinimumHeight(0);
 
-        GestureDetector gestureDetector = new GestureDetector(context, new GestureDetector.OnGestureListener() {
+        mGestureDetector = new GestureDetectorCompat(context, new GestureDetector.OnGestureListener() {
             @Override
             public boolean onDown(MotionEvent e) {
                 setBackground(mOnTouchBackground);
@@ -172,6 +180,8 @@ public class DMSButton extends Button {
                 return true;
             }
         });
+
+
 
         setOnTouchListener(new OnTouchListener() {
             @Override

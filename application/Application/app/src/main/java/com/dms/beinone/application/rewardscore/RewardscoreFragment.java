@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSEditText;
@@ -61,6 +62,15 @@ public class RewardscoreFragment extends Fragment {
                 } else {
                     contentTV.setTextColor(
                             ContextCompat.getColor(getContext(), android.R.color.primary_text_light));
+                }
+            }
+        });
+        mContentET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    // hide the soft keyboard when touch outside
+                    EditTextUtils.hideKeyboard(getContext(), (EditText) v);
                 }
             }
         });

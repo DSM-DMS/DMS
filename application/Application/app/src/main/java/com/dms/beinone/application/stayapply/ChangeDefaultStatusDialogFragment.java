@@ -27,6 +27,7 @@ import java.io.IOException;
 
 public class ChangeDefaultStatusDialogFragment extends DialogFragment {
 
+    private Context mContext;
     private ChangeDefaultStatusListener mListener;
 
     public static ChangeDefaultStatusDialogFragment newInstance(
@@ -37,6 +38,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
 
         ChangeDefaultStatusDialogFragment fragment = new ChangeDefaultStatusDialogFragment();
         fragment.setArguments(args);
+        fragment.mContext = context;
         fragment.mListener = listener;
 
         return fragment;
@@ -50,7 +52,8 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
         final String id = accountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
         final int defStatus = getArguments().getInt(getString(R.string.ARGS_DEFAULTSTATUS), -1) - 1;
 
-        return new AlertDialog.Builder(getContext()).setTitle(R.string.stayapply_dialog_title)
+        return new AlertDialog.Builder(getContext())
+                .setTitle(R.string.stayapply_dialog_title)
                 .setSingleChoiceItems(R.array.change_default_status, defStatus, null)
                 .setNegativeButton(R.string.stayapply_dialog_negative,
                         new DialogInterface.OnClickListener() {
@@ -66,7 +69,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                                 new ChangeDefaultStatusTask().execute(id, defStatus);
                             }
                         })
-                .show();
+                .create();
     }
 
     private class ChangeDefaultStatusTask extends AsyncTask<Object, Void, Integer> {
@@ -82,8 +85,10 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                 mValue = (int) params[1];
                 status = changeDefaultStatus(params[0].toString(), mValue);
             } catch (IOException e) {
+                e.printStackTrace();
                 return -1;
             } catch (JSONException e) {
+                e.printStackTrace();
                 return -1;
             }
 
@@ -109,11 +114,11 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                 mListener.onChangeDefaultStatus(mValue);
             } else if (status == 0) {
                 /* failure */
-                Toast.makeText(getContext(), R.string.stayapply_dialog_failure, Toast.LENGTH_SHORT)
+                Toast.makeText(mContext, R.string.stayapply_dialog_failure, Toast.LENGTH_SHORT)
                         .show();
             } else {
                 /* error */
-                Toast.makeText(getContext(), R.string.stayapply_dialog_error, Toast.LENGTH_SHORT)
+                Toast.makeText(mContext, R.string.stayapply_dialog_error, Toast.LENGTH_SHORT)
                         .show();
             }
 

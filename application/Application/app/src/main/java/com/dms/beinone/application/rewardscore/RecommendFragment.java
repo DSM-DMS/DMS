@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSEditText;
 import com.dms.beinone.application.R;
@@ -60,6 +61,7 @@ public class RecommendFragment extends Fragment {
                     contentTV.setTextColor(
                             ContextCompat.getColor(getContext(), R.color.colorPrimary));
                 } else {
+                    EditTextUtils.hideKeyboard(getContext(), (EditText) v);
                     contentTV.setTextColor(
                             ContextCompat.getColor(getContext(), android.R.color.primary_text_light));
                 }
@@ -76,6 +78,7 @@ public class RecommendFragment extends Fragment {
                     recommendeeTV.setTextColor(
                             ContextCompat.getColor(getContext(), R.color.colorPrimary));
                 } else {
+                    EditTextUtils.hideKeyboard(getContext(), (EditText) v);
                     recommendeeTV.setTextColor(
                             ContextCompat.getColor(getContext(), android.R.color.primary_text_light));
                 }

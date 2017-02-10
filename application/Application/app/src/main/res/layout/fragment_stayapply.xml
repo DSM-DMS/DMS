@@ -115,6 +115,7 @@
                         android:layout_height="64dp"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_fridaygo"
                         android:textOn="@string/stayapply_fridaygo" />
 
@@ -124,6 +125,7 @@
                         android:layout_height="64dp"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_saturdaygo"
                         android:textOn="@string/stayapply_saturdaygo" />
 
@@ -133,6 +135,7 @@
                         android:layout_height="64dp"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_saturdaycome"
                         android:textOn="@string/stayapply_saturdaycome" />
 
@@ -142,6 +145,7 @@
                         android:layout_height="64dp"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_stay"
                         android:textOn="@string/stayapply_stay" />
 

@@ -92,7 +92,8 @@ public class StayApplyFragment extends Fragment {
                             public void onChangeDefaultStatus(int defaultStatus) {
                                 setDefaultStatusTV(StayApplyUtils.getString(defaultStatus));
                             }
-                        });
+                        })
+                        .show(getChildFragmentManager(), null);
             }
         });
 
@@ -269,7 +270,7 @@ public class StayApplyFragment extends Fragment {
                 status = applyStayStatus(params[0].toString(), (int) params[1], params[2].toString());
             } catch (IOException e) {
                 return -1;
-            } catch(JSONException e) {
+            } catch (JSONException e) {
                 return -1;
             }
 
