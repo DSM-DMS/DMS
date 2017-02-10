@@ -16,7 +16,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.*;
 import org.boxfox.dms.utilities.log.Log;
 
-
 public class AES256 {
 	private String ips;
 	private Key keySpec;

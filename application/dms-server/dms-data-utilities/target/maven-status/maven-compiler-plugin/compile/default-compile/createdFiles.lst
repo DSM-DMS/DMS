@@ -3,7 +3,6 @@ org\boxfox\dms\utilities\datamodel\post\AttachmentList.class
 org\boxfox\dms\utilities\datamodel\post\Attachment.class
 org\boxfox\dms\utilities\log\LogErrorOutputStream.class
 org\boxfox\dms\utilities\database\SafeResultSet.class
-org\boxfox\dms\utilities\AppForTest.class
 org\boxfox\dms\utilities\datamodel\plan\MonthPlan.class
 org\boxfox\dms\utilities\dataio\post\PostChangeDetector.class
 org\boxfox\dms\utilities\dataio\ParserUtils.class

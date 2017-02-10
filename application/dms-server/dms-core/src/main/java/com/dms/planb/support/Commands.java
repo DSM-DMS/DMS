@@ -24,13 +24,13 @@ public class Commands {
 	public static final int UPLOAD_FAQ								= 115;
 	public static final int UPLOAD_AFTERSCHOOL_ITEM	= 116;
 	public static final int UPLOAD_REPORT_FACILITY		= 117;
-	public static final int UPLOAD_REPORT_RESULT 			= 118;
+	public static final int UPLOAD_REPORT_RESULT 		= 118;
 	
 	public static final int APPLY_EXTENTION						= 131;
 	public static final int APPLY_STAY									= 132;
 	public static final int APPLY_GOINGOUT						= 133;
 	public static final int APPLY_MERIT								= 134;
-	public static final int APPLY_AFTERSCHOOL					= 135;
+	public static final int APPLY_AFTERSCHOOL				= 135;
 	
 /* --------------------------------------------------------------------- */
 	
