@@ -23,7 +23,7 @@ $('#prev_month').click(function() {
   lastDay = noofdays(currentMonth, currentYear);
   clearCalendar();
   drawCalendar(newDate, lastDay);
-});+
+});
 
 //다음 달
 $('#next_month').click(function() {
@@ -70,6 +70,9 @@ function noofdays(mm, yyyy)	{
 
 //달력 그리기
 function drawCalendar(date, lastDay) {
+  $.post("http://", {year:date.getFullYear(), month:date.getMonth()}, function(date) {
+    drawPrev(date);
+  })
   switch(date.getDay()) {
     case 0:
       for(var i = 0; i < lastDay; i++) {
@@ -126,44 +129,54 @@ function clearCalendar() {
 
 $('#first_week').click(function() {
   $('#calendar tbody tr').css("background-color", "white");
-  $('#first_week').css("background-color", "yellow");
+  $('#first_week').css("background-color", "rgb(197, 197, 197)");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'first_week');
 });
 
 $('#second_week').click(function(){
   $('#calendar tbody tr').css("background-color", "white");
-  $('#second_week').css("background-color", "yellow");
+  $('#second_week').css("background-color", "rgb(197, 197, 197)");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'second_week');
 });
 
 $('#third_week').click(function() {
   $('#calendar tbody tr').css("background-color", "white");
-  $('#third_week').css("background-color", "yellow");
+  $('#third_week').css("background-color", "rgb(197, 197, 197)");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'third_week');
 });
 
 $('#fourth_week').click(function() {
   $('#calendar tbody tr').css("background-color", "white");
-  $('#fourth_week').css("background-color", "yellow");
+  $('#fourth_week').css("background-color", "rgb(197, 197, 197)");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fourth_week');
 });
 
 $('#fifth_week').click(function() {
   $('#calendar tbody tr').css("background-color", "white");
-  $('#fifth_week').css("background-color", "yellow");
+  $('#fifth_week').css("background-color", "rgb(197, 197, 197)");
   $('#date').val(currentYear+'.'+currentMonth+'.'+'fifth_week');
 });
 
 //********************이전 데이터 표시*********************
-function prevDate(year, month, week, sel) {
-  this.year = year;
-  this.month = month;
+function prevDate(week, sel) {
   this.week = week;
   this.sel = sel; // 0.잔류 1.금요귀가 2.토요귀가 3.토요귀사
 }
 
-function drawPrev(date[]) {
-
+function drawPrev(date) {
+  for(i = 0; i < date.length; i++) {
+    if(date.sel == 0) {
+    } else if(date.sel == 1) {
+      $('tr:eq('+(date.week+1)+') .fri').attr('class', 'fri go_home');
+      $('tr:eq('+(date.week+2)+') .sun').attr('class', 'sun go_dom');
+    } else if(date.sel == 2) {
+      $('tr:eq('+(date.week+1)+') .sat').attr('class', 'sat go_home');
+      $('tr:eq('+(date.week+2)+') .sun').attr('class', 'sun go_dom');
+    } else if(date.sel == 3) {
+      $('tr:eq('+(date.week+1)+') .fri').attr('class', 'fri go_home');
+      $('tr:eq('+(date.week+1)+') .sat').attr('class', 'sat go_dom');
+    }
+  }
 }
 
 //***********************신청*********************
