@@ -15,10 +15,10 @@ public class Post extends DataSaveAble {
 	public static final int CATEGORY_COMPETITION = 2;
 	private String writer, dateTime, title, content;
 	private int number, homePageNumber, category;
-	private AttachmentList  fileList;
+	private AttachmentList fileList;
 
-	public Post(int number,int category, int homePageNumber, String title, String dateTime, String writer, String content,
-			AttachmentList fileList) {
+	public Post(int number, int category, int homePageNumber, String title, String dateTime, String writer,
+			String content, AttachmentList fileList) {
 		this.number = number;
 		this.category = category;
 		this.homePageNumber = homePageNumber;
@@ -67,7 +67,8 @@ public class Post extends DataSaveAble {
 		obj.put("Writer", writer);
 		obj.put("Date", dateTime);
 		obj.put("Content", content);
-		obj.put("Attachments", fileList.toJSONObject());
+		if (fileList != null)
+			obj.put("Attachments", fileList.toJSONObject());
 		return obj;
 	}
 
@@ -80,8 +81,8 @@ public class Post extends DataSaveAble {
 		content = rs.getString("content");
 		writer = rs.getString("writer");
 		dateTime = rs.getString("date");
-		fileList = (AttachmentList) new AttachmentList().fromResultSet(DataBase
-				.getInstance().executeQuery(QueryUtils.querySetter(Query.ATTACHMENT.selectFormat, number)));
+		fileList = (AttachmentList) new AttachmentList().fromResultSet(
+				DataBase.getInstance().executeQuery(QueryUtils.querySetter(Query.ATTACHMENT.selectFormat, number)));
 		vaild = true;
 		return this;
 	}
