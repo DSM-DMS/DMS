@@ -17,6 +17,7 @@ public class DmsVerticleTest {
 		verticle(Commands.LOAD_NOTICE_LIST,"{\"category\":0,\"page\":2}");
 	}
 	
+	@Test
 	public void verticle(int command, String json){
 		EasyJsonObject responseObject = null;
 		EasyJsonObject requestObject = new EasyJsonObject(json);
