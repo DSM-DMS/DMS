@@ -53,6 +53,7 @@ public class Post extends DataSaveAble {
 		StringBuilder builder = new StringBuilder();
 		builder.append(QueryUtils.querySetter(Query.POST.insertFormat, number, category, homePageNumber, title, writer,
 				dateTime, content) + ";");
+		if(fileList!=null)
 		builder.append(fileList.toQuery());
 		return builder.toString();
 	}
