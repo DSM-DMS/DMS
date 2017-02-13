@@ -1,4 +1,4 @@
-package com.dms.planb.action;
+package org.boxfox.dms.utilities.actions;
 
 import java.sql.SQLException;
 

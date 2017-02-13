@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.json.simple.JSONObject;
 
-import com.dms.planb.action.Actionable;
+import org.boxfox.dms.utilities.actions.Actionable;
 import com.dms.planb.action.DeleteAction;
 import com.dms.planb.action.InsertAction;
 import com.dms.planb.action.SelectAction;

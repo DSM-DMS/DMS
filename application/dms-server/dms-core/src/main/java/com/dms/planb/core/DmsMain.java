@@ -1,5 +1,6 @@
 package com.dms.planb.core;
 
+import org.boxfox.dms.utilities.actions.ActionRegister;
 import org.boxfox.dms.utilities.dataio.post.PostChangeDetector;
 
 /*
@@ -28,6 +29,7 @@ import io.vertx.core.VertxOptions;
 
 class DmsMain {
 	public static void main(String[] args) {
+		ActionRegister.init();
 		PostChangeDetector.getInstance().start();
 		//System.setErr(new LogErrorOutputStream(System.err));
 		Vertx vertx = Vertx.vertx();
