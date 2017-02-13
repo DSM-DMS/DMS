@@ -7,11 +7,18 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
+/**
+ * @author JoMingyu
+ */
 public class UpdateAction implements Actionable {
-	/*
+	/**
 	 * The data to be modified are received in JSON form at once.
 	 * If there is key in request object, do action automatically.
-	 * Reference : case Commands.MODIFY_STUDENT_DATA
+	 * @see case Commands.MODIFY_STUDENT_DATA
+	 */
+	
+	/** (non-Javadoc)
+	 * @see com.dms.planb.action.Actionable#action(int, org.boxfox.dms.utilities.json.EasyJsonObject)
 	 */
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
@@ -178,7 +185,11 @@ public class UpdateAction implements Actionable {
 			break;
 		}
 		
-		responseObject.put("status", status);
+		if(status == 1) {
+			responseObject.put("status", 200);
+		} else {
+			responseObject.put("status", 500);
+		}
 		
 		return responseObject;
 	}

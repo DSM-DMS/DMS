@@ -1,0 +1,2 @@
+2017/2/10/19:41:33 [INFO] Server started 1.0.5 TEST
+2017/2/10/19:41:33 [ERROR] java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)

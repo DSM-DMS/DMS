@@ -11,11 +11,14 @@ import com.dms.planb.action.InsertAction;
 import com.dms.planb.action.SelectAction;
 import com.dms.planb.action.UpdateAction;
 
-/*
- * Date Time Functions	: http://www.java2s.com/Tutorial/MySQL/0280__Date-Time-Functions/STRTODATEstrformat.htm
- * MySQL Commands		: https://opentutorials.org/course/195/1537 | http://city7310.blog.me/220902269838
+/**
+ * @see http://www.java2s.com/Tutorial/MySQL/0280__Date-Time-Functions/STRTODATEstrformat.htm
+ * @see https://opentutorials.org/course/195/1537 | http://city7310.blog.me/220902269838
  */
 
+/**
+ * @author JoMingyu
+ */
 public class ActionPerformer {
 	private static Actionable action;
 

@@ -106,3 +106,11 @@
 2017/2/6/12:36:3 [INFO] Header : 133
 2017/2/6/12:36:3 [INFO] Fully read : {"reason":"치킨치킨","id":"dsm201671","dept_date":"2017-02-11"}
 2017/2/6/12:36:3 [INFO] SQLException
+2017/2/6/13:6:30 [INFO] Database connected successfully!
+2017/2/6/13:6:30 [INFO] Server started 1.0.5 TEST
+2017/2/6/13:7:10 [INFO] Database connected successfully!
+2017/2/6/13:7:12 [INFO] Server started 1.0.5 TEST
+2017/2/6/13:9:36 [INFO] Database connected successfully!
+2017/2/6/13:9:36 [INFO] Server started 1.0.5 TEST
+2017/2/6/13:9:49 [INFO] Database connected successfully!
+2017/2/6/13:9:50 [INFO] Server started 1.0.5 TEST

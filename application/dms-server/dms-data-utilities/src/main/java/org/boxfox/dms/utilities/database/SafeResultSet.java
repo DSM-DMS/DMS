@@ -62,7 +62,7 @@ public class SafeResultSet {
 
 	public int getInt(int index) throws SQLException {
 		try{
-			return Integer.valueOf(getObject(index).toString());
+			return Integer.parseInt(getString(index));
 		}catch(NumberFormatException e){
 			throw new SQLException(INVALID_TYPE);
 		}
@@ -74,7 +74,11 @@ public class SafeResultSet {
 
 	public String getString(int index) throws SQLException {
 		checkVaildIndex(index);
-		return getObject(index).toString();
+		try {
+			return getObject(index).toString();
+		} catch(NullPointerException e) {
+			return null;
+		}
 	}
 	
 	public boolean getBoolean(String label) throws SQLException {
