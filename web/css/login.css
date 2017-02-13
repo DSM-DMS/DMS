@@ -1,0 +1,22 @@
+body {
+  background-color: #00bcfc;
+}
+
+#title {
+  text-align: left;
+  font-size: 25px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 15px;
+}
+
+#card {
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+  width: 30%;
+  height: 350px;
+  margin: auto;
+  margin-top: 10%;
+  border-radius: 15px;
+}
