@@ -28,15 +28,27 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 
 class DmsMain {
+	static Vertx vertx;
+	static VertxOptions options;
+	
+	private static void initialize() {
+		// -- Singleton
+		PostChangeDetector.getInstance().start();
+		vertx = Vertx.vertx();
+		
+		options = new VertxOptions();
+		//System.setErr(new LogErrorOutputStream(System.err));
+	}
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		PostChangeDetector.getInstance().start();
-		//System.setErr(new LogErrorOutputStream(System.err));
-		Vertx vertx = Vertx.vertx();
-		VertxOptions options = new VertxOptions();
+		initialize();
+		// Branch off initialize() method
+		
 		options.setMaxEventLoopExecuteTime(2100000000);
+		
 		vertx.deployVerticle(new DmsVerticle());
 		// Branch off DmsVerticle class
 	}

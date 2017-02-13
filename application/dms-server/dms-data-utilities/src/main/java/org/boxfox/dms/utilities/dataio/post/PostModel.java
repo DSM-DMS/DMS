@@ -11,11 +11,8 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.datamodel.post.Post;
 
 public class PostModel {
-<<<<<<< HEAD
 	private static String GET_POSTS_FROM_PAGES_QUERY = "select no, title, writer, date from app_content where category=? ORDER BY number asc limit ?, 10";
-=======
 	private static String GET_POSTS_FROM_PAGES_QUERY = "select * from app_content where category=? ORDER BY number asc limit ?, 10";
->>>>>>> 629960b1b71a8a811a3cec29e88e435e18be40af
 	
 	public static List<Post> getPostsAtPage(int category, int page){
 		ArrayList<Post> list = new ArrayList<Post>();
