@@ -13,13 +13,19 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
+/**
+ * @author JoMingyu
+ */
 public class SelectAction implements Actionable {
+	/** (non-Javadoc)
+	 * @see com.dms.planb.action.Actionable#action(int, org.boxfox.dms.utilities.json.EasyJsonObject)
+	 */
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		EasyJsonObject tempObject = new EasyJsonObject();
 		EasyJsonArray array = new EasyJsonArray();
+		EasyJsonObject tempObject;
 		
 		DataBase database = DataBase.getInstance();
 		
@@ -53,10 +59,12 @@ public class SelectAction implements Actionable {
 				responseObject.put("merit", resultSet.getInt("merit"));
 				responseObject.put("demerit", resultSet.getInt("demerit"));
 			} else {
-				responseObject.put("status", 2);
-				/*
-				 *  Can't find from DB, set status 2 and return 404 status code.
+				responseObject.put("status", 404);
+				/**
+				 *  Can't find from DB, set status 404 and return 404 status code.
 				 *  Below from here, same about this context will same meaning.
+				 *  
+				 *  When didn't set "status", auto-set status code 200 in Verticle.
 				 */
 			}
 			
@@ -68,14 +76,14 @@ public class SelectAction implements Actionable {
 //			
 //			break;
 		case Commands.LOAD_ACCOUNT:
-			// when login
+			// When login
 			id = requestObject.getString("id");
 			password = requestObject.getString("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM account WHERE id='", id, "'");
 			
 			if(!resultSet.next() || !resultSet.getString("password").equals(password)) {
-				/*
+				/**
 				 * !resultSet.next() : Can't find id
 				 * !resultSet.getString("password").equals(password) : Incorrect password
 				 * 
@@ -90,14 +98,14 @@ public class SelectAction implements Actionable {
 			
 			break;
 		case Commands.LOAD_TEACHER_ACCOUNT:
-			// when login
+			// When login
 			id = requestObject.getString("id");
 			password = requestObject.getString("password");
 			
 			resultSet = database.executeQuery("SELECT password FROM FROM teacher_account WHERE id='", id, "'");
 			
 			if(!resultSet.next() || resultSet.getString("password").equals(password)) {
-				/*
+				/**
 				 * !resultSet.next() : Can't find id
 				 * !resultSet.getString("password").equals(password) : Incorrect password
 				 * 
@@ -126,7 +134,7 @@ public class SelectAction implements Actionable {
 			if(resultSet.next()) {
 				// There're any posts in qna
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
@@ -137,7 +145,7 @@ public class SelectAction implements Actionable {
 					array.add(tempObject);
 				} while(resultSet.next());
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -149,7 +157,7 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
@@ -174,7 +182,7 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
@@ -189,7 +197,7 @@ public class SelectAction implements Actionable {
 					array.add(tempObject);
 				} while(resultSet.next());
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -216,7 +224,7 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
@@ -225,7 +233,7 @@ public class SelectAction implements Actionable {
 					array.add(tempObject);
 				} while(resultSet.next());
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -250,7 +258,7 @@ public class SelectAction implements Actionable {
 					responseObject.put("has_answer", false);
 				}
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;
@@ -261,7 +269,7 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-				tempObject.clear();
+				tempObject = new EasyJsonObject();
 				
 				tempObject.put("writer", resultSet.getString("writer"));
 				tempObject.put("comment_date", resultSet.getString("comment_date"));
@@ -270,7 +278,7 @@ public class SelectAction implements Actionable {
 				array.add(tempObject);
 				} while(resultSet.next());
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -282,16 +290,17 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("content", resultSet.getString("content"));
 					
 					array.add(tempObject);
+					System.out.println(array);
 				} while(resultSet.next());
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -316,7 +325,7 @@ public class SelectAction implements Actionable {
 					responseObject.put("has_result", false);
 				}
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;
@@ -329,7 +338,7 @@ public class SelectAction implements Actionable {
 				responseObject.put("class", resultSet.getInt("class"));
 				responseObject.put("seat", resultSet.getInt("seat"));
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;
@@ -340,13 +349,15 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 					
 					tempObject.put("value", resultSet.getInt("value"));
 					tempObject.put("date", resultSet.getString("date"));
 					
 					array.add(tempObject);
 				} while(resultSet.next());
+			} else {
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -360,7 +371,7 @@ public class SelectAction implements Actionable {
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getString("value"));
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;
@@ -373,7 +384,7 @@ public class SelectAction implements Actionable {
 				responseObject.put("dept_date", resultSet.getString("dept_date"));
 				responseObject.put("reason", resultSet.getString("reason"));
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;
@@ -391,7 +402,7 @@ public class SelectAction implements Actionable {
 					responseObject.put("has_target", false);
 				}
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;
@@ -402,14 +413,14 @@ public class SelectAction implements Actionable {
 			
 			if(resultSet.next()) {
 				do {
-					tempObject.clear();
+					tempObject = new EasyJsonObject();
 				
 					tempObject.put("no", resultSet.getInt("no"));
 					
 					array.add(tempObject);
 				} while(resultSet.next());
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			responseObject.put("result", array);
@@ -439,7 +450,7 @@ public class SelectAction implements Actionable {
 				responseObject.put("merit", resultSet.getInt("merit"));
 				responseObject.put("demerit", resultSet.getInt("demerit"));
 			} else {
-				responseObject.put("status", 2);
+				responseObject.put("status", 404);
 			}
 			
 			break;

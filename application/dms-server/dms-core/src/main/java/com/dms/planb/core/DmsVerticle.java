@@ -23,6 +23,9 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
 
+/**
+ * @author JoMingyu
+ */
 class DmsVerticle extends AbstractVerticle {
 	private HttpServer server;
 	private HttpServerResponse response;
@@ -30,10 +33,9 @@ class DmsVerticle extends AbstractVerticle {
 	private EasyJsonObject clientObject;
 	private EasyJsonObject requestObject;
 	private EasyJsonObject responseObject;
-	// org.json.simple.JSONObject
+	// org.boxfox.dms.utilities.json
 
-	/*
-	 * (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see io.vertx.core.AbstractVerticle#start()
 	 */
 	@Override
@@ -65,6 +67,7 @@ class DmsVerticle extends AbstractVerticle {
 					
 					// 1-2. Get client's info
 //					clientObject = new EasyJsonObject(request.getHeader("User-Agent"));
+//					
 //					clientObject.getString("Version");
 //					clientObject.getString("UUID");
 					
@@ -73,7 +76,7 @@ class DmsVerticle extends AbstractVerticle {
 					
 					// 2. Ready to response to client. Set status code in try-catch
 					response = request.response();
-					response.putHeader("Content-type", "application/json; charset=utf-8");
+					response.putHeader("content-type", "application/json; charset=utf-8");
 					
 					try {
 						/*
@@ -83,27 +86,35 @@ class DmsVerticle extends AbstractVerticle {
 						responseObject = ActionPerformer.perform(command, requestObject);
 						
 						if(responseObject.containsKey("status")) {
-							if(responseObject.getInt("status") == 0) {
-								response.setStatusCode(500);
-								Log.l("Responsed status code : 500");
-								// 500 : Internal Server Error
-							} else if(responseObject.getInt("status") == 1) {
+							if(responseObject.getInt("status") == 200) {
 								response.setStatusCode(200);
 								Log.l("Responsed status code : 200");
 								// 200 : Success
-							} else if(responseObject.getInt("status") == 2) {
+							} else if(responseObject.getInt("status") == 404) {
 								response.setStatusCode(404);
 								Log.l("Responsed status code : 404");
 								// 404 : Can't find
+							} else if(responseObject.getInt("status") == 500) {
+								response.setStatusCode(500);
+								Log.l("Responsed status code : 500");
+								// 500 : Internal Server Error
 							}
+							// Remove key "status" after set status code
 							responseObject.remove("status");
 						} else {
+							// Not contains key "status"
 							response.setStatusCode(200);
 							Log.l("Responsed status code : 200");
 						}
 						
 						Log.l("Responsed object : " + responseObject.toString());
 					} catch (SQLException e) {
+						/*
+						 *  Occurred SQLException
+						 *  Ex) Student number is 99999, post number is -5, etc..
+						 *  
+						 *  Set status code 404
+						 */
 						response.setStatusCode(404);
 						
 						e.printStackTrace();
@@ -125,6 +136,9 @@ class DmsVerticle extends AbstractVerticle {
 		}).listen(10419);
 	}
 	
+	/** (non-Javadoc)
+	 * @see io.vertx.core.AbstractVerticle#stop(io.vertx.core.Future)
+	 */
 	public void stop(@SuppressWarnings("rawtypes") Future stopFuture) throws Exception {
 		
 	}

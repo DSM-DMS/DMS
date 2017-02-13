@@ -1,12 +1,16 @@
 package com.dms.planb.support;
 
-/*
- * Class that the CommandAnalyzer class refers to
+/**
+ * Class that the Action class refers to
  * 
+ * @see
  * Java final variable naming convention	: http://softwareengineering.stackexchange.com/questions/252243/naming-convention-final-fields-not-static
  * 			Field modifiers convention			: http://stackoverflow.com/questions/11219556/difference-between-final-static-and-static-final
  */
 
+/**
+ * @author JoMingyu
+ */
 public class Commands {
 	/*
 	 * Notice, Newsletter, Competition, Plan, Meal will parsed in dms-data-utilities
@@ -40,17 +44,17 @@ public class Commands {
 	public static final int MODIFY_STUDENT_DATA			= 201;
 	
 	public static final int MODIFY_RULE								= 211;
-	public static final int MODIFY_QUESTION						= 212;
+	public static final int MODIFY_QUESTION					= 212;
 	public static final int MODIFY_ANSWER						= 213;
 	public static final int MODIFY_QNA_COMMENT			= 214;
-	public static final int MODIFY_FAQ									= 215;
+	public static final int MODIFY_FAQ								= 215;
 	public static final int MODIFY_REPORT_FACILITY		= 216;
 	
 	public static final int MODIFY_EXTENTION					= 231;
 	public static final int MODIFY_STAY								= 232;
-	public static final int MODIFY_STAY_DEFAULT				= 233;
+	public static final int MODIFY_STAY_DEFAULT			= 233;
 	public static final int MODIFY_GOINGOUT					= 234;
-	public static final int MODIFY_MERIT								= 235;
+	public static final int MODIFY_MERIT							= 235;
 	public static final int MODIFY_AFTERSCHOOL				= 236;
 	
 /* --------------------------------------------------------------------- */
@@ -64,7 +68,7 @@ public class Commands {
 	public static final int DELETE_ANSWER							= 313;
 	public static final int DELETE_QNA_COMMENT			= 314;
 	public static final int DELETE_FAQ									= 315;
-	public static final int DELETE_REPORT_FACILITY			= 316;
+	public static final int DELETE_REPORT_FACILITY		= 316;
 	
 	public static final int DEAPPLY_EXTENTION					= 331;
 	public static final int DEAPPLY_GOINGOUT					= 332;
@@ -85,12 +89,12 @@ public class Commands {
 	
 	public static final int LOAD_NOTICE_LIST						= 411;
 	public static final int LOAD_NEWSLETTER_LIST			= 412;
-	public static final int LOAD_COMPETITION_LIST			= 413;
+	public static final int LOAD_COMPETITION_LIST		= 413;
 //	LOAD_RULE_LIST
 	public static final int LOAD_QNA_LIST							= 414;
 //	LOAD_FAQ_LIST
 	public static final int LOAD_REPORT_FACILITY_LIST	= 415;
-	public static final int LOAD_AFTERSCHOOL_LIST			= 416;
+	public static final int LOAD_AFTERSCHOOL_LIST		= 416;
 	
 	public static final int LOAD_NOTICE								= 421;
 	public static final int LOAD_NEWSLETTER					= 422;
@@ -103,7 +107,7 @@ public class Commands {
 	
 	public static final int LOAD_EXTENTION_STATUS		= 431;
 	public static final int LOAD_STAY_STATUS					= 432;
-	public static final int LOAD_STAY_DEFAULT					= 433;
+	public static final int LOAD_STAY_DEFAULT				= 433;
 	public static final int LOAD_GOINGOUT_STATUS		= 434;
 	public static final int LOAD_MERIT_APPLY_STATUS	= 435;
 	public static final int LOAD_AFTERSCHOOL_STATUS	= 436;
