@@ -40,7 +40,7 @@ public class SelectAction implements Actionable {
 		int category;
 		
 		// For apply
-		String date;
+		String week = null;
 		
 		// For meal&plan
 		int year;
@@ -347,9 +347,12 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_STAY_STATUS:
 			id = requestObject.getString("id");
-			date = requestObject.getString("date");
+			week = requestObject.getString("week");
+			/*
+			 * week format : YYYY-MM-DD
+			 */
 			
-			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND date='", date, "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND date='", week, "'");
 			
 			if(resultSet.next()) {
 				do {

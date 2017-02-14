@@ -28,23 +28,21 @@ public class InsertAction implements Actionable {
 		String sessionKey = null;
 		int permission;
 		
-		// For upload a post
+		// For upload a post if have target
 		int no;
-//		int number;
-//		int category;
 		
 		// For stay_apply
 		int value;
+		String week = null;
 		
 		String title = null;
 		String content = null;
 		String writer = null;
-		String date = null;
 		
 		// For status
 		int status = 0;
 		
-		/*
+		/**
 		 * PK : Primary Key
 		 * NN : Not Null
 		 * UQ : Unique index
@@ -82,7 +80,7 @@ public class InsertAction implements Actionable {
 				parentPhone = requestObject.getString("p_phone");
 			}
 			
-			/*
+			/**
 			 * Set stay apply default value when register account
 			 * 
 			 * Table Name : stay_apply_default
@@ -93,7 +91,7 @@ public class InsertAction implements Actionable {
 			
 			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4)");
 			
-			 /*
+			 /**
 			  * Set id, password, .. to account table
 			  * 
 			  * Table Name : account
@@ -107,7 +105,7 @@ public class InsertAction implements Actionable {
 			
 			database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
 			
-			/*
+			/**
 			 * Set student's data to student_data table
 			 * 
 			 * Table Name : student_data
@@ -127,7 +125,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.REGISTER_TEACHER_ACC:
-			/*
+			/**
 			 * Table Name : teacher_account
 			 * 
 			 * idx INT(11) PK NN AI
@@ -147,7 +145,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_RULE:
-			/*
+			/**
 			 * Rules of dormitory
 			 * 
 			 * Table Name : rule
@@ -163,7 +161,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_QUESTION:
-			/*
+			/**
 			 * Question in Q&A
 			 * 
 			 * Table Name : qna
@@ -189,7 +187,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_ANSWER:
-			/*
+			/**
 			 * Answer in Q&A
 			 * 
 			 * Reference UPLOAD_QUESTION
@@ -202,7 +200,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_QNA_COMMENT:
-			/*
+			/**
 			 * Q&A comment in Q&A
 			 * 
 			 * Table Name : qna_comment
@@ -227,7 +225,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_FAQ:
-			/*
+			/**
 			 * Frequently asked questions
 			 * 
 			 * Table Name : faq
@@ -243,7 +241,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_AFTERSCHOOL_ITEM:
-			/*
+			/**
 			 * After school list
 			 * 
 			 * Table Name : afterschool_list
@@ -273,7 +271,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_REPORT_FACILITY:
-			/*
+			/**
 			 * Report facilities in dormitory
 			 * 
 			 * Table Name : facility_report
@@ -298,7 +296,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.UPLOAD_REPORT_RESULT:
-			/*
+			/**
 			 * Table Name : Reference UPLOAD_REPORT_FACILITY
 			 * Upload result based report no
 			 */
@@ -341,9 +339,9 @@ public class InsertAction implements Actionable {
 			 */
 			id = requestObject.getString("id");
 			value = requestObject.getInt("value");
-			date = requestObject.getString("date");
+			week = requestObject.getString("week");
 			
-			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", value, ", '", date, "')");
+			status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", value, ", '", week, "')");
 			
 			break;
 		case Commands.APPLY_GOINGOUT:

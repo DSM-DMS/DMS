@@ -33,6 +33,8 @@ public class UpdateAction implements Actionable {
 		// For post
 		int no;
 		
+		// For apply
+		String week = null;
 		String date = null;
 		
 		// For status
@@ -146,9 +148,9 @@ public class UpdateAction implements Actionable {
 			 * Date Format : YYYY-MM-DD
 			 */
 			id = requestObject.getString("id");
-			date = requestObject.getString("date");
+			week = requestObject.getString("week");
 			
-			status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id='", id, "' AND date='", date, "'");
+			status = database.executeUpdate("UPDATE stay_apply SET value=", requestObject.getInt("value"), " WHERE id='", id, "' AND date='", week, "'");
 			
 			break;
 		case Commands.MODIFY_STAY_DEFAULT:
