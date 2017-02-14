@@ -42,9 +42,6 @@ class DmsMain {
 		//System.setErr(new LogErrorOutputStream(System.err));
 	}
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		initialize();
 		// Branch off initialize() method

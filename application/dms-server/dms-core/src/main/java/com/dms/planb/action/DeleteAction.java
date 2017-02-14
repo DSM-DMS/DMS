@@ -12,6 +12,9 @@ import com.dms.planb.support.Commands;
  * @author JoMingyu
  */
 public class DeleteAction implements Actionable {
+	/** (non-Javadoc)
+	 * @see org.boxfox.dms.utilities.actions.Actionable#action(int, org.boxfox.dms.utilities.json.EasyJsonObject)
+	 */
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
 		EasyJsonObject responseObject = new EasyJsonObject();
