@@ -307,7 +307,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.APPLY_EXTENTION:
-			/*
+			/**
 			 * Table Name : extension_apply
 			 * 
 			 * id VARCHAR(20) PK NN
@@ -322,7 +322,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.APPLY_STAY:
-			/*
+			/**
 			 * Apply stay - about value of date
 			 * 
 			 * Table Name : stay_apply
@@ -345,7 +345,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.APPLY_GOINGOUT:
-			/*
+			/**
 			 * Apply goingout - about departure date and reason
 			 * 
 			 * Table Name : goingout_apply
@@ -364,7 +364,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.APPLY_MERIT:
-			/*
+			/**
 			 * Apply merit - about target and content
 			 * 
 			 * Table Name : merit_apply
@@ -378,7 +378,7 @@ public class InsertAction implements Actionable {
 			content = requestObject.getString("content");
 			
 			if(requestObject.containsKey("target")) {
-				// Case that recommendation
+				// Case that merit recommendation
 				String recommendTarget = requestObject.getString("target");
 				status = database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES('", id, "', '", recommendTarget, "', '", content, "')");
 			} else {
@@ -387,7 +387,7 @@ public class InsertAction implements Actionable {
 			
 			break;
 		case Commands.APPLY_AFTERSCHOOL:
-			/*
+			/**
 			 * Apply after school - target number 
 			 * 
 			 * Table Name : afterschool_apply
