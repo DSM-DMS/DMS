@@ -6,7 +6,6 @@ var listNum = getListNum(trHeight);
 
 makeNewTable(1, listNum);
 
-
 // 1VH의 px값을 구함
 function getVH() {
     var windowHeight = $(window).height();
@@ -40,38 +39,87 @@ function makeNewLine(number, title, date) {
     );
 }
 
-function PROTOmakeNewTable(dat, listNum) {
-    var objDataArr = JSON.parse(data).data
-    for(var loop = 0; loop < objDataArr.length; loop++){
+function PROTOmakeNewTable(data, listNum) {
+    var objDataArr = JSON.parse(data).result;
+    for (var loop = 0; loop < objDataArr.length; loop++) {
         makeNewLine(objDataArr[loop]);
     }
 }
 
 function PROTOmakeNewLine(data) {
     var jsonLength = Object.keys(data).length;
-    var appendString = "<tr>";
+    var newTr = $('<tr/>', {
+        click: function(e) {
+            // tr 클릭이벤트
+        }
+    });
+    var appendString = "";
     for (var loop in data) {
         appendString += "<td>" + data[loop] + "</td>";
     }
-    // for (var loop = 0; loop < jsonLength; loop++) {
-    //     appendString += "<td>" + data[loop] + "</td>";
-    // }
-    appendString += "</tr>";
-    $(".articlelist table").append(appendString);
-    // $(".articlelist table").append(
-    //     "<tr>" +
-    //     "<td>" + number + "</td>" +
-    //     "<td>" + title + "</td>" +
-    //     "<td>" + date + "</td>" +
-    //     "</tr>"
-    // );
+    newTr.append(appendString);
+    $(".articlelist table").append(newTr);
 }
 
 function ajaxList() {
     $.ajax({
-        url: "demo_test.txt",
+        url: "dsm2015.cafe24.com",
         type: "GET",
-        data: {type: "faq"},
-        success: makeNewTable(result, listNum);
+        data: {},
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.setRequestHeader("command", "115");
+        },
+        success: function(data) {
+            makeNewTable(data, listNum);
+        }
     });
 }
+
+$(".articlelist table tr").click(function() {
+    console.log("test");
+    alert("tet");
+})
+
+
+// faq 성공적인 통신
+
+// var  xhr = new XMLHttpRequest();
+//
+// xhr.open('POST', 'http://dsm2015.cafe24.com:10419');
+// xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8;');
+// xhr.setRequestHeader('command', '427');
+//
+// xhr.onload = function() {
+//     if (xhr.status === 200) {
+//         var userInfo = JSON.parse(xhr.responseText);
+//         alert(userInfo);
+//     }
+//     else if (xhr.status !== 200) {
+//         alert('Request failed.  Returned status of ' + xhr.status);
+//     }
+// };
+// xhr.send(JSON.stringify({}));
+
+
+// faq response
+
+// {
+//   "result": [
+//     {
+//       "no": 3,
+//       "title": "Third FAQ",
+//       "content": "This is third FAQ."
+//     },
+//     {
+//       "no": 3,
+//       "title": "Third FAQ",
+//       "content": "This is third FAQ."
+//     },
+//     {
+//       "no": 3,
+//       "title": "Third FAQ",
+//       "content": "This is third FAQ."
+//     }
+//   ]
+// }

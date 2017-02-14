@@ -281,7 +281,272 @@ $(".remote .category .children a").click(function(e) {
         for (var i = 0; i < bgArr.length; i++) {
             $(bgArr[i]).remove();
         }
-        window.location = goTo;
+        //window.location = goTo;
 
     }, 1500);
 })
+
+// 이벤트 등록
+$(".remote .inner .category .children #extention").click(function() {
+    loadExntetionApplyData();
+});
+
+$(".remote .inner .category .children #point").click(function() {
+    loadPointApplyPage();
+});
+
+$(".remote .inner .category .children #after").click(function() {
+    loadExntetionApplyData();
+});
+
+
+// 연장학습
+
+function loadExntetionApplyData() {
+    console.log("clicked");
+    //data로 id 전송해야함
+    $.ajax({
+        url: "dsm2015.cafe24.com",
+        type: "POST",
+        data: {},
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.setRequestHeader("command", "115");
+        },
+        success: function(data) {
+            createExtentionPage(data);
+        }
+    });
+}
+
+function createExtentionPage(data) {
+    $(".main").html('\
+    <div class=\"frame left extentionapply\">\
+    <div class=\"frametitle\">\
+    <h1>연장신청</h1>\
+    <div class=\"underline blue\"></div></div>\
+    <div class=\"seatcontainer\"></div></div>');
+
+    var seatArr = JSON.parse(data).result;
+    drawSeat(seatArr, "7.5px");
+}
+
+function drawSeat(seatArr, borderSize) {
+    var selected;
+    for (var loop = 0; loop < seatArr.length; loop++) {
+        for (var innerLoop = 0; innerLoop < seatArr[0].length; innerLoop++) {
+            //draw circle
+            if (seatArr[loop][innerLoop] != 0) {
+                if (seatArr[loop][innerLoop] != 1) {
+                    $('<div/>', {
+                        "class": "seat",
+                        css: {
+                            "background": "rgb(134,193,233)"
+                        },
+                        text: seatArr[loop][innerLoop]
+                    }).appendTo(".seatcontainer");
+                } else {
+                    var newSeat = $('<div/>', {
+                        "class": "seat",
+                        css: {
+                            "border": borderSize + " solid rgb(134,193,233)"
+                        },
+                    });
+                    newSeat.appendTo(".seatcontainer");
+                    newSeat.click(function() {
+                        if (selected !== undefined) {
+                            console.log(selected);
+                            selected.css({
+                                "background": "white",
+                                "border": borderSize + " solid rgb(134,193,233)"
+                            });
+                            selected.text("");
+                        }
+                        console.log(selected);
+                        console.log($(this).get(0));
+                        if (selected !== undefined && selected.get(0) == this) {
+                            console.log("ASD");
+                            selected.css({
+                                "border": "0 solid black",
+                                "background": "rgb(231,160,153)"
+                            })
+
+                            //자리 선택했다고 ajax보내는 함수
+                            //id, class, seat 보내야함
+                            // postExtention(class, seat);
+                            //reload하는 함수
+
+                            selected.text("신청됨");
+                            selected = $(this);
+                        } else {
+                            console.log("wht");
+                            selected = $(this);
+                            $(this).css({
+                                "border": "0 solid black",
+                                "background": "#FFD180"
+                            });
+                            $(this).text("신청?");
+                        }
+
+                    })
+                }
+            } else {
+
+                $('<div/>', {
+                    "class": "seat",
+                    css: {
+                        // "z-index": "100",
+                        // "background": "#f6f6f6",
+                        "border": borderSize + " solid #757575"
+                    }
+                }).appendTo(".seatcontainer");
+            }
+        }
+        $('</br>').appendTo(".seatcontainer");
+    }
+}
+
+// function postExtention(class, seat) {
+//     $.ajax({
+//         url: "dsm2015.cafe24.com",
+//         type: "POST",
+//         data: {class: class, seat: seat, id: id},
+//         beforeSend: function(xhr) {
+//             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+//             xhr.setRequestHeader("command", "141");
+//         }
+//         // success: function(data) {
+//         //     createExtentionPage(data);
+//         // }
+//     })
+// }
+
+//외출 신청은 그냥 html받어오면 됨
+
+//귀가 신청은 현재 자신의 정보 받아와야 할듯
+
+//상점 신청
+
+function loadPointApplyPage() {
+    $(".main").html(
+        '<div class="frame left pointapply">' +
+        '<div class="frametitle">' +
+        '<h1>상점신청</h1>' +
+        '<div class="underline blue"></div>' +
+        '</div>' +
+        '<div class="selecter">' +
+        '<div class="selectmenu">' +
+        '<p>상점신청</p>' +
+        '</div>' +
+        '<div class="selectmenu">' +
+        '<p>상점추천</p>' +
+        '</div>' +
+        '</div>' +
+        '<form class="individual" action="index.html" method="post">' +
+        '<input type="text" name="reason" placeholder="이유를 입력해 주세요" value="">' +
+        '<button type="button" name="button">피융!</button>' +
+        '</form>' +
+        '<form class="group individual" action="index.html" method="post">' +
+        '<input type="text" name="reason" placeholder="이유를 입력해 주세요" value="">' +
+        '<input type="text" name="person" placeholder="추천자를 입력해 주세요(피추천자)" value="">' +
+        '<button type="button" name="button">피융!</button>' +
+        '</form>' +
+        '</div>'
+    );
+    addPointEvent();
+}
+
+function addPointEvent() {
+    $(".pointapply .selecter .selectmenu:nth-child(1)").click(function() {
+        $(".pointapply .selecter .selectmenu:nth-child(1)").css({
+            backgroundColor: "rgb(134, 193, 233)",
+            border: "1 px solid rgb(134, 193, 233)",
+            borderRadius: "5px 0px 0px 5px",
+            color: "white"
+        });
+        $(".pointapply .selecter .selectmenu:nth-child(2)").css({
+            borderRadius: "0px 5px 5px 0px",
+            border: "1px solid rgb(134, 193, 233)",
+            color: "black",
+            backgroundColor: "white"
+        });
+        $(".pointapply .individual").css({
+            display: "block"
+        });
+        $(".pointapply .group").css({
+            display: "none"
+        });
+    })
+
+    $(".pointapply .selecter .selectmenu:nth-child(2)").click(function() {
+        $(".pointapply .selecter .selectmenu:nth-child(2)").css({
+            backgroundColor: "rgb(134, 193, 233)",
+            border: "1 px solid rgb(134, 193, 233)",
+            borderRadius: "0px 5px 5px 0px",
+            color: "white"
+        });
+        $(".pointapply .selecter .selectmenu:nth-child(1)").css({
+            borderRadius: "5px 0px 0px 5px",
+            border: "1px solid rgb(134, 193, 233)",
+            color: "black",
+            backgroundColor: "white"
+        });
+        $(".pointapply .individual").css({
+            display: "none"
+        });
+        $(".pointapply .group").css({
+            display: "block"
+        });
+
+    })
+
+    $(".pointapply form:nth-child(3) button").click(function() {
+        var reason = $(".pointapply .individual input").val();
+        postIndividual(reason);
+    });
+
+    $(".pointapply form:nth-child(4) button").click(function() {
+        var reason = $(".pointapply .group input:nth-child(1)").val();
+        var person = $(".pointapply .group input:nth-child(2)").val();
+        postGroup(reason, person);
+    });
+
+    function postIndividual(reason) {
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: {
+                "id": id,
+                "content": reason
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", "144");
+            },
+            success: function() {
+                //모달로 수정
+                alert("신청되었습니다.");
+            }
+        });
+    }
+
+    function postGroup(reason, person) {
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: {
+                "id": id,
+                "content": reason,
+                "targer": person
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", "144");
+            },
+            success: function() {
+                //모달로 수정
+                alert("신청되었습니다.");
+            }
+        });
+    }
+}
