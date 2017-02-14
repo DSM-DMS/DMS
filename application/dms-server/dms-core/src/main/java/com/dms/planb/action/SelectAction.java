@@ -39,10 +39,13 @@ public class SelectAction implements Actionable {
 		int qnaNo;
 		int category;
 		
+		// For apply
+		String date;
+		
 		// For meal&plan
 		int year;
 		int month;
-		int date;
+		int day;
 		
 		switch(command) {
 		case Commands.LOAD_MYPAGE:
@@ -138,7 +141,7 @@ public class SelectAction implements Actionable {
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
-					tempObject.put("question_date", resultSet.getString("question_date"));
+					tempObject.put("question_day", resultSet.getString("question_day"));
 					tempObject.put("writer", resultSet.getString("writer"));
 					tempObject.put("privacy", resultSet.getInt("privacy"));
 					
@@ -162,7 +165,7 @@ public class SelectAction implements Actionable {
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("room", resultSet.getInt("room"));
-					tempObject.put("write_date", resultSet.getString("write_date"));
+					tempObject.put("write_day", resultSet.getString("write_day"));
 					tempObject.put("writer", resultSet.getString("writer"));
 					if(resultSet.getString("result") != null) {
 						tempObject.put("has_result", true);
@@ -247,13 +250,13 @@ public class SelectAction implements Actionable {
 			if(resultSet.next()) {
 				responseObject.put("title", resultSet.getString("title"));
 				responseObject.put("question_content", resultSet.getString("question_content"));
-				responseObject.put("question_date", resultSet.getString("question_date"));
+				responseObject.put("question_day", resultSet.getString("question_day"));
 				responseObject.put("writer", resultSet.getString("writer"));
 				responseObject.put("privacy", resultSet.getInt("privacy"));
 				if(resultSet.getString("answer_content") != null) {
 					responseObject.put("has_answer", true);
 					responseObject.put("answer_content", resultSet.getString("answer_content"));
-					responseObject.put("answer_date", resultSet.getString("answer_date"));
+					responseObject.put("answer_day", resultSet.getString("answer_day"));
 				} else {
 					responseObject.put("has_answer", false);
 				}
@@ -272,7 +275,7 @@ public class SelectAction implements Actionable {
 				tempObject = new EasyJsonObject();
 				
 				tempObject.put("writer", resultSet.getString("writer"));
-				tempObject.put("comment_date", resultSet.getString("comment_date"));
+				tempObject.put("comment_day", resultSet.getString("comment_day"));
 				tempObject.put("content", resultSet.getString("content"));
 				
 				array.add(tempObject);
@@ -315,12 +318,12 @@ public class SelectAction implements Actionable {
 				responseObject.put("title", resultSet.getString("title"));
 				responseObject.put("content", resultSet.getString("content"));
 				responseObject.put("room", resultSet.getInt("room"));
-				responseObject.put("write_date", resultSet.getString("write_date"));
+				responseObject.put("write_day", resultSet.getString("write_day"));
 				responseObject.put("writer", resultSet.getString("writer"));
 				if(resultSet.getString("result") != null){
 					responseObject.put("has_result", true);
 					responseObject.put("result", resultSet.getString("result"));
-					responseObject.put("result_date", resultSet.getString("result_date"));
+					responseObject.put("result_day", resultSet.getString("result_day"));
 				} else {
 					responseObject.put("has_result", false);
 				}
@@ -344,15 +347,16 @@ public class SelectAction implements Actionable {
 			break;
 		case Commands.LOAD_STAY_STATUS:
 			id = requestObject.getString("id");
+			date = requestObject.getString("date");
 			
-			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND date='", date, "'");
 			
 			if(resultSet.next()) {
 				do {
 					tempObject = new EasyJsonObject();
 					
 					tempObject.put("value", resultSet.getInt("value"));
-					tempObject.put("date", resultSet.getString("date"));
+					tempObject.put("day", resultSet.getString("day"));
 					
 					array.add(tempObject);
 				} while(resultSet.next());
@@ -381,7 +385,7 @@ public class SelectAction implements Actionable {
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
 			
 			if(resultSet.next()) {
-				responseObject.put("dept_date", resultSet.getString("dept_date"));
+				responseObject.put("dept_day", resultSet.getString("dept_day"));
 				responseObject.put("reason", resultSet.getString("reason"));
 			} else {
 				responseObject.put("status", 404);
@@ -429,9 +433,9 @@ public class SelectAction implements Actionable {
 		case Commands.LOAD_MEAL:
 			year = requestObject.getInt("year");
 			month = requestObject.getInt("month");
-			date = requestObject.getInt("date");
+			day = requestObject.getInt("day");
 			
-			responseObject.put("result", MealModel.getMealAtDate(year, month, date).toJSONObject());
+			responseObject.put("result", MealModel.getMealAtDate(year, month, day).toJSONObject());
 			
 			break;
 		case Commands.LOAD_PLAN:

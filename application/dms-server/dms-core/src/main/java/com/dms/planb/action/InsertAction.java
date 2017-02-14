@@ -12,7 +12,6 @@ import com.dms.planb.support.Commands;
 /**
  * @author JoMingyu
  */
-
 public class InsertAction implements Actionable {
 	/** (non-Javadoc)
 	 * @see org.boxfox.dms.utilities.actions.Actionable#action(int, org.boxfox.dms.utilities.json.EasyJsonObject)
