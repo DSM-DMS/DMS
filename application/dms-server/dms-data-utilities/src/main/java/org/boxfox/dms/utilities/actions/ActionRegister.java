@@ -56,9 +56,9 @@ public class ActionRegister {
 
 	public static void init() {
 		Reflections reflections = new Reflections("org");
-		Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(ActionRegisteration.class);
+		Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(ActionRegistration.class);
 		for (Class<?> c : annotated) {
-			ActionRegisteration annotation = c.getAnnotation(ActionRegisteration.class);
+			ActionRegistration annotation = c.getAnnotation(ActionRegistration.class);
 			try {
 				registerAction(annotation.command(), (Actionable) c.newInstance());
 			} catch (InstantiationException | IllegalAccessException | RegisterException e) {

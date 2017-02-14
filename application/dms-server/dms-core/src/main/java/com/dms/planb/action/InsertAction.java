@@ -1,5 +1,6 @@
 package com.dms.planb.action;
 
+import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import java.sql.SQLException;
 
@@ -54,6 +55,7 @@ public class InsertAction implements Actionable {
 		 * AI : Auto Incremental
 		 * G : Generated column
 		 */
+
 		switch(command) {
 		case Commands.REGISTER_STUDENT_ACC:
 			// account
