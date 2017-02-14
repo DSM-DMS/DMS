@@ -15,7 +15,7 @@ import org.boxfox.dms.utilities.dataio.post.PostChangeDetector;
  * @see http://city7310.blog.me/
  * 
  * -- Work --
- * Work Started at 2017.01.10
+ * @since 2017.01.10
  * 
  * @see https://github.com/rlatjdfo112/DSM-Dormitory-System.git
  * @see https://app.asana.com/0/238698310665123/board
