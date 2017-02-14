@@ -11,6 +11,7 @@ package com.dms.planb.core;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.utilities.actions.ActionRegister;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -83,6 +84,7 @@ class DmsVerticle extends AbstractVerticle {
 						 *  3. Performs the operation.
 						 *  Branch off the ActionPerformer class' perform method.
 						 */
+						ActionRegister.executeAction(command, requestObject);
 						responseObject = ActionPerformer.perform(command, requestObject);
 						
 						if(responseObject.containsKey("status")) {

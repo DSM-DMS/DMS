@@ -34,7 +34,7 @@
 			<artifactId>dms-data-utilities</artifactId>
 			<version>${version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
