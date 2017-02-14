@@ -14,7 +14,7 @@ public class DataBase {
 	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	private static final String DB_ID = "root";
 	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
-//	private static final String DB_PASSWORD = "";
+//	private static final String DB_PASSWORD = "uursty199";
 	
 	private static DataBase instance;
 	private Statement statement;

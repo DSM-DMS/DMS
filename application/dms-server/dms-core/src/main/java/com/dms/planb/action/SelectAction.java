@@ -141,9 +141,9 @@ public class SelectAction implements Actionable {
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
-					tempObject.put("question_day", resultSet.getString("question_day"));
+					tempObject.put("question_day", resultSet.getString("question_date"));
 					tempObject.put("writer", resultSet.getString("writer"));
-					tempObject.put("privacy", resultSet.getInt("privacy"));
+					tempObject.put("privacy", resultSet.getBoolean("privacy"));
 					
 					array.add(tempObject);
 				} while(resultSet.next());

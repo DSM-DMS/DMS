@@ -61,9 +61,9 @@ public class SafeResultSet {
 	}
 
 	public int getInt(int index) throws SQLException {
-		try{
+		try {
 			return Integer.parseInt(getString(index));
-		}catch(NumberFormatException e){
+		} catch(NumberFormatException e){
 			throw new SQLException(INVALID_TYPE);
 		}
 	}
