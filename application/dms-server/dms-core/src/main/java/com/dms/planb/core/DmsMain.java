@@ -33,7 +33,7 @@ class DmsMain {
 	static VertxOptions options;
 	
 	private static void initialize() {
-		ActionRegister.init();
+		ActionRegister.init("org.boxfox.dms.secure","com.dms.planb");
 		// -- Singleton
 		PostChangeDetector.getInstance().start();
 		vertx = Vertx.vertx();

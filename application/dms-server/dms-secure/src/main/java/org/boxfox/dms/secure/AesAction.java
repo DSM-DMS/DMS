@@ -7,7 +7,7 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 @ActionRegistration(command = 7514)
-public class ESAAction implements Actionable{
+public class AesAction implements Actionable{
 
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

@@ -85,7 +85,6 @@ class DmsVerticle extends AbstractVerticle {
 						 *  Branch off the ActionPerformer class' perform method.
 						 */
 						ActionRegister.executeAction(command, requestObject);
-						responseObject = ActionPerformer.perform(command, requestObject);
 						
 						if(responseObject.containsKey("status")) {
 							if(responseObject.getInt("status") == 200 || responseObject.getInt("status") == 1) {

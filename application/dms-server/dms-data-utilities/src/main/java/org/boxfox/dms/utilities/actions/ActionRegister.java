@@ -53,8 +53,14 @@ public class ActionRegister {
 		return instance;
 	}
 
-	public static void init() {
-		Reflections reflections = new Reflections("org");
+	public static void init(String ... packages) {
+		for(String package_s : packages){
+			searchActions(package_s);
+		}
+	}
+	
+	private static void searchActions(String pacakge){
+		Reflections reflections = new Reflections(pacakge);
 		Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(ActionRegistration.class);
 		for (Class<?> c : annotated) {
 			ActionRegistration annotation = c.getAnnotation(ActionRegistration.class);
