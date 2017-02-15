@@ -7,8 +7,8 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.dataio.post.PostModel;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=423)
-public class LoadCompetition implements Actionable {
+@ActionRegistration(command=422)
+public class LoadNewsletter implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
 		int number = requestObject.getInt("number");

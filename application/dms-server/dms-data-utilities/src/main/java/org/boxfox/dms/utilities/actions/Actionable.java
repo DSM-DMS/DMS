@@ -13,7 +13,6 @@ public interface Actionable {
 	final DataBase database = DataBase.getInstance();
 	
 	final EasyJsonObject responseObject = new EasyJsonObject();
-	final EasyJsonObject tempObject = new EasyJsonObject();
 	final EasyJsonArray array = new EasyJsonArray();
 	
 	public abstract EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException;
