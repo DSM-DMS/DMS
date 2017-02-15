@@ -33,6 +33,7 @@
 		<module>dms-core</module>
 		<module>dms-data-utilities</module>
 		<module>dms-secure</module>
+		<module>dms-parser</module>
 	</modules>
 
 	<dependencies>

@@ -1,5 +1,5 @@
 package com.dms.planb.action.updateaction;
-/*
+
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.ActionRegistration;
@@ -12,9 +12,9 @@ import com.dms.planb.support.Commands;
 public class ModifyStayApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		
+		/*
 		 * Date Format : YYYY-MM-DD
-		 
+		 */
 		String id = requestObject.getString("id");
 		String week = requestObject.getString("week");
 		int value = requestObject.getInt("value");
@@ -26,4 +26,3 @@ public class ModifyStayApply implements Actionable {
 		return responseObject;
 	}
 }
-*/

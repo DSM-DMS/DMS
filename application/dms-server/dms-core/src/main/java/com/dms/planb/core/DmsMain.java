@@ -1,7 +1,8 @@
 package com.dms.planb.core;
 
 import org.boxfox.dms.utilities.actions.ActionRegister;
-import org.boxfox.dms.utilities.dataio.post.PostChangeDetector;
+
+import com.dms.parser.dataio.post.PostChangeDetector;
 
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)

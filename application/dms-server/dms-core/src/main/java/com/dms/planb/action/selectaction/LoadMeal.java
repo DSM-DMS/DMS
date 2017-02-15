@@ -4,9 +4,9 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.dataio.meal.MealModel;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
+import com.dms.parser.dataio.meal.MealModel;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_MEAL)

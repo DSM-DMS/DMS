@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.boxfox.dms.utilities.actions.support.Sender;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.json.simple.JSONObject;
 import org.reflections.Reflections;
@@ -27,19 +30,25 @@ public class ActionRegister {
 	}
 
 	public static void registerAction(int command, Actionable action) throws RegisterException {
-		if (getInstance().getAction(command) != null) {
-			if (getInstance().getAction(command).getClass().equals(action.getClass()))
+		ActionRegister register = getInstance();
+		if (register.getAction(command) != null) {
+			if (register.getAction(command).getClass().equals(action.getClass()))
 				return;
 			throw new RegisterException(EXCEPTION_ALREADY);
 		} else
-			getInstance().putAction(command, action);
+			register.putAction(command, action);
 	}
 
-	public static EasyJsonObject executeAction(int command, EasyJsonObject requestObject) throws SQLException {
+	public static EasyJsonObject executeAction(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
+		//String UUID = Sender.getUUID();
+		//
+		//SafeResultSet rs = DataBase.getInstance().executeQuery("select securekey ");
+		//if(rs.next()){  }
+		
 		EasyJsonObject responseObject = null;
 		Actionable action = getInstance().getAction(command);
 		if (action != null) {
-			responseObject = action.action(command, requestObject);;
+			responseObject = action.action(sender, command, requestObject);;
 		}
 		return responseObject;
 	}

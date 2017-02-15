@@ -94,6 +94,13 @@
 			<artifactId>dms-data-utilities</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<!-- dms dependency -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>dms-parser</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- dms dependency -->
 		<dependency>

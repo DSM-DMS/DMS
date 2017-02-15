@@ -4,9 +4,9 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.dataio.post.PostModel;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
+import com.dms.parser.dataio.post.PostModel;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_NOTICE)

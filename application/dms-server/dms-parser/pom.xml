@@ -8,8 +8,9 @@
 		<artifactId>dms-server</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>dms-data-utilities</artifactId>
-	<name>dms-data-utilities</name>
+	<artifactId>dms-parser</artifactId>
+	<name>dms-parser</name>
+
 
 	<build>
 		<plugins>
@@ -26,8 +27,25 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jsoup.version>1.10.2</jsoup.version>
 	</properties>
+
 	<dependencies>
+		<!-- dms dependency -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>dms-data-utilities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+		<!-- json html parser for parsing data from dsm.hs.kr -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -35,20 +53,5 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- 3rd party library dependency -->
-
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
-			<version>0.9.10</version>
-		</dependency>
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.40</version>
-		</dependency>
-
 	</dependencies>
 </project>
