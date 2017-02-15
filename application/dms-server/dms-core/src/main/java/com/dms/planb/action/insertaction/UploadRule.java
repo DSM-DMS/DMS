@@ -25,7 +25,7 @@ public class UploadRule implements Actionable {
 		String content = requestObject.getString("content");
 		
 		int status = database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
-		
+				
 		responseObject.put("status", status);
 		
 		return responseObject;

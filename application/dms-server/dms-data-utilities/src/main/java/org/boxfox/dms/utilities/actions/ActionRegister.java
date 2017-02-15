@@ -59,6 +59,7 @@ public class ActionRegister {
 		for (Class<?> c : annotated) {
 			ActionRegistration annotation = c.getAnnotation(ActionRegistration.class);
 			try {
+				System.out.println(annotation.command());
 				registerAction(annotation.command(), (Actionable) c.newInstance());
 			} catch (InstantiationException | IllegalAccessException | RegisterException e) {
 				e.printStackTrace();

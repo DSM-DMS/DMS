@@ -15,8 +15,6 @@ import org.boxfox.dms.utilities.actions.ActionRegister;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.ActionPerformer;
-
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -84,8 +82,7 @@ class DmsVerticle extends AbstractVerticle {
 						 *  3. Performs the operation.
 						 *  Branch off the ActionPerformer class' perform method.
 						 */
-						ActionRegister.executeAction(command, requestObject);
-						responseObject = ActionPerformer.perform(command, requestObject);
+						responseObject = ActionRegister.executeAction(command, requestObject);
 						
 						if(responseObject.containsKey("status")) {
 							if(responseObject.getInt("status") == 200 || responseObject.getInt("status") == 1) {
