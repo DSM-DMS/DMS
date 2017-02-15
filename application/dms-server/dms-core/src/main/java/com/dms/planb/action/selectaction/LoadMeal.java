@@ -9,7 +9,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.LOAD_MEAL)
+@ActionRegistration(command = Commands.LOAD_MEAL)
 public class LoadMeal implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

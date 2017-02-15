@@ -30,7 +30,7 @@ public class Commands {
 	public static final int UPLOAD_REPORT_FACILITY		= 117;
 	public static final int UPLOAD_REPORT_RESULT 		= 118;
 	
-	public static final int APPLY_EXTENTION						= 131;
+	public static final int APPLY_EXTENSION						= 131;
 	public static final int APPLY_STAY									= 132;
 	public static final int APPLY_GOINGOUT						= 133;
 	public static final int APPLY_MERIT								= 134;
@@ -50,7 +50,7 @@ public class Commands {
 	public static final int MODIFY_FAQ								= 215;
 	public static final int MODIFY_REPORT_FACILITY		= 216;
 	
-	public static final int MODIFY_EXTENTION_APPLY					= 231;
+	public static final int MODIFY_EXTENSION_APPLY					= 231;
 	public static final int MODIFY_STAY_APPLY								= 232;
 	public static final int MODIFY_STAY_DEFAULT			= 233;
 	public static final int MODIFY_GOINGOUT_APPLY					= 234;
@@ -70,7 +70,7 @@ public class Commands {
 	public static final int DELETE_FAQ									= 315;
 	public static final int DELETE_REPORT_FACILITY		= 316;
 	
-	public static final int WITHDRAW_EXTENTION_APPLY					= 331;
+	public static final int WITHDRAW_EXTENSION_APPLY					= 331;
 	public static final int WITHDRAW_GOINGOUT_APPLY					= 332;
 	public static final int WITHDRAW_MERIT_APPLY							= 333;
 	/*
@@ -105,7 +105,7 @@ public class Commands {
 	public static final int LOAD_FAQ										= 427;
 	public static final int LOAD_REPORT_FACILITY			= 428;
 	
-	public static final int LOAD_EXTENTION_STATUS		= 431;
+	public static final int LOAD_EXTENSION_STATUS		= 431;
 	public static final int LOAD_STAY_STATUS					= 432;
 	public static final int LOAD_STAY_DEFAULT				= 433;
 	public static final int LOAD_GOINGOUT_STATUS		= 434;

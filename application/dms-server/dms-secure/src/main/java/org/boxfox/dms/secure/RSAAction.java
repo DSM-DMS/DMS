@@ -6,7 +6,7 @@ import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=7513)
+@ActionRegistration(command = 7513)
 public class RSAAction implements Actionable{
     public static final int COMMAND_RSA = 7513;
     public static final int COMMAND_AES = 7514;

@@ -7,7 +7,7 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=404)
+@ActionRegistration(command = 404)
 public class LoginTeacherRequest implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

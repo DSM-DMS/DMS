@@ -9,7 +9,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.LOAD_FAQ)
+@ActionRegistration(command = Commands.LOAD_FAQ)
 public class LoadFaq implements Actionable {
 	EasyJsonObject tempObject;
 	

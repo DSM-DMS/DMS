@@ -6,7 +6,9 @@ import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=134)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.APPLY_MERIT)
 public class ApplyMerit implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
@@ -23,7 +25,7 @@ public class ApplyMerit implements Actionable {
 		String id = requestObject.getString("id");
 		String content = requestObject.getString("content");
 		
-		int status;
+		int status = 1;
 		if(requestObject.containsKey("target")) {
 			// Case that merit recommendation
 			String recommendTarget = requestObject.getString("target");

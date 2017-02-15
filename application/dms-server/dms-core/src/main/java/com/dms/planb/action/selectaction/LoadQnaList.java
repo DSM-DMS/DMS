@@ -7,7 +7,7 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=414)
+@ActionRegistration(command = 414)
 public class LoadQnaList implements Actionable {
 	EasyJsonObject tempObject;
 	

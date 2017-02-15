@@ -8,7 +8,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.MODIFY_EXTENTION)
+@ActionRegistration(command = Commands.MODIFY_EXTENSION)
 public class ModifyExtensionApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

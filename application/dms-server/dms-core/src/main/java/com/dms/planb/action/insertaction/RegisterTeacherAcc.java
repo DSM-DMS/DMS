@@ -6,7 +6,9 @@ import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=101)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.REGISTER_TEACHER_ACC)
 public class RegisterTeacherAcc implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

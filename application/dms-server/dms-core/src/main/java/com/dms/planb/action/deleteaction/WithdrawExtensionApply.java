@@ -8,7 +8,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.WITHDRAW_EXTENTION_APPLY)
+@ActionRegistration(command = Commands.WITHDRAW_EXTENSION_APPLY)
 public class WithdrawExtensionApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

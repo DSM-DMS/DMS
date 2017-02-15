@@ -52,7 +52,7 @@ public class DeleteAction implements Actionable {
 		case Commands.DELETE_REPORT_FACILITY:
 			
 			break;
-		case Commands.DEAPPLY_EXTENTION:
+		case Commands.DEAPPLY_EXTENSION:
 			
 			break;
 		case Commands.DEAPPLY_GOINGOUT:

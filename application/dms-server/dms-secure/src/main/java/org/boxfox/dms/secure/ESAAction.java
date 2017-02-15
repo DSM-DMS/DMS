@@ -6,7 +6,7 @@ import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=7514)
+@ActionRegistration(command = 7514)
 public class ESAAction implements Actionable{
 
 	@Override

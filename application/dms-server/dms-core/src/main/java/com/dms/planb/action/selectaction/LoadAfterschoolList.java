@@ -7,7 +7,7 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=416)
+@ActionRegistration(command = 416)
 public class LoadAfterschoolList implements Actionable {
 	EasyJsonObject tempObject;
 	

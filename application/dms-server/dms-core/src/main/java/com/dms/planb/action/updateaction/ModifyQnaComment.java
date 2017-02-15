@@ -8,7 +8,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.MODIFY_QNA_COMMENT)
+@ActionRegistration(command = Commands.MODIFY_QNA_COMMENT)
 public class ModifyQnaComment implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

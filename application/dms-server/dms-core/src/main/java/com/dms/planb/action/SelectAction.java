@@ -103,7 +103,7 @@ public class SelectAction implements Actionable {
 			
 			
 			break;
-		case Commands.LOAD_EXTENTION_STATUS:
+		case Commands.LOAD_EXTENSION_STATUS:
 			
 			
 			break;

@@ -70,7 +70,7 @@ public class UpdateAction implements Actionable {
 			
 			
 			break;
-		case Commands.MODIFY_EXTENTION:
+		case Commands.MODIFY_EXTENSION:
 			
 			
 			break;

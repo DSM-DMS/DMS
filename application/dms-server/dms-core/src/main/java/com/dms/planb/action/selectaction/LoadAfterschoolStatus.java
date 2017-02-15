@@ -9,7 +9,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.LOAD_AFTERSCHOOL_STATUS)
+@ActionRegistration(command = Commands.LOAD_AFTERSCHOOL_STATUS)
 public class LoadAfterschoolStatus implements Actionable {
 	EasyJsonObject tempObject;
 	

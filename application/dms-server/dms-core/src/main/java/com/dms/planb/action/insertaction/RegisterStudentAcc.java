@@ -6,7 +6,9 @@ import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=100)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.REGISTER_STUDENT_ACC)
 public class RegisterStudentAcc implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
@@ -44,7 +46,7 @@ public class RegisterStudentAcc implements Actionable {
 		 * value INT(1) Default 4
 		 */
 		
-		int status;
+		int status = 1;
 		
 		status = database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4)");
 		if(status == 0) {

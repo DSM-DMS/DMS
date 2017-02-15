@@ -113,7 +113,7 @@ public class InsertAction implements Actionable {
 			}
 		});
 		
-		ActionRegister.registerAction(Commands.APPLY_EXTENTION, new Actionable() {
+		ActionRegister.registerAction(Commands.APPLY_EXTENSION, new Actionable() {
 			// command 131
 			@Override
 			public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

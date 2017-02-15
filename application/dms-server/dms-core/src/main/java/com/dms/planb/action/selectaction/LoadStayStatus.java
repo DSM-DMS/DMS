@@ -9,7 +9,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.LOAD_STAY_STATUS)
+@ActionRegistration(command = Commands.LOAD_STAY_STATUS)
 public class LoadStayStatus implements Actionable {
 	EasyJsonObject tempObject;
 	

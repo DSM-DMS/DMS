@@ -6,7 +6,9 @@ import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command=111)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.UPLOAD_RULE)
 public class UploadRule implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
