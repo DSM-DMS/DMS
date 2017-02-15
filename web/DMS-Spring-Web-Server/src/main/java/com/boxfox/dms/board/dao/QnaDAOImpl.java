@@ -99,6 +99,13 @@ public class QnaDAOImpl implements QnaDAO{
 		comment.setContent(content);
 		qnaMapper.editComment(comment);
 	}
+
+	@Override
+	public List<Comment> getComments(int no) {
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		List<Comment> comments = qnaMapper.getComments(no);
+		return comments;
+	}
 	
 	
 

@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.boxfox.dms.board.dao.FaqDAOImpl;
 import com.boxfox.dms.board.dao.NoticeDAOImpl;
 import com.boxfox.dms.board.dao.QnaDAOImpl;
 import com.boxfox.dms.board.dao.RuleDAOImpl;
+import com.boxfox.dms.board.dto.Comment;
 import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.board.dto.PrimaryPostContext;
 import com.boxfox.dms.board.dto.QnaPostContext;

@@ -12,5 +12,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource ="/mybatis/qna-mapper.xml"/>
         <mapper resource ="/mybatis/apply-mapper.xml"/>
         <mapper resource ="/mybatis/rule-mapper.xml"/>
+        <mapper resource ="/mybatis/faq-mapper.xml"/>
     </mappers >
 </configuration>

@@ -24,6 +24,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="resultDate" column="answer_date"/>
     </resultMap>
     
+    <resultMap type="com.boxfox.dms.board.dto.Comment" id="CommentResultList">
+        <result property="no" column="no" />
+        <result property="index" column="index" />
+        <result property="writer" column="writer" />
+        <result property="content" column="content" />
+        <result property="date" column="date" />
+    </resultMap>
+    
 	<select id="getPostsAtPage" resultMap="SummaryResultList">
         SELECT no, title, writer, room, write_date FROM facility_report order by `no` asc LIMIT #{page}, 10;
     </select>
@@ -55,5 +63,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="editComment" parameterType="com.boxfox.dms.board.dto.Comment">
     	UPDATE qna_comment set content=#{content} WHERE `idx`=#{index}
     </update>
+    
+    
+    <select id="getComments" resultMap="CommentResultList">
+    	select * from qna_comment where no=#{no}
+    </select>
     
 </mapper>
