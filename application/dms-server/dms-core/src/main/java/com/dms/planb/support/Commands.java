@@ -22,8 +22,8 @@ public class Commands {
 	
 	// notice, newsletter, competition : parsing
 	public static final int UPLOAD_RULE								= 111;
-	public static final int UPLOAD_QUESTION					= 112;
-	public static final int UPLOAD_ANSWER						= 113;
+	public static final int UPLOAD_QNA_QUESTION					= 112;
+	public static final int UPLOAD_QNA_ANSWER						= 113;
 	public static final int UPLOAD_QNA_COMMENT			= 114;
 	public static final int UPLOAD_FAQ								= 115;
 	public static final int UPLOAD_AFTERSCHOOL_ITEM	= 116;
@@ -44,18 +44,18 @@ public class Commands {
 	public static final int MODIFY_STUDENT_DATA			= 201;
 	
 	public static final int MODIFY_RULE								= 211;
-	public static final int MODIFY_QUESTION					= 212;
-	public static final int MODIFY_ANSWER						= 213;
+	public static final int MODIFY_QNA_QUESTION					= 212;
+	public static final int MODIFY_QNA_ANSWER						= 213;
 	public static final int MODIFY_QNA_COMMENT			= 214;
 	public static final int MODIFY_FAQ								= 215;
 	public static final int MODIFY_REPORT_FACILITY		= 216;
 	
-	public static final int MODIFY_EXTENTION					= 231;
-	public static final int MODIFY_STAY								= 232;
+	public static final int MODIFY_EXTENTION_APPLY					= 231;
+	public static final int MODIFY_STAY_APPLY								= 232;
 	public static final int MODIFY_STAY_DEFAULT			= 233;
-	public static final int MODIFY_GOINGOUT					= 234;
-	public static final int MODIFY_MERIT							= 235;
-	public static final int MODIFY_AFTERSCHOOL				= 236;
+	public static final int MODIFY_GOINGOUT_APPLY					= 234;
+	public static final int MODIFY_MERIT_APPLY							= 235;
+	public static final int MODIFY_AFTERSCHOOL_APPLY				= 236;
 	
 /* --------------------------------------------------------------------- */
 	
@@ -64,8 +64,8 @@ public class Commands {
 	public static final int DELETE_ACCOUNT						= 300;
 	
 	public static final int DELETE_RULE								= 311;
-	public static final int DELETE_QUESTION						= 312;
-	public static final int DELETE_ANSWER							= 313;
+	public static final int DELETE_QNA_QUESTION						= 312;
+	public static final int DELETE_QNA_ANSWER							= 313;
 	public static final int DELETE_QNA_COMMENT			= 314;
 	public static final int DELETE_FAQ									= 315;
 	public static final int DELETE_REPORT_FACILITY		= 316;

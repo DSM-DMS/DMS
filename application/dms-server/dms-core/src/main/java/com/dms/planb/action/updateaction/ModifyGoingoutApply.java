@@ -8,23 +8,17 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.MODIFY_RULE)
-public class ModifyRule implements Actionable {
+@ActionRegistration(command=Commands.MODIFY_GOINGOUT)
+public class ModifyGoingoutApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+		String id = requestObject.getString("id");
+		String date = requestObject.getString("date");
+		String reason = requestObject.getString("reason");
 		
 		int status = 1;
-		if(requestObject.containsKey("title")) {
-			status = database.executeUpdate("UPDATE rule SET title='", requestObject.getString("title"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
-		}
-		if(requestObject.containsKey("content")) {
-			status = database.executeUpdate("UPDATE rule SET content='", requestObject.getString("content"), "' WHERE no=", no);
+		if(requestObject.containsKey("reason")) {
+			status = database.executeUpdate("UPDATE goingout_apply SET reason='", reason, "' WHERE id='", id, "' AND date='", date, "'");
 			if(status == 0) {
 				// If failed
 				responseObject.put("status", status);

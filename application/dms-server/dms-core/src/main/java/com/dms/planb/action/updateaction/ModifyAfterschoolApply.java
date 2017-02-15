@@ -8,23 +8,16 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.MODIFY_RULE)
-public class ModifyRule implements Actionable {
+@ActionRegistration(command=Commands.MODIFY_AFTERSCHOOL_APPLY)
+public class ModifyAfterschoolApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+		// Modify apply
+		int targetNo = requestObject.getInt("target_no");
 		
 		int status = 1;
-		if(requestObject.containsKey("title")) {
-			status = database.executeUpdate("UPDATE rule SET title='", requestObject.getString("title"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
-		}
-		if(requestObject.containsKey("content")) {
-			status = database.executeUpdate("UPDATE rule SET content='", requestObject.getString("content"), "' WHERE no=", no);
+		if(requestObject.containsKey("no")) {
+			status = database.executeUpdate("UPDATE afterschool_apply SET no=", requestObject.getInt("no"), " WHERE no=", targetNo);
 			if(status == 0) {
 				// If failed
 				responseObject.put("status", status);

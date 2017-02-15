@@ -8,14 +8,18 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.MODIFY_PASSWORD)
-public class ModifyPassword implements Actionable {
+@ActionRegistration(command=Commands.MODIFY_STAY)
+public class ModifyStayApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
+		/*
+		 * Date Format : YYYY-MM-DD
+		 */
 		String id = requestObject.getString("id");
-		String password = requestObject.getString("password");
+		String week = requestObject.getString("week");
+		int value = requestObject.getInt("value");
 		
-		int status = database.executeUpdate("UPDATE account SET password='", password, "' WHERE id='", id, "'");
+		int status = database.executeUpdate("UPDATE stay_apply SET value=", value, " WHERE id='", id, "' AND date='", week, "'");
 		
 		responseObject.put("status", status);
 		

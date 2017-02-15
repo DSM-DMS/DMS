@@ -8,23 +8,23 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command=Commands.MODIFY_RULE)
-public class ModifyRule implements Actionable {
+@ActionRegistration(command=Commands.MODIFY_EXTENTION)
+public class ModifyExtensionApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+		String id = requestObject.getString("id");
 		
 		int status = 1;
-		if(requestObject.containsKey("title")) {
-			status = database.executeUpdate("UPDATE rule SET title='", requestObject.getString("title"), "' WHERE no=", no);
+		if(requestObject.containsKey("class")) {
+			status = database.executeUpdate("UPDATE extension_apply SET class=", requestObject.getInt("class"), " WHERE id='", id, "'");
 			if(status == 0) {
 				// If failed
 				responseObject.put("status", status);
 				return responseObject;
 			}
 		}
-		if(requestObject.containsKey("content")) {
-			status = database.executeUpdate("UPDATE rule SET content='", requestObject.getString("content"), "' WHERE no=", no);
+		if(requestObject.containsKey("seat")) {
+			status = database.executeUpdate("UPDATE extension_apply SET seat=", requestObject.getInt("seat"), " WHERE id='", id, "'");
 			if(status == 0) {
 				// If failed
 				responseObject.put("status", status);

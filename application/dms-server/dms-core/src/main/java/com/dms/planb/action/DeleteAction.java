@@ -29,7 +29,7 @@ public class DeleteAction implements Actionable {
 		String date;
 		
 		// For status
-		int status = 0;
+		int status = 1;
 		
 		switch(command) {
 		case Commands.DELETE_ACCOUNT:
