@@ -7,7 +7,9 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command = 416)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.LOAD_AFTERSCHOOL_LIST)
 public class LoadAfterschoolList implements Actionable {
 	EasyJsonObject tempObject;
 	

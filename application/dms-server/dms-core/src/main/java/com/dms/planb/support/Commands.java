@@ -84,8 +84,8 @@ public class Commands {
 	
 	public static final int LOAD_MYPAGE								= 401;
 //	public static final int LOAD_TEACHER_MYPAGE				= 402;
-	public static final int LOAD_ACCOUNT							= 403;
-	public static final int LOAD_TEACHER_ACCOUNT		= 404;
+	public static final int LOGIN_STUDENT_REQUEST							= 403;
+	public static final int LOGIN_TEACHER_REQUEST		= 404;
 	
 	public static final int LOAD_NOTICE_LIST						= 411;
 	public static final int LOAD_NEWSLETTER_LIST			= 412;

@@ -7,7 +7,9 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command = 401)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.LOAD_MYPAGE)
 public class LoadMypage implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

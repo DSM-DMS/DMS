@@ -7,7 +7,9 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.dataio.post.PostModel;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command = 411)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.LOAD_NOTICE_LIST)
 public class LoadNoticeList implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {

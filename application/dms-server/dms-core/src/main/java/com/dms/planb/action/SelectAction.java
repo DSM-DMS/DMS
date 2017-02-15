@@ -58,12 +58,12 @@ public class SelectAction implements Actionable {
 //			resultSet = database.executeQuery("SELECT * FROM teacher_account WHERE id='", id, "'");
 //			
 //			break;
-		case Commands.LOAD_ACCOUNT:
+		case Commands.LOGIN_STUDENT_REQUEST:
 			// When login
 			
 			
 			break;
-		case Commands.LOAD_TEACHER_ACCOUNT:
+		case Commands.LOGIN_TEACHER_REQUEST:
 			// When login
 			
 			

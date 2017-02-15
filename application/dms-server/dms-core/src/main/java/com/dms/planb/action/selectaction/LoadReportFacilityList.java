@@ -7,7 +7,9 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-@ActionRegistration(command = 415)
+import com.dms.planb.support.Commands;
+
+@ActionRegistration(command = Commands.LOAD_REPORT_FACILITY_LIST)
 public class LoadReportFacilityList implements Actionable {
 	EasyJsonObject tempObject;
 	
