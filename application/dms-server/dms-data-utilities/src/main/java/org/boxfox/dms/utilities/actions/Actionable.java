@@ -3,6 +3,7 @@ package org.boxfox.dms.utilities.actions;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 /**
@@ -10,6 +11,10 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
  */
 public interface Actionable {
 	final DataBase database = DataBase.getInstance();
+	
 	final EasyJsonObject responseObject = new EasyJsonObject();
+	final EasyJsonObject tempObject = new EasyJsonObject();
+	final EasyJsonArray array = new EasyJsonArray();
+	
 	public abstract EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException;
 }
