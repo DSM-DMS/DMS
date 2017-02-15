@@ -14,7 +14,7 @@ public class ActionRegister {
 	private static final String EXCEPTION_ALREADY = "이미 Command를 사용중입니다.";
 	private HashMap<Integer, Actionable> actionmap;
 	private static ActionRegister instance;
-
+ 
 	private ActionRegister() {
 	}
 

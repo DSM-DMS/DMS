@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
  */
 public interface Actionable {
 	final DataBase database = DataBase.getInstance();
-	
+	 
 	final EasyJsonObject responseObject = new EasyJsonObject();
 	final EasyJsonArray array = new EasyJsonArray();
 	

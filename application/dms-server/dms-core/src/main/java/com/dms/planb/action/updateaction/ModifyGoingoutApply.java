@@ -8,7 +8,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.MODIFY_GOINGOUT)
+@ActionRegistration(command = Commands.MODIFY_GOINGOUT_APPLY)
 public class ModifyGoingoutApply implements Actionable {
 	@Override
 	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
