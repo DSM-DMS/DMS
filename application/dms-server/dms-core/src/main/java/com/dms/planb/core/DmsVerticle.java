@@ -88,11 +88,11 @@ class DmsVerticle extends AbstractVerticle {
 						responseObject = ActionPerformer.perform(command, requestObject);
 						
 						if(responseObject.containsKey("status")) {
-							if(responseObject.getInt("status") == 200) {
+							if(responseObject.getInt("status") == 200 || responseObject.getInt("status") == 1) {
 								response.setStatusCode(200);
 								Log.l("Responsed status code : 200");
 								// 200 : Success
-							} else if(responseObject.getInt("status") == 404) {
+							} else if(responseObject.getInt("status") == 404 || responseObject.getInt("status") == 0) {
 								response.setStatusCode(404);
 								Log.l("Responsed status code : 404");
 								// 404 : Can't find
