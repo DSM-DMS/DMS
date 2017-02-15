@@ -9,22 +9,70 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.boxfox.dms.board.dao.NoticeDAOImpl;
+import com.boxfox.dms.board.dao.QnaDAOImpl;
+import com.boxfox.dms.board.dao.RuleDAOImpl;
 import com.boxfox.dms.board.dto.DatePostContext;
+import com.boxfox.dms.board.dto.PrimaryPostContext;
+import com.boxfox.dms.board.dto.QnaPostContext;
 
 @Controller
 public class PostController {
-private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	@Autowired
-    private NoticeDAOImpl noticeDAO;
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	@RequestMapping(value = "/post")
-	public String notice(Locale locale, Model model) {
-		List<DatePostContext> posts = noticeDAO.getPostsAtPage(0);
-		//model.addAttribute("serverTime", post.getTitle() );
-		
-		return "index";
+	@Autowired
+	private NoticeDAOImpl noticeDAO;
+	@Autowired
+	private RuleDAOImpl ruleDAO;
+	@Autowired
+	private FaqDAOImpl faqDAO;
+	@Autowired
+	private QnaDAOImpl qnaDAO;
+
+	@RequestMapping(value = "/rule", params = { "no" })
+	public String ruleView(Locale locale, Model model, @RequestParam(value = "no") int no) {
+		PrimaryPostContext post = ruleDAO.getPost(no);
+		if (post != null) {
+			model.addAttribute("title", post.getTitle());
+			model.addAttribute("content", post.getContent());
+			return "rule";
+		} else {
+			return "notfound";
+		}
+	}
+
+	@RequestMapping(value = "/faq", params = { "no" })
+	public String faqView(Locale locale, Model model, @RequestParam(value = "no") int no) {
+		PrimaryPostContext post = faqDAO.getPost(no);
+		if (post != null) {
+			model.addAttribute("title", post.getTitle());
+			model.addAttribute("content", post.getContent());
+			return "faq";
+		} else {
+			return "notfound";
+		}
+	}
+
+	@RequestMapping(value = "/qna", params = { "no" })
+	public String qnaView(Locale locale, Model model, @RequestParam(value = "no") int no) {
+		QnaPostContext post = qnaDAO.getPost(no);
+		if (post != null) {
+		if (post.isPrivacy()&&세션 체크) {
+
+		} else {
+				List<Comment> comments = qnaDAO.getComments(post.getNo());
+				model.addAttribute("q_title", post.getTitle());
+				model.addAttribute("q_date", post.getDate());
+				model.addAttribute("q_writer", post.getWriter());
+				model.addAttribute("q_content", post.getContent());
+				model.addAttribute("a_date", post.getResultDate());
+				model.addAttribute("a_content", post.getResult());
+				return "qna";
+		}
+		} else {
+			return "notfound";
+		}
 	}
 }
