@@ -35,14 +35,13 @@ public class ActionRegister {
 			getInstance().putAction(command, action);
 	}
 
-	public static boolean executeAction(int command, EasyJsonObject requestObject) throws SQLException {
-		boolean result = false;
+	public static EasyJsonObject executeAction(int command, EasyJsonObject requestObject) throws SQLException {
+		EasyJsonObject responseObject = null;
 		Actionable action = getInstance().getAction(command);
 		if (action != null) {
-			action.action(command, requestObject);
-			result = true;
+			responseObject = action.action(command, requestObject);;
 		}
-		return result;
+		return responseObject;
 	}
 
 	public static ActionRegister getInstance() {
