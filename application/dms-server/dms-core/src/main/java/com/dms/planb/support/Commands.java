@@ -70,9 +70,9 @@ public class Commands {
 	public static final int DELETE_FAQ									= 315;
 	public static final int DELETE_REPORT_FACILITY		= 316;
 	
-	public static final int DEAPPLY_EXTENTION					= 331;
-	public static final int DEAPPLY_GOINGOUT					= 332;
-	public static final int DEAPPLY_MERIT							= 333;
+	public static final int WITHDRAW_EXTENTION_APPLY					= 331;
+	public static final int WITHDRAW_GOINGOUT_APPLY					= 332;
+	public static final int WITHDRAW_MERIT_APPLY							= 333;
 	/*
 	 * Deapply : 기피하다
 	 * 철회하다 : Withdraw, Waive
