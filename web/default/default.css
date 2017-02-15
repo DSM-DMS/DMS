@@ -667,15 +667,14 @@
         background-color: #2979FF;
         border: none;
         height: 36px;
-        width: 50.75%;
+        width: 100%;
         border: 2px solid #222635;
         border-bottom: none;
         transition: all 1s ease;
         color: white;
         box-sizing: border-box;
-        margin-right: -5px;
-        margin-left: -5px;
         border-right: none;
+        border-left: none;
     }
     /*-------------------------------------------------- apply -------*/
 
