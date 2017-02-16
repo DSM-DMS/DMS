@@ -12,7 +12,7 @@ import com.dms.parser.dataio.Query;
 import com.dms.parser.datamodel.post.Post;
 
 public class PostModel {
-	private static String GET_POSTS_FROM_PAGES_QUERY = "select * from app_content where category=? ORDER BY number asc limit ?, 10";
+	private static String GET_POSTS_FROM_PAGES_QUERY = "select * from app_content where category=? ORDER BY number desc limit ?, 10";
 	
 	public static List<Post> getPostsAtPage(int category, int page){
 		ArrayList<Post> list = new ArrayList<Post>();
