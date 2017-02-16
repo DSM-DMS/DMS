@@ -5,7 +5,7 @@ body {
 #title {
   text-align: left;
   font-size: 25px;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   border-bottom: 1px solid #dfdfdf;
   padding-bottom: 15px;
 }
@@ -35,11 +35,17 @@ body {
 }
 
 #submit {
+  border-radius: 5px;
   margin: 10px;
+  margin-top: 25px;
   margin: auto;
   font-size: 20px;
   background-color: #1fa9d8;
   width: 30%;
   height: 30px;
   line-height: 30px;
+}
+
+#submit:hover {
+  cursor: pointer;
 }
