@@ -25,7 +25,7 @@ public class LoadStayStatus implements Actionable {
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
 		
 		if(resultSet.next()) {
-			responseObject.put("value", resultSet.getBoolean("value"));
+			responseObject.put("value", resultSet.getInt("value"));
 		} else {
 			responseObject.put("status", 404);
 		}
