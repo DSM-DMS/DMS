@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
+import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.parser.dataio.post.PostModel;
@@ -12,7 +13,7 @@ import com.dms.planb.support.Commands;
 @ActionRegistration(command = Commands.LOAD_NOTICE)
 public class LoadNotice implements Actionable {
 	@Override
-	public EasyJsonObject action(int command, EasyJsonObject requestObject) throws SQLException {
+	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int number = requestObject.getInt("number");
 		int category = requestObject.getInt("category");
 		/*

@@ -74,8 +74,8 @@ class DmsVerticle extends AbstractVerticle {
 //					clientObject.getString("UUID");
 					
 					// 1-3. Get request object from buffer.
-					//JsonObject이 암호화 되어 올 수 있기 때문에 검사작업
-					requestObject = secureManager.createJsonObject(totalBuffer.toString(), sender);
+					// JsonObject이 암호화 되어 올 수 있기 때문에 검사작업
+//					requestObject = SecureManager.createJsonObject(totalBuffer.toString(), sender);
 					
 					// 2. Ready to response to client. Set status code in try-catch
 					response = request.response();
