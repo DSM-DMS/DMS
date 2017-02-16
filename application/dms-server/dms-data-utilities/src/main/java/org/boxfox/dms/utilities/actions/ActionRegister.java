@@ -40,11 +40,6 @@ public class ActionRegister {
 	}
 
 	public static EasyJsonObject executeAction(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		//String UUID = Sender.getUUID();
-		//
-		//SafeResultSet rs = DataBase.getInstance().executeQuery("select securekey ");
-		//if(rs.next()){  }
-		
 		EasyJsonObject responseObject = null;
 		Actionable action = getInstance().getAction(command);
 		if (action != null) {

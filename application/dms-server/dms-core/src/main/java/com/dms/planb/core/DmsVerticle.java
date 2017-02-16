@@ -11,6 +11,7 @@ package com.dms.planb.core;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.secure.SecureManager;
 import org.boxfox.dms.utilities.actions.ActionRegister;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
@@ -26,6 +27,7 @@ import io.vertx.core.http.HttpServerResponse;
  * @author JoMingyu
  */
 class DmsVerticle extends AbstractVerticle {
+	private SecureManager secureManager;
 	private HttpServer server;
 	private HttpServerResponse response;
 	
@@ -42,6 +44,7 @@ class DmsVerticle extends AbstractVerticle {
 		Log.l("Server started "+ ApplicationInfo.VERSION);
 		// org.boxfox.dms.utilities.Log
 		
+		secureManager = SecureManager.getInstance();
 		server = vertx.createHttpServer();
 		server.requestHandler(request -> {
 			Log.l("Received request : " + request.host());
@@ -71,7 +74,8 @@ class DmsVerticle extends AbstractVerticle {
 //					clientObject.getString("UUID");
 					
 					// 1-3. Get request object from buffer.
-					requestObject = new EasyJsonObject(totalBuffer.toString());
+					//JsonObject이 암호화 되어 올 수 있기 때문에 검사작업
+					requestObject = secureManager.createJsonObject(totalBuffer.toString(), sender);
 					
 					// 2. Ready to response to client. Set status code in try-catch
 					response = request.response();

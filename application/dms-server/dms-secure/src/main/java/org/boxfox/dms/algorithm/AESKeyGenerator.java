@@ -1,4 +1,4 @@
-package org.boxfox.dms.secure;
+package org.boxfox.dms.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;

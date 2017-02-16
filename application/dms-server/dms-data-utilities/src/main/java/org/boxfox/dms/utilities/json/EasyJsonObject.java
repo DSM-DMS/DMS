@@ -1,5 +1,6 @@
 package org.boxfox.dms.utilities.json;
 
+import org.boxfox.dms.utilities.actions.support.Sender;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
