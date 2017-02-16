@@ -20,7 +20,7 @@ public class ApplyStay implements Actionable {
 		 * 
 		 * id VARCHAR(20) NN
 		 * value INT(1) NN
-		 * date DATE NN
+		 * week DATE NN
 		 * 
 		 * DATE format : YYYY-MM-DD
 		 * Friday home coming : 1
@@ -32,7 +32,7 @@ public class ApplyStay implements Actionable {
 		int value = requestObject.getInt("value");
 		String week = requestObject.getString("week");
 		
-		int status = database.executeUpdate("INSERT INTO stay_apply(id, value, date) VALUES('", id, "', ", value, ", '", week, "')");
+		int status = database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
 		
 		responseObject.put("status", status);
 		

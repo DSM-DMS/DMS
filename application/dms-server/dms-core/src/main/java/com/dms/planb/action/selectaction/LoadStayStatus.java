@@ -22,17 +22,10 @@ public class LoadStayStatus implements Actionable {
 		 * week format : YYYY-MM-DD
 		 */
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND date='", week, "'");
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
 		
 		if(resultSet.next()) {
-			do {
-				tempObject = new EasyJsonObject();
-				
-				tempObject.put("value", resultSet.getInt("value"));
-				tempObject.put("day", resultSet.getString("day"));
-				
-				array.add(tempObject);
-			} while(resultSet.next());
+			responseObject.put("value", resultSet.getInt("value"));
 		} else {
 			responseObject.put("status", 404);
 		}

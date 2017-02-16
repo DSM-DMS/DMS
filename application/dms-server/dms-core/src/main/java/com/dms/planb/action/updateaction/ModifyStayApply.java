@@ -20,7 +20,7 @@ public class ModifyStayApply implements Actionable {
 		String week = requestObject.getString("week");
 		int value = requestObject.getInt("value");
 		
-		int status = database.executeUpdate("UPDATE stay_apply SET value=", value, " WHERE id='", id, "' AND date='", week, "'");
+		int status = database.executeUpdate("UPDATE stay_apply SET value=", value, " WHERE id='", id, "' AND week='", week, "'");
 		
 		responseObject.put("status", status);
 		

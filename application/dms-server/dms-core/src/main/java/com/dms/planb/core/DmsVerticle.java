@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.secure.SecureManager;
 import org.boxfox.dms.utilities.actions.ActionRegister;
+import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -86,7 +87,7 @@ class DmsVerticle extends AbstractVerticle {
 						 *  3. Performs the operation.
 						 *  Branch off the ActionPerformer class' perform method.
 						 */
-						responseObject = ActionRegister.executeAction(command, requestObject);
+						responseObject = ActionRegister.executeAction(new Sender(), command, requestObject);
 						
 						if(responseObject.containsKey("status")) {
 							if(responseObject.getInt("status") == 200 || responseObject.getInt("status") == 1) {
