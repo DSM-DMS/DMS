@@ -43,7 +43,6 @@ class DmsMain {
 		// -- Singleton
 		PostChangeDetector.getInstance().start();
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
-
 			@Override
 			public void update(int currentCategory) {
 				Calendar currentTime = Calendar.getInstance();
