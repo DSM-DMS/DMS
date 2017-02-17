@@ -28,12 +28,9 @@ public class ApplyExtension implements Actionable {
 		int setHour = Integer.valueOf(Config.EXTENSION_APPLY_TIME.split(":")[0]);
 		int setMinute = Integer.valueOf(Config.EXTENSION_APPLY_TIME.split(":")[1]);
 		if(hour<setHour||(hour==setHour&&minute<setMinute)){
+			responseObject.put("status", 404);
 			
-			
-			can't apply
-			
-			
-			
+			return responseObject;
 		}
 		
 		
