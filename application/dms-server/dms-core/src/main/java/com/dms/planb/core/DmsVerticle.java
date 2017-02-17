@@ -90,6 +90,8 @@ class DmsVerticle extends AbstractVerticle {
 						 *  Branch off the ActionPerformer class' perform method.
 						 */
 						Actionable.responseObject.clear();
+						Actionable.array.clear();
+												
 						responseObject = ActionRegister.executeAction(new Sender(), command, requestObject);
 						
 						if(responseObject.containsKey("status")) {

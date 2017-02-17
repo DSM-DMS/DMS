@@ -29,6 +29,10 @@ public class EasyJsonArray extends EasyJson{
             throw new JsonException("JSONArray 형식이 아닙니다!");
         }
     }
+    
+    public void clear() {
+    	arr.clear();
+    }
 
     public Object get(int num){
         return arr.get(num);
