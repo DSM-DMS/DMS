@@ -42,6 +42,14 @@ public class AppcontentFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // initialize the page on destroy fragment
+        page = 1;
+    }
+
     /**
      * 초기화, RecyclerView 세팅
      *

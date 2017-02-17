@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         // display home fragment at initially
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.relativelayout_main_container, new HomeFragment())
+                .add(R.id.relativelayout_main_container, new HomeFragment())
                 .commit();
     }
 
@@ -176,13 +177,18 @@ public class MainActivity extends AppCompatActivity
         menu.findItem(R.id.nav_item_apply).setVisible(false);
     }
 
+    private int getFragmentCount() {
+        return getSupportFragmentManager().getBackStackEntryCount();
+    }
+
     /**
      * 기존의 Fragment를 새로운 Fragment로 교체
+     *
      * @param fragment 교체할 Fragment
      */
     private void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.relativelayout_main_container, fragment)
                 .commit();

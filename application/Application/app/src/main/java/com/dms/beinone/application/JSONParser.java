@@ -82,7 +82,7 @@ public class JSONParser {
             JSONObject noticeJSONObject = resultJSONArray.getJSONObject(index);
 
             int category = noticeJSONObject.getInt("Category");
-            int number = noticeJSONObject.getInt("Number");
+            int number = noticeJSONObject.getInt("HomeNumber");
             String title = noticeJSONObject.getString("Title");
             String writer = noticeJSONObject.getString("Writer");
             String date = noticeJSONObject.getString("Date");
@@ -94,15 +94,16 @@ public class JSONParser {
     }
 
     public static Appcontent parseAppcontentJSON(JSONObject rootJSONObject) throws JSONException {
-        int number = rootJSONObject.getInt("Number");
-        int category = rootJSONObject.getInt("Category");
-        int homeNumber = rootJSONObject.getInt("HomeNumber");
-        String title = rootJSONObject.getString("Title");
-        String content = rootJSONObject.getString("Content");
-        String writer = rootJSONObject.getString("Writer");
-        String date = rootJSONObject.getString("Date");
+        JSONObject resultJSONObject = rootJSONObject.getJSONObject("result");
+
+        int category = resultJSONObject.getInt("Category");
+        int number = resultJSONObject.getInt("HomeNumber");
+        String title = resultJSONObject.getString("Title");
+        String content = resultJSONObject.getString("Content");
+        String writer = resultJSONObject.getString("Writer");
+        String date = resultJSONObject.getString("Date");
         List<Attachment> attachmentList =
-                parseAttachmentsJSON(rootJSONObject.getJSONObject("Attachments"));
+                parseAttachmentsJSON(resultJSONObject.getJSONObject("Attachments"));
 
         return new Appcontent(category, number, title, content, writer, date, attachmentList);
     }

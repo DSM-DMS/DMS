@@ -57,7 +57,7 @@ public class QnAFragment extends Fragment {
     private void init(View rootView) {
         getActivity().setTitle(R.string.nav_qna);
 
-        mFAB = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        mFAB = (FloatingActionButton) getActivity().findViewById(R.id.fab_main);
         mFAB.setVisibility(View.VISIBLE);
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override

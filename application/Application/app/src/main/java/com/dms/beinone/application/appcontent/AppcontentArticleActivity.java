@@ -6,11 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.datamodel.Commands;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -24,6 +26,8 @@ import java.util.List;
  */
 
 public class AppcontentArticleActivity extends AppCompatActivity {
+
+    private FloatingActionButton mFAB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +43,12 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         new LoadAppcontentTask().execute(appcontent.getCategory(), appcontent.getNumber());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFAB.setVisibility(View.INVISIBLE);
+    }
+
     /**
      * sets text of article
      *
@@ -48,18 +58,20 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         TextView titleTV = (TextView) findViewById(R.id.tv_appcontent_article_title);
         TextView writerTV = (TextView) findViewById(R.id.tv_appcontent_article_writer);
         TextView dateTV = (TextView) findViewById(R.id.tv_appcontent_article_date);
-        TextView contentTV = (TextView) findViewById(R.id.tv_appcontent_article_content);
+//        TextView contentTV = (TextView) findViewById(R.id.tv_appcontent_article_content);
+        WebView contentWebView = (WebView) findViewById(R.id.webview_appcontent_article_content);
 
         titleTV.setText(appcontent.getTitle());
         writerTV.setText(appcontent.getWriter());
         dateTV.setText(appcontent.getDate());
-        contentTV.setText(appcontent.getContent());
+//        contentTV.setText(appcontent.getContent());
+        contentWebView.loadData(appcontent.getContent(), "text/html; charset=UTF-8", null);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        mFAB = (FloatingActionButton) findViewById(R.id.fab_appcontent_article);
         final List<Attachment> attachmentList = appcontent.getAttachmentList();
-        if (attachmentList.size() != 0) {
-            fab.setImageResource(R.drawable.ic_file_download_white_24dp);
-            fab.setOnClickListener(new View.OnClickListener() {
+        if (attachmentList != null && attachmentList.size() != 0) {
+            mFAB.setImageResource(R.drawable.ic_file_download_white_24dp);
+            mFAB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DownloadAttachmentDialogFragment
@@ -67,7 +79,7 @@ public class AppcontentArticleActivity extends AppCompatActivity {
                             .show(getSupportFragmentManager(), null);
                 }
             });
-            fab.setVisibility(View.VISIBLE);
+            mFAB.setVisibility(View.VISIBLE);
         }
     }
 
@@ -79,9 +91,11 @@ public class AppcontentArticleActivity extends AppCompatActivity {
 
             try {
                 appcontent = loadAppcontent(params[0], params[1]);
-            } catch (IOException ie) {
+            } catch (IOException e) {
+                e.printStackTrace();
                 return null;
-            } catch (JSONException je) {
+            } catch (JSONException e) {
+                e.printStackTrace();
                 return null;
             }
 
@@ -103,13 +117,13 @@ public class AppcontentArticleActivity extends AppCompatActivity {
             int command = 0;
             switch (category) {
                 case Appcontent.NOTICE:
-                    command = 0;
+                    command = Commands.LOAD_NOTICE;
                     break;
                 case Appcontent.NEWSLETTER:
-                    command = 1;
+                    command = Commands.LOAD_NEWSLETTER;
                     break;
                 case Appcontent.COMPETITION:
-                    command = 2;
+                    command = Commands.LOAD_COMPETITION;
                     break;
                 default:
                     break;
@@ -120,19 +134,6 @@ public class AppcontentArticleActivity extends AppCompatActivity {
             JSONObject responseJSONObject = response.getJsonObject();
 
             return JSONParser.parseAppcontentJSON(responseJSONObject);
-        }
-    }
-
-    private class DownloadAttachmentTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
         }
     }
 

@@ -109,6 +109,8 @@
     <string name="appcontent_dialog_negative">취소</string>
     <string name="appcontent_dialog_positive">다운로드</string>
     <string name="appcontent_btn_more">더보기</string>
+    <string name="appcontent_download_start">다운로드를 시작합니다.</string>
+    <string name="appcontent_download_finish">다운로드가 완료되었습니다.</string>
 
     <!-- Facility Report Fragment -->
     <string name="facilityreport_empty">신고 내역이 없습니다.</string>
