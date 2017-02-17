@@ -41,7 +41,7 @@ public class AttachmentList extends DataSaveAble{
 		JSONObject obj = new JSONObject();
 		JSONArray arr = new JSONArray();
 		for(Attachment file : list){
-			arr.add(((DataSaveAble)file).toQuery());
+			arr.add(((DataSaveAble)file).toJSONObject());
 		}
 		obj.put("List", arr);
 		obj.put("Size", list.size());
