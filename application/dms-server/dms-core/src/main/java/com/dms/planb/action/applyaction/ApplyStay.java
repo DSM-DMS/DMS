@@ -32,7 +32,7 @@ public class ApplyStay implements Actionable {
 		int value = requestObject.getInt("value");
 		String week = requestObject.getString("week");
 		
-		database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "', AND week='", week, "'");
+		database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
 		int status = database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
 		
 		responseObject.put("status", status);
