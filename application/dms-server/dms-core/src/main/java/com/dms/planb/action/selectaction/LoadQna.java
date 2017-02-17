@@ -23,7 +23,7 @@ public class LoadQna implements Actionable {
 			responseObject.put("question_content", resultSet.getString("question_content"));
 			responseObject.put("question_date", resultSet.getString("question_date"));
 			responseObject.put("writer", resultSet.getString("writer"));
-			responseObject.put("privacy", resultSet.getInt("privacy"));
+			responseObject.put("privacy", resultSet.getBoolean("privacy"));
 			if(resultSet.getString("answer_content") != null) {
 				responseObject.put("has_answer", true);
 				responseObject.put("answer_content", resultSet.getString("answer_content"));
