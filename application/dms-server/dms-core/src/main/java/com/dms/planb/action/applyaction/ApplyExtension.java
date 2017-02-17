@@ -3,12 +3,15 @@ package com.dms.planb.action.applyaction;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Config;
+import com.dms.planb.support.Commands;
 
+@ActionRegistration(command = Commands.APPLY_EXTENSION)
 public class ApplyExtension implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {

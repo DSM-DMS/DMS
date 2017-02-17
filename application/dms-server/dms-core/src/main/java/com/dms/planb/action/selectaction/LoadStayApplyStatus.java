@@ -10,17 +10,22 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_GOINGOUT_STATUS)
-public class LoadGoingoutStatus implements Actionable {
+@ActionRegistration(command = Commands.LOAD_STAY_STATUS)
+public class LoadStayApplyStatus implements Actionable {
+	EasyJsonObject tempObject;
+	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");
+		String week = requestObject.getString("week");
+		/*
+		 * week format : YYYY-MM-DD
+		 */
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
 		
 		if(resultSet.next()) {
-			responseObject.put("dept_day", resultSet.getString("dept_day"));
-			responseObject.put("reason", resultSet.getString("reason"));
+			responseObject.put("value", resultSet.getInt("value"));
 		} else {
 			responseObject.put("status", 404);
 		}

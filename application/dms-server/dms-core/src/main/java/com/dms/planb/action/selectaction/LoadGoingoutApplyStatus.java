@@ -10,29 +10,20 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_AFTERSCHOOL_STATUS)
-public class LoadAfterschoolStatus implements Actionable {
-	EasyJsonObject tempObject;
-	
+@ActionRegistration(command = Commands.LOAD_GOINGOUT_STATUS)
+public class LoadGoingoutApplyStatus implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
 		
 		if(resultSet.next()) {
-			do {
-				tempObject = new EasyJsonObject();
-			
-				tempObject.put("no", resultSet.getInt("no"));
-				
-				array.add(tempObject);
-			} while(resultSet.next());
+			responseObject.put("date", resultSet.getInt("date"));
+			responseObject.put("reason", resultSet.getString("reason"));
 		} else {
 			responseObject.put("status", 404);
 		}
-		
-		responseObject.put("result", array);
 		
 		return responseObject;
 	}
