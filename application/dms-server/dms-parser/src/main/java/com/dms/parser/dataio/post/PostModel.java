@@ -17,7 +17,7 @@ public class PostModel {
 	public static List<Post> getPostsAtPage(int category, int page){
 		ArrayList<Post> list = new ArrayList<Post>();
 		try {
-			SafeResultSet rs = DataBase.getInstance().executeQuery(QueryUtils.querySetter(GET_POSTS_FROM_PAGES_QUERY, category, page));
+			SafeResultSet rs = DataBase.getInstance().executeQuery(QueryUtils.querySetter(GET_POSTS_FROM_PAGES_QUERY, category, page*10));
 			while(rs.next()){
 				Post post = (Post)new Post().fromResultSet(rs);
 				list.add(post);
