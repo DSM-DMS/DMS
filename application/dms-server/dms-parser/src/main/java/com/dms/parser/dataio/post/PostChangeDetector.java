@@ -21,6 +21,7 @@ public class PostChangeDetector {
 
 	private boolean run;
 	private static PostChangeDetector instance;
+	private PostUpdateListener listener;
 
 	private PostChangeDetector() {
 	}
@@ -40,6 +41,8 @@ public class PostChangeDetector {
 				int currentCategory = Post.CATEGORY_NOTICE;
 				while (run) {
 					postDataSave(currentCategory);
+					if (listener != null)
+						listener.update(currentCategory);
 					currentCategory++;
 					if (currentCategory > Post.CATEGORY_COMPETITION) {
 						currentCategory = Post.CATEGORY_NOTICE;
@@ -79,8 +82,8 @@ public class PostChangeDetector {
 				}
 			}
 		}
-		if(count>0)
-		Log.l(QueryUtils.queryBuilder(categoryToString(category), " finish parse count : ", count));
+		if (count > 0)
+			Log.l(QueryUtils.queryBuilder(categoryToString(category), " finish parse count : ", count));
 	}
 
 	private boolean check(int category, int num) {
@@ -106,6 +109,10 @@ public class PostChangeDetector {
 			return CHALLENGE;
 		}
 		return null;
+	}
+
+	public void setOnCategoryUpdateListener(PostUpdateListener postUpdateListener) {
+		this.listener = postUpdateListener;
 	}
 
 }
