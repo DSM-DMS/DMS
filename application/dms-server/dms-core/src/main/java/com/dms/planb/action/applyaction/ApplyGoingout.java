@@ -11,6 +11,7 @@ import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.APPLY_GOINGOUT)
 public class ApplyGoingout implements Actionable {
+	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		/**
