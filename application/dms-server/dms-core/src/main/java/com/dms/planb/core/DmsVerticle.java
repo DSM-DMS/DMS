@@ -98,13 +98,13 @@ class DmsVerticle extends AbstractVerticle {
 								Log.l("Responsed status code : 200");
 								// 200 : Success
 							} else if(responseObject.getInt("status") == 404 || responseObject.getInt("status") == 0) {
-								response.setStatusCode(501);
-								Log.l("Responsed status code : 501");
-								// 404 : Can't find, but set 400 because 404 occurs FileNotFound on client
+								response.setStatusCode(204);
+								Log.l("Responsed status code : 204");
+								// 404 : Can't find, but set 204 because over 400 status code occurs FileNotFound on client
 							} else if(responseObject.getInt("status") == 500) {
-								response.setStatusCode(500);
-								Log.l("Responsed status code : 500");
-								// 500 : Internal Server Error
+								response.setStatusCode(205);
+								Log.l("Responsed status code : 205");
+								// 500 : Internal Server Error, but set 205
 							}
 							// Remove key "status" after set status code
 							responseObject.remove("status");
