@@ -271,11 +271,11 @@ public class MealFragment extends Fragment {
          * @throws IOException
          * @throws JSONException
          */
-        private Meal loadMeal(int year, int month, int date) throws IOException, JSONException {
+        private Meal loadMeal(int year, int month, int day) throws IOException, JSONException {
             JSONObject requestJSONObject = new JSONObject();
             requestJSONObject.put("year", year);
             requestJSONObject.put("month", month);
-            requestJSONObject.put("date", date);
+            requestJSONObject.put("day", day);
             Response response = HttpBox.post()
                     .setCommand(Commands.LOAD_MEAL)
                     .putBodyData(requestJSONObject)

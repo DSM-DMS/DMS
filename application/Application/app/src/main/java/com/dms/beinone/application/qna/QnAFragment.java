@@ -1,8 +1,10 @@
 package com.dms.beinone.application.qna;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ import java.util.List;
 
 public class QnAFragment extends Fragment {
 
+    private FloatingActionButton mFAB;
     private EmptySupportedRecyclerView mRecyclerView;
 
     @Nullable
@@ -40,6 +43,13 @@ public class QnAFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        new LoadQnAListTask().execute();
+    }
+
     /**
      * 초기화, RecyclerView 세팅
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
@@ -47,12 +57,26 @@ public class QnAFragment extends Fragment {
     private void init(View rootView) {
         getActivity().setTitle(R.string.nav_qna);
 
+        mFAB = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        mFAB.setVisibility(View.VISIBLE);
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), QnAWriteActivity.class));
+            }
+        });
+
         mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_qna);
 
         View emptyView = rootView.findViewById(R.id.view_qna_empty);
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
+    }
 
-        new LoadQnAListTask().execute();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mFAB.setVisibility(View.INVISIBLE);
     }
 
     private class LoadQnAListTask extends AsyncTask<Void, Void, List<QnA>> {
@@ -63,9 +87,9 @@ public class QnAFragment extends Fragment {
 
             try {
                 qnaList = loadQnAList();
-            } catch (IOException ie) {
+            } catch (IOException e) {
                 return null;
-            } catch (JSONException je) {
+            } catch (JSONException e) {
                 return null;
             }
 

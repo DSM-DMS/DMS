@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
 
-
         mIdET = (EditText) findViewById(R.id.et_login_id);
         mIdET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -124,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             requestJSONObject.put("id", id);
             requestJSONObject.put("password", password);
             Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_ACCOUNT)
+                    .setCommand(Commands.LOGIN_STUDENT_REQUEST)
                     .putBodyData(requestJSONObject)
                     .push();
 

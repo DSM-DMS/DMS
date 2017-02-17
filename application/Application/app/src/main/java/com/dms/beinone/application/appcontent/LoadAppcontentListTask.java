@@ -40,9 +40,11 @@ public class LoadAppcontentListTask extends AsyncTask<Integer, Void, List<Appcon
         try {
             int page = params[0];
             appcontentList = loadAppcontentList(page);
-        } catch (IOException ie) {
+        } catch (IOException e) {
+            e.printStackTrace();
             return null;
-        } catch (JSONException je) {
+        } catch (JSONException e) {
+            e.printStackTrace();
             return null;
         }
 

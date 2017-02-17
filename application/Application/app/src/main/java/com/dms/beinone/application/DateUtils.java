@@ -16,6 +16,15 @@ public class DateUtils {
         return sdf.format(date);
     }
 
+    public static String dateToWeekDateString(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.KOREA);
+        cal.setTime(date);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-0W", Locale.KOREA);
+
+        return sdf.format(cal.getTime());
+    }
+
     public static int getYear(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);

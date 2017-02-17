@@ -28,7 +28,7 @@ public class AppcontentArticleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_newsletter_article);
+        setContentView(R.layout.activity_appcontent_article);
 
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

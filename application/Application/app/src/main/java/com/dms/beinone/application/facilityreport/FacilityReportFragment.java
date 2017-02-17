@@ -44,6 +44,20 @@ public class FacilityReportFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        new LoadFacilityReportListTask().execute();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mFAB.setVisibility(View.INVISIBLE);
+    }
+
     /**
      * 초기화, FloatingActionButton 나타내기, RecyclerView 세팅
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
@@ -64,15 +78,6 @@ public class FacilityReportFragment extends Fragment {
 
         View emptyView = rootView.findViewById(R.id.view_facilityreport_empty);
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
-
-        new LoadFacilityReportListTask().execute();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        mFAB.setVisibility(View.INVISIBLE);
     }
 
     private class LoadFacilityReportListTask extends AsyncTask<Void, Void, List<FacilityReport>> {

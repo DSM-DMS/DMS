@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSToggleButton;
-import com.dms.beinone.application.R;
 
 /**
  * Created by BeINone on 2017-01-16.
@@ -65,5 +65,20 @@ public class GoingoutApplyFragment extends Fragment {
     private void apply(int day) {
 
     }
+
+//    private class ApplyGoingoutTask extends AsyncTask<String, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(String... params) {
+//            String id = params[0];
+//            String d
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//        }
+//    }
 
 }

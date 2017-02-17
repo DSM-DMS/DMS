@@ -78,6 +78,7 @@
     <string name="rewardscoreapply_norecommendee">추천인을 입력해주세요.</string>
     <string name="rewardscoreapply_success">신청이 완료되었습니다.</string>
     <string name="rewardscoreapply_failure">신청에 실패하였습니다.</string>
+    <string name="rewardscoreapply_error">오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Afterschool Apply Fragment -->
     <string name="afterschoolapply_empty">방과후신청 목록이 없습니다.</string>
@@ -133,8 +134,15 @@
     <string name="qna_empty">Q<![CDATA[&]]>A가 없습니다.</string>
     <string name="qna_private">비공개 글입니다.</string>
     <string name="qna_comment">댓글</string>
+    <string name="qna_title">제목</string>
+    <string name="qna_content">문의 내용</string>
+    <string name="qna_privacy">비공개</string>
+    <string name="qna_submit">제출하기</string>
     <string name="qna_error">오류로 인해 Q<![CDATA[&]]>A를 불러오지 못했습니다.</string>
     <string name="qna_article_error">오류로 인해 글을 불러오지 못했습니다.</string>
+    <string name="qna_write_success">문의사항을 제출하였습니다.</string>
+    <string name="qna_write_failure">문의사항을 제출하지 못했습니다.</string>
+    <string name="qna_write_error">오류로 인해 문의사항을 제출하지 못했습니다.</string>
     
     <!-- Extra Keys -->
     <string name="EXTRA_APPCONTENT">com.dms.beinone.extra.APPCONTENT</string>

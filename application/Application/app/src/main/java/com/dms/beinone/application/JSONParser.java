@@ -81,11 +81,11 @@ public class JSONParser {
         for (int index = 0; index < resultJSONArray.length(); index++) {
             JSONObject noticeJSONObject = resultJSONArray.getJSONObject(index);
 
-            int category = noticeJSONObject.getInt("category");
-            int number = noticeJSONObject.getInt("number");
-            String title = noticeJSONObject.getString("title");
-            String writer = noticeJSONObject.getString("writer");
-            String date = noticeJSONObject.getString("date");
+            int category = noticeJSONObject.getInt("Category");
+            int number = noticeJSONObject.getInt("Number");
+            String title = noticeJSONObject.getString("Title");
+            String writer = noticeJSONObject.getString("Writer");
+            String date = noticeJSONObject.getString("Date");
 
             appcontentList.add(new Appcontent(category, number, title, writer, date));
         }
@@ -215,11 +215,9 @@ public class JSONParser {
 
             int no = qnaJSONObject.getInt("no");
             String title = qnaJSONObject.getString("title");
-            String questionDate = qnaJSONObject.getString("question_date");
+            String questionDate = qnaJSONObject.getString("question_day");
             String writer = qnaJSONObject.getString("writer");
-
-            // 1 is true, 0 is false
-            boolean privacy = qnaJSONObject.getInt("privacy") != 0;
+            boolean privacy = qnaJSONObject.getBoolean("privacy");
 
             qnaList.add(new QnA(no, title, questionDate, writer, privacy));
         }

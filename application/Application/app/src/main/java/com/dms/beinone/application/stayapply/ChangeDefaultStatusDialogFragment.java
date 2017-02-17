@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dms.beinone.application.R;
@@ -30,6 +31,8 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
     private Context mContext;
     private ChangeDefaultStatusListener mListener;
 
+    private SharedPreferences mAccountPrefs;
+
     public static ChangeDefaultStatusDialogFragment newInstance(
             Context context, int defaultStatus, ChangeDefaultStatusListener listener) {
 
@@ -47,14 +50,15 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        SharedPreferences accountPrefs = getContext().getSharedPreferences(
+        mAccountPrefs = mContext.getSharedPreferences(
                 getString(R.string.PREFS_ACCOUNT), Context.MODE_PRIVATE);
-        final String id = accountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
-        final int defStatus = getArguments().getInt(getString(R.string.ARGS_DEFAULTSTATUS), -1) - 1;
+
+        final String id = mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
+        final int defStatus = getArguments().getInt(getString(R.string.ARGS_DEFAULTSTATUS), -1);
 
         return new AlertDialog.Builder(getContext())
                 .setTitle(R.string.stayapply_dialog_title)
-                .setSingleChoiceItems(R.array.change_default_status, defStatus, null)
+                .setSingleChoiceItems(R.array.change_default_status, defStatus - 1, null)
                 .setNegativeButton(R.string.stayapply_dialog_negative,
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -66,53 +70,49 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                new ChangeDefaultStatusTask().execute(id, defStatus);
+                                ListView listView = ((AlertDialog) dialog).getListView();
+                                int value = listView.getCheckedItemPosition() + 1;
+
+                                new ChangeDefaultStatusTask().execute(id, value);
                             }
                         })
                 .create();
     }
 
-    private class ChangeDefaultStatusTask extends AsyncTask<Object, Void, Integer> {
-
-        // default status
-        private int mValue;
+    private class ChangeDefaultStatusTask extends AsyncTask<Object, Void, int[]> {
 
         @Override
-        protected Integer doInBackground(Object... params) {
-            int status = -1;
+        protected int[] doInBackground(Object... params) {
+            int[] ints = null;
 
             try {
-                mValue = (int) params[1];
-                status = changeDefaultStatus(params[0].toString(), mValue);
+                String id = params[0].toString();
+                int value = (int) params[1];
+                ints = changeDefaultStatus(id, value);
             } catch (IOException e) {
-                e.printStackTrace();
-                return -1;
+                return null;
             } catch (JSONException e) {
-                e.printStackTrace();
-                return -1;
+                return null;
             }
 
-            return status;
+            return ints;
         }
 
         @Override
-        protected void onPostExecute(Integer status) {
-            super.onPostExecute(status);
+        protected void onPostExecute(int[] ints) {
+            super.onPostExecute(ints);
 
-            if (status > 0) {
+            int code = ints[0];
+            int value = ints[1];
+
+            if (code == 200) {
                 /* success */
-                Toast.makeText(getContext(), R.string.stayapply_dialog_success, Toast.LENGTH_SHORT)
+                Toast.makeText(mContext, R.string.stayapply_dialog_success, Toast.LENGTH_SHORT)
                         .show();
 
-                SharedPreferences prefs = getContext().getSharedPreferences(
-                        getString(R.string.PREFS_DEFAULTSTATUS), Context.MODE_PRIVATE);
-                prefs.edit()
-                        .putInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), mValue)
-                        .apply();
-
                 // notify the StayApplyFragment of changed default status
-                mListener.onChangeDefaultStatus(mValue);
-            } else if (status == 0) {
+                mListener.onChangeDefaultStatus(value);
+            } else if (code == 500) {
                 /* failure */
                 Toast.makeText(mContext, R.string.stayapply_dialog_failure, Toast.LENGTH_SHORT)
                         .show();
@@ -125,7 +125,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
             dismiss();
         }
 
-        private int changeDefaultStatus(String id, int value) throws IOException, JSONException {
+        private int[] changeDefaultStatus(String id, int value) throws IOException, JSONException {
             JSONObject requestJSONObject = new JSONObject();
             requestJSONObject.put("id", id);
             requestJSONObject.put("value", value);
@@ -134,8 +134,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                     .putBodyData(requestJSONObject)
                     .push();
 
-            JSONObject responseJSONObject = response.getJsonObject();
-            return responseJSONObject.getInt("status");
+            return new int[] { response.getCode(), value };
         }
     }
 

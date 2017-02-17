@@ -108,7 +108,7 @@ public class RecommendFragment extends Fragment {
         });
     }
 
-    private void clear() {
+    private void clearView() {
         mRecommendeeET.setText(null);
         mContentET.setText(null);
     }
@@ -117,31 +117,35 @@ public class RecommendFragment extends Fragment {
 
         @Override
         protected Integer doInBackground(String... params) {
-            int status = 0;
+            int code = 0;
 
             try {
-                status = applyRecommend(params[0], params[1], params[2]);
+                code = applyRecommend(params[0], params[1], params[2]);
             } catch (IOException e) {
                 return -1;
             } catch (JSONException e) {
                 return -1;
             }
 
-            return status;
+            return code;
         }
 
         @Override
-        protected void onPostExecute(Integer status) {
-            super.onPostExecute(status);
+        protected void onPostExecute(Integer code) {
+            super.onPostExecute(code);
 
-            if (status > 0) {
-                // success
+            if (code == 200) {
+                // succeed
                 Toast.makeText(getContext(), R.string.rewardscoreapply_success, Toast.LENGTH_SHORT)
                         .show();
-                clear();
-            } else {
-                // failure
+                clearView();
+            } else if (code == 400) {
+                // failed
                 Toast.makeText(getContext(), R.string.rewardscoreapply_failure, Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                // error
+                Toast.makeText(getContext(), R.string.rewardscoreapply_error, Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -158,8 +162,7 @@ public class RecommendFragment extends Fragment {
                     .putBodyData(requestJSONObject)
                     .push();
 
-            JSONObject responseJSONObject = response.getJsonObject();
-            return responseJSONObject.getInt("status");
+            return response.getCode();
         }
     }
 

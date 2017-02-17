@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.relativelayout_main_container, new HomeFragment())
                 .commit();
-
-        mPrefs.edit().clear().apply();
     }
 
     @Override

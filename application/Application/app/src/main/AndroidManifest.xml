@@ -24,9 +24,11 @@
 
         <activity android:name=".login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".appcontent.AppcontentArticleActivity" />
         <activity android:name=".facilityreport.FacilityReportArticleActivity" />
         <activity android:name=".facilityreport.FacilityReportWriteActivity" />
         <activity android:name=".qna.QnAArticleActivity" />
+        <activity android:name=".qna.QnAWriteActivity" />
         <activity android:name=".comment.CommentActivity" />
     </application>
 
