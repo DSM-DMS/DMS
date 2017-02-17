@@ -25,7 +25,7 @@ public class LoadQnaComment implements Actionable {
 			tempObject = new EasyJsonObject();
 			
 			tempObject.put("writer", resultSet.getString("writer"));
-			tempObject.put("comment_day", resultSet.getString("comment_day"));
+			tempObject.put("comment_date", resultSet.getString("comment_date"));
 			tempObject.put("content", resultSet.getString("content"));
 			
 			array.add(tempObject);
