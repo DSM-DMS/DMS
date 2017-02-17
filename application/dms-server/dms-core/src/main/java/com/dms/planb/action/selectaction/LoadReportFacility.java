@@ -22,12 +22,12 @@ public class LoadReportFacility implements Actionable {
 			responseObject.put("title", resultSet.getString("title"));
 			responseObject.put("content", resultSet.getString("content"));
 			responseObject.put("room", resultSet.getInt("room"));
-			responseObject.put("write_day", resultSet.getString("write_day"));
+			responseObject.put("write_date", resultSet.getString("write_date"));
 			responseObject.put("writer", resultSet.getString("writer"));
 			if(resultSet.getString("result") != null){
 				responseObject.put("has_result", true);
 				responseObject.put("result", resultSet.getString("result"));
-				responseObject.put("result_day", resultSet.getString("result_day"));
+				responseObject.put("result_date", resultSet.getString("result_date"));
 			} else {
 				responseObject.put("has_result", false);
 			}

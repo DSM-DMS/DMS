@@ -25,7 +25,7 @@ public class LoadReportFacilityList implements Actionable {
 				tempObject.put("no", resultSet.getInt("no"));
 				tempObject.put("title", resultSet.getString("title"));
 				tempObject.put("room", resultSet.getInt("room"));
-				tempObject.put("write_day", resultSet.getString("write_day"));
+				tempObject.put("write_date", resultSet.getString("write_date"));
 				tempObject.put("writer", resultSet.getString("writer"));
 				if(resultSet.getString("result") != null) {
 					tempObject.put("has_result", true);
