@@ -30,8 +30,6 @@ public class LoadStayStatus implements Actionable {
 			responseObject.put("status", 404);
 		}
 		
-		responseObject.put("result", array);
-		
 		return responseObject;
 	}
 }
