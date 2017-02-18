@@ -115,28 +115,3 @@ body {
 .go_home_duty {
   background-color: rgb(255, 238, 34);
 }
-
-/*=====================responsive test===============*/
-
-@media only screen and (max-width: 1200px) {}
-
-@media only screen and (max-width: 992px) {
-  .main {
-    top: 20vh;
-    left: 5%;
-    width: 90%;
-  }
-
-  #apply_field {
-    height: 50vh;
-  }
-
-  #apply_field table tr td:nth-child(1) {
-    width: 55%;
-  }
-}
-
-/*
-River-stone-jin Help this css code
-https://github.com/river-stone-jin
-*/
