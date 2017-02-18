@@ -16,7 +16,9 @@ public class LoadQnaList implements Actionable {
 	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM qna");
+		int page = requestObject.getInt("page");
+		
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM qna limit ", ((page - 1) * 10), ", 10");
 		
 		if(resultSet.next()) {
 			// There're any posts in qna

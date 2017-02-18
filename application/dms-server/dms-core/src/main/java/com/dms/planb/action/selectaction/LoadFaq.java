@@ -28,7 +28,6 @@ public class LoadFaq implements Actionable {
 				tempObject.put("content", resultSet.getString("content"));
 				
 				array.add(tempObject);
-				System.out.println(array);
 			} while(resultSet.next());
 		} else {
 			responseObject.put("status", 404);
