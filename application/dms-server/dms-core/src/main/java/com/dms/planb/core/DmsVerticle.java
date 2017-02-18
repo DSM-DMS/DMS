@@ -27,26 +27,46 @@ import io.vertx.core.http.HttpServerResponse;
 
 /**
  * @author JoMingyu
+ * @see http://vertx.io/docs/vertx-core/java/
  */
 class DmsVerticle extends AbstractVerticle {
-	private SecureManager secureManager;
+	/** (non-Javadoc)
+	 * @see http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServer.html
+	 */
 	private HttpServer server;
+	
+	/** (non-Javadoc)
+	 * @see http://vertx.io/docs/apidocs/io/vertx/core/http/HttpServerResponse.html
+	 */
 	private HttpServerResponse response;
 	
+	/**
+	 * @see org.boxfox.dms.utilities.json
+	 * .EasyJsonObject
+	 */
 	private EasyJsonObject clientObject;
 	private EasyJsonObject requestObject;
 	private EasyJsonObject responseObject;
-	// org.boxfox.dms.utilities.json
+	
+	/**
+	 * @see org.boxfox.dms.secure
+	 * .SecureManager
+	 */
+	private SecureManager secureManager;
 
 	/** (non-Javadoc)
 	 * @see io.vertx.core.AbstractVerticle#start()
 	 */
 	@Override
 	public void start() throws Exception {
+		/**
+		 * @see org.boxfox.dms.utilities.log
+		 * .Log
+		 */
 		Log.l("Server started "+ ApplicationInfo.VERSION);
-		// org.boxfox.dms.utilities.Log
 		
 		secureManager = SecureManager.getInstance();
+		
 		server = vertx.createHttpServer();
 		server.requestHandler(request -> {
 			Log.l("Received request : " + request.host());
@@ -54,8 +74,9 @@ class DmsVerticle extends AbstractVerticle {
 			Buffer totalBuffer = Buffer.buffer();
 			
 			if(request.method() == HttpMethod.POST) {
-				// The server will only work if the Http method is POST.
-				Log.l("Received POST method : " + request.host());
+				/*
+				 *  The server will only work if the Http method is POST.
+				 */
 				Log.l("Header : " + request.getHeader("command"));
 				
 				request.handler(buffer -> {
@@ -131,6 +152,7 @@ class DmsVerticle extends AbstractVerticle {
 					
 					response.end(responseObject.toString());
 					Log.l("Responsed object : " + responseObject.toString());
+					
 					response.close();
 				}); // endHandler
 			} else {

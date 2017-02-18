@@ -16,8 +16,10 @@ public class LoadFaq implements Actionable {
 	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
+		int page = requestObject.getInt("page");
+		
 		// Both list and content
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM faq");
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM faq limit ", ((page - 1) * 10), ", 10");
 		
 		if(resultSet.next()) {
 			do {

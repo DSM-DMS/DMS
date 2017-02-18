@@ -1,14 +1,5 @@
 package com.dms.planb.core;
 
-import java.sql.SQLException;
-import java.util.Calendar;
-
-import org.boxfox.dms.utilities.actions.ActionRegister;
-import org.boxfox.dms.utilities.database.DataBase;
-
-import com.dms.parser.dataio.post.PostChangeDetector;
-import com.dms.parser.dataio.post.PostUpdateListener;
-
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
  * 
@@ -31,6 +22,15 @@ import com.dms.parser.dataio.post.PostUpdateListener;
  * @see pom.xml
  */
 
+import java.sql.SQLException;
+import java.util.Calendar;
+
+import org.boxfox.dms.utilities.actions.ActionRegister;
+import org.boxfox.dms.utilities.database.DataBase;
+
+import com.dms.parser.dataio.post.PostChangeDetector;
+import com.dms.parser.dataio.post.PostUpdateListener;
+
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 
@@ -39,10 +39,33 @@ class DmsMain {
 	private static VertxOptions options;
 
 	private static void initialize() {
+		/*
+		 * Initializing method when server started.
+		 */
+		
+		/**
+		 * @see org.boxfox.dms.utilities.actions
+		 * .ActionRegister
+		 */
 		ActionRegister.init("org.boxfox.dms.secure", "com.dms.planb");
-		// -- Singleton
+		/*
+		 * Using Reflection. Find @ActionRegistration annotation of classes in package,
+		 * and register actions to ActionRegister class.
+		 */
+		
+		/**
+		 * @see com.dms.parser.dataio.post
+		 * .PostChangeDetector
+		 */
 		PostChangeDetector.getInstance().start();
+		/*
+		 * Post(in school web page) change detector(thread)
+		 */
+
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
+			/*
+			 * Refresh databases at regular intervals
+			 */
 			@Override
 			public void update(int currentCategory) {
 				Calendar currentTime = Calendar.getInstance();
@@ -51,6 +74,9 @@ class DmsMain {
 				if (dayOfWeek == Calendar.MONDAY) {
 					try {
 						DataBase.getInstance().executeUpdate("delete from goingout_apply");
+						/*
+						 * Every Monday, refresh goingout_apply table
+						 */
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -58,13 +84,23 @@ class DmsMain {
 				if (hour >= 0 && hour <= 8) {
 					try {
 						DataBase.getInstance().executeUpdate("delete from extension_apply");
+						/*
+						 * Every day, refresh extension_apply table
+						 */
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 		});
+		
+		/**
+		 * @see pom.xml : vert.x and netty syntax
+		 */
 		vertx = Vertx.vertx();
+		/*
+		 * Get vert.x's instance from Vertx(extends Measured) class
+		 */
 
 		options = new VertxOptions();
 		// System.setErr(new LogErrorOutputStream(System.err));
@@ -72,11 +108,27 @@ class DmsMain {
 
 	public static void main(String[] args) {
 		initialize();
-		// Branch off initialize() method
+		/*
+		 * Branch off initialize() method
+		 */
 
+		/** (non-Javadoc)
+		 * @see http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html
+		 */
 		options.setMaxEventLoopExecuteTime(2100000000);
+		/*
+		 * Sets the value of max event loop execute time, in ns.
+		 */
 
+		/** (non-Javadoc)
+		 * @see http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html
+		 * @see com.dms.planb.core
+		 * .DmsVerticle
+		 */
 		vertx.deployVerticle(new DmsVerticle());
-		// Branch off DmsVerticle class
+		/*
+		 * Deploy a verticle instance that you have created yourself.
+		 * Branch off DmsVerticle class
+		 */
 	}
 }
