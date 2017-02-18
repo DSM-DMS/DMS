@@ -1,13 +1,25 @@
     @import "../css/remote.css";
-    /*remote.css로 수정필요*/
+    /*remote.css�??�정?�요*/
 
     body {
-        /*배경색
-    신청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
-    기숙사 : background-color: rgb(191,148,208) -> rgb(191,148,208)
-    마이페이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
+        /*배경??
+    ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
+    기숙??: background-color: rgb(191,148,208) -> rgb(191,148,208)
+    마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
         font-size: 0.9em;
     }
+
+.afterapplypage .back_arrow{
+  width: 3em !important;
+  margin-bottom: -10px !important;
+  cursor: pointer;
+}
+
+.back_arrow{
+  width: 2em !important;
+  cursor: pointer;
+  float:left;
+}
 
     .main {
         background-color: white;
