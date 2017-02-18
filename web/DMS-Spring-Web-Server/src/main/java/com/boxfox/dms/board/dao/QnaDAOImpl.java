@@ -16,13 +16,6 @@ public class QnaDAOImpl implements QnaDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<QnaPostContext> getPostsAtPage(int page) {
-		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
-		List<QnaPostContext> list = qnaMapper.getPostsAtPage(page);
-		return list;
-	}
 
 	@Override
 	public QnaPostContext getPost(int number) {

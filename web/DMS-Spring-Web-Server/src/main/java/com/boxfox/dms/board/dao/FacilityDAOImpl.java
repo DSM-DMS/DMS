@@ -15,13 +15,6 @@ public class FacilityDAOImpl implements FacilityDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<FacilityReportContext> getPostsAtPage(int page) {
-		FacilityMapper facilityMapper = sqlSession.getMapper(FacilityMapper.class);
-		List<FacilityReportContext> list = facilityMapper.getPostsAtPage(page);
-		return list;
-	}
 
 	@Override
 	public FacilityReportContext getPost(int number) {

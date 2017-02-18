@@ -15,13 +15,6 @@ public class NoticeDAOImpl implements NoticeDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<DatePostContext> getPostsAtPage(int page) {
-		NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
-		List<DatePostContext> list = noticeMapper.getPostsAtPage(page);
-		return list;
-	}
 
 	@Override
 	public DatePostContext getPost(int number) {

@@ -51,16 +51,6 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		List<DatePostContext> list = noticeDAO.getPostsAtPage(0);
-		for(int i=1; i<=5&& i <=list.size();i++){
-			model.addAttribute("title"+i, list.get(i-1).getTitle());
-		}
-		DayMealDTO meal = mealDAO.getMealToday();
-		model.addAttribute("breakfast", meal.getBreakfast());
-		model.addAttribute("lunch", meal.getLunch());
-		model.addAttribute("dinner", meal.getDinner());
-		facilityDAO.getPostsAtPage(0);
-		qnaDAO.getPostsAtPage(0);
 		return "index";
 	}
 	

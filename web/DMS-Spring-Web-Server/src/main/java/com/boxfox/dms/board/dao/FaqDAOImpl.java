@@ -7,18 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.PrimaryPostContext;
+import com.boxfox.dms.mapper.FaqMapper;
 import com.boxfox.dms.mapper.RuleMapper;
 
 @Repository
-public class RuleDAOImpl implements RuleDAO{
+public class FaqDAOImpl implements FaqDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
 	public PrimaryPostContext getPost(int number) {
-		RuleMapper ruleMapper = sqlSession.getMapper(RuleMapper.class);
-		List<PrimaryPostContext> list = ruleMapper.getPost(number);
+		FaqMapper faqMapper = sqlSession.getMapper(FaqMapper.class);
+		List<PrimaryPostContext> list = faqMapper.getPost(number);
 		PrimaryPostContext post = null;
 		if(list.size()>0) {
 			post = list.get(0);
@@ -28,21 +29,21 @@ public class RuleDAOImpl implements RuleDAO{
 
 	@Override
 	public void writePost(String title, String content) {
-		RuleMapper ruleMapper = sqlSession.getMapper(RuleMapper.class);
+		FaqMapper faqMapper = sqlSession.getMapper(FaqMapper.class);
 		PrimaryPostContext post = new PrimaryPostContext();
 		post.setTitle(title);
 		post.setContent(content);
-		ruleMapper.writePost(post);
+		faqMapper.writePost(post);
 	}
 
 	@Override
 	public void editPost(int no, String title, String content) {
-		RuleMapper ruleMapper = sqlSession.getMapper(RuleMapper.class);
+		FaqMapper faqMapper = sqlSession.getMapper(FaqMapper.class);
 		PrimaryPostContext post = new PrimaryPostContext();
 		post.setNo(no);
 		post.setTitle(title);
 		post.setContent(content);
-		ruleMapper.editPost(post);
+		faqMapper.editPost(post);
 	}
 	
 

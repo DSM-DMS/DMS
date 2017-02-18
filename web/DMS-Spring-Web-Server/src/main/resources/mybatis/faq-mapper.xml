@@ -3,24 +3,24 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.boxfox.dms.mapper.RuleMapper">
+<mapper namespace="com.boxfox.dms.mapper.FaqMapper">
 
     <resultMap type="com.boxfox.dms.board.dto.PrimaryPostContext" id="PostResultList">
         <result property="title" column="title" />
         <result property="no" column="no" />
         <result property="content" column="content" />
     </resultMap>
-
+    
     <select id="getPost" resultMap="PostResultList">
-        SELECT * FROM rule WHERE `no`=#{number}
+        SELECT * FROM faq WHERE `no`=#{number}
     </select>
     
     <insert id="writePost" parameterType="com.boxfox.dms.board.dto.PrimaryPostContext">
-    	INSERT into rule (title, content) values(#{title}, #{content})
+    	INSERT into faq (title, content) values(#{title}, #{content})
     </insert>
     
     <update id="editPost" parameterType="com.boxfox.dms.board.dto.PrimaryPostContext">
-    	update rule set title=#{title}, content=#{content} where no=#{no}
+    	update faq set title=#{title}, content=#{content} where no=#{no}
     </update>
     
 </mapper>
