@@ -20,8 +20,6 @@ import com.boxfox.dms.board.dao.NoticeDAOImpl;
 import com.boxfox.dms.board.dao.QnaDAOImpl;
 import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.mapper.UserMapper;
-import com.boxfox.dms.meal.dao.MealDAOImpl;
-import com.boxfox.dms.meal.dto.DayMealDTO;
 import com.boxfox.dms.users.dao.UserDAOImpl;
 import com.boxfox.dms.users.dto.UserDTO;
 
@@ -38,9 +36,6 @@ public class HomeController {
 
 	@Autowired
     private FacilityDAOImpl facilityDAO;
-	
-	@Autowired
-	private MealDAOImpl mealDAO;
 
 	@Autowired
 	private QnaDAOImpl qnaDAO;
