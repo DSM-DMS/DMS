@@ -2,7 +2,9 @@ package com.boxfox.dms.users.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,18 +18,18 @@ public class UserJobController {
 	@Autowired
 	private UserDAO userDAO;
 
-	@RequestMapping("/login")
-	public @ResponseBody String login(@RequestParam String id, @RequestParam String password) {
-		return userDAO.login(id,password);
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public @ResponseBody String login(@RequestParam String id, @RequestParam String password, @RequestParam String recapcha) {
+		return userDAO.login(id,password, recapcha);
 	}
 	
-	@RequestMapping("/rename")
-	public @ResponseBody String rename(@RequestParam String id, @RequestParam String newId, @RequestParam String password) {
-		return userDAO.rename(id,newId,password);
+	@RequestMapping(value = "/rename", method = RequestMethod.POST)
+	public @ResponseBody String rename(@RequestParam String id, @RequestParam String newId, @RequestParam String password, @RequestParam String recapcha) {
+		return userDAO.rename(id,newId,password, recapcha);
 	}
 	
-	@RequestMapping("/modifyPassword")
-	public @ResponseBody String modifyPassword(@RequestParam String id, @RequestParam String password, @RequestParam String newPassword) {
-		return userDAO.modifyPassword(id, password, newPassword);
+	@RequestMapping(value = "/modifyPassword", method = RequestMethod.POST)
+	public @ResponseBody String modifyPassword(@RequestParam String id, @RequestParam String password, @RequestParam String newPassword, @RequestParam String recapcha) {
+		return userDAO.modifyPassword(id, password, newPassword, recapcha);
 	}
 }

@@ -28,10 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT * FROM facility_report WHERE `no`=#{number}
     </select>
     
-    <select id="getComments" resultMap="CommentResultList">
-        SELECT * FROM qna_comment WHERE `no`=#{no}
-    </select>
-    
     <insert id="writePost" parameterType="com.boxfox.dms.board.dto.QnaPostContext">
     	INSERT into qna (title, question_content, question_date, writer, privacy) values(#{title}, #{content}, #{date}, #{writer}, #{privacy})
     </insert>
@@ -55,7 +51,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="editComment" parameterType="com.boxfox.dms.board.dto.Comment">
     	UPDATE qna_comment set content=#{content} WHERE `idx`=#{index}
     </update>
-    
     
     <select id="getComments" resultMap="CommentResultList">
     	select * from qna_comment where no=#{no}

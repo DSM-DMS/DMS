@@ -12,11 +12,6 @@ import org.jsoup.nodes.Document;
 
 public class ParserUtils {
 
-	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
-	/// <date>2017-01-14</date>
-	// <summary>二쇱뼱吏� url�뿉 �젒�냽�븯�뿬 html�쓣 媛��졇�샂</summary>
-	// <parameter>�젒�냽�븯怨좎옄 �븯�뒗 url</parameter>
-	/// <remarks></remarks>
 	public static Document getDoc(String url) {
 		Document resultDocument = null;
 		try {
@@ -38,18 +33,6 @@ public class ParserUtils {
 		return resultDocument;
 	}
 
-	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
-	/// <date>2017-01-14</date>
-	/// <summary>url�뿉 �뜲�씠�꽣瑜� �궫�엯</summary>
-	/// <parameter>
-	/// url : ��寃� �궗�씠�듃�쓽 url �뙆�씪誘명꽣 洹쒓꺽
-	/// args : 洹쒓꺽�뿉 梨꾩썙吏� argment
-	/// </parameter>
-	/// <remarks>
-	/// url : http://dsm2015.cafe24.com?one=?&two=?
-	/// args : abc, def
-	/// return : http://dsm2015.cafe24.com?one=abc&two=def
-	/// </remarks>
 	public static String getUrl(String url, Object... args) {
 		StringBuilder builder = new StringBuilder();
 		String[] subUrl = url.split("[?]");

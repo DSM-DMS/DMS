@@ -19,7 +19,7 @@ public class ApplyDAOImpl implements ApplyDAO{
 		apply.setId(id);
 		apply.setRoom(room);
 		apply.setSeat(seat);
-		applyMapper.extensionApply(apply);
+		//applyMapper.extensionApply(apply);
 	}
 
 }
