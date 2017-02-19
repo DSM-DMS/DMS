@@ -3,29 +3,6 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<<<<<<< HEAD
-<mapper namespace="com.boxfox.dms.mapper.MealMapper">
-
-	<!-- <resultMap type="com.boxfox.dms.apply." id="MealResultList">
-        <result property="date" column="date" />
-        <result property="breakfast" column="breakfast" />
-        <result property="lunch" column="lunch" />
-        <result property="dinner" column="dinner" />
-        <result property="breakfastAllergy" column="breakfast_allergy" />
-        <result property="lunchAllergy" column="lunch_allergy" />
-        <result property="dinnerAllergy" column="dinner_allergy" />
-    </resultMap>
-    
-
-	<select id="getMealAtDate" resultMap="MealResultList">
-        SELECT * FROM meal where `date`=#{date};
-    </select>
-    
-    <insert id="insertMealAtDate" parameterType="com.boxfox.dms.meal.dto.DayMealDTO">
-    	REPLACE into meal values(#{date}, #{breakfast}, #{lunch}, #{dinner}, #{breakfastAllergy}, #{lunchAllergy}, #{dinnerAllergy})
-    </insert> -->
-    
-=======
 <mapper namespace="com.boxfox.dms.mapper.FacilityMapper">
 
 	<resultMap type="com.boxfox.dms.apply.dto.AfterSchoolApplyDTO" id="AfterSchoolResultList">
@@ -92,5 +69,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="lookupStayApply" parameterType="java.lang.String" resultMap="StayResultList">
     	select * from stay_apply where id=#{id}
     </select>
->>>>>>> b6c155ce82904b658dc26ff5549ee43e053039e3
 </mapper>

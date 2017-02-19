@@ -96,7 +96,7 @@ public class QnaDAOImpl implements QnaDAO{
 	@Override
 	public List<Comment> getComments(int no) {
 		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
-		List<Comment> comments = qnaMapper.getComment(no);
+		List<Comment> comments = qnaMapper.getComments(no);
 		return comments;
 	}
 	

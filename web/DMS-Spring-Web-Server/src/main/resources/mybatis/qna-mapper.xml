@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="result" column="answer_content"/>
         <result property="resultDate" column="answer_date"/>
     </resultMap>
-<<<<<<< HEAD
+    
     <resultMap type="com.boxfox.dms.board.dto.Comment" id="CommentResultList">
         <result property="idx" column="idx" />
         <result property="no" column="no" />
@@ -23,20 +23,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="date" column="comment_date" />
         <result property="content" column="content"/>
     </resultMap>
-=======
-    
-    <resultMap type="com.boxfox.dms.board.dto.Comment" id="CommentResultList">
-        <result property="no" column="no" />
-        <result property="index" column="index" />
-        <result property="writer" column="writer" />
-        <result property="content" column="content" />
-        <result property="date" column="date" />
-    </resultMap>
-    
-	<select id="getPostsAtPage" resultMap="SummaryResultList">
-        SELECT no, title, writer, room, write_date FROM facility_report order by `no` asc LIMIT #{page}, 10;
-    </select>
->>>>>>> b6c155ce82904b658dc26ff5549ee43e053039e3
     
     <select id="getPost" resultMap="ResultList">
         SELECT * FROM facility_report WHERE `no`=#{number}

@@ -5,27 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.boxfox.dms.mapper.FaqMapper">
 
-<<<<<<< HEAD
-=======
-	<resultMap type="com.boxfox.dms.board.dto.PrimaryPostContext" id="SummaryResultList">
-        <result property="title" column="title" />
-        <result property="no" column="no" />
-    </resultMap>
-    
->>>>>>> b6c155ce82904b658dc26ff5549ee43e053039e3
     <resultMap type="com.boxfox.dms.board.dto.PrimaryPostContext" id="PostResultList">
         <result property="title" column="title" />
         <result property="no" column="no" />
         <result property="content" column="content" />
     </resultMap>
-<<<<<<< HEAD
-=======
 
-	<select id="getPostsAtPage" resultMap="SummaryResultList">
-        SELECT no, title, writer, date FROM faq order by `no` asc LIMIT #{page}, 10;
-    </select>
->>>>>>> b6c155ce82904b658dc26ff5549ee43e053039e3
-    
     <select id="getPost" resultMap="PostResultList">
         SELECT * FROM faq WHERE `no`=#{number}
     </select>
