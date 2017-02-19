@@ -15,9 +15,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="result" column="answer_content"/>
         <result property="resultDate" column="answer_date"/>
     </resultMap>
+    <resultMap type="com.boxfox.dms.board.dto.Comment" id="CommentResultList">
+        <result property="idx" column="idx" />
+        <result property="no" column="no" />
+        <result property="writer" column="writer" />
+        <result property="date" column="comment_date" />
+        <result property="content" column="content"/>
+    </resultMap>
     
     <select id="getPost" resultMap="ResultList">
         SELECT * FROM facility_report WHERE `no`=#{number}
+    </select>
+    
+    <select id="getComments" resultMap="CommentResultList">
+        SELECT * FROM qna_comment WHERE `no`=#{no}
     </select>
     
     <insert id="writePost" parameterType="com.boxfox.dms.board.dto.QnaPostContext">

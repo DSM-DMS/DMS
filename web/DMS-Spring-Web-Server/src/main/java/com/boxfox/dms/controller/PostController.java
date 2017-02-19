@@ -27,7 +27,7 @@ import com.boxfox.dms.board.dto.QnaPostContext;
 
 @Controller
 public class PostController {
-	private static final private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private NoticeDAOImpl noticeDAO;
@@ -58,7 +58,7 @@ public class PostController {
 		return page;
 	}
 
-	@RequestMapping(value = { "/qna" }, params = { "no" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/qna", params = { "no" }, method = RequestMethod.GET)
 	public String qna(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
 		QnaPostContext post = qnaDAO.getPost(no);
 		String page = "qna_index";
@@ -74,12 +74,13 @@ public class PostController {
 				model.addAttribute("writer", post.getWriter());
 				model.addAttribute("resultDate", post.getResultDate());
 				model.addAttribute("result", post.getResult());
+				model.addAttribute("comments", qnaDAO.getComments(no));
 			}
 		}
 		return page;
 	}
 
-	@RequestMapping(value = { "/facility" }, params = { "no" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/facility", params = { "no" }, method = RequestMethod.GET)
 	public String facility(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
 		FacilityReportContext post = facilityDAO.getPost(no);
 		String page = "facility_index";
@@ -94,6 +95,22 @@ public class PostController {
 			model.addAttribute("resultDate", post.getResultDate());
 			model.addAttribute("result", post.getResult());
 			model.addAttribute("room", post.getRoom());
+		}
+		return page;
+	}
+	
+	@RequestMapping(value = "/notice", params = { "no" }, method = RequestMethod.GET)
+	public String notice(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
+		DatePostContext post = noticeDAO.getPost(no);
+		String page = "facility_index";
+		if (post == null) {
+			page = "null";
+		} else {
+			model.addAttribute("number", post.getNo());
+			model.addAttribute("title", post.getTitle());
+			model.addAttribute("content", post.getTitle());
+			model.addAttribute("writer", post.getWriter());
+			model.addAttribute("date", post.getDate());
 		}
 		return page;
 	}
