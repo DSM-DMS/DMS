@@ -11,17 +11,17 @@ import com.boxfox.dms.mapper.FaqMapper;
 import com.boxfox.dms.mapper.RuleMapper;
 
 @Repository
-public class FaqDAOImpl implements FaqDAO{
+public class FaqDAOImpl implements FaqDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public PrimaryPostContext getPost(int number) {
 		FaqMapper faqMapper = sqlSession.getMapper(FaqMapper.class);
 		List<PrimaryPostContext> list = faqMapper.getPost(number);
 		PrimaryPostContext post = null;
-		if(list.size()>0) {
+		if (list.size() > 0) {
 			post = list.get(0);
 		}
 		return post;
@@ -45,6 +45,4 @@ public class FaqDAOImpl implements FaqDAO{
 		post.setContent(content);
 		faqMapper.editPost(post);
 	}
-	
-
 }

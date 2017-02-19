@@ -35,7 +35,6 @@ public class HomeController {
 
 	@Autowired
     private NoticeDAOImpl noticeDAO;
-	
 
 	@Autowired
     private FacilityDAOImpl facilityDAO;
