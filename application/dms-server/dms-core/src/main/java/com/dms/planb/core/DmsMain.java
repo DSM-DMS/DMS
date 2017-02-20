@@ -1,7 +1,6 @@
 package com.dms.planb.core;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
@@ -55,7 +54,7 @@ class DmsMain {
 			profileImgDir.mkdir();
 		}
 		/*
-		 * Create profile image directory
+		 * Create profile image directory if not exists
 		 */
 		
 		/**

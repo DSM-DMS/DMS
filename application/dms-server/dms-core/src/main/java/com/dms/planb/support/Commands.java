@@ -48,6 +48,7 @@ public class Commands {
 /* --------------------------------------------------------------------- */
 	
 	public static final int DELETE_ACCOUNT							= 300;
+	public static final int MODIFY_PROFILE_IMAGE 				= 301;
 	
 	public static final int DELETE_RULE									= 311;
 	public static final int DELETE_QNA_QUESTION				= 312;
