@@ -31,6 +31,7 @@ public class LoadAfterschoolList implements Actionable {
 				tempObject.put("on_wednesday", resultSet.getBoolean("on_wednesday"));
 				tempObject.put("on_saturday", resultSet.getBoolean("on_saturday"));
 				tempObject.put("instructor", resultSet.getString("instructor"));
+				tempObject.put("personnel", resultSet.getInt("personnel"));
 
 				array.add(tempObject);
 			} while(resultSet.next());

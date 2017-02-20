@@ -26,7 +26,8 @@ public class UploadAfterschoolItem implements Actionable {
 		 * on_tuesday TINYINT(1) NN
 		 * on_wednesday TINYINT(1) NN
 		 * on_saturday TINYINT(1) NN
-		 * instructor VARCHAR(10)
+		 * instructor VARCHAR(10) NN
+		 * personnel INT(11) NN
 		 */
 		int no = requestObject.getInt("no");
 		String title = requestObject.getString("title");
@@ -38,8 +39,9 @@ public class UploadAfterschoolItem implements Actionable {
 		boolean onWednesday = requestObject.getBoolean("on_wednesday");
 		boolean onSaturday = requestObject.getBoolean("on_saturday");
 		String instructor = requestObject.getString("instructor");
+		int personnel = requestObject.getInt("personnel");
 		
-		int status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "')");
+		int status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor, personnel) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "', ", personnel, ")");
 		
 		responseObject.put("status", status);
 		
