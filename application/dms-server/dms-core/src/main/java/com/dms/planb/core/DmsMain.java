@@ -1,5 +1,8 @@
 package com.dms.planb.core;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
  * 
@@ -37,10 +40,22 @@ import io.vertx.core.VertxOptions;
 class DmsMain {
 	private static Vertx vertx;
 	private static VertxOptions options;
-
+	
 	private static void initialize() {
 		/*
 		 * Initializing method when server started.
+		 */
+		
+		File profileImgDir = new File("Profile Images");	
+		/*
+		 * Current path
+		 */
+		
+		if(!profileImgDir.exists()) {
+			profileImgDir.mkdir();
+		}
+		/*
+		 * Create profile image directory
 		 */
 		
 		/**
