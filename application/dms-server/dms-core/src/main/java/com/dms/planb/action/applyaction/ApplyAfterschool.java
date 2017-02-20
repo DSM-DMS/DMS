@@ -1,4 +1,4 @@
-package com.dms.planb.action.insertaction;
+package com.dms.planb.action.applyaction;
 
 import java.sql.SQLException;
 
