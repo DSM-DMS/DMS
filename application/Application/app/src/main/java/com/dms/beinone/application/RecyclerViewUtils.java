@@ -29,4 +29,21 @@ public class RecyclerViewUtils {
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
+    public static void setupCardRecyclerView(
+            EmptySupportedRecyclerView recyclerView, Context context, View emptyView) {
+
+        // set view to display when there is any content
+        recyclerView.setEmptyView(emptyView);
+
+        recyclerView.setHasFixedSize(true);
+
+        // set layout manager as linear
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        VerticalSpaceItemDecoration spaceItemDecoration =
+                new VerticalSpaceItemDecoration((int) DensityConverter.pxTodp(context, 16));
+        recyclerView.addItemDecoration(spaceItemDecoration);
+    }
+
 }

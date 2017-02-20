@@ -10,15 +10,23 @@ public class Afterschool {
     private String title;
     private int target;
     private String place;
-    private int day;
+    private boolean onMonday;
+    private boolean onTuesday;
+    private boolean onWednesday;
+    private boolean onSaturday;
     private String instructor;
 
-    public Afterschool(int no, String title, int target, String place, int day, String instructor) {
+    public Afterschool(int no, String title, int target, String place, boolean onMonday,
+                       boolean onTuesday, boolean onWednesday, boolean onSaturday,
+                       String instructor) {
         setNo(no);
         setTitle(title);
         setTarget(target);
         setPlace(place);
-        setDay(day);
+        setOnMonday(onMonday);
+        setOnTuesday(onTuesday);
+        setOnWednesday(onWednesday);
+        setOnSaturday(onSaturday);
         setInstructor(instructor);
     }
 
@@ -54,12 +62,36 @@ public class Afterschool {
         this.place = place;
     }
 
-    public int getDay() {
-        return day;
+    public boolean isOnMonday() {
+        return onMonday;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setOnMonday(boolean onMonday) {
+        this.onMonday = onMonday;
+    }
+
+    public boolean isOnTuesday() {
+        return onTuesday;
+    }
+
+    public void setOnTuesday(boolean onTuesday) {
+        this.onTuesday = onTuesday;
+    }
+
+    public boolean isOnWednesday() {
+        return onWednesday;
+    }
+
+    public void setOnWednesday(boolean onWednesday) {
+        this.onWednesday = onWednesday;
+    }
+
+    public boolean isOnSaturday() {
+        return onSaturday;
+    }
+
+    public void setOnSaturday(boolean onSaturday) {
+        this.onSaturday = onSaturday;
     }
 
     public String getInstructor() {

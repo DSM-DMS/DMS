@@ -1,79 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
-            <TextView
-                android:id="@+id/tv_afterschool_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="24dp"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_card_title" />
-
-            <TextView
-                android:id="@+id/tv_afterschool_instructor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_afterschool_title"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:textSize="@dimen/text_card_subtext" />
-
-            <TextView
-                android:id="@+id/tv_afterschool_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_afterschool_title"
-                android:layout_toEndOf="@id/tv_afterschool_instructor"
-                android:layout_toRightOf="@id/tv_afterschool_instructor"
-                android:textSize="@dimen/text_card_subtext" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_afterschool_day"
+                    android:id="@+id/tv_afterschool_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_card_title" />
+
+                <TextView
+                    android:id="@+id/tv_afterschool_instructor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_afterschool_title"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
                     android:textSize="@dimen/text_card_subtext" />
 
                 <TextView
-                    android:id="@+id/tv_afterschool_target"
+                    android:id="@+id/tv_afterschool_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:layout_below="@id/tv_afterschool_title"
+                    android:layout_toEndOf="@id/tv_afterschool_instructor"
+                    android:layout_toRightOf="@id/tv_afterschool_instructor"
                     android:textSize="@dimen/text_card_subtext" />
-            </LinearLayout>
-        </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_afterschool_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_card_subtext" />
+
+                    <TextView
+                        android:id="@+id/tv_afterschool_target"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_card_subtext" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
+
             <com.dms.beinone.application.dmsview.DMSButton
+                android:id="@+id/btn_afterschoolapply_apply"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@string/afterschoolapply_apply"
+                dmsbtn:dmsbtn_backgroundColor="@android:color/transparent"
+                dmsbtn:dmsbtn_strokeColor="@android:color/transparent"
+                dmsbtn:dmsbtn_style="rectangle"
+                dmsbtn:dmsbtn_textColor="@android:color/black"
+                dmsbtn:dmsbtn_touchBackgroundColor="@android:color/transparent"
+                dmsbtn:dmsbtn_touchStrokeColor="@android:color/transparent"
+                dmsbtn:dmsbtn_touchTextColor="@color/colorPrimary" />
         </LinearLayout>
 
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

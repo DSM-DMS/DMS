@@ -139,10 +139,14 @@ public class JSONParser {
             String title = afterschoolJSONObject.getString("title");
             int target = afterschoolJSONObject.getInt("target");
             String place = afterschoolJSONObject.getString("place");
-            int day = afterschoolJSONObject.getInt("day");
-            String instructor = afterschoolJSONObject.getString("instructor");
+            boolean onMonday = afterschoolJSONObject.getBoolean("on_monday");
+            boolean onTuesday = afterschoolJSONObject.getBoolean("on_tuesday");
+            boolean onWednesday = afterschoolJSONObject.getBoolean("on_wednesday");
+            boolean onSaturday = afterschoolJSONObject.getBoolean("on_saturday");
+            String instructor = afterschoolJSONObject.getString("instuctor");
 
-            afterschoolList.add(new Afterschool(no, title, target, place, day, instructor));
+            afterschoolList.add(new Afterschool(no, title, target, place,
+                    onMonday, onTuesday, onWednesday, onSaturday, instructor));
         }
 
         return afterschoolList;
@@ -216,7 +220,7 @@ public class JSONParser {
 
             int no = qnaJSONObject.getInt("no");
             String title = qnaJSONObject.getString("title");
-            String questionDate = qnaJSONObject.getString("question_day");
+            String questionDate = qnaJSONObject.getString("question_date");
             String writer = qnaJSONObject.getString("writer");
             boolean privacy = qnaJSONObject.getBoolean("privacy");
 
@@ -229,11 +233,9 @@ public class JSONParser {
     public static QnA parseQnAJSON(JSONObject rootJSONObject, int no) throws JSONException {
         String title = rootJSONObject.getString("title");
         String questionContent = rootJSONObject.getString("question_content");
-        String questionDate = rootJSONObject.getString("questionDate");
+        String questionDate = rootJSONObject.getString("question_date");
         String writer = rootJSONObject.getString("writer");
-
-        // 1 is true, 0 is false
-        boolean privacy = rootJSONObject.getInt("privacy") != 0;
+        boolean privacy = rootJSONObject.getBoolean("privacy");
 
         String answerContent = null;
         String answerDate = null;

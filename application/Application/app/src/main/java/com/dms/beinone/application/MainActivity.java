@@ -25,6 +25,7 @@ import com.dms.beinone.application.goingoutapply.GoingoutApplyFragment;
 import com.dms.beinone.application.home.HomeFragment;
 import com.dms.beinone.application.login.LoginActivity;
 import com.dms.beinone.application.meal.MealFragment;
+import com.dms.beinone.application.mypage.MypageFragment;
 import com.dms.beinone.application.qna.QnAFragment;
 import com.dms.beinone.application.rewardscore.RewardscoreApplyFragment;
 import com.dms.beinone.application.rule.RuleFragment;
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_item_settings) {
 
         } else if (id == R.id.nav_item_mypage) {
-
+            replaceFragment(new MypageFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

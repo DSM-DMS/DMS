@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -44,6 +45,15 @@ public class AppcontentArticleActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return false;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mFAB.setVisibility(View.INVISIBLE);
@@ -58,13 +68,11 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         TextView titleTV = (TextView) findViewById(R.id.tv_appcontent_article_title);
         TextView writerTV = (TextView) findViewById(R.id.tv_appcontent_article_writer);
         TextView dateTV = (TextView) findViewById(R.id.tv_appcontent_article_date);
-//        TextView contentTV = (TextView) findViewById(R.id.tv_appcontent_article_content);
         WebView contentWebView = (WebView) findViewById(R.id.webview_appcontent_article_content);
 
         titleTV.setText(appcontent.getTitle());
         writerTV.setText(appcontent.getWriter());
         dateTV.setText(appcontent.getDate());
-//        contentTV.setText(appcontent.getContent());
         contentWebView.loadData(appcontent.getContent(), "text/html; charset=UTF-8", null);
 
         mFAB = (FloatingActionButton) findViewById(R.id.fab_appcontent_article);

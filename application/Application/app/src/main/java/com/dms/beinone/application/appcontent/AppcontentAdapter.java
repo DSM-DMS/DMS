@@ -3,7 +3,6 @@ package com.dms.beinone.application.appcontent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,12 +136,13 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             mMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("log", "clicked");
                     new LoadAppcontentListTask(mContext, mCategory, mRecyclerView)
                             .execute(AppcontentFragment.page++);
                 }
             });
         }
     }
+
+//    private class ApplyAfterschoolTask extends AsyncTask<>
 
 }

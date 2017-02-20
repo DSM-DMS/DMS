@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
@@ -47,6 +48,7 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
         private TextView mPlaceTV;
         private TextView mDayTV;
         private TextView mTargetTV;
+        private Button mApplyBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -56,14 +58,60 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
             mPlaceTV = (TextView) itemView.findViewById(R.id.tv_afterschool_place);
             mDayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_day);
             mTargetTV = (TextView) itemView.findViewById(R.id.tv_afterschool_target);
+            mApplyBtn = (Button) itemView.findViewById(R.id.btn_afterschoolapply_apply);
+
+            mApplyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
         public void bind(Afterschool afterschool) {
             mTitleTV.setText(afterschool.getTitle());
             mInstructorTV.setText(afterschool.getInstructor());
             mPlaceTV.setText(afterschool.getPlace());
-            mDayTV.setText(afterschool.getDay());
-            mTargetTV.setText(afterschool.getTarget());
+            mDayTV.setText(getAfterschoolDayString(afterschool));
+            mTargetTV.setText(String.valueOf(afterschool.getTarget()));
+        }
+
+        private String getAfterschoolDayString(Afterschool afterschool) {
+            boolean isFirstDay = true;
+            String afterschoolDayString = "";
+
+            if (afterschool.isOnMonday()) {
+                afterschoolDayString = "월";
+                isFirstDay = false;
+            }
+
+            if (afterschool.isOnTuesday()) {
+                if (isFirstDay) {
+                    afterschoolDayString = "화";
+                    isFirstDay = false;
+                } else {
+                    afterschoolDayString += ", 화";
+                }
+            }
+
+            if (afterschool.isOnWednesday()) {
+                if (isFirstDay) {
+                    afterschoolDayString = "수";
+                    isFirstDay = false;
+                } else {
+                    afterschoolDayString += ", 수";
+                }
+            }
+
+            if (afterschool.isOnSaturday()) {
+                if (isFirstDay) {
+                    afterschoolDayString = "토";
+                } else {
+                    afterschoolDayString += ", 토";
+                }
+            }
+
+            return afterschoolDayString;
         }
     }
 

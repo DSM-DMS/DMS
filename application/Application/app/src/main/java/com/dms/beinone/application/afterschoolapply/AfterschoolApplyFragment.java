@@ -47,10 +47,10 @@ public class AfterschoolApplyFragment extends Fragment {
     private void init(View rootView) {
         getActivity().setTitle(R.string.nav_afterschoolapply);
 
-        mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_appcontent);
+        mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_afterschoolapply);
 
         View emptyView = rootView.findViewById(R.id.view_afterschoolapply_empty);
-        RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
+        RecyclerViewUtils.setupCardRecyclerView(mRecyclerView, getContext(), emptyView);
 
         new LoadAfterschoolListTask().execute();
     }

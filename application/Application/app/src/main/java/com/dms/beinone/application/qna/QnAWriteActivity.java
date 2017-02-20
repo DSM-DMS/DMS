@@ -150,8 +150,7 @@ public class QnAWriteActivity extends AppCompatActivity {
             requestJSONObject.put("title", qna.getTitle());
             requestJSONObject.put("content", qna.getQuestionContent());
             requestJSONObject.put("writer", qna.getWriter());
-            // cast to int
-            requestJSONObject.put("privacy", qna.isPrivacy() ? 1 : 0);
+            requestJSONObject.put("privacy", qna.isPrivacy());
 
             Response response = HttpBox.post()
                     .setCommand(Commands.UPLOAD_REPORT_FACILITY)
