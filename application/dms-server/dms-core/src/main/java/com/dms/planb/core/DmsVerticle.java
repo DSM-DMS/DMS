@@ -170,6 +170,7 @@ class DmsVerticle extends AbstractVerticle {
 	/** (non-Javadoc)
 	 * @see io.vertx.core.AbstractVerticle#stop(io.vertx.core.Future)
 	 */
+	@Deprecated
 	public void stop(@SuppressWarnings("rawtypes") Future stopFuture) throws Exception {
 		
 	}
