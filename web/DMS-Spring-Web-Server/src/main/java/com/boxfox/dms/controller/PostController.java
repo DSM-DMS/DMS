@@ -114,5 +114,21 @@ public class PostController {
 		}
 		return page;
 	}
+	
+	@RequestMapping(value = "/writePost", method = RequestMethod.POST)
+	public String writePost(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
+		DatePostContext post = noticeDAO.getPost(no);
+		String page = "facility_index";
+		if (post == null) {
+			page = "null";
+		} else {
+			model.addAttribute("number", post.getNo());
+			model.addAttribute("title", post.getTitle());
+			model.addAttribute("content", post.getTitle());
+			model.addAttribute("writer", post.getWriter());
+			model.addAttribute("date", post.getDate());
+		}
+		return page;
+	}
 
 }
