@@ -14,11 +14,12 @@ import com.dms.planb.support.Commands;
 public class LoadMypage implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int number = requestObject.getInt("number");
+		String id = requestObject.getString("id");
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM student_data WHERE id='", id, "'");
 		
 		if(resultSet.next()) {
+			responseObject.put("number", resultSet.getInt("number"));
 			responseObject.put("sex", resultSet.getInt("sex"));
 			responseObject.put("status", resultSet.getInt("status"));
 			responseObject.put("name", resultSet.getString("name"));

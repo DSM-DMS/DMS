@@ -89,7 +89,7 @@ public class RegisterStudentAcc implements Actionable {
 		 * demerit INT(11) Default NULL
 		 */
 		
-		status = database.executeUpdate("INSERT INTO student_data(number, sex, status, name, phone, p_name, p_phone) VALUES(", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
+		status = database.executeUpdate("INSERT INTO student_data(id, number, sex, status, name, phone, p_name, p_phone) VALUES('", id, "', ", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
 		if(status == 0) {
 			responseObject.put("status", status);
 			return responseObject;
