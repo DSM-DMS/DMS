@@ -18,6 +18,7 @@ public class LoadReportFacilityList implements Actionable {
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM facility_report");
 		
+		int postCount = 0;
 		if(resultSet.next()) {
 			do {
 				tempObject = new EasyJsonObject();
@@ -34,9 +35,12 @@ public class LoadReportFacilityList implements Actionable {
 				}
 				
 				array.add(tempObject);
+				
+				postCount++;
 			} while(resultSet.next());
 		}
 		
+		responseObject.put("num_of_post", postCount);
 		responseObject.put("result", array);
 		
 		return responseObject;

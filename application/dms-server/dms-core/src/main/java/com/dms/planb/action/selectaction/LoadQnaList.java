@@ -20,6 +20,7 @@ public class LoadQnaList implements Actionable {
 		
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM qna limit ", ((page - 1) * 10), ", 10");
 		
+		int postCount = 0;
 		if(resultSet.next()) {
 			// There're any posts in qna
 			do {
@@ -32,13 +33,15 @@ public class LoadQnaList implements Actionable {
 				tempObject.put("privacy", resultSet.getBoolean("privacy"));
 				
 				array.add(tempObject);
+				
+				postCount++;
 			} while(resultSet.next());
 		} else {
 			responseObject.put("status", 404);
 		}
 		
+		responseObject.put("num_of_post", postCount);
 		responseObject.put("result", array);
-		// Arrays in object
 		
 		return responseObject;
 	}

@@ -11,14 +11,15 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_RULE)
-public class LoadRule implements Actionable {
+public class LoadRuleWithList implements Actionable {
 	EasyJsonObject tempObject;
 	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		// Both list and content
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM rule");
-					
+		
+		int postCount = 0;
 		if(resultSet.next()) {
 			do {
 				tempObject = new EasyJsonObject();
@@ -28,11 +29,14 @@ public class LoadRule implements Actionable {
 				tempObject.put("content", resultSet.getString("content"));
 							
 				array.add(tempObject);
+				
+				postCount++;
 			} while(resultSet.next());
 		} else {
 			responseObject.put("status", 404);
 		}
-					
+		
+		responseObject.put("num_of_post", postCount);
 		responseObject.put("result", array);
 		
 		return responseObject;

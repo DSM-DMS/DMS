@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_FAQ)
-public class LoadFaq implements Actionable {
+public class LoadFaqWithList implements Actionable {
 	EasyJsonObject tempObject;
 	
 	@Override
@@ -21,6 +21,7 @@ public class LoadFaq implements Actionable {
 		// Both list and content
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM faq limit ", ((page - 1) * 10), ", 10");
 		
+		int postCount = 0;
 		if(resultSet.next()) {
 			do {
 				tempObject = new EasyJsonObject();
@@ -30,11 +31,14 @@ public class LoadFaq implements Actionable {
 				tempObject.put("content", resultSet.getString("content"));
 				
 				array.add(tempObject);
+				
+				postCount++;
 			} while(resultSet.next());
 		} else {
 			responseObject.put("status", 404);
 		}
 		
+		responseObject.put("num_of_post", postCount);
 		responseObject.put("result", array);
 		
 		return responseObject;
