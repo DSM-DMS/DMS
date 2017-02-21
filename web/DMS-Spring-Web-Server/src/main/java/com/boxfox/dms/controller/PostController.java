@@ -61,20 +61,19 @@ public class PostController {
 	public String qnaView(Locale locale, Model model, @RequestParam(value = "no") int no) {
 		QnaPostContext post = qnaDAO.getPost(no);
 		if (post != null) {
-		if (post.isPrivacy()&&技记 眉农) {
-
-		} else {
-				List<Comment> comments = qnaDAO.getComments(post.getNo());
-				model.addAttribute("q_title", post.getTitle());
-				model.addAttribute("q_date", post.getDate());
-				model.addAttribute("q_writer", post.getWriter());
-				model.addAttribute("q_content", post.getContent());
-				model.addAttribute("a_date", post.getResultDate());
-				model.addAttribute("a_content", post.getResult());
-				return "qna";
+		if (!post.isPrivacy() || 技记 眉农) {
+			List<Comment> comments = qnaDAO.getComments(post.getNo());
+			model.addAttribute("q_title", post.getTitle());
+			model.addAttribute("q_date", post.getDate());
+			model.addAttribute("q_writer", post.getWriter());
+			model.addAttribute("q_content", post.getContent());
+			model.addAttribute("a_date", post.getResultDate());
+			model.addAttribute("a_content", post.getResult());
+			return "qna";
 		}
 		} else {
 			return "notfound";
 		}
 	}
+
 }
