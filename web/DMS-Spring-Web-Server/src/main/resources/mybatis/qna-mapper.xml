@@ -5,14 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.boxfox.dms.mapper.QnaMapper">
 
-	<resultMap type="com.boxfox.dms.board.dto.QnaPostContext" id="SummaryResultList">
-        <result property="title" column="title" />
-        <result property="no" column="no" />
-        <result property="writer" column="writer" />
-        <result property="date" column="question_date" />
-        <result property="privacy" column="privacy"/>
-    </resultMap>
-    
     <resultMap type="com.boxfox.dms.board.dto.QnaPostContext" id="ResultList">
         <result property="title" column="title" />
         <result property="no" column="no" />
@@ -25,16 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
     
     <resultMap type="com.boxfox.dms.board.dto.Comment" id="CommentResultList">
+        <result property="idx" column="idx" />
         <result property="no" column="no" />
-        <result property="index" column="index" />
         <result property="writer" column="writer" />
-        <result property="content" column="content" />
-        <result property="date" column="date" />
+        <result property="date" column="comment_date" />
+        <result property="content" column="content"/>
     </resultMap>
-    
-	<select id="getPostsAtPage" resultMap="SummaryResultList">
-        SELECT no, title, writer, room, write_date FROM facility_report order by `no` asc LIMIT #{page}, 10;
-    </select>
     
     <select id="getPost" resultMap="ResultList">
         SELECT * FROM facility_report WHERE `no`=#{number}
@@ -63,7 +51,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="editComment" parameterType="com.boxfox.dms.board.dto.Comment">
     	UPDATE qna_comment set content=#{content} WHERE `idx`=#{index}
     </update>
-    
     
     <select id="getComments" resultMap="CommentResultList">
     	select * from qna_comment where no=#{no}

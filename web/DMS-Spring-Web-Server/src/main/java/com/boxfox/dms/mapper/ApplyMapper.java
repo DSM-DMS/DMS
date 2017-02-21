@@ -2,11 +2,8 @@ package com.boxfox.dms.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.boxfox.dms.apply.dto.AfterSchoolApplyDTO;
-import com.boxfox.dms.apply.dto.ExtensionApplyDTO;
-import com.boxfox.dms.apply.dto.OutApplyDTO;
-import com.boxfox.dms.apply.dto.RewardApplyDTO;
-import com.boxfox.dms.apply.dto.StayApplyDTO;
+import com.boxfox.apply.dto.ExtensionStudyDTO;
+import com.boxfox.dms.apply.dto.*;
 
 public interface ApplyMapper {
 

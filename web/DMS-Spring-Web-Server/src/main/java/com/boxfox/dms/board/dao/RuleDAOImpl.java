@@ -16,13 +16,6 @@ public class RuleDAOImpl implements RuleDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<PrimaryPostContext> getPostsAtPage(int page) {
-		RuleMapper ruleMapper = sqlSession.getMapper(RuleMapper.class);
-		List<PrimaryPostContext> list = ruleMapper.getPostsAtPage(page);
-		return list;
-	}
-
-	@Override
 	public PrimaryPostContext getPost(int number) {
 		RuleMapper ruleMapper = sqlSession.getMapper(RuleMapper.class);
 		List<PrimaryPostContext> list = ruleMapper.getPost(number);
