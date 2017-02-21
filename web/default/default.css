@@ -491,13 +491,17 @@ a.dropdown-toggle .count {
     }
     /*-------------------------------------qna list.-------------------------------*/
 
-    .qna table tr:nth-child(2), .qna table tr:nth-child(3) {
+    /*.qna table tr:nth-child(2), .qna table tr:nth-child(3) {
         background-color: rgb(191, 148, 208);
     }
 
     .qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
         color: white;
         border-bottom: 1px solid white;
+    }*/
+
+    .qna table tr td img {
+        height: 20px;
     }
     /*-------------------------------------comment.-------------------------------*/
 
@@ -622,22 +626,23 @@ a.dropdown-toggle .count {
     .mypage .info table {
         width: 100%;
         border-collapse: collapse;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border-top: 3px solid rgb(231,160,153);
+        border-bottom: 3px solid rgb(231,160,153);
     }
 
     .mypage .info table tr {
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid rgb(231,160,153);
     }
 
     .mypage .info table tr:nth-child(3) {
-        border-bottom: 1px solid black;
+        border-bottom: 3px solid rgb(231,160,153);
     }
 
     .mypage .info table tr td:nth-child(1) {
         text-align: left;
         padding-left: 10px;
-        min-width: 40px;
+        min-width: 50px;
+        width: 20%;
     }
 
     .mypage .info table tr td:nth-child(2) {
@@ -837,7 +842,7 @@ a.dropdown-toggle .count {
     }
 
     .afterapplypage .afterinfo p.grade {
-        background-color: rgb(134, 193, 233);
+        /*background-color: rgb(134, 193, 233);*/
         display: inline-block;
         border-radius: 6px;
         padding: 2px;
@@ -849,9 +854,9 @@ a.dropdown-toggle .count {
         margin-left: 40%;
     }
 
-    .afterapplypage .afterinfo p#second, .afterapplypage .afterinfo p#third {
+    /*.afterapplypage .afterinfo p#second, .afterapplypage .afterinfo p#third {
         background-color: gray;
-    }
+    }*/
 
     .afterapplypage .afterinfo p#class {
         margin-top: 2.5%;

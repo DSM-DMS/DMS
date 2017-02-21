@@ -1073,24 +1073,36 @@ function loadMyPage() {
 var pageStack = [];
 
 // 상속트리
-// Page
-// | -- ClientPage
+// Page(추상)
+// | -- ClientPage(추상)
 // |   |
-// |   | -- AjaxPage
+// |   | -- AjaxPage(추상)
 // |   |    |
-// |   |    | -- ArticleListPage
-// |   |         |
-// |   |         | -- FaqListPage
+// |   |    | -- ArticleListPage(추상)
+// |   |    |    |
+// |   |    |    | -- FaqListPage
+// |   |    |    |
+// |   |    |    | -- QnaListPage
+// |   |    |    |
+// |   |    |    | -- AfterSchoolListPage
+// |   |    |    |
+// |   |    |    | -- AfterSchoolListPage
+// |   |    |
+// |   |    | -- AfterSchoolArticlePage
+// |   |    |
+// |   |    | -- ExtentionApplyPage 구현 중
+// |   |    |
+// |   |    | -- GoHomeApplyPage 구현 미완료
+// |   |    |
+// |   |    | -- Mypage 구현 중
 // |   |
-// |   | -- NonAjaxPage
+// |   | -- NonAjaxPage(추상)
+// |        |
+// |        | -- PointApplyPage
+// |        |
+// |        | -- GoOutApplyPage 구현 미완료
 // |
-// | -- ServerPage
-// |    |
-// |
-
-
-// AjaxPage  NonAjaxPage
-// A
+// | -- ServerPage (Notice, Rule, Faq, Qna 해당)
 
 
 // Page객체 구현 -----------------------------------------------------------------------
@@ -1151,7 +1163,7 @@ function AjaxPage() {
                 xhr.setRequestHeader("command", command);
             },
             success: function(data) {
-                this.ajaxData = JSON.parse(data).result;
+                this.ajaxData = JSON.parse(data);
             }
         });
     }
@@ -1166,6 +1178,9 @@ function AjaxPage() {
 // Page를 상속
 AjaxPage.prototype = new ClientPage();
 
+// 서버측 정보 없이 클라이언트에서 동적으로 html을 구성하는 페이지
+// 자식 객체는 setEvent() 구현해야함
+// 자식 객체는 form 초기화 해야함
 function NonAjaxPage() {
     this.draw = function() {
         this.setForm();
@@ -1240,8 +1255,12 @@ function ArticleListPage() {
 
     this.setEvent = function() {};
 
-    // page를 넘겼을때 list를 가시 출력하는 함수
+    // page를 넘겼을때 list를 다시 출력하는 함수
     this.reload = function() {
+        // 데이터를 다시 받아오기 전에 sendData 다시 초기화
+        this.sendData = {
+            "page": this.page
+        };
         this.getData();
         // table초기화 전에 header를 저장해 둠
         var tableHeader = $(".articlelist table.list tr:nth-child(1)").get();
@@ -1253,12 +1272,21 @@ function ArticleListPage() {
 
     // page선택하는 html을 로드하는 함수
     this.setPageData = function() {
+        // maxPageLength 초기화
+        this.maxPageLength = Math.floor(this.ajaxData.num_of_post / this.getListLength());
 
         // 페이지 숫자 표시
         // 정상적인 경우 == 최대 표시가능한 페이지 수가 페이지 표시 단위보다 같거나 클때
         if (this.maxPageLength - Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + 1 >= this.pageUnit) {
             for (var loop = 0; loop < this.pageUnit; loop++) {
+                var selected = "";
+                // 선택된 번호의 경우
+                if (Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1 == this.page) {
+                    selected = "selected";
+                }
+
                 var newNextPage = $('<td/>', {
+                    "class": selected,
                     text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1,
                     click: function(e) {
                         this.page = Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
@@ -1270,7 +1298,13 @@ function ArticleListPage() {
         // 예외인 경우 == 최대 표시가능한 페이지 수가 페이지 표시 단위보다 작을때
         else if (this.maxPageLength - Math.floor((this.page - 1) / this.pageUnit) < this.pageUnit) {
             for (var loop = 0; loop < this.maxPageLength; loop++) {
+                var selected = "";
+                // 선택된 번호의 경우
+                if (Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1 == this.page) {
+                    selected = "selected";
+                }
                 var newPrevPage = $('<td/>', {
+                    "class": selected,
                     text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1,
                     click: function(e) {
                         this.page = Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
@@ -1286,7 +1320,7 @@ function ArticleListPage() {
             var newPageTd = $('<td/>', {
                 text: "다음",
                 click: function(e) {
-                    this.page = Math.floor((this.page -1) / this.pageUnit + 1) * this.pageUnit + 1;
+                    this.page = Math.floor((this.page - 1) / this.pageUnit + 1) * this.pageUnit + 1;
                     this.reload();
                 }
             });
@@ -1299,7 +1333,7 @@ function ArticleListPage() {
             var newPageTd = $('<td/>', {
                 text: "이전",
                 click: function(e) {
-                    this.page = Math.floor((this.page -1) / this.pageUnit + 1) * this.pageUnit - 5;
+                    this.page = Math.floor((this.page - 1) / this.pageUnit + 1) * this.pageUnit - 5;
                     this.reload();
                 }
             });
@@ -1329,20 +1363,22 @@ function FaqListPage() {
         '<tr>' +
         '</tr>' +
         '</table>';
-
+    this.sendData = {
+        "page": this.page
+    };
     this.type = "faq";
     this.command = "427";
     this.setData = function() {
-        for (var loop = 0; loop < this.ajaxData.length; loop++) {
+        for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
             var newTr = $('<tr/>', {
                 click: function(e) {
                     // 클릭이벤트
-                    new ServerPage(this.type, this.ajaxData[loop].no);
+                    new ServerPage(this.type, this.ajaxData.result.list[loop].no);
                     pageStack.push(this);
                 }
             });
-            var appendString = "<td>" + this.ajaxData[loop].no + "</td>";
-            appendString += "<td>" + data.ajaxData[loop].title + "</td>";
+            var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].title + "</td>";
             newTr.append(appendString);
             $(".articlelist table.list").append(newTr);
         }
@@ -1350,5 +1386,495 @@ function FaqListPage() {
     }
 }
 
+FaqListPage.prototype = new ArticleListPage();
 
-ArticleListPage.prototype = new AjaxPage();
+
+// form, command, sendData 초기화 해야함
+function QnaListPage() {
+    this.form =
+        '<div class="frame left articlelist qna">' +
+        '<div class="frametitle">' +
+        '<h1>Q&A</h1>' +
+        '<div class="underline puple"></div>' +
+        '</div>' +
+        '<table class="list">' +
+        '<tr class="tableheader">' +
+        '<th>번호</th>' +
+        '<th>제목</th>' +
+        '<th>날짜</th>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '<table class="page">' +
+        '<tr>' +
+        '</tr>' +
+        '</table>';
+    this.sendData = {
+        "page": this.page
+    };
+    this.type = "qna";
+    this.command = "425";
+    this.setData = function() {
+        for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
+            var newTr = $('<tr/>', {
+                click: function(e) {
+                    // 클릭이벤트
+                    new ServerPage(this.type, this.ajaxData.result.list[loop].no);
+                    pageStack.push(this);
+                }
+            });
+            var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].title;
+            if (this.ajaxData.result[loop].privacy) {
+                appendString += '<img src="../image/lock2.png" alt="lock image">';
+            }
+            appendString += "</td>"
+            appendString += "<td>" + this.ajaxData.result[loop].question_date + "</td>";
+            newTr.append(appendString);
+            $(".articlelist table.list").append(newTr);
+        }
+        this.setPageData();
+    }
+}
+
+QnaListPage.prototype = new ArticleListPage();
+
+// form, command, sendData 초기화 해야함
+// 방과후 신청기간 가져와하 함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function NoticeListPage() {
+    this.form =
+        '<div class="frame left articlelist afterapply">' +
+        '<div class="frametitle">' +
+        '<h1>공지사항</h1>' +
+        '<div class="underline puple"></div>' +
+        '</div>' +
+        '<table class="list">' +
+        '<tr class="tableheader">' +
+        '<th>번호</th>' +
+        '<th>제목</th>' +
+        '<th>날짜</th>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '<table class="page">' +
+        '<tr>' +
+        '</tr>' +
+        '</table>';
+    this.sendData = {
+        "page": this.page
+    };
+    this.type = "notice";
+    this.command = "416"; //command 몇인지 모름 !!!!!!!!!!!!!!!!!!!!
+    this.setData = function() {
+        for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
+            var newTr = $('<tr/>', {
+                click: function(e) {
+                    // 클릭이벤트
+                    new ServerPage(this.type, this.ajaxData.result.list[loop].no);
+                    pageStack.push(this);
+                }
+            });
+            var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].title + "</td>";
+            // 아직 모름
+            appendString += "<td>" + this.ajaxData.result[loop].instructor + "</td>";
+            newTr.append(appendString);
+            $(".articlelist table.list").append(newTr);
+        }
+        this.setPageData();
+    }
+}
+
+NoticeListPage.prototype = new ArticleListPage();
+
+// form, command, sendData 초기화 해야함
+// 방과후 신청기간 가져와하 함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function AfterSchoolListPage() {
+    this.form =
+        '<div class="frame left articlelist afterapply">' +
+        '<div class="frametitle">' +
+        '<h1>방과후 신청</h1>' +
+        '<p>신청기간 2017.3.2 ~ 3.10</p>' + //방과후 신청기간 가져와야함!!!
+        '<div class="underline puple"></div>' +
+        '</div>' +
+        '<table class="list">' +
+        '<tr class="tableheader">' +
+        '<th>대상학년</th>' +
+        '<th>과목</th>' +
+        '<th>교사</td>' +
+        '<th>날짜</th>' +
+        '<th>인원</th>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '<table class="page">' +
+        '<tr>' +
+        '</tr>' +
+        '</table>';
+    this.sendData = {
+        "page": this.page
+    };
+    this.type = "afterschool";
+    this.command = "416";
+    this.setData = function() {
+        for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
+            var newTr = $('<tr/>', {
+                click: function(e) {
+                    // 클릭이벤트
+                    // 방과후 신청 페이지로 수정해야함 아마 ClientPage 일듯
+                    new AfterSchoolArticlePage(this.ajaxData.result);
+                    pageStack.push(this);
+                }
+            });
+            var appendString = "<td>" + this.ajaxData.result[loop].target + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].title + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].instructor + "</td>";
+            appendString += "<td>"
+            var days = [];
+            if (data.on_monday) {
+                days.push("월");
+            }
+            if (data.on_tuesday) {
+                days.push("화");
+            }
+            if (data.on_wednesday) {
+                days.push("수");
+            }
+            if (data.on_saturday) {
+                days.push("토");
+            }
+            for (var loop = 0; loop < days.length; loop++) {
+                appendString += days[loop];
+                if (loop != days.length) {
+                    appendString += " / ";
+                }
+            }
+            appendString += "</td>";
+            // 방과후 최대 인원이 필요한데
+            appendString += "<td>" + this.ajaxData.result[loop].personnel + "</td>";
+            newTr.append(appendString);
+            $(".articlelist table.list").append(newTr);
+        }
+        this.setPageData();
+    }
+}
+
+AfterSchoolListPage.prototype = new ArticleListPage();
+
+// 객체는 setData(), setEvent() 구현해야함
+// 객체는 form, command, sendData 초기화 해야함
+// AfterSchoolArticlePage은 특별한 경우 같다. 어느 객체를 상속 받아야 할지 모르겠다. ㅠㅠ
+// 우선, ajaxData속성이 필요할것 같으으로, AjaxPage를 상속받는데, getData()를 빈 함수로 초기화 해야겠다.
+// 자신의 상태에 따라 신청, 취소 바꾸는 기능 구현해야함
+function AfterSchoolArticlePage(data) {
+    // AfterSchoolArticlePage만의 예외적인 경우다. 나중에 리팩토링 필요
+    this.getData = function() {
+        this.ajaxData = data;
+    }
+    this.form =
+        '<div class="frame left afterapplypage">' +
+        '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="">' +
+        '<h1>방과후 신청</h1>' +
+        '<div class="underline blue"></div>' +
+        '</div>' +
+        '<div class="aftercontainer">' +
+        '<div class="afterinfo">' +
+        '<div class="header">' +
+        '<p>강사</p>' +
+        '<p>대상</p>' +
+        '<p>장소</p>' +
+        '<p>인원</p>' +
+        '</div>' +
+        '<h3 class="title">C를 우숩게 보지 마라</h3>' +
+        '<p class="teacher">박정호</p>' +
+        '<p class="grade" id="first">1학년</p>' +
+        '<p class="grade" id="second">2학년</p>' +
+        '<p class="grade" id="third">3학년</p>' +
+        '<p id="class">2-2 교실</p>' +
+        '<p id="member">5 / 20</p>' +
+        '<div class="bar">' +
+        '<div class="in bar">' +
+        '</div>' +
+        '</div>' +
+        '<form class="afterform" action="index.html" method="post">' +
+        '<button id = "apply" type="button" name="button">YES</button>' +
+        // <button id = "cancle" type="button" name="button">NO</button>
+        '</form>' +
+        '</div>' +
+        '<br>' +
+        '</div>' +
+        '</div>';
+
+    this.setData = function() {
+        // 해당 방과후를 이미 신청했는지 확인
+        // 신청했으면 신청버튼을 없에고 신청취소버튼 생성
+        for (var loop = 0; loop < myAfter.length; loop++) {
+            if (myAfter[loop].no == data.no) {
+                $(".afterapplypage .aftercontainer .afterinfo form.afterform").html(
+                    '<form class="afterform" action="index.html" method="post">' +
+                    '<button id = "cancle" type="button" name="button">NO</button>' +
+                    '</form>'
+                );
+                break;
+            }
+        }
+
+        // 교사
+        $(".afterapplypage .aftercontainer .afterinfo p.teacher").text(this.ajaxData.instructor);
+        // 장소
+        $(".afterapplypage .aftercontainer .afterinfo p.class").text(this.ajaxData.place);
+        // 신청자 수
+        $(".afterapplypage .aftercontainer .afterinfo p.member").text(this.ajaxData.personnel);
+
+        //  대상학년
+        // 아직 형식을 몰라 구현불가
+        // #first, #secoend, #third 에 각각 background-color 명시해주면 됨.
+    }
+
+    this.setEvent = function() {
+        $(".afterapplypage form button#apply").click(function() {
+            // 신청 메시지 보내야함
+            $.ajax({
+                url: "dsm2015.cafe24.com",
+                type: "POST",
+                data: {
+                    "id": id,
+                    "no": this.ajaxData.no
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                    xhr.setRequestHeader("command", "145");
+                },
+                success: function(data) {
+                    alert("신청 되었습니다.");
+                }
+            });
+            alert("YES");
+        });
+        $(".afterapplypage form button#cancle").click(function() {
+            // 신청취소 메시지 보내야함
+            alert("취소 되었습니다.");
+        })
+    }
+
+    // 현재 방과후 신청상태확인
+    this.stausCheck = function() {
+        var result;
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: {
+                "id": id
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", "436");
+            },
+            success: function(data) {
+                result = data;
+            }
+        });
+        result = JSON.parse(result);
+        return result.result;
+    }
+}
+
+AfterSchoolListPage.prototype = new AjaxPage();
+
+// 객체는 setData(), setEvent() 구현해야함
+// 객체는 form, command, sendData 초기화 해야함
+// 구현 미완료 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function ExtentionApplyPage() {
+    this.form =
+        '<div class="frame left extentionapply">' +
+        '<div class="frametitle">' +
+        '<h1>연장신청</h1>' +
+        '<div class="underline blue"></div>' +
+        '</div>' +
+        '<div class="seatcontainer">' +
+        '</div>' +
+        '</div>';
+    this.command = "431";
+    this.sendData = {
+        "id": id
+    };
+
+    this.setData = function() {
+
+    }
+}
+ExtentionApplyPage.prototype = new AjaxPage();
+
+// 자식 객체는 setEvent() 구현해야함
+// 자식 객체는 form 초기화 해야함
+function PointApplyPage() {
+    this.form =
+        '<div class="frame left pointapply">' +
+        '<div class="frametitle">' +
+        '<h1>상점신청</h1>' +
+        '<div class="underline blue"></div>' +
+        '</div>' +
+        '<div class="selecter">' +
+        '<div class="selectmenu">' +
+        '<p>상점신청</p>' +
+        '</div>' +
+        '<div class="selectmenu">' +
+        '<p>상점추천</p>' +
+        '</div>' +
+        '</div>' +
+        '<form class="individual" action="index.html" method="post">' +
+        '<input type="text" name="reason" placeholder="이유를 입력해 주세요" value="">' +
+        '<button type="button" name="button">피융!</button>' +
+        '</form>' +
+        '<form class="group individual" action="index.html" method="post">' +
+        '<input type="text" name="reason" placeholder="이유를 입력해 주세요" value="">' +
+        '<input type="text" name="person" placeholder="추천자를 입력해 주세요(피추천자)" value="">' +
+        '<button type="button" name="button">피융!</button>' +
+        '</form>' +
+        '</div>';
+
+    this.setEvent = function() {
+        // 추천 -> 신청 전환
+        $(".pointapply .selecter .selectmenu:nth-child(1)").click(function() {
+                $(".pointapply .selecter .selectmenu:nth-child(1)").css({
+                    backgroundColor: "rgb(134, 193, 233)",
+                    border: "1 px solid rgb(134, 193, 233)",
+                    borderRadius: "5px 0px 0px 5px",
+                    color: "white"
+                });
+                $(".pointapply .selecter .selectmenu:nth-child(2)").css({
+                    borderRadius: "0px 5px 5px 0px",
+                    border: "1px solid rgb(134, 193, 233)",
+                    color: "black",
+                    backgroundColor: "white"
+                });
+                $(".pointapply .individual").css({
+                    display: "block"
+                });
+                $(".pointapply .group").css({
+                    display: "none"
+                });
+            })
+            // 신청 -> 추천 전환
+        $(".pointapply .selecter .selectmenu:nth-child(2)").click(function() {
+            $(".pointapply .selecter .selectmenu:nth-child(2)").css({
+                backgroundColor: "rgb(134, 193, 233)",
+                border: "1 px solid rgb(134, 193, 233)",
+                borderRadius: "0px 5px 5px 0px",
+                color: "white"
+            });
+            $(".pointapply .selecter .selectmenu:nth-child(1)").css({
+                borderRadius: "5px 0px 0px 5px",
+                border: "1px solid rgb(134, 193, 233)",
+                color: "black",
+                backgroundColor: "white"
+            });
+            $(".pointapply .individual").css({
+                display: "none"
+            });
+            $(".pointapply .group").css({
+                display: "block"
+            });
+        })
+
+        // 신청탭 신청버튼 신청 이벤트
+        $(".pointapply form:nth-child(3) button").click(function() {
+            var reason = $(".pointapply .individual input").val();
+            $.ajax({
+                url: "dsm2015.cafe24.com",
+                type: "POST",
+                data: {
+                    "id": id,
+                    "content": reason
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                    xhr.setRequestHeader("command", "144");
+                },
+                success: function() {
+                    alert("신청되었습니다.");
+                }
+            });
+        });
+
+        // 추천탭 추천버튼 추천 이벤트
+        $(".pointapply form:nth-child(4) button").click(function() {
+            var reason = $(".pointapply .group input:nth-child(1)").val();
+            var person = $(".pointapply .group input:nth-child(2)").val();
+            $.ajax({
+                url: "dsm2015.cafe24.com",
+                type: "POST",
+                data: {
+                    "id": id,
+                    "content": reason,
+                    "targer": person
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                    xhr.setRequestHeader("command", "144");
+                },
+                success: function() {
+                    alert("신청되었습니다.");
+                }
+            });
+        });
+
+    }
+}
+PointApplyPage.prototype = new ClientPage();
+
+// 객체는 setData(), setEvent() 구현해야함
+// 객체는 form, command, sendData 초기화 해야함
+function Mypage() {
+    this.form =
+        '<div class="frame left mypage">' +
+        '<div class="frametitle">' +
+        '<h1>마이페이지</h1>' +
+        '<div class="underline red"></div>' +
+        '</div>' +
+        '<div class="info applyinfo">' +
+        '<h3>신청정보</h3>' +
+        '<table>' +
+        '<tr>' +
+        '<td>귀가</td>' +
+        '<td>금요귀가</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>연장</td>' +
+        '<td>가온실 1, 1</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>방과후</td>' +
+        '<td>월 : 컴활 / 화 : 컴활 / 수 : JS</td>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '<div class="info pointinfo">' +
+        '<h3>상벌점정보</h3>' +
+        '<table>' +
+        '<tr>' +
+        '<td>상점</td>' +
+        '<td>100 점</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>벌점</td>' +
+        '<td>110 점</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>총점</td>' +
+        '<td>-10 점</td>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '</div>';
+    this.command = "401";
+    this.sendData = {
+        "id": id
+    };
+    this.setData = function () {
+        // 아직 마이페이지항목이 제대로 정의되지 않음.
+    };
+    this.setEvent = function() {};
+}
+Mypage.prototype = new AjaxPage();
