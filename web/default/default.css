@@ -1,11 +1,11 @@
     @import "../css/remote.css";
-    /*remote.css�??�정?�요*/
+    /*remote.css��??�정?�요*/
 
     body {
         /*배경??
-    ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
+    ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙??: background-color: rgb(191,148,208) -> rgb(191,148,208)
-    마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
+    마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
         font-size: 0.9em;
     }
 
@@ -200,23 +200,53 @@
         height: 50px;
     }
 
-    .articlelist table tr:hover {
+    .articlelist table.list tr:hover {
         background-color: rgb(244, 244, 244);
     }
 
-    .articlelist table td:nth-child(2) {
+    .articlelist table.list td:nth-child(2) {
         text-align: left;
         font-weight: 900;
         font-size: 0.9em;
     }
 
-    .articlelist table td:nth-child(3), table td:nth-child(1) {
+    .articlelist table.list td:nth-child(3), table.list td:nth-child(1) {
         text-align: center;
         color: rgb(100, 100, 100);
         font-size: 0.8em;
         font-weight: 900;
         min-width: 27px;
     }
+
+    /*--------------------------articlelist page table--------------------------------*/
+    .articlelist table.page {
+        width: 50%;
+        margin-left: 25%;
+    }
+
+    .articlelist table.page tr td.page-number {
+        text-align: center;
+        width: 6%;
+        color: rgb(134,193,233);
+    }
+
+    /*.articlelist table.page tr td.page-number:nth-child(2) {
+        font-size: 1.5em;
+        font-weight: 500;
+        color: black;
+    }*/
+
+    .articlelist table.page td.page-remote {
+        font-size: 0.8em;
+        color: gray;
+        font-weight: 900;
+        width: 10%;
+        text-align: center;
+        min-width: 27px;
+        padding: 0 5px 0 5px;
+    }
+
+
     /*------------------------------------------ dorm main article------------------------------------------*/
 
     .articlecontainer {
@@ -522,7 +552,7 @@
         width: 5%:
     }
 
-    .afterapply table td:nth-child(4), .afterapply table td:nth-child(5) {
+    .afterapply table.list td:nth-child(4), .afterapply table.list td:nth-child(5) {
         text-align: center;
         color: rgb(100, 100, 100);
         font-size: 0.8em;
@@ -1081,7 +1111,7 @@
         .afterapply table .tableheader th:nth-child(3), .afterapply table .tableheader th:nth-child(5) {
             display: none;
         }
-        .afterapply table tr td:nth-child(3), .afterapply table tr td:nth-child(5) {
+        .afterapply table.list tr td:nth-child(3), .afterapply table.list tr td:nth-child(5) {
             display: none;
         }
         .afterapply table .tableheader th:nth-child(1) {

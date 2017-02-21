@@ -603,7 +603,6 @@ function loadAfterList() {
             AfterMakeNewTable(data, listNum);
         }
     });
-
 }
 
 function AfterMakeNewTable(data, listNum) {
@@ -662,7 +661,6 @@ function getListNum(trHeight) {
 
 
 // 방과후 본문 -------------------------------------------------------------------
-// 받아오는걸로 할지 아닐지는 정해야 할듯
 function loadAfterArticle(data) {
     var myAfter = getAfterStatus();
     var formString = '<form class="afterform" action="index.html" method="post">' +
@@ -713,7 +711,6 @@ function loadAfterArticle(data) {
             "background-color": "rgb(134, 193, 233)"
         })
     }
-
     addAfterApplyEvent(data.no);
 }
 
@@ -764,7 +761,7 @@ function addAfterApplyEvent(no) {
 }
 
 // 공지사항 -------------------------------------------------------------------
-// 서버가 아직 구현 안됨
+// 아직 구현 안된듯
 
 // FAQ -------------------------------------------------------------------
 function loadFAQList() {
@@ -823,20 +820,33 @@ function FAQMakeNewLine(data) {
 
 // FAQ Article -------------------------------------------------------------------
 function loadFAQArticle(data) {
-    $(".main").html(
-        '<div class="frame left articlecontainer">' +
-        '<div class="frametitle">' +
-        '<h2> ' + data.title + '</h2>' +
-        '<p>' + data.date + '</p>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<div class="article">' +
-        '<p>' + data.content + '</p>' +
-        '</div>' +
-        '<hr>' +
-        '</div>'
-    );
+
+    $.ajax({
+        url: "dsm2015.cafe24.com/faq",
+        type: "GET",
+        data: {
+            "no": data.no
+        },
+        success: function(data) {
+            $(".main").html(data);
+            //FAQMakeNewTable(data, listNum);
+        }
+    });
+
+    // $(".main").html(
+    //     '<div class="frame left articlecontainer">' +
+    //     '<div class="frametitle">' +
+    //     '<h2> ' + data.title + '</h2>' +
+    //     '<p>' + data.date + '</p>' +
+    //     '<div class="underline puple">' +
+    //     '</div>' +
+    //     '</div>' +
+    //     '<div class="article">' +
+    //     '<p>' + data.content + '</p>' +
+    //     '</div>' +
+    //     '<hr>' +
+    //     '</div>'
+    // );
 }
 
 // RULE -------------------------------------------------------------------
@@ -896,20 +906,32 @@ function RuleMakeNewLine(data) {
 
 // RULE Article -------------------------------------------------------------------
 function loadRuleArticle(data) {
-    $(".main").html(
-        '<div class="frame left articlecontainer">' +
-        '<div class="frametitle">' +
-        '<h2> ' + data.title + '</h2>' +
-        '<p>' + data.date + '</p>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<div class="article">' +
-        '<p>' + data.content + '</p>' +
-        '</div>' +
-        '<hr>' +
-        '</div>'
-    );
+    $.ajax({
+        url: "dsm2015.cafe24.com/rule",
+        type: "GET",
+        data: {
+            "no": data.no
+        },
+        success: function(data) {
+            $(".main").html(data);
+            //FAQMakeNewTable(data, listNum);
+        }
+    });
+
+    // $(".main").html(
+    //     '<div class="frame left articlecontainer">' +
+    //     '<div class="frametitle">' +
+    //     '<h2> ' + data.title + '</h2>' +
+    //     '<p>' + data.date + '</p>' +
+    //     '<div class="underline puple">' +
+    //     '</div>' +
+    //     '</div>' +
+    //     '<div class="article">' +
+    //     '<p>' + data.content + '</p>' +
+    //     '</div>' +
+    //     '<hr>' +
+    //     '</div>'
+    // );
 }
 
 
@@ -960,6 +982,7 @@ function FAQMakeNewLine(data) {
             // tr 클릭이벤트
             loadFAQArticle(data);
         }
+
     });
     var appendString = "<td>" + data.no + "</td>";
     appendString += "<td>" + data.title + "</td>";
@@ -971,6 +994,34 @@ function FAQMakeNewLine(data) {
 // QNA Atricle -------------------------------------------------------------------
 function loadQNAArticle(data) {
     // 뭔 요청
+    $.ajax({
+        url: "dsm2015.cafe24.com/qna",
+        type: "GET",
+        data: {
+            "no": data.no
+        },
+        success: function(data) {
+            $(".main").html(data);
+            addQNAEvent();
+        }
+    });
+
+    // $.ajax({
+    //     url: "dsm2015.cafe24.com",
+    //     type: "POST",
+    //     data: {
+    //         "no": no,
+    //         "content": content,
+    //         "writer": writer
+    //     },
+    //     beforeSend: function(xhr) {
+    //         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    //         xhr.setRequestHeader("command", "144");
+    //     },
+    //     success: function(data) {
+    //         loadQNAArticle();
+    //     }
+    // });
 }
 
 function addQNAEvent() {
@@ -981,9 +1032,9 @@ function addQNAEvent() {
             url: "dsm2015.cafe24.com",
             type: "POST",
             data: {
-              "no": no,
-              "content": content,
-              "writer": writer
+                "no": no,
+                "content": content,
+                "writer": writer
             },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
@@ -998,5 +1049,306 @@ function addQNAEvent() {
 
 // QNA Atricle -------------------------------------------------------------------
 function loadMyPage() {
-    // mypage로드 ajax
+    // mypage 점보로드 ajax
+    var myInfo = {};
+    $.ajax({
+        url: "dsm2015.cafe24.com",
+        type: "POST",
+        data: {
+            "no": no,
+            "content": content,
+            "writer": writer
+        },
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.setRequestHeader("command", "401");
+        },
+        success: function(data) {
+            myInfo.sex = data.sex;
+        }
+    });
 }
+
+// Page객체 저장하는 스택 -----------------------------------------------------------------
+var pageStack = [];
+
+// 상속트리
+// Page
+// | -- ClientPage
+// |   |
+// |   | -- AjaxPage
+// |   |    |
+// |   |    | -- ArticleListPage
+// |   |         |
+// |   |         | -- FaqListPage
+// |   |
+// |   | -- NonAjaxPage
+// |
+// | -- ServerPage
+// |    |
+// |
+
+
+// AjaxPage  NonAjaxPage
+// A
+
+
+// Page객체 구현 -----------------------------------------------------------------------
+// Page 최상위 객체
+function Page() {
+    // 이벤트 등록까지 완료된 DOM저장
+    this.html;
+
+    // 페이지를 그리기 시작하는 함수
+    this.draw;
+
+    //이벤트 등록
+    this.setEvent;
+
+    // 이벤트 설정된 DOM을 저장
+    this.saveDom = function() {
+        this.html = $(".main").get();
+    }
+}
+
+function ClientPage() {
+    this.form;
+
+    // 기본 form을 main에 설정
+    this.setForm = function() {
+        $(".main").html(form);
+    }
+
+    this.setEvent;
+}
+
+ClientPage.prototype = new Page();
+
+// 서버에서 Page구성에 필요한 Data만을 받아와 동적으로 html을 구성하는 페이지
+// 자식 객체는 setData(), setEvent() 구현해야함
+// 자식 객체는 form, command, sendData 초기화 해야함
+function AjaxPage() {
+    this.form;
+    this.command;
+    this.ajaxData;
+    this.sendData;
+    this.draw = function() {
+        this.setForm();
+        this.getData();
+        this.setData();
+        this.setEvent();
+        this.saveDom();
+    }
+
+    // 필요한 Data를 받아옴
+    this.getData = function() {
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: this.sendData,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", command);
+            },
+            success: function(data) {
+                this.ajaxData = JSON.parse(data).result;
+            }
+        });
+    }
+
+    // 받아온 Data를 html에 설정
+    this.setData;
+
+    // html에 이벤트 설정
+    this.setEvent;
+}
+
+// Page를 상속
+AjaxPage.prototype = new ClientPage();
+
+function NonAjaxPage() {
+    this.draw = function() {
+        this.setForm();
+        this.setEvent();
+        this.saveDom();
+    }
+}
+
+NonAjaxPage.prototype = new ClientPage();
+
+
+// 서버에서 html을 받아오는 Page
+// faq, qna, rule, facility, notice 해당
+function ServerPage(type, no) {
+    this.htmlData;
+    this.sendData;
+    this.type;
+    this.no;
+    this.draw = function() {
+        this.getHtml();
+        this.setHtml();
+        this.setEvent();
+        this.saveDom();
+    }
+
+    this.getHtml = function() {
+        $.ajax({
+            url: "dsm2015.cafe24.com" + "/" + this.type,
+            data: {
+                "no": this.no
+            },
+            type: "POST",
+            data: this.sendData,
+            success: function(data) {
+                this.htmlData = data;
+            }
+        });
+    }
+
+    this.setHtml = function() {
+        $(".main").html(this.htmlData);
+    }
+
+    this.setEvent;
+}
+
+// Page객체 상속
+ServerPage.prototype = new Page();
+
+// 리스트 페이지
+// faqlist, qnalist, afterschoollist, noticelist
+// setEvent구현 완료
+// 자식객체는 setDate구현해야 함
+// 자식객체는 form, command, sendData 초기화 해야함
+// articlelist는 setEvent()를 구현하지 않는다.
+// 동적으로 Element를 삽입하는 과정이서 이벤트를 등록하는것이 더 효율적일듯
+function ArticleListPage() {
+    this.page = 1;
+    // 한줄에 표시할 페이지 갯 수
+    this.pageUnit = 5;
+    this.type;
+    // 최대 표시할 수 있는 '페이지' 수 = DB에 저장된 '리스트' 수 / 최대 리스트 표수 수
+    this.maxPageLength;
+    this.trHeight = 53;
+    this.getListLength = function() {
+        // main의 header등의 height를 제외한 공간의 높이
+        console.log($(".main").height());
+        var useableSpace = $(".main").height() - $(".articlelist table.list .tableheader").position().top;
+        console.log(useableSpace);
+        return (useableSpace / this.trHeight) - 2;
+    };
+
+    this.setEvent = function() {};
+
+    // page를 넘겼을때 list를 가시 출력하는 함수
+    this.reload = function() {
+        this.getData();
+        // table초기화 전에 header를 저장해 둠
+        var tableHeader = $(".articlelist table.list tr:nth-child(1)").get();
+        // table초기화 & tableHeader생성
+        $(".articlelist table.list").html(tableHeader);
+        this.setDate();
+        this.saveDom();
+    };
+
+    // page선택하는 html을 로드하는 함수
+    this.setPageData = function() {
+
+        // 페이지 숫자 표시
+        // 정상적인 경우 == 최대 표시가능한 페이지 수가 페이지 표시 단위보다 같거나 클때
+        if (this.maxPageLength - Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + 1 >= this.pageUnit) {
+            for (var loop = 0; loop < this.pageUnit; loop++) {
+                var newNextPage = $('<td/>', {
+                    text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
+                    click: function(e) {
+                        this.page = Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
+                        this.reload();
+                    }
+                });
+            }
+        }
+        // 예외인 경우 == 최대 표시가능한 페이지 수가 페이지 표시 단위보다 작을때
+        else if (this.maxPageLength - Math.floor((this.page - 1) / this.pageUnit) < this.pageUnit) {
+            for (var loop = 0; loop < this.maxPageLength; loop++) {
+                var newPrevPage = $('<td/>', {
+                    text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
+                    click: function(e) {
+                        this.page = Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
+                        this.reload();
+                    }
+                });
+            }
+        }
+
+        // 이전, 다음 표시
+        // 현재 페이지가 1 ~ pageUnit일 경우
+        if (this.page <= this.pageUnit) {
+            var newPageTd = $('<td/>', {
+                text: "다음",
+                click: function(e) {
+                    this.page = (Math.floor((this.page -1) / this.pageUnit) + 1) * this.pageUnit + 1);
+                    this.reload();
+                }
+            });
+            $(".articlelist table.page").prepend(newPageTd);
+
+        }
+
+        // 현재 페이지가 pageUnit+1 이상일 경우
+        if (this.page <= this.pageUnit) {
+            var newPageTd = $('<td/>', {
+                text: "이전",
+                click: function(e) {
+                    this.page = (Math.floor((this.page -1) / this.pageUnit) + 1) * this.pageUnit - 5);
+                    this.reload();
+                }
+            });
+            $(".articlelist table.page").append(newPageTd);
+        }
+    };
+}
+
+ArticleListPage.prototype = new AjaxPage();
+
+// form, command, sendData 초기화 해야함
+function FaqListPage() {
+    this.form =
+        '<div class="frame left articlelist">' +
+        '<div class="frametitle">' +
+        '<h1>FAQ</h1>' +
+        '<div class="underline puple"></div>' +
+        '</div>' +
+        '<table class="list">' +
+        '<tr class="tableheader">' +
+        '<th>번호</th>' +
+        '<th>제목</th>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '<table class="page">' +
+        '<tr>' +
+        '</tr>' +
+        '</table>';
+
+    this.type = "faq";
+    this.command = "427";
+    this.setData = function() {
+        for (var loop = 0; loop < this.ajaxData.length; loop++) {
+            var newTr = $('<tr/>', {
+                click: function(e) {
+                    // 클릭이벤트
+                    new ServerPage(this.type, this.ajaxData[loop].no);
+                    pageStack.push(this);
+                }
+            });
+            var appendString = "<td>" + this.ajaxData[loop].no + "</td>";
+            appendString += "<td>" + data.ajaxData[loop].title + "</td>";
+            newTr.append(appendString);
+            $(".articlelist table.list").append(newTr);
+        }
+        this.setPageData();
+    }
+}
+
+
+ArticleListPage.prototype = new AjaxPage();
