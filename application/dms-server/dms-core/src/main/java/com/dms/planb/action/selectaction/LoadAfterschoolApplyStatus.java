@@ -18,13 +18,20 @@ public class LoadAfterschoolApplyStatus implements Actionable {
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
+		SafeResultSet resultSet = database.executeQuery("SELECT no FROM afterschool_apply WHERE id='", id, "'");
 		
 		if(resultSet.next()) {
 			do {
 				tempObject = new EasyJsonObject();
-			
+				
+				int no = resultSet.getInt("no");
+				SafeResultSet tempResultSet = database.executeQuery("SELECT on_monday, on_tuesday, on_wednesday, on_saturday FROM afterschool_list WHERE no=", no);
+				
 				tempObject.put("no", resultSet.getInt("no"));
+				tempObject.put("on_monday", tempResultSet.getBoolean("on_monday"));
+				tempObject.put("on_tuesday", tempResultSet.getBoolean("on_tuesday"));
+				tempObject.put("on_wednesday", tempResultSet.getBoolean("on_wednesday"));
+				tempObject.put("on_saturday", tempResultSet.getBoolean("on_saturday"));
 				
 				array.add(tempObject);
 			} while(resultSet.next());
