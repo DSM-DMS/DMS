@@ -22,7 +22,7 @@ public class ModifyProfileImage implements Actionable {
 		
 		String data = requestObject.getString("data");
 				
-		File file = new File("Profile Images/".concat(hashedId));
+		File file = new File("Profile Images/".concat(hashedId).concat(".txt"));
 		if(!file.exists()) {
 			try {
 				file.createNewFile();
