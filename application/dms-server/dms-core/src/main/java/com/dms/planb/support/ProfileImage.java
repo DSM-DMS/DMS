@@ -43,10 +43,8 @@ public class ProfileImage {
 		try {
 			fr = new FileReader(file);
 			
-			int ch;
-			while((ch = fr.read()) != -1) {
-				data.append((char) ch);
-			}
+			data = new StringBuilder();
+			data.append((char) fr.read());
 		} catch (FileNotFoundException e) {
 			/*
 			 * Never loop this catch syntax.
