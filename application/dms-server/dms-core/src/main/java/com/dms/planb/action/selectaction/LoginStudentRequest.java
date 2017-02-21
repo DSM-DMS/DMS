@@ -21,7 +21,7 @@ public class LoginStudentRequest implements Actionable {
 		
 		if(!resultSet.next() || !resultSet.getString("password").equals(password)) {
 			/**
-			 * !resultSet.next() : Can't find id
+			 * !resultSet.next() : Can't find any row of id
 			 * !resultSet.getString("password").equals(password) : Incorrect password
 			 * 
 			 * Can't find id or incorrect password, set permit to false
@@ -31,6 +31,13 @@ public class LoginStudentRequest implements Actionable {
 		else if(resultSet.getString("password").equals(password)) {
 			// Correct password
 			responseObject.put("permit", true);
+			
+			SafeResultSet tempResultSet = database.executeQuery("SELECT number, name, merit, demerit FROM student_data WHERE id='", id, "'");
+			
+			responseObject.put("number", tempResultSet.getInt("number"));
+			responseObject.put("name", tempResultSet.getString("name"));
+			responseObject.put("merit", tempResultSet.getInt("merit"));
+			responseObject.put("demerit", tempResultSet.getInt("demerit"));
 		}
 		
 		return responseObject;
