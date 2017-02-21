@@ -1,11 +1,11 @@
     @import "../css/remote.css";
-    /*remote.css�??�정?�요*/
+    /*remote.css��??�정?�요*/
 
     body {
         /*배경??
-    ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
+    ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙??: background-color: rgb(191,148,208) -> rgb(191,148,208)
-    마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
+    마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
         font-size: 0.9em;
     }
 
@@ -54,21 +54,21 @@ a, a:hover, a:focus, .btn:focus {
 		-ms-transform: translateZ(0);
 		 -o-transform: translateZ(0);
 			transform: translateZ(0);
-		  
+
 	-webkit-backface-visibility: hidden;
 	   -moz-backface-visibility: hidden;
 			backface-visibility: hidden;
-		  
+
 	-webkit-transition-property: color;
 	   -moz-transition-property: color;
 		-ms-transition-property: color;
 			transition-property: color;
-		  
+
 	-webkit-transition-duration: 0.3s;
 	   -moz-transition-duration: 0.3s;
 		-ms-transition-duration: 0.3s;
 			transition-duration: 0.3s;
-		  
+
 	-moz-osx-font-smoothing: grayscale;
 }
 
@@ -81,27 +81,27 @@ a, a:hover, a:focus, .btn:focus {
 	right: 0;
 	bottom: 0;
 	background: #fff;
-	
+
 	-webkit-transform: scaleX(0);
 	   -moz-transform: scaleX(0);
 		-ms-transform: scaleX(0);
 			transform: scaleX(0);
-			
+
 	-webkit-transform-origin: 0 50%;
 	   -moz-transform-origin: 0 50%;
 		-ms-transform-origin: 0 50%;
 			transform-origin: 0 50%;
-			
+
 	-webkit-transition-property: transform;
 	   -moz-transition-property: transform;
 		-ms-transition-property: transform;
 			transition-property: transform;
-			
+
 	-webkit-transition-duration: 0.3s;
 	   -moz-transition-duration: 0.3s;
 		-ms-transition-duration: 0.3s;
 			transition-duration: 0.3s;
-			
+
 	-webkit-transition-timing-function: ease-out;
 	   -moz-transition-timing-function: ease-out;
 		-ms-transition-timing-function: ease-out;
@@ -121,7 +121,7 @@ a, a:hover, a:focus, .btn:focus {
 
 
 
-    
+
 .border-less-input{
   background: transparent;
   border: 0;
@@ -129,7 +129,7 @@ a, a:hover, a:focus, .btn:focus {
   border-color: transparent;
   outline: none;
   outline-offset: 0;
-  box-shadow: none;  
+  box-shadow: none;
   font-size: 2.5em;
   font-weight: bold;
   margin-bottom:1%;
@@ -1101,6 +1101,47 @@ a.dropdown-toggle .count {
 
     #submit:hover {
       cursor: pointer;
+    }
+
+    /*-------------------------- facility ------------------------*/
+
+    #facility-form {
+      font-size: 125%;
+      margin: auto;
+      margin-top: 3%;
+      width: 80%;
+    }
+
+    #facility-form input[type="text"] {
+      font-size: 125%;
+      width: 90%;
+      height: 25px;
+      border: 2px solid rgb(134, 193, 233);
+      border-radius: 4px;
+      transition: all 1s ease;
+    }
+
+    #facility-form textarea {
+      vertical-align: text-top;
+      font-size: 125%;
+      width: 90%;
+      border: 2px solid rgb(134, 193, 233);
+      border-radius: 4px;
+      transition: all 1s ease;
+    }
+
+    #facility-table td:nth-child(1) {
+      width: 20%;
+    }
+
+    #facility-submit {
+      width: 90%;
+      text-align: center;
+      cursor: pointer;
+      background-color: rgb(134, 193, 233);
+      border-radius: 4px;
+      transition: all 1s ease;
+      border: 2px solid rgb(134, 193, 233);
     }
 
     /*----------------------------- each colors -------------------*/
