@@ -9,6 +9,7 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
+import com.dms.planb.support.ProfileImage;
 
 @ActionRegistration(command = Commands.LOAD_MYPAGE)
 public class LoadMypage implements Actionable {
@@ -19,6 +20,7 @@ public class LoadMypage implements Actionable {
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM student_data WHERE id='", id, "'");
 		
 		if(resultSet.next()) {
+			responseObject.put("profile_image", ProfileImage.getProfileImage(id));
 			responseObject.put("number", resultSet.getInt("number"));
 			responseObject.put("sex", resultSet.getInt("sex"));
 			responseObject.put("status", resultSet.getInt("status"));
