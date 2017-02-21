@@ -34,6 +34,7 @@ public class ModifyProfileImage implements Actionable {
 		try {
 			FileWriter fw = new FileWriter(file);
 			fw.write(data);
+			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

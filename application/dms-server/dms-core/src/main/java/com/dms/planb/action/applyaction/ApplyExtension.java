@@ -8,7 +8,7 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-import com.dms.planb.support.Config;
+import com.dms.planb.support.LimitConfig;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.APPLY_EXTENSION)
@@ -25,8 +25,8 @@ public class ApplyExtension implements Actionable {
 		Calendar currentTime = Calendar.getInstance();
 		int hour = currentTime.get(Calendar.HOUR_OF_DAY);
 		int minute = currentTime.get(Calendar.MINUTE);
-		int setHour = Integer.valueOf(Config.EXTENSION_APPLY_TIME.split(":")[0]);
-		int setMinute = Integer.valueOf(Config.EXTENSION_APPLY_TIME.split(":")[1]);
+		int setHour = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[0]);
+		int setMinute = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[1]);
 		if(hour<setHour||(hour==setHour&&minute<setMinute)){
 			responseObject.put("status", 404);
 			
