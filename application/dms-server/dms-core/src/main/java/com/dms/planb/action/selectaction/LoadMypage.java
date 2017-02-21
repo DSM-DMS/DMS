@@ -9,7 +9,6 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
-import com.sun.xml.internal.messaging.saaj.util.Base64;
 
 @ActionRegistration(command = Commands.LOAD_MYPAGE)
 public class LoadMypage implements Actionable {
