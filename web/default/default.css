@@ -1,4 +1,4 @@
-    @import "../css/remote.css";
+table.list    @import "../css/remote.css";
     /*remote.css��??�정?�요*/
 
     body {
@@ -363,26 +363,26 @@ a.dropdown-toggle .count {
     }
     /*--------------------------table--------------------------------*/
 
-    .articlelist table {
+    .articlelist table.list {
         border-collapse: collapse;
         width: 86.5%;
         margin-top: 25px;
         margin-left: 7%;
     }
 
-    .articlelist table th:nth-child(1) {
+    .articlelist table.list.list th:nth-child(1) {
         width: 5%;
     }
 
-    .articlelist table th:nth-child(2) {
+    .articlelist table.list th:nth-child(2) {
         width: 85%;
     }
 
-    .articlelist table th:nth-child(3) {
+    .articlelist table.list th:nth-child(3) {
         width: 10%;
     }
 
-    .articlelist table .tableheader {
+    .articlelist table.list .tableheader {
         background-color: rgb(244, 244, 244);
     }
 
@@ -395,7 +395,7 @@ a.dropdown-toggle .count {
         height: 32px;
     }
 
-    .articlelist table td {
+    .articlelist table.list td {
         border-bottom: 1px solid rgb(191, 148, 208);
         height: 50px;
     }
@@ -760,7 +760,7 @@ a.dropdown-toggle .count {
         min-width: 27px;
     }
 
-    ..afterapply table .tableheader {
+    .afterapply table .tableheader {
         background-color: rgb(244, 244, 244);
     }
 

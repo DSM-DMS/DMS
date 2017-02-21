@@ -1259,7 +1259,7 @@ function ArticleListPage() {
         if (this.maxPageLength - Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + 1 >= this.pageUnit) {
             for (var loop = 0; loop < this.pageUnit; loop++) {
                 var newNextPage = $('<td/>', {
-                    text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
+                    text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1,
                     click: function(e) {
                         this.page = Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
                         this.reload();
@@ -1271,7 +1271,7 @@ function ArticleListPage() {
         else if (this.maxPageLength - Math.floor((this.page - 1) / this.pageUnit) < this.pageUnit) {
             for (var loop = 0; loop < this.maxPageLength; loop++) {
                 var newPrevPage = $('<td/>', {
-                    text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
+                    text: Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1,
                     click: function(e) {
                         this.page = Math.floor((this.page - 1) / this.pageUnit) * this.pageUnit + loop + 1;
                         this.reload();
@@ -1286,7 +1286,7 @@ function ArticleListPage() {
             var newPageTd = $('<td/>', {
                 text: "다음",
                 click: function(e) {
-                    this.page = (Math.floor((this.page -1) / this.pageUnit) + 1) * this.pageUnit + 1);
+                    this.page = Math.floor((this.page -1) / this.pageUnit + 1) * this.pageUnit + 1;
                     this.reload();
                 }
             });
@@ -1299,7 +1299,7 @@ function ArticleListPage() {
             var newPageTd = $('<td/>', {
                 text: "이전",
                 click: function(e) {
-                    this.page = (Math.floor((this.page -1) / this.pageUnit) + 1) * this.pageUnit - 5);
+                    this.page = Math.floor((this.page -1) / this.pageUnit + 1) * this.pageUnit - 5;
                     this.reload();
                 }
             });
