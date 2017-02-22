@@ -33,6 +33,7 @@ import com.boxfox.dms.users.dto.UserDataDTO;
 @Repository
 public class ResidualDownLoad {
 	private static final String FORMAT_XLSX_FILE = "ÀÜ·ùÁ¶»çÆ÷¸Ë.xlsx";
+	private static final String FILE_PATH = "files/";
 	private static final String [] RESIDUAL_TYPE = new String[]{"±Ý¿ä±Í°¡", "Åä¿ä±Í°¡", "Åä¿ä±Í»ç", "ÀÜ·ù"};
 
 	@Autowired
@@ -40,18 +41,18 @@ public class ResidualDownLoad {
 
 	private HashMap<String, String> map = new HashMap();
 
-	public String readExcel(String path) {
+	public String readExcel() {
 		initResidualMaps();
-		File xlsxFile = new File(path + FORMAT_XLSX_FILE);
+		File xlsxFile = new File(FILE_PATH + FORMAT_XLSX_FILE);
 		try {
 			XSSFWorkbook workbook = processXlsx(xlsxFile);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = new Date();
 			String fileName = "Residual" + sdf.format(now) + ".xlsx";
-			FileOutputStream fileoutputstream = new FileOutputStream(path + fileName);
+			FileOutputStream fileoutputstream = new FileOutputStream(FILE_PATH + fileName);
 			workbook.write(fileoutputstream);
 			fileoutputstream.close();
-			return fileName;
+			return FILE_PATH+fileName;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

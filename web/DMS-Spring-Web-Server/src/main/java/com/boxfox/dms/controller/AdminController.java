@@ -12,10 +12,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boxfox.dms.board.dao.BoardDAO;
 import com.boxfox.dms.board.dao.FacilityDAOImpl;
@@ -25,6 +27,7 @@ import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.mapper.UserMapper;
 import com.boxfox.dms.users.dao.UserDAOImpl;
 import com.boxfox.dms.users.dto.UserDTO;
+import com.boxfox.dsm.xlsx.ResidualDownLoad;
 
 /**
  * Handles requests for the application home page.
@@ -48,6 +51,9 @@ public class AdminController {
 	@Autowired
 	private QnaDAOImpl qnaDAO;
 	
+	@Autowired
+	private ResidualDownLoad residualFile;
+	
 	@RequestMapping(value = "/admin/write/", method = RequestMethod.POST)
 	public void home(HttpServletRequest request) {
 		int type = Integer.valueOf(request.getParameter("type"));
@@ -58,9 +64,12 @@ public class AdminController {
 	
 
 	@RequestMapping(value = "/admin/download", method = RequestMethod.POST)
-	public void download(HttpServletRequest request) {
+	@ResponseBody
+	public FileSystemResource download(HttpServletRequest request) {
 		if(request.getCookies()){
 		String target = request.getParameter("target");
+	    return new FileSystemResource(residualFile.readExcel()); 
 		}
+		return null;
 	}
 }
