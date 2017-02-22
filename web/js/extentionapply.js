@@ -23,7 +23,7 @@ function drawSeat(seatArr, borderSize) {
             // 자리가 벽이 아니면
             if (seatArr[loop][innerLoop] != 0) {
                 // 자리가 이미 선택됐으면
-                if (seatArr[loop][innerLoop] != 1) {
+                if (typeof(seatArr[loop][innerLoop]) == "string") {
                     $('<div/>', {
                         "class": "seat",
                         css: {
@@ -103,7 +103,7 @@ var gaon2 = [
     [0, "임나연", "조성빈", 0, "사나", "권장호", 0],
     [0, "모모", "김지수", 0, "박지효", "박영준", 0],
     [0, "미나", "구승완", 0, 1, 1, 0],
-    [0, 1, 1, 0, 1, 1, 0],
+    [0, 1, 1, 0, 2, 1, 0],
     [0, 1, 1, 0, 1, 1, 0],
     [0, 0, 0, 0, 0, 0, 0]
 ];
@@ -157,6 +157,57 @@ var daon2 = [
 ];
 
 drawSeat(gaon2, "7.5px");
+$(".extentionapply div.class-selecter-div select#class-select").change(function() {
+    //change event;
+    var select_name = $(this).children("option:selected").text();
+    $(this).siblings("label").text(select_name);
+    console.log($(this).children("option:selected").val());
+})
+
+function Class() {
+    trancedSeatData;
+    this.map = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, this.seatData[0], this.seatData[1], 0, this.seatData[2], this.seatData[3], 0],
+        [0, this.seatData[4], this.seatData[5], 0, this.seatData[6], this.seatData[7], 0],
+        [0, this.seatData[8], this.seatData[9], 0, this.seatData[10], this.seatData[11], 0],
+        [0, this.seatData[12], this.seatData[13], 0, this.seatData[14], this.seatData[15], 0],
+        [0, this.seatData[16], this.seatData[17], 0, this.seatData[18], this.seatData[19], 0],
+        [0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    this.pushData = function(seatData) {
+        this.seatData = seatData;
+        var trancedSeatData = [];
+        // 받은 데이터를 그리기위한 배열로 만들기위한 전 단계
+        for(var loop = 0; loop < seatData.length; loop++) {
+
+            if(seatData.name !== null) {
+                trancedSeatData.push(seatData.name);
+            } else {
+                trancedSeatData.push(seatData.seat);
+            }
+        }
+        return [
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, trancedSeatData[0], trancedSeatData[1], 0, trancedSeatData[2], trancedSeatData[3], 0],
+            [0, trancedSeatData[4], trancedSeatData[5], 0, trancedSeatData[6], trancedSeatData[7], 0],
+            [0, trancedSeatData[8], trancedSeatData[9], 0, trancedSeatData[10], trancedSeatData[11], 0],
+            [0, trancedSeatData[12], trancedSeatData[13], 0, trancedSeatData[14], trancedSeatData[15], 0],
+            [0, trancedSeatData[16], trancedSeatData[17], 0, trancedSeatData[18], this.seatData[19], 0],
+            [0, 0, 0, 0, 0, 0, 0]
+        ];
+    }
+
+    this.classNum = 1;
+    this.seats = [];
+    for (var loop = 1; loop <= 20; loop++) {
+        seats.push({
+            "seat": loop
+        })
+    }
+
+}
 
 
 // ====가온실====
