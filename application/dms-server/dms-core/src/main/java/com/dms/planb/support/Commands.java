@@ -75,7 +75,7 @@ public class Commands {
 	public static final int LOAD_QNA_LIST							= 414;
 //	LOAD_FAQ_LIST
 	public static final int LOAD_REPORT_FACILITY_LIST	= 415;
-	public static final int LOAD_AFTERSCHOOL_LIST		= 416;
+	public static final int LOAD_AFTERSCHOOL_ITEM_LIST		= 416;
 	
 	public static final int LOAD_NOTICE								= 421;
 	public static final int LOAD_NEWSLETTER					= 422;
