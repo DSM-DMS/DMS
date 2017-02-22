@@ -20,7 +20,7 @@ public class LoadFaqWithList implements Actionable {
 		int limit = requestObject.getInt("limit");
 		
 		// Both list and content
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM faq limit ", ((page - 1) * 10), ", ", limit);
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM faq limit ", ((page - 1) * limit), ", ", limit);
 		
 		int postCount = 0;
 		if(resultSet.next()) {

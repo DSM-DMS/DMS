@@ -60,6 +60,7 @@ public class Commands {
 	public static final int WITHDRAW_EXTENSION_APPLY	= 331;
 	public static final int WITHDRAW_GOINGOUT_APPLY	= 332;
 	public static final int WITHDRAW_MERIT_APPLY			= 333;
+	public static final int WITHDRAW_AFTERSCHOOL_APPLY = 334;
 	
 /* --------------------------------------------------------------------- */
 	

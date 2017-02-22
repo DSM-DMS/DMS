@@ -19,7 +19,7 @@ public class LoadReportFacilityList implements Actionable {
 		int page = requestObject.getInt("page");
 		int limit = requestObject.getInt("limit");
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM facility_report limit ", ((page - 1) * 10), ", ", limit);
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM facility_report limit ", ((page - 1) * limit), ", ", limit);
 		
 		int postCount = 0;
 		if(resultSet.next()) {
