@@ -14,9 +14,9 @@ import com.dms.planb.support.Commands;
 public class LoadExtensionApplyStatus implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		String id = requestObject.getString("id");
+		String name = requestObject.getString("name");
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id='", id, "'");
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE name='", name, "'");
 		
 		if(resultSet.next()) {
 			responseObject.put("class", resultSet.getInt("class"));
