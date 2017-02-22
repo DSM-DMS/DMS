@@ -7,6 +7,7 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
+import com.dms.planb.support.Afterschool;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.APPLY_AFTERSCHOOL)
@@ -25,9 +26,11 @@ public class ApplyAfterschool implements Actionable {
 		String id = requestObject.getString("id");
 		int no = requestObject.getInt("no");
 		
-		int status = database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
-		
-		responseObject.put("status", status);
+		if(Afterschool.canApply(id, no)) {
+			database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
+		} else {
+			responseObject.put("status", 404);
+		}
 		
 		return responseObject;
 	}

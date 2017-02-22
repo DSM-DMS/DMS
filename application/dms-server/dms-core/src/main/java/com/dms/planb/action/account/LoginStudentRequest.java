@@ -29,7 +29,9 @@ public class LoginStudentRequest implements Actionable {
 			responseObject.put("permit", false);
 		}
 		else if(resultSet.getString("password").equals(password)) {
-			// Correct password
+			/*
+			 * Correct password
+			 */
 			responseObject.put("permit", true);
 			
 			SafeResultSet tempResultSet = database.executeQuery("SELECT number, name, merit, demerit FROM student_data WHERE id='", id, "'");
