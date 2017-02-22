@@ -1,6 +1,10 @@
 package com.dms.parser.dataio.post;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.QueryUtils;
@@ -9,6 +13,8 @@ import org.boxfox.dms.utilities.log.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.dms.parser.dataio.ParserUtils;
 import com.dms.parser.datamodel.post.Post;
@@ -64,19 +70,23 @@ public class PostChangeDetector {
 		int page = 1;
 		int count = 0;
 		while (true) {
-			Document doc = ParserUtils.getDoc(QueryUtils.querySetter(url, page++));
-			String html = doc.html();
-			html = html.substring(html.indexOf("var Posts=") + "var Posts=".length(),
-					html.indexOf("post_list(Posts);"));
-			html = html.substring(0, html.lastIndexOf(";"));
-			JSONArray posts = (JSONArray) JSONValue.parse(html);
-			if (posts.size() == 1)
+			Document doc = ParserUtils.getDoc(ParserUtils.getUrl(url, page++));
+			Element body = doc.getElementsByTag("tbody").get(0);
+			Elements elements = body.getElementsByTag("tr");
+			if (elements.size() == 1)
 				break;
-			for (int i = 1; i < posts.size(); i++) {
-				JSONArray post = ((JSONArray) posts.get(i));
-				int postNum = Integer.valueOf(((String) ((JSONArray) ((JSONArray) post.get(0)).get(0)).get(1)));
+			for (int i = 1; i < elements.size(); i++) {
+				Element element = elements.get(i);
+				int postNum = Integer.valueOf(element.getElementsByTag("td").get(0).text());
 				if (!check(category, postNum)) {
-					PostParser parser = new PostParser(category, postNum, ((String) ((JSONArray) post.get(0)).get(2)));
+					String onClick = element.getElementsByTag("a").get(0).attr("onclick");
+					Pattern pattern = Pattern.compile("'([a-zA-Z0-9]*)'");
+					Matcher matcher = pattern.matcher(onClick);
+					List<String> list = new ArrayList<String>();
+					while(matcher.find()){
+						list.add(matcher.group(0).replaceAll("'", ""));
+					}
+					PostParser parser = new PostParser(category, postNum, list.toArray());
 					parser.parse();
 					count++;
 				}

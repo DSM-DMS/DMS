@@ -12,6 +12,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.dms.parser.dataio.Parser;
 import com.dms.parser.dataio.ParserUtils;
@@ -24,13 +26,13 @@ public class PostParser<T> extends Parser {
 	public static final int CATEGORY_BROAD = 0;
 	public static final int CATEGORY_FAMILER = 1;
 	public static final int CATEGORY_CHALLENGE = 2;
-	
+
 	private int category, postNum;
 
-	public PostParser(int category,int postNum, String postKey) {
+	public PostParser(int category, int postNum, Object[] args) {
 		this.category = category;
 		this.postNum = postNum;
-		url = LINK + postKey;
+		url = LINK + ParserUtils.getUrl(URL_BOARD_PARAMATER, args);
 	}
 
 	public static String getUrlFromCategory(int category) {
@@ -48,40 +50,40 @@ public class PostParser<T> extends Parser {
 		}
 		return url;
 	}
+
 	@Override
-	public DataSaveAble[] parseAll(){
+	public DataSaveAble[] parseAll() {
 		throw new RuntimeException("Is not Implemented method!");
 	};
 
 	@Override
 	public DataSaveAble parse() {
 		Document doc = ParserUtils.getDoc(url);
-		String title = doc.getElementsByClass("read_title").get(0).text().replaceAll("'", "&quot;");
-		String writer = doc.getElementsByClass("user_icon").get(0).text().replaceAll("'", "&quot;");
-		String dateTime = doc.getElementsByClass("text").get(0).text().replaceAll("'", "&quot;");
-		String content = doc.getElementsByClass("context_view").get(0).html().replaceAll("'", "&quot;");
-		String html = doc.html();
-		html = html.substring(html.indexOf("var PostFiles = ") + "var PostFiles = ".length(),
-				html.indexOf("var POST_ID="));
-		html = html.substring(0, html.lastIndexOf(";")).replaceAll("'", "&quot;");
-		JSONArray files = (JSONArray) JSONValue.parse(html);
-		AttachmentList list = new AttachmentList();
-
+		Element article = doc.getElementsByTag("article").get(0);
+		String title = article.getElementsByTag("h1").get(0).text().replaceAll("제목", "");
+		String writer = article.getElementsByTag("ul").get(0).getElementsByTag("li").get(0).text().replaceAll("작성자","");
+		String dateTime = article.getElementsByTag("ul").get(0).getElementsByTag("li").get(1).text().replaceAll("작성일","");
+		String content = article.getElementsByClass("viewBox").get(0).html();
 		Post post = null;
 		try {
 			int num = 0;
-			SafeResultSet rs =DataBase.getInstance().executeQuery(Query.POST.selectFormat, " ORDER BY `no` DESC LIMIT 1");
-			if(rs.next()){
-				num = rs.getInt(1)+1;
+			SafeResultSet rs = DataBase.getInstance().executeQuery(Query.POST.selectFormat,
+					" ORDER BY `no` DESC LIMIT 1");
+			if (rs.next()) {
+				num = rs.getInt(1) + 1;
 			}
-			DataBase.getInstance().executeUpdate(QueryUtils.querySetter(Query.POST.insertFormat, num, category, postNum, "", "", "1999-01-01", ""));
+			DataBase.getInstance().executeUpdate(
+					QueryUtils.querySetter(Query.POST.insertFormat, num, category, postNum, "", "", "1999-01-01", ""));
 			post = PostModel.getPost(category, postNum);
 			if (post != null) {
-				for (Object file : files) {
-					JSONArray arr = (JSONArray) file;
-					Attachment attachment = new Attachment(post.getNumber(), arr.get(0).toString(),
-							arr.get(2).toString());
-					list.add(attachment);
+				AttachmentList list = new AttachmentList();
+				if (article.getElementsByTag("dd").size() != 0) {
+					Elements files = article.getElementsByTag("dd").get(0).getElementsByTag("a");
+					for (int i = 0; i < files.size(); i++) {
+						Element item = files.get(i++);
+						Attachment attachment = new Attachment(num, item.text(), item.attr("href"));
+						list.add(attachment);
+					}
 				}
 				post.setTitle(title);
 				post.setWriter(writer);

@@ -1,11 +1,8 @@
 package com.dms.parser.dataio;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,24 +15,14 @@ public class ParserUtils {
 	// <parameter>접속하고자 하는 url</parameter>
 	/// <remarks></remarks>
 	public static Document getDoc(String url) {
-		Document resultDocument = null;
 		try {
-			StringBuffer buffer = new StringBuffer();
-			URL urlObj = new URL(url);
-			URLConnection connection = urlObj.openConnection();
-			connection.setDoInput(true);
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				buffer.append(line + "\n");
-			}
-			resultDocument = Jsoup.parse(buffer.toString());
+			return Jsoup.parse(new URL(url), 5000);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return resultDocument;
+		return null;
 	}
 
 	/// <author>BoxFox (rlatjdfo112@naver.com)</author>
