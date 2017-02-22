@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_GOINGOUT_STATUS)
+@ActionRegistration(command = Commands.LOAD_GOINGOUT_APPLY_STATUS)
 public class LoadGoingoutApplyStatus implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
