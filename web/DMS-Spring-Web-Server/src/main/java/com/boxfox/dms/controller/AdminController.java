@@ -53,8 +53,11 @@ public class AdminController {
 		int type = Integer.valueOf(request.getParameter("type"));
 		BoardDAO targetDAO;
 		switch(type) {
-		case 
 		}
 	}
 	
+
+	@RequestMapping(value = "/admin/write/", method = RequestMethod.POST)
+	public void home(HttpServletRequest request) {
+	}
 }
