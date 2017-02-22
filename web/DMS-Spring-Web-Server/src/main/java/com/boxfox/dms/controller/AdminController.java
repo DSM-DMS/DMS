@@ -57,7 +57,9 @@ public class AdminController {
 	}
 	
 
-	@RequestMapping(value = "/admin/write/", method = RequestMethod.POST)
-	public void home(HttpServletRequest request) {
+	@RequestMapping(value = "/admin/download", method = RequestMethod.POST)
+	public void download(HttpServletRequest request) {
+		if(request.getCookies())
+		String target = request.getParameter("target");
 	}
 }
