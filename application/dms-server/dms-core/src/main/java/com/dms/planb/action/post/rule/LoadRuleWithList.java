@@ -13,14 +13,22 @@ import com.dms.planb.support.Commands;
 @ActionRegistration(command = Commands.LOAD_RULE)
 public class LoadRuleWithList implements Actionable {
 	EasyJsonObject tempObject;
+	SafeResultSet resultSet;
 	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int page = requestObject.getInt("page");
-		int limit = requestObject.getInt("limit");
-		
 		// Both list and content
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
+		if(requestObject.isEmpty()) {
+			resultSet = database.executeQuery("SELECT * FROM rule");
+			/*
+			 * Responses all of posts
+			 */
+		} else {
+			int page = requestObject.getInt("page");
+			int limit = requestObject.getInt("limit");
+			
+			resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
+		}
 		
 		int postCount = 0;
 		if(resultSet.next()) {

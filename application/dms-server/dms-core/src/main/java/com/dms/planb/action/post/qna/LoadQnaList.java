@@ -13,17 +13,24 @@ import com.dms.planb.support.Commands;
 @ActionRegistration(command = Commands.LOAD_QNA_LIST)
 public class LoadQnaList implements Actionable {
 	EasyJsonObject tempObject;
+	SafeResultSet resultSet;
 	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int page = requestObject.getInt("page");
-		int limit = requestObject.getInt("limit");
-		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM qna limit ", ((page - 1) * limit), ", ", limit);
+	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {		
+		if(requestObject.isEmpty()) {
+			resultSet = database.executeQuery("SELECT * FROM qna");
+			/*
+			 * Responses all of posts
+			 */
+		} else {
+			int page = requestObject.getInt("page");
+			int limit = requestObject.getInt("limit");
+			
+			resultSet = database.executeQuery("SELECT * FROM qna limit ", ((page - 1) * limit), ", ", limit);
+		}
 		
 		int postCount = 0;
 		if(resultSet.next()) {
-			// There're any posts in qna
 			do {
 				tempObject = new EasyJsonObject();
 				

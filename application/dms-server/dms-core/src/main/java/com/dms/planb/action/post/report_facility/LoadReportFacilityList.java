@@ -13,13 +13,21 @@ import com.dms.planb.support.Commands;
 @ActionRegistration(command = Commands.LOAD_REPORT_FACILITY_LIST)
 public class LoadReportFacilityList implements Actionable {
 	EasyJsonObject tempObject;
+	SafeResultSet resultSet;
 	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int page = requestObject.getInt("page");
-		int limit = requestObject.getInt("limit");
-		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM facility_report limit ", ((page - 1) * limit), ", ", limit);
+	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {		
+		if(requestObject.isEmpty()) {
+			resultSet = database.executeQuery("SELECT * FROM facility_report");
+			/*
+			 * Responses all of posts
+			 */
+		} else {
+			int page = requestObject.getInt("page");
+			int limit = requestObject.getInt("limit");
+			
+			resultSet = database.executeQuery("SELECT * FROM facility_report limit ", ((page - 1) * limit), ", ", limit);
+		}
 		
 		int postCount = 0;
 		if(resultSet.next()) {
