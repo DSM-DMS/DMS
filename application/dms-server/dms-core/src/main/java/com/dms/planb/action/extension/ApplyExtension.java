@@ -36,9 +36,10 @@ public class ApplyExtension implements Actionable {
 		int classId = requestObject.getInt("class");
 		int seatId = requestObject.getInt("seat");
 		String name = requestObject.getString("name");
+		String id = requestObject.getString("id");
 		
-		database.executeUpdate("DELETE FROM extension_apply WHERE name='", name, "'");
-		int status = database.executeUpdate("INSERT INTO extension_apply(class, seat, name) VALUES('", classId, "', ", seatId, ", ", name, ")");
+		database.executeUpdate("DELETE FROM extension_apply WHERE id='", id, "'");
+		int status = database.executeUpdate("INSERT INTO extension_apply(class, seat, name, id) VALUES(", classId, ", ", seatId, ", '", name, "', '", id, "')");
 		
 		responseObject.put("status", status);
 		

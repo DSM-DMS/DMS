@@ -13,9 +13,9 @@ import com.dms.planb.support.Commands;
 public class WithdrawExtensionApply implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		String name = requestObject.getString("name");
+		String id = requestObject.getString("id");
 		
-		int status = database.executeUpdate("DELETE extension_apply WHERE name='", name, "'");
+		int status = database.executeUpdate("DELETE extension_apply WHERE id='", id, "'");
 		
 		responseObject.put("status", status);
 		
