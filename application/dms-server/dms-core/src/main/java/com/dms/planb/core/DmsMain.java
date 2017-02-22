@@ -41,8 +41,7 @@ class DmsMain {
 	private static VertxOptions options;
 	
 	/**
-	 * @see com.dms.planb.action.updateaction
-	 * .ModifyProfileImage
+	 * @see com.dms.planb.action.account.ModifyProfileImage
 	 */
 	private static File profileImgDir = new File("Profile Images");	
 	/*
