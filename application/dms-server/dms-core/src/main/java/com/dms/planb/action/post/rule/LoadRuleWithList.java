@@ -35,12 +35,12 @@ public class LoadRuleWithList implements Actionable {
 				
 				postCount++;
 			} while(resultSet.next());
+			
+			responseObject.put("num_of_post", postCount);
+			responseObject.put("result", array);
 		} else {
 			responseObject.put("status", 404);
 		}
-		
-		responseObject.put("num_of_post", postCount);
-		responseObject.put("result", array);
 		
 		return responseObject;
 	}

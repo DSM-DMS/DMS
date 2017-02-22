@@ -36,6 +36,6 @@ public class LoadExtensionClassStatus implements Actionable {
 			responseObject.put("status", 404);
 		}
 		
-		return null;
+		return responseObject;
 	}
 }

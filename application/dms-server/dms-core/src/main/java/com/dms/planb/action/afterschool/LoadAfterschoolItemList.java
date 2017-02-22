@@ -35,11 +35,11 @@ public class LoadAfterschoolItemList implements Actionable {
 
 				array.add(tempObject);
 			} while(resultSet.next());
+			
+			responseObject.put("result", array);
 		} else {
 			responseObject.put("status", 404);
 		}
-		
-		responseObject.put("result", array);
 		
 		return responseObject;
 	}
