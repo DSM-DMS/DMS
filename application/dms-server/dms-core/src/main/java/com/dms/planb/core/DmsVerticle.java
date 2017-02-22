@@ -109,7 +109,6 @@ class DmsVerticle extends AbstractVerticle {
 					// 2. Ready to response to client. Set status code in try-catch
 					response = request.response();
 					response.putHeader("content-type", "application/json; charset=utf-8");
-					response.putHeader("content-length", "1000000");
 					
 					try {
 						/*
