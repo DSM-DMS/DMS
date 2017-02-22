@@ -18,9 +18,9 @@ public class ApplyExtension implements Actionable {
 		/**
 		 * Table Name : extension_apply
 		 * 
-		 * id VARCHAR(20) PK NN
-		 * class INT(1) NN
-		 * seat INT(2) NN
+		 * class INT(1) NN PK,
+		 * seat INT(2) NN PK,
+		 * name VARCHAR(20) NN
 		 */
 		Calendar currentTime = Calendar.getInstance();
 		int hour = currentTime.get(Calendar.HOUR_OF_DAY);
@@ -33,14 +33,12 @@ public class ApplyExtension implements Actionable {
 			return responseObject;
 		}
 		
-		
-		
-		String id = requestObject.getString("id");
 		int classId = requestObject.getInt("class");
 		int seatId = requestObject.getInt("seat");
+		String name = requestObject.getString("name");
 		
-		database.executeUpdate("DELETE FROM extension_apply WHERE id='", id, "'");
-		int status = database.executeUpdate("INSERT INTO extension_apply(id, class, seat) VALUES('", id, "', ", classId, ", ", seatId, ")");
+		database.executeUpdate("DELETE FROM extension_apply WHERE name='", name, "'");
+		int status = database.executeUpdate("INSERT INTO extension_apply(class, seat, name) VALUES('", classId, "', ", seatId, ", ", name, ")");
 		
 		responseObject.put("status", status);
 		
