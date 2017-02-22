@@ -1,4 +1,4 @@
-package com.dms.planb.action.selectaction;
+package com.dms.planb.action.post.report_facility;
 
 import java.sql.SQLException;
 

@@ -1,4 +1,4 @@
-package com.dms.planb.action.selectaction;
+package com.dms.planb.action.post.rule;
 
 import java.sql.SQLException;
 

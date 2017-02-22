@@ -1,4 +1,4 @@
-package com.dms.planb.action.selectaction;
+package com.dms.planb.action.post.report_facility;
 
 import java.sql.SQLException;
 
@@ -7,17 +7,17 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-import com.dms.parser.dataio.post.PostModel;
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_COMPETITION_LIST)
-public class LoadCompetitionList implements Actionable {
+@ActionRegistration(command = Commands.DELETE_REPORT_FACILITY)
+public class DeleteReportFacility implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int category = requestObject.getInt("category");
-		int no = requestObject.getInt("page");
+		int no = requestObject.getInt("no");
 		
-		responseObject.put("result", PostModel.getPostsAtPage(category, no));
+		int status = database.executeUpdate("DELETE facility_report WHERE no=", no);
+		
+		responseObject.put("status", status);
 		
 		return responseObject;
 	}

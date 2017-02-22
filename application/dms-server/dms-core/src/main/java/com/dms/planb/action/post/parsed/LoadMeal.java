@@ -1,4 +1,4 @@
-package com.dms.planb.action.deleteaction;
+package com.dms.planb.action.post.parsed;
 
 import java.sql.SQLException;
 
@@ -7,17 +7,18 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
+import com.dms.parser.dataio.meal.MealModel;
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.DELETE_RULE)
-public class DeleteRule implements Actionable {
+@ActionRegistration(command = Commands.LOAD_MEAL)
+public class LoadMeal implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+		int year = requestObject.getInt("year");
+		int month = requestObject.getInt("month");
+		int day = requestObject.getInt("day");
 		
-		int status = database.executeUpdate("DELETE FROM rule WHERE no=", no);
-		
-		responseObject.put("status", status);
+		responseObject.put("result", MealModel.getMealAtDate(year, month, day).toJSONObject());
 		
 		return responseObject;
 	}

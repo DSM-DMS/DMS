@@ -1,4 +1,4 @@
-package com.dms.planb.action.selectaction;
+package com.dms.planb.action.post.parsed;
 
 import java.sql.SQLException;
 
@@ -10,8 +10,8 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.parser.dataio.post.PostModel;
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_NEWSLETTER)
-public class LoadNewsletter implements Actionable {
+@ActionRegistration(command = Commands.LOAD_COMPETITION)
+public class LoadCompetition implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int number = requestObject.getInt("number");

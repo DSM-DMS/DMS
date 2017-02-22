@@ -1,4 +1,4 @@
-package com.dms.planb.action.selectaction;
+package com.dms.planb.action.post.parsed;
 
 import java.sql.SQLException;
 
@@ -7,18 +7,17 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
-import com.dms.parser.dataio.meal.MealModel;
+import com.dms.parser.dataio.post.PostModel;
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_MEAL)
-public class LoadMeal implements Actionable {
+@ActionRegistration(command = Commands.LOAD_NOTICE_LIST)
+public class LoadNoticeList implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int year = requestObject.getInt("year");
-		int month = requestObject.getInt("month");
-		int day = requestObject.getInt("day");
+		int category = requestObject.getInt("category");
+		int no = requestObject.getInt("page");
 		
-		responseObject.put("result", MealModel.getMealAtDate(year, month, day).toJSONObject());
+		responseObject.put("result", PostModel.getPostsAtPage(category, no));
 		
 		return responseObject;
 	}
