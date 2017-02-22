@@ -16,7 +16,10 @@ public class LoadReportFacilityList implements Actionable {
 	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM facility_report");
+		int page = requestObject.getInt("page");
+		int limit = requestObject.getInt("limit");
+		
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM facility_report limit ", ((page - 1) * 10), ", ", limit);
 		
 		int postCount = 0;
 		if(resultSet.next()) {

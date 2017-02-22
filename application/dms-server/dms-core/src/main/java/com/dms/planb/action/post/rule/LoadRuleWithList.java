@@ -16,8 +16,11 @@ public class LoadRuleWithList implements Actionable {
 	
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
+		int page = requestObject.getInt("page");
+		int limit = requestObject.getInt("limit");
+		
 		// Both list and content
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM rule");
+		SafeResultSet resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * 10), ", ", limit);
 		
 		int postCount = 0;
 		if(resultSet.next()) {
