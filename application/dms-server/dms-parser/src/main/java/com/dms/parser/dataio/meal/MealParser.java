@@ -108,7 +108,7 @@ public class MealParser extends Parser {
 		}
 		for (int i = 0; i < meals.length; i++)
 			if (meals[i] == null)
-				meals[i] = new Meal(new JSONArray(), new JSONArray());
+				meals[i] = new Meal(null, null);
 		return new DayMeal(QueryUtils.queryCreateDate(year, month, day), meals);
 	}
 
