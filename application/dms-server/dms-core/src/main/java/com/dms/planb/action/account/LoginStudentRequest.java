@@ -34,7 +34,8 @@ public class LoginStudentRequest implements Actionable {
 			 */
 			responseObject.put("permit", true);
 			
-			SafeResultSet tempResultSet = database.executeQuery("SELECT number, name, merit, demerit FROM student_data WHERE id='", id, "'");
+			SafeResultSet tempResultSet = database.executeQuery("SELECT * FROM student_data WHERE id='", id, "'");
+			tempResultSet.next();
 			
 			responseObject.put("number", tempResultSet.getInt("number"));
 			responseObject.put("name", tempResultSet.getString("name"));
