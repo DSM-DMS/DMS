@@ -1380,6 +1380,66 @@ function PointApplyPage() {
 }
 PointApplyPage.prototype = new ClientPage();
 
+// 자식 객체는 setEvent() 구현해야함
+// 자식 객체는 form 초기화 해야함
+function GoOutApplyPage() {
+    this.form =
+        '<div class="frametitle">' +
+        '<h1>외출신청</h1>' +
+        '<div class="underline"></div>' +
+        '</div>' +
+        '<form id="apply_form">' +
+        '<input id="day" type="hidden" name="day">' +
+        '<table id="select_table">' +
+        '<tr>' +
+        '<td id="selection">신청</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td id="sat" hidden>토요일</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td id="sun" hidden>일요일</td>' +
+        '</tr>' +
+        '</table>' +
+        '</form>' +
+        '<div id="submit_button">신청</div>';
+
+    this.setEvent = function() {
+        clickable = true;
+
+        $('#selection').on("click", function () {
+          if(clickable) {
+            $("#select_table td:eq(1), td:eq(2)").show();
+            clickable = false;
+
+            $("#sat").on("click", function () {
+              $('#selection').text('토요일')
+              $('#day').attr('value', '토요일');
+              $("#select_table td:eq(1), td:eq(2)").hide();
+              clickable = true;
+            });
+
+            $('#sun').on("click", function () {
+              $('#selection').text('일요일');
+              $('#day').attr('value', '일요일');
+              $("#select_table td:eq(1), td:eq(2)").hide();
+              clickable = true;
+            });
+
+          } else {
+            $("#select_table td:eq(1), td:eq(2)").hide();
+            clickable = true;
+          }
+        });
+
+        $('#submit_button').on('click', function () {
+          $('#apply_form').submit();
+        });
+        
+    }
+}
+GoOutApplyPage.prototype = new ClientPage();
+
 // 객체는 setData(), setEvent() 구현해야함
 // 객체는 form, command, sendData 초기화 해야함
 function Mypage() {
