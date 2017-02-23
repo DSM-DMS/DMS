@@ -1,9 +1,10 @@
-package org.boxfox.dms.secure;
+package org.boxfox.dms.secure.action;
 
 import java.sql.SQLException;
 
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.RSA;
+import org.boxfox.dms.secure.SecureManager;
 import org.boxfox.dms.utilities.actions.ActionRegistration;
 import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;

@@ -1,4 +1,4 @@
-package org.boxfox.dms.secure;
+package org.boxfox.dms.secure.action;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;

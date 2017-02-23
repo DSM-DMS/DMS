@@ -3,7 +3,7 @@ package com.dms.parser.dataio;
 import org.boxfox.dms.utilities.database.DataSaveAble;
 
 public abstract class Parser {
-	public static final String URL_MEAL = "http://dsm.hs.kr/segio/meal/meal.php?year=?&month=?&day=?";
+	public static final String URL_MEAL = "http://stu.dje.go.kr/sts_sci_md00_001.do?schulCode=G100000170&schulCrseScCode=4&schulKndScCode=04&schYm=?";
 	public static final String URL_PLAN = "http://dsm.hs.kr/segio/plan_v2/month_cont.php?lid=main&sdate_ms=?";
 	public static final String LINK = "http://dsmhs.djsch.kr/boardCnts/view.do";
 	public static final String URL_BROAD = "http://dsmhs.djsch.kr/boardCnts/list.do?boardID=54793&m=0201&s=dsmhs&page=?";
