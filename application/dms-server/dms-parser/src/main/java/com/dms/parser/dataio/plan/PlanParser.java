@@ -1,19 +1,12 @@
 package com.dms.parser.dataio.plan;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.DataSaveAble;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -27,7 +20,7 @@ public class PlanParser extends Parser {
 	private int year, month;
 
 	public PlanParser(int year, int month) {
-		this.url = (ParserUtils.getUrl(URL_PLAN, getTimeStemp(year, month)));
+		this.url = (ParserUtils.getUrl(URL_PLAN, year, String.format("%02d", month)));
 		this.year = year;
 		this.month = month;
 	}
