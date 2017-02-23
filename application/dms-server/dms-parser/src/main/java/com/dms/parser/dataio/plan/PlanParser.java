@@ -25,16 +25,6 @@ public class PlanParser extends Parser {
 		this.month = month;
 	}
 
-	private static long getTimeStemp(int year, int month) {
-		Date currentDate = new Date(year, month, 15);
-		Date standardDate = new Date(1970, 1, 1);
-		long time = currentDate.getTime();
-		long times = standardDate.getTime();
-		Timestamp ts = new Timestamp(time);
-		Timestamp ts2 = new Timestamp(times);
-		long ResultData = (ts.getTime() - ts2.getTime()) / 1000;
-		return ResultData;
-	}
 
 	@Override
 	public DataSaveAble parse() {
@@ -51,7 +41,7 @@ public class PlanParser extends Parser {
 	}
 
 	public MonthPlan parse(int year, int month) {
-		this.url = (ParserUtils.getUrl(URL_PLAN, getTimeStemp(year, month)));
+		this.url = (ParserUtils.getUrl(URL_PLAN, year, String.format("%02d", month)));
 		this.year = year;
 		this.month = month;
 		return doParse();

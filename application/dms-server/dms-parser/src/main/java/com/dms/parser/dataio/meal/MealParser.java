@@ -41,14 +41,14 @@ public class MealParser extends Parser {
 	@Override
 	public DayMeal[] parseAll() {
 		List<DayMeal> list = parse(ParserUtils.getDoc(url).getElementsByTag("table").get(0).html());
-		for(DayMeal meal : list){
+		for (DayMeal meal : list) {
 			try {
 				DataBase.getInstance().execute(meal);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return (DayMeal[])list.toArray();
+		return list.toArray(new DayMeal[list.size()]);
 	}
 
 	private List<DayMeal> parse(String rawData) {
@@ -80,39 +80,35 @@ public class MealParser extends Parser {
 	}
 
 	private DayMeal parseDay(String rawData, int day) {
-
 		Meal[] meals = new Meal[3];
 
 		rawData = rawData.replace("(석식)", "");
 		rawData = rawData.replace("(선)", "");
 
-		String[] chunk = rawData.split("<br/>");
-		int time = -1;
-		JSONArray menu = null, allergy = null;
+		String[] chunk = rawData.split("\\[(.*?)\\]");
 
-		for (int i = 1; i < chunk.length; i++) {
+		for (int j = 1; j < chunk.length; j++) {
+			JSONArray menu = new JSONArray(), allergy = new JSONArray();
+			String[] chunks = chunk[j].split("<br>");
+			for (int i = 1; i < chunks.length; i++) {
+				if (chunks[i].trim().length() < 1)
+					continue;
 
-			if (chunk[i].trim().length() < 1)
-				continue;
-
-			if (chunk[i].matches("\\[(.*?)\\]")) {
-				if (time > -1) {
-					meals[time] = new Meal(menu, allergy);
-				}
-				menu = new JSONArray();
-				allergy = new JSONArray();
-				time++;
-				continue;
-			}
-			menu.add(chunk[i].split("\\*")[0]);
-			String[] allergis = chunk[i].split("\\*")[1].split(".");
-			for (String a : allergis) {
-				if (!allergy.contains(a)) {
-					allergy.add(a);
+				menu.add(chunks[i].split("\\*")[0]);
+				if (chunks[i].split("\\*").length > 1) {
+					String[] allergis = chunks[i].split("\\*")[1].split("\\.");
+					for (String a : allergis) {
+						if (!allergy.contains(a)) {
+							allergy.add(a);
+						}
+					}
 				}
 			}
-
+			meals[j - 1] = new Meal(menu, allergy);
 		}
+		for (int i = 0; i < meals.length; i++)
+			if (meals[i] == null)
+				meals[i] = new Meal(new JSONArray(), new JSONArray());
 		return new DayMeal(QueryUtils.queryCreateDate(year, month, day), meals);
 	}
 
