@@ -354,6 +354,8 @@ var pageStack = [];
 // |   |    |    | -- NoticeListPage
 // |   |    |    |
 // |   |    |    | -- RuleListPage
+// |   |    |    |
+// |   |    |    | -- FacilityListPage 구현 미완료
 // |   |    |
 // |   |    | -- AfterSchoolArticlePage
 // |   |    |
@@ -362,6 +364,8 @@ var pageStack = [];
 // |   |    | -- GoHomeApplyPage 구현 미완료
 // |   |    |
 // |   |    | -- Mypage 구현 중
+// |   |    |
+// |   |    | -- MainPage 구현 중
 // |   |
 // |   | -- NonAjaxPage(추상)
 // |        |
@@ -507,6 +511,41 @@ function ServerPage() {
 // Page객체 상속
 ServerPage.prototype = new Page();
 
+// 메인페이지
+// 공지사항 가져오고, 급식정보 가져와야함
+// 자식객체는 setDate, setEvent구현해야 함
+// 자식객체는 form, command, sendData 초기화 해야함
+// MainPage는 약간 다른것이 요청해야하는 정보가 2개임 (공지사항, 급식)
+// getData 재정의 해야함 (급식, 공지 다 받아오도록)
+// 아직 알고 있는게 하나도 없어서 구현을 못하겠다.
+function MainPage() {
+    // 웹용 공지는 아직 없는것 같다.
+    this.notoceCommand;
+    this.mealCommand = 438;
+
+    this.form;
+
+    // 공지 ajax + 급식 ajax
+    this.getData = function() {
+
+    }
+
+    // 공지 셋팅 + 급식
+    // 급식 reseponse형식을 아직 모르겠다.
+    this.setData = function() {
+
+    }
+
+    // 공지 클릭시, notice글 받아오기 + 급식 알러지 정보
+    this.setEvent = function() {
+
+    }
+
+}
+
+MainPage.prototype = new AjaxPage();
+
+
 // 리스트 페이지
 // faqlist, qnalist, afterschoollist, noticelist
 // setEvent구현 완료
@@ -536,7 +575,8 @@ function ArticleListPage() {
     this.reload = function() {
         // 데이터를 다시 받아오기 전에 sendData 다시 초기화
         this.sendData = {
-            "page": this.page
+            "page": this.page,
+            "limit": this.getListLength();
         };
         this.getData();
         // table초기화 전에 header를 저장해 둠
@@ -880,6 +920,117 @@ function AfterSchoolListPage() {
 }
 
 AfterSchoolListPage.prototype = new ArticleListPage();
+
+// form, command, sendData 초기화 해야함
+function FacilityListPage() {
+    this.form =
+        '<div class="frame left articlelist">' +
+        '<div class="frametitle">' +
+        '<h1>FAQ</h1>' +
+        '<div class="underline puple"></div>' +
+        '</div>' +
+        '<table class="list">' +
+        '<tr class="tableheader">' +
+        '<th>번호</th>' +
+        '<th>제목</th>' +
+        '<th>호실</th>' +
+        '<th>작성일</th>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '<table class="page">' +
+        '<tr>' +
+        '</tr>' +
+        '</table>';
+    this.sendData = {
+        "page": this.page
+    };
+    this.type = "faq";
+    this.command = "415";
+    this.setData = function() {
+        for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
+            var newTr = $('<tr/>', {
+                click: function(e) {
+                    // 클릭이벤트
+                    // 새로운 AjaxPage 만들어서 생성해야 할듯
+                    new FacilityArticlePage(this.ajaxData.result[loop].no);
+                    pageStack.push(this);
+                }
+            });
+            var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].title;
+            if (this.ajaxData[loop].has_result) {
+                appendString += '<img src="../image/pupleCheck.png" alt="check image">';
+            }
+            appendString += +"</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].room + "</td>";
+            appendString += "<td>" + this.ajaxData.result[loop].write_date + "</td>";
+
+            newTr.append(appendString);
+            $(".articlelist table.list").append(newTr);
+        }
+        this.setPageData();
+    }
+}
+
+FacilityListPage.prototype = new ArticleListPage();
+
+// 객체는 setData(), setEvent() 구현해야함
+// 객체는 form, command, sendData 초기화 해야함
+function FacilityArticlePage(no) {
+    this.command = 428;
+    this.form =
+        '<div class="frame left articlecontainer question">' +
+        '<div class="frametitle">' +
+        '<h2></h2>' +
+        '<p class="date">date</p>' +
+        '<div class="underline puple">' +
+        '</div>' +
+        '</div>' +
+        '<div class="article">' +
+        '</div>' +
+        '<hr>' +
+        '</div>' +
+        '</div>';
+    this.sendData = {
+        "no": no
+    };
+
+    this.setData = function() {
+        // 답변이 있으면, 답변 form 추가
+        if (this.ajaxData.result.has_result) {
+            $("div.articlecontainer").append(
+                '<div class="frame extention articlecontainer">' +
+                '<div class="frametitle">' +
+                '<h2>답변</h2>' +
+                '<p class="date">'+
+                this.ajaxData.result.result_date +
+                '</p>' +
+                '<div class="underline puple">' +
+                '</div>' +
+                '</div>' +
+                '<div class="article">' +
+                this.ajaxData.result.result +
+                '</div>' +
+                '<hr>'
+            );
+        }
+
+        // 질문 제목 셋팅
+        $("div.question div.frametitle h2").html = '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
+        this.ajaxData.result.title;
+
+        // 질문 내용 셋팅
+        $("div.question div.title").text(this.ajaxData.result.content);
+
+
+    }
+
+    // 이벤트가 없다
+    this.setEvent = function() {
+    }
+
+}
 
 // 객체는 setData(), setEvent() 구현해야함
 // 객체는 form, command, sendData 초기화 해야함

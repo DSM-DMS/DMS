@@ -17,7 +17,7 @@ body {
 }
 
 .back_arrow {
-    width: 2em !important;
+    height: 35px !important;
     cursor: pointer;
     float: left;
 }
@@ -613,6 +613,17 @@ body {
 }
 
 
+/*-------------------------------------qna list.-------------------------------*/
+
+.facility-list table.list tr td:nth-child(4) {
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+    min-width: 27px;
+}
+
+
 /*-------------------------------------mypage.-------------------------------*/
 
 body {
@@ -988,6 +999,7 @@ body {
     /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
 }
 
+
 /*---------------------- extentionapply select css-------*/
 
 .extentionapply div.class-selecter-div {
@@ -1016,13 +1028,15 @@ body {
     line-height: 40px;
     padding: 0 10px;
     opacity: 0;
-    filter: alpha(opacity=0); /* IE 8 */
+    filter: alpha(opacity=0);
+    /* IE 8 */
 }
 
 .extentionapply div.selecter-container {
     text-align: center;
     margin-top: 20px;
 }
+
 
 /*---------------------- extentionapply applycancle css-------*/
 
