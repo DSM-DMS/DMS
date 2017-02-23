@@ -33,7 +33,7 @@ public class UploadQnaQuestion implements Actionable {
 		String content = requestObject.getString("question_content");
 		String writer = requestObject.getString("writer");
 		
-		int privacy = requestObject.getInt("privacy");
+		boolean privacy = requestObject.getBoolean("privacy");
 		
 		int status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");
 		
