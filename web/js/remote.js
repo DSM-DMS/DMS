@@ -610,6 +610,9 @@ function MainPage() {
                     new NoticePage("notice", this.ajaxData.noticeData.no);
                 }
             }).appendTo("ul.notice");
+
+            // li DOM에 no 저장
+            newLi.data("no", this.ajaxData.noticeData.result.no);
             var appendString =
                 '<p class="title">' + this.ajaxData.noticeData.result.title + '</p>';
             appendString +=
@@ -617,37 +620,80 @@ function MainPage() {
             newLi.append(appendString);
         }
 
-        //급식은 reseponse형태를 아직 모르겠음
-        // meal 형식
-        // "result": {
-        //   "Meals": [
-        //     {
-        //       "Allergy": [],
-        //       "Menu": []
-        //     },
-        //     {
-        //       "Allergy": [],
-        //       "Menu": []
-        //     },
-        //     {
-        //       "Allergy": [],
-        //       "Menu": []
-        //     }
-        //   ],
-        //   "Date": "2017-02-22"
-        // }
-
+        // 메뉴 채우기
         var mealArr = $(".right div.menues div.meal div.info");
-        for(var loop = 0; loop < mealArr.length; loop++) {
-            $(mealArr[loop]).children().eq(1).text(this.ajaxData.mealData.result.Meals[loop].Menu);
+        for (var loop = 0; loop < mealArr.length; loop++) {
+            var menuString = "";
+            for (var innerLoop = 0; innerLoop < this.ajaxData.mealData.result.Meals[loop].Menu.length; innerLoop++) {
+                menuString += this.ajaxData.mealData.result.Meals[loop].Menu[innerLoop];
+                if (innerLoop != this.ajaxData.mealData.result.Meals[loop].Menu.length - 1) {
+                    menuString += " / "
+                }
+            }
+            $(mealArr[loop]).children().eq(1).text(menuString);
+        }
+
+        // 알러지 채우기
+        var mealArr = $(".right div.menues div.meal div.info");
+        for (var loop = 0; loop < mealArr.length; loop++) {
+            var allergyString = "";
+            for (var innerLoop = 0; innerLoop < this.ajaxData.mealData.result.Meals[loop].Allergy.length; innerLoop++) {
+                allergyString += this.ajaxData.mealData.result.Meals[loop].Allergy[innerLoop];
+                if (innerLoop != this.ajaxData.mealData.result.Meals[loop].Allergy.length - 1) {
+                    allergyString += " / "
+                }
+            }
+            $(mealArr[loop]).children().eq(2).children().eq(0).text(allergyString);
         }
 
     }
 
     // 공지 클릭시, notice글 받아오기 + 급식 알러지 정보
     this.setEvent = function() {
-        $(".right div.menues div.meal img").click(function() {
-            // 알러지 정보 출력 페이지
+        // 공지사항 글로 넘어가는 이벤트
+        var liArr = $(".left ul.notice li");
+        for (var loop = 0; loop < liArr.length; loop++) {
+            $(liArr[loop]).click(function() {
+                new NoticePage("notice", $(liArr[loop]).data("no"));
+                pageStack.push(this);
+            })
+        }
+
+        // 알러지 보여주는 이벤트
+        $(".right .mornig img").click(function() {
+            // 알러지 정보를 가져와야함
+            if ($(this).data("clicked") == false || $(this).data("clicked") === undefined) {
+                $(this).data("clicked", true);
+                $(".right .mornig .info .div-allergy").show(100)
+            } else {
+                // 알러지 정보를 집어넣어야함
+                $(this).data("clicked", false);
+                $(".right .mornig .info .div-allergy").hide(100)
+            }
+        })
+
+        $(".right .lunch img").click(function() {
+            // 알러지 정보를 가져와야함
+            if ($(this).data("clicked") == false || $(this).data("clicked") === undefined) {
+                $(this).data("clicked", true);
+                $(".right .lunch .info .div-allergy").show(100)
+            } else {
+                // 알러지 정보를 집어넣어야함
+                $(this).data("clicked", false);
+                $(".right .lunch .info .div-allergy").hide(100)
+            }
+        })
+
+        $(".right .dinner img").click(function() {
+            // 알러지 정보를 가져와야함
+            if ($(this).data("clicked") == false || $(this).data("clicked") === undefined) {
+                $(this).data("clicked", true);
+                $(".right .dinner .info .div-allergy").show(100)
+            } else {
+                // 알러지 정보를 집어넣어야함
+                $(this).data("clicked", false);
+                $(".right .dinner .info .div-allergy").hide(100)
+            }
         })
     }
 
@@ -686,7 +732,7 @@ function ArticleListPage() {
         // 데이터를 다시 받아오기 전에 sendData 다시 초기화
         this.sendData = {
             "page": this.page,
-            "limit": this.getListLength();
+            "limit": this.getListLength()
         };
         this.getData();
         // table초기화 전에 header를 저장해 둠
@@ -1714,21 +1760,21 @@ function GoOutApplyPage() {
         });
 
         $('#submit_button').on('click', function() {
-          $.ajax({
-              url: "dsm2015.cafe24.com",
-              type: "POST",
-              data: {
-                  "id": id,
-                  "day": this.sendData,
-              },
-              beforeSend: function(xhr) {
-                  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                  xhr.setRequestHeader("command", 503);
-              },
-              success: function() {
-                  alert('신청되었습니다.');
-              }
-          });
+            $.ajax({
+                url: "dsm2015.cafe24.com",
+                type: "POST",
+                data: {
+                    "id": id,
+                    "day": this.sendData,
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                    xhr.setRequestHeader("command", 503);
+                },
+                success: function() {
+                    alert('신청되었습니다.');
+                }
+            });
 
         });
 
@@ -1836,10 +1882,10 @@ function QnaArticlePage(type, no) {
         })
 
         // 댓글수정, 댓글삭제, 댓글전송 이벤트 등록
-        $(".answer .comment table td span.comment-modify").click(function () {
+        $(".answer .comment table td span.comment-modify").click(function() {
             // 댓글 수정
         })
-        $(".answer .comment table td span.comment-delete").click(function () {
+        $(".answer .comment table td span.comment-delete").click(function() {
             // 댓글 삭제
         })
 

@@ -135,6 +135,7 @@ div#mceu_11 {
     margin-top: 20px;
 }
 
+
 /*margin left 7%*/
 
 .margin-left-7 {
@@ -331,7 +332,7 @@ a.dropdown-toggle .count {
     /*padding: 5% 0%;*/
 }
 
-.right .meal p {
+.right .meal p, div.div-allergy p {
     display: inline-block;
     vertical-align: middle;
     width: 70%;
@@ -356,6 +357,55 @@ a.dropdown-toggle .count {
     vertical-align: middle;
     /*height: 30%;*/
     height: 25px;
+}
+
+.right div.menues div.meal div.info div.div-allergy {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.blue-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    /* Standard syntax */
+}
+
+.puple-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    /* Standard syntax */
+}
+
+.red-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    /* Standard syntax */
 }
 
 
@@ -1280,7 +1330,7 @@ body {
     width: 100%;
 }
 
-#facility-form > div {
+#facility-form>div {
     margin: auto;
     margin-top: 10px;
     width: 80%;
@@ -1303,6 +1353,7 @@ body {
     transition: all 1s ease;
     padding: 2px;
 }
+
 
 /*----------------------------- each colors -------------------*/
 
