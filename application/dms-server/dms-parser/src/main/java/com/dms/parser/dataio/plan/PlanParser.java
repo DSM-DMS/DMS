@@ -25,7 +25,6 @@ public class PlanParser extends Parser {
 		this.month = month;
 	}
 
-
 	@Override
 	public DataSaveAble parse() {
 		return doParse();
@@ -48,21 +47,21 @@ public class PlanParser extends Parser {
 	}
 
 	private MonthPlan doParse() {
-		Element tbody = ParserUtils.getDoc(url).getElementsByClass("plist").get(0).getElementsByTag("tbody").get(0);
-		Elements tds = tbody.getElementsByTag("td");
-		boolean check = false;
 		MonthPlan monthPlan = new MonthPlan(year, month);
-		for (Element td : tds) {
-			Plan plan = getDayPlan(td);
-			if (plan.getDay() == 1) {
-				if (check)
-					break;
-				else
-					check = true;
-			} else if (!check)
+		Element tbody = ParserUtils.getDoc(url).getElementsByTag("tbody").get(0);
+		Elements items = tbody.getElementsByClass("textL");
+		Element[] itemsArray = items.toArray(new Element[items.size()]);
+		for (int i = 1; i < itemsArray.length; i++) {
+			Element planElement = itemsArray[i];
+			String dayStr = planElement.getElementsByTag("em").get(0).text();
+			if (dayStr.equals("") || dayStr.length() == 0)
 				continue;
-			if (plan.getDayPlan() == null)
-				continue;
+			int day = Integer.valueOf(dayStr);
+			Elements plans = itemsArray[i].getElementsByTag("strong");
+			JSONArray plansJsonArray = new JSONArray();
+			for (Element plan : plans)
+				plansJsonArray.add(plan.text());
+			Plan plan = new Plan(day, plansJsonArray);
 			monthPlan.addPlan(plan);
 		}
 		try {
@@ -71,20 +70,5 @@ public class PlanParser extends Parser {
 			e.printStackTrace();
 		}
 		return monthPlan;
-	}
-
-	private Plan getDayPlan(Element td) {
-		Plan planObj = null;
-		JSONArray plan = null;
-		int day = Integer.valueOf(td.getElementsByClass("left").get(0).text());
-		Elements elements = td.getElementsByClass("mday_pl");
-		if (elements.size() - 1 > 0) {
-			plan = new JSONArray();
-			for (int i = 0; i < elements.size() - 1; i++) {
-				plan.add(elements.get(i).text());
-			}
-		}
-		planObj = new Plan(day, plan);
-		return planObj;
 	}
 }
