@@ -1,5 +1,9 @@
 package com.boxfox.dms.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,8 +11,10 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +33,7 @@ import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.mapper.UserMapper;
 import com.boxfox.dms.users.dao.UserDAOImpl;
 import com.boxfox.dms.users.dto.UserDTO;
-import com.boxfox.dsm.xlsx.ResidualDownLoad;
+import com.boxfox.dsm.xlsx.ResidualDownLoadDAOImpl;
 
 /**
  * Handles requests for the application home page.
@@ -39,37 +45,41 @@ public class AdminController {
 	private static final int TYPE_QNA = 3;
 	private static final int TYPE_RULE = 4;
 	private static final int TYPE_NOTICE = 5;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
-    private NoticeDAOImpl noticeDAO;
+	private NoticeDAOImpl noticeDAO;
 
 	@Autowired
-    private FacilityDAOImpl facilityDAO;
+	private FacilityDAOImpl facilityDAO;
 
 	@Autowired
 	private QnaDAOImpl qnaDAO;
-	
+
 	@Autowired
-	private ResidualDownLoad residualFile;
-	
+	private UserDAOImpl userDAO;
+
+	@Autowired
+	private ResidualDownLoadDAOImpl residualDownload;
+
 	@RequestMapping(value = "/admin/write/", method = RequestMethod.POST)
 	public void home(HttpServletRequest request) {
 		int type = Integer.valueOf(request.getParameter("type"));
 		BoardDAO targetDAO;
-		switch(type) {
+		switch (type) {
 		}
 	}
-	
 
-	@RequestMapping(value = "/admin/download", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/download", method = RequestMethod.GET)
 	@ResponseBody
-	public FileSystemResource download(HttpServletRequest request) {
-		if(request.getCookies()){
-		String target = request.getParameter("target");
-	    return new FileSystemResource(residualFile.readExcel()); 
-		}
-		return null;
+	public void download(HttpServletRequest request, HttpServletResponse response) {
+		    try {
+		      InputStream is = new FileInputStream(residualDownload.readExcel());
+		      IOUtils.copy(is, response.getOutputStream());
+		      response.flushBuffer();
+		    } catch (IOException ex) {
+		      throw new RuntimeException("IOError writing file to output stream");
+		    }
 	}
 }

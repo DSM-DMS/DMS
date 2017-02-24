@@ -107,4 +107,14 @@ public class UserDAOImpl implements UserDAO {
 		return JsonBuilder.build(code, msg).toString();
 	}
 
+	@Override
+	public boolean checkAdminSession(String sessionKey) {
+		return false;
+	}
+
+	@Override
+	public boolean checkUserSession(String sessionKey) {
+		return false;
+	}
+
 }

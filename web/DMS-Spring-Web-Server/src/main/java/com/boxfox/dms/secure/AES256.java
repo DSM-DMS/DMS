@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.boxfox.dms.controller.AdminController;
 
 // 2016.03.12
+// need refactoring
 
 public class AES256 {
 	private static String ips;

@@ -81,7 +81,7 @@ public class PostController {
 		return page;
 	}
 
-	@RequestMapping(value = "/qna", params = { "no" })
+	/*@RequestMapping(value = "/qna", params = { "no" })
 	public String qnaView(Locale locale, Model model, @RequestParam(value = "no") int no) {
 		QnaPostContext post = qnaDAO.getPost(no);
 		if (post != null) {
@@ -96,7 +96,7 @@ public class PostController {
 			return "qna";
 		}
 		return page;
-	}
+	}*/
 	
 	@RequestMapping(value = "/writePost", method = RequestMethod.POST)
 	public String writePost(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {

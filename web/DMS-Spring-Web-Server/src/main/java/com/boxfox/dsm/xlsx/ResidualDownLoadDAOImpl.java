@@ -23,6 +23,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.users.dto.UserDataDTO;
@@ -31,20 +32,23 @@ import com.boxfox.dms.users.dto.UserDataDTO;
 //need refactoring
 
 @Repository
-public class ResidualDownLoad {
+public class ResidualDownLoadDAOImpl{
 	private static final String FORMAT_XLSX_FILE = "ÀÜ·ùÁ¶»çÆ÷¸Ë.xlsx";
 	private static final String FILE_PATH = "files/";
 	private static final String [] RESIDUAL_TYPE = new String[]{"±Ý¿ä±Í°¡", "Åä¿ä±Í°¡", "Åä¿ä±Í»ç", "ÀÜ·ù"};
 
 	@Autowired
+	private ResourceLoader resourceLoader;
+	
+	@Autowired
 	private SqlSession sqlSession;
 
 	private HashMap<String, String> map = new HashMap();
-
-	public String readExcel() {
+	
+	public File readExcel() {
 		initResidualMaps();
-		File xlsxFile = new File(FILE_PATH + FORMAT_XLSX_FILE);
 		try {
+			File xlsxFile = resourceLoader.getResource("classpath:ÀÜ·ùÁ¶»çÆ÷¸Ë.xlsx").getFile();
 			XSSFWorkbook workbook = processXlsx(xlsxFile);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = new Date();
@@ -52,7 +56,7 @@ public class ResidualDownLoad {
 			FileOutputStream fileoutputstream = new FileOutputStream(FILE_PATH + fileName);
 			workbook.write(fileoutputstream);
 			fileoutputstream.close();
-			return FILE_PATH+fileName;
+			return new File(FILE_PATH + fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -93,16 +97,25 @@ public class ResidualDownLoad {
 	private void initResidualMaps() {
 			UserMapper userMapper = (UserMapper) sqlSession.getMapper(UserMapper.class);
 			List<UserDataDTO> list = userMapper.residual();
+			String week = getWeek();
 
 			for (int i = 0; i < list.size(); i++) {
 				String typeStr = null;
-				Integer type = userMapper.residualAtWeek(list.get(i).getId());
+				Integer type = userMapper.residualAtWeek(list.get(i).getId(),getWeek());
 				if (type == null) {
 					type = list.get(i).getResidualDefault();
 				}
 				typeStr = RESIDUAL_TYPE[type-1];
 				map.put(list.get(i).getNumber() + "", typeStr);
 			}
+	}
+	
+	private String getWeek() {
+		Calendar calendar = Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH)+1;
+		int day = calendar.get(Calendar.WEEK_OF_MONTH);
+		return year+"-"+month+"-"+day;
 	}
 
 }
