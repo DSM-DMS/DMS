@@ -11,4 +11,5 @@ public interface UserDAO {
 	public String modifyPassword(String id, String password, String newPassword, String recapchaResponse);
 	public boolean checkAdminSession(HttpServletRequest request);
 	public boolean checkUserSession(HttpServletRequest request);
+	public String getIdBySession(HttpServletRequest request);
 }

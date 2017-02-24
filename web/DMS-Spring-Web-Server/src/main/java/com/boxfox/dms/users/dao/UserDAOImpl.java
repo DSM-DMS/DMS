@@ -105,7 +105,7 @@ public class UserDAOImpl implements UserDAO {
 		} else {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			UserRenameDTO user = new UserRenameDTO(id, newId, password);
-			if (userMapper.login(user)!=null) {
+			if (userMapper.login(user) != null) {
 				msg = FAIL_LOGIN;
 			} else if (userMapper.checkIdExist(newId) > 0) {
 				msg = ALREDY_EXSIT_ID;
@@ -131,7 +131,7 @@ public class UserDAOImpl implements UserDAO {
 		} else {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			UserModifyPasswordDTO user = new UserModifyPasswordDTO(id, password, newPassword);
-			if (userMapper.login(user)!=null) {
+			if (userMapper.login(user) != null) {
 				msg = FAIL_LOGIN;
 			} else {
 				if (userMapper.modifyPassword(user) > 0) {
@@ -183,6 +183,24 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return check;
+	}
+
+	@Override
+	public String getIdBySession(HttpServletRequest request) {
+		String id = null;
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("UserSessionKey")) {
+				id = mapper.checkUserSession(cookie.getValue());
+			}
+		}
+		if (id == null) {
+			Object sessionKey = request.getSession().getAttribute("UserSessionKey");
+			if (sessionKey != null) {
+				id = mapper.checkUserSession((String) sessionKey);
+			}
+		}
+		return id;
 	}
 
 }

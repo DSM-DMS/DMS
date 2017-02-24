@@ -51,7 +51,8 @@ public class PostController {
 			model.addAttribute("q_content", "");
 			model.addAttribute("a_date", "");
 			model.addAttribute("a_content", "");
-		} else if (!post.isPrivacy() || userDAO.checkUserSession(request)) {
+		} else if (!post.isPrivacy()
+				|| (userDAO.checkUserSession(request) && userDAO.getIdBySession(request).equals(post.getWriter()))) {
 			List<Comment> comments = qnaDAO.getComments(post.getNo());
 			model.addAttribute("q_title", post.getTitle());
 			model.addAttribute("q_date", post.getDate());
