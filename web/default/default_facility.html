@@ -51,25 +51,11 @@
                 <h1>시설 고장 신고</h1>
                 <div class="underline puple"></div>
             </div>
-            <form id="facility-form" method="get">
-              <table id="facility-table">
-                <tr>
-                  <td>제목: </td>
-                  <td><input class="required" type="text" name="title"></td>
-                </tr>
-                <tr>
-                  <td>호실: </td>
-                  <td><input class="required" type="text" name="room_num"></td>
-                </tr>
-                <tr>
-                  <td>내용: </td>
-                  <td><textarea class="required" name="content" rows="8" cols="80" form="facility-form"></textarea></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><div id="facility-submit">신청</div></td>
-                </tr>
-              </table>
+            <form id="facility-form">
+              <div><input class="required" type="text" name="title" placeholder="제목"></div>
+              <div><input class="required" type="text" name="room_num" placeholder="호실"></div>
+              <textarea class="required" form="facility-form" style="height: 300px; width: 80%;"></textarea>
+              <div id="facility-submit">신청</div>
             </form>
         </div>
         <!-- <div class="frame right">
@@ -84,5 +70,11 @@
     <script type="text/javascript" src="../js/remote.js"></script>
     <!--remote.js로 수정필요-->
     <script type="text/javascript" src="../js/facility.js"></script>
+    <script src="./js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script>
 </body>
 </html>

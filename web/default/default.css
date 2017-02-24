@@ -1277,42 +1277,32 @@ body {
 #facility-form {
     font-size: 125%;
     margin: auto;
-    margin-top: 3%;
+    width: 100%;
+}
+
+#facility-form > div {
+    margin: auto;
+    margin-top: 10px;
     width: 80%;
 }
 
 #facility-form input[type="text"] {
     font-size: 125%;
-    width: 90%;
-    height: 25px;
-    border: 2px solid rgb(134, 193, 233);
+    width: 100%;
+    padding: 2px;
+    border: 1px solid #a9a9a9;
     border-radius: 4px;
-    transition: all 1s ease;
-}
-
-#facility-form textarea {
-    vertical-align: text-top;
-    font-size: 125%;
-    width: 90%;
-    border: 2px solid rgb(134, 193, 233);
-    border-radius: 4px;
-    transition: all 1s ease;
-}
-
-#facility-table td:nth-child(1) {
-    width: 20%;
 }
 
 #facility-submit {
-    width: 90%;
+    font-size: 125%;
     text-align: center;
     cursor: pointer;
     background-color: rgb(134, 193, 233);
     border-radius: 4px;
     transition: all 1s ease;
-    border: 2px solid rgb(134, 193, 233);
+    padding: 2px;
 }
-
 
 /*----------------------------- each colors -------------------*/
 
