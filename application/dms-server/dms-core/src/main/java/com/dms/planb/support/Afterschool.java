@@ -10,8 +10,8 @@ public class Afterschool {
 	static SafeResultSet resultSet;
 	static SafeResultSet tempResultSet;
 
-	static boolean[] appliedDay = new boolean[4];
-	static boolean[] targetDay = new boolean[4];
+	static boolean[] appliedDate = new boolean[4];
+	static boolean[] targetDate = new boolean[4];
 	/*
 	 * 0 : Monday
 	 * 1 : Tuesday
@@ -21,7 +21,7 @@ public class Afterschool {
 
 	public static boolean canApply(String id, int no) throws SQLException {
 		database = DataBase.getInstance();
-
+				
 		resultSet = database.executeQuery("SELECT * FROM afterschool_list WHERE no=", no);
 		/*
 		 * Target
@@ -29,10 +29,10 @@ public class Afterschool {
 		
 		resultSet.next();
 		
-		targetDay[0] = resultSet.getBoolean("on_monday");
-		targetDay[1] = resultSet.getBoolean("on_tuesday");
-		targetDay[2] = resultSet.getBoolean("on_wednesday");
-		targetDay[3] = resultSet.getBoolean("on_saturday");
+		targetDate[0] = resultSet.getBoolean("on_monday");
+		targetDate[1] = resultSet.getBoolean("on_tuesday");
+		targetDate[2] = resultSet.getBoolean("on_wednesday");
+		targetDate[3] = resultSet.getBoolean("on_saturday");
 		/*
 		 * Target subject's date of course
 		 */
@@ -44,26 +44,26 @@ public class Afterschool {
 			 * Applier's apply status
 			 */
 			
-			tempResultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE no=", resultSet.getInt("no"));
+			tempResultSet = database.executeQuery("SELECT * FROM afterschool_list WHERE no=", resultSet.getInt("no"));
 			/*
-			 * Applier's after school number
+			 * Applier's applied date
 			 */
 			
 			do {
 				if (tempResultSet.getBoolean("on_monday")) {
-					appliedDay[0] = true;
+					appliedDate[0] = true;
 				}
 
 				if (tempResultSet.getBoolean("on_tuesday")) {
-					appliedDay[1] = true;
+					appliedDate[1] = true;
 				}
 
 				if (tempResultSet.getBoolean("on_wednesday")) {
-					appliedDay[2] = true;
+					appliedDate[2] = true;
 				}
 
 				if (tempResultSet.getBoolean("on_saturday")) {
-					appliedDay[3] = true;
+					appliedDate[3] = true;
 				}
 			} while (resultSet.next());
 		} else {
@@ -78,7 +78,7 @@ public class Afterschool {
 		}
 
 		for (int i = 0; i <= 3; i++) {
-			if (targetDay[i] && !appliedDay[i]) {
+			if (targetDate[i] && !appliedDate[i]) {
 				continue;
 			} else {
 				/*

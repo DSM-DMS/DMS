@@ -1,7 +1,5 @@
 package com.dms.planb.core;
 
-import java.io.File;
-
 /*
  * Communication : HTTP Protocol, POST method, JSON exchange
  * 
@@ -19,8 +17,6 @@ import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
-
-import com.dms.planb.support.Commands;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
