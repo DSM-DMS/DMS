@@ -26,7 +26,7 @@ public class RegisterStudentAcc implements Actionable {
 		// student data
 		String studentName = requestObject.getString("name");
 		int studentNumber = requestObject.getInt("number");
-		int studentSex = requestObject.getInt("sex");
+		boolean studentSex = requestObject.getBoolean("sex");
 //		int status = requestObject.getInt("status");
 		
 		String studentPhone = null;
