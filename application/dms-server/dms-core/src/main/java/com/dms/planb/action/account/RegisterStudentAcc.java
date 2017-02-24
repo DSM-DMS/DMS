@@ -13,17 +13,21 @@ import com.dms.planb.support.Commands;
 public class RegisterStudentAcc implements Actionable {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
+		/*
+		 * Need process : permission, student_status, session_key 
+		 */
+		
 		// account
 		String id = requestObject.getString("id");
 		String password = requestObject.getString("password");
-		String sessionKey = requestObject.getString("session_key");
-		int permission = requestObject.getInt("permission");
+//		String sessionKey = requestObject.getString("session_key");
+//		int permission = requestObject.getInt("permission");
 		
 		// student data
 		String studentName = requestObject.getString("name");
 		int studentNumber = requestObject.getInt("number");
 		int studentSex = requestObject.getInt("sex");
-		int studentStatus = requestObject.getInt("status");
+//		int status = requestObject.getInt("status");
 		
 		String studentPhone = null;
 		String parentName = null;
@@ -67,7 +71,7 @@ public class RegisterStudentAcc implements Actionable {
 		 * permission TINYINT(1) NN
 		 */
 		
-		status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", sessionKey, "', ", permission, ")");
+		status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", "dummy", "', ", 1, ")");
 		if(status == 0) {
 			responseObject.put("status", status);
 			return responseObject;
@@ -89,7 +93,7 @@ public class RegisterStudentAcc implements Actionable {
 		 * demerit INT(11) Default NULL
 		 */
 		
-		status = database.executeUpdate("INSERT INTO student_data(id, number, sex, status, name, phone, p_name, p_phone) VALUES('", id, "', ", studentNumber, ", ", studentSex, ", ", studentStatus, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
+		status = database.executeUpdate("INSERT INTO student_data(id, number, sex, status, name, phone, p_name, p_phone) VALUES('", id, "', ", studentNumber, ", ", studentSex, ", ", 1, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
 		if(status == 0) {
 			responseObject.put("status", status);
 			return responseObject;
