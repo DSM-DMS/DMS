@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.PrimaryPostContext;
+import com.boxfox.dms.mapper.QnaMapper;
 import com.boxfox.dms.mapper.RuleMapper;
 
 @Repository
@@ -43,6 +44,12 @@ public class RuleDAOImpl implements RuleDAO {
 		post.setTitle(title);
 		post.setContent(content);
 		ruleMapper.editPost(post);
+	}
+
+	@Override
+	public int deletePost(int number) {
+		RuleMapper ruleMapper = sqlSession.getMapper(RuleMapper.class);
+		return ruleMapper.deletePost(number);
 	}
 
 }

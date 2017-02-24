@@ -36,4 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	UPDATE facility_report set title=#{title}, content=#{content}, room=#{room} WHERE `no`=#{no}
     </update>
     
+    <update id="deletePost" >
+    	delete from facility_report WHERE `no`=#{no}
+    </update>
+    
 </mapper>

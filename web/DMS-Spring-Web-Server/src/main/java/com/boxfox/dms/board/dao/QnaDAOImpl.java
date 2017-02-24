@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.Comment;
 import com.boxfox.dms.board.dto.QnaPostContext;
+import com.boxfox.dms.mapper.NoticeMapper;
 import com.boxfox.dms.mapper.QnaMapper;
 
 @Repository
@@ -22,7 +23,7 @@ public class QnaDAOImpl implements QnaDAO{
 		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
 		List<QnaPostContext> list = qnaMapper.getPost(number);
 		QnaPostContext post = null;
-		if(list.size()==0)
+		if(list.size()>0)
 			post = list.get(0);
 		return post;
 	}
@@ -99,7 +100,11 @@ public class QnaDAOImpl implements QnaDAO{
 		List<Comment> comments = qnaMapper.getComments(no);
 		return comments;
 	}
-	
-	
+
+	@Override
+	public int deletePost(int number) {
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		return qnaMapper.deletePost(number);
+	}
 
 }

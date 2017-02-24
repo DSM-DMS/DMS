@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="status" />
 		<result property="residualDefault" column="value" />
 	</resultMap>
+	
 
 	<select id="login" parameterType="com.boxfox.dms.users.dto.UserDTO"
 		resultType="java.lang.String">
@@ -32,19 +33,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT student_data.id, number, status, value FROM student_data right join stay_apply_default on student_data.id = stay_apply_default.id
 	</select>
 	
-	<select id="checkAdminSession" resultMap="java.lang.String">
+	<select id="checkAdminSession" resultType="java.lang.String">
 		SELECT id FROM teacher_account where session_key = #{sessionKey}
 	</select>
 	
-	<select id="createAdminSession" resultMap="java.lang.String">
+	<select id="createAdminSession" resultType="java.lang.String">
 		UPDATE teacher_account session_key = #{sessionKey} where id = #{id}
 	</select>
 	
-	<select id="checkUserSession" resultMap="java.lang.String">
+	<select id="checkUserSession" resultType="java.lang.String">
 		SELECT id FROM account where session_key = #{sessionKey}
 	</select>
 	
-	<select id="createUserSession" resultMap="java.lang.String">
+	<select id="createUserSession" resultType="java.lang.String">
 		UPDATE account session_key = #{sessionKey} where id = #{id}
 	</select>
 	

@@ -23,4 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	update rule set title=#{title}, content=#{content} where no=#{no}
     </update>
     
+    <update id="deletePost" >
+    	delete from rule WHERE `no`=#{no}
+    </update>
+    
 </mapper>

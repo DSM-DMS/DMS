@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.DatePostContext;
+import com.boxfox.dms.mapper.FaqMapper;
 import com.boxfox.dms.mapper.NoticeMapper;
 
 @Repository
@@ -47,6 +48,12 @@ public class NoticeDAOImpl implements NoticeDAO{
 		post.setTitle(title);
 		post.setContent(content);
 		noticeMapper.editPost(post);
+	}
+	
+	@Override
+	public int deletePost(int number) {
+		NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		return noticeMapper.deletePost(number);
 	}
 
 }

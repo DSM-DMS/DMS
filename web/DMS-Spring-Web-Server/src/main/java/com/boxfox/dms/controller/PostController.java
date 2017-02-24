@@ -1,56 +1,37 @@
 package com.boxfox.dms.controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.boxfox.dms.board.dao.FacilityDAOImpl;
-import com.boxfox.dms.board.dao.FaqDAOImpl;
-import com.boxfox.dms.board.dao.NoticeDAOImpl;
-import com.boxfox.dms.board.dao.QnaDAOImpl;
+import com.boxfox.dms.board.dao.FacilityDAO;
+import com.boxfox.dms.board.dao.FaqDAO;
+import com.boxfox.dms.board.dao.NoticeDAO;
+import com.boxfox.dms.board.dao.QnaDAO;
 import com.boxfox.dms.board.dao.RuleDAO;
-import com.boxfox.dms.board.dao.RuleDAOImpl;
 import com.boxfox.dms.board.dto.Comment;
-import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.board.dto.FacilityReportContext;
 import com.boxfox.dms.board.dto.PrimaryPostContext;
 import com.boxfox.dms.board.dto.QnaPostContext;
+import com.boxfox.dms.board.dto.WriterPostContext;
+import com.boxfox.dms.users.dao.UserDAO;
 
-@Controller
 public class PostController {
-	private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
-	@Autowired
-	private NoticeDAOImpl noticeDAO;
-	@Autowired
-	private FaqDAOImpl faqDAO;
-	@Autowired
-	private RuleDAOImpl ruleDAO;
-	@Autowired
-	private QnaDAOImpl qnaDAO;
-	@Autowired
-	private FacilityDAOImpl facilityDAO;
-
-	@RequestMapping(value = { "/faq", "/rule" }, params = { "no" }, method = RequestMethod.GET)
-	public String primary(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
+	public String primary(FaqDAO faqDAO, RuleDAO ruleDAO, HttpServletRequest request, Model model, int no) {
 		PrimaryPostContext post;
-		String page = "primary_index";
+		String page = "index";
 		if (request.getRequestURL().toString().contains("faq")) {
 			post = faqDAO.getPost(no);
 		} else
 			post = ruleDAO.getPost(no);
 		if (post == null) {
 			page = "null";
+			model.addAttribute("number", "");
+			model.addAttribute("title", "");
+			model.addAttribute("content", "");
 		} else {
 			model.addAttribute("number", post.getNo());
 			model.addAttribute("title", post.getTitle());
@@ -59,33 +40,18 @@ public class PostController {
 		return page;
 	}
 
-	@RequestMapping(value = "/qna", params = { "no" }, method = RequestMethod.GET)
-	public String qna(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
+	public String qna(QnaDAO qnaDAO, UserDAO userDAO, HttpServletRequest request, Model model, int no) {
 		QnaPostContext post = qnaDAO.getPost(no);
-		String page = "qna_index";
+		String page;
 		if (post == null) {
 			page = "null";
-		} else {
-			if (!post.isPrivacy()) {
-
-			} else {
-				model.addAttribute("number", post.getNo());
-				model.addAttribute("title", post.getTitle());
-				model.addAttribute("content", post.getTitle());
-				model.addAttribute("writer", post.getWriter());
-				model.addAttribute("resultDate", post.getResultDate());
-				model.addAttribute("result", post.getResult());
-				model.addAttribute("comments", qnaDAO.getComments(no));
-			}
-		}
-		return page;
-	}
-
-	/*@RequestMapping(value = "/qna", params = { "no" })
-	public String qnaView(Locale locale, Model model, @RequestParam(value = "no") int no) {
-		QnaPostContext post = qnaDAO.getPost(no);
-		if (post != null) {
-		if (!post.isPrivacy() || 세션 체크) {
+			model.addAttribute("q_title", "");
+			model.addAttribute("q_date", "");
+			model.addAttribute("q_writer", "");
+			model.addAttribute("q_content", "");
+			model.addAttribute("a_date", "");
+			model.addAttribute("a_content", "");
+		} else if (!post.isPrivacy() || userDAO.checkUserSession(request)) {
 			List<Comment> comments = qnaDAO.getComments(post.getNo());
 			model.addAttribute("q_title", post.getTitle());
 			model.addAttribute("q_date", post.getDate());
@@ -93,23 +59,52 @@ public class PostController {
 			model.addAttribute("q_content", post.getContent());
 			model.addAttribute("a_date", post.getResultDate());
 			model.addAttribute("a_content", post.getResult());
-			return "qna";
+			model.addAttribute("a_comment", comments);
+			page = "index";
+		} else {
+			page = "privacy";
 		}
 		return page;
-	}*/
-	
-	@RequestMapping(value = "/writePost", method = RequestMethod.POST)
-	public String writePost(HttpServletRequest request, Locale locale, Model model, @RequestParam("no") int no) {
-		DatePostContext post = noticeDAO.getPost(no);
-		String page = "facility_index";
+	}
+
+	public String facility(FacilityDAO facilityDAO, HttpServletRequest request, Model model, int no) {
+		FacilityReportContext post = facilityDAO.getPost(no);
+		String page;
 		if (post == null) {
 			page = "null";
+			model.addAttribute("f_title", "");
+			model.addAttribute("f_date", "");
+			model.addAttribute("f_writer", "");
+			model.addAttribute("f_content", "");
+			model.addAttribute("f_room", "");
+			model.addAttribute("a_date", "");
+			model.addAttribute("a_content", "");
 		} else {
-			model.addAttribute("number", post.getNo());
+			model.addAttribute("f_title", post.getTitle());
+			model.addAttribute("f_date", post.getDate());
+			model.addAttribute("f_writer", post.getWriter());
+			model.addAttribute("f_content", post.getContent());
+			model.addAttribute("f_room", post.getRoom());
+			model.addAttribute("a_date", post.getResultDate());
+			model.addAttribute("a_content", post.getResult());
+			page = "index";
+		}
+		return page;
+	}
+
+	public String notice(NoticeDAO noticeDAO, HttpServletRequest request, Model model, int no) {
+		WriterPostContext post = noticeDAO.getPost(no);
+		String page;
+		if (post == null) {
+			page = "null";
+			model.addAttribute("title", "");
+			model.addAttribute("writer", "");
+			model.addAttribute("content", "");
+		} else {
 			model.addAttribute("title", post.getTitle());
-			model.addAttribute("content", post.getTitle());
 			model.addAttribute("writer", post.getWriter());
-			model.addAttribute("date", post.getDate());
+			model.addAttribute("content", post.getContent());
+			page = "index";
 		}
 		return page;
 	}

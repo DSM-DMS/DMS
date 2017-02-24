@@ -25,4 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	update notice set title=#{title}, content=#{content} where no=#{no}
     </update>
     
+    <update id="deletePost" >
+    	delete from notice WHERE `no`=#{no}
+    </update>
+    
 </mapper>

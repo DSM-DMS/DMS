@@ -56,4 +56,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from qna_comment where no=#{no}
     </select>
     
+    <update id="deletePost" >
+    	delete from qna WHERE `no`=#{no}
+    </update>
+    
 </mapper>

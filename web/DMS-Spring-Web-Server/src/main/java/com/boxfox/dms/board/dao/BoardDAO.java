@@ -7,5 +7,6 @@ import com.boxfox.dms.board.dto.DatePostContext;
 public interface BoardDAO<T> {
 	
 	public T getPost(int number);
+	public int deletePost(int number);
 	
 }

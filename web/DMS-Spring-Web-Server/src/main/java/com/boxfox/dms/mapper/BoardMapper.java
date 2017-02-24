@@ -9,4 +9,5 @@ public interface BoardMapper<T> {
 	public List<T> getPost(@Param("number")int number);
 	public void writePost(T obj);
 	public void editPost(T obj);
+	public int deletePost(int no);
 }
