@@ -44,13 +44,44 @@ public class UserDAOImpl implements UserDAO {
 		} else {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			UserDTO user = new UserDTO(id, password);
-			List<String> results = userMapper.login(user);
-			if (results.size() > 0) {
+			String result = userMapper.login(user);
+			if (result != null) {
 				String sessionKey = UUID.randomUUID().toString();
 				userMapper.createUserSession(sessionKey, id);
 				request.getSession().setAttribute("UserSessionKey", sessionKey);
 				if (autoLogin) {
 					Cookie cookie = new Cookie("UserSessionKey", sessionKey);
+					cookie.setMaxAge(356 * 24 * 60 * 60);
+					response.addCookie(cookie);
+				}
+			} else {
+				code = 400;
+				msg = FAIL_LOGIN;
+			}
+		}
+
+		JsonBuilder builder = JsonBuilder.build(code, msg);
+		return builder.toString();
+	}
+
+	@Override
+	public String loginAdmin(HttpServletRequest request, HttpServletResponse response, String id, String password,
+			boolean autoLogin, String recapchResponse) {
+		int code = 200;
+		String msg = SUCCESS_LOGIN;
+		if (!VerifyRecaptcha.verify(recapchResponse)) {
+			code = 400;
+			msg = FAIL_RECAPCHA;
+		} else {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			UserDTO user = new UserDTO(id, password);
+			String result = userMapper.loginAdmin(user);
+			if (result != null) {
+				String sessionKey = UUID.randomUUID().toString();
+				userMapper.createAdminSession(sessionKey, id);
+				request.getSession().setAttribute("AdminSessionKey", sessionKey);
+				if (autoLogin) {
+					Cookie cookie = new Cookie("AdminSessionKey", sessionKey);
 					cookie.setMaxAge(356 * 24 * 60 * 60);
 					response.addCookie(cookie);
 				}
@@ -74,7 +105,7 @@ public class UserDAOImpl implements UserDAO {
 		} else {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			UserRenameDTO user = new UserRenameDTO(id, newId, password);
-			if (userMapper.login(user).size() == 0) {
+			if (userMapper.login(user)!=null) {
 				msg = FAIL_LOGIN;
 			} else if (userMapper.checkIdExist(newId) > 0) {
 				msg = ALREDY_EXSIT_ID;
@@ -100,7 +131,7 @@ public class UserDAOImpl implements UserDAO {
 		} else {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			UserModifyPasswordDTO user = new UserModifyPasswordDTO(id, password, newPassword);
-			if (userMapper.login(user).size() == 0) {
+			if (userMapper.login(user)!=null) {
 				msg = FAIL_LOGIN;
 			} else {
 				if (userMapper.modifyPassword(user) > 0) {

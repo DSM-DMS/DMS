@@ -23,6 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT id FROM account WHERE(id=#{id}) AND (password=#{password})
 	</select>
 
+	<select id="loginAdmin" parameterType="com.boxfox.dms.users.dto.UserDTO"
+		resultType="java.lang.String">
+		SELECT id FROM account WHERE(id=#{id}) AND (password=#{password})
+	</select>
+
 	<select id="residual" resultMap="residualResult">
 		SELECT student_data.id, number, status, value FROM student_data right join stay_apply_default on student_data.id = stay_apply_default.id
 	</select>

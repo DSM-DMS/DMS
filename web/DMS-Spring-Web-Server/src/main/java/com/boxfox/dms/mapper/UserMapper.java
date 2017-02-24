@@ -10,8 +10,10 @@ import com.boxfox.dms.users.dto.UserModifyPasswordDTO;
 import com.boxfox.dms.users.dto.UserRenameDTO;
 
 public interface UserMapper {
-	public List<String> login(UserDTO user);
+	public String login(UserDTO user);
 
+	public String loginAdmin(UserDTO user);
+	
 	public int rename(UserRenameDTO user);
 
 	public int modifyPassword(UserModifyPasswordDTO user);

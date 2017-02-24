@@ -26,12 +26,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boxfox.dms.board.dao.BoardDAO;
 import com.boxfox.dms.board.dao.FacilityDAOImpl;
+import com.boxfox.dms.board.dao.FaqDAOImpl;
 import com.boxfox.dms.board.dao.NoticeDAOImpl;
 import com.boxfox.dms.board.dao.QnaDAOImpl;
+import com.boxfox.dms.board.dao.RuleDAOImpl;
 import com.boxfox.dms.board.dto.DatePostContext;
 import com.boxfox.dms.mapper.UserMapper;
 import com.boxfox.dms.users.dao.UserDAOImpl;
@@ -41,6 +44,7 @@ import com.boxfox.dsm.xlsx.ResidualDownLoadDAOImpl;
 /**
  * Handles requests for the application home page.
  */
+@RequestMapping(value = "/admin", produces = "text/plain;charset=UTF-8")
 @Controller
 public class AdminController {
 	private static final int TYPE_FACILITY_RESULT = 1;
@@ -61,20 +65,63 @@ public class AdminController {
 	private QnaDAOImpl qnaDAO;
 
 	@Autowired
+	private FaqDAOImpl faqDAO;
+
+	@Autowired
+	private RuleDAOImpl ruleDAO;
+
+	@Autowired
 	private UserDAOImpl userDAO;
 
 	@Autowired
 	private ResidualDownLoadDAOImpl residualDownload;
 
-	@RequestMapping(value = "/admin/write/", method = RequestMethod.POST)
-	public void home(HttpServletRequest request) {
-		int type = Integer.valueOf(request.getParameter("type"));
-		BoardDAO targetDAO;
-		switch (type) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String home(HttpServletRequest request, HttpServletResponse response) {
+		if (userDAO.checkAdminSession(request)) {
+			return "home";
+		} else {
+			return "null";
 		}
 	}
 
-	@RequestMapping(value = "/admin/download/{file_name:.+}", method = RequestMethod.GET)
+	@RequestMapping(value = "/write/{type}", method = RequestMethod.POST)
+	public void home(HttpServletRequest request, HttpServletResponse response, @PathVariable("type") String type) {
+		if (userDAO.checkAdminSession(request)) {
+			type = type.toLowerCase();
+			switch (type) {
+			case "notice":
+				noticeDAO.writePost(request.getParameter("title"), request.getParameter("content"),
+						request.getParameter("writer"));
+				break;
+			case "faq":
+				faqDAO.writePost(request.getParameter("title"), request.getParameter("content"));
+				break;
+			case "rule":
+				ruleDAO.writePost(request.getParameter("title"), request.getParameter("content"));
+				break;
+			case "qna":
+				qnaDAO.writeAnswer(Integer.valueOf(request.getParameter("no")), request.getParameter("content"));
+				break;
+			case "facility":
+				facilityDAO.setResult(Integer.valueOf(request.getParameter("no")), request.getParameter("content"));
+				break;
+			}
+			try {
+				response.sendRedirect("/admin");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				response.sendError(404);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@RequestMapping(value = "/download/{file_name:.+}", method = RequestMethod.GET)
 	public void download(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("file_name") String fileName) {
 		if (userDAO.checkAdminSession(request)) {
@@ -89,6 +136,11 @@ public class AdminController {
 				}
 				IOUtils.copy(residualDownload.readExcel(date), response.getOutputStream());
 				response.flushBuffer();
+				try {
+					response.sendRedirect("/admin");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -99,5 +151,11 @@ public class AdminController {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public @ResponseBody String login(HttpServletRequest request, HttpServletResponse response, @RequestParam String id,
+			@RequestParam String password, @RequestParam boolean autoLogin, @RequestParam String recapcha) {
+		return userDAO.loginAdmin(request, response, id, password, autoLogin, recapcha);
 	}
 }

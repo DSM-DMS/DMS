@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boxfox.dms.users.dao.UserDAO;
-import com.boxfox.dms.users.dao.UserDAOImpl;
 
 @Controller
 @RequestMapping(value = "/user", produces = "text/plain;charset=UTF-8")
