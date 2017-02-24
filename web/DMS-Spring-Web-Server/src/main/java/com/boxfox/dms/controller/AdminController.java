@@ -71,9 +71,12 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "/admin/download", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/download/residual.xlsx", method = RequestMethod.GET)
 	@ResponseBody
 	public void download(HttpServletRequest request, HttpServletResponse response) {
+		if(userDAO.checkAdminSession(request.getCookies())) {
+			
+		}
 		    try {
 		      InputStream is = new FileInputStream(residualDownload.readExcel());
 		      IOUtils.copy(is, response.getOutputStream());

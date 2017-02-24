@@ -3,6 +3,8 @@ package com.boxfox.dms.users.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -108,12 +110,18 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean checkAdminSession(String sessionKey) {
+	public boolean checkAdminSession(Cookie[] cookies) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("AdminSessionKey")) {
+				cookie.getValue();
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean checkUserSession(String sessionKey) {
+	public boolean checkUserSession(Cookie[] cookies) {
 		return false;
 	}
 

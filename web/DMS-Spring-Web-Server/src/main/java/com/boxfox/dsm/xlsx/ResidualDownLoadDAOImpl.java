@@ -32,38 +32,42 @@ import com.boxfox.dms.users.dto.UserDataDTO;
 //need refactoring
 
 @Repository
-public class ResidualDownLoadDAOImpl{
+public class ResidualDownLoadDAOImpl {
 	private static final String FORMAT_XLSX_FILE = "ÀÜ·ùÁ¶»çÆ÷¸Ë.xlsx";
 	private static final String FILE_PATH = "files/";
-	private static final String [] RESIDUAL_TYPE = new String[]{"±Ý¿ä±Í°¡", "Åä¿ä±Í°¡", "Åä¿ä±Í»ç", "ÀÜ·ù"};
+	private static final String[] RESIDUAL_TYPE = new String[] { "±Ý¿ä±Í°¡", "Åä¿ä±Í°¡", "Åä¿ä±Í»ç", "ÀÜ·ù" };
 
 	@Autowired
 	private ResourceLoader resourceLoader;
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
 	private HashMap<String, String> map = new HashMap();
-	
+
 	public File readExcel() {
-		initResidualMaps();
+		//initResidualMaps();
 		try {
 			File xlsxFile = resourceLoader.getResource("classpath:ÀÜ·ùÁ¶»çÆ÷¸Ë.xlsx").getFile();
 			XSSFWorkbook workbook = processXlsx(xlsxFile);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = new Date();
-			String fileName = "Residual" + sdf.format(now) + ".xlsx";
-			FileOutputStream fileoutputstream = new FileOutputStream(FILE_PATH + fileName);
+			String fileName = getClass().getClassLoader().getResource(".").getFile() + "/Residual" + sdf.format(now)
+					+ ".xlsx";
+			File file = new File(fileName);
+			if (!file.exists())
+				file.createNewFile();
+			FileOutputStream fileoutputstream = new FileOutputStream(file);
 			workbook.write(fileoutputstream);
 			fileoutputstream.close();
-			return new File(FILE_PATH + fileName);
+			return file;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	private XSSFWorkbook processXlsx(File input) throws IOException{
+
+	private XSSFWorkbook processXlsx(File input) throws IOException {
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(input));
 		int rowindex = 0;
 		int columnindex = 0;
@@ -75,18 +79,18 @@ public class ResidualDownLoadDAOImpl{
 				int cells = row.getPhysicalNumberOfCells();
 				for (columnindex = 0; columnindex <= cells; columnindex++) {
 					XSSFCell cell = row.getCell(columnindex);
-						if (cell != null && cell.getCellType() == 0) {
-							String sNum = new StringBuilder(String.valueOf(cell.getNumericCellValue())).toString();
-							if (sNum != null) {
-								cell = row.getCell(++columnindex);
-								if (cell.getCellType() == 1) {
-									String type = map.get(sNum);
-									if (type != null) {
-										cell = row.getCell(++columnindex);
-										cell.setCellValue(type);
-									}
+					if (cell != null && cell.getCellType() == 0) {
+						String sNum = new StringBuilder(String.valueOf(cell.getNumericCellValue())).toString();
+						if (sNum != null) {
+							cell = row.getCell(++columnindex);
+							if (cell.getCellType() == 1) {
+								String type = map.get(sNum);
+								if (type != null) {
+									cell = row.getCell(++columnindex);
+									cell.setCellValue(type);
 								}
 							}
+						}
 					}
 				}
 			}
@@ -95,27 +99,27 @@ public class ResidualDownLoadDAOImpl{
 	}
 
 	private void initResidualMaps() {
-			UserMapper userMapper = (UserMapper) sqlSession.getMapper(UserMapper.class);
-			List<UserDataDTO> list = userMapper.residual();
-			String week = getWeek();
+		UserMapper userMapper = (UserMapper) sqlSession.getMapper(UserMapper.class);
+		List<UserDataDTO> list = userMapper.residual();
+		String week = getWeek();
 
-			for (int i = 0; i < list.size(); i++) {
-				String typeStr = null;
-				Integer type = userMapper.residualAtWeek(list.get(i).getId(),getWeek());
-				if (type == null) {
-					type = list.get(i).getResidualDefault();
-				}
-				typeStr = RESIDUAL_TYPE[type-1];
-				map.put(list.get(i).getNumber() + "", typeStr);
+		for (int i = 0; i < list.size(); i++) {
+			String typeStr = null;
+			Integer type = userMapper.residualAtWeek(list.get(i).getId(), getWeek());
+			if (type == null) {
+				type = list.get(i).getResidualDefault();
 			}
+			typeStr = RESIDUAL_TYPE[type - 1];
+			map.put(list.get(i).getNumber() + "", typeStr);
+		}
 	}
-	
+
 	private String getWeek() {
 		Calendar calendar = Calendar.getInstance();
 		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH)+1;
+		int month = calendar.get(Calendar.MONTH) + 1;
 		int day = calendar.get(Calendar.WEEK_OF_MONTH);
-		return year+"-"+month+"-"+day;
+		return year + "-" + month + "-" + day;
 	}
 
 }
