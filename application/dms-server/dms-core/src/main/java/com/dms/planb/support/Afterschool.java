@@ -26,7 +26,9 @@ public class Afterschool {
 		/*
 		 * Target
 		 */
-
+		
+		resultSet.next();
+		
 		targetDay[0] = resultSet.getBoolean("on_monday");
 		targetDay[1] = resultSet.getBoolean("on_tuesday");
 		targetDay[2] = resultSet.getBoolean("on_wednesday");
