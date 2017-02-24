@@ -44,7 +44,7 @@ public class Afterschool {
 			 * Applier's apply status
 			 */
 			
-			tempResultSet = database.executeQuery("SELECT * FROM afterschool_list WHERE no=", resultSet.getInt("no"));
+			tempResultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE no=", resultSet.getInt("no"));
 			/*
 			 * Applier's after school number
 			 */
