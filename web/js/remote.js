@@ -1660,6 +1660,7 @@ PointApplyPage.prototype = new ClientPage();
 // 자식 객체는 setEvent() 구현해야함
 // 자식 객체는 form 초기화 해야함
 function GoOutApplyPage() {
+    this.sendData;
     this.form =
         '<div class="frametitle">' +
         '<h1>외출신청</h1>' +
@@ -1692,6 +1693,7 @@ function GoOutApplyPage() {
                 $("#sat").on("click", function() {
                     $('#selection').text('토요일')
                     $('#day').attr('value', '토요일');
+                    this.sendData = 'sat';
                     $("#select_table td:eq(1), td:eq(2)").hide();
                     clickable = true;
                 });
@@ -1699,6 +1701,8 @@ function GoOutApplyPage() {
                 $('#sun').on("click", function() {
                     $('#selection').text('일요일');
                     $('#day').attr('value', '일요일');
+                    $('#goout_data').text('sun');
+                    this.sendData = 'sun';
                     $("#select_table td:eq(1), td:eq(2)").hide();
                     clickable = true;
                 });
@@ -1710,12 +1714,27 @@ function GoOutApplyPage() {
         });
 
         $('#submit_button').on('click', function() {
-            $('#apply_form').submit();
+          $.ajax({
+              url: "dsm2015.cafe24.com",
+              type: "POST",
+              data: {
+                  "id": id,
+                  "day": this.sendData,
+              },
+              beforeSend: function(xhr) {
+                  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                  xhr.setRequestHeader("command", 503);
+              },
+              success: function() {
+                  alert('신청되었습니다.');
+              }
+          });
+
         });
 
     }
 }
-GoOutApplyPage.prototype = new ClientPage();
+GoOutApplyPage.prototype = new NonAjaxPage();
 
 // 객체는 setData(), setEvent() 구현해야함
 // 객체는 form, command, sendData 초기화 해야함
