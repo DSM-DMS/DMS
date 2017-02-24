@@ -10,9 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="password" column="password" />
 	</resultMap>
 
-	<resultMap type="java.lang.String" id="sessionsResult">
-		<result property="" column="session_key" />
-	</resultMap>
 	
 	<resultMap type="com.boxfox.dms.users.dto.UserDataDTO" id="residualResult">
 		<result property="id" column="id" />
@@ -22,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="login" parameterType="com.boxfox.dms.users.dto.UserDTO"
-		resultMap="sessionsResult">
-		SELECT session_key FROM account WHERE(id=#{id}) AND (password=#{password})
+		resultType="java.lang.String">
+		SELECT id FROM account WHERE(id=#{id}) AND (password=#{password})
 	</select>
 
 	<select id="residual" resultMap="residualResult">
@@ -31,7 +28,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkAdminSession" resultMap="java.lang.String">
-		SELECT id FROM   where session_key = #{sessionKey}
+		SELECT id FROM teacher_account where session_key = #{sessionKey}
+	</select>
+	
+	<select id="createAdminSession" resultMap="java.lang.String">
+		UPDATE teacher_account session_key = #{sessionKey} where id = #{id}
+	</select>
+	
+	<select id="checkUserSession" resultMap="java.lang.String">
+		SELECT id FROM account where session_key = #{sessionKey}
+	</select>
+	
+	<select id="createUserSession" resultMap="java.lang.String">
+		UPDATE account session_key = #{sessionKey} where id = #{id}
 	</select>
 	
 	<select id="residualAtWeek" resultType="java.lang.Integer">

@@ -77,7 +77,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/download/{file_name:.+}", method = RequestMethod.GET)
 	public void download(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("file_name") String fileName) {
-		if (userDAO.checkAdminSession(request.getCookies())) {
+		if (userDAO.checkAdminSession(request)) {
 			Matcher m = Pattern.compile("(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.]([1-4])").matcher(fileName);
 			String date = null;
 			if (m.find()) {

@@ -2,8 +2,11 @@ package com.boxfox.dms.users.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,31 +34,33 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public String login(String id, String password, String recapchResponse) {
-		int code = ResponseCode.SUCCESS;
+	public String login(HttpServletRequest request, HttpServletResponse response, String id, String password,
+			boolean autoLogin, String recapchResponse) {
+		int code = 200;
 		String msg = SUCCESS_LOGIN;
-		String result = null;
 		if (!VerifyRecaptcha.verify(recapchResponse)) {
-			code = ResponseCode.FAIL;
+			code = 400;
 			msg = FAIL_RECAPCHA;
 		} else {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			UserDTO user = new UserDTO(id, password);
 			List<String> results = userMapper.login(user);
-
-			if (results.size() > 0)
-				result = results.get(0);
-			else {
-				code = ResponseCode.FAIL;
+			if (results.size() > 0) {
+				String sessionKey = UUID.randomUUID().toString();
+				userMapper.createUserSession(sessionKey, id);
+				request.getSession().setAttribute("UserSessionKey", sessionKey);
+				if (autoLogin) {
+					Cookie cookie = new Cookie("UserSessionKey", sessionKey);
+					cookie.setMaxAge(356 * 24 * 60 * 60);
+					response.addCookie(cookie);
+				}
+			} else {
+				code = 400;
 				msg = FAIL_LOGIN;
-				result = null;
 			}
 		}
 
 		JsonBuilder builder = JsonBuilder.build(code, msg);
-		if (result != null)
-			builder.put("SessionKey", result);
-
 		return builder.toString();
 	}
 
@@ -110,19 +115,43 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean checkAdminSession(Cookie[] cookies) {
+	public boolean checkAdminSession(HttpServletRequest request) {
+		boolean check = false;
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("AdminSessionKey")) {
-				cookie.getValue();
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("AdminSessionKey")) {
+				if (mapper.checkAdminSession(cookie.getValue()) != null) {
+					check = true;
+				}
 			}
 		}
-		return false;
+		if (check == false) {
+			Object sessionKey = request.getSession().getAttribute("AdminSessionKey");
+			if (sessionKey != null && mapper.checkAdminSession((String) sessionKey) != null) {
+				check = true;
+			}
+		}
+		return check;
 	}
 
 	@Override
-	public boolean checkUserSession(Cookie[] cookies) {
-		return false;
+	public boolean checkUserSession(HttpServletRequest request) {
+		boolean check = false;
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("UserSessionKey")) {
+				if (mapper.checkUserSession(cookie.getValue()) != null) {
+					check = true;
+				}
+			}
+		}
+		if (check == false) {
+			Object sessionKey = request.getSession().getAttribute("UserSessionKey");
+			if (sessionKey != null && mapper.checkUserSession((String) sessionKey) != null) {
+				check = true;
+			}
+		}
+		return check;
 	}
 
 }
