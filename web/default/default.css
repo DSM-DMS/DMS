@@ -106,7 +106,8 @@ a, a:hover, a:focus, .btn:focus {
 }
 
 .btn-margin {
-    margin: 5px;
+    margin: 20px;
+    margin-left: 0;
 }
 
 .border-less-input {
@@ -117,10 +118,27 @@ a, a:hover, a:focus, .btn:focus {
     outline: none;
     outline-offset: 0;
     box-shadow: none;
-    font-size: 2.5em;
-    font-weight: bold;
-    margin-bottom: 1%;
+    /*font-size: 2.5em;
+    font-weight: bold;*/
+    /*margin-bottom: 1%;*/
     padding-left: 5px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+/*text editor*/
+
+div#mceu_11 {
+    width: 86.3%;
+    margin-left: 7%;
+    margin-top: 20px;
+}
+
+/*margin left 7%*/
+
+.margin-left-7 {
+    margin-left: 7%;
 }
 
 
@@ -496,6 +514,24 @@ body {
     margin-bottom: 1%;
 }
 
+.articlecontainer div.input-container, .articlelist div.input-container {
+    position: absolute;
+    right: 7%;
+    bottom: 16%;
+    margin-top: 15px;
+}
+
+.articlecontainer div.input-container input[type="button"], .articlelist div.input-container input[type="button"] {
+    display: inline-block;
+    background-color: white;
+    height: 40px;
+    border: 1px solid #E9DDDD;
+}
+
+.frametitle {
+    position: relative;
+}
+
 
 /*-------------------------------------qna list.-------------------------------*/
 
@@ -596,8 +632,17 @@ body {
 }
 
 .comment table tr td:nth-child(2) {
-    width: 87%;
+    width: 75%;
     font-size: 0.9em;
+}
+
+.comment table tr td:nth-child(4), .comment table tr td:nth-child(5) {
+    width: 5%;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: underline;
 }
 
 .comment table .date {

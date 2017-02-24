@@ -315,11 +315,11 @@ $(".remote .inner .category .children #after").click(function() {
 });
 
 $(".remote .inner .category .children #notice").click(function() {
-    new NoticeListPage();
+    new FaqListPage();
 });
 
-$(".remote .inner .category .children #faq").click(function() {
-    new FaqListPage();
+$(".remote .inner .category .children #facility").click(function() {
+    new FacilityListPage();
 });
 
 $(".remote .inner .category .children #rule").click(function() {
@@ -333,6 +333,8 @@ $(".remote .inner .category .children #qna").click(function() {
 $(".remote .inner .category .a#mypage").click(function() {
     loadMyPage();
 });
+
+// 위는 모두 remote에 관한 코드임
 
 // Page객체 저장하는 스택 -----------------------------------------------------------------
 var pageStack = [];
@@ -351,7 +353,7 @@ var pageStack = [];
 // |   |    |    |
 // |   |    |    | -- AfterSchoolListPage
 // |   |    |    |
-// |   |    |    | -- NoticeListPage
+// |   |    |    | -- NoticeListPage (사라짐 FAQ와 통합)
 // |   |    |    |
 // |   |    |    | -- RuleListPage
 // |   |    |    |
@@ -372,10 +374,37 @@ var pageStack = [];
 // |        | -- PointApplyPage
 // |        |
 // |        | -- GoOutApplyPage 구현 미완료
+// |        |
+// |        | -- ArticleModifyPage 구현 미완료 (에디터 사용여부 결정뒤 구현)
+// |        |
+// |        | -- NoticeModifyPage 구현 미완료
+// |        |
+// |        | -- RuleModifyPage 구현 미완료
+// |        |
+// |        | -- FacilityModifyPage 구현 미완료
+// |        |
+// |        | -- QnaAnswerModifyPage 구현 미완료
+// |        |
+// |        | -- FacilityResultModifyPage 구현 미완료
+// |        |
+// |        | -- ArticleWritePage 구현 미완료 (에디터 사용여부 결정뒤 구현)
+// |        |
+// |        | -- NoticeWritePage 구현 미완료
+// |        |
+// |        | -- RuleWritePage 구현 미완료
+// |        |
+// |        | -- FacilityWritePage 구현 미완료
+// |        |
+// |        | -- QnaAnswerWritePage 구현 미완료
+// |        |
+// |        | -- FacilityResultWritePage 구현 미완료
+
+
+
 // |
 // | -- ServerPage(추상) (Notice, Rule, Faq, Qna 해당)
 //      |
-//      | -- NoticeArticlePage 구현 미완료
+//      | -- NoticeArticlePage 구현 미완료 (사라짐 FAQ와 통합)
 //      |
 //      | -- RuleArticlePage 구현 미완료
 //      |
@@ -520,25 +549,83 @@ ServerPage.prototype = new Page();
 // 아직 알고 있는게 하나도 없어서 구현을 못하겠다.
 function MainPage() {
     // 웹용 공지는 아직 없는것 같다.
-    this.notoceCommand;
-    this.mealCommand = 438;
+
+    this.command = {
+        noticeCommand: 427,
+        mealCommand: 438
+    };
 
     this.form;
+    this.ajaxData = {
+        noticeData: {},
+        mealData: {}
+    }
 
     // 공지 ajax + 급식 ajax
     this.getData = function() {
+        // getNoticeData
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: {
+                "page": 0,
+                "limit": 5
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", this.command.noticeCommand);
+            },
+            success: function(data) {
+                this.ajaxData.noticeData = JSON.parse(data);
+            }
+        });
+
+        // getMaelData
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: {
+                "year": year,
+                "month": month.
+                "day": day
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", this.command.mealCommand);
+            },
+            success: function(data) {
+                this.ajaxData.mealData = JSON.parse(data);
+            }
+        });
 
     }
 
     // 공지 셋팅 + 급식
     // 급식 reseponse형식을 아직 모르겠다.
     this.setData = function() {
+        // 공지사항 채우기 and 이벤트 등록
+        for (var loop = 0; loop < 5; loop++) {
+            var newLi = $('<li/>', {
+                click: function() {
+                    pageStack.push(this);
+                    new NoticePage("notice", this.ajaxData.noticeData.no);
+                }
+            }).appendTo("ul.notice");
+            var appendString =
+                '<p class="title">' + this.ajaxData.noticeData.result.title + '</p>';
+            appendString +=
+                '<p class="no">' + this.ajaxData.noticeData.result.no + '</p>';
+            newLi.append(appendString);
+        }
 
+        //급식은 reseponse형태를 아직 모르겠음
     }
 
     // 공지 클릭시, notice글 받아오기 + 급식 알러지 정보
     this.setEvent = function() {
-
+        $(".right div.menues div.meal img").click(function() {
+            // 알러지 정보 출력 페이지
+        })
     }
 
 }
@@ -666,7 +753,10 @@ function FaqListPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
-        '<h1>FAQ</h1>' +
+        '<h1>공지사항</h1>' +
+        '<div class="input-container">' +
+        '<input type="button" name="" value="글 쓰기">' +
+        '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
         '<table class="list">' +
@@ -712,6 +802,9 @@ function QnaListPage() {
         '<div class="frame left articlelist qna">' +
         '<div class="frametitle">' +
         '<h1>Q&A</h1>' +
+        '<div class="input-container">' +
+        '<input type="button" name="" value="글 쓰기">' +
+        '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
         '<table class="list">' +
@@ -752,6 +845,11 @@ function QnaListPage() {
         }
         this.setPageData();
     }
+    this.setEvent = function() {
+        $(".articlelist div.input-container input").click(function() {
+            // 글 쓰기 페이지 로드
+        })
+    }
 }
 
 QnaListPage.prototype = new ArticleListPage();
@@ -761,7 +859,10 @@ function RuleListPage() {
     this.form =
         '<div class="frame left articlelist qna">' +
         '<div class="frametitle">' +
-        '<h1>Q&A</h1>' +
+        '<h1>기숙사규칙</h1>' +
+        '<div class="input-container">' +
+        '<input type="button" name="" value="글 쓰기">' +
+        '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
         '<table class="list">' +
@@ -800,52 +901,52 @@ function RuleListPage() {
 
 RuleListPage.prototype = new ArticleListPage();
 
-// form, command, sendData 초기화 해야함
-function NoticeListPage() {
-    this.form =
-        '<div class="frame left articlelist afterapply">' +
-        '<div class="frametitle">' +
-        '<h1>공지사항</h1>' +
-        '<div class="underline puple"></div>' +
-        '</div>' +
-        '<table class="list">' +
-        '<tr class="tableheader">' +
-        '<th>번호</th>' +
-        '<th>제목</th>' +
-        '<th>날짜</th>' +
-        '</tr>' +
-        '</table>' +
-        '</div>' +
-        '<table class="page">' +
-        '<tr>' +
-        '</tr>' +
-        '</table>';
-    this.sendData = {
-        "page": this.page
-    };
-    this.type = "notice";
-    this.command = "416"; //command 몇인지 모름 !!!!!!!!!!!!!!!!!!!!
-    this.setData = function() {
-        for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
-            var newTr = $('<tr/>', {
-                click: function(e) {
-                    // 클릭이벤트
-                    new ServerPage(this.type, this.ajaxData.result.list[loop].no);
-                    pageStack.push(this);
-                }
-            });
-            var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
-            appendString += "<td>" + this.ajaxData.result[loop].title + "</td>";
-            // 아직 모름
-            appendString += "<td>" + this.ajaxData.result[loop].instructor + "</td>";
-            newTr.append(appendString);
-            $(".articlelist table.list").append(newTr);
-        }
-        this.setPageData();
-    }
-}
-
-NoticeListPage.prototype = new ArticleListPage();
+// // form, command, sendData 초기화 해야함
+// function NoticeListPage() {
+//     this.form =
+//         '<div class="frame left articlelist afterapply">' +
+//         '<div class="frametitle">' +
+//         '<h1>공지사항</h1>' +
+//         '<div class="underline puple"></div>' +
+//         '</div>' +
+//         '<table class="list">' +
+//         '<tr class="tableheader">' +
+//         '<th>번호</th>' +
+//         '<th>제목</th>' +
+//         '<th>날짜</th>' +
+//         '</tr>' +
+//         '</table>' +
+//         '</div>' +
+//         '<table class="page">' +
+//         '<tr>' +
+//         '</tr>' +
+//         '</table>';
+//     this.sendData = {
+//         "page": this.page
+//     };
+//     this.type = "notice";
+//     this.command = "416"; //command 몇인지 모름 !!!!!!!!!!!!!!!!!!!!
+//     this.setData = function() {
+//         for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
+//             var newTr = $('<tr/>', {
+//                 click: function(e) {
+//                     // 클릭이벤트
+//                     new ServerPage(this.type, this.ajaxData.result.list[loop].no);
+//                     pageStack.push(this);
+//                 }
+//             });
+//             var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
+//             appendString += "<td>" + this.ajaxData.result[loop].title + "</td>";
+//             // 아직 모름
+//             appendString += "<td>" + this.ajaxData.result[loop].instructor + "</td>";
+//             newTr.append(appendString);
+//             $(".articlelist table.list").append(newTr);
+//         }
+//         this.setPageData();
+//     }
+// }
+//
+// NoticeListPage.prototype = new ArticleListPage();
 
 // form, command, sendData 초기화 해야함
 // 방과후 신청기간 가져와하 함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -926,7 +1027,10 @@ function FacilityListPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
-        '<h1>FAQ</h1>' +
+        '<h1>시설고장신고</h1>' +
+        '<div class="input-container">' +
+        '<input type="button" name="" value="글 쓰기">' +
+        '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
         '<table class="list">' +
@@ -945,7 +1049,7 @@ function FacilityListPage() {
     this.sendData = {
         "page": this.page
     };
-    this.type = "faq";
+    this.type = "facility";
     this.command = "415";
     this.setData = function() {
         for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
@@ -1003,7 +1107,7 @@ function FacilityArticlePage(no) {
                 '<div class="frame extention articlecontainer">' +
                 '<div class="frametitle">' +
                 '<h2>답변</h2>' +
-                '<p class="date">'+
+                '<p class="date">' +
                 this.ajaxData.result.result_date +
                 '</p>' +
                 '<div class="underline puple">' +
@@ -1018,7 +1122,7 @@ function FacilityArticlePage(no) {
 
         // 질문 제목 셋팅
         $("div.question div.frametitle h2").html = '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        this.ajaxData.result.title;
+            this.ajaxData.result.title;
 
         // 질문 내용 셋팅
         $("div.question div.title").text(this.ajaxData.result.content);
@@ -1027,8 +1131,7 @@ function FacilityArticlePage(no) {
     }
 
     // 이벤트가 없다
-    this.setEvent = function() {
-    }
+    this.setEvent = function() {}
 
 }
 
@@ -1558,35 +1661,35 @@ function GoOutApplyPage() {
     this.setEvent = function() {
         clickable = true;
 
-        $('#selection').on("click", function () {
-          if(clickable) {
-            $("#select_table td:eq(1), td:eq(2)").show();
-            clickable = false;
+        $('#selection').on("click", function() {
+            if (clickable) {
+                $("#select_table td:eq(1), td:eq(2)").show();
+                clickable = false;
 
-            $("#sat").on("click", function () {
-              $('#selection').text('토요일')
-              $('#day').attr('value', '토요일');
-              $("#select_table td:eq(1), td:eq(2)").hide();
-              clickable = true;
-            });
+                $("#sat").on("click", function() {
+                    $('#selection').text('토요일')
+                    $('#day').attr('value', '토요일');
+                    $("#select_table td:eq(1), td:eq(2)").hide();
+                    clickable = true;
+                });
 
-            $('#sun').on("click", function () {
-              $('#selection').text('일요일');
-              $('#day').attr('value', '일요일');
-              $("#select_table td:eq(1), td:eq(2)").hide();
-              clickable = true;
-            });
+                $('#sun').on("click", function() {
+                    $('#selection').text('일요일');
+                    $('#day').attr('value', '일요일');
+                    $("#select_table td:eq(1), td:eq(2)").hide();
+                    clickable = true;
+                });
 
-          } else {
-            $("#select_table td:eq(1), td:eq(2)").hide();
-            clickable = true;
-          }
+            } else {
+                $("#select_table td:eq(1), td:eq(2)").hide();
+                clickable = true;
+            }
         });
 
-        $('#submit_button').on('click', function () {
-          $('#apply_form').submit();
+        $('#submit_button').on('click', function() {
+            $('#apply_form').submit();
         });
-        
+
     }
 }
 GoOutApplyPage.prototype = new ClientPage();
@@ -1646,10 +1749,79 @@ function Mypage() {
 }
 Mypage.prototype = new AjaxPage();
 
+// qna, rule, facility, notice 해당
 function NoticeArticlePage(type, no) {
     this.type = type;
     this.no = no;
-    this.setEvent = function() {}
+    // 이벤트 등록할 것 없음
+    this.setEvent = function() {
+
+    }
 }
 
 NoticeArticlePage.prototype = new ServerPage();
+
+function RuleArticlePage(type, no) {
+    this.type = type;
+    this.no = no;
+    // 이벤트 등록할 것 없음
+    this.setEvent = function() {
+
+    }
+}
+
+RuleArticlePage.prototype = new ServerPage();
+
+function QnaArticlePage(type, no) {
+    this.type = type;
+    this.no = no;
+    // 이벤트 등록할 것 없음
+    this.setEvent = function() {
+        // 질문수정, 질문삭제 이벤트 등록
+        $(".articlecontainer .frametitle div.input-container input.modify").click(function() {
+            // 질문 수정 ajax
+        });
+        $(".articlecontainer .frametitle div.input-container input.delete").click(function() {
+            // 질문 삭제 ajax
+        })
+
+        // 답변수정, 답변삭제 이벤트 등록
+        $(".answer .frametitle div.input-container input.modify").click(function() {
+            // 질문 수정 ajax
+        });
+        $(".answer .frametitle div.input-container input.delete").click(function() {
+            // 질문 삭제 ajax
+        })
+
+        // 댓글수정, 댓글삭제, 댓글전송 이벤트 등록
+        $(".answer .comment table td span.comment-modify").click(function () {
+            // 댓글 수정
+        })
+        $(".answer .comment table td span.comment-delete").click(function () {
+            // 댓글 삭제
+        })
+
+
+    }
+}
+
+QnaArticlePage.prototype = new ServerPage();
+
+// meal 형식
+// "result": {
+//   "Meals": [
+//     {
+//       "Allergy": [],
+//       "Menu": []
+//     },
+//     {
+//       "Allergy": [],
+//       "Menu": []
+//     },
+//     {
+//       "Allergy": [],
+//       "Menu": []
+//     }
+//   ],
+//   "Date": "2017-02-22"
+// }

@@ -5,10 +5,14 @@
     <meta charset="utf-8">
     <title>DMS</title>
     <link rel="stylesheet" href="default.css">
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
     <!--css파일 위치로 수정필요-->
     <script src="./js/tinymce/tinymce.min.js"></script>
-  <script>tinymce.init({ selector:'textarea' });</script>
+    <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script>
 
 </head>
 
@@ -16,13 +20,13 @@
     <header>
         <div class="logo" style="color: white">
             <p>로고</p>
-            
+
             <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <div class="icon"><i class="fa fa-bell" aria-hidden="true"></i></div>
             <div class="title">System Notifications</div>
             <div class="count">10</div>-->
-            
-          </a>
+
+            </a>
             <!--수정필요-->
         </div>
     </header>
@@ -30,18 +34,18 @@
         <div class="single-container">
             <form action="/admin/writepost" method="post" id="form">
                 <input id="category" type="text" value="" hidden>
-            <div class="frametitle" style="margin-bottom: 15px;">
-                <input class="border-less-input" type="text" name="title" placeholder="제목 입력"/>
-                <div class="underline"></div>
-            </div>
-        <textarea style="height: 300px;" name="content"> </textarea>
-            <div>
-                <div style="right: 0;">
-        <a href="" onclock="document.getElementById("form").submit();" class="btn blue btn-effect btn-hover-blue btn-margin">작성</a>
-                <a href="" class="btn blue btn-effect btn-hover-blue btn-margin">취소</a>
-            </div>
+                <div class="frametitle" style="margin-bottom: 15px;">
+                    <input class="border-less-input" type="text" name="title" placeholder="제목 입력" />
+                    <div class="underline"></div>
                 </div>
-                </form>
+                <textarea style="height: 300px; width: 80%;" name="content"> </textarea>
+                <div>
+                    <div style="right: 0;">
+                        <a href="" onclock="document.getElementById(" form ").submit();" class="btn blue btn-effect btn-hover-blue btn-margin">작성</a>
+                        <a href="" class="btn blue btn-effect btn-hover-blue btn-margin">취소</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
