@@ -548,7 +548,6 @@ ServerPage.prototype = new Page();
 // getData 재정의 해야함 (급식, 공지 다 받아오도록)
 // 아직 알고 있는게 하나도 없어서 구현을 못하겠다.
 function MainPage() {
-    // 웹용 공지는 아직 없는것 같다.
 
     this.command = {
         noticeCommand: 427,
@@ -586,7 +585,7 @@ function MainPage() {
             type: "POST",
             data: {
                 "year": year,
-                "month": month.
+                "month": month,
                 "day": day
             },
             beforeSend: function(xhr) {
@@ -619,6 +618,30 @@ function MainPage() {
         }
 
         //급식은 reseponse형태를 아직 모르겠음
+        // meal 형식
+        // "result": {
+        //   "Meals": [
+        //     {
+        //       "Allergy": [],
+        //       "Menu": []
+        //     },
+        //     {
+        //       "Allergy": [],
+        //       "Menu": []
+        //     },
+        //     {
+        //       "Allergy": [],
+        //       "Menu": []
+        //     }
+        //   ],
+        //   "Date": "2017-02-22"
+        // }
+
+        var mealArr = $(".right div.menues div.meal div.info");
+        for(var loop = 0; loop < mealArr.length; loop++) {
+            $(mealArr[loop]).children().eq(1).text(this.ajaxData.mealData.result.Meals[loop].Menu);
+        }
+
     }
 
     // 공지 클릭시, notice글 받아오기 + 급식 알러지 정보
