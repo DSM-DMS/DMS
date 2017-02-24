@@ -30,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT student_data.id, number, status, value FROM student_data right join stay_apply_default on student_data.id = stay_apply_default.id
 	</select>
 	
+	<select id="checkAdminSession" resultMap="java.lang.String">
+		SELECT id FROM   where session_key = #{sessionKey}
+	</select>
+	
 	<select id="residualAtWeek" resultType="java.lang.Integer">
 		SELECT value FROM stay_apply where id = #{id} AND week = #{week}
 	</select>

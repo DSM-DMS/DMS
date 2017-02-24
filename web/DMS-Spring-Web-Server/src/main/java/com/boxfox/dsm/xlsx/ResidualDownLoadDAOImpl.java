@@ -1,10 +1,14 @@
 package com.boxfox.dsm.xlsx;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,22 +49,14 @@ public class ResidualDownLoadDAOImpl {
 
 	private HashMap<String, String> map = new HashMap();
 
-	public File readExcel() {
-		//initResidualMaps();
+	public InputStream readExcel(String date) {
+		initResidualMaps(date);
 		try {
 			File xlsxFile = resourceLoader.getResource("classpath:잔류조사포맷.xlsx").getFile();
 			XSSFWorkbook workbook = processXlsx(xlsxFile);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date now = new Date();
-			String fileName = getClass().getClassLoader().getResource(".").getFile() + "/Residual" + sdf.format(now)
-					+ ".xlsx";
-			File file = new File(fileName);
-			if (!file.exists())
-				file.createNewFile();
-			FileOutputStream fileoutputstream = new FileOutputStream(file);
-			workbook.write(fileoutputstream);
-			fileoutputstream.close();
-			return file;
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			workbook.write(outputStream);
+			return new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +76,7 @@ public class ResidualDownLoadDAOImpl {
 				for (columnindex = 0; columnindex <= cells; columnindex++) {
 					XSSFCell cell = row.getCell(columnindex);
 					if (cell != null && cell.getCellType() == 0) {
-						String sNum = new StringBuilder(String.valueOf(cell.getNumericCellValue())).toString();
+						String sNum = (String.valueOf((int)cell.getNumericCellValue()));
 						if (sNum != null) {
 							cell = row.getCell(++columnindex);
 							if (cell.getCellType() == 1) {
@@ -98,28 +94,19 @@ public class ResidualDownLoadDAOImpl {
 		return workbook;
 	}
 
-	private void initResidualMaps() {
+	private void initResidualMaps(String date) {
 		UserMapper userMapper = (UserMapper) sqlSession.getMapper(UserMapper.class);
 		List<UserDataDTO> list = userMapper.residual();
-		String week = getWeek();
-
+		
 		for (int i = 0; i < list.size(); i++) {
 			String typeStr = null;
-			Integer type = userMapper.residualAtWeek(list.get(i).getId(), getWeek());
+			Integer type = userMapper.residualAtWeek(list.get(i).getId(), date);
 			if (type == null) {
 				type = list.get(i).getResidualDefault();
 			}
 			typeStr = RESIDUAL_TYPE[type - 1];
 			map.put(list.get(i).getNumber() + "", typeStr);
 		}
-	}
-
-	private String getWeek() {
-		Calendar calendar = Calendar.getInstance();
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int day = calendar.get(Calendar.WEEK_OF_MONTH);
-		return year + "-" + month + "-" + day;
 	}
 
 }

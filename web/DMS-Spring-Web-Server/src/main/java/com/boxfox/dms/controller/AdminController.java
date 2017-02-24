@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -71,18 +74,30 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "/admin/download/residual.xlsx", method = RequestMethod.GET)
-	@ResponseBody
-	public void download(HttpServletRequest request, HttpServletResponse response) {
-		if(userDAO.checkAdminSession(request.getCookies())) {
-			
+	@RequestMapping(value = "/admin/download/{file_name:.+}", method = RequestMethod.GET)
+	public void download(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("file_name") String fileName) {
+		if (userDAO.checkAdminSession(request.getCookies())) {
+			Matcher m = Pattern.compile("(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.]([1-4])").matcher(fileName);
+			String date = null;
+			if (m.find()) {
+				date = m.group();
+			}
+			try {
+				if (date == null || !fileName.endsWith("xlsx")) {
+					response.sendError(400, "yyyy-mm-ww 형식의 이름이 포함되어야 하며, 확장자는 xlsx형식 이여야 합니다.");
+				}
+				IOUtils.copy(residualDownload.readExcel(date), response.getOutputStream());
+				response.flushBuffer();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			try {
+				response.sendError(404);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		    try {
-		      InputStream is = new FileInputStream(residualDownload.readExcel());
-		      IOUtils.copy(is, response.getOutputStream());
-		      response.flushBuffer();
-		    } catch (IOException ex) {
-		      throw new RuntimeException("IOError writing file to output stream");
-		    }
 	}
 }
