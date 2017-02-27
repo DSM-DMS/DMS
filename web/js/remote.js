@@ -1762,7 +1762,10 @@ function GoHomeApplyPage() {
         $.ajax({
             url: "dsm2015.cafe24.com",
             type: "POST",
-            data: this.sendData,
+            data: {
+              "id": this.sendData.id,
+              "week": this.sendData.week
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                 xhr.setRequestHeader("command", this.command.load);
@@ -1909,6 +1912,7 @@ function GoHomeApplyPage() {
               }
               break;
           }
+          drawPrev();
         }
 
         //달력 초기화
@@ -1961,8 +1965,9 @@ function GoHomeApplyPage() {
         }
 
         function drawPrev() {
+            loadPrev();
             for(i = 1; i <= valueArray.length; i++) {
-              if(valueArray[i] == 0) {
+              if(valueArray[i] == 4) { //잔류
               } else if(valueArray[i] == 1) {
                   $('tr:eq('+(i+1)+') .fri').attr('class', 'fri go_home');
                   $('tr:eq('+(i+2)+') .sun').attr('class', 'sun go_dom');
@@ -1974,6 +1979,7 @@ function GoHomeApplyPage() {
                   $('tr:eq('+(i+1)+') .sat').attr('class', 'sat go_dom');
               }
             }
+            valueArray = new Array();
         }
 
         //***********************신청*********************
