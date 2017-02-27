@@ -1,6 +1,26 @@
 id = "test";
 name = "momo";
 
+// 로그인 페이지
+$('#login').on('click', function () {
+  $.ajax({
+      url: "dsm2015.cafe24.com/user/login",
+      type: "POST",
+      data: {
+        id: $('#login_id').val(),
+        password: $('#login_pw').val(),
+        recaptcha: recaptcha,
+        autoLogin: autoLogin
+      }
+      statusCode: {
+        500: function(xhr) {
+          if(window.console) console.log(xhr.responseText);
+        }
+      }
+  });
+});
+
+
 //신청탭 over 이벤트
 
 $(".remote .category").children("a").eq(0).click(function() {

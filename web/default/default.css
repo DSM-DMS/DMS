@@ -1310,10 +1310,14 @@ body {
     font-size: 20px;
 }
 
-#login_form input {
+#login_form input[type="text"], #login_form input[type="password"] {
     width: 80%;
     margin: 10px;
     font-size: 20px;
+}
+
+#auto_login {
+  font-size: 80%;
 }
 
 #recaptcha {
@@ -1323,7 +1327,8 @@ body {
     margin-bottom: 10px;
 }
 
-#submit {
+#login {
+    cursor: pointer;
     border-radius: 5px;
     margin: 10px;
     margin-top: 25px;
@@ -1334,11 +1339,6 @@ body {
     height: 30px;
     line-height: 30px;
 }
-
-#submit:hover {
-    cursor: pointer;
-}
-
 
 /*-------------------------- facility ------------------------*/
 
