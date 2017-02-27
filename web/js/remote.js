@@ -2,6 +2,7 @@ id = "test";
 name = "momo";
 
 //신청탭 over 이벤트
+
 $(".remote .category").children("a").eq(0).click(function() {
     // 신청 text를 white로
     if ($(window).width() > 480) {
@@ -1644,6 +1645,362 @@ function ExtentionApplyPage() {
     this.draw();
 }
 ExtentionApplyPage.prototype = new AjaxPage();
+
+function GoHomeApplyPage() {
+    this.form =
+        '<div class="frame calendar">' +
+        '<h1>귀가 신청</h1>' +
+        '<div class="underline"></div>' +
+        '<table id="calendar" cellspacing="0">' +
+        '<thead>' +
+        '<tr>' +
+        '<td id="prev_month"><i class="fa fa-toggle-left" style="font-size: 28px;"></i></td>' +
+        '<td id="month" colspan="5" style="font-size: 28px; font-weight: bold;"></td>' +
+        '<td id="next_month"><i class="fa fa-toggle-right" style="font-size: 28px;"></i></td>' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+        '<tr class="days">' +
+        '<td>Sun</td>' +
+        '<td>Mon</td>' +
+        '<td>Tue</td>' +
+        '<td>Wed</td>' +
+        '<td>Thu</td>' +
+        '<td>Fri</td>' +
+        '<td>Sat</td>' +
+        '</tr>' +
+        '<tr id="first_week" class="weeks">' +
+        '<td class="sun"></td>' +
+        '<td class="mon"></td>' +
+        '<td class="tue"></td>' +
+        '<td class="wed"></td>' +
+        '<td class="thu"></td>' +
+        '<td class="fri go_home"></td>' +
+        '<td class="sat"></td>' +
+        '</tr>' +
+        '<tr id="second_week" class="weeks">' +
+        '<td class="sun go_dom"></td>' +
+        '<td class="mon"></td>' +
+        '<td class="tue"></td>' +
+        '<td class="wed"></td>' +
+        '<td class="thu"></td>' +
+        '<td class="fri go_home"></td>' +
+        '<td class="sat go_dom"></td>' +
+        '</tr>' +
+        '<tr id="third_week" class="weeks">' +
+        '<td class="sun"></td>' +
+        '<td class="mon"></td>' +
+        '<td class="tue"></td>' +
+        '<td class="wed"></td>' +
+        '<td class="thu"></td>' +
+        '<td class="fri"></td>' +
+        '<td class="sat go_home"></td>' +
+        '</tr>' +
+        '<tr id="fourth_week" class="weeks">' +
+        '<td class="sun go_dom"></td>' +
+        '<td class="mon"></td>' +
+        '<td class="tue"></td>' +
+        '<td class="wed"></td>' +
+        '<td class="thu"></td>' +
+        '<td class="fri go_home_duty"></td>' +
+        '<td class="sat"></td>' +
+        '</tr>' +
+        '<tr id="fifth_week" class="weeks">' +
+        '<td class="sun go_dom"></td>' +
+        '<td class="mon"></td>' +
+        '<td class="tue"></td>' +
+        '<td class="wed"></td>' +
+        '<td class="thu"></td>' +
+        '<td class="fri"></td>' +
+        '<td class="sat"></td>' +
+        '</tr>' +
+        '</tbody>' +
+        '</table>' +
+        '</div>' +
+        '<div class="frame go_home_apply">' +
+        '<form id="apply_form">' +
+        '<fieldset id="apply_field">' +
+        '<legend>잔류신청</legend>' +
+        '<table width="100%">' +
+        '<tr>' +
+        '<td width="45%">' +
+        '<label for="stay-1">&nbsp&nbsp&nbsp잔&nbsp&nbsp류&nbsp&nbsp&nbsp</label>' +
+        '<input type="radio" name="stay" id="stay-1" value="1" required><br><br>' +
+        '<label for="stay-2">금요 귀가</label>' +
+        '<input type="radio" name="stay" id="stay-2" value="2"><br><br>' +
+        '<label for="stay-3">토요 귀가</label>' +
+        '<input type="radio" name="stay" id="stay-3" value="3"><br><br>' +
+        '<label for="stay-4">토요 귀사</label>' +
+        '<input type="radio" name="stay" id="stay-4" value="4"><br><br>' +
+        '</td>' +
+        '<td>' +
+        '<div style="margin: 20%; margin-left: 0;">' +
+        '<span class="color" style="background-color: rgb(52, 219, 94);"></span>&nbsp&nbsp귀가' +
+        '</div>' +
+        '<div style="margin: 20%; margin-left: 0;">' +
+        '<span class="color" style="background-color: rgb(255, 151, 49);"></span>&nbsp&nbsp귀사' +
+        '</div>' +
+        '<div style="margin: 20%; margin-left: 0;">' +
+        '<span class="color" style="background-color: rgb(255, 238, 34);"></span>&nbsp&nbsp의무귀가' +
+        '</div>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td colspan="2"><input type="text" name="date" id="date" size="15"><div class="ui-button ui-widget ui-corner-all" id="apply_submit">신청</div></td>' +
+        '</tr>' +
+        '</table>' +
+        '</fieldset>' +
+        '</form>' +
+        '</div>';
+
+    this.command = {
+        load: "433",
+        apply: "502"
+    }
+    this.ajaxData = {
+        "value": value
+    };
+    this.sendData = {
+        "id": id,
+        "week": week,
+        "value": value
+    };
+
+    // 필요한 Data를 받아옴
+    this.getData = function() {
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: this.sendData,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", this.command.load);
+            },
+            success: function(data) {
+                this.ajaxData = JSON.parse(data);
+            }
+        });
+    }
+
+    // 신청
+    this.applyData = function() {
+        $.ajax({
+            url: "dsm2015.cafe24.com",
+            type: "POST",
+            data: this.sendData,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", this.command.apply);
+            },
+            success: function(data) {
+                alert("신청되었습니다.");
+            }
+        });
+    }
+
+    // 받아온 Data를 html에 설정
+    this.setData;
+
+    // html에 이벤트 설정
+    this.setEvent = function() {
+        var valueArray = new Array();
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+        var currentMonth = currentDate.getMonth()+1;
+        var lastDay = noofdays(currentYear, currentMonth);
+        var newDate = new Date(currentYear, currentMonth - 1, 1);
+
+        $('#month').text(currentYear+'.'+currentMonth); //달력 년, 월 표시
+
+        drawCalendar(newDate, lastDay); //처음 달력 날짜 표시
+
+        //이전 달
+        $('#prev_month').click(function() {
+          if(currentMonth == 1) {
+            currentYear--;
+            currentMonth = 12;
+          } else {
+            currentMonth--;
+          }
+          $('#month').text(currentYear+'.'+currentMonth);
+          newDate = new Date(currentYear, currentMonth - 1, 1);
+          lastDay = noofdays(currentMonth, currentYear);
+          clearCalendar();
+          drawCalendar(newDate, lastDay);
+        });
+
+        //다음 달
+        $('#next_month').click(function() {
+          if(currentMonth == 12) {
+            currentYear++;
+            currentMonth = 1;
+          } else {
+            currentMonth++;
+          }
+          $('#month').text(currentYear+'.'+currentMonth);
+          newDate = new Date(currentYear, currentMonth - 1, 1);
+          lastDay = noofdays(currentMonth, currentYear);
+          clearCalendar();
+          drawCalendar(newDate, lastDay);
+        });
+
+        //달의 말일 구하기
+        function noofdays(year, month)	{
+          var daysofmonth;
+
+          if((month == 4) || (month ==6) || (month ==9) || (month == 11)) {
+            daysofmonth = 30;
+          }
+          else {
+            daysofmonth = 31;
+            if(month == 2) {
+              if (year/4 - parseInt(year/4) != 0) {
+                daysofmonth = 28;
+              }	else {
+                if (year/100 - parseInt(year/100) != 0) {
+                  daysofmonth = 29;
+                } else {
+                  if(year/400 -  parseInt(year/400) != 0) {
+                    daysofmonth = 28;
+                  } else {
+                    daysofmonth =29;
+                  }
+                }
+              }
+            }
+          }
+          return daysofmonth;
+        }
+
+        //달력 그리기
+        function drawCalendar(date, lastDay) {
+          switch(date.getDay()) {
+            case 0:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 10 + i; //일요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+            case 1:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 11 + i; //월요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+            case 2:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 12 + i; //화요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+            case 3:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 13 + i; //수요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+            case 4:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 14 + i; //목요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+            case 5:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 15 + i; //금요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+            case 6:
+              for(var i = 0; i < lastDay; i++) {
+                var idx = 16 + i; //토요일
+                $('#calendar td:eq('+idx+')').text(i+1);
+              }
+              break;
+          }
+        }
+
+        //달력 초기화
+        function clearCalendar() {
+          for(var i = 0; i < 35; i++) {
+            $('#calendar td:eq('+(i+10)+')').text("");
+            $('#calendar tbody tr').css("background-color", "white");
+          }
+        }
+
+        $('#first_week').click(function() {
+          $('#calendar tbody tr').css("background-color", "white");
+          $('#first_week').css("background-color", "rgb(197, 197, 197)");
+          $('#date').val(currentYear+'-'+currentMonth+'-'+'01');
+        });
+
+        $('#second_week').click(function(){
+          $('#calendar tbody tr').css("background-color", "white");
+          $('#second_week').css("background-color", "rgb(197, 197, 197)");
+          $('#date').val(currentYear+'-'+currentMonth+'-'+'02');
+        });
+
+        $('#third_week').click(function() {
+          $('#calendar tbody tr').css("background-color", "white");
+          $('#third_week').css("background-color", "rgb(197, 197, 197)");
+          $('#date').val(currentYear+'-'+currentMonth+'-'+'03');
+        });
+
+        $('#fourth_week').click(function() {
+          $('#calendar tbody tr').css("background-color", "white");
+          $('#fourth_week').css("background-color", "rgb(197, 197, 197)");
+          $('#date').val(currentYear+'-'+currentMonth+'-'+'04');
+        });
+
+        $('#fifth_week').click(function() {
+          alert("다음 달 1주로 신청해주세요.");
+        });
+
+        //********************이전 데이터 표시*********************
+        function dateToString(week) {
+            return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
+        }
+
+        function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
+            for(var i = 1; i <= 4; i++) {
+                this.sendData.week = dateToString(i);
+                this.getData();
+                valueArray.push(this.ajaxData);
+            }
+        }
+
+        function drawPrev() {
+            for(i = 1; i <= valueArray.length; i++) {
+              if(valueArray[i] == 0) {
+              } else if(valueArray[i] == 1) {
+                  $('tr:eq('+(i+1)+') .fri').attr('class', 'fri go_home');
+                  $('tr:eq('+(i+2)+') .sun').attr('class', 'sun go_dom');
+              } else if(valueArray[i] == 2) {
+                  $('tr:eq('+(i+1)+') .sat').attr('class', 'sat go_home');
+                  $('tr:eq('+(i+2)+') .sun').attr('class', 'sun go_dom');
+              } else if(valueArray[i] == 3) {
+                  $('tr:eq('+(i+1)+') .fri').attr('class', 'fri go_home');
+                  $('tr:eq('+(i+1)+') .sat').attr('class', 'sat go_dom');
+              }
+            }
+        }
+
+        //***********************신청*********************
+        $('#apply_form input[type="radio"]').checkboxradio();
+
+        $('#date').keydown(function(e){
+              e.preventDefault();
+        });
+
+        $('#apply_submit').on('click', function () {
+              this.sendData.week = $('#date').val();
+              this.sendData.value = $(':input:radio[name="stay"]:checked').val();
+              this.applyData();
+        });
+
+    };
+}
+GoHOmApplyPage.prototype = new AjaxPage();
 
 // 자식 객체는 setEvent() 구현해야함
 // 자식 객체는 form 초기화 해야함
