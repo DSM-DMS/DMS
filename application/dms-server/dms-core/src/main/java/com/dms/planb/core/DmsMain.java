@@ -74,7 +74,7 @@ class DmsMain {
 		 * @see com.dms.parser.dataio.post
 		 * .PostChangeDetector
 		 */
-//		PostChangeDetector.getInstance().start();
+		PostChangeDetector.getInstance().start();
 		/*
 		 * Post(in school web page) change detector(thread)
 		 */
