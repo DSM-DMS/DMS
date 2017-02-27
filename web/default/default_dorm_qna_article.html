@@ -46,10 +46,10 @@
         </div>
     </nav>
     <div class="main">
-        <div class="frame left articlecontainer">
+        <div class="frame left articlecontainer question">
             <div class="frametitle">
-                <img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">
-                <h2>Q : ${title}</h2>
+                <h2><img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">
+Q : ${title}</h2>
                 <p>${date}</p>
                 <div class="input-container">
                     <input class="modify" type="button" name="" value="수정">
@@ -78,32 +78,70 @@
                 ${result}
             </div>
             <hr>
-            <div class="commentinput">
-                <table>
-                    <tr>
-                        <td> <input type="text" name="comment" value="" placeholder="여기에 댓글을 입력해 주세요">
-                        </td>
-                        <td> <button type="button" name="button">슝!</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="comment">
-                <table>
-                    <tr>
-                        <td>
-                            <h3>김지수</h3></td>
-                        <td>
-                            <p>young wild free</p>
-                        </td>
-                        <td>
-                            <p class="date">${comment.date}</p>
-                        </td>
-                        <td><span class="comment-modify">수정</span></td>
-                        <td><span class="comment-delete">삭제</span></td>
-                    </tr>
-                </table>
-            </div>
+        </div>
+        <div class="commentinput">
+            <table>
+                <tr>
+                    <td> <input type="text" name="comment" value="" placeholder="여기에 댓글을 입력해 주세요">
+                    </td>
+                    <td> <button type="button" name="button">슝!</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="comment">
+            <table>
+                <tr>
+                    <td>
+                        <h3>김지수</h3></td>
+                    <td>
+                        <p>young wild free</p>
+                    </td>
+                    <td>
+                        <p class="date">${comment.date}</p>
+                    </td>
+                    <!-- 댓글 수정, 삭제 기능 -->
+                    <td><span class="comment-modify">수정</span></td>
+                    <td><span class="comment-delete">삭제</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>김지수</h3></td>
+                    <td>
+                        <p>young wild free</p>
+                    </td>
+                    <td>
+                        <p class="date">${comment.date}</p>
+                    </td>
+                    <!-- 댓글 수정, 삭제 기능 -->
+                    <td><span class="comment-modify">수정</span></td>
+                    <td><span class="comment-delete">삭제</span></td>
+                </tr><tr>
+                    <td>
+                        <h3>김지수</h3></td>
+                    <td>
+                        <input class="comment-modify-input" type="text" name="" value="young wild free">
+                    </td>
+                    <td>
+                        <p class="date">${comment.date}</p>
+                    </td>
+                    <!-- 댓글 수정, 삭제 기능 -->
+                    <td><span class="comment-modify">수정</span></td>
+                    <td><span class="comment-delete">삭제</span></td>
+                </tr><tr>
+                    <td>
+                        <h3>김지수</h3></td>
+                    <td>
+                        <p>young wild free</p>
+                    </td>
+                    <td>
+                        <p class="date">${comment.date}</p>
+                    </td>
+                    <!-- 댓글 수정, 삭제 기능 -->
+                    <td><span class="comment-modify">수정</span></td>
+                    <td><span class="comment-delete">삭제</span></td>
+                </tr>
+            </table>
         </div>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

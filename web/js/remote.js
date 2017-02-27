@@ -339,6 +339,17 @@ $(".remote .inner .category .a#mypage").click(function() {
 // Page객체 저장하는 스택 -----------------------------------------------------------------
 var pageStack = [];
 
+// 페이지를 바꾸는 함수
+function changePage(beforePage, AfterPage) {
+    pageStack.push(beforePage);
+    AfterPage.draw();
+}
+
+function prevPage() {
+    pageStack.pop();
+    $(".main").html(pageStack[pageStack.length - 1].html.children())
+}
+
 // 상속트리
 // Page(추상)
 // | -- ClientPage(추상)
@@ -367,13 +378,13 @@ var pageStack = [];
 // |   |    |
 // |   |    | -- Mypage 구현 중
 // |   |    |
-// |   |    | -- MainPage 구현 중
+// |   |    | -- MainPage
 // |   |
 // |   | -- NonAjaxPage(추상)
 // |        |
 // |        | -- PointApplyPage
 // |        |
-// |        | -- GoOutApplyPage 구현 미완료
+// |        | -- GoOutApplyPage
 // |        |
 // |        | -- ArticleModifyPage 구현 미완료 (에디터 사용여부 결정뒤 구현)
 // |        |
@@ -398,6 +409,10 @@ var pageStack = [];
 // |        | -- QnaAnswerWritePage 구현 미완료
 // |        |
 // |        | -- FacilityResultWritePage 구현 미완료
+// |        |
+// |        | -- QnaQuestionWritePage 구현 미완료
+// |        |
+// |        | -- QnaQuestionModifyPage 구현 미완료
 
 
 
@@ -428,7 +443,7 @@ function Page() {
 
     // 이벤트 설정된 DOM을 저장
     this.saveDom = function() {
-        this.html = $(".main").get();
+        this.html = $(".main").clone(true, true);
     }
 }
 
@@ -437,7 +452,7 @@ function ClientPage() {
 
     // 기본 form을 main에 설정
     this.setForm = function() {
-        $(".main").html(form);
+        $(".main").html(this.form);
     }
 
     this.setEvent;
@@ -697,6 +712,9 @@ function MainPage() {
         })
     }
 
+    pageStack.push(this);
+    this.draw();
+
 }
 
 MainPage.prototype = new AjaxPage();
@@ -860,6 +878,9 @@ function FaqListPage() {
         }
         this.setPageData();
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 FaqListPage.prototype = new ArticleListPage();
@@ -919,6 +940,9 @@ function QnaListPage() {
             // 글 쓰기 페이지 로드
         })
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 QnaListPage.prototype = new ArticleListPage();
@@ -966,6 +990,9 @@ function RuleListPage() {
         }
         this.setPageData();
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 RuleListPage.prototype = new ArticleListPage();
@@ -1087,6 +1114,9 @@ function AfterSchoolListPage() {
         }
         this.setPageData();
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 AfterSchoolListPage.prototype = new ArticleListPage();
@@ -1144,65 +1174,68 @@ function FacilityListPage() {
         }
         this.setPageData();
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 FacilityListPage.prototype = new ArticleListPage();
 
 // 객체는 setData(), setEvent() 구현해야함
 // 객체는 form, command, sendData 초기화 해야함
-function FacilityArticlePage(no) {
-    this.command = 428;
-    this.form =
-        '<div class="frame left articlecontainer question">' +
-        '<div class="frametitle">' +
-        '<h2></h2>' +
-        '<p class="date">date</p>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<div class="article">' +
-        '</div>' +
-        '<hr>' +
-        '</div>' +
-        '</div>';
-    this.sendData = {
-        "no": no
-    };
-
-    this.setData = function() {
-        // 답변이 있으면, 답변 form 추가
-        if (this.ajaxData.result.has_result) {
-            $("div.articlecontainer").append(
-                '<div class="frame extention articlecontainer">' +
-                '<div class="frametitle">' +
-                '<h2>답변</h2>' +
-                '<p class="date">' +
-                this.ajaxData.result.result_date +
-                '</p>' +
-                '<div class="underline puple">' +
-                '</div>' +
-                '</div>' +
-                '<div class="article">' +
-                this.ajaxData.result.result +
-                '</div>' +
-                '<hr>'
-            );
-        }
-
-        // 질문 제목 셋팅
-        $("div.question div.frametitle h2").html = '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-            this.ajaxData.result.title;
-
-        // 질문 내용 셋팅
-        $("div.question div.title").text(this.ajaxData.result.content);
-
-
-    }
-
-    // 이벤트가 없다
-    this.setEvent = function() {}
-
-}
+// function FacilityArticlePage(no) {
+//     this.command = 428;
+//     this.form =
+//         '<div class="frame left articlecontainer question">' +
+//         '<div class="frametitle">' +
+//         '<h2></h2>' +
+//         '<p class="date">date</p>' +
+//         '<div class="underline puple">' +
+//         '</div>' +
+//         '</div>' +
+//         '<div class="article">' +
+//         '</div>' +
+//         '<hr>' +
+//         '</div>' +
+//         '</div>';
+//     this.sendData = {
+//         "no": no
+//     };
+//
+//     this.setData = function() {
+//         // 답변이 있으면, 답변 form 추가
+//         if (this.ajaxData.result.has_result) {
+//             $("div.articlecontainer").append(
+//                 '<div class="frame extention articlecontainer">' +
+//                 '<div class="frametitle">' +
+//                 '<h2>답변</h2>' +
+//                 '<p class="date">' +
+//                 this.ajaxData.result.result_date +
+//                 '</p>' +
+//                 '<div class="underline puple">' +
+//                 '</div>' +
+//                 '</div>' +
+//                 '<div class="article">' +
+//                 this.ajaxData.result.result +
+//                 '</div>' +
+//                 '<hr>'
+//             );
+//         }
+//
+//         // 질문 제목 셋팅
+//         $("div.question div.frametitle h2").html = '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
+//             this.ajaxData.result.title;
+//
+//         // 질문 내용 셋팅
+//         $("div.question div.title").text(this.ajaxData.result.content);
+//
+//
+//     }
+//
+//     // 이벤트가 없다
+//     this.setEvent = function() {}
+//
+// }
 
 // 객체는 setData(), setEvent() 구현해야함
 // 객체는 form, command, sendData 초기화 해야함
@@ -1321,6 +1354,9 @@ function AfterSchoolArticlePage(data) {
         result = JSON.parse(result);
         return result.result;
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 AfterSchoolListPage.prototype = new AjaxPage();
@@ -1582,6 +1618,8 @@ function ExtentionApplyPage() {
         this.setData();
 
     }
+    pageStack.push(this);
+    this.draw();
 }
 ExtentionApplyPage.prototype = new AjaxPage();
 
@@ -1700,8 +1738,11 @@ function PointApplyPage() {
         });
 
     }
+
+    pageStack.push(this);
+    this.draw();
 }
-PointApplyPage.prototype = new ClientPage();
+PointApplyPage.prototype = new NonAjaxPage();
 
 // 자식 객체는 setEvent() 구현해야함
 // 자식 객체는 form 초기화 해야함
@@ -1779,6 +1820,9 @@ function GoOutApplyPage() {
         });
 
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 GoOutApplyPage.prototype = new NonAjaxPage();
 
@@ -1834,6 +1878,9 @@ function Mypage() {
         // 아직 마이페이지항목이 제대로 정의되지 않음.
     };
     this.setEvent = function() {};
+
+    pageStack.push(this);
+    this.draw();
 }
 Mypage.prototype = new AjaxPage();
 
@@ -1845,9 +1892,20 @@ function NoticeArticlePage(type, no) {
     this.setEvent = function() {
 
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 NoticeArticlePage.prototype = new ServerPage();
+
+
+function FacilityArticlePage() {
+
+}
+
+FacilityArticlePage.prototype = new ServerPage();
+
 
 function RuleArticlePage(type, no) {
     this.type = type;
@@ -1856,6 +1914,9 @@ function RuleArticlePage(type, no) {
     this.setEvent = function() {
 
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 RuleArticlePage.prototype = new ServerPage();
@@ -1868,29 +1929,100 @@ function QnaArticlePage(type, no) {
         // 질문수정, 질문삭제 이벤트 등록
         $(".articlecontainer .frametitle div.input-container input.modify").click(function() {
             // 질문 수정 ajax
+            // qna질문 수정 페이지 로드 후, 질문 수정 페이지에서, 수정 버튼을 누르면, ajax발사후, QnaArticlePage리로드
+            // 취소버튼 누르면 그냥 QnaArticlePage리로드
+            new QnaQuestionModifyPage();
+
         });
         $(".articlecontainer .frametitle div.input-container input.delete").click(function() {
             // 질문 삭제 ajax
+            // 질문 삭제 후 전 페이지로 돌아가기
+            prevPage();
         })
 
         // 답변수정, 답변삭제 이벤트 등록
         $(".answer .frametitle div.input-container input.modify").click(function() {
             // 질문 수정 ajax
+            new QnaAnswerModifyPage();
         });
         $(".answer .frametitle div.input-container input.delete").click(function() {
             // 질문 삭제 ajax
+            // 성래서버로 요청하면 됨
         })
 
-        // 댓글수정, 댓글삭제, 댓글전송 이벤트 등록
-        $(".answer .comment table td span.comment-modify").click(function() {
+        // 댓글 전송 이벤트
+        $(".commentinput table tr td input[type='button']").click(function () {
+            $.ajax({
+                url: "dsm2015.cafe24.com",
+                type: "POST",
+                data: {
+                    "no": this.no,
+                    "content": content,
+                    "writer": name
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                    xhr.setRequestHeader("command", "114");
+                },
+                success: function() {
+                    // 다시 qna 글 페이지를 로드해야 할듯
+                    this.draw();
+                }
+            });
+        })
+
+        var commentArr = $(".comment table tr");
+        for (var loop = 0; loop < commentArr.length; loop++) {
             // 댓글 수정
-        })
-        $(".answer .comment table td span.comment-delete").click(function() {
-            // 댓글 삭제
-        })
+            $(commentArr[loop]).children("td").children("span.comment-modify").click(function() {
+                // ajax전에 댓글 수정 페이지를 보여줘야 함 ㅠㅠ
+                $.ajax({
+                    url: "dsm2015.cafe24.com",
+                    type: "POST",
+                    data: {
+                        "id": id,
+                        "content": content
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                        xhr.setRequestHeader("command", "214");
+                    },
+                    success: function() {
+                        // 다시 qna 글 페이지를 로드해야 할듯
+                        this.draw();
+                    }
+                });
+            })
 
+            // 댓글 삭제
+            $(commentArr[loop]).children("td").children("span.comment-delete").click(function() {
+                // 댓글 삭제
+                $.ajax({
+                    url: "dsm2015.cafe24.com",
+                    type: "POST",
+                    data: {
+                        "no": $(commentArr[loop]).children("td.hide-no").text(),
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                        xhr.setRequestHeader("command", "314");
+                    },
+                    success: function() {
+                        // 다시 qna 글 페이지를 로드해야 할듯
+                        this.draw();
+                    }
+                });
+            })
+        }
+
+        $(".comment table td span.comment-delete").click(function() {
+
+        })
 
     }
+
+    pageStack.push(this);
+    this.draw();
 }
 
 QnaArticlePage.prototype = new ServerPage();
