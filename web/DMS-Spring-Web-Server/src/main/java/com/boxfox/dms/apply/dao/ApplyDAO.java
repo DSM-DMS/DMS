@@ -27,5 +27,7 @@ public interface ApplyDAO {
 	public List<RewardApplyDTO> lookupRewardApply(String id);
 	
 	public List<StayApplyDTO> lookupStayApply(String id);
+	
+	public List<ExtensionMapDTO> getMapdatas();
 
 }

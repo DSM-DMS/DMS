@@ -23,7 +23,7 @@ import com.boxfox.dms.users.dao.UserDAOImpl;
 
 @RequestMapping(value = "/view", produces = "text/plain;charset=UTF-8")
 @Controller
-public class PostViewController extends PostController{
+public class PostViewController extends PostController {
 	private static final Logger logger = LoggerFactory.getLogger(PostViewController.class);
 
 	@Autowired
@@ -51,28 +51,48 @@ public class PostViewController extends PostController{
 	@RequestMapping(value = { "/faq", "/rule" }, params = { "no" }, method = RequestMethod.GET)
 	public String primary(HttpServletRequest request, Model model, @RequestParam("no") int no) {
 		String page = super.primary(faqDAO, ruleDAO, request, model, no);
-		if(page.equals("index"))
-		page = "primary_index";
-		
+		if (page.equals("index"))
+			page = "primary_index";
+
 		return page;
 	}
 
 	@RequestMapping(value = "/qna", params = { "no" })
 	public String qnaView(HttpServletRequest request, Model model, @RequestParam(value = "no") int no) {
 		String page = super.qna(qnaDAO, userDAO, request, model, no);
-		if(page.equals("index")) {
+		if (page.equals("index")) {
 			page = "qna_index";
 		}
 		return page;
 	}
-	
+
 	@RequestMapping(value = "/facility", params = { "no" })
 	public String facilityView(HttpServletRequest request, Model model, @RequestParam(value = "no") int no) {
 		String page = super.facility(facilityDAO, request, model, no);
-		if(page.equals("index")) {
+		if (page.equals("index")) {
 			page = "facility_index";
 		}
 		return page;
+	}
+
+	@RequestMapping(value = { "/extention", "/out", "/stay" }, method = RequestMethod.GET)
+	public String applys(HttpServletRequest request, Model model) {
+		String page = "login";
+		if (userDAO.checkUserSession(request)) {
+			if (request.getRequestURL().toString().contains("extension")) {
+				page = "extention_index";
+			} else if (request.getRequestURL().toString().contains("extension")) {
+				page = "out_index";
+			} else {
+				page = "stay_index";
+			}
+		}
+		return page;
+	}
+
+	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
+	public String index(HttpServletRequest request, Model model) {
+		return "index";
 	}
 
 }

@@ -25,6 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="title" column="title" />
     </resultMap>
     
+    <resultMap type="com.boxfox.dms.apply.dto.ExtensionMapDTO" id="MapResultList">
+        <result property="room" column="room" />
+        <result property="name" column="name" />
+        <result property="map" column="map" />
+    </resultMap>
     
     <insert id="extensionApply" parameterType="com.boxfox.dms.apply.dto.ExtensionApplyDTO">
     	REPLACE into extension_apply (id, room, seat) values(#{id}, #{room}, #{seat})
@@ -68,5 +73,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="lookupStayApply" parameterType="java.lang.String" resultMap="StayResultList">
     	select * from stay_apply where id=#{id}
+    </select>
+    
+    <select id="getMapDatas" resultMap="MapResultList">
+    	select * from extension_map
     </select>
 </mapper>

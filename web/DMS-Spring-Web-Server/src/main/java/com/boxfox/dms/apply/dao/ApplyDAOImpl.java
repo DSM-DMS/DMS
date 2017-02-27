@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.apply.dto.AfterSchoolApplyDTO;
 import com.boxfox.dms.apply.dto.ExtensionApplyDTO;
+import com.boxfox.dms.apply.dto.ExtensionMapDTO;
 import com.boxfox.dms.apply.dto.OutApplyDTO;
 import com.boxfox.dms.apply.dto.RewardApplyDTO;
 import com.boxfox.dms.apply.dto.StayApplyDTO;
@@ -88,6 +89,12 @@ public class ApplyDAOImpl implements ApplyDAO{
 
 	@Override
 	public List<StayApplyDTO> lookupStayApply(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ExtensionMapDTO> getMapdatas() {
 		// TODO Auto-generated method stub
 		return null;
 	}
