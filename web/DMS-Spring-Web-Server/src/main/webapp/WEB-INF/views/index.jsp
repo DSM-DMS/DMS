@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -92,7 +94,7 @@
                           <p>1, 2, 3</p>
                         </div>
                     </div>
-                    <img src="../image/arrow.png" alt="arrow image to see allergy">
+                    <img src="/image/arrow.png" alt="arrow image to see allergy">
                 </div>
                 <div class="lunch meal">
                     <div class="info">
@@ -102,7 +104,7 @@
                           <p>1, 2, 3</p>
                         </div>
                     </div>
-                    <img src="../image/arrow.png" alt="arrow image to see allergy">
+                    <img src="/image/arrow.png" alt="arrow image to see allergy">
                 </div>
                 <div class="dinner meal">
                     <div class="info">
@@ -112,7 +114,7 @@
                           <p>1, 2, 3</p>
                         </div>
                     </div>
-                    <img src="../image/arrow.png" alt="arrow image to see allergy">
+                    <img src="/image/arrow.png" alt="arrow image to see allergy">
 
                 </div>
             </div>
