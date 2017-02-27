@@ -1,4 +1,4 @@
-table.list @import "../css/remote.css";
+@import "../css/remote.css";
 
 /*remote.css��??�정?�요*/
 
@@ -17,9 +17,9 @@ body {
 }
 
 .back_arrow {
-    height: 35px !important;
+    height: 30px !important;
     cursor: pointer;
-    float: left;
+    vertical-align: middle;
 }
 
 .btn {
@@ -250,7 +250,9 @@ a.dropdown-toggle .count {
 }
 
 .frame h1 {
-    margin-bottom: 1%;
+    margin: 6px 0 6px 0;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .underline {
@@ -707,6 +709,19 @@ body {
     margin-bottom: 8px;
 }
 
+.comment table td.hide-no {
+    display: none;
+}
+
+.comment table td input.comment-modify-input {
+  height: 30px;
+  width: 97%;
+  border: 2px solid rgb(191, 148, 208);
+  border-radius: 4px;
+  padding-left: 1%;
+  transition: all 1s ease;
+}
+
 
 /*-------------------------------------qna list.-------------------------------*/
 
@@ -1073,7 +1088,7 @@ body {
 .extentionapply {
     width: 100%;
 }
-
+-
 .extentionapply .seatcontainer {
     width: 100%;
     margin-top: 20px;
@@ -1269,9 +1284,9 @@ body {
 
 /*------------------------- login -------------------*/
 
-body {
+/*body {
     background-color: #00bcfc;
-}
+}*/
 
 #title {
     text-align: left;
