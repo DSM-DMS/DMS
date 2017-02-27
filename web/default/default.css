@@ -668,6 +668,7 @@ body {
 
 .comment tr {
     border-bottom: 1px solid gray;
+    height: 50px;
 }
 
 .comment table tr td:nth-child(1) {

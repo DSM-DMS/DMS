@@ -354,7 +354,10 @@ function changePage(beforePage, AfterPage) {
 
 function prevPage() {
     pageStack.pop();
+    console.log(pageStack[pageStack.length - 1].html.children());
     $(".main").html(pageStack[pageStack.length - 1].html.children())
+    pageStack[pageStack.length -1].saveDom();
+    console.log(pageStack[pageStack.length - 1].html.children());
 }
 
 // 상속트리
@@ -853,6 +856,7 @@ function FaqListPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>공지사항</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -904,6 +908,7 @@ function QnaListPage() {
     this.form =
         '<div class="frame left articlelist qna">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>Q&A</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -965,6 +970,7 @@ function RuleListPage() {
     this.form =
         '<div class="frame left articlelist qna">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>기숙사규칙</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -1063,6 +1069,7 @@ function AfterSchoolListPage() {
     this.form =
         '<div class="frame left articlelist afterapply">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>방과후 신청</h1>' +
         '<p>신청기간 2017.3.2 ~ 3.10</p>' + //방과후 신청기간 가져와야함!!!
         '<div class="underline puple"></div>' +
@@ -1139,6 +1146,7 @@ function FacilityListPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>시설고장신고</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -1263,7 +1271,7 @@ function AfterSchoolArticlePage(data) {
     this.form =
         '<div class="frame left afterapplypage">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>방과후 신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -1383,6 +1391,7 @@ function ExtentionApplyPage() {
     this.form =
         '<div class="frame left extentionapply">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>연장신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -1642,7 +1651,7 @@ function PointApplyPage() {
     this.form =
         '<div class="frame left pointapply">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>상점신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -1750,15 +1759,9 @@ function PointApplyPage() {
                 }
             });
         });
-
-        $(".back_arrow").click(function() {
-            prevPage();
-        })
-
     }
-
-    pageStack.push(this);
     this.draw();
+    pageStack.push(this);
 }
 PointApplyPage.prototype = new NonAjaxPage();
 
@@ -1769,7 +1772,7 @@ function GoOutApplyPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>외출신청</h1>' +
         '<div class="underline"></div>' +
         '</div>' +
@@ -1840,11 +1843,6 @@ function GoOutApplyPage() {
 
         });
 
-
-        $(".back_arrow").click(function() {
-            prevPage();
-        })
-
     }
 
     pageStack.push(this);
@@ -1858,6 +1856,7 @@ function Mypage() {
     this.form =
         '<div class="frame left mypage">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>마이페이지</h1>' +
         '<div class="underline red"></div>' +
         '</div>' +
