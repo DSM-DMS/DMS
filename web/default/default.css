@@ -1298,6 +1298,7 @@ body {
 }
 
 #card {
+    min-width: 304px;
     padding: 20px;
     background-color: white;
     text-align: center;
@@ -1310,15 +1311,16 @@ body {
 }
 
 #login_form input {
+    width: 80%;
     margin: 10px;
     font-size: 20px;
 }
 
 #recaptcha {
-    width: 100px;
+    width: 304px;
+    margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 15%;
 }
 
 #submit {
@@ -1326,7 +1328,7 @@ body {
     margin: 10px;
     margin-top: 25px;
     margin: auto;
-    font-size: 20px;
+    font-size: 100%;
     background-color: #1fa9d8;
     width: 30%;
     height: 30px;
