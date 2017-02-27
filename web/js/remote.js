@@ -1,3 +1,6 @@
+id = "test";
+name = "momo";
+
 //신청탭 over 이벤트
 $(".remote .category").children("a").eq(0).click(function() {
     // 신청 text를 white로
@@ -334,6 +337,10 @@ $(".remote .inner .category .a#mypage").click(function() {
     loadMyPage();
 });
 
+$(".remote .inner .category .a#goout").click(function() {
+    new GoOutApplyPage();
+});
+
 // 위는 모두 remote에 관한 코드임
 
 // Page객체 저장하는 스택 -----------------------------------------------------------------
@@ -479,12 +486,12 @@ function AjaxPage() {
     // 필요한 Data를 받아옴
     this.getData = function() {
         $.ajax({
-            url: "dsm2015.cafe24.com",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: this.sendData,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                xhr.setRequestHeader("command", command);
+                xhr.setRequestHeader("command", this.command);
             },
             success: function(data) {
                 this.ajaxData = JSON.parse(data);
@@ -533,7 +540,7 @@ function ServerPage() {
 
     this.getHtml = function() {
         $.ajax({
-            url: "dsm2015.cafe24.com" + "/" + this.type,
+            url: "dsm2015.cafe24.com:10419" + "/" + this.type,
             data: {
                 "no": this.no
             },
@@ -568,6 +575,8 @@ function MainPage() {
         noticeCommand: 427,
         mealCommand: 438
     };
+    this.noticeCommand = 427;
+    this.mealCommand = 438;
 
     this.form;
     this.ajaxData = {
@@ -575,11 +584,15 @@ function MainPage() {
         mealData: {}
     }
 
+    this.noticeData;
+    this.mealData;
+    this.date = new Date();
+
     // 공지 ajax + 급식 ajax
     this.getData = function() {
         // getNoticeData
         $.ajax({
-            url: "dsm2015.cafe24.com",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: {
                 "page": 0,
@@ -587,28 +600,28 @@ function MainPage() {
             },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                xhr.setRequestHeader("command", this.command.noticeCommand);
+                xhr.setRequestHeader("command", this.noticeCommand);
             },
             success: function(data) {
-                this.ajaxData.noticeData = JSON.parse(data);
+                this.noticeData = JSON.parse(data);
             }
         });
 
         // getMaelData
         $.ajax({
-            url: "dsm2015.cafe24.com",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: {
-                "year": year,
-                "month": month,
-                "day": day
+                "year": this.date.getFullYear(),
+                "month": this.date.getMonth() + 1,
+                "day": this.date.getDate()
             },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                xhr.setRequestHeader("command", this.command.mealCommand);
+                xhr.setRequestHeader("command", this.mealCommand);
             },
             success: function(data) {
-                this.ajaxData.mealData = JSON.parse(data);
+                this.mealData = JSON.parse(data);
             }
         });
 
@@ -622,16 +635,16 @@ function MainPage() {
             var newLi = $('<li/>', {
                 click: function() {
                     pageStack.push(this);
-                    new NoticePage("notice", this.ajaxData.noticeData.no);
+                    new NoticePage("notice", this.noticeData.no);
                 }
             }).appendTo("ul.notice");
 
             // li DOM에 no 저장
-            newLi.data("no", this.ajaxData.noticeData.result.no);
+            newLi.data("no", this.noticeData.result.no);
             var appendString =
-                '<p class="title">' + this.ajaxData.noticeData.result.title + '</p>';
+                '<p class="title">' + this.noticeData.result.title + '</p>';
             appendString +=
-                '<p class="no">' + this.ajaxData.noticeData.result.no + '</p>';
+                '<p class="no">' + this.noticeData.result.no + '</p>';
             newLi.append(appendString);
         }
 
@@ -639,9 +652,9 @@ function MainPage() {
         var mealArr = $(".right div.menues div.meal div.info");
         for (var loop = 0; loop < mealArr.length; loop++) {
             var menuString = "";
-            for (var innerLoop = 0; innerLoop < this.ajaxData.mealData.result.Meals[loop].Menu.length; innerLoop++) {
-                menuString += this.ajaxData.mealData.result.Meals[loop].Menu[innerLoop];
-                if (innerLoop != this.ajaxData.mealData.result.Meals[loop].Menu.length - 1) {
+            for (var innerLoop = 0; innerLoop < this.mealData.result.Meals[loop].Menu.length; innerLoop++) {
+                menuString += this.mealData.result.Meals[loop].Menu[innerLoop];
+                if (innerLoop != this.mealData.result.Meals[loop].Menu.length - 1) {
                     menuString += " / "
                 }
             }
@@ -652,9 +665,9 @@ function MainPage() {
         var mealArr = $(".right div.menues div.meal div.info");
         for (var loop = 0; loop < mealArr.length; loop++) {
             var allergyString = "";
-            for (var innerLoop = 0; innerLoop < this.ajaxData.mealData.result.Meals[loop].Allergy.length; innerLoop++) {
-                allergyString += this.ajaxData.mealData.result.Meals[loop].Allergy[innerLoop];
-                if (innerLoop != this.ajaxData.mealData.result.Meals[loop].Allergy.length - 1) {
+            for (var innerLoop = 0; innerLoop < this.mealData.result.Meals[loop].Allergy.length; innerLoop++) {
+                allergyString += this.mealData.result.Meals[loop].Allergy[innerLoop];
+                if (innerLoop != this.mealData.result.Meals[loop].Allergy.length - 1) {
                     allergyString += " / "
                 }
             }
@@ -1312,7 +1325,7 @@ function AfterSchoolArticlePage(data) {
         $(".afterapplypage form button#apply").click(function() {
             // 신청 메시지 보내야함
             $.ajax({
-                url: "dsm2015.cafe24.com",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "id": id,
@@ -1338,7 +1351,7 @@ function AfterSchoolArticlePage(data) {
     this.stausCheck = function() {
         var result;
         $.ajax({
-            url: "dsm2015.cafe24.com",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: {
                 "id": id
@@ -1543,7 +1556,7 @@ function ExtentionApplyPage() {
 
     this.extentionapply = function(seat) {
         $.ajax({
-            url: "dsm2015.cafe24.com",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: {
                 "id": id,
@@ -1564,7 +1577,7 @@ function ExtentionApplyPage() {
     this.getMyExtentionData = function() {
         var result;
         $.ajax({
-            url: "dsm2015.cafe24.com",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: {
                 "id": id,
@@ -1585,7 +1598,7 @@ function ExtentionApplyPage() {
         $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
             // 신청취소 ajax
             $.ajax({
-                url: "dsm2015.cafe24.com",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "id": id,
@@ -1699,7 +1712,7 @@ function PointApplyPage() {
         $(".pointapply form:nth-child(3) button").click(function() {
             var reason = $(".pointapply .individual input").val();
             $.ajax({
-                url: "dsm2015.cafe24.com",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "id": id,
@@ -1720,7 +1733,7 @@ function PointApplyPage() {
             var reason = $(".pointapply .group input:nth-child(1)").val();
             var person = $(".pointapply .group input:nth-child(2)").val();
             $.ajax({
-                url: "dsm2015.cafe24.com",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "id": id,
@@ -1802,7 +1815,7 @@ function GoOutApplyPage() {
 
         $('#submit_button').on('click', function() {
             $.ajax({
-                url: "dsm2015.cafe24.com",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "id": id,
@@ -1953,7 +1966,7 @@ function QnaArticlePage(type, no) {
         // 댓글 전송 이벤트
         $(".commentinput table tr td input[type='button']").click(function () {
             $.ajax({
-                url: "dsm2015.cafe24.com",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "no": this.no,
@@ -1977,7 +1990,7 @@ function QnaArticlePage(type, no) {
             $(commentArr[loop]).children("td").children("span.comment-modify").click(function() {
                 // ajax전에 댓글 수정 페이지를 보여줘야 함 ㅠㅠ
                 $.ajax({
-                    url: "dsm2015.cafe24.com",
+                    url: "dsm2015.cafe24.com:10419",
                     type: "POST",
                     data: {
                         "id": id,
@@ -1998,7 +2011,7 @@ function QnaArticlePage(type, no) {
             $(commentArr[loop]).children("td").children("span.comment-delete").click(function() {
                 // 댓글 삭제
                 $.ajax({
-                    url: "dsm2015.cafe24.com",
+                    url: "dsm2015.cafe24.com:10419",
                     type: "POST",
                     data: {
                         "no": $(commentArr[loop]).children("td.hide-no").text(),
