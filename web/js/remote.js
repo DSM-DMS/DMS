@@ -337,7 +337,7 @@ $(".remote .inner .category .a#mypage").click(function() {
     loadMyPage();
 });
 
-$(".remote .inner .category .a#goout").click(function() {
+$(".remote .inner .category .children #goout").click(function() {
     new GoOutApplyPage();
 });
 
@@ -1642,6 +1642,7 @@ function PointApplyPage() {
     this.form =
         '<div class="frame left pointapply">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
         '<h1>상점신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -1750,6 +1751,10 @@ function PointApplyPage() {
             });
         });
 
+        $(".back_arrow").click(function() {
+            prevPage();
+        })
+
     }
 
     pageStack.push(this);
@@ -1762,7 +1767,9 @@ PointApplyPage.prototype = new NonAjaxPage();
 function GoOutApplyPage() {
     this.sendData;
     this.form =
+        '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
         '<h1>외출신청</h1>' +
         '<div class="underline"></div>' +
         '</div>' +
@@ -1780,7 +1787,8 @@ function GoOutApplyPage() {
         '</tr>' +
         '</table>' +
         '</form>' +
-        '<div id="submit_button">신청</div>';
+        '<div id="submit_button">신청</div>' +
+        '</div>';
 
     this.setEvent = function() {
         clickable = true;
@@ -1831,6 +1839,11 @@ function GoOutApplyPage() {
             });
 
         });
+
+
+        $(".back_arrow").click(function() {
+            prevPage();
+        })
 
     }
 
@@ -1964,7 +1977,7 @@ function QnaArticlePage(type, no) {
         })
 
         // 댓글 전송 이벤트
-        $(".commentinput table tr td input[type='button']").click(function () {
+        $(".commentinput table tr td input[type='button']").click(function() {
             $.ajax({
                 url: "dsm2015.cafe24.com:10419",
                 type: "POST",

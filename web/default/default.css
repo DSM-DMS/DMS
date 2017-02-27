@@ -1088,7 +1088,7 @@ body {
 .extentionapply {
     width: 100%;
 }
-
+-
 .extentionapply .seatcontainer {
     width: 100%;
     margin-top: 20px;
@@ -1284,9 +1284,9 @@ body {
 
 /*------------------------- login -------------------*/
 
-body {
+/*body {
     background-color: #00bcfc;
-}
+}*/
 
 #title {
     text-align: left;
