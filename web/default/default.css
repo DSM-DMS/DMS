@@ -374,39 +374,39 @@ a.dropdown-toggle .count {
 .blue-gradient {
     background: red;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    background: -webkit-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    background: -o-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    background: -moz-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
+    background: linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
     /* Standard syntax */
 }
 
 .puple-gradient {
     background: red;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    background: -webkit-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    background: -o-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    background: -moz-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
+    background: linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
     /* Standard syntax */
 }
 
 .red-gradient {
     background: red;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    background: -webkit-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    background: -o-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    background: -moz-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
+    background: linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
     /* Standard syntax */
 }
 
@@ -715,12 +715,23 @@ body {
 }
 
 .comment table td input.comment-modify-input {
-  height: 30px;
-  width: 97%;
-  border: 2px solid rgb(191, 148, 208);
-  border-radius: 4px;
-  padding-left: 1%;
-  transition: all 1s ease;
+    height: 30px;
+    width: 98%;
+    border: 2px solid rgb(191, 148, 208);
+    border-radius: 4px;
+    padding-left: 1%;
+    transition: all 1s ease;
+}
+
+.comment table td input.comment-modify-push {
+    background-color: rgb(191, 148, 208);
+    border: none;
+    height: 36px;
+    width: 100%;
+    border: 2px solid rgb(191, 148, 208);
+    border-radius: 4px;
+    transition: all 1s ease;
+    color: white;
 }
 
 
@@ -1089,8 +1100,8 @@ body {
 .extentionapply {
     width: 100%;
 }
--
-.extentionapply .seatcontainer {
+
+- .extentionapply .seatcontainer {
     width: 100%;
     margin-top: 20px;
     text-align: center;
@@ -1284,6 +1295,7 @@ body {
 
 
 /*------------------------- login -------------------*/
+
 
 /*body {
     background-color: #00bcfc;

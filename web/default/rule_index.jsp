@@ -1,9 +1,8 @@
-
-        <div class="frame left articlecontainer">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <div class="frame left articlecontainer question">
             <div class="frametitle">
                 <img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">
                 <h1>${title}</h1>
-                <p>${date}</p>
                 <%-- 관리자 에게만 보여야함 --%>
                 <div class="input-container">
                     <input class="modify" type="button" name="" value="수정">
