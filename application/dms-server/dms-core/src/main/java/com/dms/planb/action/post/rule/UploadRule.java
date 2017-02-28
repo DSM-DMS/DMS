@@ -22,10 +22,25 @@ public class UploadRule implements Actionable {
 		 * title VARCHAR(45) NN
 		 * content VARCHAR(5000) NN
 		 */
+		
 		String title = requestObject.getString("title");
 		String content = requestObject.getString("content");
 		
-		int status = database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
+		int status = 1;
+		if(requestObject.containsKey("no")) {
+			/*
+			 * Judge modify
+			 */
+			int no = requestObject.getInt("no");
+			
+			database.executeUpdate("DELETE FROM rule WHERE no=", no);
+			status = database.executeUpdate("INSERT INTO rule(no, title, content) VALUES('", title, "', '", content, "')");
+		} else {
+			/*
+			 * Judge upload
+			 */
+			status = database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
+		}
 				
 		responseObject.put("status", status);
 		
