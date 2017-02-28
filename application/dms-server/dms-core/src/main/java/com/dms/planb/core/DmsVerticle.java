@@ -125,8 +125,7 @@ class DmsVerticle extends AbstractVerticle {
 					 * Preflight request cash time : 3600s
 					 */
 					
-//					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with, command");
-					response.putHeader("Access-Control-Allow-Headers", "command");
+					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with, command");
 					/*
 					 * Support AJAX
 					 */
