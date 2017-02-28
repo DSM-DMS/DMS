@@ -110,7 +110,7 @@ class DmsVerticle extends AbstractVerticle {
 					/**
 					 * @see http://ooz.co.kr/232
 					 */
-					response.putHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+					response.putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, HEAD, DELETE, CONNECT");
 					/*
 					 * Method allow : POST, OPTIONS
 					 * OPTIONS : to receive preflight request
@@ -121,7 +121,7 @@ class DmsVerticle extends AbstractVerticle {
 					 * Preflight request cash time : 3600s
 					 */
 					
-					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with, authorization");
+					response.putHeader("Access-Control-Allow-Headers", "origin, content-type, x-requested-with, authorization, accept");
 					/*
 					 * Support AJAX
 					 */
