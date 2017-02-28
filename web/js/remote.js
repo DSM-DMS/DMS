@@ -20,6 +20,36 @@ $('#login').on('click', function() {
     });
 });
 
+// 회원가입 페이지
+$('#code_submit').on('click', function () {
+    $.ajax({
+        url: "dsm2015.cafe24.com/user/login",
+        type: "POST",
+        data: {
+            code: $('#register_code').val(),
+        }
+        success: function(data) {
+            var studentData = JSON.parse(data);
+            $('register_hidden').val($('#register_code').val());
+            $('#student_data').html('<td colspan="3" text-align="center">'+studentData.name+'</td>');
+        }
+    });
+});
+
+$('register').on('click', function () {
+    $.ajax({
+        url: "dsm2015.cafe24.com/user/login",
+        type: "POST",
+        data: {
+            code: $('#register_hidden').val(),
+            id: $('#register_id').val(),
+            password: $('#register_id').val()
+        }
+        success: function() {
+            alert('회원가입이 완료되었습니다.')
+        }
+    });
+});
 
 //신청탭 over 이벤트
 
@@ -1888,11 +1918,7 @@ function GoHomeApplyPage() {
         }
 
         //달력 그리기
-        function drawCalendar(date, lastDay) { <<
-            <<
-            <<
-            <
-            HEAD
+        function drawCalendar(date, lastDay) {
             switch (date.getDay()) {
                 case 0:
                     for (var i = 0; i < lastDay; i++) {
@@ -2002,7 +2028,7 @@ function GoHomeApplyPage() {
                 } else if (valueArray[i] == 3) {
                     $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
                     $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
-                }
+
             }
             valueArray = new Array();
         }
