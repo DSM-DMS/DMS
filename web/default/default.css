@@ -1301,7 +1301,7 @@ body {
     background-color: #00bcfc;
 }*/
 
-#title {
+#login_title {
     text-align: left;
     font-size: 25px;
     margin-bottom: 40px;
@@ -1309,7 +1309,7 @@ body {
     padding-bottom: 15px;
 }
 
-#card {
+#login_card {
     min-width: 304px;
     padding: 20px;
     background-color: white;
@@ -1345,6 +1345,55 @@ body {
     margin: 10px;
     margin-top: 25px;
     margin: auto;
+    font-size: 100%;
+    background-color: #1fa9d8;
+    width: 30%;
+    height: 30px;
+    line-height: 30px;
+}
+
+/*------------------------- register -------------------*/
+
+#register_table {
+  width: 100%;
+}
+
+.register_input {
+    text-align: left;
+}
+
+#register_title {
+    text-align: left;
+    font-size: 25px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 15px;
+}
+
+#register_card {
+    min-width: 304px;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    width: 30%;
+    height: 350px;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+#register_table input {
+    width: 80%;
+    margin: 10px;
+    font-size: 20px;
+}
+
+#register {
+    cursor: pointer;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 8%;
     font-size: 100%;
     background-color: #1fa9d8;
     width: 30%;
