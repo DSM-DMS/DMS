@@ -29,13 +29,30 @@ public class UploadQnaQuestion implements Actionable {
 		 * 
 		 * DATETIME format : YYYY-MM-DD hh:mm:ss
 		 */
+		
 		String title = requestObject.getString("title");
 		String content = requestObject.getString("question_content");
 		String writer = requestObject.getString("writer");
 		
 		boolean privacy = requestObject.getBoolean("privacy");
 		
-		int status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");
+		int status = 1;
+		
+		if(requestObject.containsKey("no")) {
+			/*
+			 * Judge modify
+			 */
+			int no = requestObject.getInt("no");
+			
+			database.executeUpdate("UPDATE qna SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE qna SET question_content='", content, "' WHERE no=", no);
+			status = database.executeUpdate("UPDATE qna SET writer='", writer, "' WHERE no=", no);
+		} else {
+			/*
+			 * Judge upload
+			 */
+			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");
+		}
 		
 		responseObject.put("status", status);
 		
