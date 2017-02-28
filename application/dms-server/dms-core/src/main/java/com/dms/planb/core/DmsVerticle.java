@@ -215,6 +215,18 @@ class DmsVerticle extends AbstractVerticle {
 				
 				response.end();
 				response.close();
+			} else {
+				/*
+				 * Another methods
+				 */
+				response = request.response();
+				response.putHeader("Content-type", "text/html; charset=utf-8");
+				
+				response.setStatusCode(205);
+				// 205(405) : Method Not Allowed
+				
+				response.end();
+				response.close();
 			}
 		}).listen(10419);
 	}
