@@ -171,9 +171,9 @@ class DmsVerticle extends AbstractVerticle {
 						 *  Occurred SQLException
 						 *  Ex) Student number is 99999, post number is -5, etc..
 						 *  
-						 *  Set status code 404
+						 *  Set status code 204
 						 */
-						response.setStatusCode(404);
+						response.setStatusCode(204);
 						
 						e.printStackTrace();
 						Log.l("SQLException");
