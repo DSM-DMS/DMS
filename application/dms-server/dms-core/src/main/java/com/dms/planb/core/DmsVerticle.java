@@ -74,7 +74,7 @@ class DmsVerticle extends AbstractVerticle {
 			
 			Buffer totalBuffer = Buffer.buffer();
 			
-			if(request.method() == HttpMethod.POST || request.method() == HttpMethod.OPTIONS) {
+			if(request.method() == HttpMethod.POST) {
 				/*
 				 *  The server will only work if the Http method is POST.
 				 */
@@ -184,11 +184,34 @@ class DmsVerticle extends AbstractVerticle {
 					
 					response.close();
 				}); // endHandler
-			} else {
+			} else if(request.method() == HttpMethod.OPTIONS) {
 				response = request.response();
 				response.putHeader("Content-type", "text/html; charset=utf-8");
-				response.setStatusCode(405);
-				// 405 : Method Not Allowed
+				response.putHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
+				
+				response.putHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+				/*
+				 * Method allow : POST, OPTIONS
+				 * OPTIONS : to receive preflight request
+				 */
+				
+				response.putHeader("Access-Control-Max-Age", "3600");
+				/*
+				 * Preflight request cash time : 3600s
+				 */
+				
+				response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with, command");
+				/*
+				 * Support AJAX
+				 */
+				
+				response.putHeader("Access-Control-Allow-Origin", "dsm2015.cafe24.com");
+				/*
+				 * Allow all of domains
+				 */
+				
+				response.setStatusCode(205);
+				// 205(405) : Method Not Allowed
 				
 				response.end();
 				response.close();
