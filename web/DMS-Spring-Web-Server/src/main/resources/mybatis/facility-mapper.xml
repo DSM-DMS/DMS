@@ -28,10 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	UPDATE facility_report set result=#{result}, result_date=#{resultDate} WHERE `no`=#{no}
     </update>
     
-    <update id="editResult" parameterType="com.boxfox.dms.board.dto.FacilityReportContext">
-    	UPDATE facility_report set result=#{result} WHERE `no`=#{no}
-    </update>
-    
     <update id="editPost" parameterType="com.boxfox.dms.board.dto.FacilityReportContext">
     	UPDATE facility_report set title=#{title}, content=#{content}, room=#{room} WHERE `no`=#{no}
     </update>
