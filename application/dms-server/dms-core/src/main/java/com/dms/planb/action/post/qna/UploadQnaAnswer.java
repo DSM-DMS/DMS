@@ -19,6 +19,7 @@ public class UploadQnaAnswer implements Actionable {
 		 * Reference UPLOAD_QUESTION
 		 * Upload answer based question no
 		 */
+		
 		int no = requestObject.getInt("no");
 		String content = requestObject.getString("answer_content");
 		

@@ -12,6 +12,7 @@ import com.dms.planb.support.Commands;
 @ActionRegistration(command = Commands.MODIFY_REPORT_FACILITY)
 public class ModifyReportFacility implements Actionable {
 	@Override
+	@Deprecated
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int no = requestObject.getInt("no");
 		

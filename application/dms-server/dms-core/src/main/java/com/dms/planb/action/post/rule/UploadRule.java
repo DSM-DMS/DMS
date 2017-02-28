@@ -27,6 +27,7 @@ public class UploadRule implements Actionable {
 		String content = requestObject.getString("content");
 		
 		int status = 1;
+		
 		if(requestObject.containsKey("no")) {
 			/*
 			 * Judge modify

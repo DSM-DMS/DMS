@@ -29,12 +29,30 @@ public class UploadReportFacility implements Actionable {
 		 * 
 		 * DATETIME format : YYYY-MM-DD hh:mm:ss
 		 */
+		
 		String title = requestObject.getString("title");
 		String content = requestObject.getString("content");
-		int no = requestObject.getInt("room");
+		int room = requestObject.getInt("room");
 		String writer = requestObject.getString("writer");
 		
-		int status = database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", no, ", NOW(), '", writer, "')");
+		int status = 1;
+		
+		if(requestObject.containsKey("no")) {
+			/*
+			 * Judge modify
+			 */
+			int no = requestObject.getInt("no");
+			
+			database.executeUpdate("UPDATE facility_report SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE facility_report SET content='", content, "' WHERE no=", no);
+			database.executeUpdate("UPDATE facility_report SET room=", room, " WHERE no=", no);
+			database.executeUpdate("UPDATE facility_report SET writer='", writer, "' WHERE no=", no);
+		} else {
+			/*
+			 * Judge upload
+			 */
+			status = database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", room, ", NOW(), '", writer, "')");
+		}
 		
 		responseObject.put("status", status);
 		
