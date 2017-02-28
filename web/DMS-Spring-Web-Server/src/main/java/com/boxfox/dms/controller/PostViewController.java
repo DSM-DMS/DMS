@@ -90,9 +90,4 @@ public class PostViewController extends PostController {
 		return page;
 	}
 
-	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
-	public String index(HttpServletRequest request, Model model) {
-		return "index";
-	}
-
 }

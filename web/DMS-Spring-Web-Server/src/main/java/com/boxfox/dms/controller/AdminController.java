@@ -55,20 +55,6 @@ public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-	@Autowired
-	private NoticeDAOImpl noticeDAO;
-
-	@Autowired
-	private FacilityDAOImpl facilityDAO;
-
-	@Autowired
-	private QnaDAOImpl qnaDAO;
-
-	@Autowired
-	private FaqDAOImpl faqDAO;
-
-	@Autowired
-	private RuleDAOImpl ruleDAO;
 
 	@Autowired
 	private UserDAOImpl userDAO;
@@ -76,48 +62,12 @@ public class AdminController {
 	@Autowired
 	private ResidualDownLoadDAOImpl residualDownload;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpServletResponse response) {
 		if (userDAO.checkAdminSession(request)) {
 			return "home";
 		} else {
 			return "null";
-		}
-	}
-
-	@RequestMapping(value = "/write/{type}", method = RequestMethod.POST)
-	public void home(HttpServletRequest request, HttpServletResponse response, @PathVariable("type") String type) {
-		if (userDAO.checkAdminSession(request)) {
-			type = type.toLowerCase();
-			switch (type) {
-			case "notice":
-				noticeDAO.writePost(request.getParameter("title"), request.getParameter("content"),
-						request.getParameter("writer"));
-				break;
-			case "faq":
-				faqDAO.writePost(request.getParameter("title"), request.getParameter("content"));
-				break;
-			case "rule":
-				ruleDAO.writePost(request.getParameter("title"), request.getParameter("content"));
-				break;
-			case "qna":
-				qnaDAO.writeAnswer(Integer.valueOf(request.getParameter("no")), request.getParameter("content"));
-				break;
-			case "facility":
-				facilityDAO.setResult(Integer.valueOf(request.getParameter("no")), request.getParameter("content"));
-				break;
-			}
-			try {
-				response.sendRedirect("/admin");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				response.sendError(404);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
