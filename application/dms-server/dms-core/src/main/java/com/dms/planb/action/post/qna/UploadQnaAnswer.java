@@ -16,14 +16,14 @@ public class UploadQnaAnswer implements Actionable {
 		/**
 		 * Answer in Q&A
 		 * 
-		 * Reference UPLOAD_QUESTION
+		 * Reference UploadQnaQuestion
 		 * Upload answer based question no
 		 */
 		
 		int no = requestObject.getInt("no");
 		String content = requestObject.getString("answer_content");
 		
-		int status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date= now()", " WHERE no=", no);
+		int status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date=now() WHERE no=", no);
 		
 		responseObject.put("status", status);
 		

@@ -24,7 +24,7 @@ public class UploadQnaQuestion implements Actionable {
 		 * question_date DATETIME NN
 		 * writer VARCHAR(20) NN
 		 * answer_content VARCHAR(5000) Default NULL
-		 * answer_date DATETIME Defalt NULL
+		 * answer_date DATETIME Default NULL
 		 * privacy TINYINT(1) NN
 		 * 
 		 * DATETIME format : YYYY-MM-DD hh:mm:ss
