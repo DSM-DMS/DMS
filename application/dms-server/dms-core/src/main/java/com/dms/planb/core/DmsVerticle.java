@@ -76,7 +76,7 @@ class DmsVerticle extends AbstractVerticle {
 			
 			if(request.method() == HttpMethod.POST) {
 				/*
-				 *  The server will only work if the Http method is POST.
+				 *  The server will only work if the Http method is POST or OPTIONS.
 				 */
 				Log.l("Header : " + request.getHeader("command"));
 				
@@ -130,7 +130,7 @@ class DmsVerticle extends AbstractVerticle {
 					 * Support AJAX
 					 */
 					
-					response.putHeader("Access-Control-Allow-Origin", "dsm2015.cafe24.com");
+					response.putHeader("Access-Control-Allow-Origin", "*");
 					/*
 					 * Allow all of domains
 					 */
@@ -205,7 +205,7 @@ class DmsVerticle extends AbstractVerticle {
 				 * Support AJAX
 				 */
 				
-				response.putHeader("Access-Control-Allow-Origin", "dsm2015.cafe24.com");
+				response.putHeader("Access-Control-Allow-Origin", "*");
 				/*
 				 * Allow all of domains
 				 */
