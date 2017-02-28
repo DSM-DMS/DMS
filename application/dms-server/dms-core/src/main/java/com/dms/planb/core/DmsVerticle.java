@@ -74,7 +74,7 @@ class DmsVerticle extends AbstractVerticle {
 			
 			Buffer totalBuffer = Buffer.buffer();
 			
-			if(request.method() == HttpMethod.POST) {
+			if(request.method() == HttpMethod.POST || request.method() == HttpMethod.OPTIONS) {
 				/*
 				 *  The server will only work if the Http method is POST.
 				 */
@@ -125,7 +125,8 @@ class DmsVerticle extends AbstractVerticle {
 					 * Preflight request cash time : 3600s
 					 */
 					
-					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with");
+//					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with, command");
+					response.putHeader("Access-Control-Allow-Headers", "command");
 					/*
 					 * Support AJAX
 					 */
