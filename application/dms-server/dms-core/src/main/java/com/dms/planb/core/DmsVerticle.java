@@ -130,7 +130,7 @@ class DmsVerticle extends AbstractVerticle {
 					 * Support AJAX
 					 */
 					
-					response.putHeader("Access-Control-Allow-Origin", "*");
+					response.putHeader("Access-Control-Allow-Origin", "dsm2015.cafe24.com");
 					/*
 					 * Allow all of domains
 					 */
