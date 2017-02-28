@@ -106,6 +106,30 @@ class DmsVerticle extends AbstractVerticle {
 					response = request.response();
 					response.putHeader("content-type", "application/json; charset=utf-8");
 					
+					/**
+					 * @see http://ooz.co.kr/232
+					 */
+					response.putHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+					/*
+					 * Method allow : POST, OPTIONS
+					 * OPTIONS : to receive preflight request
+					 */
+					
+					response.putHeader("Access-Control-Max-Age", "3600");
+					/*
+					 * Preflight request cash time : 3600s
+					 */
+					
+					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with");
+					/*
+					 * Support AJAX
+					 */
+					
+					response.putHeader("Access-Control-Allow-Origin", "*");
+					/*
+					 * Allow all of domains
+					 */
+					
 					try {
 						/*
 						 *  3. Performs the operation.
