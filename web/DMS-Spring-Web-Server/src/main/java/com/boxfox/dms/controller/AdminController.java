@@ -47,12 +47,6 @@ import com.boxfox.dsm.xlsx.ResidualDownLoadDAOImpl;
 @RequestMapping(value = "/admin", produces = "text/plain;charset=UTF-8")
 @Controller
 public class AdminController {
-	private static final int TYPE_FACILITY_RESULT = 1;
-	private static final int TYPE_FAQ_RESULT = 2;
-	private static final int TYPE_QNA = 3;
-	private static final int TYPE_RULE = 4;
-	private static final int TYPE_NOTICE = 5;
-
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 

@@ -16,6 +16,7 @@ import com.boxfox.dms.board.dao.FaqDAOImpl;
 import com.boxfox.dms.board.dao.NoticeDAOImpl;
 import com.boxfox.dms.board.dao.QnaDAOImpl;
 import com.boxfox.dms.board.dao.RuleDAOImpl;
+import com.boxfox.dms.response.Guardian;
 import com.boxfox.dms.response.JsonBuilder;
 import com.boxfox.dms.users.dao.UserDAOImpl;
 
@@ -72,7 +73,7 @@ public class PostUpdateController {
 		if (userDAO.checkAdminSession(request)) {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			if (!checkParameters(title, content)) {
+			if (!Guardian.checkParameters(title, content)) {
 				result = JsonBuilder.build(400, MSG_INVALID_PARAMETER);
 			} else if (request.getParameter("no") != null) {
 				int no = Integer.valueOf(request.getParameter("no"));
@@ -87,7 +88,7 @@ public class PostUpdateController {
 		}
 		return result.toString();
 	}
-	
+
 	@RequestMapping(value = { "/facility" }, method = RequestMethod.POST)
 	@ResponseBody
 	public String Facility(HttpServletRequest request, Model model) {
@@ -95,7 +96,7 @@ public class PostUpdateController {
 		if (userDAO.checkAdminSession(request)) {
 			String content = request.getParameter("content");
 			int no = Integer.valueOf(request.getParameter("no"));
-			if (!checkParameters(content,no)) {
+			if (!Guardian.checkParameters(content, no)) {
 				result = JsonBuilder.build(400, MSG_INVALID_PARAMETER);
 			} else {
 				facilityDAO.setResult(no, content);
@@ -106,7 +107,7 @@ public class PostUpdateController {
 		}
 		return result.toString();
 	}
-	
+
 	@RequestMapping(value = { "/qna" }, method = RequestMethod.POST)
 	@ResponseBody
 	public String qna(HttpServletRequest request, Model model) {
@@ -114,7 +115,7 @@ public class PostUpdateController {
 		if (userDAO.checkAdminSession(request)) {
 			String content = request.getParameter("content");
 			int no = Integer.valueOf(request.getParameter("no"));
-			if (!checkParameters(content,no)) {
+			if (!Guardian.checkParameters(content, no)) {
 				result = JsonBuilder.build(400, MSG_INVALID_PARAMETER);
 			} else {
 				qnaDAO.writeAnswer(no, content);
@@ -125,7 +126,7 @@ public class PostUpdateController {
 		}
 		return result.toString();
 	}
-	
+
 	@RequestMapping(value = { "/faq" }, method = RequestMethod.POST)
 	@ResponseBody
 	public String faq(HttpServletRequest request, Model model) {
@@ -133,7 +134,7 @@ public class PostUpdateController {
 		if (userDAO.checkAdminSession(request)) {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			if (!checkParameters(title, content)) {
+			if (!Guardian.checkParameters(title, content)) {
 				result = JsonBuilder.build(400, MSG_INVALID_PARAMETER);
 			} else if (request.getParameter("no") != null) {
 				int no = Integer.valueOf(request.getParameter("no"));
@@ -149,12 +150,4 @@ public class PostUpdateController {
 		return result.toString();
 	}
 
-
-	private boolean checkParameters(Object... args) {
-		for (Object obj : args) {
-			if (obj == null)
-				return false;
-		}
-		return true;
-	}
 }

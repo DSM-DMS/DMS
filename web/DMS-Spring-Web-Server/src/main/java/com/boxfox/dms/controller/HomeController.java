@@ -44,4 +44,9 @@ public class HomeController extends PostController {
 		return "index";
 	}
 
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login(HttpServletRequest request, Model model) {
+		return "login";
+	}
+
 }
