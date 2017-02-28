@@ -105,6 +105,7 @@ class DmsVerticle extends AbstractVerticle {
 					// 2. Ready to response to client. Set status code in try-catch
 					response = request.response();
 					response.putHeader("content-type", "application/json; charset=utf-8");
+					response.putHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
 					
 					/**
 					 * @see http://ooz.co.kr/232
@@ -120,7 +121,7 @@ class DmsVerticle extends AbstractVerticle {
 					 * Preflight request cash time : 3600s
 					 */
 					
-					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with");
+					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with, authorization");
 					/*
 					 * Support AJAX
 					 */
