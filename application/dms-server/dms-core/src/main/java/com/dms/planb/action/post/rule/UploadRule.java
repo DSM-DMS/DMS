@@ -34,8 +34,8 @@ public class UploadRule implements Actionable {
 			 */
 			int no = requestObject.getInt("no");
 			
-			database.executeUpdate("DELETE FROM rule WHERE no=", no);
-			status = database.executeUpdate("INSERT INTO rule(no, title, content) VALUES('", title, "', '", content, "')");
+			database.executeUpdate("UPDATE rule SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE rule SET content='", content, "' WHERE no=", no);
 		} else {
 			/*
 			 * Judge upload

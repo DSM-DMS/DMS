@@ -34,8 +34,8 @@ public class UploadFaq implements Actionable {
 			 */
 			int no = requestObject.getInt("no");
 			
-			database.executeUpdate("DELETE faq WHERE no=", no);
-			status = database.executeUpdate("INSERT INTO faq(no, title, content) VALUES(", no, ", '", title, "', '", content, "')");
+			database.executeUpdate("UPDATE faq SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE faq SET content='", content, "' WHERE no=", no);
 		} else {
 			/*
 			 * Judge upload

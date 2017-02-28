@@ -46,7 +46,7 @@ public class UploadQnaQuestion implements Actionable {
 			
 			database.executeUpdate("UPDATE qna SET title='", title, "' WHERE no=", no);
 			database.executeUpdate("UPDATE qna SET question_content='", content, "' WHERE no=", no);
-			status = database.executeUpdate("UPDATE qna SET writer='", writer, "' WHERE no=", no);
+			database.executeUpdate("UPDATE qna SET writer='", writer, "' WHERE no=", no);
 		} else {
 			/*
 			 * Judge upload
