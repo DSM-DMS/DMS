@@ -13,9 +13,9 @@ public class DataBase {
 	private static final String DB_TARGET = "localhost:3306/dsm_dms";
 	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	private static final String DB_ID = "root";
-//	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
+	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
 //	private static final String DB_PASSWORD = "testdatabase";
-	private static final String DB_PASSWORD = "uursty199";
+//	private static final String DB_PASSWORD = "uursty199";
 	
 	private static DataBase instance;
 	private Statement statement;

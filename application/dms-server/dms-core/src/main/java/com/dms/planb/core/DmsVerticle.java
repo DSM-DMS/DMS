@@ -108,9 +108,13 @@ class DmsVerticle extends AbstractVerticle {
 					response.putHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
 					
 					/**
+					 * About CORS
 					 * @see http://ooz.co.kr/232
+					 * 
+					 * About HTTP status code and methods
+					 * @see http://gyrfalcon.tistory.com/entry/HTTP-%EC%9D%91%EB%8B%B5-%EC%BD%94%EB%93%9C-%EC%A2%85%EB%A5%98-HTTP-%EB%A9%94%EC%86%8C%EB%93%9C-%EC%A2%85%EB%A5%98
 					 */
-					response.putHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, HEAD, DELETE, CONNECT");
+					response.putHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 					/*
 					 * Method allow : POST, OPTIONS
 					 * OPTIONS : to receive preflight request
@@ -121,7 +125,7 @@ class DmsVerticle extends AbstractVerticle {
 					 * Preflight request cash time : 3600s
 					 */
 					
-					response.putHeader("Access-Control-Allow-Headers", "origin, content-type, x-requested-with, authorization, accept");
+					response.putHeader("Access-Control-Allow-Headers", "content-type, x-requested-with");
 					/*
 					 * Support AJAX
 					 */
@@ -149,7 +153,7 @@ class DmsVerticle extends AbstractVerticle {
 							} else if(responseObject.getInt("status") == 404 || responseObject.getInt("status") == 0) {
 								response.setStatusCode(204);
 								Log.l("Responsed status code : 204");
-								// 404 : Can't find, but set 204 because over 400 status code occurs FileNotFound on client
+								// 404 : Can't find, but set 204 because over 400 status code occurs FileNotFound on android client
 							} else if(responseObject.getInt("status") == 500) {
 								response.setStatusCode(205);
 								Log.l("Responsed status code : 205");
