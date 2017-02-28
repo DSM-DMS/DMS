@@ -1401,6 +1401,16 @@ body {
     line-height: 30px;
 }
 
+#code_submit {
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 100%;
+    background-color: #1fa9d8;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
 /*-------------------------- facility ------------------------*/
 
 #facility-form {
