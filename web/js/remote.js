@@ -21,22 +21,22 @@ $('#login').on('click', function() {
 });
 
 // 회원가입 페이지
-$('#code_submit').on('click', function () {
+$('#code_submit').on('click', function() {
     $.ajax({
         url: "dsm2015.cafe24.com/user/login",
         type: "POST",
         data: {
-            code: $('#register_code').val(),
-        }
+            code: $('#register_code').val()
+        },
         success: function(data) {
             var studentData = JSON.parse(data);
             $('register_hidden').val($('#register_code').val());
-            $('#student_data').html('<td colspan="3" text-align="center">'+studentData.name+'</td>');
+            $('#student_data').html('<td colspan="3" text-align="center">' + studentData.name + '</td>');
         }
     });
 });
 
-$('register').on('click', function () {
+$('register').on('click', function() {
     $.ajax({
         url: "dsm2015.cafe24.com/user/login",
         type: "POST",
@@ -44,7 +44,7 @@ $('register').on('click', function () {
             code: $('#register_hidden').val(),
             id: $('#register_id').val(),
             password: $('#register_id').val()
-        }
+        },
         success: function() {
             alert('회원가입이 완료되었습니다.')
         }
@@ -2029,24 +2029,25 @@ function GoHomeApplyPage() {
                     $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
                     $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
 
+                }
+                valueArray = new Array();
             }
-            valueArray = new Array();
-        }
 
-        //***********************신청*********************
-        $('#apply_form input[type="radio"]').checkboxradio();
+            //***********************신청*********************
+            $('#apply_form input[type="radio"]').checkboxradio();
 
-        $('#date').keydown(function(e) {
-            e.preventDefault();
-        });
+            $('#date').keydown(function(e) {
+                e.preventDefault();
+            });
 
-        $('#apply_submit').on('click', function() {
-            this.sendData.week = $('#date').val();
-            this.sendData.value = $(':input:radio[name="stay"]:checked').val();
-            this.applyData();
-        });
+            $('#apply_submit').on('click', function() {
+                this.sendData.week = $('#date').val();
+                this.sendData.value = $(':input:radio[name="stay"]:checked').val();
+                this.applyData();
+            });
 
-    };
+        };
+    }
 }
 GoHomeApplyPage.prototype = new AjaxPage();
 
@@ -2928,7 +2929,7 @@ function NoticeWritePage() {
                 url: "http://dsm2015.cafe24.com/update/notice",
                 type: "POST",
                 data: JSON.stringify({
-                    "title": $(".articlecontainer .frametitle input.title-input").val();
+                    "title": $(".articlecontainer .frametitle input.title-input").val(),
                     "content": tinymce.get('content').getContent()
                 }),
                 success: function() {
@@ -2982,7 +2983,7 @@ function RuleWritePage() {
                 url: "http://dsm2015.cafe24.com/update/rule",
                 type: "POST",
                 data: JSON.stringify({
-                    "title": $(".articlecontainer .frametitle input.title-input").val();
+                    "title": $(".articlecontainer .frametitle input.title-input").val(),
                     "content": tinymce.get('content').getContent()
                 }),
                 success: function() {
@@ -3076,7 +3077,6 @@ function FacilityQuestionModifyPage(no, title, content) {
     this.draw();
     pageStack.push();
 }
-
 FacilityQuestionModifyPage.prototype = new NonAjaxPage();
 
 
@@ -3102,15 +3102,15 @@ function NoticeModifyPage(no) {
                 }
             });
 
-        })
+        });
 
         // 취소버튼 이벤트
         $(".articlecontainer a.cancle").click(function() {
             alert("cancle");
             // 다시 전 글로 돌아가기
             prevPage();
-        })
-    }
+        });
+    };
 }
 
 NoticeModifyPage.prototype = new ServerPage();
@@ -3118,6 +3118,7 @@ NoticeModifyPage.prototype = new ServerPage();
 function RuleModifyPage(no) {
     this.type = "rule";
     this.action = "view";
+    this.no = no;
 
     this.setEvent = function() {
         // 전송, 취소 이벤트
@@ -3137,22 +3138,24 @@ function RuleModifyPage(no) {
                 }
             });
 
-        })
+        });
 
         // 취소버튼 이벤트
         $(".articlecontainer a.cancle").click(function() {
             alert("cancle");
             // 다시 전 글로 돌아가기
             prevPage();
-        })
+        });
     }
 }
+
 RuleModifyPage.prototype = new ServerPage();
 
 
 function QnaAnswerModifyPage(no) {
     this.type = "rule";
     this.action = "view";
+    this.no = no;
 
     this.setEvent = function() {
         // 전송, 취소 이벤트
@@ -3171,14 +3174,14 @@ function QnaAnswerModifyPage(no) {
                 }
             });
 
-        })
+        });
 
         // 취소버튼 이벤트
         $(".articlecontainer a.cancle").click(function() {
             alert("cancle");
             // 다시 전 글로 돌아가기
             prevPage();
-        })
+        });
     }
 }
 QnaAnswerModifyPage.prototype = new ServerPage();
@@ -3187,6 +3190,7 @@ QnaAnswerModifyPage.prototype = new ServerPage();
 function FacilityResultModifyPage(no) {
     this.type = "rule";
     this.action = "view";
+    this.no = no;
 
     this.setEvent = function() {
         // 전송, 취소 이벤트
@@ -3214,5 +3218,7 @@ function FacilityResultModifyPage(no) {
             prevPage();
         })
     }
+    this.draw();
+    pageStack.push();
 }
 FacilityResultModifyPage.prototype = new ServerPage();
