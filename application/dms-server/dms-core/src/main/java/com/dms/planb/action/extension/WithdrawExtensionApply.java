@@ -15,7 +15,7 @@ public class WithdrawExtensionApply implements Actionable {
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");
 		
-		int status = database.executeUpdate("DELETE extension_apply WHERE id='", id, "'");
+		int status = database.executeUpdate("DELETE FROM extension_apply WHERE id='", id, "'");
 		
 		responseObject.put("status", status);
 		

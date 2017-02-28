@@ -15,7 +15,7 @@ public class DeleteReportFacility implements Actionable {
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int no = requestObject.getInt("no");
 		
-		int status = database.executeUpdate("DELETE facility_report WHERE no=", no);
+		int status = database.executeUpdate("DELETE FROM facility_report WHERE no=", no);
 		
 		responseObject.put("status", status);
 		

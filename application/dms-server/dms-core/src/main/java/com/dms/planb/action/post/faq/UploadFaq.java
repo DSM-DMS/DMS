@@ -22,10 +22,26 @@ public class UploadFaq implements Actionable {
 		 * title VARCHAR(45) NN
 		 * content VARCHAR(5000) NN
 		 */
+		
 		String title = requestObject.getString("title");
 		String content = requestObject.getString("content");
 		
-		int status = database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
+		int status = 1;
+		
+		if(requestObject.containsKey("no")) {
+			/*
+			 * Judge modify
+			 */
+			int no = requestObject.getInt("no");
+			
+			database.executeUpdate("DELETE faq WHERE no=", no);
+			status = database.executeUpdate("INSERT INTO faq(no, title, content) VALUES(", no, ", '", title, "', '", content, "')");
+		} else {
+			/*
+			 * Judge upload
+			 */
+			status = database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
+		}
 		
 		responseObject.put("status", status);
 		

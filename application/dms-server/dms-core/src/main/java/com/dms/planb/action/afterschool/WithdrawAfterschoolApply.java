@@ -16,7 +16,7 @@ public class WithdrawAfterschoolApply implements Actionable {
 		String id = requestObject.getString("id");
 		int no = requestObject.getInt("no");
 		
-		int status =database.executeUpdate("DELETE * FROM afterschool_apply WHERE id='", id, "' AND no=", no);
+		int status =database.executeUpdate("DELETE FROM afterschool_apply WHERE id='", id, "' AND no=", no);
 		
 		responseObject.put("status", status);
 		

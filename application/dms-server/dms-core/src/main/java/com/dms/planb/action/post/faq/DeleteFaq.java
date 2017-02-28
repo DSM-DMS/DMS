@@ -15,7 +15,7 @@ public class DeleteFaq implements Actionable {
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int no = requestObject.getInt("no");
 		
-		int status = database.executeUpdate("DELETE faq WHERE no=", no);
+		int status = database.executeUpdate("DELETE FROM faq WHERE no=", no);
 		
 		responseObject.put("status", status);
 		

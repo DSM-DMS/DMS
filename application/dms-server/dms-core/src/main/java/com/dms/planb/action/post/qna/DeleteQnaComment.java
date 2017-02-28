@@ -15,7 +15,7 @@ public class DeleteQnaComment implements Actionable {
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int no = requestObject.getInt("no");
 		
-		int status = database.executeUpdate("DELETE qna_comment WHERE no=", no);
+		int status = database.executeUpdate("DELETE FROM qna_comment WHERE no=", no);
 		
 		responseObject.put("status", status);
 		
