@@ -19,7 +19,7 @@ public class LoadGoingoutApplyStatus implements Actionable {
 		SafeResultSet resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
 		
 		if(resultSet.next()) {
-			responseObject.put("date", resultSet.getInt("date"));
+			responseObject.put("date", resultSet.getBoolean("date"));
 			responseObject.put("reason", resultSet.getString("reason"));
 		} else {
 			responseObject.put("status", 404);
