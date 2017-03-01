@@ -63,6 +63,37 @@ public class UserDAOImpl implements UserDAO {
 		JsonBuilder builder = JsonBuilder.build(code, msg);
 		return builder.toString();
 	}
+	
+	@Override
+	public String register(HttpServletRequest request, HttpServletResponse response, String id, String password,
+			boolean autoLogin, String recapchResponse) {
+		int code = 200;
+		String msg = SUCCESS_LOGIN;
+		if (!VerifyRecaptcha.verify(recapchResponse)) {
+			code = 400;
+			msg = FAIL_RECAPCHA;
+		} else {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			UserDTO user = new UserDTO(id, password);
+			String result = userMapper.login(user);
+			if (result != null) {
+				String sessionKey = UUID.randomUUID().toString();
+				userMapper.createUserSession(sessionKey, id);
+				request.getSession().setAttribute("UserSessionKey", sessionKey);
+				if (autoLogin) {
+					Cookie cookie = new Cookie("UserSessionKey", sessionKey);
+					cookie.setMaxAge(356 * 24 * 60 * 60);
+					response.addCookie(cookie);
+				}
+			} else {
+				code = 400;
+				msg = FAIL_LOGIN;
+			}
+		}
+
+		JsonBuilder builder = JsonBuilder.build(code, msg);
+		return builder.toString();
+	}
 
 	@Override
 	public String loginAdmin(HttpServletRequest request, HttpServletResponse response, String id, String password,

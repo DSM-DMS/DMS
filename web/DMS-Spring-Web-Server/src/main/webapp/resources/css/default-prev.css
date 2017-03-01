@@ -1,61 +1,4 @@
-@import "../css/remote.css";
-
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-@font-face {
-    font-family: HANNA;
-    src: url('../font/BMHANNA_11yrs_ttf.ttf');
-    src:url('..//fonts/BMHANNA_11yrs_otf.otf') format('otf'),
-}
-@font-face {
-    font-family: NANUM;
-    src: url('../font/naverNaNumPen.ttf');
-    src:url('..//fonts/naverNaNumPen.otf') format('otf'),
-}
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
-
-@font-face {
-    font-family: 'Spoqa Han Sans';
-    font-weight: 700;
-    src: local('Spoqa Han Sans Bold'), local('Spoqa Han Sans Bold'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.woff2') format('woff2'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.woff') format('woff'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Spoqa Han Sans';
-    font-weight: 400;
-    src: local('Spoqa Han Sans Regular'), local('Spoqa Han Sans Regular'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.woff2') format('woff2'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.woff') format('woff'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Spoqa Han Sans';
-    font-weight: 300;
-    src: local('Spoqa Han Sans Light'), local('Spoqa Han Sans Light'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.woff2') format('woff2'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.woff') format('woff'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Spoqa Han Sans';
-    font-weight: 100;
-    src: local('Spoqa Han Sans Thin'), local('Spoqa Han Sans Thin'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.woff2') format('woff2'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.woff') format('woff'),
-    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.ttf') format('truetype');
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Nanum Gothic", 'Spoqa Han Sans';
-}
-
-p, span, li, td, tr, div, input, button {
-    font-family: "Nanum Gothic", 'Spoqa Han Sans';
-}
+@import "/css/remote.css";
 
 /*remote.css��??�정?�요*/
 
@@ -64,7 +7,7 @@ body {
     ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙??: background-color: rgb(191,148,208) -> rgb(191,148,208)
     마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
-    font-size: 1em;
+    font-size: 0.9em;
 }
 
 .afterapplypage .back_arrow {
@@ -354,10 +297,6 @@ a.dropdown-toggle .count {
     overflow: hidden;
 }
 
-.left .notice li .title:hover {
-    text-decoration: underline;
-}
-
 .left .notice li p.date {
     color: gray;
     float: right;
@@ -435,39 +374,39 @@ a.dropdown-toggle .count {
 .blue-gradient {
     background: red;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    background: -webkit-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    background: -o-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    background: -moz-linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    background: linear-gradient(90deg, rgb(134,193,233), rgb(191,148,208));
     /* Standard syntax */
 }
 
 .puple-gradient {
     background: red;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    background: -webkit-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    background: -o-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    background: -moz-linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    background: linear-gradient(90deg, rgb(191,148,208), rgb(231,160,153));
     /* Standard syntax */
 }
 
 .red-gradient {
     background: red;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    background: -webkit-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    background: -o-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    background: -moz-linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    background: linear-gradient(90deg, rgb(231,160,153), rgb(134,193,233));
     /* Standard syntax */
 }
 
@@ -729,7 +668,6 @@ body {
 
 .comment tr {
     border-bottom: 1px solid gray;
-    height: 50px;
 }
 
 .comment table tr td:nth-child(1) {
@@ -776,23 +714,12 @@ body {
 }
 
 .comment table td input.comment-modify-input {
-    height: 30px;
-    width: 98%;
-    border: 2px solid rgb(191, 148, 208);
-    border-radius: 4px;
-    padding-left: 1%;
-    transition: all 1s ease;
-}
-
-.comment table td input.comment-modify-push {
-    background-color: rgb(191, 148, 208);
-    border: none;
-    height: 36px;
-    width: 100%;
-    border: 2px solid rgb(191, 148, 208);
-    border-radius: 4px;
-    transition: all 1s ease;
-    color: white;
+  height: 30px;
+  width: 97%;
+  border: 2px solid rgb(191, 148, 208);
+  border-radius: 4px;
+  padding-left: 1%;
+  transition: all 1s ease;
 }
 
 
@@ -1161,8 +1088,8 @@ body {
 .extentionapply {
     width: 100%;
 }
-
-- .extentionapply .seatcontainer {
+-
+.extentionapply .seatcontainer {
     width: 100%;
     margin-top: 20px;
     text-align: center;
@@ -1357,12 +1284,11 @@ body {
 
 /*------------------------- login -------------------*/
 
-
 /*body {
     background-color: #00bcfc;
 }*/
 
-#login_title {
+#title {
     text-align: left;
     font-size: 25px;
     margin-bottom: 40px;
@@ -1370,8 +1296,7 @@ body {
     padding-bottom: 15px;
 }
 
-#login_card {
-    min-width: 304px;
+#card {
     padding: 20px;
     background-color: white;
     text-align: center;
@@ -1383,94 +1308,34 @@ body {
     font-size: 20px;
 }
 
-#login_form input[type="text"], #login_form input[type="password"] {
-    width: 80%;
+#login_form input {
     margin: 10px;
     font-size: 20px;
 }
 
-#auto_login {
-  font-size: 80%;
-}
-
 #recaptcha {
-    width: 304px;
-    margin: auto;
+    width: 100px;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 15%;
 }
 
-#login {
-    cursor: pointer;
+#submit {
     border-radius: 5px;
     margin: 10px;
     margin-top: 25px;
     margin: auto;
-    font-size: 100%;
-    background-color: #1fa9d8;
-    width: 30%;
-    height: 30px;
-    line-height: 30px;
-}
-
-/*------------------------- register -------------------*/
-
-#register_table {
-  width: 100%;
-}
-
-.register_input {
-    text-align: left;
-}
-
-#register_title {
-    text-align: left;
-    font-size: 25px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid #dfdfdf;
-    padding-bottom: 15px;
-}
-
-#register_card {
-    min-width: 304px;
-    padding: 20px;
-    background-color: white;
-    text-align: center;
-    width: 30%;
-    height: 350px;
-    margin: auto;
-    margin-top: 10%;
-    border-radius: 15px;
     font-size: 20px;
-}
-
-#register_table input {
-    width: 80%;
-    margin: 10px;
-    font-size: 20px;
-}
-
-#register {
-    cursor: pointer;
-    border-radius: 5px;
-    margin: auto;
-    margin-top: 8%;
-    font-size: 100%;
     background-color: #1fa9d8;
     width: 30%;
     height: 30px;
     line-height: 30px;
 }
 
-#code_submit {
+#submit:hover {
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 100%;
-    background-color: #1fa9d8;
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
 }
+
 
 /*-------------------------- facility ------------------------*/
 

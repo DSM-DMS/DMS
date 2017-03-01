@@ -1,4 +1,4 @@
-        <div class="frame left extentionapply">
+         <div class="frame left extentionapply">
             <div class="frametitle">
                 <h1>연장신청</h1>
                 <div class="underline blue"></div>
@@ -7,7 +7,6 @@
                 <div class="class-selecter-div">
                     <label for="class-select">가온실</label>
                     <select id="class-select">
-                        <!--받은 데이터를 통해 호실의 개수를 정하도록 리팩토링 요구 - 출시후에-->
                       <option selected="selected" value="1">가온실</option>
                       <option value="2">나온실</option>
                       <option value="3">다온실</option>

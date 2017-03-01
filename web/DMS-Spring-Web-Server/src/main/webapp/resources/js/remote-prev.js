@@ -1,58 +1,7 @@
 id = "test";
 name = "momo";
 
-// 로그인 페이지
-$('#login').on('click', function() {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/user/login",
-        type: "POST",
-        data: JSON.stringify({
-            id: $('#login_id').val(),
-            password: $('#login_pw').val(),
-            recaptcha: recaptcha,
-            autoLogin: autoLogin
-        }),
-        statusCode: {
-            500: function(xhr) {
-                if (window.console) console.log(xhr.responseText);
-            }
-        }
-    });
-});
-
-// 회원가입 페이지
-$('#code_submit').on('click', function() {
-    $.ajax({
-        url: "dsm2015.cafe24.com/user/login",
-        type: "POST",
-        data: {
-            code: $('#register_code').val()
-        },
-        success: function(data) {
-            var studentData = JSON.parse(data);
-            $('register_hidden').val($('#register_code').val());
-            $('#student_data').html('<td colspan="3" text-align="center">' + studentData.name + '</td>');
-        }
-    });
-});
-
-$('register').on('click', function() {
-    $.ajax({
-        url: "dsm2015.cafe24.com/user/login",
-        type: "POST",
-        data: {
-            code: $('#register_hidden').val(),
-            id: $('#register_id').val(),
-            password: $('#register_id').val()
-        },
-        success: function() {
-            alert('회원가입이 완료되었습니다.')
-        }
-    });
-});
-
 //신청탭 over 이벤트
-
 $(".remote .category").children("a").eq(0).click(function() {
     // 신청 text를 white로
     if ($(window).width() > 480) {
@@ -405,10 +354,7 @@ function changePage(beforePage, AfterPage) {
 
 function prevPage() {
     pageStack.pop();
-    console.log(pageStack[pageStack.length - 1].html.children());
     $(".main").html(pageStack[pageStack.length - 1].html.children())
-    pageStack[pageStack.length - 1].saveDom();
-    console.log(pageStack[pageStack.length - 1].html.children());
 }
 
 // 상속트리
@@ -435,7 +381,7 @@ function prevPage() {
 // |   |    |
 // |   |    | -- ExtentionApplyPage
 // |   |    |
-// |   |    | -- GoHomeApplyPage
+// |   |    | -- GoHomeApplyPage 구현 미완료
 // |   |    |
 // |   |    | -- Mypage 구현 중
 // |   |    |
@@ -447,43 +393,47 @@ function prevPage() {
 // |        |
 // |        | -- GoOutApplyPage
 // |        |
-// |        | -- ArticleModifyPage -------------- 서버에서 준다고 함
+// |        | -- ArticleModifyPage 구현 미완료 (에디터 사용여부 결정뒤 구현)
 // |        |
 // |        | -- NoticeModifyPage 구현 미완료
 // |        |
-// |        | -- RuleModifyPage
+// |        | -- RuleModifyPage 구현 미완료
 // |        |
-// |        | -- QnaAnswerModifyPage
+// |        | -- FacilityModifyPage 구현 미완료
 // |        |
-// |        | -- FacilityResultModifyPage
+// |        | -- QnaAnswerModifyPage 구현 미완료
 // |        |
-// |        | -- NoticeWritePage
+// |        | -- FacilityResultModifyPage 구현 미완료
 // |        |
-// |        | -- RuleWritePage
+// |        | -- ArticleWritePage 구현 미완료 (에디터 사용여부 결정뒤 구현)
 // |        |
-// |        | -- FacilityWritePage
+// |        | -- NoticeWritePage 구현 미완료
 // |        |
-// |        | -- QnaAnswerWritePage
+// |        | -- RuleWritePage 구현 미완료
 // |        |
-// |        | -- FacilityResultWritePage
+// |        | -- FacilityWritePage 구현 미완료
 // |        |
-// |        | -- QnaQuestionWritePage
+// |        | -- QnaAnswerWritePage 구현 미완료
 // |        |
-// |        | -- QnaQuestionModifyPage
+// |        | -- FacilityResultWritePage 구현 미완료
 // |        |
-// |        | -- FacilityModifyPage
+// |        | -- QnaQuestionWritePage 구현 미완료
+// |        |
+// |        | -- QnaQuestionModifyPage 구현 미완료
+
+
+
 // |
 // | -- ServerPage(추상) (Notice, Rule, Faq, Qna 해당)
 //      |
-//      | -- NoticeArticlePage
+//      | -- NoticeArticlePage 구현 미완료 (사라짐 FAQ와 통합)
 //      |
-//      | -- RuleArticlePage
+//      | -- RuleArticlePage 구현 미완료
 //      |
 //      | -- FaqArticlePage 구현 미완료
 //      |
-//      | -- QnaArticlePage 구현 거의 완료
+//      | -- QnaArticlePage 구현 미완료
 
-// ajax가 비동이 이기 때문에, getData, getHtml의 success 콜백으로 draw
 
 
 // Page객체 구현 -----------------------------------------------------------------------
@@ -527,19 +477,16 @@ function AjaxPage() {
     this.sendData;
     this.draw = function() {
         this.setForm();
-        this.getData(function() {
-            this.setData();
-            this.setData();
-            this.setEvent();
-            this.saveDom();
-        });
-
+        this.getData();
+        this.setData();
+        this.setEvent();
+        this.saveDom();
     }
 
     // 필요한 Data를 받아옴
-    this.getData = function(callback) {
+    this.getData = function() {
         $.ajax({
-            url: "http://dsm2015.cafe24.com:10419",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
             data: this.sendData,
             beforeSend: function(xhr) {
@@ -548,9 +495,6 @@ function AjaxPage() {
             },
             success: function(data) {
                 this.ajaxData = JSON.parse(data);
-                if (typeof callback === "function") {
-                    callback();
-                }
             }
         });
     }
@@ -587,25 +531,23 @@ function ServerPage() {
     this.sendData;
     this.type;
     this.no;
-    this.action;
     this.draw = function() {
-        this.getHtml(function() {
-            this.setHtml();
-            this.setEvent();
-            this.saveDom();
-        });
+        this.getHtml();
+        this.setHtml();
+        this.setEvent();
+        this.saveDom();
     }
 
-    this.getHtml = function(callback) {
+    this.getHtml = function() {
         $.ajax({
-            url: "http://dsm2015.cafe24.com" + "/" + this.action + "/" + this.type,
+            url: "dsm2015.cafe24.com:10419" + "/" + this.type,
+            data: {
+                "no": this.no
+            },
             type: "POST",
             data: this.sendData,
             success: function(data) {
                 this.htmlData = data;
-                if(typeof callback === "function") {
-                    callback();
-                }
             }
         });
     }
@@ -646,55 +588,40 @@ function MainPage() {
     this.mealData;
     this.date = new Date();
 
-    // 2개 이상의 ajax가 있을시, 2개 모두 완료후, draw를 하기 위함
-    this.noticeDone = false;
-    this.mealDone = false;
-    this.startDraw = function() {
-        if (this.noticeDone && this.mealDone) {
-            this.draw();
-        }
-    }
-
     // 공지 ajax + 급식 ajax
-    this.getData = function(callback) {
+    this.getData = function() {
         // getNoticeData
         $.ajax({
-            url: "http://dsm2015.cafe24.com:10419",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
-            data: JSON.stringify({
+            data: {
                 "page": 0,
                 "limit": 5
-            }),
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                 xhr.setRequestHeader("command", this.noticeCommand);
             },
             success: function(data) {
                 this.noticeData = JSON.parse(data);
-                this.noticeDone = true;
-                if (typeof callback === "function") {
-                    callback();
-                }
             }
         });
 
         // getMaelData
         $.ajax({
-            url: "http://dsm2015.cafe24.com:10419",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
-            data: JSON.stringify({
+            data: {
                 "year": this.date.getFullYear(),
                 "month": this.date.getMonth() + 1,
                 "day": this.date.getDate()
-            }),
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                 xhr.setRequestHeader("command", this.mealCommand);
             },
             success: function(data) {
                 this.mealData = JSON.parse(data);
-                this.mealDone = true;
-                this.startDraw();
             }
         });
 
@@ -834,10 +761,10 @@ function ArticleListPage() {
     // page를 넘겼을때 list를 다시 출력하는 함수
     this.reload = function() {
         // 데이터를 다시 받아오기 전에 sendData 다시 초기화
-        this.sendData = JSON.stringify({
+        this.sendData = {
             "page": this.page,
             "limit": this.getListLength()
-        });
+        };
         this.getData();
         // table초기화 전에 header를 저장해 둠
         var tableHeader = $(".articlelist table.list tr:nth-child(1)").get();
@@ -926,7 +853,6 @@ function FaqListPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>공지사항</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -944,9 +870,9 @@ function FaqListPage() {
         '<tr>' +
         '</tr>' +
         '</table>';
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "page": this.page
-    });
+    };
     this.type = "faq";
     this.command = "427";
     this.setData = function() {
@@ -978,7 +904,6 @@ function QnaListPage() {
     this.form =
         '<div class="frame left articlelist qna">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>Q&A</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -997,9 +922,9 @@ function QnaListPage() {
         '<tr>' +
         '</tr>' +
         '</table>';
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "page": this.page
-    });
+    };
     this.type = "qna";
     this.command = "425";
     this.setData = function() {
@@ -1007,7 +932,7 @@ function QnaListPage() {
             var newTr = $('<tr/>', {
                 click: function(e) {
                     // 클릭이벤트
-                    new QnaArticlePage(this.ajaxData.result.list[loop].no);
+                    new ServerPage(this.type, this.ajaxData.result.list[loop].no);
                     pageStack.push(this);
                 }
             });
@@ -1040,7 +965,6 @@ function RuleListPage() {
     this.form =
         '<div class="frame left articlelist qna">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>기숙사규칙</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -1058,9 +982,9 @@ function RuleListPage() {
         '<tr>' +
         '</tr>' +
         '</table>';
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "page": this.page
-    });
+    };
     this.type = "rule";
     this.command = "424";
     this.setData = function() {
@@ -1068,7 +992,7 @@ function RuleListPage() {
             var newTr = $('<tr/>', {
                 click: function(e) {
                     // 클릭이벤트
-                    new RuleArticlePage(this.ajaxData.result.list[loop].no);
+                    new ServerPage(this.type, this.ajaxData.result.list[loop].no);
                     pageStack.push(this);
                 }
             });
@@ -1139,7 +1063,6 @@ function AfterSchoolListPage() {
     this.form =
         '<div class="frame left articlelist afterapply">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>방과후 신청</h1>' +
         '<p>신청기간 2017.3.2 ~ 3.10</p>' + //방과후 신청기간 가져와야함!!!
         '<div class="underline puple"></div>' +
@@ -1158,9 +1081,9 @@ function AfterSchoolListPage() {
         '<tr>' +
         '</tr>' +
         '</table>';
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "page": this.page
-    });
+    };
     this.type = "afterschool";
     this.command = "416";
     this.setData = function() {
@@ -1216,7 +1139,6 @@ function FacilityListPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>시설고장신고</h1>' +
         '<div class="input-container">' +
         '<input type="button" name="" value="글 쓰기">' +
@@ -1236,9 +1158,9 @@ function FacilityListPage() {
         '<tr>' +
         '</tr>' +
         '</table>';
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "page": this.page
-    });
+    };
     this.type = "facility";
     this.command = "415";
     this.setData = function() {
@@ -1333,19 +1255,15 @@ FacilityListPage.prototype = new ArticleListPage();
 // AfterSchoolArticlePage은 특별한 경우 같다. 어느 객체를 상속 받아야 할지 모르겠다. ㅠㅠ
 // 우선, ajaxData속성이 필요할것 같으으로, AjaxPage를 상속받는데, getData()를 빈 함수로 초기화 해야겠다.
 // 자신의 상태에 따라 신청, 취소 바꾸는 기능 구현해야함
-// getData는 draw의 도화선같다.
 function AfterSchoolArticlePage(data) {
     // AfterSchoolArticlePage만의 예외적인 경우다. 나중에 리팩토링 필요
-    this.getData = function(callback) {
+    this.getData = function() {
         this.ajaxData = data;
-        if (typeof callback === "function") {
-            callback();
-        }
     }
     this.form =
         '<div class="frame left afterapplypage">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="">' +
         '<h1>방과후 신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -1407,12 +1325,12 @@ function AfterSchoolArticlePage(data) {
         $(".afterapplypage form button#apply").click(function() {
             // 신청 메시지 보내야함
             $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
-                data: JSON.stringify({
+                data: {
                     "id": id,
                     "no": this.ajaxData.no
-                }),
+                },
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                     xhr.setRequestHeader("command", "145");
@@ -1433,11 +1351,11 @@ function AfterSchoolArticlePage(data) {
     this.stausCheck = function() {
         var result;
         $.ajax({
-            url: "http://dsm2015.cafe24.com:10419",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
-            data: JSON.stringify({
+            data: {
                 "id": id
-            }),
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                 xhr.setRequestHeader("command", "436");
@@ -1465,7 +1383,6 @@ function ExtentionApplyPage() {
     this.form =
         '<div class="frame left extentionapply">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>연장신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -1489,9 +1406,9 @@ function ExtentionApplyPage() {
     this.command = "432";
     // 연장학습 장소의 고유값
     this.class = 1;
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "class": this.class
-    });
+    };
 
     this.pushData = function() {
         var trancedSeatData = [];
@@ -1639,14 +1556,14 @@ function ExtentionApplyPage() {
 
     this.extentionapply = function(seat) {
         $.ajax({
-            url: "http://dsm2015.cafe24.com:10419",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
-            data: JSON.stringify({
+            data: {
                 "id": id,
                 "class": this.class,
                 "seat": seat,
                 "name": name
-            }),
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                 xhr.setRequestHeader("command", "510");
@@ -1660,12 +1577,12 @@ function ExtentionApplyPage() {
     this.getMyExtentionData = function() {
         var result;
         $.ajax({
-            url: "http://dsm2015.cafe24.com:10419",
+            url: "dsm2015.cafe24.com:10419",
             type: "POST",
-            data: JSON.stringify({
+            data: {
                 "id": id,
                 "no": this.ajaxData.no
-            }),
+            },
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                 xhr.setRequestHeader("command", "431");
@@ -1681,11 +1598,11 @@ function ExtentionApplyPage() {
         $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
             // 신청취소 ajax
             $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
-                data: JSON.stringify({
+                data: {
                     "id": id,
-                }),
+                },
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                     xhr.setRequestHeader("command", "331");
@@ -1707,9 +1624,9 @@ function ExtentionApplyPage() {
 
     // 교실바꿔서 리로드하는 함수
     this.reload = function() {
-        this.sendData = JSON.stringify({
+        this.sendData = {
             "class": this.class
-        });
+        };
         this.getData();
         this.setData();
 
@@ -1719,378 +1636,13 @@ function ExtentionApplyPage() {
 }
 ExtentionApplyPage.prototype = new AjaxPage();
 
-function GoHomeApplyPage() {
-    this.form =
-        '<div class="frame calendar">' +
-        '<h1>귀가 신청</h1>' +
-        '<div class="underline"></div>' +
-        '<table id="calendar" cellspacing="0">' +
-        '<thead>' +
-        '<tr>' +
-        '<td id="prev_month"><i class="fa fa-toggle-left" style="font-size: 28px;"></i></td>' +
-        '<td id="month" colspan="5" style="font-size: 28px; font-weight: bold;"></td>' +
-        '<td id="next_month"><i class="fa fa-toggle-right" style="font-size: 28px;"></i></td>' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody>' +
-        '<tr class="days">' +
-        '<td>Sun</td>' +
-        '<td>Mon</td>' +
-        '<td>Tue</td>' +
-        '<td>Wed</td>' +
-        '<td>Thu</td>' +
-        '<td>Fri</td>' +
-        '<td>Sat</td>' +
-        '</tr>' +
-        '<tr id="first_week" class="weeks">' +
-        '<td class="sun"></td>' +
-        '<td class="mon"></td>' +
-        '<td class="tue"></td>' +
-        '<td class="wed"></td>' +
-        '<td class="thu"></td>' +
-        '<td class="fri go_home"></td>' +
-        '<td class="sat"></td>' +
-        '</tr>' +
-        '<tr id="second_week" class="weeks">' +
-        '<td class="sun go_dom"></td>' +
-        '<td class="mon"></td>' +
-        '<td class="tue"></td>' +
-        '<td class="wed"></td>' +
-        '<td class="thu"></td>' +
-        '<td class="fri go_home"></td>' +
-        '<td class="sat go_dom"></td>' +
-        '</tr>' +
-        '<tr id="third_week" class="weeks">' +
-        '<td class="sun"></td>' +
-        '<td class="mon"></td>' +
-        '<td class="tue"></td>' +
-        '<td class="wed"></td>' +
-        '<td class="thu"></td>' +
-        '<td class="fri"></td>' +
-        '<td class="sat go_home"></td>' +
-        '</tr>' +
-        '<tr id="fourth_week" class="weeks">' +
-        '<td class="sun go_dom"></td>' +
-        '<td class="mon"></td>' +
-        '<td class="tue"></td>' +
-        '<td class="wed"></td>' +
-        '<td class="thu"></td>' +
-        '<td class="fri go_home_duty"></td>' +
-        '<td class="sat"></td>' +
-        '</tr>' +
-        '<tr id="fifth_week" class="weeks">' +
-        '<td class="sun go_dom"></td>' +
-        '<td class="mon"></td>' +
-        '<td class="tue"></td>' +
-        '<td class="wed"></td>' +
-        '<td class="thu"></td>' +
-        '<td class="fri"></td>' +
-        '<td class="sat"></td>' +
-        '</tr>' +
-        '</tbody>' +
-        '</table>' +
-        '</div>' +
-        '<div class="frame go_home_apply">' +
-        '<form id="apply_form">' +
-        '<fieldset id="apply_field">' +
-        '<legend>잔류신청</legend>' +
-        '<table width="100%">' +
-        '<tr>' +
-        '<td width="45%">' +
-        '<label for="stay-1">&nbsp&nbsp&nbsp잔&nbsp&nbsp류&nbsp&nbsp&nbsp</label>' +
-        '<input type="radio" name="stay" id="stay-1" value="1" required><br><br>' +
-        '<label for="stay-2">금요 귀가</label>' +
-        '<input type="radio" name="stay" id="stay-2" value="2"><br><br>' +
-        '<label for="stay-3">토요 귀가</label>' +
-        '<input type="radio" name="stay" id="stay-3" value="3"><br><br>' +
-        '<label for="stay-4">토요 귀사</label>' +
-        '<input type="radio" name="stay" id="stay-4" value="4"><br><br>' +
-        '</td>' +
-        '<td>' +
-        '<div style="margin: 20%; margin-left: 0;">' +
-        '<span class="color" style="background-color: rgb(52, 219, 94);"></span>&nbsp&nbsp귀가' +
-        '</div>' +
-        '<div style="margin: 20%; margin-left: 0;">' +
-        '<span class="color" style="background-color: rgb(255, 151, 49);"></span>&nbsp&nbsp귀사' +
-        '</div>' +
-        '<div style="margin: 20%; margin-left: 0;">' +
-        '<span class="color" style="background-color: rgb(255, 238, 34);"></span>&nbsp&nbsp의무귀가' +
-        '</div>' +
-        '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td colspan="2"><input type="text" name="date" id="date" size="15"><div class="ui-button ui-widget ui-corner-all" id="apply_submit">신청</div></td>' +
-        '</tr>' +
-        '</table>' +
-        '</fieldset>' +
-        '</form>' +
-        '</div>';
-
-    this.command = {
-        load: "433",
-        apply: "502"
-    }
-    this.ajaxData = {
-        "value": value
-    };
-    this.sendData = JSON.stringify({
-        "id": id,
-        "week": week,
-        "value": value
-    });
-
-    // 필요한 Data를 받아옴
-    this.getData = function(callback) {
-        $.ajax({
-            url: "http://dsm2015.cafe24.com",
-            type: "POST",
-            data: JSON.stringify({
-                "id": this.sendData.id,
-                "week": this.sendData.week
-            }),
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                xhr.setRequestHeader("command", this.command.load);
-            },
-            success: function(data) {
-                this.ajaxData = JSON.parse(data);
-                if (typeof callback === "function") {
-                    callback();
-                }
-            }
-        });
-    }
-
-    // 신청
-    this.applyData = function() {
-        $.ajax({
-            url: "http://dsm2015.cafe24.com",
-            type: "POST",
-            data: this.sendData,
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                xhr.setRequestHeader("command", this.command.apply);
-            },
-            success: function(data) {
-                alert("신청되었습니다.");
-            }
-        });
-    }
-
-    // 받아온 Data를 html에 설정
-    this.setData;
-
-    // html에 이벤트 설정
-    this.setEvent = function() {
-        var valueArray = new Array();
-        var currentDate = new Date();
-        var currentYear = currentDate.getFullYear();
-        var currentMonth = currentDate.getMonth() + 1;
-        var lastDay = noofdays(currentYear, currentMonth);
-        var newDate = new Date(currentYear, currentMonth - 1, 1);
-
-        $('#month').text(currentYear + '.' + currentMonth); //달력 년, 월 표시
-
-        drawCalendar(newDate, lastDay); //처음 달력 날짜 표시
-
-        //이전 달
-        $('#prev_month').click(function() {
-            if (currentMonth == 1) {
-                currentYear--;
-                currentMonth = 12;
-            } else {
-                currentMonth--;
-            }
-            $('#month').text(currentYear + '.' + currentMonth);
-            newDate = new Date(currentYear, currentMonth - 1, 1);
-            lastDay = noofdays(currentMonth, currentYear);
-            clearCalendar();
-            drawCalendar(newDate, lastDay);
-        });
-
-        //다음 달
-        $('#next_month').click(function() {
-            if (currentMonth == 12) {
-                currentYear++;
-                currentMonth = 1;
-            } else {
-                currentMonth++;
-            }
-            $('#month').text(currentYear + '.' + currentMonth);
-            newDate = new Date(currentYear, currentMonth - 1, 1);
-            lastDay = noofdays(currentMonth, currentYear);
-            clearCalendar();
-            drawCalendar(newDate, lastDay);
-        });
-
-        //달의 말일 구하기
-        function noofdays(year, month) {
-            var daysofmonth;
-
-            if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
-                daysofmonth = 30;
-            } else {
-                daysofmonth = 31;
-                if (month == 2) {
-                    if (year / 4 - parseInt(year / 4) != 0) {
-                        daysofmonth = 28;
-                    } else {
-                        if (year / 100 - parseInt(year / 100) != 0) {
-                            daysofmonth = 29;
-                        } else {
-                            if (year / 400 - parseInt(year / 400) != 0) {
-                                daysofmonth = 28;
-                            } else {
-                                daysofmonth = 29;
-                            }
-                        }
-                    }
-                }
-            }
-            return daysofmonth;
-        }
-
-        //달력 그리기
-        function drawCalendar(date, lastDay) {
-            switch (date.getDay()) {
-                case 0:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 10 + i; //일요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-                case 1:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 11 + i; //월요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-                case 2:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 12 + i; //화요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-                case 3:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 13 + i; //수요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-                case 4:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 14 + i; //목요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-                case 5:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 15 + i; //금요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-                case 6:
-                    for (var i = 0; i < lastDay; i++) {
-                        var idx = 16 + i; //토요일
-                        $('#calendar td:eq(' + idx + ')').text(i + 1);
-                    }
-                    break;
-            }
-            drawPrev();
-        }
-
-        //달력 초기화
-        function clearCalendar() {
-            for (var i = 0; i < 35; i++) {
-                $('#calendar td:eq(' + (i + 10) + ')').text("");
-                $('#calendar tbody tr').css("background-color", "white");
-            }
-        }
-
-        $('#first_week').click(function() {
-            $('#calendar tbody tr').css("background-color", "white");
-            $('#first_week').css("background-color", "rgb(197, 197, 197)");
-            $('#date').val(currentYear + '-' + currentMonth + '-' + '01');
-        });
-
-        $('#second_week').click(function() {
-            $('#calendar tbody tr').css("background-color", "white");
-            $('#second_week').css("background-color", "rgb(197, 197, 197)");
-            $('#date').val(currentYear + '-' + currentMonth + '-' + '02');
-        });
-
-        $('#third_week').click(function() {
-            $('#calendar tbody tr').css("background-color", "white");
-            $('#third_week').css("background-color", "rgb(197, 197, 197)");
-            $('#date').val(currentYear + '-' + currentMonth + '-' + '03');
-        });
-
-        $('#fourth_week').click(function() {
-            $('#calendar tbody tr').css("background-color", "white");
-            $('#fourth_week').css("background-color", "rgb(197, 197, 197)");
-            $('#date').val(currentYear + '-' + currentMonth + '-' + '04');
-        });
-
-        $('#fifth_week').click(function() {
-            alert("다음 달 1주로 신청해주세요.");
-        });
-
-        //********************이전 데이터 표시*********************
-        function dateToString(week) {
-            return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
-        }
-
-        function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
-            for (var i = 1; i <= 4; i++) {
-                this.sendData.week = dateToString(i);
-                this.getData();
-                valueArray.push(this.ajaxData);
-            }
-        }
-
-        function drawPrev() {
-            loadPrev();
-            for (i = 1; i <= valueArray.length; i++) {
-                if (valueArray[i] == 4) { //잔류
-                } else if (valueArray[i] == 1) {
-                    $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
-                    $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
-                } else if (valueArray[i] == 2) {
-                    $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_home');
-                    $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
-                } else if (valueArray[i] == 3) {
-                    $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
-                    $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
-
-                }
-                valueArray = new Array();
-            }
-
-            //***********************신청*********************
-            $('#apply_form input[type="radio"]').checkboxradio();
-
-            $('#date').keydown(function(e) {
-                e.preventDefault();
-            });
-
-            $('#apply_submit').on('click', function() {
-                this.sendData.week = $('#date').val();
-                this.sendData.value = $(':input:radio[name="stay"]:checked').val();
-                this.applyData();
-            });
-
-        };
-    }
-}
-GoHomeApplyPage.prototype = new AjaxPage();
-
 // 자식 객체는 setEvent() 구현해야함
 // 자식 객체는 form 초기화 해야함
 function PointApplyPage() {
     this.form =
         '<div class="frame left pointapply">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
         '<h1>상점신청</h1>' +
         '<div class="underline blue"></div>' +
         '</div>' +
@@ -2161,7 +1713,7 @@ function PointApplyPage() {
         $(".pointapply form:nth-child(3) button").click(function() {
             var reason = $(".pointapply .individual input").val();
             $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
                 data: {
                     "id": id,
@@ -2182,13 +1734,13 @@ function PointApplyPage() {
             var reason = $(".pointapply .group input:nth-child(1)").val();
             var person = $(".pointapply .group input:nth-child(2)").val();
             $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
-                data: JSON.stringify({
+                data: {
                     "id": id,
                     "content": reason,
                     "targer": person
-                }),
+                },
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                     xhr.setRequestHeader("command", "144");
@@ -2198,9 +1750,15 @@ function PointApplyPage() {
                 }
             });
         });
+
+        $(".back_arrow").click(function() {
+            prevPage();
+        })
+
     }
-    this.draw();
+
     pageStack.push(this);
+    this.draw();
 }
 PointApplyPage.prototype = new NonAjaxPage();
 
@@ -2211,7 +1769,7 @@ function GoOutApplyPage() {
     this.form =
         '<div class="frame left articlelist">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
+        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
         '<h1>외출신청</h1>' +
         '<div class="underline"></div>' +
         '</div>' +
@@ -2265,12 +1823,12 @@ function GoOutApplyPage() {
 
         $('#submit_button').on('click', function() {
             $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
-                data: JSON.stringify({
+                data: {
                     "id": id,
                     "day": this.sendData,
-                }),
+                },
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                     xhr.setRequestHeader("command", 503);
@@ -2281,6 +1839,11 @@ function GoOutApplyPage() {
             });
 
         });
+
+
+        $(".back_arrow").click(function() {
+            prevPage();
+        })
 
     }
 
@@ -2295,7 +1858,6 @@ function Mypage() {
     this.form =
         '<div class="frame left mypage">' +
         '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>마이페이지</h1>' +
         '<div class="underline red"></div>' +
         '</div>' +
@@ -2335,9 +1897,9 @@ function Mypage() {
         '</div>' +
         '</div>';
     this.command = "401";
-    this.sendData = JSON.stringify({
+    this.sendData = {
         "id": id
-    });
+    };
     this.setData = function() {
         // 아직 마이페이지항목이 제대로 정의되지 않음.
     };
@@ -2349,37 +1911,11 @@ function Mypage() {
 Mypage.prototype = new AjaxPage();
 
 // qna, rule, facility, notice 해당
-function NoticeArticlePage(no) {
-    this.type = "notice";
+function NoticeArticlePage(type, no) {
+    this.type = type;
     this.no = no;
-    this.action = "view";
-    this.sendData = JSON.stringify({
-        "no": this.no
-    });
     // 이벤트 등록할 것 없음
     this.setEvent = function() {
-        // 수정 삭제 이벤트 등록
-        // 수정 이벤트 발생시, NoticeModifyPage() 생성
-        $(".frametitle .input-container input.modify").click(function() {
-            new NoticeModifyPage(this.no);
-
-        })
-
-        // 삭제 이벤트 발생시 삭제 요청 보내기
-        $(".frametitle .input-container input.delete").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/notice/delete",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no
-                }),
-                success: function() {
-                    alert('삭제되었습니다.');
-                    prevPage();
-                }
-            });
-        })
-
 
     }
 
@@ -2390,105 +1926,30 @@ function NoticeArticlePage(no) {
 NoticeArticlePage.prototype = new ServerPage();
 
 
-function FacilityArticlePage(no) {
-    this.type = "facility";
-    this.no = no;
-    this.action = "view";
+function FacilityArticlePage() {
 
-    this.setEvent = function() {
-        // 학생용 이벤트
-        // 수정이벤트 등록
-        $(".question .frametitle .input-container input.modify").click(function() {
-            new FacilityModifyPage(this.no);
-
-        })
-
-        // 삭제 이벤트 등록
-        $(".question .frametitle .input-container input.delete").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": this.no
-                }),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                    xhr.setRequestHeader("command", 316);
-                },
-                success: function() {
-                    alert('삭제되었습니다.');
-                    new FacilityListPage();
-                }
-            });
-        })
-
-        // 관리자용 이벤트
-        // 글 수정, 삭제
-        $(".answer .frametitle .input-container input.modify").click(function() {
-            new FacilityResultModifyPage();
-        });
-
-        $(".answer .frametitle .input-container input.delete").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/facility/delete",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no
-                }),
-                success: function() {
-                    alert('삭제되었습니다.');
-                    prevPage();
-                }
-            });
-        })
-
-
-    }
-
-    this.draw();
-    pageStack.push(this);
 }
 
 FacilityArticlePage.prototype = new ServerPage();
 
 
-function RuleArticlePage(no) {
-    this.type = "rule"
+function RuleArticlePage(type, no) {
+    this.type = type;
     this.no = no;
-    this.action = "view";
-    // 수정삭제 이벤트 등록해야함
+    // 이벤트 등록할 것 없음
     this.setEvent = function() {
-        // 수정이벤트 등록
-        $(".frametitle .input-container input.modify").click(function() {
-            new RuleModifyPage(this.no);
-        })
 
-        // 삭제 이벤트 등록
-        $(".frametitle .input-container input.delete").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/rule/delete",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no
-                }),
-                success: function() {
-                    alert('삭제되었습니다.');
-                    prevPage();
-                }
-            });
-        })
     }
 
-    this.draw();
     pageStack.push(this);
+    this.draw();
 }
 
 RuleArticlePage.prototype = new ServerPage();
 
-function QnaArticlePage(no) {
-    this.type = "qna";
+function QnaArticlePage(type, no) {
+    this.type = type;
     this.no = no;
-    this.action = "view";
     // 이벤트 등록할 것 없음
     this.setEvent = function() {
         // 질문수정, 질문삭제 이벤트 등록
@@ -2496,62 +1957,35 @@ function QnaArticlePage(no) {
             // 질문 수정 ajax
             // qna질문 수정 페이지 로드 후, 질문 수정 페이지에서, 수정 버튼을 누르면, ajax발사후, QnaArticlePage리로드
             // 취소버튼 누르면 그냥 QnaArticlePage리로드
-            // title question_content writer
-            new QnaQuestionModifyPage(this.no, $(".question div.frametitle h1").text(), $(".question div.article").html());
+            new QnaQuestionModifyPage();
+
         });
         $(".articlecontainer .frametitle div.input-container input.delete").click(function() {
             // 질문 삭제 ajax
             // 질문 삭제 후 전 페이지로 돌아가기
-            $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no
-                }),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                    xhr.setRequestHeader("command", 312);
-                },
-                success: function() {
-                    alert('삭제되었습니다.');
-                    prevPage();
-                }
-            });
+            prevPage();
         })
 
-        // 관리자에서만 동작
         // 답변수정, 답변삭제 이벤트 등록
         $(".answer .frametitle div.input-container input.modify").click(function() {
-            // 답변 수정 ajax
+            // 질문 수정 ajax
             new QnaAnswerModifyPage();
         });
-
-        // 관리자에서만 동작
         $(".answer .frametitle div.input-container input.delete").click(function() {
-            // 답변 삭제 ajax
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/delete/qna",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no
-                }),
-                success: function() {
-                    alert('삭제되었습니다.');
-                    this.draw();
-                }
-            });
+            // 질문 삭제 ajax
+            // 성래서버로 요청하면 됨
         })
 
         // 댓글 전송 이벤트
         $(".commentinput table tr td input[type='button']").click(function() {
             $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
+                url: "dsm2015.cafe24.com:10419",
                 type: "POST",
-                data: JSON.stringify({
+                data: {
                     "no": this.no,
                     "content": content,
                     "writer": name
-                }),
+                },
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                     xhr.setRequestHeader("command", "114");
@@ -2568,46 +2002,33 @@ function QnaArticlePage(no) {
             // 댓글 수정
             $(commentArr[loop]).children("td").children("span.comment-modify").click(function() {
                 // ajax전에 댓글 수정 페이지를 보여줘야 함 ㅠㅠ
-                // 댓글 수정창 load
-                $(commentArr[loop]).children("td").eq(1).html(
-                    '<input class="comment-modify-input" type="text" name="" value="' +
-                    $(commentArr[loop]).children("td").eq(1).text() + '">');
-
-                // 댓글 수정 완료버튼 load
-                $(commentArr[loop]).children("td").eq(2).html(
-                    '<input class="comment-modify-push" type="button" name="" value="퓨슝!">');
-
-                // 수정 완료 ajax 이벤트 등록
-                $(commentArr[loop]).children("td").eq(2).children("input").click(function() {
-                    $.ajax({
-                        url: "http://dsm2015.cafe24.com:10419",
-                        type: "POST",
-                        data: JSON.stringify({
-                            "id": id,
-                            "content": content
-                        }),
-                        beforeSend: function(xhr) {
-                            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                            xhr.setRequestHeader("command", "214");
-                        },
-                        success: function() {
-                            // 다시 qna 글 페이지를 로드해야 할듯
-                            this.draw();
-                        }
-                    });
-                })
-
+                $.ajax({
+                    url: "dsm2015.cafe24.com:10419",
+                    type: "POST",
+                    data: {
+                        "id": id,
+                        "content": content
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                        xhr.setRequestHeader("command", "214");
+                    },
+                    success: function() {
+                        // 다시 qna 글 페이지를 로드해야 할듯
+                        this.draw();
+                    }
+                });
             })
 
             // 댓글 삭제
             $(commentArr[loop]).children("td").children("span.comment-delete").click(function() {
                 // 댓글 삭제
                 $.ajax({
-                    url: "http://dsm2015.cafe24.com:10419",
+                    url: "dsm2015.cafe24.com:10419",
                     type: "POST",
-                    data: JSON.stringify({
+                    data: {
                         "no": $(commentArr[loop]).children("td.hide-no").text(),
-                    }),
+                    },
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
                         xhr.setRequestHeader("command", "314");
@@ -2619,6 +2040,11 @@ function QnaArticlePage(no) {
                 });
             })
         }
+
+        $(".comment table td span.comment-delete").click(function() {
+
+        })
+
     }
 
     pageStack.push(this);
@@ -2627,631 +2053,21 @@ function QnaArticlePage(no) {
 
 QnaArticlePage.prototype = new ServerPage();
 
-
-
-
-// title question_content writer
-function QnaQuestionModifyPage(no, title, content) {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1><input class="border-less-input title-input" type="text" name="title" placeholder="제목 입력" /></h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea',
-            init_instance_callback: function(editor) {
-                console.log("Editor: " + editor.id + " is now initialized.");
-                tinymce.activeEditor.setContent(content);
-            }
-        });
-
-        // title input에 기존 title set
-        console.log(title);
-        $(".frametitle h1 input.title-input").val(title);
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "title": $(".frametitle h1 input.title-input").val(),
-                    "question_content": tinymce.get('content').getContent(),
-                    "writer": name
-                }),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                    xhr.setRequestHeader("command", "212");
-                },
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new QnaArticlePage("qna", no);
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-
-    this.draw();
-    pageStack.push();
-}
-
-QnaQuestionModifyPage.prototype = new NonAjaxPage();
-
-
-
-function QnaQuestionWritePage() {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1><input class="border-less-input title-input" type="text" name="title" placeholder="제목 입력" /></h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
-                type: "POST",
-                data: JSON.stringify({
-                    "title": $(".frametitle h1 input.title-input").val(),
-                    "question_content": tinymce.get('content').getContent(),
-                    "writer": name
-                }),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                    xhr.setRequestHeader("command", "212");
-                },
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new QnaArticlePage("qna", no);
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-
-    this.draw();
-    pageStack.push();
-}
-
-QnaQuestionWritePage.prototype = new NonAjaxPage();
-
-function QnaAnswerWritePage(no) {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1>Answer</h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/qna",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "content": tinymce.get('content').getContent(),
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new QnaArticlePage("qna", no);
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-    this.draw();
-    pageStack.push();
-}
-
-QnaAnswerWritePage.prototype = new NonAjaxPage();
-
-// title content room writer
-function FacilityQuestionWritePage() {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1><input class="border-less-input title-input" type="text" name="title" placeholder="제목 입력" />' +
-        '<input class="border-less-input title-input-room" type="text" name="title" placeholder="호실 입력" /></h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
-                type: "POST",
-                data: JSON.stringify({
-                    "title": $(".frametitle h1 input.title-input").val(),
-                    "room": $(".frametitle h1 input.title-input-room").val(),
-                    "content": tinymce.get('content').getContent(),
-                    "writer": name
-                }),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                    xhr.setRequestHeader("command", "117");
-                },
-                success: function() {
-                    // 다시 facility 리스트 페이지를 로드해야 할듯
-                    new FacilityListPage();
-                }
-            });
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-
-    this.draw();
-    pageStack.push();
-}
-
-FacilityQuestionWritePage.prototype = new NonAjaxPage();
-
-function FacilityResultWritePage(no) {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1>Result</h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/facility",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "content": tinymce.get('content').getContent(),
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new FacilityArticlePage("facility", no);
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-    this.draw();
-    pageStack.push();
-}
-
-FacilityResultWritePage.prototype = new NonAjaxPage();
-
-function NoticeWritePage() {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1><input class="border-less-input title-input" type="text" name="title" placeholder="제목 입력" /></h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/notice",
-                type: "POST",
-                data: JSON.stringify({
-                    "title": $(".articlecontainer .frametitle input.title-input").val(),
-                    "content": tinymce.get('content').getContent()
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new NoticeListPage();
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-    this.draw();
-    pageStack.push();
-}
-
-NoticeWritePage.prototype = new NonAjaxPage();
-
-function RuleWritePage() {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1><input class="border-less-input title-input" type="text" name="title" placeholder="제목 입력" /></h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea'
-        });
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/rule",
-                type: "POST",
-                data: JSON.stringify({
-                    "title": $(".articlecontainer .frametitle input.title-input").val(),
-                    "content": tinymce.get('content').getContent()
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new RuleListPage();
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-    this.draw();
-    pageStack.push();
-}
-
-RuleWritePage.prototype = new NonAjaxPage();
-
-
-
-// n t c
-
-
-function FacilityQuestionModifyPage(no, title, content) {
-    this.form =
-        '<div class="frame left articlecontainer">' +
-        '<form action="/admin/writepost" method="post" id="form">' +
-        '<div class="frametitle">' +
-        '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="back()">' +
-        '<h1><input class="border-less-input title-input" type="text" name="title" placeholder="제목 입력" /></h1>' +
-        '<div class="underline puple">' +
-        '</div>' +
-        '</div>' +
-        '<textarea style="height: 300px; width: 80%;" name="content"> </textarea>' +
-        '<div style="right: 0;" class = "margin-left-7">' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin push">작성</a>' +
-        '<a class="btn blue btn-effect btn-hover-blue btn-margin cancle">취소</a>' +
-        '</div>' +
-        '</form>' +
-        '</div>';
-
-    this.setEvent = function() {
-        // text editor 설정
-        tinymce.init({
-            selector: 'textarea',
-            init_instance_callback: function(editor) {
-                console.log("Editor: " + editor.id + " is now initialized.");
-                tinymce.activeEditor.setContent(content);
-            }
-        });
-
-        // title input에 기존 title set
-        console.log(title);
-        $(".frametitle h1 input.title-input").val(title);
-
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com:10419",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "title": $(".frametitle h1 input.title-input").val(),
-                    "content": tinymce.get('content').getContent(),
-                }),
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-                    xhr.setRequestHeader("command", "216");
-                },
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new FacilityArticlePage("facility", no);
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-
-    this.draw();
-    pageStack.push();
-}
-FacilityQuestionModifyPage.prototype = new NonAjaxPage();
-
-
-function NoticeModifyPage(no) {
-    this.type = "notice";
-    this.action = "view";
-
-    this.setEvent = function() {
-        // 전송, 취소 이벤트
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/notice",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "title": $(".frametitle h1 input.title-input").val(),
-                    "content": tinymce.get('content').getContent()
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new NoticeArticlePage(no);
-                }
-            });
-
-        });
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        });
-    };
-}
-
-NoticeModifyPage.prototype = new ServerPage();
-
-function RuleModifyPage(no) {
-    this.type = "rule";
-    this.action = "view";
-    this.no = no;
-
-    this.setEvent = function() {
-        // 전송, 취소 이벤트
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/rule",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "title": $(".frametitle h1 input.title-input").val(),
-                    "content": tinymce.get('content').getContent()
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new RuleArticlePage(no);
-                }
-            });
-
-        });
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        });
-    }
-}
-
-RuleModifyPage.prototype = new ServerPage();
-
-
-function QnaAnswerModifyPage(no) {
-    this.type = "rule";
-    this.action = "view";
-    this.no = no;
-
-    this.setEvent = function() {
-        // 전송, 취소 이벤트
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/qna",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "content": tinymce.get('content').getContent()
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new QnaArticlePage(no);
-                }
-            });
-
-        });
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        });
-    }
-}
-QnaAnswerModifyPage.prototype = new ServerPage();
-
-
-function FacilityResultModifyPage(no) {
-    this.type = "rule";
-    this.action = "view";
-    this.no = no;
-
-    this.setEvent = function() {
-        // 전송, 취소 이벤트
-        // 전송버튼 이벤트
-        $(".articlecontainer a.push").click(function() {
-            $.ajax({
-                url: "http://dsm2015.cafe24.com/update/qna",
-                type: "POST",
-                data: JSON.stringify({
-                    "no": no,
-                    "content": tinymce.get('content').getContent()
-                }),
-                success: function() {
-                    // 다시 qna 글 페이지를 로드해야 할듯
-                    new QnaArticlePage(no);
-                }
-            });
-
-        })
-
-        // 취소버튼 이벤트
-        $(".articlecontainer a.cancle").click(function() {
-            alert("cancle");
-            // 다시 전 글로 돌아가기
-            prevPage();
-        })
-    }
-    this.draw();
-    pageStack.push();
-}
-FacilityResultModifyPage.prototype = new ServerPage();
+// meal 형식
+// "result": {
+//   "Meals": [
+//     {
+//       "Allergy": [],
+//       "Menu": []
+//     },
+//     {
+//       "Allergy": [],
+//       "Menu": []
+//     },
+//     {
+//       "Allergy": [],
+//       "Menu": []
+//     }
+//   ],
+//   "Date": "2017-02-22"
+// }

@@ -26,7 +26,7 @@ public class UserJobController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody String login(HttpServletRequest request, HttpServletResponse response) {
-		String recapcha = request.getParameter("g-recaptcha-response");
+		String recapcha = request.getParameter("recapcha");
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		boolean autoLogin = Boolean.valueOf(request.getParameter("autoLogin"));
@@ -34,6 +34,18 @@ public class UserJobController {
 			return new JsonBuilder(400,"").toString();
 		} else
 			return userDAO.login(request, response, id, password, autoLogin, recapcha);
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public @ResponseBody String register(HttpServletRequest request, HttpServletResponse response) {
+		String recapcha = request.getParameter("recapcha");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		boolean autoLogin = Boolean.valueOf(request.getParameter("autoLogin"));
+		if (Guardian.checkParameters(recapcha, id, password, autoLogin)) {
+			return new JsonBuilder(400,"").toString();
+		} else
+			return userDAO.register(request, response, id, password, autoLogin, recapcha);
 	}
 
 	@RequestMapping(value = "/rename", method = RequestMethod.POST)

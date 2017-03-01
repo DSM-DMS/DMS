@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @rlatjdfo112
+ Sign out
+ Unwatch 4
+  Star 1
+ Fork 0 rlatjdfo112/DSM-Dormitory-System
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: back Find file Copy pathDSM-Dormitory-System/web/DMS-Spring-Web-Server/src/main/webapp/WEB-INF/views/index.jsp
+dd8c316  2 days ago
+@rlatjdfo112 rlatjdfo112 devloy to server
+1 contributor
+RawBlameHistory     
+131 lines (125 sloc)  5.07 KB
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -128,3 +146,5 @@
 </body>
 
 </html>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help

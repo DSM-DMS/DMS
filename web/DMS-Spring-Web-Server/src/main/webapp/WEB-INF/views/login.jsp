@@ -16,7 +16,7 @@
         <input type="password" name="password" id="login_pw" placeholder="PW">
         <div id="auto_login"><input type="checkbox" name="autoLogin" id="autoLogin">자동 로그인</div>
         <div id="recaptcha" class="g-recaptcha" data-sitekey="6LdPphUUAAAAALXbBtZQa5Jtau60XENpmPX8YG9-"></div>
-        <input type="submit" id="login" value="LOGIN">
+        <div id="login">LOGIN</div>
       </form>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
