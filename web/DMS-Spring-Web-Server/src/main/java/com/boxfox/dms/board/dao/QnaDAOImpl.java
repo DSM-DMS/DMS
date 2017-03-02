@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.Comment;
 import com.boxfox.dms.board.dto.QnaPostContext;
-import com.boxfox.dms.mapper.NoticeMapper;
-import com.boxfox.dms.mapper.QnaMapper;
+import com.boxfox.dms.board.mapper.NoticeMapper;
+import com.boxfox.dms.board.mapper.QnaMapper;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO{

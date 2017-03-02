@@ -3,79 +3,100 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.boxfox.dms.mapper.FacilityMapper">
+<mapper namespace="com.boxfox.dms.mapper.ApplyMapper">
 
-	<resultMap type="com.boxfox.dms.apply.dto.AfterSchoolApplyDTO" id="AfterSchoolResultList">
-        <result property="title" column="title" />
-    </resultMap>
-    
-    <resultMap type="com.boxfox.dms.apply.dto.ExtensionApplyDTO" id="ExtensionResultList">
-        <result property="title" column="title" />
-    </resultMap>
-    
-    <resultMap type="com.boxfox.dms.apply.dto.OutApplyDTO" id="OutResultList">
-        <result property="title" column="title" />
-    </resultMap>
-    
-    <resultMap type="com.boxfox.dms.apply.dto.RewardApplyDTO" id="RewardResultList">
-        <result property="title" column="title" />
-    </resultMap>
-    
-    <resultMap type="com.boxfox.dms.apply.dto.StayApplyDTO" id="StayResultList">
-        <result property="title" column="title" />
-    </resultMap>
-    
-    <resultMap type="com.boxfox.dms.apply.dto.ExtensionMapDTO" id="MapResultList">
-        <result property="room" column="room" />
-        <result property="name" column="name" />
-        <result property="map" column="map" />
-    </resultMap>
-    
-    <insert id="extensionApply" parameterType="com.boxfox.dms.apply.dto.ExtensionApplyDTO">
-    	REPLACE into extension_apply (id, room, seat) values(#{id}, #{room}, #{seat})
-    </insert>
-    
-    <update id="afterschoolApply" parameterType="com.boxfox.dms.apply.dto.AfterSchoolApplyDTO">
-    	REPLACE into afterschool_apply (id, no) values(#{id}, #{no})
-    </update>
-    
-    <update id="rewardscoreApply" parameterType="com.boxfox.dms.apply.dto.RewardApplyDTO">
-    	REPLACE into rewardscore_apply (id, target, content) values(#{id}, #{target}, #{content})
-    </update>
-    
-    <update id="stayApply" parameterType="com.boxfox.dms.apply.dto.StayApplyDTO">
-    	REPLACE into stay_apply (id, value, data) values(#{id}, #{value}, #{data})
-    </update>
-    
-    <update id="goingoutApply" parameterType="com.boxfox.dms.apply.dto.OutApplyDTO">
-    	REPLACE into goingout_apply (id, date, reason) values(#{id}, #{date}, #{reason})
-    </update>
-    
-    <select id="lookupAfterSchoolApply" parameterType="java.lang.String" resultMap="AfterSchoolResultList">
-    	select * from afterschool_apply where id=#{id}
-    </select>
-    
-    <select id="lookupExtensionApply" parameterType="java.lang.String" resultMap="ResultList">
-    	select * from extension_apply where id=#{id}
-    </select>
-    
-    <select id="lookupExtensionApplyAtRoom" parameterType="java.lang.Integer" resultMap="ExtensionResultList">
-    	select * from extension_apply where room=#{room}
-    </select>
-    
-    <select id="lookupOutApply" parameterType="java.lang.String" resultMap="OutResultList">
-    	select * from goingout_apply where id=#{id}
-    </select>
-    
-    <select id="lookupRewardApply" parameterType="java.lang.String" resultMap="RewardResultList">
-    	select * from afterschool_apply where id=#{id}
-    </select>
-    
-    <select id="lookupStayApply" parameterType="java.lang.String" resultMap="StayResultList">
-    	select * from stay_apply where id=#{id}
-    </select>
-    
-    <select id="getMapDatas" resultMap="MapResultList">
-    	select * from extension_map
-    </select>
+	<resultMap type="com.boxfox.dms.apply.dto.AfterSchoolApplyDTO"
+		id="AfterSchoolResultList">
+		<result property="title" column="title" />
+	</resultMap>
+
+	<resultMap type="com.boxfox.dms.apply.dto.ExtensionApplyDTO"
+		id="ExtensionResultList">
+		<result property="title" column="title" />
+	</resultMap>
+
+	<resultMap type="com.boxfox.dms.apply.dto.OutApplyDTO" id="OutResultList">
+		<result property="title" column="title" />
+	</resultMap>
+
+	<resultMap type="com.boxfox.dms.apply.dto.RewardApplyDTO" id="RewardResultList">
+		<result property="title" column="title" />
+	</resultMap>
+
+	<resultMap type="com.boxfox.dms.apply.dto.StayApplyDTO" id="StayResultList">
+		<result property="title" column="title" />
+	</resultMap>
+
+	<resultMap type="com.boxfox.dms.apply.dto.ExtensionMapDTO"
+		id="MapResultList">
+		<result property="room" column="room" />
+		<result property="name" column="name" />
+		<result property="map" column="map" />
+	</resultMap>
+
+	<resultMap type="java.util.HashMap" id="SeatResultMap">
+		<result property="key" column="seat" />
+		<result property="value" column="name" />
+	</resultMap>
+
+	<insert id="extensionApply" parameterType="com.boxfox.dms.apply.dto.ExtensionApplyDTO">
+		REPLACE into extension_apply (id, room, seat) values(#{id}, #{room}, #{seat})
+	</insert>
+
+	<update id="afterschoolApply" parameterType="com.boxfox.dms.apply.dto.AfterSchoolApplyDTO">
+		REPLACE into afterschool_apply (id, no) values(#{id}, #{no})
+	</update>
+
+	<update id="rewardscoreApply" parameterType="com.boxfox.dms.apply.dto.RewardApplyDTO">
+		REPLACE into rewardscore_apply (id, target, content) values(#{id}, #{target},
+		#{content})
+	</update>
+
+	<update id="stayApply" parameterType="com.boxfox.dms.apply.dto.StayApplyDTO">
+		REPLACE into stay_apply (id, value, data) values(#{id}, #{value}, #{data})
+	</update>
+
+	<update id="goingoutApply" parameterType="com.boxfox.dms.apply.dto.OutApplyDTO">
+		REPLACE into goingout_apply (id, date, reason) values(#{id}, #{date},
+		#{reason})
+	</update>
+
+	<select id="lookupAfterSchoolApply" parameterType="java.lang.String"
+		resultMap="AfterSchoolResultList">
+		select * from afterschool_apply where id=#{id}
+	</select>
+
+	<!-- <select id="lookupExtensionApply" parameterType="java.lang.String"
+		resultMap="ResultList">
+		select * from extension_apply where id=#{id}
+	</select> -->
+
+	<select id="lookupExtensionApplyAtRoom" parameterType="java.lang.Integer"
+		resultMap="ExtensionResultList">
+		select * from extension_apply where room=#{room}
+	</select>
+
+	<select id="lookupOutApply" parameterType="java.lang.String"
+		resultMap="OutResultList">
+		select * from goingout_apply where id=#{id}
+	</select>
+
+	<select id="lookupRewardApply" parameterType="java.lang.String"
+		resultMap="RewardResultList">
+		select * from afterschool_apply where id=#{id}
+	</select>
+
+	<select id="lookupStayApply" parameterType="java.lang.String"
+		resultMap="StayResultList">
+		select * from stay_apply where id=#{id}
+	</select>
+
+	<select id="getMapdatas" resultMap="MapResultList">
+		select * from extension_map
+	</select>
+	
+	<select id="getSeatDatas" resultMap="SeatResultMap">
+		select seat, name from extension_apply where class = #{room}
+	</select>
+
 </mapper>

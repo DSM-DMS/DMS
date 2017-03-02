@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.PrimaryPostContext;
-import com.boxfox.dms.mapper.QnaMapper;
-import com.boxfox.dms.mapper.RuleMapper;
+import com.boxfox.dms.board.mapper.QnaMapper;
+import com.boxfox.dms.board.mapper.RuleMapper;
 
 @Repository
 public class RuleDAOImpl implements RuleDAO {

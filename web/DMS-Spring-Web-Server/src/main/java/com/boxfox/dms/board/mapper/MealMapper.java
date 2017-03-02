@@ -1,4 +1,4 @@
-package com.boxfox.dms.mapper;
+package com.boxfox.dms.board.mapper;
 
 import com.boxfox.dms.meal.dto.DayMealDTO;
 import com.boxfox.dms.meal.dto.DayMealTest;

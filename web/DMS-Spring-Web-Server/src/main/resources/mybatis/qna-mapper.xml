@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.boxfox.dms.mapper.QnaMapper">
+<mapper namespace="com.boxfox.dms.board.mapper.QnaMapper">
 
     <resultMap type="com.boxfox.dms.board.dto.QnaPostContext" id="ResultList">
         <result property="title" column="title" />

@@ -1,6 +1,7 @@
 package com.boxfox.dms.apply.dto;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 public class ExtensionMapDTO {
@@ -29,6 +30,14 @@ public class ExtensionMapDTO {
 
 	public void setMap(String map) {
 		this.map = map;
+	}
+	
+	public JSONObject toJSONObject(){
+		JSONObject obj = new JSONObject();
+		obj.put("Name", getName());
+		obj.put("Room", getRoom());
+		obj.put("Data", getMap());
+		return obj;
 	}
 
 }

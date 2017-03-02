@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.PrimaryPostContext;
-import com.boxfox.dms.mapper.FacilityMapper;
-import com.boxfox.dms.mapper.FaqMapper;
+import com.boxfox.dms.board.mapper.FacilityMapper;
+import com.boxfox.dms.board.mapper.FaqMapper;
 
 @Repository
 public class FaqDAOImpl implements FaqDAO {

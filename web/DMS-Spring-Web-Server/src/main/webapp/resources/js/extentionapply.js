@@ -13,7 +13,6 @@ function getBorderSize() {
 }
 
 var borderSize = getBorderSize();
-console.log(borderSize);
 
 function drawSeat(seatArr, borderSize) {
     var selected;
@@ -88,7 +87,7 @@ function drawSeat(seatArr, borderSize) {
     }
 }
 
-drawSeat(gaon2, "7.5px");
+drawSeat(map[0].Data, "7.5px");
 $(".extentionapply div.class-selecter-div select#class-select").change(function() {
     //change event;
     var select_name = $(this).children("option:selected").text();

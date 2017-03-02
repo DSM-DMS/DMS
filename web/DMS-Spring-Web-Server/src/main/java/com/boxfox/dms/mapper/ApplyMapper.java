@@ -1,15 +1,15 @@
 package com.boxfox.dms.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.boxfox.apply.dto.ExtensionStudyDTO;
 import com.boxfox.dms.apply.dto.*;
 
 public interface ApplyMapper {
 
-	public void lookupExtensionApply(@Param("id") String id);
+	//public void lookupExtensionApply(@Param("id") String id);
 
 	public void extensionApply(ExtensionApplyDTO apply);
 
@@ -34,5 +34,7 @@ public interface ApplyMapper {
 	public List<StayApplyDTO> lookupStayApply(@Param("id") String id);
 
 	public List<ExtensionMapDTO> getMapdatas();
+	
+	public HashMap<Integer, String> getSeatDatas(@Param("room") int room);
 
 }

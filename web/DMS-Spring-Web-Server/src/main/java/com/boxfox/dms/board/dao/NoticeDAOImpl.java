@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.DatePostContext;
-import com.boxfox.dms.mapper.FaqMapper;
-import com.boxfox.dms.mapper.NoticeMapper;
+import com.boxfox.dms.board.mapper.FaqMapper;
+import com.boxfox.dms.board.mapper.NoticeMapper;
 
 @Repository
 public class NoticeDAOImpl implements NoticeDAO{

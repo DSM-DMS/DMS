@@ -1,8 +1,11 @@
 package com.boxfox.dms.apply.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -94,9 +97,37 @@ public class ApplyDAOImpl implements ApplyDAO{
 	}
 
 	@Override
-	public List<ExtensionMapDTO> getMapdatas() {
-		// TODO Auto-generated method stub
-		return null;
+	public JSONArray getMapdatas() {
+		ApplyMapper mapper = sqlSession.getMapper(ApplyMapper.class);
+		List<ExtensionMapDTO> list = mapper.getMapdatas();
+		JSONArray arr = new JSONArray();
+		for(ExtensionMapDTO map : list)
+			arr.add(map.toJSONObject());
+		System.out.println(arr.size());
+		process(mapper, arr);
+		return arr;
+	}
+	
+	private void process(ApplyMapper mapper, JSONArray roomArr) {
+		for (int r = 0; r < roomArr.size(); r++) {
+			HashMap<Integer, String> map = mapper.getSeatDatas((int)((JSONObject)roomArr.get(r)).get("Room"));
+			JSONArray arr = (JSONArray)((JSONObject)roomArr.get(r)).get("Data");
+			int count = 1;
+			for (int i = 0; i < arr.size(); i++) {
+				JSONArray row = (JSONArray)arr.get(i);
+				for (int k = 0; k < row.size(); k++) {
+					if (((long)row.get(k)) == 1) {
+						row.remove(k);
+						if (map.get(count) != null) {
+							row.add(k, map.get(count));
+						} else {
+							row.add(k, count);
+						}
+						count++;
+					}
+				}
+			}
+		}
 	}
 	
 

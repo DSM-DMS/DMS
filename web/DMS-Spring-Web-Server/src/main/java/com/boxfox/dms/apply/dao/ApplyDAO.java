@@ -2,6 +2,8 @@ package com.boxfox.dms.apply.dao;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 import com.boxfox.dms.apply.dto.*;
 
 public interface ApplyDAO {
@@ -28,6 +30,6 @@ public interface ApplyDAO {
 	
 	public List<StayApplyDTO> lookupStayApply(String id);
 	
-	public List<ExtensionMapDTO> getMapdatas();
+	public JSONArray getMapdatas();
 
 }
