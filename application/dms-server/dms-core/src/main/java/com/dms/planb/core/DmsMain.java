@@ -1,6 +1,6 @@
 package com.dms.planb.core;
 
-import java.io.File;
+
 
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
@@ -23,6 +23,8 @@ import java.io.File;
  * -- Libraries -- 
  * @see pom.xml
  */
+
+import java.io.File;
 
 import java.sql.SQLException;
 import java.util.Calendar;
