@@ -55,6 +55,12 @@
 			<artifactId>vertx-web</artifactId>
 			<version>${vertx.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.vertx/vertx-lang-groovy -->
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-lang-groovy</artifactId>
+			<version>${vertx.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-transport</artifactId>

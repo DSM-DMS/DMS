@@ -12,8 +12,7 @@ package com.dms.planb.core;
 import java.sql.SQLException;
 
 import org.boxfox.dms.secure.SecureManager;
-import org.boxfox.dms.utilities.actions.ActionRegister;
-import org.boxfox.dms.utilities.actions.Actionable;
+import org.boxfox.dms.utilities.actions.RouteRegister;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
@@ -24,6 +23,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.ext.web.Router;
 
 /**
  * @author JoMingyu
@@ -69,6 +69,7 @@ class DmsVerticle extends AbstractVerticle {
 		secureManager = SecureManager.getInstance();
 		
 		server = vertx.createHttpServer();
+		RouteRegister.registerRouters(Router.router(vertx), "org.boxfox.dms.secure", "com.dms.planb");
 		server.requestHandler(request -> {
 			Log.l("Received request : " + request.host());
 			
