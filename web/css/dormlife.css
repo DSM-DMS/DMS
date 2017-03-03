@@ -1,0 +1,75 @@
+@import "remote.css";
+@import "table.css";
+
+body {
+    background-color: rgb(142, 68, 173);
+}
+
+.main {
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 20vh;
+    left: 16%;
+    height: 70%;
+    width: 80%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+
+.frame {
+    position: relative;
+    width: 48%;
+    height: 100%;
+    float: left;
+    /*overflow-x: hidden;*/
+}
+
+.frame h1 {
+    margin-left: 7%;
+    margin-bottom: 1%;
+}
+
+.frame ul {
+    position: relative;
+    margin-left: 7%;
+    padding-left: 0%;
+}
+
+.frame ul li {
+    list-style-type: none;
+    margin: 4% 0%;
+}
+
+.frame ul li .title {
+    display: inline;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.frame ul li p.date {
+    /*display: inline;*/
+    color: gray;
+    float: right;
+    vertical-align: bottom;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+.frame .frametitle {
+    position: relative;
+    height: 12%;
+}
+
+.underline {
+    position: relative;
+    right: 0%;
+    height: 8px;
+    margin-left: 7%;
+    margin-right: 0%;
+    width: 93%;
+    background: rgb(142, 68, 173);
+}
+
+.right {
+    text-align: center;
+}
