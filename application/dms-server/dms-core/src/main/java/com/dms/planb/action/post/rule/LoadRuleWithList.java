@@ -2,54 +2,63 @@ package com.dms.planb.action.post.rule;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.Sender;
+import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@ActionRegistration(command = Commands.LOAD_RULE)
+@RouteRegistration(path="post/rule", method={HttpMethod.GET})
 public class LoadRuleWithList implements Handler<RoutingContext> {
-	EasyJsonObject tempObject;
-	SafeResultSet resultSet;
-	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		// Both list and content
-		if(requestObject.isEmpty()) {
-			resultSet = database.executeQuery("SELECT * FROM rule");
-			/*
-			 * Responses all of posts
-			 */
-		} else {
-			int page = requestObject.getInt("page");
-			int limit = requestObject.getInt("limit");
-			
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet = null;
+		EasyJsonObject responseObject = new EasyJsonObject();
+		EasyJsonObject tempObject = new EasyJsonObject();
+		EasyJsonArray tempArray = new EasyJsonArray();
+		
+		int page = Integer.parseInt(context.request().getParam("page"));
+		int limit = Integer.parseInt(context.request().getParam("limit"));
+		
+		try {
 			resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
-		}
 		
-		int postCount = 0;
-		if(resultSet.next()) {
-			do {
-				tempObject = new EasyJsonObject();
-							
-				tempObject.put("no", resultSet.getInt("no"));
-				tempObject.put("title", resultSet.getString("title"));
-				tempObject.put("content", resultSet.getString("content"));
-							
-				array.add(tempObject);
+			int postCount = 0;
+			if(resultSet.next()) {
+				do {
+					tempObject = new EasyJsonObject();
+								
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("content", resultSet.getString("content"));
+								
+					tempArray.add(tempObject);
+					
+					postCount++;
+				} while(resultSet.next());
 				
-				postCount++;
-			} while(resultSet.next());
+				responseObject.put("num_of_post", postCount);
+				responseObject.put("result", responseObject);
+				
+				context.response().setStatusCode(200).end();
+				context.response().end(responseObject.toString());
+				context.response().close();
+			} else {
+				context.response().setStatusCode(404).end();
+				context.response().close();
+			}
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
 			
-			responseObject.put("num_of_post", postCount);
-			responseObject.put("result", array);
-		} else {
-			responseObject.put("status", 404);
+			Log.l("SQLException");
 		}
-		
-		return responseObject;
 	}
 }

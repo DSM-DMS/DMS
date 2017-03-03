@@ -2,49 +2,33 @@ package com.dms.planb.action.post.rule;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@ActionRegistration(command = Commands.UPLOAD_RULE)
+@RouteRegistration(path="post/rule", method={HttpMethod.POST})
 public class UploadRule implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Rules of dormitory
-		 * 
-		 * Table Name : rule
-		 * 
-		 * no INT(11) PK NN AI
-		 * title VARCHAR(45) NN
-		 * content VARCHAR(5000) NN
-		 */
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
 		
-		String title = requestObject.getString("title");
-		String content = requestObject.getString("content");
+		String title = context.request().getParam("title");
+		String content = context.request().getParam("content");
 		
-		int status = 1;
-		
-		if(requestObject.containsKey("no")) {
-			/*
-			 * Judge modify
-			 */
-			int no = requestObject.getInt("no");
+		try {
+			database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
 			
-			database.executeUpdate("UPDATE rule SET title='", title, "' WHERE no=", no);
-			database.executeUpdate("UPDATE rule SET content='", content, "' WHERE no=", no);
-		} else {
-			/*
-			 * Judge upload
-			 */
-			status = database.executeUpdate("INSERT INTO rule(title, content) VALUES('", title, "', '", content, "')");
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-				
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

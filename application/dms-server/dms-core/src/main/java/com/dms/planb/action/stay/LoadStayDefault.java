@@ -16,9 +16,9 @@ import io.vertx.ext.web.RoutingContext;
 public class LoadStayDefault implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet = null;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		DataBase database = DataBase.getInstance();
 		
 		String id = context.request().getParam("id");
 		
