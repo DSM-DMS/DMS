@@ -7,6 +7,7 @@ import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -36,7 +37,7 @@ public class LoadStayDefault implements Handler<RoutingContext> {
 				context.response().close();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.l("SQLException");
 		}
 	}
 }

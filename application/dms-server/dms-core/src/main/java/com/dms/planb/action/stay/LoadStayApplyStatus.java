@@ -7,6 +7,7 @@ import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -51,11 +52,14 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
 				responseObject.put("value", resultSet.getInt("value"));
 				
 				context.response().setStatusCode(200).end();
+				context.response().end(responseObject.toString());
+				context.response().close();
 			} else {
-				responseObject.put("status", 404);
+				context.response().setStatusCode(404).end();
+				context.response().close();
 			}
 		} catch(SQLException e) {
-			
+			Log.l("SQLException");
 		}
 	}
 }
