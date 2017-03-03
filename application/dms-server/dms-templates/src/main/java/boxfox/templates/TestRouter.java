@@ -20,20 +20,13 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegister(Path="test/aa")
-public class TestRouter implements Handler<RoutingContext>
-{
+@RouteRegister(Path = "test/aa")
+public class TestRouter implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
-		Configuration cfg = DmsConfiguration.getConfiguration();
 
 		Map<String, Object> input = new HashMap<String, Object>();
 		input.put("title", "Vogella example");
 
-		Template template = cfg.getTemplate("helloworld.ftl");
-
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-		template.process(input, writer);
-		System.out.println(out.toString());
+		System.out.println(new DmsTemplate("hello").process(input));
 	}
 }
