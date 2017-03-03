@@ -2,17 +2,16 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@ActionRegistration(command = Commands.APPLY_STAY)
+@RouteRegistration(path="apply/stay", method={HttpMethod.PUT})
 public class ApplyStay implements Handler<RoutingContext> {
-	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		/**
 		 * Apply stay - about value of date
 		 * 
@@ -28,15 +27,25 @@ public class ApplyStay implements Handler<RoutingContext> {
 		 * Saturday dormitory coming : 3
 		 * Stay : 4
 		 */
-		String id = requestObject.getString("id");
-		int value = requestObject.getInt("value");
-		String week = requestObject.getString("week");
+	@Override
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
 		
-		database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
-		int status = database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
+		String id = context.request().getParam("id");
+		int value = Integer.parseInt(context.request().getParam("value"));
+		String week = context.request().getParam("week");
 		
-		responseObject.put("status", status);
-		
-		return responseObject;
+		try {
+			database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
+			database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+
+			Log.l("SQLException");
+		}
 	}
 }

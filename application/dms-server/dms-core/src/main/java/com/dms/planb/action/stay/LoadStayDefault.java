@@ -3,7 +3,6 @@ package com.dms.planb.action.stay;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
@@ -37,6 +36,9 @@ public class LoadStayDefault implements Handler<RoutingContext> {
 				context.response().close();
 			}
 		} catch (SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
 			Log.l("SQLException");
 		}
 	}
