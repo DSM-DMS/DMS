@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.boxfox.dms.board.mapper.FaqMapper">
+
+    <resultMap type="com.boxfox.dms.board.dto.PrimaryPostContext" id="PostResultList">
+        <result property="title" column="title" />
+        <result property="no" column="no" />
+        <result property="content" column="content" />
+    </resultMap>
+
+    <select id="getPost" resultMap="PostResultList">
+        SELECT * FROM faq WHERE `no`=#{number}
+    </select>
+    
+    <insert id="writePost" parameterType="com.boxfox.dms.board.dto.PrimaryPostContext">
+    	INSERT into faq (title, content) values(#{title}, #{content})
+    </insert>
+    
+    <update id="editPost" parameterType="com.boxfox.dms.board.dto.PrimaryPostContext">
+    	update faq set title=#{title}, content=#{content} where no=#{no}
+    </update>
+    
+    <update id="deletePost" >
+    	delete from faq WHERE `no`=#{no}
+    </update>
+    
+</mapper>

@@ -8,20 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.FacilityReportContext;
-import com.boxfox.dms.mapper.FacilityMapper;
+import com.boxfox.dms.board.mapper.FacilityMapper;
 
 @Repository
 public class FacilityDAOImpl implements FacilityDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<FacilityReportContext> getPostsAtPage(int page) {
-		FacilityMapper facilityMapper = sqlSession.getMapper(FacilityMapper.class);
-		List<FacilityReportContext> list = facilityMapper.getPostsAtPage(page);
-		return list;
-	}
 
 	@Override
 	public FacilityReportContext getPost(int number) {
@@ -70,12 +63,9 @@ public class FacilityDAOImpl implements FacilityDAO{
 	}
 
 	@Override
-	public void editResult(int no, String result) {
+	public int deletePost(int number) {
 		FacilityMapper facilityMapper = sqlSession.getMapper(FacilityMapper.class);
-		FacilityReportContext post = new FacilityReportContext();
-		post.setNo(no);
-		post.setResult(result);
-		facilityMapper.editResult(post);
+		return facilityMapper.deletePost(number);
 	}
 
 

@@ -6,28 +6,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.boxfox.dms.mapper.UserMapper">
 
 	<resultMap type="com.boxfox.dms.users.dto.UserDTO" id="LoginResultSessions">
-        <result property="id" column="id" />
-        <result property="password" column="password" />
-    </resultMap>
-    
-    <resultMap type="java.lang.String" id="sessionsResult"> 
-   <result property="" column="session_key"/> 
- </resultMap> 
+		<result property="id" column="id" />
+		<result property="password" column="password" />
+	</resultMap>
 
-	<select id="login" parameterType="com.boxfox.dms.users.dto.UserDTO" resultMap="sessionsResult">
-        SELECT session_key FROM account WHERE(id=#{id}) AND (password=#{password})
-    </select>
-    
-    <update id="rename" parameterType="com.boxfox.dms.users.dto.UserRenameDTO">
-        UPDATE account set id=#{newId} WHERE(id=#{id}) AND (password=#{password})
-    </update>
-    
-    <update id="modifyPassword" parameterType="com.boxfox.dms.users.dto.UserModifyPasswordDTO">
-        UPDATE account set password=#{newPassword} WHERE(id=#{id}) AND (password=#{password})
-    </update>
-    
-    <select id="checkIdExist" parameterType="String" resultType="java.lang.Integer">
-        SELECT count(*) FROM account WHERE(id=#{id})
-    </select>
-    
+	
+	<resultMap type="com.boxfox.dms.users.dto.UserDataDTO" id="residualResult">
+		<result property="id" column="id" />
+		<result property="number" column="number" />
+		<result property="status" column="status" />
+		<result property="residualDefault" column="value" />
+	</resultMap>
+	
+
+	<select id="login" parameterType="com.boxfox.dms.users.dto.UserDTO"
+		resultType="java.lang.String">
+		SELECT id FROM account WHERE(id=#{id}) AND (password=#{password})
+	</select>
+
+	<select id="loginAdmin" parameterType="com.boxfox.dms.users.dto.UserDTO"
+		resultType="java.lang.String">
+		SELECT id FROM account WHERE(id=#{id}) AND (password=#{password})
+	</select>
+
+	<select id="residual" resultMap="residualResult">
+		SELECT student_data.id, number, status, value FROM student_data right join stay_apply_default on student_data.id = stay_apply_default.id
+	</select>
+	
+	<select id="checkAdminSession" resultType="java.lang.String">
+		SELECT id FROM teacher_account where session_key = #{sessionKey}
+	</select>
+	
+	<select id="createAdminSession" resultType="java.lang.String">
+		UPDATE teacher_account session_key = #{sessionKey} where id = #{id}
+	</select>
+	
+	<select id="checkUserSession" resultType="java.lang.String">
+		SELECT id FROM account where session_key = #{sessionKey}
+	</select>
+	
+	<select id="createUserSession" resultType="java.lang.String">
+		UPDATE account session_key = #{sessionKey} where id = #{id}
+	</select>
+	
+	<select id="residualAtWeek" resultType="java.lang.Integer">
+		SELECT value FROM stay_apply where id = #{id} AND week = #{week}
+	</select>
+
+	<update id="rename" parameterType="com.boxfox.dms.users.dto.UserRenameDTO">
+		UPDATE account set id=#{newId} WHERE(id=#{id}) AND (password=#{password})
+	</update>
+
+	<update id="modifyPassword" parameterType="com.boxfox.dms.users.dto.UserModifyPasswordDTO">
+		UPDATE account set password=#{newPassword} WHERE(id=#{id}) AND
+		(password=#{password})
+	</update>
+
+	<select id="checkIdExist" parameterType="String" resultType="java.lang.Integer">
+		SELECT count(*) FROM account WHERE(id=#{id})
+	</select>
+
 </mapper>

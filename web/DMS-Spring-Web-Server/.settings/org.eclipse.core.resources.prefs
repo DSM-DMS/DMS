@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/main/java/org/boxfox/dms/utils/meals/MealParser.java=UTF-8
-encoding//src/main/java/org/boxfox/dms/utils/meals/ParserUtils.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/extention_index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mypage_index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/qna_index.jsp=UTF-8
+encoding//src/main/webapp/resources/css/default.css=UTF-8

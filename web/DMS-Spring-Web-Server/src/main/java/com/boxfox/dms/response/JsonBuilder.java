@@ -9,7 +9,7 @@ public class JsonBuilder {
 	private String msg;
 	private HashMap<String, Object> map;
 	
-	private JsonBuilder(int code, String msg){
+	public JsonBuilder(int code, String msg){
 		this.code = code;
 		this.msg = msg;
 		this.map = new HashMap<String, Object>();

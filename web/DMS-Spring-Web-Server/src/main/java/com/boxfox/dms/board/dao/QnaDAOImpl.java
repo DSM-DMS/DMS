@@ -9,27 +9,21 @@ import org.springframework.stereotype.Repository;
 
 import com.boxfox.dms.board.dto.Comment;
 import com.boxfox.dms.board.dto.QnaPostContext;
-import com.boxfox.dms.mapper.QnaMapper;
+import com.boxfox.dms.board.mapper.NoticeMapper;
+import com.boxfox.dms.board.mapper.QnaMapper;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<QnaPostContext> getPostsAtPage(int page) {
-		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
-		List<QnaPostContext> list = qnaMapper.getPostsAtPage(page);
-		return list;
-	}
 
 	@Override
 	public QnaPostContext getPost(int number) {
 		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
 		List<QnaPostContext> list = qnaMapper.getPost(number);
 		QnaPostContext post = null;
-		if(list.size()==0)
+		if(list.size()>0)
 			post = list.get(0);
 		return post;
 	}
@@ -82,15 +76,6 @@ public class QnaDAOImpl implements QnaDAO{
 	}
 
 	@Override
-	public void editAnswer(int no, String content) {
-		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
-		QnaPostContext post = new QnaPostContext();
-		post.setNo(no);
-		post.setResult(content);
-		qnaMapper.editPost(post);
-	}
-
-	@Override
 	public void editComment(int no, int number, String content) {
 		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
 		Comment comment = new Comment();
@@ -99,7 +84,18 @@ public class QnaDAOImpl implements QnaDAO{
 		comment.setContent(content);
 		qnaMapper.editComment(comment);
 	}
-	
-	
+
+	@Override
+	public List<Comment> getComments(int no) {
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		List<Comment> comments = qnaMapper.getComments(no);
+		return comments;
+	}
+
+	@Override
+	public int deletePost(int number) {
+		QnaMapper qnaMapper = sqlSession.getMapper(QnaMapper.class);
+		return qnaMapper.deletePost(number);
+	}
 
 }
