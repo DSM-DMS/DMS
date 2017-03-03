@@ -11,6 +11,9 @@ import android.view.View;
 
 public class RecyclerViewUtils {
 
+    public static final int TYPE_ITEM = 1;
+    public static final int TYPE_FOOTER = 2;
+
     public static void setupRecyclerView(
             EmptySupportedRecyclerView recyclerView, Context context, View emptyView) {
 

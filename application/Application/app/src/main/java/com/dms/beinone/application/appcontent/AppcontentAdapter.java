@@ -14,14 +14,14 @@ import com.dms.beinone.application.R;
 
 import java.util.List;
 
+import static com.dms.beinone.application.RecyclerViewUtils.TYPE_FOOTER;
+import static com.dms.beinone.application.RecyclerViewUtils.TYPE_ITEM;
+
 /**
  * Created by BeINone on 2017-01-26.
  */
 
 public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final int TYPE_ITEM = 1;
-    private static final int TYPE_FOOTER = 2;
 
     private Context mContext;
     private int mCategory;
@@ -51,7 +51,7 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else {
             // footer view
             View view = LayoutInflater.from(mContext)
-                    .inflate(R.layout.viewholder_appcontent_footer, parent, false);
+                    .inflate(R.layout.viewholder_footer_more, parent, false);
             return new FooterViewHolder(view);
         }
     }
@@ -132,17 +132,14 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public FooterViewHolder(View itemView) {
             super(itemView);
 
-            mMoreBtn = (Button) itemView.findViewById(R.id.btn_appcontent_more);
+            mMoreBtn = (Button) itemView.findViewById(R.id.btn_footer_more);
             mMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new LoadAppcontentListTask(mContext, mCategory, mRecyclerView)
-                            .execute(AppcontentFragment.page++);
+                    new LoadAppcontentListTask(mContext, mCategory, mRecyclerView).execute();
                 }
             });
         }
     }
-
-//    private class ApplyAfterschoolTask extends AsyncTask<>
 
 }

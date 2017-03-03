@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,14 +17,18 @@ import com.dms.beinone.application.R;
 
 import java.util.List;
 
+import static com.dms.beinone.application.RecyclerViewUtils.TYPE_FOOTER;
+import static com.dms.beinone.application.RecyclerViewUtils.TYPE_ITEM;
+
 /**
  * Created by BeINone on 2017-01-23.
  */
 
-public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
+public class QnAAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<QnA> mQnAList;
+    private RecyclerView mRecyclerView;
 
     public QnAAdapter(Context context, List<QnA> qnaList) {
         mContext = context;
@@ -31,18 +36,30 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
     }
 
     @Override
-    public QnAAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewholder_qna, parent, false);
-
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.viewholder_qna, parent, false);
+            return new ItemViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.viewholder_footer_more, parent, false);
+            return new FooterViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(QnAAdapter.ViewHolder holder, int position) {
-        QnA qna = mQnAList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType() == TYPE_ITEM) {
+            QnA qna = mQnAList.get(position);
+            ((ItemViewHolder) holder).bind(qna.getTitle(), qna.getWriter(), qna.getQuestionDate(), qna.isPrivacy());
+        }
+    }
 
-        holder.bind(qna.getTitle(), qna.getWriter(), qna.getQuestionDate(), qna.isPrivacy());
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -50,14 +67,23 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
         return mQnAList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mQnAList.size()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
+    }
+
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTitleTV;
         private TextView mWriterTV;
         private TextView mQuestionDateTV;
         private ImageView mPrivacyIV;
 
-        public ViewHolder(View itemView) {
+        public ItemViewHolder(View itemView) {
             super(itemView);
 
             mTitleTV = (TextView) itemView.findViewById(R.id.tv_qna_title);
@@ -74,7 +100,7 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
                     if (qna.isPrivacy()) {
                         Toast.makeText(mContext, R.string.qna_private, Toast.LENGTH_SHORT).show();
                     } else {
-                        viewArticle(qna.getNo());
+                        viewArticle(qna.getNo(), qna.getWriter());
                     }
                 }
             });
@@ -98,12 +124,30 @@ public class QnAAdapter extends RecyclerView.Adapter<QnAAdapter.ViewHolder> {
          * start a new activity to display article
          * @param no index of QnA article
          */
-        private void viewArticle(int no) {
+        private void viewArticle(int no, String writer) {
             Intent intent = new Intent(mContext, QnAArticleActivity.class);
             intent.putExtra(mContext.getString(R.string.EXTRA_NO), no);
+            intent.putExtra(mContext.getString(R.string.EXTRA_WRITER), writer);
             mContext.startActivity(intent);
         }
 
+    }
+
+    public class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        private Button mMoreBtn;
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+
+            mMoreBtn = (Button) itemView.findViewById(R.id.btn_footer_more);
+            mMoreBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new LoadQnAListTask(mContext, mRecyclerView).execute();
+                }
+            });
+        }
     }
 
 }

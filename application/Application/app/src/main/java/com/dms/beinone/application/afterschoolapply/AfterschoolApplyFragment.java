@@ -18,8 +18,10 @@ import com.dms.boxfox.networking.datamodel.Commands;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,40 +57,60 @@ public class AfterschoolApplyFragment extends Fragment {
         new LoadAfterschoolListTask().execute();
     }
 
-    private class LoadAfterschoolListTask extends AsyncTask<Void, Void, List<Afterschool>> {
+    private class LoadAfterschoolListTask extends AsyncTask<Void, Void, Object[]> {
 
         @Override
-        protected List<Afterschool> doInBackground(Void... params) {
-            List<Afterschool> afterschoolList = null;
+        protected Object[] doInBackground(Void... params) {
+            Object[] results = null;
 
             try {
-                afterschoolList = loadAfterschoolList();
+                results = loadAfterschoolList();
             } catch (IOException e) {
                 return null;
             } catch (JSONException e) {
                 return null;
             }
 
-            return afterschoolList;
+            return results;
         }
 
         @Override
-        protected void onPostExecute(List<Afterschool> afterschoolList) {
-            super.onPostExecute(afterschoolList);
+        protected void onPostExecute(Object[] results) {
+            super.onPostExecute(results);
 
-            if (afterschoolList == null) {
-                Toast.makeText(getContext(), R.string.afterschoolapply_error, Toast.LENGTH_SHORT)
-                        .show();
+            if (results != null) {
+                int code = (int) results[0];
+                List<Afterschool> afterschoolList = (ArrayList<Afterschool>) results[1];
+
+                if (code == 200) {
+                    // success
+                    mRecyclerView.setAdapter(new AfterschoolAdapter(getContext(), afterschoolList));
+                } else if (code == 204) {
+                    // empty
+                    Toast.makeText(getContext(), R.string.afterschoolapply_list_empty, Toast.LENGTH_SHORT).show();
+                } else {
+                    // error
+                    Toast.makeText(getContext(), R.string.afterschoolapply_list_error, Toast.LENGTH_SHORT).show();
+                }
             } else {
-                mRecyclerView.setAdapter(new AfterschoolAdapter(afterschoolList));
+                // error
+                Toast.makeText(getContext(), R.string.afterschoolapply_list_error, Toast.LENGTH_SHORT).show();
             }
         }
 
-        private List<Afterschool> loadAfterschoolList() throws IOException, JSONException {
+        private Object[] loadAfterschoolList() throws IOException, JSONException {
             Response response =
-                    HttpBox.post().setCommand(Commands.LOAD_AFTERSCHOOL_LIST).putBodyData().push();
+                    HttpBox.post().setCommand(Commands.LOAD_AFTERSCHOOL_ITEM_LIST).putBodyData().push();
 
-            return JSONParser.parseAfterschoolListJSON(response.getJsonObject());
+            JSONObject responseJSONObject = response.getJsonObject();
+
+            int code = response.getCode();
+            List<Afterschool> afterschoolList = null;
+            if (code == 200) {
+                afterschoolList = JSONParser.parseAfterschoolListJSON(responseJSONObject);
+            }
+
+            return new Object[] { code, afterschoolList };
         }
     }
 

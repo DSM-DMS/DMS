@@ -21,7 +21,7 @@ import java.util.List;
  * Created by BeINone on 2017-02-03.
  */
 
-public class LoadAppcontentListTask extends AsyncTask<Integer, Void, List<Appcontent>> {
+public class LoadAppcontentListTask extends AsyncTask<Void, Void, List<Appcontent>> {
 
     private Context mContext;
     private int mCategory;
@@ -34,12 +34,11 @@ public class LoadAppcontentListTask extends AsyncTask<Integer, Void, List<Appcon
     }
 
     @Override
-    protected List<Appcontent> doInBackground(Integer... params) {
+    protected List<Appcontent> doInBackground(Void... params) {
         List<Appcontent> appcontentList = null;
 
         try {
-            int page = params[0];
-            appcontentList = loadAppcontentList(page);
+            appcontentList = loadAppcontentList();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -55,12 +54,26 @@ public class LoadAppcontentListTask extends AsyncTask<Integer, Void, List<Appcon
     protected void onPostExecute(List<Appcontent> appcontentList) {
         super.onPostExecute(appcontentList);
 
+        int errorMsgResId = -1;
+        int emptyMsgResId = -1;
+
+        if (mCategory == Appcontent.NOTICE) {
+            errorMsgResId = R.string.appcontent_notice_error;
+            emptyMsgResId = R.string.appcontent_notice_empty;
+        } else if (mCategory == Appcontent.NEWSLETTER) {
+            errorMsgResId = R.string.appcontent_newsletter_error;
+            emptyMsgResId = R.string.appcontent_newsletter_empty;
+        } else {
+            errorMsgResId = R.string.appcontent_competition_error;
+            emptyMsgResId = R.string.appcontent_competition_empty;
+        }
+
         if (appcontentList == null) {
             // error
-            Toast.makeText(mContext, R.string.notice_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, errorMsgResId, Toast.LENGTH_SHORT).show();
         } else if (appcontentList.size() == 0) {
-            // failed
-            Toast.makeText(mContext, R.string.notice_failure, Toast.LENGTH_SHORT).show();
+            // empty
+            Toast.makeText(mContext, emptyMsgResId, Toast.LENGTH_SHORT).show();
         } else {
             // success
             if (mRecyclerView.getAdapter() == null) {
@@ -70,13 +83,16 @@ public class LoadAppcontentListTask extends AsyncTask<Integer, Void, List<Appcon
                 // if there is adapter on recycler view, add items
                 ((AppcontentAdapter) mRecyclerView.getAdapter()).addAll(appcontentList);
             }
+
+            // increase the page number if completed loading successfully
+            AppcontentFragment.page++;
         }
     }
 
-    private List<Appcontent> loadAppcontentList(int page) throws IOException, JSONException {
+    private List<Appcontent> loadAppcontentList() throws IOException, JSONException {
         JSONObject requestJSONObject = new JSONObject();
         requestJSONObject.put("category", mCategory);
-        requestJSONObject.put("page", page);
+        requestJSONObject.put("page", AppcontentFragment.page);
 
         int command = 0;
 

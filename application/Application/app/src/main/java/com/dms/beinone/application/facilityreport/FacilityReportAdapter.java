@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.dms.beinone.application.Listeners;
@@ -13,14 +14,18 @@ import com.dms.beinone.application.R;
 
 import java.util.List;
 
+import static com.dms.beinone.application.RecyclerViewUtils.TYPE_FOOTER;
+import static com.dms.beinone.application.RecyclerViewUtils.TYPE_ITEM;
+
 /**
  * Created by BeINone on 2017-01-20.
  */
 
-public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAdapter.ViewHolder> {
+public class FacilityReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<FacilityReport> mFacilityReportList;
+    private RecyclerView mRecyclerView;
 
     public FacilityReportAdapter(Context context, List<FacilityReport> facilityReportList) {
         mContext = context;
@@ -28,17 +33,31 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
     }
 
     @Override
-    public FacilityReportAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewholder_facilityreport, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.viewholder_facilityreport, parent, false);
+            return new ItemViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.viewholder_footer_more, parent, false);
+            return new FooterViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(FacilityReportAdapter.ViewHolder holder, int position) {
-        FacilityReport facilityReport = mFacilityReportList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder.getItemViewType() == TYPE_ITEM) {
+            FacilityReport facilityReport = mFacilityReportList.get(position);
+            ((ItemViewHolder) holder).bind(facilityReport.getTitle(), facilityReport.getWriter(), facilityReport.getWriteDate());
+        }
+    }
 
-        holder.bind(facilityReport.getTitle(), facilityReport.getWriter(), facilityReport.getWriteDate());
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+
+        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -46,13 +65,22 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
         return mFacilityReportList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mFacilityReportList.size()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
+    }
+
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTitleTV;
         private TextView mWriterTV;
         private TextView mWriteDateTV;
 
-        public ViewHolder(View itemView) {
+        public ItemViewHolder(View itemView) {
             super(itemView);
 
             mTitleTV = (TextView) itemView.findViewById(R.id.tv_facilityreport_title);
@@ -63,7 +91,8 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewArticle(mFacilityReportList.get(getAdapterPosition()).getNo());
+                    FacilityReport facilityReport = mFacilityReportList.get(getAdapterPosition());
+                    viewArticle(facilityReport.getNo(), facilityReport.getWriter());
                 }
             });
         }
@@ -78,12 +107,29 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<FacilityReportAd
          * start a new activity to display article
          * @param no index of FacilityReport article
          */
-        private void viewArticle(int no) {
+        private void viewArticle(int no, String writer) {
             Intent intent = new Intent(mContext, FacilityReportArticleActivity.class);
             intent.putExtra(mContext.getString(R.string.EXTRA_NO), no);
+            intent.putExtra(mContext.getString(R.string.EXTRA_WRITER), writer);
             mContext.startActivity(intent);
         }
+    }
 
+    public class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        private Button mMoreBtn;
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+
+            mMoreBtn = (Button) itemView.findViewById(R.id.btn_footer_more);
+            mMoreBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new LoadFacilityReportListTask(mContext, mRecyclerView).execute();
+                }
+            });
+        }
     }
 
 }

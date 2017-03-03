@@ -78,18 +78,25 @@
             android:layout_height="wrap_content"
             android:padding="8dp">
 
-            <com.dms.beinone.application.dmsview.DMSButton
+            <Button
                 android:id="@+id/btn_afterschoolapply_apply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/afterschoolapply_apply"
-                dmsbtn:dmsbtn_backgroundColor="@android:color/transparent"
-                dmsbtn:dmsbtn_strokeColor="@android:color/transparent"
-                dmsbtn:dmsbtn_style="rectangle"
-                dmsbtn:dmsbtn_textColor="@android:color/black"
-                dmsbtn:dmsbtn_touchBackgroundColor="@android:color/transparent"
-                dmsbtn:dmsbtn_touchStrokeColor="@android:color/transparent"
-                dmsbtn:dmsbtn_touchTextColor="@color/colorPrimary" />
+                android:text="@string/afterschoolapply_list_apply"
+                android:background="?attr/selectableItemBackground" />
+
+            <!--<com.dms.beinone.application.dmsview.DMSButton-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/afterschoolapply_list_apply"-->
+                <!--android:background="?attr/selectableItemBackground"-->
+                <!--dmsbtn:dmsbtn_backgroundColor="@android:color/transparent"-->
+                <!--dmsbtn:dmsbtn_strokeColor="@android:color/transparent"-->
+                <!--dmsbtn:dmsbtn_style="rectangle"-->
+                <!--dmsbtn:dmsbtn_textColor="@android:color/black"-->
+                <!--dmsbtn:dmsbtn_touchBackgroundColor="@android:color/transparent"-->
+                <!--dmsbtn:dmsbtn_touchStrokeColor="@android:color/transparent"-->
+                <!--dmsbtn:dmsbtn_touchTextColor="@color/colorPrimary" />-->
         </LinearLayout>
 
     </LinearLayout>

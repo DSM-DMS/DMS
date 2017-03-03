@@ -148,12 +148,12 @@ public class QnAWriteActivity extends AppCompatActivity {
         private int uploadQnA(QnA qna) throws IOException, JSONException {
             JSONObject requestJSONObject = new JSONObject();
             requestJSONObject.put("title", qna.getTitle());
-            requestJSONObject.put("content", qna.getQuestionContent());
+            requestJSONObject.put("question_content", qna.getQuestionContent());
             requestJSONObject.put("writer", qna.getWriter());
             requestJSONObject.put("privacy", qna.isPrivacy());
 
             Response response = HttpBox.post()
-                    .setCommand(Commands.UPLOAD_REPORT_FACILITY)
+                    .setCommand(Commands.UPLOAD_QNA_QUESTION)
                     .putBodyData(requestJSONObject)
                     .push();
 

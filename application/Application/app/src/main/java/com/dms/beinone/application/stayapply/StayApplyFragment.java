@@ -73,7 +73,7 @@ public class StayApplyFragment extends Fragment {
         mDefaultStatusPrefs = getActivity()
                 .getSharedPreferences(getString(R.string.PREFS_DEFAULTSTATUS), MODE_PRIVATE);
 
-        mDefaultStatusTV = (TextView) rootView.findViewById(R.id.tv_stayapply_defstatus);
+        mDefaultStatusTV = (TextView) rootView.findViewById(R.id.tv_stayapply_defaultstatus);
         mSelectedWeekTV = (TextView) rootView.findViewById(R.id.tv_stayapply_selectedweek);
         mSelectedWeekStatusTV = (TextView) rootView.findViewById(R.id.tv_stayapply_selectedweekstatus);
         final CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_stayapply);
@@ -95,7 +95,7 @@ public class StayApplyFragment extends Fragment {
                                 mDefaultStatusPrefs.edit()
                                         .putInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), defaultStatus)
                                         .apply();
-                                setDefaultStatusTV(StayApplyUtils.getString(defaultStatus));
+                                setDefaultStatusTV(StayApplyUtils.getStringFromStayStatus(defaultStatus));
                             }
                         })
                         .show(getChildFragmentManager(), null);
@@ -184,9 +184,9 @@ public class StayApplyFragment extends Fragment {
             try {
                 values = loadStayStatus(params[0], params[1]);
             } catch (IOException e) {
-                return null;
+                return new int[]{ -1, -1 };
             } catch (JSONException e) {
-                return null;
+                return new int[]{ -1, -1 };
             }
 
             return values;
@@ -201,7 +201,7 @@ public class StayApplyFragment extends Fragment {
 
             if (code == 200 || code == 204) {
                 /* succeed */
-                setSelectedWeekStatusTV(StayApplyUtils.getString(stayStatus));
+                setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
             } else {
                 /* error */
                 Toast.makeText(getContext(), R.string.stayapply_error, Toast.LENGTH_SHORT).show();
@@ -213,7 +213,7 @@ public class StayApplyFragment extends Fragment {
             requestJsonObject.put("id", id);
             requestJsonObject.put("week", week);
             Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_STAY_STATUS)
+                    .setCommand(Commands.LOAD_STAY_APPLY_STATUS)
                     .putBodyData(requestJsonObject)
                     .push();
 
@@ -260,7 +260,7 @@ public class StayApplyFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.stayapply_default_error, Toast.LENGTH_SHORT).show();
             }
 
-            setDefaultStatusTV(StayApplyUtils.getString(stayStatus));
+            setDefaultStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
             mDefaultStatusPrefs.edit()
                     .putInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), stayStatus)
                     .apply();
@@ -311,7 +311,7 @@ public class StayApplyFragment extends Fragment {
                 /* succeed */
                 Toast.makeText(getContext(), R.string.stayapply_apply_success, Toast.LENGTH_SHORT)
                         .show();
-                setSelectedWeekStatusTV(StayApplyUtils.getString(stayStatus));
+                setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
             } else if (code == 204) {
                 /* failed */
                 Toast.makeText(getContext(), R.string.stayapply_apply_failure, Toast.LENGTH_SHORT)

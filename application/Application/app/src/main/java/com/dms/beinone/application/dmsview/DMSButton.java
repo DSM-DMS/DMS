@@ -7,10 +7,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +26,6 @@ public class DMSButton extends Button {
 
     private static final int STYLE_RECTANGLE = 0;
     private static final int STYLE_ROUND = 1;
-
-    private GestureDetectorCompat mGestureDetector;
 
     private Drawable mNormalBackground;
     private Drawable mOnTouchBackground;
@@ -99,11 +95,13 @@ public class DMSButton extends Button {
 
         // background color and stroke color
         ((GradientDrawable) mNormalBackground).setColor(backgroundColor);
-        ((GradientDrawable) mNormalBackground).setStroke(1, strokeColor);
+        ((GradientDrawable) mNormalBackground).setStroke(
+                (int) DensityConverter.dpToPx(context, 1), strokeColor);
 
         // background color and stroke color on button touch
         ((GradientDrawable) mOnTouchBackground).setColor(touchBackgroundColor);
-        ((GradientDrawable) mOnTouchBackground).setStroke(1, touchStrokeColor);
+        ((GradientDrawable) mOnTouchBackground).setStroke(
+                (int) DensityConverter.dpToPx(context, 1), touchStrokeColor);
 
         // text color
         mNormalTextColor = textColor;
@@ -123,65 +121,6 @@ public class DMSButton extends Button {
         setMinimumWidth(0);
         setMinHeight(0);
         setMinimumHeight(0);
-
-        mGestureDetector = new GestureDetectorCompat(context, new GestureDetector.OnGestureListener() {
-            @Override
-            public boolean onDown(MotionEvent e) {
-                setBackground(mOnTouchBackground);
-                setTextColor(mOnTouchTextColor);
-
-                if (hasImage) {
-                    // get drawable having drawableRight attribute (drawableRight is in index 2)
-                    // and clear color filter
-                    getCompoundDrawables()[2].clearColorFilter();
-                }
-
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                setBackground(mNormalBackground);
-                setTextColor(mNormalTextColor);
-
-                if (hasImage) {
-                    getCompoundDrawables()[2].setColorFilter(
-                            mNormalTextColor, PorterDuff.Mode.MULTIPLY);
-                }
-
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                setBackground(mNormalBackground);
-                setTextColor(mNormalTextColor);
-
-                if (hasImage) {
-                    getCompoundDrawables()[2].setColorFilter(
-                            mNormalTextColor, PorterDuff.Mode.MULTIPLY);
-                }
-
-                return true;
-            }
-        });
-
-
 
         setOnTouchListener(new OnTouchListener() {
             @Override
@@ -218,6 +157,7 @@ public class DMSButton extends Button {
                         break;
 
                     case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
                         setBackground(mNormalBackground);
                         setTextColor(mNormalTextColor);
 

@@ -8,6 +8,7 @@ import com.dms.beinone.application.facilityreport.FacilityReport;
 import com.dms.beinone.application.faq.FAQ;
 import com.dms.beinone.application.faq.FAQContent;
 import com.dms.beinone.application.meal.Meal;
+import com.dms.beinone.application.mypage.Student;
 import com.dms.beinone.application.qna.QnA;
 import com.dms.beinone.application.rule.Rule;
 import com.dms.beinone.application.rule.RuleContent;
@@ -25,8 +26,17 @@ import java.util.List;
 
 public class JSONParser {
 
-    public static Meal parseMealJSON(JSONObject rootJsonObject) throws JSONException {
-        JSONObject resultJSONObject = rootJsonObject.getJSONObject("result");
+    public static Student parseLoginJSON(JSONObject rootJSONObject) throws JSONException {
+        int number = rootJSONObject.getInt("number");
+        String name = rootJSONObject.getString("name");
+        int merit = rootJSONObject.getInt("merit");
+        int demerit = rootJSONObject.getInt("demerit");
+
+        return new Student(number, name, merit, demerit);
+    }
+
+    public static Meal parseMealJSON(JSONObject rootJSONObject) throws JSONException {
+        JSONObject resultJSONObject = rootJSONObject.getJSONObject("result");
 
         JSONArray mealJSONArray = resultJSONObject.getJSONArray("Meals");
 
@@ -38,6 +48,10 @@ public class JSONParser {
             // parse menu
             JSONArray menuJSONArray = mealJSONObject.getJSONArray("Menu");
             StringBuilder menuBuilder = new StringBuilder();
+
+            if (menuJSONArray.length() == 0) {
+                menuBuilder.append("급식이 없습니다.");
+            }
             for (int i = 0; i < menuJSONArray.length(); i++) {
                 menuBuilder.append(menuJSONArray.getString(i));
                 if (i != menuJSONArray.length() - 1) {
@@ -48,6 +62,10 @@ public class JSONParser {
             // parse allergy
             JSONArray allergyJSONArray = mealJSONObject.getJSONArray("Allergy");
             StringBuilder allergyBuilder = new StringBuilder();
+
+            if (menuJSONArray.length() == 0) {
+                allergyBuilder.append("급식이 없습니다.");
+            }
             for (int i = 0; i < allergyJSONArray.length(); i++) {
                 allergyBuilder.append(allergyJSONArray.getString(i));
 
@@ -70,6 +88,41 @@ public class JSONParser {
         }
 
         return meal;
+    }
+
+//    public static List<Goingout> parseGoingoutApplyStatusJSON(JSONObject rootJSONObject)
+//            throws JSONException {
+//
+//        List<Goingout> goingoutList = new ArrayList<>();
+//
+//        JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
+//    }
+
+    public static List<Afterschool> parseAfterschoolListJSON(JSONObject rootJSONObject)
+            throws JSONException {
+
+        List<Afterschool> afterschoolList = new ArrayList<>();
+
+        JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
+
+        for (int index = 0; index < resultJSONArray.length(); index++) {
+            JSONObject afterschoolJSONObject = resultJSONArray.getJSONObject(index);
+
+            int no = afterschoolJSONObject.getInt("no");
+            String title = afterschoolJSONObject.getString("title");
+            int target = afterschoolJSONObject.getInt("target");
+            String place = afterschoolJSONObject.getString("place");
+            boolean onMonday = afterschoolJSONObject.getBoolean("on_monday");
+            boolean onTuesday = afterschoolJSONObject.getBoolean("on_tuesday");
+            boolean onWednesday = afterschoolJSONObject.getBoolean("on_wednesday");
+            boolean onSaturday = afterschoolJSONObject.getBoolean("on_saturday");
+            String instructor = afterschoolJSONObject.getString("instructor");
+
+            afterschoolList.add(new Afterschool(no, title, target, place,
+                    onMonday, onTuesday, onWednesday, onSaturday, instructor));
+        }
+
+        return afterschoolList;
     }
 
     public static List<Appcontent> parseAppcontentListJSON(JSONObject rootJSONObject)
@@ -125,31 +178,27 @@ public class JSONParser {
         return attachmentList;
     }
 
-    public static List<Afterschool> parseAfterschoolListJSON(JSONObject rootJSONObject)
+    public static List<FacilityReport> parseFacilityReportListJSON(JSONObject rootJSONObject)
             throws JSONException {
 
-        List<Afterschool> afterschoolList = new ArrayList<>();
+        List<FacilityReport> facilityReportList = new ArrayList<>();
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-
         for (int index = 0; index < resultJSONArray.length(); index++) {
-            JSONObject afterschoolJSONObject = resultJSONArray.getJSONObject(index);
+            JSONObject facilityReportJSONObject = resultJSONArray.getJSONObject(index);
 
-            int no = afterschoolJSONObject.getInt("no");
-            String title = afterschoolJSONObject.getString("title");
-            int target = afterschoolJSONObject.getInt("target");
-            String place = afterschoolJSONObject.getString("place");
-            boolean onMonday = afterschoolJSONObject.getBoolean("on_monday");
-            boolean onTuesday = afterschoolJSONObject.getBoolean("on_tuesday");
-            boolean onWednesday = afterschoolJSONObject.getBoolean("on_wednesday");
-            boolean onSaturday = afterschoolJSONObject.getBoolean("on_saturday");
-            String instructor = afterschoolJSONObject.getString("instuctor");
+            int no = facilityReportJSONObject.getInt("no");
+            String title = facilityReportJSONObject.getString("title");
+            int room = facilityReportJSONObject.getInt("room");
+            String writeDate = facilityReportJSONObject.getString("write_date");
+            String writer = facilityReportJSONObject.getString("writer");
+            boolean hasResult = facilityReportJSONObject.getBoolean("has_result");
 
-            afterschoolList.add(new Afterschool(no, title, target, place,
-                    onMonday, onTuesday, onWednesday, onSaturday, instructor));
+            facilityReportList.add(
+                    new FacilityReport(no, title, room, writeDate, writer, hasResult));
         }
 
-        return afterschoolList;
+        return facilityReportList;
     }
 
     public static FacilityReport parseFacilityReportJSON(JSONObject rootJSONObject, int no)
@@ -263,6 +312,19 @@ public class JSONParser {
         }
 
         return commentList;
+    }
+
+    public static Student parseStudentJSON(JSONObject rootJSONObject) throws JSONException {
+        int number = rootJSONObject.getInt("number");
+        String name = rootJSONObject.getString("name");
+        boolean sex = rootJSONObject.getBoolean("sex");
+        int status = rootJSONObject.getInt("status");
+        String phone = rootJSONObject.getString("phone");
+        String parent = rootJSONObject.getString("p_name");
+        int merit = rootJSONObject.getInt("merit");
+        int demerit = rootJSONObject.getInt("demerit");
+
+        return new Student(number, name, sex, status, phone, parent, merit, demerit);
     }
 
 }

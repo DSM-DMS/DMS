@@ -1,10 +1,12 @@
 package com.dms.beinone.application.qna;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -29,6 +31,8 @@ import java.io.IOException;
 
 public class QnAArticleActivity extends AppCompatActivity {
 
+    private SharedPreferences mAccountPrefs;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class QnAArticleActivity extends AppCompatActivity {
 
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
 
         final int no = getIntent().getIntExtra(getString(R.string.EXTRA_NO), 0);
 
@@ -48,6 +54,20 @@ public class QnAArticleActivity extends AppCompatActivity {
         });
 
         new LoadQnATask().execute(no);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        String id = mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
+        String writer = getIntent().getStringExtra(getString(R.string.EXTRA_WRITER));
+
+        if (id.equals(writer)) {
+            // show delete menu if writer's id and the user's id are same
+            getMenuInflater().inflate(R.menu.activity_article, menu);
+            return true;
+        } else {
+            return super.onCreateOptionsMenu(menu);
+        }
     }
 
     @Override
@@ -111,6 +131,12 @@ public class QnAArticleActivity extends AppCompatActivity {
                         QnAArticleActivity.this, R.string.qna_article_error, Toast.LENGTH_SHORT)
                         .show();
             } else {
+                String id = mAccountPrefs.getString(QnAArticleActivity.this.getString(
+                        R.string.PREFS_ACCOUNT_ID), "");
+
+                if (qna.getWriter().equals(id)) {
+
+                }
                 bind(qna);
             }
         }

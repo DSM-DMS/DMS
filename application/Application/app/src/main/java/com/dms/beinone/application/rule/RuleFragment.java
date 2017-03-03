@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +44,7 @@ public class RuleFragment extends Fragment {
 
     /**
      * 초기화
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -56,39 +58,59 @@ public class RuleFragment extends Fragment {
         new LoadRuleTask().execute();
     }
 
-    private class LoadRuleTask extends AsyncTask<Void, Void, List<Rule>> {
+    private class LoadRuleTask extends AsyncTask<Void, Void, Object[]> {
 
         @Override
-        protected List<Rule> doInBackground(Void... params) {
-            List<Rule> ruleList = null;
+        protected Object[] doInBackground(Void... params) {
+            Object[] results = null;
 
             try {
-                ruleList = loadRule();
-            } catch (IOException ie) {
+                results = loadRule();
+            } catch (IOException e) {
                 return null;
-            } catch (JSONException je) {
+            } catch (JSONException e) {
                 return null;
             }
 
-            return ruleList;
+            return results;
         }
 
         @Override
-        protected void onPostExecute(List<Rule> ruleList) {
-            super.onPostExecute(ruleList);
+        protected void onPostExecute(Object[] results) {
+            super.onPostExecute(results);
 
-            if (ruleList == null) {
-                Toast.makeText(getContext(), R.string.rule_error, Toast.LENGTH_SHORT).show();
+            if (results != null) {
+                int code = (int) results[0];
+                List<Rule> ruleList = (ArrayList<Rule>) results[1];
+
+                if (code == 200) {
+                    // success
+                    mRecyclerView.setAdapter(new RuleAdapter(getContext(), ruleList));
+                } else if (code == 204) {
+                    // no data
+                    Toast.makeText(getContext(), R.string.rule_nodata, Toast.LENGTH_SHORT).show();
+                } else {
+                    // error
+                    Toast.makeText(getContext(), R.string.rule_error, Toast.LENGTH_SHORT).show();
+                }
             } else {
-                mRecyclerView.setAdapter(new RuleAdapter(getContext(), ruleList));
+                // error
+                Toast.makeText(getContext(), R.string.rule_error, Toast.LENGTH_SHORT).show();
             }
         }
 
-        private List<Rule> loadRule() throws IOException, JSONException {
+        private Object[] loadRule() throws IOException, JSONException {
             Response response = HttpBox.post().setCommand(Commands.LOAD_RULE).putBodyData().push();
             JSONObject responseJSONObject = response.getJsonObject();
 
-            return JSONParser.parseRuleJSON(responseJSONObject);
+            int code = response.getCode();
+
+            List<Rule> ruleList = null;
+            if (code == 200) {
+                ruleList = JSONParser.parseRuleJSON(responseJSONObject);
+            }
+
+            return new Object[] { code, ruleList };
         }
     }
 

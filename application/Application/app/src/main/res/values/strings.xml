@@ -9,6 +9,7 @@
     <!-- Navigation Drawer -->
     <string name="nav_desclogin">로그인을 하시면 더 많은 기능을 사용하실 수 있습니다.</string>
     <string name="nav_login">로그인</string>
+    <string name="nav_logout">로그아웃</string>
     <string name="nav_home">홈</string>
     <string name="nav_apply">신청</string>
     <string name="nav_extensionapply">연장신청</string>
@@ -33,11 +34,25 @@
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
     <string name="login_login">로그인</string>
+    <string name="login_register">아이디가 없으신가요? 지금 회원가입하세요.</string>
     <string name="login_noid">아이디를 입력하세요.</string>
     <string name="login_nopassword">비밀번호를 입력하세요.</string>
     <string name="login_success">님, 환영합니다.</string>
     <string name="login_failure">아이디 또는 비밀번호를 잘못 입력하셨습니다.</string>
     <string name="login_error">오류로 인해 로그인에 실패하였습니다.</string>
+
+    <string name="logout_success">로그아웃하였습니다.</string>
+    
+    <!-- Register Activity -->
+    <string name="register_id">아이디</string>
+    <string name="register_password">비밀번호</string>
+    <string name="register_name">이름</string>
+    <string name="register_number">학번</string>
+    <string name="register_sex">성별</string>
+    <string name="register_register">가입하기</string>
+    <string name="register_success">회원가입이 완료되었습니다.</string>
+    <string name="register_failure">회원가입에 실패했습니다.</string>
+    <string name="register_error">오류로 인해 회원가입에 실패했습니다.</string>
 
     <!-- Stay Apply Fragment -->
     <string name="stayapply_defaultstatus">기본값</string>
@@ -61,12 +76,20 @@
     <string name="stayapply_apply_error">오류로 인해 잔류상태를 변경하지 못했습니다.</string>
 
     <!-- Goingout Apply Fragment -->
-    <string name="goingoutapply_desc">앱에서 외출신청 후, 별도로 사감실에 방문하여 확인받아야 합니다.</string>
+    <string name="goingoutapply_applystatus">신청한 요일</string>
+    <string name="goingoutapply_load_failure">신청 상태를 불러오지 못했습니다.</string>
+    <string name="goingoutapply_load_error">오류로 인해 신청 상태를 불러오지 못했습니다.</string>
     <string name="goingoutapply_saturday">토요일</string>
     <string name="goingoutapply_sunday">일요일</string>
+    <string name="goingoutapply_reason">이유</string>
+    <string name="goingoutapply_desc">앱에서 외출신청 후, 별도로 사감실에 방문하여 확인받아야 합니다.</string>
+    <string name="goingoutapply_hint">이유를 작성해주세요.</string>
     <string name="goingoutapply_subdesc">(중복 선택 가능)</string>
     <string name="goingoutapply_apply">신청하기</string>
     <string name="goingoutapply_nochecked">값을 선택해주세요.</string>
+    <string name="goingoutapply_apply_success">신청이 완료되었습니다.</string>
+    <string name="goingoutapply_apply_failure">신청에 실패하였습니다.</string>
+    <string name="goingoutapply_apply_error">오류로 인해 신청에 실패했습니다.</string>
     
     <!-- Rewardscore Apply Fragment -->
     <string name="rewardscoreapply_rewardscore">상점</string>
@@ -76,14 +99,27 @@
     <string name="rewardscoreapply_apply">신청하기</string>
     <string name="rewardscoreapply_nocontent">내용을 입력해주세요.</string>
     <string name="rewardscoreapply_norecommendee">추천인을 입력해주세요.</string>
+    <string name="rewardscoreapply_description_morningexercise_title">아침운동 상점</string>
+    <string name="rewardscoreapply_description_morningexercise_content">3점: 지각·열외·불참 없으며 모범적으로 참여 / 2점: 지각·열외·불참 없음 / 1점: 지각·열외·불참 1회 이하</string>
+    <string name="rewardscoreapply_description_cleanroom_title">청결점호 상점</string>
+    <string name="rewardscoreapply_description_cleanroom_content">2점: 해당 월 청결호실 점검 X표 누적 2회 이하인 학생</string>
+    <string name="rewardscoreapply_description_modelstudent_title">모범학생 상점(월별)</string>
+    <string name="rewardscoreapply_description_modelstudent_content">2점: 해당 월 무벌점자 중 기숙사생들의 추천 수가 높은 학년별 3명(1인당 학기별 1회까지만 부여)</string>
+    <string name="rewardscoreapply_description_electronicequip_title">전자기기 사용 모범</string>
+    <string name="rewardscoreapply_description_electronicequip_content">1점: 해당 월 전자기기 사용규정 위반사항이 없는 학생</string>
+    <string name="rewardscoreapply_description_etc_title">기타</string>
+    <string name="rewardscoreapply_description_etc_content">기숙사 생활 중 선행이나 모범행동으로 추천을 받은 경우 / 기숙사 이벤트에 모범적으로 참여하거나 수상한 경우</string>
     <string name="rewardscoreapply_success">신청이 완료되었습니다.</string>
     <string name="rewardscoreapply_failure">신청에 실패하였습니다.</string>
     <string name="rewardscoreapply_error">오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Afterschool Apply Fragment -->
-    <string name="afterschoolapply_apply">신청</string>
-    <string name="afterschoolapply_empty">방과후신청 목록이 없습니다.</string>
-    <string name="afterschoolapply_error">오류로 인해 방과후신청 목록을 불러오지 못했습니다.</string>
+    <string name="afterschoolapply_list_apply">신청</string>
+    <string name="afterschoolapply_list_empty">방과후신청 목록이 없습니다.</string>
+    <string name="afterschoolapply_list_error">오류로 인해 방과후신청 목록을 불러오지 못했습니다.</string>
+    <string name="afterschoolapply_apply_success">신청이 완료되었습니다.</string>
+    <string name="afterschoolapply_apply_failure">신청에 실패하였습니다.</string>
+    <string name="afterschoolapply_apply_error">오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Meal Fragment -->
     <string name="meal_breakfast">아침</string>
@@ -93,19 +129,14 @@
     <string name="meal_allergy">알레르기</string>
     <string name="meal_error">오류로 인해 급식 정보를 불러오지 못했습니다.</string>
 
-    <!-- Notice Fragment -->
-    <string name="notice_empty">공지사항이 없습니다.</string>
-    <string name="notice_important">중요</string>
-    <string name="notice_failure">공지사항을 불러오지 못했습니다.</string>
-    <string name="notice_error">오류로 인해 공지사항을 불러오지 못했습니다.</string>
-
-    <!-- Newsletter Fragment -->
-    <string name="newsletter_empty">가정통신문이 없습니다.</string>
-
-    <!-- Competition Fragment -->
-    <string name="competition_empty">대회정보가 없습니다.</string>
-
     <!-- Appcontent -->
+    <string name="appcontent_notice_empty">공지사항이 없습니다.</string>
+    <string name="appcontent_newsletter_empty">가정통신문이 없습니다.</string>
+    <string name="appcontent_competition_empty">대회정보가 없습니다.</string>
+    <string name="appcontent_notice_important">중요</string>
+    <string name="appcontent_notice_error">오류로 인해 공지사항을 불러오지 못했습니다.</string>
+    <string name="appcontent_newsletter_error">오류로 인해 가정통신문을 불러오지 못했습니다.</string>
+    <string name="appcontent_competition_error">오류로 인해 대회정보를 불러오지 못했습니다.</string>
     <string name="appcontent_dialog_title">첨부파일</string>
     <string name="appcontent_dialog_negative">취소</string>
     <string name="appcontent_dialog_positive">다운로드</string>
@@ -127,10 +158,12 @@
 
     <!-- Rule Fragment -->
     <string name="rule_empty">기숙사 규정이 없습니다.</string>
+    <string name="rule_nodata">기숙사 규정이 없습니다.</string>
     <string name="rule_error">오류로 인해 기숙사 규정을 불러오지 못했습니다.</string>
 
     <!-- FAQ Fragment -->
     <string name="faq_empty">FAQ가 없습니다.</string>
+    <string name="faq_nodata">fAQ가 없습니다.</string>
     <string name="faq_error">오류로 인해 FAQ를 불러오지 못했습니다.</string>
 
     <!-- QnA Fragment -->
@@ -146,6 +179,34 @@
     <string name="qna_write_success">문의사항을 제출하였습니다.</string>
     <string name="qna_write_failure">문의사항을 제출하지 못했습니다.</string>
     <string name="qna_write_error">오류로 인해 문의사항을 제출하지 못했습니다.</string>
+
+    <!-- Comment -->
+    <string name="comment_upload_failure">댓글을 작성하지 못했습니다.</string>
+    <string name="comment_upload_error">오류로 인해 댓글을 작성하지 못했습니다.</string>
+
+    <!-- Mypage -->
+    <string name="mypage_merit">상점</string>
+    <string name="mypage_demerit">벌점</string>
+    <string name="mypage_total">총점</string>
+    <string name="mypage_sex">성별</string>
+    <string name="mypage_phone">전화번호</string>
+    <string name="mypage_status">상태</string>
+    <string name="mypage_parent">학부모</string>
+    <string name="mypage_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
+
+    <!-- Menu -->
+    <string name="menu_delete">삭제</string>
+    <string name="menu_edit">수정</string>
+
+    <!-- Dialog -->
+    <string name="dialog_ok">확인</string>
+    <string name="dialog_cancel">취소</string>
+    <string name="deletedialog_article_title">글 삭제</string>
+    <string name="deletedialog_article_message">글을 삭제하시겠습니까?</string>
+    <string name="deletedialog_article_success">글을 삭제하였습니다.</string>
+    <string name="deletedialog_article_failure">글을 삭제하지 못했습니다.</string>
+    <string name="deletedialog_article_error">오류로 인해 글을 삭제하지 못했습니다.</string>
+
     
     <!-- Extra Keys -->
     <string name="EXTRA_APPCONTENT">com.dms.beinone.extra.APPCONTENT</string>
@@ -154,18 +215,24 @@
     <string name="EXTRA_FACILITYREPORT">com.dms.beinone.extra.FACILITYREPORT</string>
     <string name="EXTRA_QNA">com.dms.beinone.extra.QNA</string>
     <string name="EXTRA_NO">com.dms.beinone.extra.NO</string>
+    <string name="EXTRA_WRITER">com.dms.beinone.extra.WRITER</string>
 
     <!-- Arguments -->
     <string name="ARGS_CATEGORY">com.dms.beinone.args.CATEGORY</string>
     <string name="ARGS_DEFAULTSTATUS">com.dms.beinone.args.DEFAULTSTATUS</string>
     <string name="ARGS_DOWNLOAD">com.dms.beinone.args.DOWNLOAD</string>
+    <string name="ARGS_DATE">com.dms.beinone.args.DATE</string>
+    <string name="ARGS_NO">com.dms.beinone.args.NO</string>
 
     <!-- SharedPreferences -->
-
     <!-- Account -->
     <string name="PREFS_ACCOUNT">account</string>
     <string name="PREFS_ACCOUNT_ID">id</string>
     <string name="PREFS_ACCOUNT_PASSWORD">password</string>
+    <string name="PREFS_ACCOUNT_NUMBER">number</string>
+    <string name="PREFS_ACCOUNT_NAME">name</string>
+    <string name="PREFS_ACCOUNT_MERIT">merit</string>
+    <string name="PREFS_ACCOUNT_DEMERIT">demerit</string>
     <!-- Default Status of Stay Apply -->
     <string name="PREFS_DEFAULTSTATUS">defaultStatus</string>
     <string name="PREFS_DEFAULTSTATUS_DEFAULTSTATUS">defaultStatus</string>

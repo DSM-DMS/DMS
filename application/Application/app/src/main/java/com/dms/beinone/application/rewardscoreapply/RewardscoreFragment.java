@@ -1,4 +1,4 @@
-package com.dms.beinone.application.rewardscore;
+package com.dms.beinone.application.rewardscoreapply;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -34,6 +34,7 @@ import java.io.IOException;
 public class RewardscoreFragment extends Fragment {
 
     private EditText mContentET;
+    private TextView mContentTV;
 
     @Nullable
     @Override
@@ -50,17 +51,17 @@ public class RewardscoreFragment extends Fragment {
      * @param rootView view to find child views
      */
     private void init(View rootView) {
-        final TextView contentTV = (TextView) rootView.findViewById(R.id.tv_rewardscore_content);
+        mContentTV = (TextView) rootView.findViewById(R.id.tv_rewardscore_content);
 
         mContentET = (DMSEditText) rootView.findViewById(R.id.et_rewardscore_content);
         mContentET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    contentTV.setTextColor(
+                    mContentTV.setTextColor(
                             ContextCompat.getColor(getContext(), R.color.colorPrimary));
                 } else {
-                    contentTV.setTextColor(
+                    mContentTV.setTextColor(
                             ContextCompat.getColor(getContext(), android.R.color.primary_text_light));
                     // hide the soft keyboard when touch outside
                     EditTextUtils.hideKeyboard(getContext(), (EditText) v);
@@ -88,7 +89,7 @@ public class RewardscoreFragment extends Fragment {
     }
 
     private void clearView() {
-        mContentET.setText(null);
+        mContentET.setText("");
     }
 
     private class ApplyRewardscoreTask extends AsyncTask<String, Void, Integer> {

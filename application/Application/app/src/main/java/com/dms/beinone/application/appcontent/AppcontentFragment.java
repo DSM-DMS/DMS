@@ -19,9 +19,10 @@ import com.dms.beinone.application.RecyclerViewUtils;
 
 public class AppcontentFragment extends Fragment {
 
-    private EmptySupportedRecyclerView mRecyclerView;
-
     public static int page = 1;
+
+    private int mCategory;
+    private EmptySupportedRecyclerView mRecyclerView;
 
     public static AppcontentFragment newInstance(Context context, int category) {
         Bundle args = new Bundle();
@@ -46,7 +47,7 @@ public class AppcontentFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        // initialize the page on destroy fragment
+        // initialize the page on destroy the fragment
         page = 1;
     }
 
@@ -56,10 +57,10 @@ public class AppcontentFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        int category = getArguments().getInt(getString(R.string.ARGS_CATEGORY));
+        mCategory = getArguments().getInt(getString(R.string.ARGS_CATEGORY));
 
         String title = null;
-        switch (category) {
+        switch (mCategory) {
             case Appcontent.NOTICE:
                 title = getString(R.string.nav_notice);
                 break;
@@ -77,21 +78,21 @@ public class AppcontentFragment extends Fragment {
         mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_appcontent);
 
         View emptyView = rootView.findViewById(R.id.view_appcontent_empty);
-        switch (category) {
+        switch (mCategory) {
             case Appcontent.NOTICE:
-                ((TextView) emptyView).setText(R.string.notice_empty);
+                ((TextView) emptyView).setText(R.string.appcontent_notice_empty);
                 break;
             case Appcontent.NEWSLETTER:
-                ((TextView) emptyView).setText(R.string.newsletter_empty);
+                ((TextView) emptyView).setText(R.string.appcontent_newsletter_empty);
                 break;
             case Appcontent.COMPETITION:
-                ((TextView) emptyView).setText(R.string.competition_empty);
+                ((TextView) emptyView).setText(R.string.appcontent_competition_empty);
                 break;
             default: break;
         }
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
 
-        new LoadAppcontentListTask(getContext(), category, mRecyclerView).execute(page++);
+        new LoadAppcontentListTask(getContext(), mCategory, mRecyclerView).execute();
     }
 
 }

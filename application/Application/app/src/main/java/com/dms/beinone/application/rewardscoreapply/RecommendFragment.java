@@ -1,4 +1,4 @@
-package com.dms.beinone.application.rewardscore;
+package com.dms.beinone.application.rewardscoreapply;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,8 +33,10 @@ import java.io.IOException;
 
 public class RecommendFragment extends Fragment {
 
-    private EditText mRecommendeeET;
+    private TextView mContentTV;
     private EditText mContentET;
+    private TextView mRecommendeeTV;
+    private EditText mRecommendeeET;
 
     @Nullable
     @Override
@@ -51,35 +53,35 @@ public class RecommendFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        final TextView contentTV = (TextView) rootView.findViewById(R.id.tv_recommend_content);
+        mContentTV = (TextView) rootView.findViewById(R.id.tv_recommend_content);
 
         mContentET = (DMSEditText) rootView.findViewById(R.id.et_recommend_content);
         mContentET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    contentTV.setTextColor(
+                    mContentTV.setTextColor(
                             ContextCompat.getColor(getContext(), R.color.colorPrimary));
                 } else {
                     EditTextUtils.hideKeyboard(getContext(), (EditText) v);
-                    contentTV.setTextColor(
+                    mContentTV.setTextColor(
                             ContextCompat.getColor(getContext(), android.R.color.primary_text_light));
                 }
             }
         });
 
-        final TextView recommendeeTV = (TextView) rootView.findViewById(R.id.tv_recommend_recommendee);
+        mRecommendeeTV = (TextView) rootView.findViewById(R.id.tv_recommend_recommendee);
 
         mRecommendeeET = (DMSEditText) rootView.findViewById(R.id.et_recommend_recommendee);
         mRecommendeeET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    recommendeeTV.setTextColor(
+                    mRecommendeeTV.setTextColor(
                             ContextCompat.getColor(getContext(), R.color.colorPrimary));
                 } else {
                     EditTextUtils.hideKeyboard(getContext(), (EditText) v);
-                    recommendeeTV.setTextColor(
+                    mRecommendeeTV.setTextColor(
                             ContextCompat.getColor(getContext(), android.R.color.primary_text_light));
                 }
             }
@@ -109,8 +111,8 @@ public class RecommendFragment extends Fragment {
     }
 
     private void clearView() {
-        mRecommendeeET.setText(null);
-        mContentET.setText(null);
+        mRecommendeeET.setText("");
+        mContentET.setText("");
     }
 
     private class ApplyRecommendTask extends AsyncTask<String, Void, Integer> {

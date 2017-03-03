@@ -6,4 +6,7 @@
     
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorSecondary">#BDBDBD</color>
+
+    <color name="merit">#66BB6A</color>
+    <color name="demerit">#EF5350</color>
 </resources>

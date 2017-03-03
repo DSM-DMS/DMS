@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,39 +56,59 @@ public class FAQFragment extends Fragment {
         new LoadFAQListTask().execute();
     }
 
-    private class LoadFAQListTask extends AsyncTask<Void, Void, List<FAQ>> {
+    private class LoadFAQListTask extends AsyncTask<Void, Void, Object[]> {
 
         @Override
-        protected List<FAQ> doInBackground(Void... params) {
-            List<FAQ> faqList = null;
+        protected Object[] doInBackground(Void... params) {
+            Object[] results = null;
 
             try {
-                faqList = loadFAQList();
-            } catch (IOException ie) {
+                results = loadFAQList();
+            } catch (IOException e) {
                 return null;
-            } catch (JSONException je) {
+            } catch (JSONException e) {
                 return null;
             }
 
-            return faqList;
+            return results;
         }
 
         @Override
-        protected void onPostExecute(List<FAQ> faqList) {
-            super.onPostExecute(faqList);
+        protected void onPostExecute(Object[] results) {
+            super.onPostExecute(results);
 
-            if (faqList == null) {
-                Toast.makeText(getContext(), R.string.faq_error, Toast.LENGTH_SHORT).show();
+            if (results != null) {
+                int code = (int) results[0];
+                List<FAQ> faqList = (ArrayList<FAQ>) results[1];
+
+                if (code == 200) {
+                    // success
+                    mRecyclerView.setAdapter(new FAQAdapter(getContext(), faqList));
+                } else if (code == 204) {
+                    // no data
+                    Toast.makeText(getContext(), R.string.faq_nodata, Toast.LENGTH_SHORT).show();
+                } else {
+                    // error
+                    Toast.makeText(getContext(), R.string.faq_error, Toast.LENGTH_SHORT).show();
+                }
             } else {
-                mRecyclerView.setAdapter(new FAQAdapter(getContext(), faqList));
+                // error
+                Toast.makeText(getContext(), R.string.faq_error, Toast.LENGTH_SHORT).show();
             }
         }
 
-        private List<FAQ> loadFAQList() throws IOException, JSONException {
+        private Object[] loadFAQList() throws IOException, JSONException {
             Response response = HttpBox.post().setCommand(Commands.LOAD_FAQ).putBodyData().push();
             JSONObject responseJSONObject = response.getJsonObject();
 
-            return JSONParser.parseFAQJSON(responseJSONObject);
+            int code = response.getCode();
+
+            List<FAQ> faqList = null;
+            if (code == 200) {
+                faqList = JSONParser.parseFAQJSON(responseJSONObject);
+            }
+
+            return new Object[] { code, faqList };
         }
     }
 

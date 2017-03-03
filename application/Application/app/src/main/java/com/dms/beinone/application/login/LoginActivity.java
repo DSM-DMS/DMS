@@ -1,5 +1,6 @@
 package com.dms.beinone.application.login;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EditTextUtils;
+import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.mypage.Student;
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.datamodel.Commands;
 import com.dms.boxfox.networking.datamodel.Response;
@@ -72,53 +75,67 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button registerBtn = (Button) findViewById(R.id.btn_login_register);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
     }
 
-    private class LoginTask extends AsyncTask<String, Void, Boolean> {
+    private class LoginTask extends AsyncTask<String, Void, Student> {
 
         private String mID;
         private String mPassword;
 
         @Override
-        protected Boolean doInBackground(String... account) {
+        protected Student doInBackground(String... account) {
+            Student student = null;
+
             mID = account[0];
             mPassword = account[1];
 
-            boolean permit = false;
-
             try {
-                permit = login(mID, mPassword);
-            } catch (IOException ie) {
+                student = login(mID, mPassword);
+            } catch (IOException e) {
                 return null;
-            } catch (JSONException je) {
+            } catch (JSONException e) {
                 return null;
             }
 
-            return permit;
+            return student;
         }
 
         @Override
-        protected void onPostExecute(Boolean permit) {
-            super.onPostExecute(permit);
+        protected void onPostExecute(Student student) {
+            super.onPostExecute(student);
 
-            if (permit == null) {
+            if (student == null) {
                 // error
                 Toast.makeText(LoginActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
-            } else if (permit) {
+            } else if (student.getNumber() == 0) {
+                // failure
+                Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
+            } else {
+                SharedPreferences.Editor editor = mPrefs.edit();
                 // success
-                mPrefs.edit().putString(getString(R.string.PREFS_ACCOUNT_ID), mID).apply();
-                mPrefs.edit().putString(getString(R.string.PREFS_ACCOUNT_PASSWORD), mPassword).apply();
+                editor.putString(getString(R.string.PREFS_ACCOUNT_ID), mID).apply();
+                editor.putString(getString(R.string.PREFS_ACCOUNT_PASSWORD), mPassword).apply();
+                editor.putInt(getString(R.string.PREFS_ACCOUNT_NUMBER), student.getNumber()).apply();
+                editor.putString(getString(R.string.PREFS_ACCOUNT_NAME), student.getName()).apply();
+                editor.putInt(getString(R.string.PREFS_ACCOUNT_MERIT), student.getMerit()).apply();
+                editor.putInt(getString(R.string.PREFS_ACCOUNT_DEMERIT), student.getDemerit()).apply();
+
                 Toast.makeText(LoginActivity.this,
                         mID + getString(R.string.login_success), Toast.LENGTH_SHORT).show();
 
                 finish();
-            } else {
-                // failure
-                Toast.makeText(LoginActivity.this, R.string.login_failure, Toast.LENGTH_SHORT).show();
             }
         }
 
-        private boolean login(String id, String password) throws IOException, JSONException {
+        private Student login(String id, String password) throws IOException, JSONException {
             JSONObject requestJSONObject = new JSONObject();
             requestJSONObject.put("id", id);
             requestJSONObject.put("password", password);
@@ -129,7 +146,11 @@ public class LoginActivity extends AppCompatActivity {
 
             JSONObject responseJSONObject = response.getJsonObject();
 
-            return responseJSONObject.getBoolean("permit");
+            if (responseJSONObject.getBoolean("permit")) {
+                return JSONParser.parseLoginJSON(responseJSONObject);
+            } else {
+                return new Student();
+            }
         }
     }
 
