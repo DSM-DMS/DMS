@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.MODIFY_FAQ)
-public class ModifyFaq implements Actionable {
+public class ModifyFaq implements Handler<RoutingContext> {
 	@Override
 	@Deprecated
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {

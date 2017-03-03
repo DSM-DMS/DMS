@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_QNA_COMMENT)
-public class LoadQnaComment implements Actionable {
+public class LoadQnaComment implements Handler<RoutingContext> {
 	EasyJsonObject tempObject;
 	
 	@Override

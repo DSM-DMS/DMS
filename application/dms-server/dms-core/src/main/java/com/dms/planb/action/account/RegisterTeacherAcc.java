@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.REGISTER_TEACHER_ACC)
-public class RegisterTeacherAcc implements Actionable {
+public class RegisterTeacherAcc implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		/**

@@ -2,16 +2,17 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
 import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_STAY_DEFAULT)
-public class LoadStayDefault implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegist
+public class LoadStayDefault implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");
@@ -25,5 +26,10 @@ public class LoadStayDefault implements Actionable {
 		}
 		
 		return responseObject;
+	}
+
+	@Override
+	public void handle(RoutingContext event) {
+		
 	}
 }

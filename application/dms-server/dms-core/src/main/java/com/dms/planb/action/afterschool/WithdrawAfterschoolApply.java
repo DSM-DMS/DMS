@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command=Commands.WITHDRAW_AFTERSCHOOL_APPLY)
-public class WithdrawAfterschoolApply implements Actionable {
+public class WithdrawAfterschoolApply implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");

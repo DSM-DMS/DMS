@@ -11,7 +11,7 @@ import com.dms.parser.dataio.post.PostModel;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_NEWSLETTER)
-public class LoadNewsletter implements Actionable {
+public class LoadNewsletter implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int number = requestObject.getInt("number");

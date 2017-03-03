@@ -12,7 +12,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 @ActionRegistration(command = 7514)
-public class AesAction implements Actionable {
+public class AesAction implements Handler<RoutingContext> {
 	private SecureManager manager;
 	
 	public AesAction(){

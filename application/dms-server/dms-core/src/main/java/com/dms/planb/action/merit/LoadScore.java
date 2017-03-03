@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_SCORE)
-public class LoadScore implements Actionable {
+public class LoadScore implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int number = requestObject.getInt("number");

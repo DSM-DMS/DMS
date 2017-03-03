@@ -11,7 +11,7 @@ import com.dms.planb.support.Commands;
 import com.dms.planb.support.ProfileImage;
 
 @ActionRegistration(command=Commands.MODIFY_PROFILE_IMAGE)
-public class ModifyProfileImage implements Actionable {
+public class ModifyProfileImage implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");

@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_GOINGOUT_APPLY_STATUS)
-public class LoadGoingoutApplyStatus implements Actionable {
+public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	SafeResultSet resultSet;
 	EasyJsonObject tempObject;
 	

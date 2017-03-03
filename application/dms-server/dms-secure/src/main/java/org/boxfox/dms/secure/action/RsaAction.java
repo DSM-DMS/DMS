@@ -12,7 +12,7 @@ import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 
 @ActionRegistration(command = 7513)
-public class RsaAction implements Actionable{
+public class RsaAction implements Handler<RoutingContext>{
     public static final int COMMAND_RSA = 7513;
     public static final int COMMAND_AES = 7514;
 

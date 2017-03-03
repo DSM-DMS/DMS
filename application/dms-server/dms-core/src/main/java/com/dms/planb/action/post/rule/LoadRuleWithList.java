@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_RULE)
-public class LoadRuleWithList implements Actionable {
+public class LoadRuleWithList implements Handler<RoutingContext> {
 	EasyJsonObject tempObject;
 	SafeResultSet resultSet;
 	

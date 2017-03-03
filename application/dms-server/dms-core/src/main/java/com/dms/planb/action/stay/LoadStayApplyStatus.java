@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_STAY_APPLY_STATUS)
-public class LoadStayApplyStatus implements Actionable {
+public class LoadStayApplyStatus implements Handler<RoutingContext> {
 	EasyJsonObject tempObject;
 	
 	@Override

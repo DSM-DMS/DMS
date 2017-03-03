@@ -11,7 +11,7 @@ import com.dms.parser.dataio.plan.PlanModel;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_PLAN)
-public class LoadPlan implements Actionable {
+public class LoadPlan implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int year = requestObject.getInt("year");

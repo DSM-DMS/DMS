@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.MODIFY_QNA_ANSWER)
-public class ModifyQnaAnswer implements Actionable {
+public class ModifyQnaAnswer implements Handler<RoutingContext> {
 	@Override
 	@Deprecated
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {

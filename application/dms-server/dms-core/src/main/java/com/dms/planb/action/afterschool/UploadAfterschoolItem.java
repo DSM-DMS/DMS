@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.UPLOAD_AFTERSCHOOL_ITEM)
-public class UploadAfterschoolItem implements Actionable {
+public class UploadAfterschoolItem implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		/**

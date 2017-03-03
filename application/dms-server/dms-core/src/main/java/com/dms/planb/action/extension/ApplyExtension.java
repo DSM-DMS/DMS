@@ -12,7 +12,7 @@ import com.dms.planb.support.LimitConfig;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.APPLY_EXTENSION)
-public class ApplyExtension implements Actionable {
+public class ApplyExtension implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		/**

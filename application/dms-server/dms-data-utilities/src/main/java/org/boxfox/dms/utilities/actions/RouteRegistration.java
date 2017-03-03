@@ -10,7 +10,7 @@ import io.vertx.core.http.HttpMethod;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface RouteRegisteration {
+public @interface RouteRegistration {
 
 	String path();
 

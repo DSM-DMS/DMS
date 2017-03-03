@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_QNA_LIST)
-public class LoadQnaList implements Actionable {
+public class LoadQnaList implements Handler<RoutingContext> {
 	EasyJsonObject tempObject;
 	SafeResultSet resultSet;
 	

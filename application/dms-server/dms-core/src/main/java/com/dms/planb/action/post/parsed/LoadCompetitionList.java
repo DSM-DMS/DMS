@@ -11,7 +11,7 @@ import com.dms.parser.dataio.post.PostModel;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_COMPETITION_LIST)
-public class LoadCompetitionList implements Actionable {
+public class LoadCompetitionList implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		int category = requestObject.getInt("category");

@@ -11,7 +11,7 @@ import com.dms.planb.support.Afterschool;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.APPLY_AFTERSCHOOL)
-public class ApplyAfterschool implements Actionable {
+public class ApplyAfterschool implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		/**

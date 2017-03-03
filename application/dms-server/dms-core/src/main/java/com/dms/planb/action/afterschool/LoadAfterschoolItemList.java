@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_AFTERSCHOOL_ITEM_LIST)
-public class LoadAfterschoolItemList implements Actionable {
+public class LoadAfterschoolItemList implements Handler<RoutingContext> {
 	EasyJsonObject tempObject;
 	
 	@Override

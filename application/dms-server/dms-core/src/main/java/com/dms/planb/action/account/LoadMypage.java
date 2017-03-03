@@ -12,7 +12,7 @@ import com.dms.planb.support.Commands;
 import com.dms.planb.support.ProfileImage;
 
 @ActionRegistration(command = Commands.LOAD_MYPAGE)
-public class LoadMypage implements Actionable {
+public class LoadMypage implements Handler<RoutingContext> {
 	@Override
 	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
 		String id = requestObject.getString("id");

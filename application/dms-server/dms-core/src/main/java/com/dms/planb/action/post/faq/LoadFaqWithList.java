@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import com.dms.planb.support.Commands;
 
 @ActionRegistration(command = Commands.LOAD_FAQ)
-public class LoadFaqWithList implements Actionable {
+public class LoadFaqWithList implements Handler<RoutingContext> {
 	EasyJsonObject tempObject;
 	SafeResultSet resultSet;
 	
