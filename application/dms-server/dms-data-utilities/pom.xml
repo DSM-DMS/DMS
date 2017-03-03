@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>dms-data-utilities</artifactId>
 	<name>dms-data-utilities</name>
-	<url>http://maven.apache.org</url>
 
 	<build>
 		<plugins>
@@ -27,9 +26,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jsoup.version>1.10.2</jsoup.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -39,11 +38,10 @@
 
 		<!-- 3rd party library dependency -->
 
-		<!-- json html parser for parsing data from dsm.hs.kr -->
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>${jsoup.version}</version>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.10</version>
 		</dependency>
 
 		<dependency>
@@ -51,10 +49,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.40</version>
 		</dependency>
-
-
-
-
 
 	</dependencies>
 </project>

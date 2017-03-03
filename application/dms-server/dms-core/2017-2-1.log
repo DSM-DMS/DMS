@@ -1,4 +1,0 @@
-2017/2/1/21:39:4 [INFO] Server started 1.0.3 TEST
-2017/2/1/21:39:5 [ERROR] com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
