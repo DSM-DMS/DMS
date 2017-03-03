@@ -33,8 +33,11 @@ import org.boxfox.dms.utilities.database.DataBase;
 import com.dms.parser.dataio.post.PostChangeDetector;
 import com.dms.parser.dataio.post.PostUpdateListener;
 
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 
 class DmsMain {
 	private static Vertx vertx;
