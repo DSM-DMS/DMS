@@ -3,7 +3,6 @@ package com.dms.planb.action.post.rule;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.Sender;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonArray;
@@ -24,12 +23,16 @@ public class LoadRuleWithList implements Handler<RoutingContext> {
 		EasyJsonObject tempObject = new EasyJsonObject();
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
-		int page = Integer.parseInt(context.request().getParam("page"));
-		int limit = Integer.parseInt(context.request().getParam("limit"));
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
-		
+			if(!context.request().params().contains("page") && !context.request().params().contains("limit")) {
+				resultSet = database.executeQuery("SELECT * FROM rule");
+			} else {
+				int page = Integer.parseInt(context.request().getParam("page"));
+				int limit = Integer.parseInt(context.request().getParam("limit"));
+				
+				resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
+			}
 			int postCount = 0;
 			if(resultSet.next()) {
 				do {

@@ -2,42 +2,34 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@ActionRegistration(command = Commands.UPLOAD_QNA_COMMENT)
+@RouteRegistration(path="post/qna/comment", method={HttpMethod.POST})
 public class UploadQnaComment implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Q&A comment in Q&A
-		 * 
-		 * Table Name : qna_comment
-		 * 
-		 * idx INT(11) PK NN AI
-		 * no INT(11) NN
-		 * writer VARCHAR(10) NN
-		 * comment_date DATETIME NN
-		 * content VARCHAR(300) NN
-		 * FOREIGN KEY no REFERENCES qna(no)
-		 * ON DELETE/UPDATE CASCADE
-		 * 
-		 * DATETIME format : YYYY-MM-DD hh:mm:ss
-		 * 
-		 * Upload comment based qna no
-		 */
-		int no = requestObject.getInt("no");
-		String content = requestObject.getString("content");
-		String writer = requestObject.getString("writer");
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
 		
-		int status = database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
+		int no = Integer.parseInt(context.request().getParam("no"));
+		String content = context.request().getParam("content");
+		String writer = context.request().getParam("writer");
 		
-		responseObject.put("status", status);
-		
-		return responseObject;
+		try {
+			database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", no, ", '", writer, "', now(), '", content, "')");
+			
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }
