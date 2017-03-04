@@ -9,7 +9,7 @@ $('#login').on('click', function() {
         data: {
             id: $('#login_id').val(),
             password: $('#login_pw').val(),
-            recaptcha: recaptcha,
+            recapcha: recaptcha,
             autoLogin: autoLogin
         }
         statusCode: {

@@ -1,0 +1,66 @@
+body{
+    background: #F1F1F1 !important;
+}
+
+/* ----- underbar title box -----  */
+.underbar-title{
+    position: relative;
+    border-bottom-width: 7px;
+    border-bottom-style: solid;
+    font-weight: bold;
+    font-size: 2.2em;
+}
+
+.view-more{
+    position: absolute;
+    bottom:0;
+    right:0;
+    font-size: 0.7em;
+    font-weight: normal;
+}
+
+.border-red{
+    border-color: #F92F24;
+}
+
+.border-blue{
+    border-color: #007BD3;
+}
+
+.border-puple{
+    border-color: #583E80;
+}
+table tr{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+/*----- icon menu -----*/
+.icon-menu-item{
+    position: relative;
+    margin:10px 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.icon-menu-item div{
+    top: 46px;
+    width:100%;
+    position: absolute;
+    color: white;
+}
+
+.slider-menu-container{
+    background: #F1F1F1;
+    margin: 20px 0;
+}
+.card {
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+    margin-bottom: 20px;
+}
+
+.card-block{
+}
