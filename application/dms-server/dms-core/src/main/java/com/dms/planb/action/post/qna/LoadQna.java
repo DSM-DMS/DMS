@@ -38,8 +38,13 @@ public class LoadQna implements Handler<RoutingContext> {
 				} else {
 					responseObject.put("has_answer", false);
 				}
+				
+				context.response().setStatusCode(200).end();
+				context.response().end(responseObject.toString());
+				context.response().close();
 			} else {
-				responseObject.put("status", 404);
+				context.response().setStatusCode(404).end();
+				context.response().close();
 			}
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
