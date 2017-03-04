@@ -1,25 +1,23 @@
 package com.dms.planb.action.post.parsed;
 
-import java.sql.SQLException;
-
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.parser.dataio.meal.MealModel;
-import com.dms.planb.support.Commands;
 
-@ActionRegistration(command = Commands.LOAD_MEAL)
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="meal", method={HttpMethod.GET})
 public class LoadMeal implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int year = requestObject.getInt("year");
-		int month = requestObject.getInt("month");
-		int day = requestObject.getInt("day");
+	public void handle(RoutingContext context) {
+		int year = Integer.parseInt(context.request().getParam("year"));
+		int month = Integer.parseInt(context.request().getParam("month"));
+		int day = Integer.parseInt(context.request().getParam("day"));
 		
-		responseObject.put("result", MealModel.getMealAtDate(year, month, day).toJSONObject());
-		
-		return responseObject;
+		context.response().setStatusCode(200).end();
+		context.response().end(MealModel.getMealAtDate(year, month, day).toString());
+		context.response().close();
 	}
 }
