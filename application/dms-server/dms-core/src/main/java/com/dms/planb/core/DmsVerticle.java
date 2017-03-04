@@ -69,7 +69,7 @@ class DmsVerticle extends AbstractVerticle {
 		secureManager = SecureManager.getInstance();
 		
 		server = vertx.createHttpServer();
-		RouteRegister.registerRouters(Router.router(vertx), "org.boxfox.dms.secure", "com.dms.planb");
+		
 		server.requestHandler(request -> {
 			Log.l("Received request : " + request.host());
 			
@@ -78,9 +78,7 @@ class DmsVerticle extends AbstractVerticle {
 			if(request.method() == HttpMethod.POST) {
 				/*
 				 *  The server will only work if the Http method is POST or OPTIONS.
-				 */
-				Log.l("Header : " + request.getHeader("command"));
-				
+				 */				
 				request.handler(buffer -> {
 					totalBuffer.appendBuffer(buffer);
 				});

@@ -25,7 +25,6 @@ package com.dms.planb.core;
  */
 
 import java.io.File;
-
 import java.sql.SQLException;
 import java.util.Calendar;
 
@@ -35,12 +34,9 @@ import org.boxfox.dms.utilities.database.DataBase;
 import com.dms.parser.dataio.post.PostChangeDetector;
 import com.dms.parser.dataio.post.PostUpdateListener;
 
-import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpServer;
 import io.vertx.core.VertxOptions;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
 
 class DmsMain {
 	private static Vertx vertx;
@@ -81,7 +77,7 @@ class DmsMain {
 		/*
 		 * Post(in school web page) change detector(thread)
 		 */
-
+		RouteRegister.registerRouters(Router.router(vertx), "org.boxfox.dms.secure", "com.dms.planb");
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			/*
 			 * Refresh databases at regular intervals
