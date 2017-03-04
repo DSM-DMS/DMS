@@ -23,7 +23,7 @@ public class LoadScore implements Handler<RoutingContext> {
 		int number = Integer.parseInt(context.request().getParam("number"));
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", number);
+			resultSet = database.executeQuery("SELECT * FROM student_score WHERE id='", number, "'");
 			if(resultSet.next()) {
 				responseObject.put("merit", resultSet.getInt("merit"));
 				responseObject.put("demerit", resultSet.getInt("demerit"));
