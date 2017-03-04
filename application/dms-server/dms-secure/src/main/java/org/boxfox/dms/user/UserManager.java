@@ -33,19 +33,16 @@ public class UserManager {
         String message = null;
         SafeResultSet rs = database.executeQuery("select count(*) from account where uid='", key, "'");
         if (rs.next() && rs.getInt(1) == 1) {
-            String dbId = rs.getString("id");
-            if (dbId == null) {
-                if (!checkIdExists(id)) {
-                    int result = database.executeUpdate("update account set id='", id, "', password='", password, "' where uid='", key, "'");
-                    if (result == 1) {
-                        message = "회원가입에 성공했습니다.";
-                        check = true;
-                    } else {
-                        message = "회원가입에 실패했습니다.";
-                    }
+            if (!checkIdExists(id)) {
+                int result = database.executeUpdate("update account set id='", id, "', password='", password, "' where uid='", key, "'");
+                if (result == 1) {
+                    message = "회원가입에 성공했습니다.";
+                    check = true;
                 } else {
-                    message = "이미 존재하는 아이디 입니다.";
+                    message = "회원가입에 실패했습니다.";
                 }
+            } else {
+                message = "이미 존재하는 아이디 입니다.";
             }
         } else {
             message = "고유번호를 확인해 주세요";
@@ -67,6 +64,17 @@ public class UserManager {
                 result.setSuccess(true);
                 result.setArgs(map);
             }
+        }
+        return result;
+    }
+
+    public JobResult sessionLogin(String sessionKey) throws SQLException {
+        JobResult result = new JobResult(false);
+        SafeResultSet rs = database.executeQuery("select id from account where session_key='", sessionKey, "'");
+        if (rs.next()) {
+            String id = rs.getString(1);
+            result.setSuccess(true);
+            result.setArgs(id);
         }
         return result;
     }

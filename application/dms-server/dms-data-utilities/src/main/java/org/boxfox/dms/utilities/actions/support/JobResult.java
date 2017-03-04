@@ -6,11 +6,9 @@ package org.boxfox.dms.utilities.actions.support;
 public class JobResult {
     private String message;
     private boolean success;
-    private Object[] args;
 
-    public JobResult(boolean success, Object... args) {
+    public JobResult(boolean success) {
         this.success = success;
-        this.args = args;
     }
 
 

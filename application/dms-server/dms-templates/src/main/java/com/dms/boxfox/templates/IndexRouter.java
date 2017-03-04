@@ -12,7 +12,6 @@ import java.io.IOException;
 @RouteRegistration(path = "/", method={HttpMethod.POST})
 public class IndexRouter implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
-
 		DmsTemplate templates = new DmsTemplate("index");
 		try {
 			System.out.println(templates.process());

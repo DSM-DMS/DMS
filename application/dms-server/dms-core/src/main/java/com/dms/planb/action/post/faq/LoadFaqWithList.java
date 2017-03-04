@@ -29,7 +29,6 @@ public class LoadFaqWithList implements Handler<RoutingContext> {
 			} else {
 				int page = Integer.parseInt(context.request().getParam("page"));
 				int limit = Integer.parseInt(context.request().getParam("limit"));
-				
 				resultSet = database.executeQuery("SELECT * FROM faq limit ", ((page - 1) * limit), ", ", limit);
 			}
 			
