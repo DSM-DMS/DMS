@@ -2,38 +2,35 @@ package com.dms.planb.action.goingout;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@ActionRegistration(command = Commands.APPLY_GOINGOUT)
+@RouteRegistration(path="apply/goingout", method={HttpMethod.PUT})
 public class ApplyGoingout implements Handler<RoutingContext> {
-	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Apply goingout - about departure date and reason
-		 * 
-		 * Table Name : goingout_apply
-		 * 
-		 * id VARCHAR(20) PK NN
-		 * date TINYINT(1) NN
-		 * reason VARCHAR(100) NN
-		 * 
-		 * DATE format : YYYY-MM-DD
-		 */
-		String id = requestObject.getString("id");
-		boolean date = requestObject.getBoolean("date");
-		String reason = requestObject.getString("reason");
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
 		
-		database.executeUpdate("DELETE FROM goingout_apply WHERE id='", id, "' AND date=", date);
-		int status = database.executeUpdate("INSERT INTO goingout_apply(id, date, reason) VALUES('", id, "', ", date, ", '", reason, "')");
+		String id = context.request().getParam("id");
+		String date = context.request().getParam("date");
+		String reason = context.request().getParam("reason");
 		
-		responseObject.put("status", status);
+		try {
+			database.executeUpdate("DELETE FROM goingout_apply WHERE id='", id, "' AND date=", date);
+			database.executeUpdate("INSERT INTO goingout_apply(id, date, reason) VALUES('", id, "', ", date, ", '", reason, "')");
 		
-		return responseObject;
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }
