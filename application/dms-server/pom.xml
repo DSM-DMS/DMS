@@ -34,7 +34,6 @@
 		<module>dms-data-utilities</module>
 		<module>dms-secure</module>
 		<module>dms-parser</module>
-		<module>templates</module>
 		<module>dms-templates</module>
 	</modules>
 

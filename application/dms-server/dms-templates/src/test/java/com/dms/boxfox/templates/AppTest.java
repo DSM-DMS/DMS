@@ -1,4 +1,4 @@
-package boxfox.templates;
+package com.dms.boxfox.templates;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
