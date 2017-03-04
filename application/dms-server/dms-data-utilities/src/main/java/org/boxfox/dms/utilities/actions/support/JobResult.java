@@ -6,10 +6,18 @@ package org.boxfox.dms.utilities.actions.support;
 public class JobResult {
     private String message;
     private boolean success;
+    private Object[] args;
 
-    public JobResult(boolean success, String message) {
+    public JobResult(boolean success, Object... args) {
+        this.success = success;
+        this.args = args;
+    }
+
+
+    public JobResult(boolean success, String message, Object... args) {
         this.success = success;
         this.message = message;
+        this.args = args;
     }
 
     public String getMessage() {
@@ -26,5 +34,13 @@ public class JobResult {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public Object[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(Object ... args) {
+        this.args = args;
     }
 }
