@@ -14,7 +14,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="post/faq/list", method={HttpMethod.GET})
-public class LoadFaqList implements Handler<RoutingContext> {
+public class LoadFaqWithList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
@@ -39,6 +39,7 @@ public class LoadFaqList implements Handler<RoutingContext> {
 					
 					tempObject.put("no", resultSet.getInt("no"));
 					tempObject.put("title", resultSet.getString("title"));
+					tempObject.put("content", resultSet.getString("content"));
 					
 					tempArray.add(tempObject);
 					

@@ -14,6 +14,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="post/faq", method={HttpMethod.GET})
 public class LoadFaq implements Handler<RoutingContext> {
+	@Deprecated
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
