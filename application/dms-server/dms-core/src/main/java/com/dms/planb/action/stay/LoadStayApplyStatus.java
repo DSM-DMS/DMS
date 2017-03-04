@@ -17,7 +17,7 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet = null;
+		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		String id = context.request().getParam("id");
