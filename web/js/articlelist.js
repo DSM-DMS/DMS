@@ -88,18 +88,18 @@ $(".articlelist table tr").click(function() {
 //
 // xhr.open('POST', 'http://dsm2015.cafe24.com:10419');
 // xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8;');
-// xhr.setRequestHeader('command', '427');
+// xhr.setRequestHeader('command', '438');
 //
 // xhr.onload = function() {
 //     if (xhr.status === 200) {
 //         var userInfo = JSON.parse(xhr.responseText);
-//         alert(userInfo);
+//         alert(xhr.responseText);
 //     }
 //     else if (xhr.status !== 200) {
 //         alert('Request failed.  Returned status of ' + xhr.status);
 //     }
 // };
-// xhr.send(JSON.stringify({}));
+// xhr.send(JSON.stringify({"year":2017, "month":02, "day": 10}));
 
 
 // faq response

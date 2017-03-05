@@ -9,8 +9,8 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
   <body>
-    <div id="card">
-      <div id="title">로그인</div>
+    <div id="login_card">
+      <div id="login_title">로그인</div>
       <form id="login_form">
         <input type="text" name="id" id="login_id" placeholder="ID">
         <input type="password" name="password" id="login_pw" placeholder="PW">
