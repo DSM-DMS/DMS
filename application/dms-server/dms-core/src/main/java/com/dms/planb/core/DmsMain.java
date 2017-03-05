@@ -115,8 +115,6 @@ class DmsMain {
 		/*
 		 * Get vert.x's instance from Vertx(extends Measured) class
 		 */
-		
-		vertx.createHttpServer().listen(8080);
 
 		options = new VertxOptions();
 		// System.setErr(new LogErrorOutputStream(System.err));
@@ -144,7 +142,7 @@ class DmsMain {
 		 * @see http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html
 		 * @see com.dms.planb.core .DmsVerticle
 		 */
-//		vertx.deployVerticle(new DmsVerticle());
+		vertx.deployVerticle(new DmsVerticle());
 		/*
 		 * Deploy a verticle instance that you have created yourself. Branch off
 		 * DmsVerticle class

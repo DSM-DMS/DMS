@@ -8,6 +8,7 @@ import org.reflections.Reflections;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
@@ -18,11 +19,15 @@ public class RouteRegister {
 	private static RouteRegister instance;
 	private List<String> paths;
 
-	private Router router;
+	private static Router router;
 
 	private RouteRegister(Router router) {
 		this.router = router;
 		this.paths = new ArrayList<String>();
+	}
+	
+	public static void executeRouter(HttpServerRequest request) {
+		
 	}
 
 	public void registerRouter(String path, Handler<RoutingContext> handler) throws RegisterException {
