@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/goingout", method={HttpMethod.DELETE})
+@RouteRegistration(path="/apply/goingout", method={HttpMethod.DELETE})
 public class WithdrawGoingoutApply implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

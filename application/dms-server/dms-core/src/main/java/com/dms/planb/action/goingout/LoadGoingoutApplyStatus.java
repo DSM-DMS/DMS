@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/goingout", method={HttpMethod.GET})
+@RouteRegistration(path="/apply/goingout", method={HttpMethod.GET})
 public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

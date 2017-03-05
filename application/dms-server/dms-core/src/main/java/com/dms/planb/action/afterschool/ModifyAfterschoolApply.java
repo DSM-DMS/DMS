@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/afterschool", method={HttpMethod.PATCH})
+@RouteRegistration(path="/apply/afterschool", method={HttpMethod.PATCH})
 public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

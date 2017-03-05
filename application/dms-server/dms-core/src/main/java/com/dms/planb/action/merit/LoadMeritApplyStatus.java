@@ -12,7 +12,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/merit", method={HttpMethod.GET})
+@RouteRegistration(path="/apply/merit", method={HttpMethod.GET})
 public class LoadMeritApplyStatus implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

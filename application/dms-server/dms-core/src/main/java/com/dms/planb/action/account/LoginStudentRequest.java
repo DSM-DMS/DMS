@@ -14,7 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="account/login", method={HttpMethod.POST})
+@RouteRegistration(path="/account/login", method={HttpMethod.POST})
 public class LoginStudentRequest implements Handler<RoutingContext> {
 	private UserManager userManager;
 	EasyJsonObject responseObject = new EasyJsonObject();

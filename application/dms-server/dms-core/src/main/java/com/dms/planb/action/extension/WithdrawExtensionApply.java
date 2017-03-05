@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/extension", method={HttpMethod.DELETE})
+@RouteRegistration(path="/apply/extension", method={HttpMethod.DELETE})
 public class WithdrawExtensionApply implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
