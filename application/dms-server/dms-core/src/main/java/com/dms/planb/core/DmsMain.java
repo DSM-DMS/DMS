@@ -75,7 +75,6 @@ class DmsMain {
 		/*
 		 * Post(in school web page) change detector(thread)
 		 */
-		RouteRegister.registerRouters(Router.router(vertx), "org.boxfox.dms.secure", "com.dms.planb");
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			/*
 			 * Refresh databases at regular intervals

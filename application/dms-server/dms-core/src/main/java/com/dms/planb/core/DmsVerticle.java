@@ -1,5 +1,7 @@
 package com.dms.planb.core;
 
+import io.vertx.core.http.HttpServer;
+import io.vertx.core.http.HttpServerResponse;
 import org.boxfox.dms.utilities.actions.RouteRegister;
 
 import io.vertx.core.AbstractVerticle;
@@ -8,10 +10,11 @@ import io.vertx.ext.web.Router;
 
 public class DmsVerticle extends AbstractVerticle {	
 	public void start() throws Exception {
-		vertx.createHttpServer().requestHandler(Router.router(vertx)::accept)
-		.requestHandler(request -> {
-			RouteRegister.executeRouter(request);
-		}).listen(8080);
+		HttpServer server = vertx.createHttpServer();
+
+		Router router = Router.router(vertx);
+		RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb");
+		server.requestHandler(router::accept).listen(8080);
 	}
 	
 	@SuppressWarnings("rawtypes")

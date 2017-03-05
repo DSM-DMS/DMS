@@ -25,10 +25,6 @@ public class RouteRegister {
 		this.router = router;
 		this.paths = new ArrayList<String>();
 	}
-	
-	public static void executeRouter(HttpServerRequest request) {
-		
-	}
 
 	public void registerRouter(String path, Handler<RoutingContext> handler) throws RegisterException {
 		if (router.get(path) != null) {
