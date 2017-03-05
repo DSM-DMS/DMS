@@ -29,9 +29,9 @@ public class LoadRuleWithList implements Handler<RoutingContext> {
 			} else {
 				int page = Integer.parseInt(context.request().getParam("page"));
 				int limit = Integer.parseInt(context.request().getParam("limit"));
-				
 				resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
 			}
+			
 			int postCount = 0;
 			if(resultSet.next()) {
 				do {
@@ -47,7 +47,7 @@ public class LoadRuleWithList implements Handler<RoutingContext> {
 				} while(resultSet.next());
 				
 				responseObject.put("num_of_post", postCount);
-				responseObject.put("result", responseObject);
+				responseObject.put("result", tempArray);
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
