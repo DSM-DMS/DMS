@@ -76,7 +76,6 @@ class DmsMain {
 		 * Post(in school web page) change detector(thread)
 		 */
 		RouteRegister.registerRouters(Router.router(vertx), "org.boxfox.dms.secure", "com.dms.planb");
-		vertx.createHttpServer().listen(8080);
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			/*
 			 * Refresh databases at regular intervals
@@ -116,6 +115,8 @@ class DmsMain {
 		/*
 		 * Get vert.x's instance from Vertx(extends Measured) class
 		 */
+		
+		vertx.createHttpServer().listen(8080);
 
 		options = new VertxOptions();
 		// System.setErr(new LogErrorOutputStream(System.err));
