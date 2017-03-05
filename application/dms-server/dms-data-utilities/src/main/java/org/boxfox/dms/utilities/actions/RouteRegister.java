@@ -1,19 +1,9 @@
 package org.boxfox.dms.utilities.actions;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.json.simple.JSONObject;
 import org.reflections.Reflections;
 
-import io.vertx.core.Vertx;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.Router;
@@ -69,5 +59,4 @@ public class RouteRegister {
 			}
 		}
 	}
-
 }
