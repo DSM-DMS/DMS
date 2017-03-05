@@ -7,6 +7,7 @@
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     border: 1px solid rgb(220, 220, 220);
+    font-size: 200%;
     width: 90%;
     text-align: center;
     margin: auto;
@@ -31,23 +32,25 @@
 
 #calendar td {
     width: calc(100%/7);
-    height: 50px;
+    height: 75px;
 }
 
 .stay_div {
-  width: 80%;
-  margin: auto;
   margin-bottom: 3%;
-  font-size: 140%;
+  font-size: 200%;
 }
 
 #date {
-    width: 70%;
+    text-align: center;
+    font-size: 100%;
+    width: 60%;
 }
 
 #stay_submit {
-    width: 62px;
-    margin: auto;
+    font-size: 100%;
+    width: 18%;
+    /*width: 62px;*/
+    margin-left: 5%;
 }
 
 #stay_table {
@@ -56,8 +59,9 @@
   width: 100%;
 }
 
+
 .color {
-    vertical-align: -35%;
+    text-align: middle;
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -65,10 +69,14 @@
 }
 
 .color_ex {
-  font-size: 140%;
+  font-size: 200%;
   width: 75%;
   margin: auto;
   margin-bottom: 5%;
+}
+
+.other_month {
+  color: rgb(220, 220, 220);
 }
 
 .go_home {

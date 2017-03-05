@@ -2,8 +2,12 @@ var valueArray = new Array();
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear();
 var currentMonth = currentDate.getMonth() + 1;
+var prevMonth = new Date(currentYear, currentMonth - 1, 1);
+var nextMonth = new Date(currentYear, currentYear - 1, 1);
 var lastDay = noofdays(currentYear, currentMonth);
 var newDate = new Date(currentYear, currentMonth - 1, 1);
+prevMonth.setMonth(newDate.getMonth() - 1);
+nextMonth.setMonth(newDate.getMonth() + 1);
 
 $('#month').text(currentYear + '.' + currentMonth); //달력 년, 월 표시
 
@@ -19,7 +23,9 @@ $('#prev_month').click(function() {
     }
     $('#month').text(currentYear + '.' + currentMonth);
     newDate = new Date(currentYear, currentMonth - 1, 1);
-    lastDay = noofdays(currentMonth, currentYear);
+    prevMonth.setMonth(newDate.getMonth() - 1);
+    nextMonth.setMonth(newDate.getMonth() + 1);
+    lastDay = noofdays(currentYear, currentMonth);
     clearCalendar();
     drawCalendar(newDate, lastDay);
 });
@@ -34,7 +40,9 @@ $('#next_month').click(function() {
     }
     $('#month').text(currentYear + '.' + currentMonth);
     newDate = new Date(currentYear, currentMonth - 1, 1);
-    lastDay = noofdays(currentMonth, currentYear);
+    prevMonth.setMonth(newDate.getMonth() - 1);
+    nextMonth.setMonth(newDate.getMonth() + 1);
+    lastDay = noofdays(currentYear, currentMonth);
     clearCalendar();
     drawCalendar(newDate, lastDay);
 });
@@ -68,47 +76,112 @@ function noofdays(year, month) {
 
 //달력 그리기
 function drawCalendar(date, lastDay) {
+    $('#sixth_week').hide();
     switch (date.getDay()) {
         case 0:
-            for (var i = 0; i < lastDay; i++) {
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 10 + i; //일요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
             }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
+            }
             break;
         case 1:
-            for (var i = 0; i < lastDay; i++) {
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
+            }
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 11 + i; //월요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
             }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
+            }
             break;
         case 2:
-            for (var i = 0; i < lastDay; i++) {
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
+            }
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 12 + i; //화요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
             }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
+            }
             break;
         case 3:
-            for (var i = 0; i < lastDay; i++) {
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
+            }
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 13 + i; //수요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
             }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
+            }
             break;
         case 4:
-            for (var i = 0; i < lastDay; i++) {
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
+            }
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 14 + i; //목요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
             }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
+            }
             break;
         case 5:
-            for (var i = 0; i < lastDay; i++) {
+            if(lastDay == 31) {
+              $('#sixth_week').toggle();
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
+            }
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 15 + i; //금요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
             }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
+            }
             break;
         case 6:
-            for (var i = 0; i < lastDay; i++) {
+            if(lastDay == 31) {
+              $('#sixth_week').toggle();
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
+            }
+            for (var i = 0; i <= lastDay; i++) {
                 var idx = 16 + i; //토요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            for(var j = 0; idx <= 51; idx++) {
+              $('#calendar td:eq(' + idx + ')').text(++j);
+              $('#calendar td:eq(' + idx + ')').attr('class', 'other_month');
             }
             break;
     }
@@ -117,9 +190,33 @@ function drawCalendar(date, lastDay) {
 
 //달력 초기화
 function clearCalendar() {
-    for (var i = 0; i < 35; i++) {
-        $('#calendar td:eq(' + (i + 10) + ')').text("");
+    for (var i = 0; i < 42; i++) {
+      var idx = 10 + i;
+        switch (idx % 7) {
+          case 0:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'sun');
+            break;
+          case 1:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'mon');
+            break;
+          case 2:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'tue');
+            break;
+          case 3:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'wed');
+            break;
+          case 4:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'thu');
+            break;
+          case 5:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'fri');
+          case 6:
+            $('#calendar td:eq(' + idx + ')').attr('class', 'sat');
+            break;
+        }
+        $('#calendar td:eq(' + idx + ')').text("");
         $('#calendar tbody tr').css("background-color", "white");
+        $('#sixth_week').toggle();
     }
 }
 
@@ -151,13 +248,22 @@ $('#fifth_week').click(function() {
     alert("다음 달 1주로 신청해주세요.");
 });
 
+
+$('#sixth_week').click(function() {
+    alert("다음 달 1주로 신청해주세요.");
+});
+
+function getNextMonth() {
+    return new Date()
+}
+
 // //********************이전 데이터 표시*********************
 // function dateToString(week) {
 //     return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
 // }
 //
 // function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
-//     for (var i = 1; i <= 4; i++) {
+//     for (var i = 1; i <= 4; i++) { //한달이 5주인 경우도 고려하고, 다음달 1주도 받도록 수정 해야함!!!
 //         this.sendData.week = dateToString(i);
 //         this.getData();
 //         valueArray.push(this.ajaxData);
@@ -177,14 +283,11 @@ $('#fifth_week').click(function() {
 //         } else if (valueArray[i] == 3) {
 //             $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
 //             $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
-//
 //         }
 //         valueArray = new Array();
 //     }
 //
 //     //***********************신청*********************
-//     $('#apply_form input[type="radio"]').checkboxradio();
-//
 //     $('#date').keydown(function(e) {
 //         e.preventDefault();
 //     });
