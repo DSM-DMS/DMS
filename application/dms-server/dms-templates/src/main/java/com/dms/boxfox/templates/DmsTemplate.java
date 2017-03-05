@@ -1,9 +1,6 @@
 package com.dms.boxfox.templates;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -26,7 +23,7 @@ public class DmsTemplate {
         this.input = new HashMap<String, Object>();
     }
 
-    public void put(String key, Object value){
+    public void put(String key, Object value) {
         input.put(key, value);
     }
 
@@ -41,8 +38,11 @@ public class DmsTemplate {
     private static Configuration getConfiguration() {
         if (configuration == null) {
             configuration = new Configuration();
-            configuration.setClassForTemplateLoading(IndexRouter.class, "/templates");
-
+            try {
+                configuration.setDirectoryForTemplateLoading(new File("WEB-INF/"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             configuration.setIncompatibleImprovements(new Version(2, 3, 20));
             configuration.setDefaultEncoding("UTF-8");
             configuration.setLocale(Locale.KOREA);
