@@ -61,7 +61,7 @@ table tr{
   transition: all 0.4s ease-in-out;
 }
 
-.slider-menu-container.hide .menu-controller{
+.slider-menu-container.hides .menu-controller{
     height: 3em;
     width: 3em;
     transform: rotate(180deg);
@@ -72,7 +72,7 @@ table tr{
     box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.slider-menu-container.hide .menu-controller img{
+.slider-menu-container.hides .menu-controller img{
     margin-top: 0.5em;
     margin-left: 0.5em;
 }
@@ -95,7 +95,7 @@ table tr{
   transition: all 0.4s ease-in-out;
 }
 
-.slider-menu-container.hide{
+.slider-menu-container.hides{
     transform: translate(calc(100% - 4em), 0);
 }
 
@@ -127,11 +127,12 @@ table tr{
 
 .menues {
     position: relative;
+    padding-top: 10px;
 }
 
 .menues .meal {
     position: relative;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
 }
 
 .menues .meal h4 {
@@ -139,8 +140,6 @@ table tr{
     vertical-align: middle;
     padding: 0;
     margin: 0;
-    margin-left: 7px;
-    margin-right: 3px;
 }
 
 .menues .meal p, div.div-allergy p {
@@ -208,6 +207,83 @@ table tr{
     /* Standard syntax */
 }
 
+/*------------------------------- extention ---------------------*/
+
+.extentionapply {
+    width: 100%;
+}
+
+- .extentionapply .seatcontainer {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.extentionapply .seatcontainer .seat {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 8px;
+    text-align: center;
+    line-height: 60px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+}
+
+
+
+/*---------------------- extentionapply select css------------*/
+
+.extentionapply div.class-selecter-div {
+    position: relative;
+    width: 200px;
+    height: 40px;
+    background: url(../image/selectArrow.png) 180px center no-repeat;
+    /* 화살표 이미지 */
+    border: 1px solid #E9DDDD;
+    display: inline-block;
+}
+
+.extentionapply div.class-selecter-div label {
+    position: absolute;
+    font-size: 14px;
+    color: #a97228;
+    top: 13px;
+    left: 12px;
+    letter-spacing: 1px;
+}
+
+.extentionapply div.class-selecter-div select#class-select {
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    /* IE 8 */
+}
+
+.extentionapply div.selecter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+/*---------------------- extentionapply applycancle css-------*/
+
+.extentionapply div.selecter-container input.apply-cancle {
+    display: inline-block;
+    background-color: white;
+    height: 40px;
+    border: 1px solid #E9DDDD;
+}
+
+
 
 
 .display-inline-block{
@@ -230,6 +306,29 @@ table tr{
 .main{
     padding: 0 15px;
     position: relative;
+}
+
+
+
+/*---------------------- modal to center -------------*/
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 
 

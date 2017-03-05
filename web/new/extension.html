@@ -6,16 +6,16 @@
     <title>DMS</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
     <h1>DSM Dormitory System</h1> 
 </div>
     
-    <div class="row slider-menu-container hides">
+    <div class="row slider-menu-container hide">
              <div class="menu-controller show">
                     <img src="../image/arrow.png">
              </div>
@@ -53,21 +53,37 @@
       <div class="card-wrapper">
     <div class="card">
     <div class="card-block">
-        <div class="row">
-    <div class="col-lg-6 col-md-12">
-        
-    </div>
-    <div class="col-lg-6 col-md-12">
-        
+        <div class="underbar-title border-blue">연장신청</div>
+        <div class="extentionapply text-center">
+            <div class="selecter-container">
+                <div class="class-selecter-div">
+                    <label for="class-select">가온실</label>
+                    <select id="class-select">
+                        <!--받은 데이터를 통해 호실의 개수를 정하도록 리팩토링 요구 - 출시후에-->
+                      <option selected="selected" value="1">가온실</option>
+                      <option value="2">나온실</option>
+                      <option value="3">다온실</option>
+                      <option value="4">라온실</option>
+                      <option value="5">3층 독서실</option>
+                      <option value="4">4층 독서실</option>
+                      <option value="4">5층 자유구역</option>
+                  </select>
+                </div>
+                <input class="apply-cancle" type="button" name="" value="신청취소">
+            </div>
+
+            <div class="seatcontainer">
+
+            </div>
+        </div>
     </div>
       </div>
-        </div>
-        </div>
         </div>
         </div>
       
 </body>
     
 <script src="./js/script.js"></script>
+<script src="./js/extentionapply.js"></script>
 
 </html>
