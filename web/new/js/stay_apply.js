@@ -167,7 +167,7 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 6:
-            if(lastDay == 31) {
+            if(lastDay == 31 || lastDay == 30) {
               $('#sixth_week').toggle();
             }
             var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
