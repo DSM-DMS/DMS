@@ -5,17 +5,36 @@ import java.util.Map;
 
 import org.boxfox.dms.secure.Guardian;
 import org.boxfox.dms.user.UserManager;
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.actions.support.Sender;
+import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
-@ActionRegistration(command = Commands.LOGIN_STUDENT_REQUEST)
+@RouteRegistration(path="account/login", method={HttpMethod.POST})
 public class LoginStudentRequest implements Handler<RoutingContext> {
+	@Override
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet;
+		
+		
+		
+		try {
+
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
+	}
     private UserManager userManager;
 
     public LoginStudentRequest() {
