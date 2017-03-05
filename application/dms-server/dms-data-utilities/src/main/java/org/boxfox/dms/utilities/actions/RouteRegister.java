@@ -1,5 +1,6 @@
 package org.boxfox.dms.utilities.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +22,7 @@ public class RouteRegister {
 
 	private RouteRegister(Router router) {
 		this.router = router;
+		this.paths = new ArrayList<String>();
 	}
 
 	public void registerRouter(String path, Handler<RoutingContext> handler) throws RegisterException {
