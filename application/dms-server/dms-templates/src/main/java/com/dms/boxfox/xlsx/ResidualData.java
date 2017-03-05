@@ -4,7 +4,7 @@ package com.dms.boxfox.xlsx;
  * Created by boxfox on 2017-03-04.
  */
 public class ResidualData {
-    private String id, name, phone, p_name, p_phone;
+    private String id, name;
     private int number, status, merit, demerit, residualDefault;
 
     public int getResidualDefault() {
@@ -31,30 +31,6 @@ public class ResidualData {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getP_name() {
-        return p_name;
-    }
-
-    public void setP_name(String p_name) {
-        this.p_name = p_name;
-    }
-
-    public String getP_phone() {
-        return p_phone;
-    }
-
-    public void setP_phone(String p_phone) {
-        this.p_phone = p_phone;
     }
 
     public int getNumber() {
