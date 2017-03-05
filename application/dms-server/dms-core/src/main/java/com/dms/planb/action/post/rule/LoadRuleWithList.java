@@ -23,7 +23,6 @@ public class LoadRuleWithList implements Handler<RoutingContext> {
 		EasyJsonObject tempObject = new EasyJsonObject();
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
-		
 		try {
 			if(!context.request().params().contains("page") && !context.request().params().contains("limit")) {
 				resultSet = database.executeQuery("SELECT * FROM rule");
