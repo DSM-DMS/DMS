@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-@RouteRegistration(path = "/", method = {HttpMethod.POST})
+@RouteRegistration(path = "/", method = {HttpMethod.GET})
 public class IndexRouter implements Handler<RoutingContext> {
     private DataBase db;
 

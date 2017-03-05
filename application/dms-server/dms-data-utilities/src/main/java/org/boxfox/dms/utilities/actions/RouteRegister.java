@@ -1,5 +1,6 @@
 package org.boxfox.dms.utilities.actions;
 
+import java.util.List;
 import java.util.Set;
 
 import org.reflections.Reflections;
@@ -14,6 +15,7 @@ import io.vertx.ext.web.RoutingContext;
 public class RouteRegister {
 	private static final String EXCEPTION_ALREADY = "이미 Command를 사용중입니다.";
 	private static RouteRegister instance;
+	private List<String> paths;
 
 	private Router router;
 
@@ -30,11 +32,12 @@ public class RouteRegister {
 
 	public void registerRouter(HttpMethod method, String path, Handler<RoutingContext> handler)
 			throws RegisterException {
-		System.out.println(path);
-		if (router.get(path) != null) {
+		if (paths.contains(path+method.name())) {
 			throw new RegisterException(EXCEPTION_ALREADY);
-		} else
+		} else{
 			router.route(method, path).handler(handler);
+			paths.add(path+method.name());
+		}
 	}
 
 	public static void registerRouters(Router router, String... packages) {
