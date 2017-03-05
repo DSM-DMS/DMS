@@ -1,0 +1,84 @@
+#calendar thead {
+    background-color: rgb(220, 220, 220);
+}
+
+#calendar {
+    margin-top: 7%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border: 1px solid rgb(220, 220, 220);
+    width: 90%;
+    text-align: center;
+    margin: auto;
+}
+
+.stay_content {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+#calendar .days, .days td {
+    font-weight: bold;
+}
+
+#calendar tr, #stay_table tr {
+    border-width: 0px;
+}
+
+.weeks {
+    cursor: pointer;
+}
+
+#calendar td {
+    width: calc(100%/7);
+    height: 50px;
+}
+
+.stay_div {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 3%;
+  font-size: 140%;
+}
+
+#date {
+    width: 70%;
+}
+
+#stay_submit {
+    width: 62px;
+    margin: auto;
+}
+
+#stay_table {
+  height: 100%;
+  margin: auto;
+  width: 100%;
+}
+
+.color {
+    vertical-align: -35%;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.color_ex {
+  font-size: 140%;
+  width: 75%;
+  margin: auto;
+  margin-bottom: 5%;
+}
+
+.go_home {
+    color: rgb(52, 219, 94);
+}
+
+.go_dom {
+    color: rgb(255, 151, 49);
+}
+
+.go_home_duty {
+    color: rgb(2, 117, 217);
+}
