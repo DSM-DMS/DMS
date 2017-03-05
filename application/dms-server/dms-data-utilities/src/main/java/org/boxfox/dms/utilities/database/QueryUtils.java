@@ -14,7 +14,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class QueryUtils {
-
 	public static String queryBuilder(Object... args) {
 		/*
 		 * This method is accessible anywhere.
