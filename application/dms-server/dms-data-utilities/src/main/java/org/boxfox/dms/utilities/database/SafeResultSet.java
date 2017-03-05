@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import static java.sql.Types.*;
 
 public class SafeResultSet {
@@ -37,6 +39,18 @@ public class SafeResultSet {
 			throw new SQLException(OFFSET_OVERFLOW);
 		}
 		return this;
+	}
+
+	public List<HashMap<String, Object>> toHashMap(){
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		for(Row row : rows) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			for(int i = 0 ; i < columns.size() ; i++){
+				map.put(columns.get(i), i+1);
+			}
+			list.add(map);
+		}
+		return list;
 	}
 
 	public int getRow(){
