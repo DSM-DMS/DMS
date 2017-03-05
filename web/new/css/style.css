@@ -1,14 +1,18 @@
 body{
     background: #F1F1F1 !important;
 }
+::-webkit-scrollbar { 
+    display: none; 
+}
 
-/* ----- underbar title box -----  */
+/*-------------------------- under bar title box--------------------------------*/
 .underbar-title{
     position: relative;
     border-bottom-width: 7px;
     border-bottom-style: solid;
     font-weight: bold;
     font-size: 2.2em;
+    margin-bottom: 3px;
 }
 
 .view-more{
@@ -17,6 +21,8 @@ body{
     right:0;
     font-size: 0.7em;
     font-weight: normal;
+    text-decoration: none;
+    cursor:pointer;
 }
 
 .border-red{
@@ -35,25 +41,179 @@ table tr{
     border-bottom-width: 1px;
 }
 
-/*----- icon menu -----*/
+/*--------------------------icon menu--------------------------------*/
 .icon-menu-item{
+    height: 3em;
     position: relative;
-    margin:10px 10px;
-    font-size: 1.5em;
-    font-weight: bold;
+    margin: 0 0.5em;
+    cursor: pointer;
+    display:inline-block;
+}
+
+.menu-controller {
+    vertical-align: middle;
+    height: 2em;
+    margin: 0.5em 0.2em;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.slider-menu-container.hide .menu-controller{
+    height: 3em;
+    width: 3em;
+    transform: rotate(180deg);
+    background: #ffffff;
+    border-radius: 360px;
+    margin-top: 0;
+    display:inline-block;
+    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.slider-menu-container.hide .menu-controller img{
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.menu-controller img{
+    width: 2em;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.slider-menu-container{
+    position: fixed;
+    right:10px;
+    top:5px;
+    z-index: 1;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.slider-menu-container.hide{
+    transform: translate(calc(100% - 4em), 0);
+}
+
+.icon-menu-item:hover > img{ opacity: 0; }
+.icon-menu-item:hover > div{ opacity: 100; }
+
+.icon-menu-item img{
+    width: 3em;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -ms-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .icon-menu-item div{
-    top: 46px;
-    width:100%;
     position: absolute;
+    top:1.5em;
+    width:100%;
+    font-size: 0.7em;
+    opacity: 0;
+}
+
+
+/*--------------------------meal--------------------------------*/
+.underline {
+    background: rgb(41, 128, 185);
+}
+
+.menues {
+    position: relative;
+}
+
+.menues .meal {
+    position: relative;
+    margin-bottom: 3px;
+}
+
+.menues .meal h4 {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    margin-left: 7px;
+    margin-right: 3px;
+}
+
+.menues .meal p, div.div-allergy p {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: 10px 0
+}
+
+.menues .meal .info {
+    position: relative;
+    width: calc(100% - 40px);
+    background-color: #f0f0f0;
+    display: inline-block;
+    transition: all 0.5s ease;
+}
+
+.menues .meal .info:hover {
+    background-color: rgb(191, 148, 208);
     color: white;
 }
 
-.slider-menu-container{
-    background: #F1F1F1;
-    margin: 20px 0;
+.menues img {
+    vertical-align: middle;
+    width: 25px;
+    cursor: pointer;
 }
+
+.blue-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* Standard syntax */
+}
+
+.puple-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* Standard syntax */
+}
+
+.red-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* Standard syntax */
+}
+
+
+
+.display-inline-block{
+    display:inline-block;
+}
+
 .card {
     padding: 15px;
     background-color: white;
