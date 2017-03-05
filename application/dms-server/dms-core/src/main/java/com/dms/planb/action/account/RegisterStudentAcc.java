@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="account/register/student", method={HttpMethod.POST})
+@RouteRegistration(path = "account/register/student", method = {HttpMethod.POST})
 public class RegisterStudentAcc implements Handler<RoutingContext> {
 	private UserManager userManager;
 
@@ -46,11 +46,11 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 	    			database.executeUpdate("INSERT INTO student_score(uid, merit, demerit) VALUES('", uid, "', 0, 0)");
 	    			
 	    			context.response().setStatusCode(201).end();
-	    			context.response().end(result.getMessage());
+	    			context.response().setStatusMessage(result.getMessage()).end();
 	    			context.response().close();
 	            } else {
 	            	context.response().setStatusCode(409).end();
-	            	context.response().end(result.getMessage());
+	            	context.response().setStatusMessage(result.getMessage()).end();
 	    			context.response().close();
 	            }
 	        } else {
