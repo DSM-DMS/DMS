@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/extension", method={HttpMethod.PUT})
+@RouteRegistration(path="/apply/extension", method={HttpMethod.PUT})
 public class ApplyExtension implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

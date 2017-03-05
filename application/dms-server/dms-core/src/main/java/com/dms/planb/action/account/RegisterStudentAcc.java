@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "account/register/student", method = {HttpMethod.POST})
+@RouteRegistration(path="/account/register/student", method={HttpMethod.POST})
 public class RegisterStudentAcc implements Handler<RoutingContext> {
 	private UserManager userManager;
 

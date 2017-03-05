@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="post/report/list", method={HttpMethod.GET})
+@RouteRegistration(path="/post/report/list", method={HttpMethod.GET})
 public class LoadReportFacilityList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

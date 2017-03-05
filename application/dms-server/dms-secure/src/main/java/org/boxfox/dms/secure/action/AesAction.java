@@ -15,7 +15,7 @@
 //
 //import javax.xml.ws.handler.Handler;
 //
-//@RouteRegistration(path = "/secure/aes")
+//@RouteRegistration(path="/secure/aes")
 //public class AesAction implements Handler<RoutingContext> {
 //	private SecureManager manager;
 //	

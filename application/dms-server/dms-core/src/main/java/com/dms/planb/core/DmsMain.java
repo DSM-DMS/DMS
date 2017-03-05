@@ -1,7 +1,5 @@
 package com.dms.planb.core;
 
-
-
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
  * 

@@ -11,7 +11,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="post/faq", method={HttpMethod.DELETE})
+@RouteRegistration(path="/post/faq", method={HttpMethod.DELETE})
 public class DeleteFaq implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

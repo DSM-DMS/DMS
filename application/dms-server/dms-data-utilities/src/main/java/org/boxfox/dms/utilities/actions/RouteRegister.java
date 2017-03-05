@@ -30,6 +30,7 @@ public class RouteRegister {
 
 	public void registerRouter(HttpMethod method, String path, Handler<RoutingContext> handler)
 			throws RegisterException {
+		System.out.println(path);
 		if (router.get(path) != null) {
 			throw new RegisterException(EXCEPTION_ALREADY);
 		} else

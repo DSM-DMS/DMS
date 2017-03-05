@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="apply/stay", method={HttpMethod.PUT})
+@RouteRegistration(path="/apply/stay", method={HttpMethod.PUT})
 public class ApplyStay implements Handler<RoutingContext> {
 		/**
 		 * Apply stay - about value of date

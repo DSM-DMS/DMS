@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="post/qna/answer", method={HttpMethod.DELETE})
+@RouteRegistration(path="/post/qna/answer", method={HttpMethod.DELETE})
 public class DeleteQnaAnswer implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

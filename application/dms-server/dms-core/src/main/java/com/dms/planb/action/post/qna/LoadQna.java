@@ -12,7 +12,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="post/qna", method={HttpMethod.GET})
+@RouteRegistration(path="/post/qna", method={HttpMethod.GET})
 public class LoadQna implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

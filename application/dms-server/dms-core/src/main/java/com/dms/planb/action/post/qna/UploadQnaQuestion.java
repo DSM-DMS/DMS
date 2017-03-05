@@ -9,7 +9,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="post/qna/question", method={HttpMethod.POST})
+@RouteRegistration(path="/post/qna/question", method={HttpMethod.POST})
 public class UploadQnaQuestion implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
