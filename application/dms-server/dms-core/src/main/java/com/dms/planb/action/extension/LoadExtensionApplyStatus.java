@@ -30,7 +30,7 @@ public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
 				responseObject.put("seat", resultSet.getInt("seat"));
 				responseObject.put("name", resultSet.getString("name"));
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

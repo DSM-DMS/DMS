@@ -28,7 +28,7 @@ public class LoadStayDefault implements Handler<RoutingContext> {
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getString("value"));
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

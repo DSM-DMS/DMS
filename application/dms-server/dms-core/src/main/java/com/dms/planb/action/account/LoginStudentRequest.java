@@ -48,7 +48,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 	                	
 	                }
 	                
-	                context.response().setStatusCode(201).end();
+	                context.response().setStatusCode(201);
 	                context.response().end(responseObject.toString());
 	                context.response().close();
 	            }

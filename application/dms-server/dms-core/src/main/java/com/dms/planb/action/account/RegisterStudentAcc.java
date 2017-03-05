@@ -45,11 +45,11 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 	    			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4");
 	    			database.executeUpdate("INSERT INTO student_score(uid, merit, demerit) VALUES('", uid, "', 0, 0)");
 	    			
-	    			context.response().setStatusCode(201).end();
+	    			context.response().setStatusCode(201);
 	    			context.response().setStatusMessage(result.getMessage()).end();
 	    			context.response().close();
 	            } else {
-	            	context.response().setStatusCode(409).end();
+	            	context.response().setStatusCode(409);
 	            	context.response().setStatusMessage(result.getMessage()).end();
 	    			context.response().close();
 	            }

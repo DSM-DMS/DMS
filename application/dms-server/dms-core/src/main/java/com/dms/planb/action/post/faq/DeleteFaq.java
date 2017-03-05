@@ -23,7 +23,7 @@ public class DeleteFaq implements Handler<RoutingContext> {
 		try {
 			database.executeUpdate("DELETE FROM faq WHERE no=", no);
 			
-			context.response().setStatusCode(200).end();
+			context.response().setStatusCode(200);
 			context.response().end(responseObject.toString());
 			context.response().close();
 		} catch(SQLException e) {

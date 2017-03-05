@@ -16,7 +16,7 @@ public class LoadMeal implements Handler<RoutingContext> {
 		int month = Integer.parseInt(context.request().getParam("month"));
 		int day = Integer.parseInt(context.request().getParam("day"));
 		
-		context.response().setStatusCode(200).end();
+		context.response().setStatusCode(200);
 		context.response().end(MealModel.getMealAtDate(year, month, day).toString());
 		context.response().close();
 	}

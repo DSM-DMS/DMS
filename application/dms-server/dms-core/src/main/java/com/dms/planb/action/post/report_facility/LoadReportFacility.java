@@ -39,7 +39,7 @@ public class LoadReportFacility implements Handler<RoutingContext> {
 					responseObject.put("has_result", false);
 				}
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

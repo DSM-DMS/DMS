@@ -14,7 +14,7 @@ public class LoadNoticeList implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		int page = Integer.parseInt(context.request().getParam("page"));
 		
-		context.response().setStatusCode(200).end();
+		context.response().setStatusCode(200);
 		context.response().end(PostModel.getPostsAtPage(0, page).toString());
 		context.response().close();
 	}

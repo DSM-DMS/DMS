@@ -14,7 +14,7 @@ public class LoadNewsletterList implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		int page = Integer.parseInt(context.request().getParam("page"));
 		
-		context.response().setStatusCode(200).end();
+		context.response().setStatusCode(200);
 		context.response().end(PostModel.getPostsAtPage(1, page).toString());
 		context.response().close();
 	}

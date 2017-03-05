@@ -49,7 +49,7 @@ public class LoadFaqWithList implements Handler<RoutingContext> {
 				responseObject.put("num_of_post", postCount);
 				responseObject.put("result", tempArray);
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

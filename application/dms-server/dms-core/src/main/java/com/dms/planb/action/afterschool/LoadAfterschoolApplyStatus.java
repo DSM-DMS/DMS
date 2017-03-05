@@ -47,7 +47,7 @@ public class LoadAfterschoolApplyStatus implements Handler<RoutingContext> {
 				
 				responseObject.put("result", tempArray);
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

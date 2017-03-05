@@ -28,7 +28,7 @@ public class LoadScore implements Handler<RoutingContext> {
 				responseObject.put("merit", resultSet.getInt("merit"));
 				responseObject.put("demerit", resultSet.getInt("demerit"));
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

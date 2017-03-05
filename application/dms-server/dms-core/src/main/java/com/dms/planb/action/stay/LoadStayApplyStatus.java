@@ -29,7 +29,7 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getInt("value"));
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

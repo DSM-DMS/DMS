@@ -30,7 +30,7 @@ public class LoadFaq implements Handler<RoutingContext> {
 				responseObject.put("title", resultSet.getString("title"));
 				responseObject.put("content", resultSet.getString("content"));
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

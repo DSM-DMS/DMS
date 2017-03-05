@@ -22,7 +22,7 @@ public class UploadReportResult implements Handler<RoutingContext> {
 		try {
 			database.executeUpdate("UPDATE facility_report SET result='", content, "', result_date=NOW() WHERE no=", no);
 			
-			context.response().setStatusCode(200).end();
+			context.response().setStatusCode(200).end();;
 			context.response().close();
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();

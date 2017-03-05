@@ -15,7 +15,7 @@ public class LoadPlan implements Handler<RoutingContext> {
 		int year = Integer.parseInt(context.request().getParam("year"));
 		int month = Integer.parseInt(context.request().getParam("month"));
 		
-		context.response().setStatusCode(200).end();
+		context.response().setStatusCode(200);
 		context.response().end(PlanModel.getPlan(year, month).toString());
 		context.response().close();
 	}
