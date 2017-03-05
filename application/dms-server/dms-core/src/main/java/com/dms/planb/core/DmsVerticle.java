@@ -12,7 +12,17 @@ public class DmsVerticle extends AbstractVerticle {
 		HttpServer server = vertx.createHttpServer();
 
 		Router router = Router.router(vertx);
+		/**
+		 * @see org.boxfox.dms.utilities.actions
+		 * .RouteRegister
+		 */
 		RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb");
+		/*
+		 * Using Reflection. Find @RouteRegistration annotation of classes in
+		 * package, and register actions to RouteRegister class.
+		 */
+		
+		
 		server.requestHandler(router::accept).listen(8081);
 	}
 	

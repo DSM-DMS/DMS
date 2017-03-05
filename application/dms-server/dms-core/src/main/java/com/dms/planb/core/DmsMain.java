@@ -59,14 +59,6 @@ class DmsMain {
 		 */
 
 		/**
-		 * @see org.boxfox.dms.utilities.actions .ActionRegister
-		 */
-		/*
-		 * Using Reflection. Find @ActionRegistration annotation of classes in
-		 * package, and register actions to ActionRegister class.
-		 */
-
-		/**
 		 * @see com.dms.parser.dataio.post .PostChangeDetector
 		 */
 		// PostChangeDetector.getInstance().start();
