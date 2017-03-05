@@ -86,7 +86,7 @@ table tr{
 .slider-menu-container{
     position: fixed;
     right:10px;
-    top:5px;
+    bottom:5px;
     z-index: 1;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -211,16 +211,25 @@ table tr{
 
 
 .display-inline-block{
-    display:inline-block;
+    display:inline-block !important;
 }
 
-.card {
-    padding: 15px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
-    margin-bottom: 20px;
+.card{
+    margin-bottom: 5px;
 }
 
-.card-block{
+.row.padding{
+    padding: 0 15px;
 }
+
+.card-block-notice{
+    padding: 5px !important;
+    text-align: center;
+}
+
+.main{
+    padding: 0 15px;
+    position: relative;
+}
+
+
