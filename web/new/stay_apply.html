@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>DMS</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/stay_apply.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+  <body>
+    <div class="container">
+      <h1>DSM Dormitory System</h1>
+    </div>
+
+    <div class="row slider-menu-container hide">
+       <div class="menu-controller show">
+              <img src="../image/arrow.png">
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/megaphone.png"/>
+           <div>공지사항</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/writing.png"/>
+           <div>연장신청</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/settings.png"/>
+           <div>수리신고</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/chicken.png"/>
+           <div>학교급식</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/crown.png"/>
+           <div>상점신청</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/bug.png"/>
+           <div>버그신고</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/man.png"/>
+           <div>내정보</div>
+      </div>
+  </div>
+
+  <div class="main">
+    <div class="card-wrapper">
+      <div class="card">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-lg-7 col-md-12">
+              <table id="calendar" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <td id="prev_month"><i class="fa fa-toggle-left" style="font-size: 28px;"></i></td>
+                          <td id="month" colspan="5" style="font-size: 28px; font-weight: bold;"></td>
+                          <td id="next_month"><i class="fa fa-toggle-right" style="font-size: 28px;"></i></td>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="days">
+                          <td>Sun</td>
+                          <td>Mon</td>
+                          <td>Tue</td>
+                          <td>Wed</td>
+                          <td>Thu</td>
+                          <td>Fri</td>
+                          <td>Sat</td>
+                      </tr>
+                      <tr id="first_week" class="weeks">
+                          <td class="sun"></td>
+                          <td class="mon"></td>
+                          <td class="tue"></td>
+                          <td class="wed"></td>
+                          <td class="thu"></td>
+                          <td class="fri go_home"></td>
+                          <td class="sat"></td>
+                      </tr>
+                      <tr id="second_week" class="weeks">
+                          <td class="sun go_dom"></td>
+                          <td class="mon"></td>
+                          <td class="tue"></td>
+                          <td class="wed"></td>
+                          <td class="thu"></td>
+                          <td class="fri go_home"></td>
+                          <td class="sat go_dom"></td>
+                      </tr>
+                      <tr id="third_week" class="weeks">
+                          <td class="sun"></td>
+                          <td class="mon"></td>
+                          <td class="tue"></td>
+                          <td class="wed"></td>
+                          <td class="thu"></td>
+                          <td class="fri"></td>
+                          <td class="sat go_home"></td>
+                      </tr>
+                      <tr id="fourth_week" class="weeks">
+                          <td class="sun go_dom"></td>
+                          <td class="mon"></td>
+                          <td class="tue"></td>
+                          <td class="wed"></td>
+                          <td class="thu"></td>
+                          <td class="fri go_home_duty"></td>
+                          <td class="sat"></td>
+                      </tr>
+                      <tr id="fifth_week" class="weeks">
+                          <td class="sun go_dom"></td>
+                          <td class="mon"></td>
+                          <td class="tue"></td>
+                          <td class="wed"></td>
+                          <td class="thu"></td>
+                          <td class="fri"></td>
+                          <td class="sat"></td>
+                      </tr>
+                      <tr id="sixth_week" class="weeks">
+                          <td class="sun"></td>
+                          <td class="mon"></td>
+                          <td class="tue"></td>
+                          <td class="wed"></td>
+                          <td class="thu"></td>
+                          <td class="fri"></td>
+                          <td class="sat"></td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+            <div class="col-lg-5 col-md-10" style="margin: auto;">
+              <table id="stay_table">
+                <tr>
+                  <td>
+                    <div class="color_ex">
+                      <span class="color" style="background-color: rgb(52, 219, 94);"></span>&nbsp&nbsp귀가
+                    </div>
+                    <div class="color_ex">
+                      <span class="color" style="background-color: rgb(255, 151, 49);"></span>&nbsp&nbsp귀사
+                    </div>
+                    <div class="color_ex">
+                      <span class="color" style="background-color: rgb(2, 117, 217);"></span>&nbsp&nbsp의무귀가
+                    </div>
+                  </td>
+                  <td>
+                    <div class="radio stay_div">
+                      <label><input type="radio" name="stay" value="4"> 잔류</label>
+                    </div>
+                    <div class="radio stay_div">
+                      <label><input type="radio" name="stay" value="1"> 금요귀가</label>
+                    </div>
+                    <div class="radio stay_div">
+                      <label><input type="radio" name="stay" value="2"> 토요귀가</label>
+                    </div>
+                    <div class="radio stay_div">
+                      <label><input type="radio" name="stay" value="3"> 토요귀사</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div class="stay_div">
+                      <input type="text" name="date" id="date"><button type="button" class="btn btn-secondary" id="stay_submit">신청</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script src="./js/script.js"></script>
+<script src="./js/stay_apply.js"></script>
+
+</html>
