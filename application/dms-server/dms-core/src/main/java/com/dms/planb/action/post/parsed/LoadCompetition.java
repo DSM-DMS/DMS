@@ -8,7 +8,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/competition", method={HttpMethod.GET})
+@RouteRegistration(path="/post/school/competition", method={HttpMethod.GET})
 public class LoadCompetition implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
