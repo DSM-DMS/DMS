@@ -12,7 +12,7 @@ public class ImagesRouter implements Handler<RoutingContext> {
         if (context.request().path().contains("..")) {
             context.response().end();
         } else {
-            context.response().sendFile("WEB-INF/" + context.request().path());
+            context.response().sendFile("WEB-INF" + context.request().path());
         }
     }
 }
