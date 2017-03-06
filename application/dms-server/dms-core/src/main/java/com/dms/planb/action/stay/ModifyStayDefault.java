@@ -16,11 +16,11 @@ public class ModifyStayDefault implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
 		
-		String uid = context.request().getParam("uid");
+		String id = context.request().getParam("id");
 		int value = Integer.parseInt(context.request().getParam("value"));
 		
 		try {
-			database.executeUpdate("UPDATE stay_apply_default SET value=", value, " WHERE uid='", uid, "'");
+			database.executeUpdate("UPDATE stay_apply_default SET value=", value, " WHERE id='", id, "'");
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

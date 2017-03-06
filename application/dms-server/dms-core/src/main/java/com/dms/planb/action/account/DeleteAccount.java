@@ -10,7 +10,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/account/delete/student", method={HttpMethod.DELETE})
+@RouteRegistration(path="/account/student", method={HttpMethod.DELETE})
 public class DeleteAccount implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

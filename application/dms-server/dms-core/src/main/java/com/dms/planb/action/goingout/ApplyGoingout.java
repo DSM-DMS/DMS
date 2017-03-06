@@ -17,7 +17,7 @@ public class ApplyGoingout implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		
 		String id = context.request().getParam("id");
-		String date = context.request().getParam("date");
+		boolean date = Boolean.parseBoolean(context.request().getParam("date"));
 		String reason = context.request().getParam("reason");
 		
 		try {

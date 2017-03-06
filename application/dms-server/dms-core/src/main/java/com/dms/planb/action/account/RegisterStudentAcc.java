@@ -41,9 +41,9 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 			if (Guardian.checkParameters(uid, id, password)) {
 	            JobResult result = userManager.register(uid, id, password);
 	            if (result.isSuccess()) {
-	                database.executeUpdate("INSERT INTO student_data(uid, number, status, name) VALUES('", uid, "', ", number, ", ", status, ", '", name, "')");
-	    			database.executeUpdate("INSERT INTO stay_apply_default(uid, value) VALUES('", uid, "', 4");
-	    			database.executeUpdate("INSERT INTO student_score(uid, merit, demerit) VALUES('", uid, "', 0, 0)");
+	                database.executeUpdate("INSERT INTO student_data(id, number, status, name) VALUES('", id, "', ", number, ", ", status, ", '", name, "')");
+	    			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4");
+	    			database.executeUpdate("INSERT INTO student_score(id, merit, demerit) VALUES('", id, "', 0, 0)");
 	    			
 	    			context.response().setStatusCode(201);
 	    			context.response().setStatusMessage(result.getMessage()).end();

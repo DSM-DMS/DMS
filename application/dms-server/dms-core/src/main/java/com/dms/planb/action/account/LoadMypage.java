@@ -1,10 +1,11 @@
 package com.dms.planb.action.account;
 
 import java.sql.SQLException;
+import java.util.Map;
 
+import org.boxfox.dms.user.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -14,44 +15,41 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/account/mypage/student", method={HttpMethod.GET})
+@RouteRegistration(path = "/account/student", method = { HttpMethod.GET })
 public class LoadMypage implements Handler<RoutingContext> {
+	private UserManager userManager;
+
+	public LoadMypage() {
+		userManager = new UserManager();
+	}
+
 	@Override
 	public void handle(RoutingContext context) {
-		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		
-		String uid = context.request().getParam("uid");
-		
+
+		String id = context.request().getParam("id");
+
 		try {
-			responseObject.put("profile_image", ProfileImage.getProfileImage(uid));
-			
-			resultSet = database.executeQuery("SELECT * FROM student_data WHERE id='", uid, "'");
-			
-			if(resultSet.next()) {
-				responseObject.put("number", resultSet.getInt("number"));
-				responseObject.put("name", resultSet.getString("name"));
-			} else {
-				 context.response().setStatusCode(404).end();
-				 context.response().close();
-				 return;
-			}
-			
-			resultSet = database.executeQuery("SELECT * FROM student_score WHERE uid='", uid, "'");
-			
-			if(resultSet.next()) {
-				responseObject.put("merit", resultSet.getInt("merit"));
-				responseObject.put("demerit", resultSet.getInt("demerit"));
+			responseObject.put("profile_image", ProfileImage.getProfileImage(id));
+
+			JobResult result = userManager.getUserInfo(id);
+			if (result.isSuccess()) {
+				Map<String, Object> datas = (Map) result.getArgs()[0];
+				responseObject.put("number", datas.get("number"));
+				responseObject.put("name", datas.get("name"));
+				responseObject.put("merit", datas.get("merit"));
+				responseObject.put("demerit", datas.get("demerit"));
+
+				context.response().setStatusCode(200).end();
+				context.response().close();
 			} else {
 				context.response().setStatusCode(404).end();
 				context.response().close();
-				return;
-			}			
-		} catch(SQLException e) {
+			}
+		} catch (SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
-			
+
 			Log.l("SQLException");
 		}
 	}

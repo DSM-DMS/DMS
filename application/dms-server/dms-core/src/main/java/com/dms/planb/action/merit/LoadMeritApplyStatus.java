@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -19,6 +20,8 @@ public class LoadMeritApplyStatus implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
+		EasyJsonObject tempObject = new EasyJsonObject();
+		EasyJsonArray tempArray = new EasyJsonArray();
 		
 		String id = context.request().getParam("id");
 		
@@ -26,13 +29,18 @@ public class LoadMeritApplyStatus implements Handler<RoutingContext> {
 			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id='", id, "'");
 			
 			if(resultSet.next()) {
-				responseObject.put("content", resultSet.getString("content"));
-				if(!resultSet.getString("target").isEmpty()) {
-					responseObject.put("has_target", true);
-					responseObject.put("target", resultSet.getString("target"));
-				} else {
-					responseObject.put("has_target", false);
-				}
+				do {
+					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("content", resultSet.getString("content"));
+					if(!resultSet.getString("target").isEmpty()) {
+						tempObject.put("has_target", true);
+						tempObject.put("target", resultSet.getString("target"));
+					} else {
+						tempObject.put("has_target", false);
+					}
+					
+					tempArray.add(tempObject);
+				} while(resultSet.next());
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());

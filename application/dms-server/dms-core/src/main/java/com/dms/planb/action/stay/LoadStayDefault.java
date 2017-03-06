@@ -2,6 +2,7 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.user.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -20,10 +21,10 @@ public class LoadStayDefault implements Handler<RoutingContext> {
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		String uid = context.request().getParam("uid");
+		String id = context.request().getParam("id");
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE id='", id, "'");
 			
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getString("value"));
