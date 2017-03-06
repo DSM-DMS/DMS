@@ -20,10 +20,10 @@ public class LoadStayDefault implements Handler<RoutingContext> {
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		String id = context.request().getParam("id");
+		String uid = context.request().getParam("uid");
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE id='", id, "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
 			
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getString("value"));
