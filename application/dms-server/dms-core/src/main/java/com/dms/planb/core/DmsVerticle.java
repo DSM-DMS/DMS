@@ -14,7 +14,7 @@ public class DmsVerticle extends AbstractVerticle {
 
 		Router router = Router.router(vertx);
 		RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb");
-		server.requestHandler(router::accept).listen(8080);
+		server.requestHandler(router::accept).listen(8081);
 	}
 	
 	@SuppressWarnings("rawtypes")

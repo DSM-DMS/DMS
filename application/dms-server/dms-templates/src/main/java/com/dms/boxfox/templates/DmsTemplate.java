@@ -10,6 +10,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
+import org.boxfox.dms.utilities.log.Log;
 
 public class DmsTemplate {
     private static Configuration configuration;
@@ -39,7 +40,8 @@ public class DmsTemplate {
         if (configuration == null) {
             configuration = new Configuration();
             try {
-                configuration.setDirectoryForTemplateLoading(new File("WEB-INF/"));
+                Log.l(new File("WEB-INF").getPath());
+                configuration.setDirectoryForTemplateLoading(new File("WEB-INF"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

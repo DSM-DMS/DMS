@@ -11,6 +11,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.log.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -37,6 +38,7 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Breakfast", (String)((JSONObject)meal.get(0)).get("Menu"));
         templates.put("Lunch", (String)((JSONObject)meal.get(1)).get("Menu"));
         templates.put("Dinner", (String)((JSONObject)meal.get(2)).get("Menu"));
+        Log.l("testasdasd");
         try {
             context.response().end(templates.process());
         } catch (IOException e) {
