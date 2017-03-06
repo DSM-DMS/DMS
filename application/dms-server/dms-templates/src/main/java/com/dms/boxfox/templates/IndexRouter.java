@@ -50,7 +50,7 @@ public class IndexRouter implements Handler<RoutingContext> {
     private List<HashMap<String, Object>> getPosts(String category) {
         List<HashMap<String, Object>> map = null;
         try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select * from ", category, " no desc limit 5");
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select * from ", category, " order by no desc limit 5");
             map = rs.toHashMap();
         } catch (SQLException e) {
             e.printStackTrace();
