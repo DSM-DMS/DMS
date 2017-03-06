@@ -52,9 +52,9 @@ public class UserManager {
 
     public JobResult getUserInfo(String id) throws SQLException {
         JobResult result = new JobResult(false);
-        String uid = getUid(id);
-        if (uid != null) {
-            SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
+//        String uid = getUid(id);
+//        if (uid != null) {
+            SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.id = b.id where a.id='", id, "'");
             if (rs.next()) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("number", rs.getInt("number"));
@@ -63,7 +63,7 @@ public class UserManager {
                 map.put("demerit", rs.getInt("demerit"));
                 result.setSuccess(true);
                 result.setArgs(map);
-            }
+//            }
         }
         return result;
     }

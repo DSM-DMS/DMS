@@ -18,7 +18,7 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 		
 		int no = Integer.parseInt(context.request().getParam("no"));
 		String id = context.request().getParam("id");
-		int targetNo = Integer.parseInt(context.request().getParam("no"));
+		int targetNo = Integer.parseInt(context.request().getParam("target_no"));
 		
 		try {
 			database.executeUpdate("UPDATE afterschool_apply SET no=", no, " WHERE no=", targetNo, " AND id='", id, "'");

@@ -1,4 +1,4 @@
-package com.dms.planb.action.merit;
+package com.dms.planb.action.post.notice;
 
 import java.sql.SQLException;
 
@@ -13,8 +13,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/apply/merit", method={HttpMethod.GET})
-public class LoadMeritApplyStatus implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/notice/list", method={HttpMethod.GET})
+public class LoadNoticeList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
@@ -23,24 +23,31 @@ public class LoadMeritApplyStatus implements Handler<RoutingContext> {
 		EasyJsonObject tempObject = new EasyJsonObject();
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
-		String id = context.request().getParam("id");
-		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id='", id, "'");
+			if(!context.request().params().contains("page") && !context.request().params().contains("limit")) {
+				resultSet = database.executeQuery("SELECT * FROM notice");
+			} else {
+				int page = Integer.parseInt(context.request().getParam("page"));
+				int limit = Integer.parseInt(context.request().getParam("limit"));
+				resultSet = database.executeQuery("SELECT * FROM notice limit " + ((page - 1) * limit), ", ", limit);
+			}
 			
+			int postCount = 0;
 			if(resultSet.next()) {
 				do {
+					tempObject = new EasyJsonObject();
+					
 					tempObject.put("no", resultSet.getInt("no"));
+					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("content", resultSet.getString("content"));
-					if(!resultSet.getString("target").isEmpty()) {
-						tempObject.put("has_target", true);
-						tempObject.put("target", resultSet.getString("target"));
-					} else {
-						tempObject.put("has_target", false);
-					}
 					
 					tempArray.add(tempObject);
+					
+					postCount++;
 				} while(resultSet.next());
+				
+				responseObject.put("num_of_post", postCount);
+				responseObject.put("result", tempArray);
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());

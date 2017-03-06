@@ -8,7 +8,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/meal", method={HttpMethod.GET})
+@RouteRegistration(path="/school/meal", method={HttpMethod.GET})
 public class LoadMeal implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
@@ -16,7 +16,7 @@ public class LoadMeal implements Handler<RoutingContext> {
 		int month = Integer.parseInt(context.request().getParam("month"));
 		int day = Integer.parseInt(context.request().getParam("day"));
 		
-		context.response().setStatusCode(200).end();
+		context.response().setStatusCode(200);
 		context.response().end(MealModel.getMealAtDate(year, month, day).toString());
 		context.response().close();
 	}

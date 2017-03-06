@@ -20,15 +20,15 @@ public class LoadScore implements Handler<RoutingContext> {
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		int number = Integer.parseInt(context.request().getParam("number"));
+		String id = context.request().getParam("id");
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM student_score WHERE id='", number, "'");
+			resultSet = database.executeQuery("SELECT * FROM student_score WHERE id='", id, "'");
 			if(resultSet.next()) {
 				responseObject.put("merit", resultSet.getInt("merit"));
 				responseObject.put("demerit", resultSet.getInt("demerit"));
 				
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

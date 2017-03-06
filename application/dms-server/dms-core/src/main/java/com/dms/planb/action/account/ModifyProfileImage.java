@@ -1,25 +1,23 @@
-//package com.dms.planb.action.account;
-//
-//import java.sql.SQLException;
-//
-//import org.boxfox.dms.utilities.actions.ActionRegistration;
-//import org.boxfox.dms.utilities.actions.Actionable;
-//import org.boxfox.dms.utilities.actions.support.Sender;
-//import org.boxfox.dms.utilities.json.EasyJsonObject;
-//
-//import com.dms.planb.support.Commands;
-//import com.dms.planb.support.ProfileImage;
-//
-//@ActionRegistration(command=Commands.MODIFY_PROFILE_IMAGE)
-//public class ModifyProfileImage implements Handler<RoutingContext> {
-//	@Override
-//	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-//		String id = requestObject.getString("id");
-//		
-//		String data = requestObject.getString("profile_image");
-//		
-//		ProfileImage.setProfileImage(id, data);
-//		
-//		return responseObject;
-//	}
-//}
+package com.dms.planb.action.account;
+
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+
+import com.dms.planb.support.ProfileImage;
+
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/account/profile-image", method={HttpMethod.PATCH})
+public class ModifyProfileImage implements Handler<RoutingContext> {
+	@Override
+	public void handle(RoutingContext context) {
+		String id = context.request().getParam("id");
+		String data = context.request().getParam("profile_image");
+		
+		ProfileImage.setProfileImage(id, data);
+		
+		context.response().setStatusCode(200).end();
+		context.response().close();
+	}
+}

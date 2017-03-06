@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -28,6 +29,8 @@ public class ModifyFaq implements Handler<RoutingContext> {
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
+			
+			Log.l("SQLException");
 		}
 	}
 }

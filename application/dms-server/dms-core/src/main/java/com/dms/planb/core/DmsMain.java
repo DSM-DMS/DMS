@@ -26,7 +26,6 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import org.boxfox.dms.utilities.actions.RouteRegister;
 import org.boxfox.dms.utilities.database.DataBase;
 
 import com.dms.parser.dataio.post.PostChangeDetector;
@@ -34,7 +33,6 @@ import com.dms.parser.dataio.post.PostUpdateListener;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
-import io.vertx.ext.web.Router;
 
 class DmsMain {
 	private static Vertx vertx;
@@ -58,14 +56,6 @@ class DmsMain {
 		}
 		/*
 		 * Create profile image directory if not exists
-		 */
-
-		/**
-		 * @see org.boxfox.dms.utilities.actions .ActionRegister
-		 */
-		/*
-		 * Using Reflection. Find @ActionRegistration annotation of classes in
-		 * package, and register actions to ActionRegister class.
 		 */
 
 		/**

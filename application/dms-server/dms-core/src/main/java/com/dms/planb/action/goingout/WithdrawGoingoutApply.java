@@ -17,9 +17,10 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		
 		String id = context.request().getParam("id");
+		boolean date = Boolean.parseBoolean(context.request().getParam("date"));
 		
 		try {
-			database.executeUpdate("DELETE FROM goingout_apply WHERE id='", id, "'");
+			database.executeUpdate("DELETE FROM goingout_apply WHERE id='", id, "' AND date=", date);
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

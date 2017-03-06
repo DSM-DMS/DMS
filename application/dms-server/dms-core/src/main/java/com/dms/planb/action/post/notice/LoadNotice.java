@@ -1,4 +1,4 @@
-package com.dms.planb.action.extension;
+package com.dms.planb.action.post.notice;
 
 import java.sql.SQLException;
 
@@ -12,23 +12,22 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/apply/extension", method={HttpMethod.GET})
-public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/notice", method={HttpMethod.GET})
+public class LoadNotice implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		String id = context.request().getParam("id");
+		int no = Integer.parseInt(context.request().getParam("no"));
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id='", id, "'");
+			resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
 			
 			if(resultSet.next()) {
-				responseObject.put("class", resultSet.getInt("class"));
-				responseObject.put("seat", resultSet.getInt("seat"));
-				responseObject.put("name", resultSet.getString("name"));
+				responseObject.put("title", resultSet.getString("title"));
+				responseObject.put("content", resultSet.getString("content"));
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());

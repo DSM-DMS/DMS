@@ -36,6 +36,7 @@ public class RouteRegister {
 	public void registerRouter(HttpMethod method, String path, Handler<RoutingContext> handler)
 			throws RegisterException {
 		if (paths.contains((path+method.name()))) {
+			System.out.println(path);
 			throw new RegisterException(EXCEPTION_ALREADY);
 		} else{
 			router.route(method, path).handler(handler);

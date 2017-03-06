@@ -14,10 +14,9 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/account/login", method={HttpMethod.POST})
+@RouteRegistration(path="/account/login/student", method={HttpMethod.POST})
 public class LoginStudentRequest implements Handler<RoutingContext> {
 	private UserManager userManager;
-	EasyJsonObject responseObject = new EasyJsonObject();
 
     public LoginStudentRequest() {
         userManager = new UserManager();
@@ -25,18 +24,17 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
     
 	@Override
 	public void handle(RoutingContext context) {
+		EasyJsonObject responseObject = new EasyJsonObject();
+		
 		String id = context.request().getParam("id");
 		String password = context.request().getParam("password");
 		
 		try {
 			if (Guardian.checkParameters(id, password)) {
 	            if (!userManager.login(id, password)) {
-	                responseObject.put("permit", false);
-	                
 	                context.response().setStatusCode(404).end();
 	                context.response().close();
 	            } else {
-	            	responseObject.put("permit", true);
 	                JobResult result = userManager.getUserInfo(id);
 	                if (result.isSuccess()) {
 	                    Map<String, Object> datas = (Map) result.getArgs()[0];
@@ -48,7 +46,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 	                	
 	                }
 	                
-	                context.response().setStatusCode(201).end();
+	                context.response().setStatusCode(201);
 	                context.response().end(responseObject.toString());
 	                context.response().close();
 	            }
