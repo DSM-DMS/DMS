@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.faq;
+package com.dms.planb.action.post.notice;
 
 import java.sql.SQLException;
 
@@ -10,8 +10,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/faq", method={HttpMethod.PATCH})
-public class ModifyFaq implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/notice", method={HttpMethod.PATCH})
+public class ModifyNotice implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
@@ -21,8 +21,8 @@ public class ModifyFaq implements Handler<RoutingContext> {
 		String content = context.request().getParam("content");
 		
 		try {
-			database.executeUpdate("UPDATE faq SET title='", title, "' WHERE no=", no);
-			database.executeUpdate("UPDATE faq SET content='", content, "' WHERE no=", no);
+			database.executeUpdate("UPDATE notice SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE notice SET content='", content, "' WHERE no=", no);
 			
 			context.response().setStatusCode(200).end();
 			context.response().end();

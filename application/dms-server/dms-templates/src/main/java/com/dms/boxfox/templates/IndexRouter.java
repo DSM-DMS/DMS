@@ -32,7 +32,7 @@ public class IndexRouter implements Handler<RoutingContext> {
         JSONArray meal = (JSONArray) MealModel.getMealAtDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH)).toJSONObject().get("Meals");
         DmsTemplate templates = new DmsTemplate("index");
         templates.put("Rules", getPosts("rule"));
-        templates.put("Notices", getPosts("notice"));
+        templates.put("Notices", getPosts("faq"));
         templates.put("Breakfast", (String)((JSONObject)meal.get(0)).get("Menu"));
         templates.put("Lunch", (String)((JSONObject)meal.get(1)).get("Menu"));
         templates.put("Dinner", (String)((JSONObject)meal.get(2)).get("Menu"));

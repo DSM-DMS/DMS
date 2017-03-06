@@ -1,36 +1,31 @@
-package com.dms.planb.action.post.faq;
+package com.dms.planb.action.post.notice;
 
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/faq", method={HttpMethod.PATCH})
-public class ModifyFaq implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/notice", method={HttpMethod.POST})
+public class UploadNotice implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
 		String title = context.request().getParam("title");
 		String content = context.request().getParam("content");
 		
 		try {
-			database.executeUpdate("UPDATE faq SET title='", title, "' WHERE no=", no);
-			database.executeUpdate("UPDATE faq SET content='", content, "' WHERE no=", no);
+			database.executeUpdate("INSERT INTO notice(title, content) VALUES('", title, "', '", content, "')");
 			
-			context.response().setStatusCode(200).end();
-			context.response().end();
+			context.response().setStatusCode(201).end();
+			context.response().close();
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
-			
-			Log.l("SQLException");
 		}
 	}
 }
