@@ -294,6 +294,6 @@ function getNextMonth() {
 //
 //     $('#stay_submit').on('click', function() {
 //         this.sendData.week = $('#date').val();
-//         this.sendData.value = $(':input:radio[name="stay"]:checked').val();
+//         this.sendData.value = $("#stay_select option:selected").val();
 //         this.applyData();
 //     });

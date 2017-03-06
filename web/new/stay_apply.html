@@ -147,23 +147,17 @@
                     </div>
                   </td>
                   <td>
-                    <div class="radio stay_div">
-                      <label><input type="radio" name="stay" value="4"> 잔류</label>
-                    </div>
-                    <div class="radio stay_div">
-                      <label><input type="radio" name="stay" value="1"> 금요귀가</label>
-                    </div>
-                    <div class="radio stay_div">
-                      <label><input type="radio" name="stay" value="2"> 토요귀가</label>
-                    </div>
-                    <div class="radio stay_div">
-                      <label><input type="radio" name="stay" value="3"> 토요귀사</label>
-                    </div>
+                    <select id="stay_select" class="selectpicker">
+                      <option value="4">잔류</option>
+                      <option value="1">금요귀가</option>
+                      <option value="2">토요귀가</option>
+                      <option value="3">토요귀사</option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <div class="stay_div">
+                    <div id="stay_div">
                       <input type="text" name="date" id="date"><button type="button" class="btn btn-secondary" id="stay_submit">신청</button>
                     </div>
                   </td>
