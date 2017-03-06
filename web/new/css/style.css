@@ -1,8 +1,8 @@
 body{
     background: #F1F1F1 !important;
 }
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 
 /*-------------------------- under bar title box--------------------------------*/
@@ -45,6 +45,7 @@ body{
 .border-puple{
     border-color: #583E80;
 }
+
 table tr{
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -316,6 +317,8 @@ table tr{
     padding: 0 15px;
     position: relative;
 }
+<<<<<<< HEAD
+=======
 
 
 
@@ -341,3 +344,4 @@ table tr{
 }
 
 
+>>>>>>> 43cb3c01accbbdf64d57a4e07382a755e25b3b77
