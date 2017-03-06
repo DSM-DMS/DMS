@@ -53,8 +53,23 @@
       <div class="card-wrapper">
     <div class="card">
     <div class="card-block">
-        <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
-        ${content}
+        <div class="underbar-title border-blue">${title}</div>
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>제목</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <#list Rules as rule>
+                                        <tr>
+                                            <th scope="row">${rule.no}</th>
+                                            <td>${rule.title}</td>
+                                        </tr>
+                                        </#list>
+                                </tbody>
+                            </table>
         </div>
         </div>
         </div>

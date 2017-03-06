@@ -25,6 +25,15 @@ body{
     cursor:pointer;
 }
 
+.subinfo{
+    position: absolute;
+    bottom:0;
+    right:0;
+    font-size: 0.5em;
+    font-weight: normal;
+    text-decoration: none;
+}
+
 .border-red{
     border-color: #F92F24;
 }
