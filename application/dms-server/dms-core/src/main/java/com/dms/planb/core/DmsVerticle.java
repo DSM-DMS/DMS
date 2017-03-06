@@ -16,14 +16,13 @@ public class DmsVerticle extends AbstractVerticle {
 		 * @see org.boxfox.dms.utilities.actions
 		 * .RouteRegister
 		 */
-		RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb");
+		RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb", "com.dms.boxfox.templates");
 		/*
 		 * Using Reflection. Find @RouteRegistration annotation of classes in
 		 * package, and register actions to RouteRegister class.
 		 */
 		
-		
-		server.requestHandler(router::accept).listen(8081);
+		server.requestHandler(router::accept).listen(8088);
 	}
 	
 	@SuppressWarnings("rawtypes")

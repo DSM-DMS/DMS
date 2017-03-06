@@ -1,24 +1,23 @@
 package com.dms.boxfox.templates;
 
-import com.dms.parser.dataio.meal.MealModel;
-import com.dms.parser.datamodel.meals.DayMeal;
-import com.dms.parser.datamodel.meals.Meal;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-
-import freemarker.template.TemplateException;
-import io.vertx.core.Handler;
-import io.vertx.core.http.HttpMethod;
-import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.dms.parser.dataio.meal.MealModel;
+
+import freemarker.template.TemplateException;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/", method = {HttpMethod.GET})
 public class IndexRouter implements Handler<RoutingContext> {
@@ -38,7 +37,9 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Lunch", (String)((JSONObject)meal.get(1)).get("Menu"));
         templates.put("Dinner", (String)((JSONObject)meal.get(2)).get("Menu"));
         try {
+        	context.response().setStatusCode(200);
             context.response().end(templates.process());
+            context.response().close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
