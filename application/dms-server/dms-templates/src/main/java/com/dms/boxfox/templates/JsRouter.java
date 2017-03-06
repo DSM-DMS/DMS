@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
-@RouteRegistration(path = "/js/", method = {HttpMethod.GET})
+@RouteRegistration(path = "/js", method = {HttpMethod.GET})
 public class JsRouter implements Handler<RoutingContext> {
 
     public void handle(RoutingContext context) {
