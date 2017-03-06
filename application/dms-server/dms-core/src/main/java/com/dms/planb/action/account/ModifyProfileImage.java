@@ -8,7 +8,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/account/profileimage", method={HttpMethod.PATCH})
+@RouteRegistration(path="/account/profile-image", method={HttpMethod.PATCH})
 public class ModifyProfileImage implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

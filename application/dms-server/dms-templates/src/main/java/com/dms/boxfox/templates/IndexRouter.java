@@ -33,9 +33,10 @@ public class IndexRouter implements Handler<RoutingContext> {
         DmsTemplate templates = new DmsTemplate("index");
         templates.put("Rules", getPosts("rule"));
         templates.put("Notices", getPosts("notice"));
-        templates.put("Breakfast", (String)((JSONObject)meal.get(0)).get("Menu"));
-        templates.put("Lunch", (String)((JSONObject)meal.get(1)).get("Menu"));
-        templates.put("Dinner", (String)((JSONObject)meal.get(2)).get("Menu"));
+        
+        templates.put("Breakfast", ((JSONObject)meal.get(0)).get("Menu").toString());
+        templates.put("Lunch", ((JSONObject)meal.get(1)).get("Menu").toString());
+        templates.put("Dinner", ((JSONObject)meal.get(2)).get("Menu").toString());
         try {
         	context.response().setStatusCode(200);
             context.response().end(templates.process());
