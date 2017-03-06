@@ -1,5 +1,64 @@
 @import "../css/remote.css";
 
+
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@font-face {
+    font-family: HANNA;
+    src: url('../font/BMHANNA_11yrs_ttf.ttf');
+    src:url('..//fonts/BMHANNA_11yrs_otf.otf') format('otf'),
+}
+@font-face {
+    font-family: NANUM;
+    src: url('../font/naverNaNumPen.ttf');
+    src:url('..//fonts/naverNaNumPen.otf') format('otf'),
+}
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 700;
+    src: local('Spoqa Han Sans Bold'), local('Spoqa Han Sans Bold'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 400;
+    src: local('Spoqa Han Sans Regular'), local('Spoqa Han Sans Regular'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 300;
+    src: local('Spoqa Han Sans Light'), local('Spoqa Han Sans Light'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 100;
+    src: local('Spoqa Han Sans Thin'), local('Spoqa Han Sans Thin'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.ttf') format('truetype');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:  "Nanum Gothic", 'Spoqa Han Sans';
+}
+
+p, span, li, td, tr, div, input, button {
+    font-family: "Nanum Gothic", 'Spoqa Han Sans';
+}
+
 /*remote.css��??�정?�요*/
 
 body {
@@ -7,7 +66,7 @@ body {
     ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
     기숙??: background-color: rgb(191,148,208) -> rgb(191,148,208)
     마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 .afterapplypage .back_arrow {
@@ -295,6 +354,10 @@ a.dropdown-toggle .count {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.left .notice li .title:hover {
+    text-decoration: underline;
 }
 
 .left .notice li p.date {
