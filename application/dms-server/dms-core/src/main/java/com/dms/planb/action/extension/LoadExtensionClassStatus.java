@@ -22,7 +22,6 @@ import org.json.simple.JSONValue;
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
-        EasyJsonObject responseObject = new EasyJsonObject();
         EasyJson json = null;
         
         String option = context.request().getParam("option");
