@@ -317,10 +317,6 @@ table tr{
     padding: 0 15px;
     position: relative;
 }
-<<<<<<< HEAD
-=======
-
-
 
 /*---------------------- modal to center -------------*/
 
@@ -343,5 +339,104 @@ table tr{
   vertical-align: middle;
 }
 
+/*--------------------- stay apply ----------------------*/
 
->>>>>>> 43cb3c01accbbdf64d57a4e07382a755e25b3b77
+#calendar thead {
+  background-color: rgb(220, 220, 220);
+}
+
+#calendar {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border: 1px solid rgb(220, 220, 220);
+    font-size: 200%;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+#stay_select {
+  width: 80%;
+  font-size: 200%;
+}
+
+#calendar .days, .days td {
+    font-weight: bold;
+}
+
+#calendar tr, #stay_table tr {
+    border-width: 0px;
+}
+
+.weeks {
+    cursor: pointer;
+}
+
+#calendar td {
+    width: calc(100%/7);
+    height: 75px;
+}
+
+#stay_div {
+  margin: auto;
+  width: 90%;
+  margin-top: 10%;
+  margin-bottom: 3%;
+  font-size: 200%;
+}
+
+#date {
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 5%;
+    text-align: center;
+    width: 70%;
+}
+
+#stay_submit {
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 5%;
+    font-size: 100%;
+    width: 20%;
+    margin-left: 5%;
+}
+
+#stay_table {
+  height: 100%;
+  margin-top: 5%;
+  margin: auto;
+  width: 100%;
+}
+
+
+.color {
+    text-align: middle;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.color_ex {
+  font-size: 200%;
+  width: 75%;
+  margin: auto;
+  margin-bottom: 5%;
+}
+
+.other_month {
+  color: rgb(220, 220, 220);
+}
+
+.go_home {
+    color: rgb(52, 219, 94);
+}
+
+.go_dom {
+    color: rgb(255, 151, 49);
+}
+
+.go_home_duty {
+    color: rgb(2, 117, 217);
+}
