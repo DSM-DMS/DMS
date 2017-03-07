@@ -1,5 +1,7 @@
 package org.boxfox.dms.utilities.json;
 
+import java.util.HashMap;
+
 import org.json.simple.JSONArray;
 
 /**
@@ -30,7 +32,7 @@ public class EasyJsonArray extends EasyJson{
         }
     }
     
-    public void clear() {
+	public void clear() {
     	arr.clear();
     }
 

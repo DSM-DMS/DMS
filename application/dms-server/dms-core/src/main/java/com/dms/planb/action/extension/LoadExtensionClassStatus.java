@@ -18,95 +18,97 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-@RouteRegistration(path = "/apply/extension/class", method = {HttpMethod.GET})
+@RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
-    @Override
-    public void handle(RoutingContext context) {
-        EasyJson json = null;
-        
-        String option = context.request().getParam("option");
-        
-        try {
-        	int classId = -1;
-        	
-        	switch(option) {
-        	case "map":
-        		classId = Integer.parseInt(context.request().getParam("class"));
-        		 if(classId == -1) {
-                     json = new EasyJsonArray(getMapdataAll());
-                 } else {
-                     json = new EasyJsonObject(getMapdata(classId));
-                 }
-        		break;
-        	case "status":
-        		classId = Integer.parseInt(context.request().getParam("class"));
-        		json = new EasyJsonObject((JSONObject) getSeatDatas(classId));
-        	}
-            
-            context.response().setStatusCode(200);
-            context.response().end(json.toString());
-            context.response().close();
-        } catch (SQLException e) {
-            context.response().setStatusCode(500).end();
-            context.response().close();
+	@Override
+	public void handle(RoutingContext context) {
+		EasyJson json = null;
 
-            Log.l("SQLException");
-        }
-    }
+		String option = context.request().getParam("option");
 
+		try {
+			int classId = -1;
 
-    private HashMap<Integer, String> getSeatDatas(int classId) throws SQLException {
-        HashMap<Integer, String> map = new HashMap<Integer, String>();
-        SafeResultSet resultSet = DataBase.getInstance().executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
+			switch (option) {
+			case "map":
+				if (context.request().params().contains("class")) {
+					classId = Integer.parseInt(context.request().getParam("class"));
+					json = new EasyJsonObject(getMapdata(classId));
+				} else {
+					json = new EasyJsonArray(getMapdataAll());
+				}
+				
+				break;
+			case "status":
+				classId = Integer.parseInt(context.request().getParam("class"));
+				
+				break;
+			}
 
-        while (resultSet.next()) {
-            map.put(resultSet.getInt("seat"), resultSet.getString("name"));
-        }
-        return map;
-    }
+			context.response().setStatusCode(200);
+			context.response().end(json.toString());
+			context.response().close();
+		} catch (SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
 
-    public JSONObject getMapdata(int room) throws SQLException {
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map where room=", room);
-        JSONObject object = null;
-        if(rs.next()) {
-            object = new JSONObject();
-            object.put("no", rs.getInt("room"));
-            object.put("name", rs.getString("name"));
-            object.put("map", process((JSONArray) JSONValue.parse(rs.getString("map")), rs.getInt("room")));
-        }
-        return object;
-    }
+			Log.l("SQLException");
+		}
+	}
 
-    public JSONArray getMapdataAll() throws SQLException {
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map");
-        JSONArray classs = new JSONArray();
-        while (rs.next()) {
-            JSONObject object = new JSONObject();
-            object.put("no", rs.getInt("room"));
-            object.put("name", rs.getString("name"));
-            object.put("map", process((JSONArray) JSONValue.parse(rs.getString("map")), rs.getInt("room")));
-            classs.add(object);
-        }
-        return classs;
-    }
+	private HashMap<Integer, String> getSeatDatas(int classId) throws SQLException {
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		SafeResultSet resultSet = DataBase.getInstance().executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
 
-    private JSONArray process(JSONArray arr, int room) throws SQLException {
-        HashMap<Integer, String> map = getSeatDatas(room);
-        int count = 1;
-        for (int i = 0; i < arr.size(); i++) {
-            JSONArray row = (JSONArray) arr.get(i);
-            for (int k = 0; k < row.size(); k++) {
-                if (((long) row.get(k)) == 1) {
-                    row.remove(k);
-                    if (map.get(count) != null) {
-                        row.add(k, map.get(count));
-                    } else {
-                        row.add(k, count);
-                    }
-                    count++;
-                }
-            }
-        }
-        return arr;
-    }
+		while (resultSet.next()) {
+			map.put(resultSet.getInt("seat"), resultSet.getString("name"));
+		}
+		
+		return map;
+	}
+
+	public JSONObject getMapdata(int room) throws SQLException {
+		SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map where room=", room);
+		JSONObject object = null;
+		if (rs.next()) {
+			object = new JSONObject();
+			object.put("no", rs.getInt("room"));
+			object.put("name", rs.getString("name"));
+			object.put("map", process((JSONArray) JSONValue.parse(rs.getString("map")), rs.getInt("room")));
+		}
+		return object;
+	}
+
+	public JSONArray getMapdataAll() throws SQLException {
+		SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map");
+		JSONArray classs = new JSONArray();
+		while (rs.next()) {
+			JSONObject object = new JSONObject();
+			object.put("no", rs.getInt("room"));
+			object.put("name", rs.getString("name"));
+			object.put("map", process((JSONArray) JSONValue.parse(rs.getString("map")), rs.getInt("room")));
+			classs.add(object);
+		}
+		return classs;
+	}
+
+	private JSONArray process(JSONArray arr, int room) throws SQLException {
+		HashMap<Integer, String> map = getSeatDatas(room);
+		int count = 1;
+		for (int i = 0; i < arr.size(); i++) {
+			JSONArray row = (JSONArray) arr.get(i);
+			for (int k = 0; k < row.size(); k++) {
+				if (((long) row.get(k)) == 1) {
+					row.remove(k);
+					if (map.get(count) != null) {
+						row.add(k, map.get(count));
+					} else {
+						row.add(k, count);
+					}
+					count++;
+				}
+			}
+		}
+		return arr;
+	}
 }
