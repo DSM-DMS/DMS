@@ -23,24 +23,31 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
         EasyJsonObject responseObject = new EasyJsonObject();
-        String classIdStr = context.request().getParam("class");
+        EasyJson json = null;
+        
+        String option = context.request().getParam("option");
+        
         try {
-            EasyJson json;
-            if(classIdStr==null){
-                json = new EasyJsonArray(getMapdataAll());
-            }else{
-                json = new EasyJsonObject(getMapdata(Integer.parseInt(classIdStr)));
-            }
-            responseObject.put("result", json);
-
+        	int classId = -1;
+        	
+        	switch(option) {
+        	case "map":
+        		classId = Integer.parseInt(context.request().getParam("class"));
+        		 if(classId == -1) {
+                     json = new EasyJsonArray(getMapdataAll());
+                 } else {
+                     json = new EasyJsonObject(getMapdata(classId));
+                 }
+        		break;
+        	case "status":
+        		classId = Integer.parseInt(context.request().getParam("class"));
+        		json = new EasyJsonObject((JSONObject) getSeatDatas(classId));
+        	}
+            
             context.response().setStatusCode(200);
-            context.response().end(responseObject.toString());
+            context.response().end(json.toString());
             context.response().close();
-            context.response().setStatusCode(404).end();
-            context.response().close();
-        } catch (SQLException e)
-
-        {
+        } catch (SQLException e) {
             context.response().setStatusCode(500).end();
             context.response().close();
 
@@ -60,7 +67,7 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
     }
 
     public JSONObject getMapdata(int room) throws SQLException {
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map where room=",room);
+        SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map where room=", room);
         JSONObject object = null;
         if(rs.next()) {
             object = new JSONObject();
