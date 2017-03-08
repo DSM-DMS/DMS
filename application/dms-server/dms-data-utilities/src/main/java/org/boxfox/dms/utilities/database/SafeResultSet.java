@@ -46,7 +46,7 @@ public class SafeResultSet {
 		for(Row row : rows) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			for(int i = 0 ; i < columns.size() ; i++){
-				map.put(columns.get(i), i+1);
+				map.put(columns.get(i), row.get(i+1));
 			}
 			list.add(map);
 		}
@@ -94,11 +94,11 @@ public class SafeResultSet {
 			return null;
 		}
 	}
-	
+
 	public boolean getBoolean(String label) throws SQLException {
 		return getBoolean(getIndexByLabel(label));
 	}
-	
+
 	public boolean getBoolean(int index) throws SQLException {
 		return Boolean.valueOf(getObject(index).toString());
 	}
