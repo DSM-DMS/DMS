@@ -28,7 +28,8 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 
 		try {
 			int classId = -1;
-
+			
+			System.out.println(option);
 			switch (option) {
 			case "map":
 				if (context.request().params().contains("class")) {

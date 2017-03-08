@@ -46,9 +46,7 @@ public class ProfileImage {
 			data = new StringBuilder();
 			data.append((char) fr.read());
 		} catch (FileNotFoundException e) {
-			/*
-			 * Never loop this catch syntax.
-			 */
+			return null;
 		} catch (IOException e) { }
 		
 		return data.toString();

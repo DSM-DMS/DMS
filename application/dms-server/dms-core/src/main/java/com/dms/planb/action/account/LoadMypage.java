@@ -30,10 +30,10 @@ public class LoadMypage implements Handler<RoutingContext> {
 		String id = context.request().getParam("id");
 
 		try {
-			responseObject.put("profile_image", ProfileImage.getProfileImage(id));
-
 			JobResult result = userManager.getUserInfo(id);
 			if (result.isSuccess()) {
+				responseObject.put("profile_image", ProfileImage.getProfileImage(id));
+				
 				Map<String, Object> datas = (Map) result.getArgs()[0];
 				responseObject.put("number", datas.get("number"));
 				responseObject.put("name", datas.get("name"));
@@ -41,9 +41,11 @@ public class LoadMypage implements Handler<RoutingContext> {
 				responseObject.put("demerit", datas.get("demerit"));
 
 				context.response().setStatusCode(200).end();
+				System.out.println("200 responsed");
 				context.response().close();
 			} else {
 				context.response().setStatusCode(404).end();
+				System.out.println("404 responsed");
 				context.response().close();
 			}
 		} catch (SQLException e) {
