@@ -10,6 +10,8 @@ import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
+import com.dms.planb.support.CORSHeader;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -24,6 +26,8 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
     
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		String id = context.request().getParam("id");

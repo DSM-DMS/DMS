@@ -9,6 +9,7 @@ import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
+import com.dms.planb.support.CORSHeader;
 import com.dms.planb.support.ProfileImage;
 
 import io.vertx.core.Handler;
@@ -25,6 +26,8 @@ public class LoadMypage implements Handler<RoutingContext> {
 
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		EasyJsonObject responseObject = new EasyJsonObject();
 
 		String id = context.request().getParam("id");

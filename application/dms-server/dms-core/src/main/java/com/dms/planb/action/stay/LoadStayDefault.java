@@ -2,12 +2,13 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.user.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
+
+import com.dms.planb.support.CORSHeader;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -17,6 +18,8 @@ import io.vertx.ext.web.RoutingContext;
 public class LoadStayDefault implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();

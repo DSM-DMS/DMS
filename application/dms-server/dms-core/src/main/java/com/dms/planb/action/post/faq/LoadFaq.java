@@ -8,6 +8,8 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
+import com.dms.planb.support.CORSHeader;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -17,6 +19,8 @@ public class LoadFaq implements Handler<RoutingContext> {
 	@Deprecated
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();

@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 
+import com.dms.planb.support.CORSHeader;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -13,6 +15,8 @@ import io.vertx.ext.web.RoutingContext;
 public class UploadQnaQuestion implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		
 		String title = context.request().getParam("title");

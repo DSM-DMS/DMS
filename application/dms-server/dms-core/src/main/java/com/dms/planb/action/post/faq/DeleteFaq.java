@@ -7,6 +7,8 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
+import com.dms.planb.support.CORSHeader;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -15,6 +17,8 @@ import io.vertx.ext.web.RoutingContext;
 public class DeleteFaq implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		EasyJsonObject responseObject = new EasyJsonObject();
 		

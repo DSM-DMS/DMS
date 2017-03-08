@@ -18,10 +18,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import com.dms.planb.support.CORSHeader;
+
 @RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		EasyJson json = null;
 
 		String option = context.request().getParam("option");

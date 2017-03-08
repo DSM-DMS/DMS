@@ -7,6 +7,7 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
+import com.dms.planb.support.CORSHeader;
 import com.dms.planb.support.LimitConfig;
 
 import io.vertx.core.Handler;
@@ -17,6 +18,8 @@ import io.vertx.ext.web.RoutingContext;
 public class ApplyExtension implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		Calendar currentTime = Calendar.getInstance();
 		
