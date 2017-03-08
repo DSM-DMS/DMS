@@ -40,7 +40,8 @@ public class DmsTemplate {
         if (configuration == null) {
             configuration = new Configuration();
             try {
-                Log.l(new File("WEB-INF").getPath());
+                if (!new File("WEB-INF").exists())
+                    new File("WEB-INF").mkdir();
                 configuration.setDirectoryForTemplateLoading(new File("WEB-INF"));
             } catch (IOException e) {
                 e.printStackTrace();

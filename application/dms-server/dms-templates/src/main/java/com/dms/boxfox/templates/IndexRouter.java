@@ -9,7 +9,6 @@ import java.util.List;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.log.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -34,9 +33,9 @@ public class IndexRouter implements Handler<RoutingContext> {
         DmsTemplate templates = new DmsTemplate("index");
         templates.put("Rules", getPosts("rule"));
         templates.put("Notices", getPosts("notice"));
-        templates.put("Breakfast", ((JSONObject) meal.get(0)).get("Menu").toString());
-        templates.put("Lunch", ((JSONObject) meal.get(1)).get("Menu").toString());
-        templates.put("Dinner", ((JSONObject) meal.get(2)).get("Menu").toString());
+        templates.put("Breakfast", clearMenus(meal, 0));
+        templates.put("Lunch", clearMenus(meal, 1));
+        templates.put("Dinner", clearMenus(meal, 2));
         try {
             context.response().setStatusCode(200);
             context.response().end(templates.process());
@@ -48,11 +47,23 @@ public class IndexRouter implements Handler<RoutingContext> {
         }
     }
 
+    private String clearMenus(JSONArray meal, int index) {
+        JSONArray arr = ((JSONArray) ((JSONObject) meal.get(index)).get("Menu"));
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < arr.size(); i++) {
+            builder.append(arr.get(i));
+            if (i != arr.size() - 1)
+                builder.append(", ");
+        }
+        return builder.toString();
+    }
+
     private List<HashMap<String, Object>> getPosts(String category) {
         List<HashMap<String, Object>> map = null;
         try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select * from ", category, " order by no desc limit 5");
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select * from ", category, " order by no asc limit 5");
             map = rs.toHashMap();
+            System.out.println(map.get(0).toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
