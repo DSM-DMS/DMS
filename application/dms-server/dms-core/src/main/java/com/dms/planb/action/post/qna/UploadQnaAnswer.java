@@ -26,7 +26,7 @@ public class UploadQnaAnswer implements Handler<RoutingContext> {
 		try {
 			database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date=now() WHERE no=", no);
 			
-			context.response().setStatusCode(200).end();
+			context.response().setStatusCode(201).end();
 			context.response().close();
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();

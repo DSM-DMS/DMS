@@ -16,7 +16,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/notice/list", method={HttpMethod.GET})
-public class LoadNoticeList implements Handler<RoutingContext> {
+public class LoadNoticeWithList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		context = CORSHeader.putHeaders(context);

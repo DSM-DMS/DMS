@@ -6,7 +6,10 @@ public class CORSHeader {
 	public static RoutingContext putHeaders(RoutingContext context) {
 		context.response().putHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type");
 		context.response().putHeader("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE, OPTIONS, CONNECT");
-		context.response().putHeader("Access-Control-Allow-Origin", "http://dsm2015.cafe24.com/*, http://dms2015.cafe24.com/");
+		context.response().putHeader("Access-Control-Allow-Origin", "http://dsm2015.cafe24.com/*");
+		context.response().putHeader("Access-Control-Allow-Origin", "http://dsm2015.cafe24.com/");
+		context.response().putHeader("Access-Control-Allow-Origin", "http://dsm2015.cafe24.com");
+		context.response().putHeader("Access-Control-Allow-Origin", "*");
 		
 		return context;
 	}
