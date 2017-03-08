@@ -440,3 +440,105 @@ table tr{
 .go_home_duty {
     color: rgb(2, 117, 217);
 }
+
+/*--------------------- go out apply -------------------*/
+
+#individual_reason {
+    display: block;
+    border: 2px solid rgb(220, 220, 220);
+    width: 90%;
+    font-size: 200%;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 2%;
+}
+
+#individual_btn {
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(91, 192, 222);
+    width: 80%;
+    margin: auto;
+    margin-top: 2%;
+    font-size: 150%;
+    cursor: pointer;
+    text-align: center;
+}
+
+#recommend_btn {
+  border: 0;
+  border-radius: 5px;
+  background-color: rgb(91, 192, 222);
+  width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  font-size: 150%;
+  cursor: pointer;
+  text-align: center;
+}
+
+#recommend_reason {
+  display: block;
+  border: 2px solid rgb(220, 220, 220);
+  width: 90%;
+  font-size: 200%;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 2%;
+}
+
+#recommend_name {
+  display: block;
+  border: 2px solid rgb(220, 220, 220);
+  width: 90%;
+  font-size: 200%;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 2%;
+}
+
+#point_sel {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  font-size: 180%;
+  border-radius: 5px;
+}
+
+#out_sel {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  font-size: 180%;
+  border-radius: 5px;
+}
+
+#out_btn {
+  border: 0;
+  border-radius: 5px;
+  background-color: rgb(255, 122, 249);
+  width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  font-size: 150%;
+  cursor: pointer;
+  text-align: center;
+}
+
+#point_sel tr, #out_sel tr {
+  border-radius: 5px;
+  border: 0;
+}
+
+#point_apply, #sat_out {
+  border-radius: 5px 0 0 5px;
+}
+
+#point_reco, #sun_out {
+  border-radius: 0 5px 5px 0;
+}
+
+.point_margin {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
