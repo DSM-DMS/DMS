@@ -38,7 +38,7 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 		// To student_data table
 		
 		try {
-//			if (Guardian.checkParameters(uid, id, password)) {
+			if (Guardian.checkParameters(uid, id, password)) {
 	            JobResult result = userManager.register(uid, id, password);
 	            if (result.isSuccess()) {
 	                database.executeUpdate("INSERT INTO student_data(id, number, status, name) VALUES('", id, "', ", number, ", ", status, ", '", name, "')");
@@ -53,9 +53,9 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 	            	context.response().setStatusMessage(result.getMessage()).end();
 	    			context.response().close();
 	            }
-//	        } else {
+	        } else {
 	            // Null in any parameters
-//	        }
+	        }
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
