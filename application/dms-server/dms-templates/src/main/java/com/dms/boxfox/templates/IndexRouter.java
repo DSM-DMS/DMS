@@ -63,7 +63,6 @@ public class IndexRouter implements Handler<RoutingContext> {
         try {
             SafeResultSet rs = DataBase.getInstance().executeQuery("select * from ", category, " order by no asc limit 5");
             map = rs.toHashMap();
-            System.out.println(map.get(0).toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }

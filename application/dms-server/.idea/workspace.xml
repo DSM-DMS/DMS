@@ -22,24 +22,15 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IndexRouter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndexRouter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/IndexRouter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="26" column="18" lean-forward="false" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+            <state relative-caret-position="222">
+              <caret line="30" column="34" lean-forward="false" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#778#779#0" expanded="true" />
+                <element signature="e#821#822#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SafeResultSet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/SafeResultSet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="46" column="72" lean-forward="false" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -54,13 +45,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoadExtensionClassStatus.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionClassStatus.java">
+      <file leaf-file-name="ImagesRouter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/ImagesRouter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+            <state relative-caret-position="179">
+              <caret line="16" column="61" lean-forward="false" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
               <folding>
-                <element signature="e#1880#1897#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -69,18 +60,72 @@
       <file leaf-file-name="DmsVerticle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="30" column="8" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+            <state relative-caret-position="160">
+              <caret line="22" column="64" lean-forward="false" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImagesRouter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/ImagesRouter.java">
+      <file leaf-file-name="JsRouter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/JsRouter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="304">
+              <caret line="16" column="61" lean-forward="false" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CssRouter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/CssRouter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="15" column="99" lean-forward="false" selection-start-line="15" selection-start-column="99" selection-end-line="17" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RouteRegistration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/actions/RouteRegistration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RouteRegister.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/actions/RouteRegister.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-646">
+              <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DmsMain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.tls" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WEB-INF/index.tls">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="86" column="27" lean-forward="false" selection-start-line="86" selection-start-column="27" selection-end-line="86" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -105,6 +150,10 @@
       <find>org</find>
       <find>dms</find>
       <find>org.planb.dms.core.DmsMain</find>
+      <find>images/</find>
+      <find>images/arrow</find>
+      <find>com</find>
+      <find>com.</find>
     </findStrings>
     <replaceStrings>
       <replace>database</replace>
@@ -118,12 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dms-core/src/main/java/org/planb/dms/core/DmsMain.java" />
-        <option value="$PROJECT_DIR$/dms-utilities/src/main/java/org/boxfox/dms/utilities/logging/Log.java" />
-        <option value="$PROJECT_DIR$/dms-core/src/main/java/org/planb/dms/core/DmsVerticle.java" />
-        <option value="$PROJECT_DIR$/dms-utilities/pom.xml" />
-        <option value="$PROJECT_DIR$/dms-core/src/test/java/org/panb/dms/core/DmsVerticle.java" />
-        <option value="$PROJECT_DIR$/dms-utilities/src/main/java/org/boxfox/dms/utilities/database/DataBase.java" />
         <option value="$PROJECT_DIR$/dms-data-utilities/pom.xml" />
         <option value="$PROJECT_DIR$/dms-core/pom.xml" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/boxfox/templates/TestRouter.java" />
@@ -157,18 +200,24 @@
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/actions/RouteRegister.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/DataBase.java" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/JsRouter.java" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/CssRouter.java" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/ImagesRouter.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionClassStatus.java" />
-        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/DmsTemplate.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/ResponsePostContext.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/router/IndexRouter.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/WriterPostContext.java" />
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/SafeResultSet.java" />
+        <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/DataBase.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/IndexRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/CssRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/ImagesRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/JsRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/resources/ImagesRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/resources/JsRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/resources/CssRouter.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/CssRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/ImagesRouter.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/JsRouter.java" />
       </list>
     </option>
   </component>
@@ -211,8 +260,8 @@
     <option name="skipTests" value="true" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="440" />
-    <option name="y" value="91" />
+    <option name="x" value="62" />
+    <option name="y" value="336" />
     <option name="width" value="1365" />
     <option name="height" value="749" />
   </component>
@@ -231,7 +280,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -241,6 +290,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dms-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -388,21 +451,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dms-data-utilities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dms-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dms-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dms-data-utilities" />
+              <option name="myItemId" value="dms-templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -418,11 +467,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="boxfox" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -430,7 +475,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
+              <option name="myItemId" value="boxfox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,7 +497,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dms-data-utilities" />
+              <option name="myItemId" value="dms-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -460,11 +527,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="boxfox" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -472,18 +535,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
+              <option name="myItemId" value="planb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms-server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
+              <option name="myItemId" value="dms-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="planb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -769,31 +870,31 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="440" y="91" width="1365" height="749" extended-state="0" />
+    <frame x="62" y="336" width="1365" height="749" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32718894" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14069591" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14022988" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38474026" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38474026" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29118773" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="503" y="58" width="359" height="651" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29578543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="503" y="58" width="359" height="651" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39935064" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39935064" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -837,7 +938,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -846,8 +947,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/dataio/post/faq/LoadFaqWithList.java" />
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/dataio/post/faq/DeleteFaq.java" />
     <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/dataio/post/faq/FaqPostModel.java" />
     <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/dataio/post/faq/ModifyFaq.java" />
     <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/dataio/post/PostModel.java" />
@@ -905,40 +1004,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#233#234#0" expanded="false" />
-            <element signature="e#271#272#0" expanded="false" />
-            <element signature="e#330#331#0" expanded="false" />
-            <element signature="e#384#385#0" expanded="false" />
-            <element signature="e#439#440#0" expanded="false" />
-            <element signature="e#464#465#0" expanded="false" />
-            <element signature="e#500#501#0" expanded="false" />
-            <element signature="e#528#529#0" expanded="false" />
-            <element signature="e#559#560#0" expanded="false" />
-            <element signature="e#586#587#0" expanded="false" />
-            <element signature="e#626#627#0" expanded="false" />
-            <element signature="e#658#659#0" expanded="false" />
-            <element signature="e#688#689#0" expanded="false" />
-            <element signature="e#717#718#0" expanded="false" />
-            <element signature="e#758#759#0" expanded="false" />
-            <element signature="e#794#795#0" expanded="false" />
-            <element signature="e#824#825#0" expanded="false" />
-            <element signature="e#853#854#0" expanded="false" />
-            <element signature="e#894#895#0" expanded="false" />
-            <element signature="e#930#931#0" expanded="false" />
-            <element signature="e#959#960#0" expanded="false" />
-            <element signature="e#987#988#0" expanded="false" />
-            <element signature="e#1026#1027#0" expanded="false" />
-            <element signature="e#1060#1061#0" expanded="false" />
-            <element signature="e#1091#1092#0" expanded="false" />
-            <element signature="e#1121#1122#0" expanded="false" />
-            <element signature="e#1164#1165#0" expanded="false" />
-            <element signature="e#1202#1203#0" expanded="false" />
-            <element signature="e#1232#1233#0" expanded="false" />
-            <element signature="e#1258#1259#0" expanded="false" />
-            <element signature="e#1297#1298#0" expanded="false" />
-            <element signature="e#1327#1328#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -946,9 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1349">
           <caret line="82" column="25" lean-forward="false" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1015,13 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/actions/RouteRegister.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
@@ -1045,13 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/DataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/afterschool/ApplyAfterschool.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1063,9 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1073,7 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="17" column="48" lean-forward="false" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1088,7 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,25 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="33" column="18" lean-forward="false" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/JsRouter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="10" selection-start-column="48" selection-end-line="15" selection-end-column="9" />
-          <folding>
-            <marker date="1488977054829" expanded="true" signature="370:575" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/CssRouter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,7 +1146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="33" column="49" lean-forward="false" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1130,30 +1153,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java">
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionClassStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="64" column="10" lean-forward="false" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
-          <folding />
+        <state relative-caret-position="950">
+          <caret line="66" column="16" lean-forward="false" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+          <folding>
+            <marker date="1489016790663" expanded="true" signature="3563:3564" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/ImagesRouter.java">
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/DatePostContext.java" />
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/FacilityReportContext.java" />
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/ResponsePostContext.java" />
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/PrimaryPostContext.java" />
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/WriterPostContext.java" />
+    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/SafeResultSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="46" column="72" lean-forward="false" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
+          <folding>
+            <marker date="1489016791065" expanded="true" signature="2660:2719" ph="{...}" />
+            <marker date="1489016791065" expanded="true" signature="2783:2914" ph="{...}" />
+            <marker date="1489016791065" expanded="true" signature="2977:3070" ph="{...}" />
+            <marker date="1489016791065" expanded="false" signature="3107:3112" ph=" { " />
+            <marker date="1489016791065" expanded="false" signature="3147:3150" ph=" }" />
+            <marker date="1489016791065" expanded="true" signature="3171:3450" ph="{...}" />
+            <marker date="1489016791065" expanded="true" signature="3247:3381" ph="{...}" />
+            <marker date="1489016791065" expanded="false" signature="3413:3419" ph=" { " />
+            <marker date="1489016791065" expanded="false" signature="3443:3447" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/DataBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
+    <entry file="file://$PROJECT_DIR$/WEB-INF/index.tls">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="30" column="8" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+        <state relative-caret-position="152">
+          <caret line="86" column="27" lean-forward="false" selection-start-line="86" selection-start-column="27" selection-end-line="86" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1166,68 +1213,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionClassStatus.java">
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/IndexRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+        <state relative-caret-position="222">
+          <caret line="30" column="34" lean-forward="false" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
           <folding>
-            <element signature="e#1880#1897#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/DatePostContext.java">
+    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/actions/RouteRegistration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="114">
+          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/FacilityReportContext.java">
+    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/actions/RouteRegister.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="-646">
+          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/ResponsePostContext.java">
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/PrimaryPostContext.java">
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="31" />
+        <state relative-caret-position="160">
+          <caret line="22" column="64" lean-forward="false" selection-start-line="22" selection-start-column="64" selection-end-line="22" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/WriterPostContext.java">
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/ImagesRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="179">
+          <caret line="16" column="61" lean-forward="false" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/SafeResultSet.java">
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/CssRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="46" column="72" lean-forward="false" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
-          <folding />
+        <state relative-caret-position="153">
+          <caret line="15" column="99" lean-forward="false" selection-start-line="15" selection-start-column="99" selection-end-line="17" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/IndexRouter.java">
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/resources/JsRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="26" column="18" lean-forward="false" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+        <state relative-caret-position="304">
+          <caret line="16" column="61" lean-forward="false" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
