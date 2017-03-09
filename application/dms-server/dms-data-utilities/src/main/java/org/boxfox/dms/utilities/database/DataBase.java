@@ -14,11 +14,11 @@ public class DataBase {
 	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	private static final String DB_ID = "root";
 //	private static final String DB_PASSWORD = "sotkfkddmsdjeldp";
-//	private static final String DB_PASSWORD = "testdatabase";
+	private static final String DB_PASSWORD = "testdatabase";
 //	private static final String DB_PASSWORD = "uursty199";
-	private static final String DB_PASSWORD = "";
+//	private static final String DB_PASSWORD = "";
 	
-	private static DataBase instance;
+	private static DataBase instance = new DataBase();
 	private Statement statement;
 	private Connection connection;
 
@@ -31,9 +31,6 @@ public class DataBase {
 		 * Problems occur when more than one object accesses the database at the
 		 * same time. So use singleton pattern.
 		 */
-		if (instance == null) {
-			instance = new DataBase();
-		}
 		return instance;
 	}
 	

@@ -2,60 +2,36 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.UPLOAD_QNA_QUESTION)
-public class UploadQnaQuestion implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/qna/question", method={HttpMethod.POST})
+public class UploadQnaQuestion implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Question in Q&A
-		 * 
-		 * Table Name : qna
-		 * 
-		 * no INT(11) PK NN AI
-		 * title VARCHAR(45) NN
-		 * question_content VARCHAR(5000) NN
-		 * question_date DATETIME NN
-		 * writer VARCHAR(20) NN
-		 * answer_content VARCHAR(5000) Default NULL
-		 * answer_date DATETIME Default NULL
-		 * privacy TINYINT(1) NN
-		 * 
-		 * DATETIME format : YYYY-MM-DD hh:mm:ss
-		 */
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		String title = requestObject.getString("title");
-		String content = requestObject.getString("question_content");
-		String writer = requestObject.getString("writer");
+		DataBase database = DataBase.getInstance();
 		
-		boolean privacy = requestObject.getBoolean("privacy");
+		String title = context.request().getParam("title");
+		String content = context.request().getParam("content");
+		String writer = context.request().getParam("writer");
+		boolean privacy = Boolean.parseBoolean(context.request().getParam("privacy"));
 		
-		int status = 1;
-		
-		if(requestObject.containsKey("no")) {
-			/*
-			 * Judge modify
-			 */
-			int no = requestObject.getInt("no");
+		try {
+			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");
 			
-			database.executeUpdate("UPDATE qna SET title='", title, "' WHERE no=", no);
-			database.executeUpdate("UPDATE qna SET question_content='", content, "' WHERE no=", no);
-			database.executeUpdate("UPDATE qna SET writer='", writer, "' WHERE no=", no);
-		} else {
-			/*
-			 * Judge upload
-			 */
-			status = database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
 		}
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

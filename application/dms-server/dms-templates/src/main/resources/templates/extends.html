@@ -1,0 +1,167 @@
+<!-- Robot -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="row content-container">
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">안내</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            ※ 다른 학생에 의해 피해를 볼 수 있습니다. 가급적 비밀번호를 변경하여 사용해 주세요. 이를 무시하여 발생하는
+                            불이익은 책임지지 않습니다. <br> <br> ※ 비밀번호를 잊어버리신 경우 사감실에 문의하여
+                            주시고, 버그신고는 박성근 선생님 또는 카카오톡 rlatjdfo112를 통해 문의하여 주세요
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">연장학습 신청</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            ※ 열린교실은 5층을 사용하며, 코딩실 1과 독서실은 조용한 자습, 코딩실 2, 3, 4는 토론이 가능합니다.<br>
+                            <div class="sub-title">Input</div>
+                            <div>
+                                <div>
+                                    <form action="${pageContext.request.contextPath}/checkin"
+                                          method="POST">
+                                        <div class="radio3 radio-check radio-inline">
+                                            <input type="radio" id="radio4" name="gender" value="first"
+                                                   checked=""> <label id="one" for="radio4">
+                                            코딩실1 </label>
+                                        </div>
+
+                                        <div class="radio3 radio-check radio-success radio-inline">
+                                            <input type="radio" id="radio5" name="gender" value="second">
+                                            <label id="two" for="radio5"> 코딩실2 </label>
+                                        </div>
+
+                                        <div class="radio3 radio-check radio-warning radio-inline">
+                                            <input type="radio" id="radio6" name="gender" value="third">
+                                            <label id="three" for="radio6"> 코딩실3 </label>
+                                        </div>
+
+                                        <div class="radio3 radio-check radio-inline">
+                                            <input type="radio" id="radio7" name="gender" value="four">
+                                            <label id="four" for="radio7"> 코딩실4 </label>
+                                        </div>
+
+                                        <div class="radio3 radio-check radio-success radio-inline">
+                                            <input type="radio" id="radio8" name="gender"
+                                                   value="firstlib"> <label id="five" for="radio8">
+                                            3층 독서실 </label>
+                                        </div>
+
+                                        <div class="radio3 radio-check radio-warning radio-inline">
+                                            <input type="radio" id="radio9" name="gender"
+                                                   value="secondlib"> <label id="six" for="radio9">
+                                            4층 독서실 </label>
+                                        </div>
+
+                                        <div class="radio3 radio-check radio-warning radio-inline">
+                                            <input type="radio" id="radio10" name="gender"
+                                                   value="openclass"> <label id="seven" for="radio10">
+                                            열린교실 </label>
+                                        </div>
+
+
+                                        <div class="radio3 radio-check radio-warning radio-inline">
+                                            <input type="radio" id="radio11" name="gender" value="cansle">
+                                            <label for="radio11"> 신청 취소 </label>
+                                        </div>
+                                        <br> <br>
+                                        <div class="g-recaptcha"
+                                             data-sitekey="6LePhxsTAAAAAHREEHAFfh7AiHdQphO0u2D97VP6"></div>
+                                        <br> <input type="submit" class="btn btn-info"
+                                                    value=" 제출 "><br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="title">신청자 목록</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <div>
+                                    <table class="table" id="thisistable">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>코딩실1</th>
+                                            <th>코딩실2</th>
+                                            <th>코딩실3</th>
+                                            <th>코딩실4</th>
+                                            <th>3층 독서실</th>
+                                            <th>4층 독서실</th>
+                                            <th>열린교실</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <%
+                                        ArrayList
+                                        <ArrayList
+                                        <String>> list = new ArrayList
+                                            <ArrayList
+                                            <String>>();
+                                                String roomList[] = {"first", "second", "third", "four", "firstlib",
+                                                "secondlib", "openclass"};
+                                                for (int i = 0; i < roomList.length; i++) {
+                                                list.add(in.checkInList(roomList[i]));
+                                                }
+                                                for (int i = 0; i < 20; i++) {
+                                                %>
+                                                <tr>
+                                                    <td><%=i + 1%></td>
+                                                    <%
+                                                    for (int j = 0; j < roomList.length; j++) {
+                                                    String str;
+                                                    if (i > list.get(j).size() - 1)
+                                                    str = "";
+                                                    else
+                                                    str = list.get(j).get(i);
+                                                    %>
+                                                    <td><%=str%></td>
+                                                    <%
+                                                    }
+                                                    %>
+
+                                                <tr>
+                                                    <%
+                                                    }
+                                                    %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

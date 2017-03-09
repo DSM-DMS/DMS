@@ -2,46 +2,60 @@ package com.dms.planb.action.goingout;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.LOAD_GOINGOUT_APPLY_STATUS)
-public class LoadGoingoutApplyStatus implements Actionable {
-	SafeResultSet resultSet;
-	EasyJsonObject tempObject;
-	
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/goingout", method={HttpMethod.GET})
+public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		String id = requestObject.getString("id");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
+		
+		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet;
+		EasyJsonObject responseObject = new EasyJsonObject();
+		EasyJsonObject tempObject = new EasyJsonObject();
+		EasyJsonArray tempArray = new EasyJsonArray();
+		
+		String id = context.request().getParam("id");
 		
 		try {
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE id='", id, "'");
-		} catch(NullPointerException e) {
-			responseObject.put("status", 404);
 			
-			return responseObject;
-		}
-		
-		if(resultSet.next()) {
-			do {
-				tempObject = new EasyJsonObject();
+			if(resultSet.next()) {
+				do {
+					tempObject = new EasyJsonObject();
+					
+					tempObject.put("date", resultSet.getBoolean("date"));
+					tempObject.put("reason", resultSet.getString("reason"));
+					
+					tempArray.add(tempObject);
+				} while(resultSet.next());
 				
-				tempObject.put("date", resultSet.getBoolean("date"));
-				tempObject.put("reason", resultSet.getString("reason"));
+				responseObject.put("result", tempArray);
 				
-				array.add(tempObject);
-			} while(resultSet.next());
+				context.response().setStatusCode(200);
+				context.response().end(responseObject.toString());
+				context.response().close();
+			} else {
+				context.response().setStatusCode(404).end();
+				context.response().close();
+			}
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
 			
-			responseObject.put("result", array);
-		} else {
-			responseObject.put("status", 404);
+			Log.l("SQLException");
 		}
-		
-		return responseObject;
 	}
 }

@@ -2,17 +2,18 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.APPLY_STAY)
-public class ApplyStay implements Actionable {
-	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/stay", method={HttpMethod.PUT})
+public class ApplyStay implements Handler<RoutingContext> {
 		/**
 		 * Apply stay - about value of date
 		 * 
@@ -28,15 +29,27 @@ public class ApplyStay implements Actionable {
 		 * Saturday dormitory coming : 3
 		 * Stay : 4
 		 */
-		String id = requestObject.getString("id");
-		int value = requestObject.getInt("value");
-		String week = requestObject.getString("week");
+	@Override
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
-		int status = database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		String id = context.request().getParam("id");
+		int value = Integer.parseInt(context.request().getParam("value"));
+		String week = context.request().getParam("week");
 		
-		return responseObject;
+		try {
+			database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
+			database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+
+			Log.l("SQLException");
+		}
 	}
 }

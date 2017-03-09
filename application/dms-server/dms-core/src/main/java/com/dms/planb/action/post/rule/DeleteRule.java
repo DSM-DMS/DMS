@@ -2,23 +2,36 @@ package com.dms.planb.action.post.rule;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.DELETE_RULE)
-public class DeleteRule implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/rule", method={HttpMethod.DELETE})
+public class DeleteRule implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int status = database.executeUpdate("DELETE FROM rule WHERE no=", no);
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		int no = Integer.parseInt(context.request().getParam("no"));
 		
-		return responseObject;
+		try {
+			database.executeUpdate("DELETE FROM rule WHERE no=", no);
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }

@@ -2,23 +2,37 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.MODIFY_QNA_COMMENT)
-public class ModifyQnaComment implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/qna/comment", method={HttpMethod.PATCH})
+public class ModifyQnaComment implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int status = database.executeUpdate("UPDATE qna_comment SET content='", requestObject.getString("content"), "' WHERE no=", no);
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		int no = Integer.parseInt(context.request().getParam("no"));
+		String content = context.request().getParam("content");
 		
-		return responseObject;
+		try {
+			database.executeUpdate("UPDATE qna_comment SET content='", content, "' WHERE no=", no);
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }

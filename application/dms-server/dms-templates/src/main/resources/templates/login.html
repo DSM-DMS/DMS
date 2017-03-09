@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>대덕 소프트웨어 마이스터고 알리미 Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link
+            href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400'
+            rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900'
+          rel='stylesheet' type='text/css'>
+    <!-- CSS Libs -->
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/checkbox3.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/select2.min.css">
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/flat-blue.css">
+    <!-- Robot -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body class="flat-blue" background="test.jpg"
+      oncontextmenu="return false" topmargin="0" ondragstart="return false"
+      onselectstart="return false">
+
+<div class="app-container" style="padding: 10% 0px !important;">
+
+    <div class="side-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card2">
+                    <div class="card2-header">
+                        <div class="card2-title">
+                            <div class="title">로그인</div>
+                        </div>
+                        <div class="pull-right card-action" style="margin-top: 10px;">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-link" data-toggle="modal"
+                                        data-target="#notice">
+                                    <i class="fa fa-question-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <hr width="100%" color="#000000"/>
+                    </div>
+                    <div class="card2-body">
+                        <div>
+                            <div>
+                                <form method="post"
+                                      action="${pageContext.request.contextPath}/login">
+                                    <center>
+                                        <label for="username">ID</label> <input type="text" name="id"
+                                                                                class="form-control" id="username"
+                                                                                placeholder="아이디">
+                                        <br> <label for="password">PASSWORD</label> <input
+                                            type="password" name="password" class="form-control"
+                                            id="password" placeholder="비밀번호"> <br>
+                                        <div class="g-recaptcha"
+                                             data-sitekey="6LePhxsTAAAAAHREEHAFfh7AiHdQphO0u2D97VP6"></div>
+                                        <div
+                                                class="checkbox3 checkbox-success checkbox-inline checkbox-check checkbox-round  checkbox-light">
+                                            <input type="checkbox" id="KeepCheckBox" name="KeepLogin"
+                                                   checked=""> <label for="KeepCheckBox">로그인
+                                            유지</label>
+                                        </div>
+                                        <input type="submit" class="btn btn-info" value="Login"/> <br
+                                            colspan="2"/>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="notice" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Notice</h4>
+                    </div>
+                    <div class="modal-body"
+                         style="padding-left: 50px !important; padding-right: 50px !important;">
+                        <br>해당 홈페이지에서 사용되는 아이디는 대마고 알리미 어플리케이션에서도 사용가능하며, 앱에서 로그인
+                        하신뒤 내정보 - 연장학습 신청을 통해 앱을 통해 연장학습 신청이 가능합니다. <br>
+                        <br>※ 다른 학생에 의해 피해를 볼 수 있습니다. 가급적 비밀번호를 변경하여 사용해 주세요. 이를
+                        무시하여 발생하는 불이익은 책임지지 않습니다. <br>
+                        <br> ※ 비밀번호를 잃어버리신 경우 사감실에 문의하여 주시고, 버그신고는 박성근 선생님을 통해 문의하여 주세요 <br>
+                        <a
+                                href="https://play.google.com/store/apps/details?id=com.boxfox.dsm_boxfox"
+                                target="_blank">대덕 소프트웨어 마이스터고 알리미 다운로드</a> <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+<footer class="app-footer">
+    <div class="wrapper">
+        <center>
+            <a href="http://boxfoxs.tistory.com" target="_blank">By BoxFox</a><br>
+            Design Library : <a
+                href="https://github.com/tui2tone/flat-admin-bootstrap-templates"
+                target="_blank">flat-admin-bootstrap</a> <br>
+        </center>
+    </div>
+</footer>
+
+
+<!-- Javascript Libs -->
+<script type="text/javascript" src="lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap-switch.min.js"></script>
+
+<script type="text/javascript" src="lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/select2.full.min.js"></script>
+<script type="text/javascript" src="lib/js/ace/ace.js"></script>
+<script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
+<script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
+<script type="text/javascript" src="test.js"></script>
+</body>
+</html>

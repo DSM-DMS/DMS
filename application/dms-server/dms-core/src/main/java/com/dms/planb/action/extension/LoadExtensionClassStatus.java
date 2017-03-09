@@ -1,41 +1,118 @@
 package com.dms.planb.action.extension;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.json.EasyJson;
+import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
-@ActionRegistration(command=Commands.LOAD_EXTENSION_CLASS_STATUS)
-public class LoadExtensionClassStatus implements Actionable {
-	EasyJsonObject tempObject;
-	
+import com.dms.planb.support.CORSHeader;
+
+@RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
+public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int classId = requestObject.getInt("class");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
-		
-		if(resultSet.next()) {
-			do {
-				tempObject = new EasyJsonObject();
-				
-				tempObject.put("seat", resultSet.getInt("seat"));
-				tempObject.put("name", resultSet.getString("name"));
-				tempObject.put("id", resultSet.getString("id"));
-				
-				array.add(tempObject);
-			} while(resultSet.next());
+		EasyJson json = null;
+
+		String option = context.request().getParam("option");
+
+		try {
+			int classId = -1;
 			
-			responseObject.put("result", array);
-		} else {
-			responseObject.put("status", 404);
+			switch (option) {
+			case "map":
+				if (context.request().params().contains("class")) {
+					classId = Integer.parseInt(context.request().getParam("class"));
+					json = new EasyJsonObject(getMapdata(classId));
+				} else {
+					json = new EasyJsonArray(getMapdataAll());
+				}
+				
+				break;
+			case "status":
+				classId = Integer.parseInt(context.request().getParam("class"));
+				
+				break;
+			}
+
+			context.response().setStatusCode(200);
+			context.response().end(json.toString());
+			context.response().close();
+		} catch (SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+
+			Log.l("SQLException");
+		}
+	}
+
+	private HashMap<Integer, String> getSeatDatas(int classId) throws SQLException {
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		SafeResultSet resultSet = DataBase.getInstance().executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
+
+		while (resultSet.next()) {
+			map.put(resultSet.getInt("seat"), resultSet.getString("name"));
 		}
 		
-		return responseObject;
+		return map;
+	}
+
+	public JSONObject getMapdata(int room) throws SQLException {
+		SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map where room=", room);
+		JSONObject object = null;
+		if (rs.next()) {
+			object = new JSONObject();
+			object.put("no", rs.getInt("room"));
+			object.put("name", rs.getString("name"));
+			object.put("map", process((JSONArray) JSONValue.parse(rs.getString("map")), rs.getInt("room")));
+		}
+		return object;
+	}
+
+	public JSONArray getMapdataAll() throws SQLException {
+		SafeResultSet rs = DataBase.getInstance().executeQuery("select * from extension_map");
+		JSONArray classs = new JSONArray();
+		while (rs.next()) {
+			JSONObject object = new JSONObject();
+			object.put("no", rs.getInt("room"));
+			object.put("name", rs.getString("name"));
+			object.put("map", process((JSONArray) JSONValue.parse(rs.getString("map")), rs.getInt("room")));
+			classs.add(object);
+		}
+		return classs;
+	}
+
+	private JSONArray process(JSONArray arr, int room) throws SQLException {
+		HashMap<Integer, String> map = getSeatDatas(room);
+		int count = 1;
+		for (int i = 0; i < arr.size(); i++) {
+			JSONArray row = (JSONArray) arr.get(i);
+			for (int k = 0; k < row.size(); k++) {
+				if (((long) row.get(k)) == 1) {
+					row.remove(k);
+					if (map.get(count) != null) {
+						row.add(k, map.get(count));
+					} else {
+						row.add(k, count);
+					}
+					count++;
+				}
+			}
+		}
+		return arr;
 	}
 }

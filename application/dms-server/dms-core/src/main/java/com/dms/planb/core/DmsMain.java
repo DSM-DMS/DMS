@@ -1,7 +1,5 @@
 package com.dms.planb.core;
 
-import java.io.File;
-
 /**
  * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
  * 
@@ -24,10 +22,10 @@ import java.io.File;
  * @see pom.xml
  */
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import org.boxfox.dms.utilities.actions.ActionRegister;
 import org.boxfox.dms.utilities.database.DataBase;
 
 import com.dms.parser.dataio.post.PostChangeDetector;
@@ -39,46 +37,34 @@ import io.vertx.core.VertxOptions;
 class DmsMain {
 	private static Vertx vertx;
 	private static VertxOptions options;
-	
+
 	/**
 	 * @see com.dms.planb.action.account.ModifyProfileImage
 	 */
-	private static File profileImgDir = new File("Profile Images");	
+	private static File profileImgDir = new File("Profile Images");
 	/*
 	 * Current path, directory which named "Profile Images"
 	 */
-	
+
 	private static void initialize() {
 		/*
 		 * Initializing method when server started.
 		 */
-		
-		if(!profileImgDir.exists()) {
+
+		if (!profileImgDir.exists()) {
 			profileImgDir.mkdir();
 		}
 		/*
 		 * Create profile image directory if not exists
 		 */
-		
+
 		/**
-		 * @see org.boxfox.dms.utilities.actions
-		 * .ActionRegister
+		 * @see com.dms.parser.dataio.post .PostChangeDetector
 		 */
-		ActionRegister.init("org.boxfox.dms.secure", "com.dms.planb");
-		/*
-		 * Using Reflection. Find @ActionRegistration annotation of classes in package,
-		 * and register actions to ActionRegister class.
-		 */
-		
-		/**
-		 * @see com.dms.parser.dataio.post
-		 * .PostChangeDetector
-		 */
-//		PostChangeDetector.getInstance().start();
+		// PostChangeDetector.getInstance().start();
 		/*
 		 * Post(in school web page) change detector(thread)
 		 */
-
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			/*
 			 * Refresh databases at regular intervals
@@ -110,7 +96,7 @@ class DmsMain {
 				}
 			}
 		});
-		
+
 		/**
 		 * @see pom.xml : vert.x and netty syntax
 		 */
@@ -129,23 +115,26 @@ class DmsMain {
 		 * Branch off initialize() method
 		 */
 
-		/** (non-Javadoc)
+		/**
+		 * (non-Javadoc)
+		 * 
 		 * @see http://vertx.io/docs/apidocs/io/vertx/core/VertxOptions.html
 		 */
 		options.setMaxEventLoopExecuteTime(2100000000);
 		/*
 		 * Sets the value of max event loop execute time, in ns.
 		 */
-
-		/** (non-Javadoc)
+		
+		/**
+		 * (non-Javadoc)
+		 * 
 		 * @see http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html
-		 * @see com.dms.planb.core
-		 * .DmsVerticle
+		 * @see com.dms.planb.core .DmsVerticle
 		 */
 		vertx.deployVerticle(new DmsVerticle());
 		/*
-		 * Deploy a verticle instance that you have created yourself.
-		 * Branch off DmsVerticle class
+		 * Deploy a verticle instance that you have created yourself. Branch off
+		 * DmsVerticle class
 		 */
 	}
 }

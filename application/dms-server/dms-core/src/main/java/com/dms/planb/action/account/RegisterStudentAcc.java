@@ -2,105 +2,69 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.secure.Guardian;
+import org.boxfox.dms.user.UserManager;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.JobResult;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.REGISTER_STUDENT_ACC)
-public class RegisterStudentAcc implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/account/register/student", method={HttpMethod.POST})
+public class RegisterStudentAcc implements Handler<RoutingContext> {
+	private UserManager userManager;
+
+    public RegisterStudentAcc() {
+        userManager = new UserManager();
+    }
+	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/*
-		 * Need process : permission, student_status, session_key 
-		 */
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		// account
-		String id = requestObject.getString("id");
-		String password = requestObject.getString("password");
-//		String sessionKey = requestObject.getString("session_key");
-//		int permission = requestObject.getInt("permission");
+		DataBase database = DataBase.getInstance();
 		
-		// student data
-		String studentName = requestObject.getString("name");
-		int studentNumber = requestObject.getInt("number");
-		boolean studentSex = requestObject.getBoolean("sex");
-//		int status = requestObject.getInt("status");
+		String uid = context.request().getParam("uid");
+		String id = context.request().getParam("id");
+		String password = context.request().getParam("password");
+//		String sessionKey;
+//		boolean permission;
+		// To account table
 		
-		String studentPhone = null;
-		String parentName = null;
-		String parentPhone = null;
-		if(requestObject.containsKey("phone")) {
-			studentPhone = requestObject.getString("phone");
+		int number = Integer.parseInt(context.request().getParam("number"));
+		int status = Integer.parseInt(context.request().getParam("status"));
+		String name = context.request().getParam("name");
+		// To student_data table
+		
+		try {
+			if (Guardian.checkParameters(uid, id, password)) {
+	            JobResult result = userManager.register(uid, id, password);
+	            if (result.isSuccess()) {
+	                database.executeUpdate("INSERT INTO student_data(id, number, status, name) VALUES('", id, "', ", number, ", ", status, ", '", name, "')");
+	    			database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4");
+	    			database.executeUpdate("INSERT INTO student_score(id, merit, demerit) VALUES('", id, "', 0, 0)");
+	    			
+	    			context.response().setStatusCode(201);
+	    			context.response().setStatusMessage(result.getMessage()).end();
+	    			context.response().close();
+	            } else {
+	            	context.response().setStatusCode(409);
+	            	context.response().setStatusMessage(result.getMessage()).end();
+	    			context.response().close();
+	            }
+	        } else {
+	            // Null in any parameters
+	        }
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		if(requestObject.containsKey("p_name")) {
-			parentName = requestObject.getString("p_name");
-		}
-		if(requestObject.containsKey("p_phone")) {
-			parentPhone = requestObject.getString("p_phone");
-		}
-		
-		/**
-		 * Set stay apply default value when register account
-		 * 
-		 * Table Name : stay_apply_default
-		 * 
-		 * id VARCHAR(20) PK NN
-		 * value INT(1) Default 4
-		 */
-		
-		int status = 1;
-		
-		status = database.executeUpdate("INSERT INTO stay_apply_default(id, value) VALUES('", id, "', 4)");
-		if(status == 0) {
-			responseObject.put("status", status);
-			return responseObject;
-		}
-		
-		/**
-		 * Set id, password, .. to account table
-		 * 
-		 * Table Name : account
-		 * 
-		 * idx INT(11) PK NN AI
-		 * id VARCHAR(20) NN UQ
-		 * password VARCHAR(300) NN
-		 * session_key VARCHAR(300) Default NULL
-		 * permission TINYINT(1) NN
-		 */
-		
-		status = database.executeUpdate("INSERT INTO account(id, password, session_key, permission) VALUES('", id, "', '", password, "', '", "dummy", "', ", 1, ")");
-		if(status == 0) {
-			responseObject.put("status", status);
-			return responseObject;
-		}
-		
-		/**
-		 * Set student's data to student_data table
-		 * 
-		 * Table Name : student_data
-		 * 
-		 * number INT(11) PK NN
-		 * sex TINYINT(1) Default 1
-		 * status INT(11) NN
-		 * name VARCHAR(20) NN
-		 * phone VARCHAR(20) Default NULL
-		 * p_name VARCHAR(20) Default NULL
-		 * p_phone VARCHAR(20) Default NULL
-		 * merit INT(11) Default NULL
-		 * demerit INT(11) Default NULL
-		 */
-		
-		status = database.executeUpdate("INSERT INTO student_data(id, number, sex, status, name, phone, p_name, p_phone) VALUES('", id, "', ", studentNumber, ", ", studentSex, ", ", 1, ", '", studentName, "', '", studentPhone, "', '", parentName, "', '", parentPhone, "')");
-		if(status == 0) {
-			responseObject.put("status", status);
-			return responseObject;
-		}
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

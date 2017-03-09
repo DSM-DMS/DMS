@@ -2,24 +2,37 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.MODIFY_STAY_DEFAULT)
-public class ModifyStayDefault implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/stay/default", method={HttpMethod.PATCH})
+public class ModifyStayDefault implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		String id = requestObject.getString("id");
-		int value = requestObject.getInt("value");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int status = database.executeUpdate("UPDATE stay_apply_default SET value=", value, " WHERE id='", id, "'");
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		String id = context.request().getParam("id");
+		int value = Integer.parseInt(context.request().getParam("value"));
 		
-		return responseObject;
+		try {
+			database.executeUpdate("UPDATE stay_apply_default SET value=", value, " WHERE id='", id, "'");
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }

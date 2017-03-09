@@ -1,10 +1,5 @@
 package org.boxfox.dms.utilities.json;
 
-import java.sql.SQLException;
-
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

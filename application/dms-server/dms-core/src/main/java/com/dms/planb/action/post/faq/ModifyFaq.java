@@ -2,40 +2,39 @@ package com.dms.planb.action.post.faq;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.MODIFY_FAQ)
-public class ModifyFaq implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/faq", method={HttpMethod.PATCH})
+public class ModifyFaq implements Handler<RoutingContext> {
 	@Override
-	@Deprecated
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int status = 1;
-		if(requestObject.containsKey("title")) {
-			status = database.executeUpdate("UPDATE faq SET title='", requestObject.getString("title"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
+		DataBase database = DataBase.getInstance();
+		
+		int no = Integer.parseInt(context.request().getParam("no"));
+		String title = context.request().getParam("title");
+		String content = context.request().getParam("content");
+		
+		try {
+			database.executeUpdate("UPDATE faq SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE faq SET content='", content, "' WHERE no=", no);
+			
+			context.response().setStatusCode(200).end();
+			context.response().end();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		if(requestObject.containsKey("content")) {
-			status = database.executeUpdate("UPDATE faq SET content='", requestObject.getString("content"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
-		}
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

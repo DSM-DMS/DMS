@@ -2,31 +2,37 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.UPLOAD_QNA_ANSWER)
-public class UploadQnaAnswer implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/qna/answer", method={HttpMethod.PUT})
+public class UploadQnaAnswer implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Answer in Q&A
-		 * 
-		 * Reference UploadQnaQuestion
-		 * Upload answer based question no
-		 */
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int no = requestObject.getInt("no");
-		String content = requestObject.getString("answer_content");
+		DataBase database = DataBase.getInstance();
 		
-		int status = database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date=now() WHERE no=", no);
+		int no = Integer.parseInt(context.request().getParam("no"));
+		String content = context.request().getParam("content");
 		
-		responseObject.put("status", status);
-		
-		return responseObject;
+		try {
+			database.executeUpdate("UPDATE qna SET answer_content='", content, "', answer_date=now() WHERE no=", no);
+			
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }

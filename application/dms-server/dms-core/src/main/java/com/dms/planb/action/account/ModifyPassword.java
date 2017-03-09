@@ -2,24 +2,37 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.MODIFY_PASSWORD)
-public class ModifyPassword implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/account/password/student", method={HttpMethod.PATCH})
+public class ModifyPassword implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		String id = requestObject.getString("id");
-		String password = requestObject.getString("password");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int status = database.executeUpdate("UPDATE account SET password='", password, "' WHERE id='", id, "'");
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		String id = context.request().getParam("id");
+		String password = context.request().getParam("password");
 		
-		return responseObject;
+		try {
+			database.executeUpdate("UPDATE account SET password='", password, "' WHERE id='", id, "'");
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }

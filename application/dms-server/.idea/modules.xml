@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/dms-core/dms-core.iml" filepath="$PROJECT_DIR$/dms-core/dms-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/dms-data-utilities/dms-data-utilities.iml" filepath="$PROJECT_DIR$/dms-data-utilities/dms-data-utilities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dms-parser/dms-parser.iml" filepath="$PROJECT_DIR$/dms-parser/dms-parser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dms-secure/dms-secure.iml" filepath="$PROJECT_DIR$/dms-secure/dms-secure.iml" />
       <module fileurl="file://$PROJECT_DIR$/dms-server.iml" filepath="$PROJECT_DIR$/dms-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dms-templates/dms-templates.iml" filepath="$PROJECT_DIR$/dms-templates/dms-templates.iml" />
       <module fileurl="file://$PROJECT_DIR$/dms-utilities/dms-utilities.iml" filepath="$PROJECT_DIR$/dms-utilities/dms-utilities.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dms-secure/dms_secure.iml" filepath="$PROJECT_DIR$/dms-secure/dms_secure.iml" />
     </modules>
   </component>
 </project>

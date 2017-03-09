@@ -1,24 +1,25 @@
 package com.dms.planb.action.post.parsed;
 
-import java.sql.SQLException;
-
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.parser.dataio.plan.PlanModel;
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.LOAD_PLAN)
-public class LoadPlan implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/school/plan", method={HttpMethod.GET})
+public class LoadPlan implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int year = requestObject.getInt("year");
-		int month = requestObject.getInt("month");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		responseObject.put("result", PlanModel.getPlan(year, month));
+		int year = Integer.parseInt(context.request().getParam("year"));
+		int month = Integer.parseInt(context.request().getParam("month"));
 		
-		return responseObject;
+		context.response().setStatusCode(200);
+		context.response().end(PlanModel.getPlan(year, month).toString());
+		context.response().close();
 	}
 }

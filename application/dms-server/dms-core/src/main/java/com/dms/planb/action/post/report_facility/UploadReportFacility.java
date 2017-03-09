@@ -2,60 +2,39 @@ package com.dms.planb.action.post.report_facility;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.UPLOAD_REPORT_FACILITY)
-public class UploadReportFacility implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/report", method={HttpMethod.POST})
+public class UploadReportFacility implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Report facilities in dormitory
-		 * 
-		 * Table Name : facility_report
-		 * 
-		 * no INT(11) PK NN AI
-		 * title VARCHAR(45) NN
-		 * content VARCHAR(1000) NN
-		 * room INT(11) NN
-		 * write_date DATETIME NN
-		 * writer VARCHAR(10) NN
-		 * result VARCHAR(100) Default NULL
-		 * result_date DATETIME Default NULL
-		 * 
-		 * DATETIME format : YYYY-MM-DD hh:mm:ss
-		 */
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		String title = requestObject.getString("title");
-		String content = requestObject.getString("content");
-		int room = requestObject.getInt("room");
-		String writer = requestObject.getString("writer");
+		DataBase database = DataBase.getInstance();
 		
-		int status = 1;
+		String title = context.request().getParam("title");
+		String content = context.request().getParam("content");
+		int room = Integer.parseInt(context.request().getParam("room"));
+		String writer = context.request().getParam("writer");
 		
-		if(requestObject.containsKey("no")) {
-			/*
-			 * Judge modify
-			 */
-			int no = requestObject.getInt("no");
+		try {			
+			database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", room, ", NOW(), '", writer, "')");
 			
-			database.executeUpdate("UPDATE facility_report SET title='", title, "' WHERE no=", no);
-			database.executeUpdate("UPDATE facility_report SET content='", content, "' WHERE no=", no);
-			database.executeUpdate("UPDATE facility_report SET room=", room, " WHERE no=", no);
-			database.executeUpdate("UPDATE facility_report SET writer='", writer, "' WHERE no=", no);
-		} else {
-			/*
-			 * Judge upload
-			 */
-			status = database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", room, ", NOW(), '", writer, "')");
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

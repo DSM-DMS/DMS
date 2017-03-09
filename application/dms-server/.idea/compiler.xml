@@ -8,6 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="dms-core" />
         <module name="dms-data-utilities" />
+        <module name="dms-parser" />
+        <module name="dms-secure" />
+        <module name="dms-templates" />
         <module name="dms-utilities" />
         <module name="dms_secure" />
       </profile>
@@ -15,7 +18,10 @@
     <bytecodeTargetLevel>
       <module name="dms-core" target="1.8" />
       <module name="dms-data-utilities" target="1.8" />
+      <module name="dms-parser" target="1.8" />
+      <module name="dms-secure" target="1.8" />
       <module name="dms-server" target="1.5" />
+      <module name="dms-templates" target="1.5" />
       <module name="dms-utilities" target="1.7" />
       <module name="dms_secure" target="1.8" />
     </bytecodeTargetLevel>

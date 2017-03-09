@@ -1,0 +1,17 @@
+	@Override
+	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet;
+		EasyJsonObject responseObject = new EasyJsonObject();
+		EasyJsonObject tempObject = new EasyJsonObject();
+		EasyJsonArray tempArray = new EasyJsonArray();
+		
+		try {
+
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
+	}

@@ -2,49 +2,46 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.UPLOAD_AFTERSCHOOL_ITEM)
-public class UploadAfterschoolItem implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/afterschool/item", method={HttpMethod.POST})
+public class UploadAfterschoolItem implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * After school list
-		 * 
-		 * Table Name : afterschool_list
-		 * 
-		 * no INT(11) PK NN
-		 * title VARCHAR(45) NN
-		 * target INT(1) NN
-		 * place VARCHAR(10) NN
-		 * on_monday TINYINT(1) NN
-		 * on_tuesday TINYINT(1) NN
-		 * on_wednesday TINYINT(1) NN
-		 * on_saturday TINYINT(1) NN
-		 * instructor VARCHAR(10) NN
-		 * personnel INT(11) NN
-		 */
-		int no = requestObject.getInt("no");
-		String title = requestObject.getString("title");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		int target = requestObject.getInt("target");
-		String place = requestObject.getString("place");
-		boolean onMonday = requestObject.getBoolean("on_monday");
-		boolean onTuesday = requestObject.getBoolean("on_tuesday");
-		boolean onWednesday = requestObject.getBoolean("on_wednesday");
-		boolean onSaturday = requestObject.getBoolean("on_saturday");
-		String instructor = requestObject.getString("instructor");
-		int personnel = requestObject.getInt("personnel");
+		DataBase database = DataBase.getInstance();
 		
-		int status = database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor, personnel) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "', ", personnel, ")");
+		int no = Integer.parseInt(context.request().getParam("no"));
+		String title = context.request().getParam("title");
 		
-		responseObject.put("status", status);
+		int target = Integer.parseInt(context.request().getParam("target"));
+		String place = context.request().getParam("place");
+		boolean onMonday = Boolean.parseBoolean(context.request().getParam("on_monday"));
+		boolean onTuesday = Boolean.parseBoolean(context.request().getParam("on_tuesday"));
+		boolean onWednesday = Boolean.parseBoolean(context.request().getParam("on_wednesday"));
+		boolean onSaturday = Boolean.parseBoolean(context.request().getParam("on_saturday"));
+		String instructor = context.request().getParam("instructor");
+		int personnel = Integer.parseInt(context.request().getParam("personnel"));
 		
-		return responseObject;
+		try {
+			database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor, personnel) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "', ", personnel, ")");
+			
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }

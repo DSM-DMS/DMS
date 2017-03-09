@@ -2,36 +2,44 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.planb.support.Afterschool;
-import com.dms.planb.support.Commands;
+import com.dms.planb.support.CORSHeader;
 
-@ActionRegistration(command = Commands.APPLY_AFTERSCHOOL)
-public class ApplyAfterschool implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/afterschool", method={HttpMethod.POST})
+public class ApplyAfterschool implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Apply after school - target number 
-		 * 
-		 * Table Name : afterschool_apply
-		 * 
-		 * id VARCHAR(20) NN
-		 * no INT(11) NN
-		 * CONSTRAINT afterschool_apply_ibfk_1 FOREIGN KEY no REFERENCES afterschool_list(no)
-		 */
-		String id = requestObject.getString("id");
-		int no = requestObject.getInt("no");
+	public void handle(RoutingContext context) {
+		context = CORSHeader.putHeaders(context);
 		
-		if(Afterschool.canApply(id, no)) {
-			database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
-		} else {
-			responseObject.put("status", 404);
+		DataBase database = DataBase.getInstance();
+		
+		String id = context.request().getParam("id");
+		int no = Integer.parseInt(context.request().getParam("no"));
+		
+		try {
+			if(Afterschool.canApply(id, no)) {
+				database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
+				
+				context.response().setStatusCode(201).end();
+				context.response().close();
+			} else {
+				context.response().setStatusCode(409).end();
+				context.response().close();
+				// conflict
+			}
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		
-		return responseObject;
 	}
 }
