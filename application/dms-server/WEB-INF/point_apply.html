@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>DMS</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+  <body>
+    <div class="container">
+      <h1>DSM Dormitory System</h1>
+    </div>
+
+    <div class="row slider-menu-container hide">
+       <div class="menu-controller show">
+              <img src="../image/arrow.png">
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/megaphone.png"/>
+           <div>공지사항</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/writing.png"/>
+           <div>연장신청</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/settings.png"/>
+           <div>수리신고</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/chicken.png"/>
+           <div>학교급식</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/crown.png"/>
+           <div>상점신청</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/bug.png"/>
+           <div>버그신고</div>
+       </div>
+       <div class="icon-menu-item text-center">
+           <img src="images/man.png"/>
+           <div>내정보</div>
+      </div>
+  </div>
+
+  <div class="main">
+    <div class="card-wrapper">
+      <div class="card">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-lg-6 col-md-12 point_margin">
+              <table id="point_sel">
+                <tr>
+                  <td id="point_apply">
+                    상점신청
+                  </td>
+                  <td id="point_reco">
+                    상점추천
+                  </td>
+                </tr>
+              </table>
+              <div id="individual">
+                <input type="text" name="reason" placeholder="이유를 입력해 주세요." id="individual_reason">
+                <div id="individual_btn">상점신청</div>
+              </div>
+              <div id="recommend">
+                <input type="text" name="name" placeholder="이름을 입력해 주세요." id="recommend_name">
+                <input type="text" name="reason" placeholder="이유를 입력해 주세요." id="recommend_reason">
+                <div id="recommend_btn">상점추천</div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 point_margin">
+              <table id="out_sel">
+                <tr>
+                  <td id="sat_out">
+                    토요일
+                  </td>
+                  <td id="sun_out">
+                    일요일
+                  </td>
+                </tr>
+              </table>
+              <input type="hidden" id="out_day">
+              <div id="out_btn">외출신청</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script src="./js/script.js"></script>
+<script src="./js/point_apply.js"></script>
+
+</html>

@@ -483,6 +483,7 @@ function prevPage() {
 //      |
 //      | -- QnaArticlePage 구현 거의 완료
 
+// ajax가 비동이 이기 때문에, getData, getHtml의 success 콜백으로 draw
 
 
 // Page객체 구현 -----------------------------------------------------------------------
@@ -526,14 +527,17 @@ function AjaxPage() {
     this.sendData;
     this.draw = function() {
         this.setForm();
-        this.getData();
-        this.setData();
-        this.setEvent();
-        this.saveDom();
+        this.getData(function() {
+            this.setData();
+            this.setData();
+            this.setEvent();
+            this.saveDom();
+        });
+
     }
 
     // 필요한 Data를 받아옴
-    this.getData = function() {
+    this.getData = function(callback) {
         $.ajax({
             url: "http://dsm2015.cafe24.com:10419",
             type: "POST",
@@ -544,6 +548,9 @@ function AjaxPage() {
             },
             success: function(data) {
                 this.ajaxData = JSON.parse(data);
+                if (typeof callback === "function") {
+                    callback();
+                }
             }
         });
     }
@@ -582,19 +589,23 @@ function ServerPage() {
     this.no;
     this.action;
     this.draw = function() {
-        this.getHtml();
-        this.setHtml();
-        this.setEvent();
-        this.saveDom();
+        this.getHtml(function() {
+            this.setHtml();
+            this.setEvent();
+            this.saveDom();
+        });
     }
 
-    this.getHtml = function() {
+    this.getHtml = function(callback) {
         $.ajax({
             url: "http://dsm2015.cafe24.com" + "/" + this.action + "/" + this.type,
             type: "POST",
             data: this.sendData,
             success: function(data) {
                 this.htmlData = data;
+                if (typeof callback === "function") {
+                    callback();
+                }
             }
         });
     }
@@ -635,8 +646,17 @@ function MainPage() {
     this.mealData;
     this.date = new Date();
 
+    // 2개 이상의 ajax가 있을시, 2개 모두 완료후, draw를 하기 위함
+    this.noticeDone = false;
+    this.mealDone = false;
+    this.startDraw = function() {
+        if (this.noticeDone && this.mealDone) {
+            this.draw();
+        }
+    }
+
     // 공지 ajax + 급식 ajax
-    this.getData = function() {
+    this.getData = function(callback) {
         // getNoticeData
         $.ajax({
             url: "http://dsm2015.cafe24.com:10419",
@@ -651,6 +671,10 @@ function MainPage() {
             },
             success: function(data) {
                 this.noticeData = JSON.parse(data);
+                this.noticeDone = true;
+                if (typeof callback === "function") {
+                    callback();
+                }
             }
         });
 
@@ -669,6 +693,8 @@ function MainPage() {
             },
             success: function(data) {
                 this.mealData = JSON.parse(data);
+                this.mealDone = true;
+                this.startDraw();
             }
         });
 
@@ -903,7 +929,7 @@ function FaqListPage() {
         '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>공지사항</h1>' +
         '<div class="input-container">' +
-        '<input type="button" name="" value="글 쓰기">' +
+        '<input class="input-write" type="button" name="" value="글 쓰기">' +
         '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
@@ -939,6 +965,12 @@ function FaqListPage() {
         }
         this.setPageData();
     }
+    this.setEvent = function() {
+        $(".articlelist div.input-container input.input-write").click(function() {
+            // 글 쓰기 페이지 로드
+            new NoticeWritePage();
+        })
+    }
 
     pageStack.push(this);
     this.draw();
@@ -955,7 +987,7 @@ function QnaListPage() {
         '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>Q&A</h1>' +
         '<div class="input-container">' +
-        '<input type="button" name="" value="글 쓰기">' +
+        '<input class="input-write" type="button" name="" value="글 쓰기">' +
         '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
@@ -998,8 +1030,9 @@ function QnaListPage() {
         this.setPageData();
     }
     this.setEvent = function() {
-        $(".articlelist div.input-container input").click(function() {
+        $(".articlelist div.input-container input.input-write").click(function() {
             // 글 쓰기 페이지 로드
+            new QnaAnswerWritePage();
         })
     }
 
@@ -1017,7 +1050,7 @@ function RuleListPage() {
         '<img class="back_arrow" src="../image/arrow2.png" alt="" onclick="prevPage()">' +
         '<h1>기숙사규칙</h1>' +
         '<div class="input-container">' +
-        '<input type="button" name="" value="글 쓰기">' +
+        '<input class="input-write" type="button" name="" value="글 쓰기">' +
         '</div>' +
         '<div class="underline puple"></div>' +
         '</div>' +
@@ -1052,6 +1085,12 @@ function RuleListPage() {
             $(".articlelist table.list").append(newTr);
         }
         this.setPageData();
+    }
+    this.setEvent = function() {
+        $(".articlelist div.input-container input.input-write").click(function() {
+            // 글 쓰기 페이지 로드
+            new RuleWritePage();
+        })
     }
 
     pageStack.push(this);
@@ -1137,8 +1176,35 @@ function AfterSchoolListPage() {
     });
     this.type = "afterschool";
     this.command = "416";
+
+    // 자신의 방과후 신청상태
+    this.myStatus;
+
+    // 현재 방과후 신청상태확인
+    this.stausCheck = function() {
+        var result;
+        $.ajax({
+            url: "http://dsm2015.cafe24.com:10419",
+            type: "POST",
+            data: JSON.stringify({
+                "id": id
+            }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", "436");
+            },
+            success: function(data) {
+                result = data;
+            }
+        });
+        result = JSON.parse(result);
+        this.myStatus = result.result;
+    }
+
     this.setData = function() {
         for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
+            // 자신의 방과후 정보 load
+            this.stausCheck();
             var newTr = $('<tr/>', {
                 click: function(e) {
                     // 클릭이벤트
@@ -1147,6 +1213,15 @@ function AfterSchoolListPage() {
                     pageStack.push(this);
                 }
             });
+            // 이미 신청한 방과후면 background-color 주기
+            for (var loop = 0; loop < this.myStatus.length; loop++) {
+                if (this.ajaxData.result[loop].no == this.myStatus[loop].no) {
+                    newTr.css({
+                        "background-color": "rgb(134,193,233)"
+                    })
+                }
+            }
+
             var appendString = "<td>" + this.ajaxData.result[loop].target + "</td>";
             appendString += "<td>" + this.ajaxData.result[loop].title + "</td>";
             appendString += "<td>" + this.ajaxData.result[loop].instructor + "</td>";
@@ -1179,8 +1254,13 @@ function AfterSchoolListPage() {
         this.setPageData();
     }
 
+    this.getMyData = function() {
+
+    }
+
     pageStack.push(this);
     this.draw();
+
 }
 
 AfterSchoolListPage.prototype = new ArticleListPage();
@@ -1215,6 +1295,7 @@ function FacilityListPage() {
     });
     this.type = "facility";
     this.command = "415";
+
     this.setData = function() {
         for (var loop = 0; loop < this.ajaxData.result.length; loop++) {
             var newTr = $('<tr/>', {
@@ -1225,6 +1306,7 @@ function FacilityListPage() {
                     pageStack.push(this);
                 }
             });
+
             var appendString = "<td>" + this.ajaxData.result[loop].no + "</td>";
             appendString += "<td>" + this.ajaxData.result[loop].title;
             if (this.ajaxData[loop].has_result) {
@@ -1307,10 +1389,14 @@ FacilityListPage.prototype = new ArticleListPage();
 // AfterSchoolArticlePage은 특별한 경우 같다. 어느 객체를 상속 받아야 할지 모르겠다. ㅠㅠ
 // 우선, ajaxData속성이 필요할것 같으으로, AjaxPage를 상속받는데, getData()를 빈 함수로 초기화 해야겠다.
 // 자신의 상태에 따라 신청, 취소 바꾸는 기능 구현해야함
+// getData는 draw의 도화선같다.
 function AfterSchoolArticlePage(data) {
     // AfterSchoolArticlePage만의 예외적인 경우다. 나중에 리팩토링 필요
-    this.getData = function() {
+    this.getData = function(callback) {
         this.ajaxData = data;
+        if (typeof callback === "function") {
+            callback();
+        }
     }
     this.form =
         '<div class="frame left afterapplypage">' +
@@ -1346,12 +1432,37 @@ function AfterSchoolArticlePage(data) {
         '<br>' +
         '</div>' +
         '</div>';
+    // 자신의 방과후 신청상태
+    this.myStatus;
+
+    // 현재 방과후 신청상태확인
+    this.stausCheck = function() {
+        var result;
+        $.ajax({
+            url: "http://dsm2015.cafe24.com:10419",
+            type: "POST",
+            data: JSON.stringify({
+                "id": id
+            }),
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhr.setRequestHeader("command", "436");
+            },
+            success: function(data) {
+                result = data;
+            }
+        });
+        result = JSON.parse(result);
+        this.myStatus = result.result;
+    }
 
     this.setData = function() {
+        this.checkStatus();
+
         // 해당 방과후를 이미 신청했는지 확인
         // 신청했으면 신청버튼을 없에고 신청취소버튼 생성
-        for (var loop = 0; loop < myAfter.length; loop++) {
-            if (myAfter[loop].no == data.no) {
+        for (var loop = 0; loop < this.myStatus.length; loop++) {
+            if (this.myStatus[loop].no == data.no) {
                 $(".afterapplypage .aftercontainer .afterinfo form.afterform").html(
                     '<form class="afterform" action="index.html" method="post">' +
                     '<button id = "cancle" type="button" name="button">NO</button>' +
@@ -1424,7 +1535,7 @@ function AfterSchoolArticlePage(data) {
     this.draw();
 }
 
-AfterSchoolListPage.prototype = new AjaxPage();
+AfterSchoolArticlePage.prototype = new AjaxPage();
 
 // 객체는 setData(), setEvent() 구현해야함
 // 객체는 form, command, sendData 초기화 해야함
@@ -1810,7 +1921,7 @@ function GoHomeApplyPage() {
     });
 
     // 필요한 Data를 받아옴
-    this.getData = function() {
+    this.getData = function(callback) {
         $.ajax({
             url: "http://dsm2015.cafe24.com",
             type: "POST",
@@ -1824,6 +1935,9 @@ function GoHomeApplyPage() {
             },
             success: function(data) {
                 this.ajaxData = JSON.parse(data);
+                if (typeof callback === "function") {
+                    callback();
+                }
             }
         });
     }

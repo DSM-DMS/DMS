@@ -6,6 +6,7 @@ var prevMonth = new Date(currentYear, currentMonth - 1, 1);
 var nextMonth = new Date(currentYear, currentYear - 1, 1);
 var lastDay = noofdays(currentYear, currentMonth);
 var newDate = new Date(currentYear, currentMonth - 1, 1);
+var five_week = false;
 prevMonth.setMonth(newDate.getMonth() - 1);
 nextMonth.setMonth(newDate.getMonth() + 1);
 
@@ -151,6 +152,7 @@ function drawCalendar(date, lastDay) {
         case 5:
             if(lastDay == 31) {
               $('#sixth_week').toggle();
+              five_week = true;
             }
             var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
             for(var k = 9 + date.getDay(); k >= 10; k--) {
@@ -169,6 +171,7 @@ function drawCalendar(date, lastDay) {
         case 6:
             if(lastDay == 31 || lastDay == 30) {
               $('#sixth_week').toggle();
+              five_week = true;
             }
             var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
             for(var k = 9 + date.getDay(); k >= 10; k--) {
@@ -217,6 +220,7 @@ function clearCalendar() {
         $('#calendar td:eq(' + idx + ')').text("");
         $('#calendar tbody tr').css("background-color", "white");
         $('#sixth_week').toggle();
+        five_week = false;
     }
 }
 
@@ -263,11 +267,19 @@ function getNextMonth() {
 // }
 //
 // function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
+//   if(five_week) {
+//     for (var i = 1; i <= 5; i++) { //한달이 5주인 경우도 고려하고, 다음달 1주도 받도록 수정 해야함!!!
+//         this.sendData.week = dateToString(i);
+//         this.getData();
+//         valueArray.push(this.ajaxData);
+//     }
+//   } else {
 //     for (var i = 1; i <= 4; i++) { //한달이 5주인 경우도 고려하고, 다음달 1주도 받도록 수정 해야함!!!
 //         this.sendData.week = dateToString(i);
 //         this.getData();
 //         valueArray.push(this.ajaxData);
 //     }
+//   }
 // }
 //
 // function drawPrev() {
