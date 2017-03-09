@@ -12,7 +12,7 @@ public class ImagesRouter implements Handler<RoutingContext> {
         if (context.request().path().contains("..")) {
             context.response().end();
         } else {
-            context.response().sendFile("WEB-INF\\images\\" + context.request().getParam("filename"));
+            context.response().sendFile("./WEB-INF/images/"  + context.request().getParam("filename"));
             if (!context.response().ended())
                 context.response().end("Resource Not Found");
         }
