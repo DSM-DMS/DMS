@@ -1,5 +1,6 @@
 // 정석 시작
 // set cancleEvent -> setSelecterOptions -> setSelecterEvent -> drawSeat
+var id = "test";
 
 setCancleEvent();
 setSelecterOptions();
@@ -15,9 +16,9 @@ function setCancleEvent() {
         $.ajax({
             url: "http://dsm2015.cafe24.com:8088/apply/extension",
             type: "DELETE",
-            data: JSON.stringify({
+            data: {
                 "id": id
-            }),
+            },
             success: function(data) {
                 // alert("취소 완료.");
                 // 화면을 리로드하는 코드
@@ -46,7 +47,7 @@ function setSelecterOptions() {
     // });
     function setOptions(optionData) {
         // class 목록을 받아오는 코드
-        var optionData = getSelecterOptions().result;
+        // var optionData = getSelecterOptions().result;
         for (var loop = 0; loop < optionData.length; loop++) {
             var newOption = $('<option/>', {
                 value: optionData[loop].no,
@@ -126,20 +127,22 @@ function getSeatData(callback) {
     // var result;
     $.ajax({
         url: "http://dsm2015.cafe24.com:8088/apply/extension/class",
-        type: "PUT",
-        data: JSON.stringify({
+        type: "GET",
+        data: {
             "option": "map",
             "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val()
-        }),
+        },
         success: function(data) {
             // result = JSON.parse(data);
-            callback(JSON.parse(data))
+            console.log(JSON.parse(data).map);
+            callback(JSON.parse(data).map)
         }
     });
 }
 
 function drawSeat(seatArr, borderSize) {
     var selected;
+    console.log(seatArr);
     for (var loop = 0; loop < seatArr.length; loop++) {
         for (var innerLoop = 0; innerLoop < seatArr[0].length; innerLoop++) {
             // draw circle
@@ -162,7 +165,7 @@ function drawSeat(seatArr, borderSize) {
                         css: {
                             "border": borderSize + " solid rgb(134,193,233)"
                         },
-                    });
+                    }).data("seat", seatArr[loop][innerLoop]);
                     newSeat.appendTo(".seatcontainer");
                     newSeat.click(function() {
                         if (selected !== undefined) {
@@ -190,7 +193,8 @@ function drawSeat(seatArr, borderSize) {
                                 data: JSON.stringify({
                                     "id": id,
                                     "class": $(this).children("option:selected").val(),
-                                    "seat": seatArr[loop][innerLoop]
+                                    "seat": $(this).data("seat"),
+                                    "name": "name"
                                 }),
                                 success: function(data) {
                                     $("div.seatcontainer").html("");
