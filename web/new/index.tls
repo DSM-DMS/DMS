@@ -64,13 +64,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <#list Notices as notice>
+                                    <#list Notices as notice>
                                         <tr>
                                             <th scope="row">${notice.no}</th>
                                             <td>${notice.title}</td>
                                             <td>${notice.writer}</td>
                                         </tr>
-                                        </#list>
+                                    </#list>
                                     </tbody>
                                 </table>
                             </div>
