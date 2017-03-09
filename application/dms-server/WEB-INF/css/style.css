@@ -444,101 +444,89 @@ table tr{
 /*--------------------- go out apply -------------------*/
 
 #individual_reason {
-    display: block;
-    border: 2px solid rgb(220, 220, 220);
-    width: 90%;
-    font-size: 200%;
-    border-radius: 5px;
-    margin: auto;
-    margin-top: 2%;
+   display: block;
+   border: 2px solid rgb(220, 220, 220);
+   width: 80%;
+   font-size: 130%;
+   border-radius: 5px;
+   margin: auto;
+   margin-top: 2%;
+   height: 40px;
 }
 
 #individual_btn {
-    border: 0;
-    border-radius: 5px;
-    background-color: rgb(91, 192, 222);
-    width: 80%;
-    margin: auto;
-    margin-top: 2%;
-    font-size: 150%;
-    cursor: pointer;
-    text-align: center;
+   border: 0;
+   border-radius: 5px;
+   background-color: rgb(91, 192, 222);
+   width: 20%;
+   margin: auto;
+   margin-top: 2%;
+   font-size: 130%;
+   cursor: pointer;
+   text-align: center;
+   height: 40px;
+   line-height: 40px;
 }
 
 #recommend_btn {
-  border: 0;
-  border-radius: 5px;
-  background-color: rgb(91, 192, 222);
-  width: 80%;
-  margin: auto;
-  margin-top: 2%;
-  font-size: 150%;
-  cursor: pointer;
-  text-align: center;
+ border: 0;
+ border-radius: 5px;
+ background-color: rgb(91, 192, 222);
+ width: 20%;
+ margin: auto;
+ margin-top: 2%;
+ font-size: 130%;
+ cursor: pointer;
+ text-align: center;
+ height: 40px;
+ line-height: 40px;
 }
 
 #recommend_reason {
-  display: block;
-  border: 2px solid rgb(220, 220, 220);
-  width: 90%;
-  font-size: 200%;
-  border-radius: 5px;
-  margin: auto;
-  margin-top: 2%;
+ display: block;
+ border: 2px solid rgb(220, 220, 220);
+ width: 80%;
+ font-size: 130%;
+ border-radius: 5px;
+ margin: auto;
+ margin-top: 2%;
+ height: 40px;
 }
 
 #recommend_name {
-  display: block;
-  border: 2px solid rgb(220, 220, 220);
-  width: 90%;
-  font-size: 200%;
-  border-radius: 5px;
-  margin: auto;
-  margin-top: 2%;
+ display: block;
+ border: 2px solid rgb(220, 220, 220);
+ width: 80%;
+ font-size: 130%;
+ border-radius: 5px;
+ margin: auto;
+ margin-top: 2%;
+ height: 40px;
 }
 
 #point_sel {
-  text-align: center;
-  width: 50%;
-  margin: auto;
-  font-size: 180%;
-  border-radius: 5px;
+ text-align: center;
+ width: 80%;
+ margin: auto;
+ font-size: 180%;
+ border-radius: 5px;
+ height: 40px;
 }
 
-#out_sel {
-  text-align: center;
-  width: 50%;
-  margin: auto;
-  font-size: 180%;
-  border-radius: 5px;
+#point_sel tr{
+ border-radius: 5px;
+ border: 0;
 }
 
-#out_btn {
-  border: 0;
-  border-radius: 5px;
-  background-color: rgb(255, 122, 249);
-  width: 80%;
-  margin: auto;
-  margin-top: 2%;
-  font-size: 150%;
-  cursor: pointer;
-  text-align: center;
+#point_apply {
+ border-radius: 5px 0 0 5px;
 }
 
-#point_sel tr, #out_sel tr {
-  border-radius: 5px;
-  border: 0;
-}
-
-#point_apply, #sat_out {
-  border-radius: 5px 0 0 5px;
-}
-
-#point_reco, #sun_out {
-  border-radius: 0 5px 5px 0;
+#point_reco {
+ border-radius: 0 5px 5px 0;
 }
 
 .point_margin {
-  margin-top: 2%;
-  margin-bottom: 2%;
+ margin-top: 2%;
+ margin-bottom: 2%;
 }
