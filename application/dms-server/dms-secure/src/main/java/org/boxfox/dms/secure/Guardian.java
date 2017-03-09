@@ -10,11 +10,10 @@ public class Guardian {
     public static final int AES = 1;
     public static final int SHA = 2;
 
-    private static final String KEY = "";
-
     private static final AES256 aes;
+    private static final String KEY = "asfpialshvlajvhavav";
 
-    static{
+    static {
         aes = new AES256(KEY);
     }
 

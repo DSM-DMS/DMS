@@ -28,7 +28,7 @@ public class AES256 {
 			SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
 			this.ips = key.substring(0, 16);
 			this.keySpec = keySpec;
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			Log.e(e.toString());
 		}
 	}
