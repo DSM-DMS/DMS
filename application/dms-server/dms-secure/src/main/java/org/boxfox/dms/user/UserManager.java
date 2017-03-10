@@ -32,7 +32,7 @@ public class UserManager {
         boolean check = false;
         String message = null;
         SafeResultSet rs = database.executeQuery("select * from account where uid='", key, "'");
-        if (rs.next()&&rs.getString("id")==null) {
+        if (rs.next() && rs.getString("id") == null) {
             if (!checkIdExists(id)) {
                 int result = database.executeUpdate("update account set id='", id, "', password='", password, "' where uid='", key, "'");
                 if (result == 1) {
@@ -54,15 +54,15 @@ public class UserManager {
         JobResult result = new JobResult(false);
 //        String uid = getUid(id);
 //        if (uid != null) {
-            SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.id = b.id where a.id='", id, "'");
-            if (rs.next()) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("number", rs.getInt("number"));
-                map.put("name", rs.getString("name"));
-                map.put("merit", rs.getInt("merit"));
-                map.put("demerit", rs.getInt("demerit"));
-                result.setSuccess(true);
-                result.setArgs(map);
+        SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.id = b.id where a.id='", id, "'");
+        if (rs.next()) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("number", rs.getInt("number"));
+            map.put("name", rs.getString("name"));
+            map.put("merit", rs.getInt("merit"));
+            map.put("demerit", rs.getInt("demerit"));
+            result.setSuccess(true);
+            result.setArgs(map);
 //            }
         }
         return result;

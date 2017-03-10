@@ -1,6 +1,7 @@
 package com.dms.boxfox.templates.post;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.boxfox.templates.post.data.PostTemplate;
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -11,37 +12,74 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by boxfox on 2017-03-10.
  */
 
-@RouteRegistration(path = "/post/notice", method = {HttpMethod.GET})
+@RouteRegistration(path = "/post/", method = {HttpMethod.GET})
 public class NoticeBoardRouter implements Handler<RoutingContext> {
+    private static List<PostTemplate> categories;
     private DataBase db;
+
+    static {
+        categories = new ArrayList<PostTemplate>();
+        categories.add(new PostTemplate("notice", "공지사항", new String[]{"no", "title", "writer"}, new String[]{"#", "제목", "작성자"}));
+        categories.add(new PostTemplate("rule", "기숙사 규칙", new String[]{"no", "title"}, new String[]{"#", "제목"}));
+        categories.add(new PostTemplate("qna", "Q&A", new String[]{"no", "title", "writer"}, new String[]{"#", "제목", "작성자"}));
+        categories.add(new PostTemplate("faq", "FAQ", new String[]{"no", "title"}, new String[]{"#", "제목"}));
+        categories.add(new PostTemplate("facility_report", "시설고장신고", new String[]{"no", "title", "writer", " write_date"}, new String[]{"#", "제목", "작성자", "날짜"}));
+    }
 
     public NoticeBoardRouter() {
         db = DataBase.getInstance();
     }
 
     public void handle(RoutingContext context) {
-        int page = getPageNumber(context);
+        PostTemplate postTemplate = getCategory(context);
+        if (postTemplate != null) {
+            int page = getPageNumber(context);
 
-        try {
-            DmsTemplate templates = new DmsTemplate("notice-board");
-            SafeResultSet rs = db.executeQuery("select * from notice order by no desc limit ", page, ", ", page + 10, "");
-            templates.put("lists", rs.toHashMap());
-            rs.toHashMap();
-            context.response().setStatusCode(200);
-            context.response().end(templates.process());
+            try {
+                DmsTemplate templates = new DmsTemplate("board");
+                SafeResultSet rs = db.executeQuery("select ", postTemplate.getColumns(), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
+                templates.put("Title", postTemplate.getKoreanName());
+                templates.put("Head", postTemplate.getHeads());
+                templates.put("Columns", postTemplate.getColumns());
+                templates.put("List", rs.toHashMap());
+
+                rs.toHashMap();
+                context.response().setStatusCode(200);
+                context.response().end(templates.process());
+                context.response().close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (TemplateException e) {
+                e.printStackTrace();
+            }
+        } else {
+            context.response().setStatusCode(404);
+            context.response().end("page not found");
             context.response().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (TemplateException e) {
-            e.printStackTrace();
         }
+    }
+
+    private PostTemplate getCategory(RoutingContext context) {
+        PostTemplate result = null;
+        String category = context.request().getParam("category");
+        if (category == null) category = "notice";
+        for (PostTemplate template : categories) {
+            if (template.getCategory().equals(category)) {
+                result = template;
+            }
+        }
+        return result;
     }
 
     private int getPageNumber(RoutingContext context) {
