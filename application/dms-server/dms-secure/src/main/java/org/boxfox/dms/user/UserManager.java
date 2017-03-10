@@ -1,5 +1,7 @@
 package org.boxfox.dms.user;
 
+import io.vertx.ext.web.Cookie;
+import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -68,17 +70,6 @@ public class UserManager {
         return result;
     }
 
-    public JobResult sessionLogin(String sessionKey) throws SQLException {
-        JobResult result = new JobResult(false);
-        SafeResultSet rs = database.executeQuery("select id from account where session_key='", sessionKey, "'");
-        if (rs.next()) {
-            String id = rs.getString(1);
-            result.setSuccess(true);
-            result.setArgs(id);
-        }
-        return result;
-    }
-
     private String getUid(String id) throws SQLException {
         String uid = null;
         if (checkIdExists(id))
@@ -99,6 +90,22 @@ public class UserManager {
         return check;
     }
 
+    public JobResult sessionLogin(RoutingContext context) throws SQLException {
+        String sessionKey = getRegistredSessionKey(context);
+        JobResult result = new JobResult(false);
+        if (sessionKey != null) {
+            SafeResultSet rs = database.executeQuery("select id from account where session_key='", sessionKey, "'");
+            if (rs.next()) {
+                String id = rs.getString(1);
+                result.setSuccess(true);
+                result.setArgs(id);
+            }
+        } else {
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
     public String createSession(String id) {
         boolean check = true;
         String sessionKey = null;
@@ -114,5 +121,30 @@ public class UserManager {
         } while (check);
         return sessionKey;
     }
+
+    public String getRegistredSessionKey(RoutingContext context) {
+        String key = context.session().get("UserSession");
+        if (key == null) {
+            key = context.getCookie("UserSession").getValue();
+        }
+        return key;
+    }
+
+    public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
+        try {
+            String sessionKey = createSession(id);
+            if (keepLogin) {
+                context.addCookie(Cookie.cookie("UserSession", sessionKey));
+            } else {
+                context.session().put("UserSession", sessionKey);
+            }
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+
+    }
+
+    //router.route().handler(CookieHandler.create());
 
 }
