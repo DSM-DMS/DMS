@@ -504,7 +504,7 @@ table tr {
     font-size: 130%;
     border-radius: 5px;
     margin: auto;
-    margin-top: 2%;
+    margin-top: 1%;
     height: 40px;
 }
 
@@ -529,6 +529,7 @@ table tr {
 }
 
 #point_sel tr {
+    cursor: pointer;
     border-radius: 5px;
     border: 0;
 }
