@@ -1,7 +1,6 @@
 package org.boxfox.dms.secure;
 
 import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.algorithm.SHA256;
 
 /**
  * Created by boxfox on 2017-03-04.
@@ -31,8 +30,9 @@ public class Guardian {
 
     public static boolean checkParameters(Object... args) {
         for (Object obj : args) {
-            if (obj == null)
-                return false;
+            if (obj == null) {
+            	return false;
+            }
         }
         return true;
     }
