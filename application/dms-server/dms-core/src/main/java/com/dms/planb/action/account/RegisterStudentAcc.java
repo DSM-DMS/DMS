@@ -43,6 +43,7 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
                     context.response().close();
                 }
             } else {
+                Log.l("null 입니다.");
                 // Null in any parameters
             }
         } catch (SQLException e) {

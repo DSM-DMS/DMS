@@ -31,8 +31,8 @@ public class UserManager {
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
-        SafeResultSet rs = database.executeQuery("select count(*) from account where uid='", key, "'");
-        if (rs.next() && rs.getInt(1) == 1) {
+        SafeResultSet rs = database.executeQuery("select * from account where uid='", key, "'");
+        if (rs.next()&&rs.getString("id")==null) {
             if (!checkIdExists(id)) {
                 int result = database.executeUpdate("update account set id='", id, "', password='", password, "' where uid='", key, "'");
                 if (result == 1) {
