@@ -1,0 +1,1769 @@
+@import "../css/remote.css";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@font-face {
+    font-family: HANNA;
+    src: url('../font/BMHANNA_11yrs_ttf.ttf');
+    src:url('..//fonts/BMHANNA_11yrs_otf.otf') format('otf'),
+}
+@font-face {
+    font-family: NANUM;
+    src: url('../font/naverNaNumPen.ttf');
+    src:url('..//fonts/naverNaNumPen.otf') format('otf'),
+}
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 700;
+    src: local('Spoqa Han Sans Bold'), local('Spoqa Han Sans Bold'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 400;
+    src: local('Spoqa Han Sans Regular'), local('Spoqa Han Sans Regular'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 300;
+    src: local('Spoqa Han Sans Light'), local('Spoqa Han Sans Light'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans';
+    font-weight: 100;
+    src: local('Spoqa Han Sans Thin'), local('Spoqa Han Sans Thin'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.woff2') format('woff2'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.woff') format('woff'),
+    url('https://cdn.rawgit.com/spoqa/spoqa-han-sans/892af0c6/Subset/SpoqaHanSans/Spoqa%20Han%20Sans%20Thin.ttf') format('truetype');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Nanum Gothic", 'Spoqa Han Sans';
+}
+
+p, span, li, td, tr, div, input, button {
+    font-family: "Nanum Gothic", 'Spoqa Han Sans';
+}
+
+/*remote.css��??�정?�요*/
+
+body {
+    /*배경??
+    ?�청 : background-color: rgb(52, 152, 219) -> rgb(134,193,233)
+    기숙??: background-color: rgb(191,148,208) -> rgb(191,148,208)
+    마이?�이지 : background-color: rgb(192, 57, 43) -> rgb(231,160,153) -> c*/
+    font-size: 1em;
+}
+
+.afterapplypage .back_arrow {
+    width: 3em !important;
+    margin-bottom: -10px !important;
+    cursor: pointer;
+}
+
+.back_arrow {
+    height: 30px !important;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.btn {
+    border-radius: 0;
+    border: 0;
+    position: relative;
+    text-transform: uppercase;
+    box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.15) inset;
+    padding: 15px 55px;
+    color: #fff;
+}
+
+.btn-border {
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 12px 35px;
+}
+
+a, a:hover, a:focus, .btn:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.btn-effect {
+    vertical-align: middle;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    display: inline-block;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition-property: color;
+    -moz-transition-property: color;
+    -ms-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -ms-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-effect:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    -moz-transform-origin: 0 50%;
+    -ms-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    -moz-transition-property: transform;
+    -ms-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -ms-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    -moz-transition-timing-function: ease-out;
+    -ms-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.btn-effect:hover:before, .btn-effect:focus:before, .btn-effect:active:before {
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+.btn-margin {
+    margin: 20px;
+    margin-left: 0;
+}
+
+.border-less-input {
+    background: transparent;
+    border: 0;
+    border-style: none;
+    border-color: transparent;
+    outline: none;
+    outline-offset: 0;
+    box-shadow: none;
+    /*font-size: 2.5em;
+    font-weight: bold;*/
+    /*margin-bottom: 1%;*/
+    padding-left: 5px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+/*text editor*/
+
+div#mceu_11 {
+    width: 86.3%;
+    margin-left: 7%;
+    margin-top: 20px;
+}
+
+
+/*margin left 7%*/
+
+.margin-left-7 {
+    margin-left: 7%;
+}
+
+
+/* dropdown */
+
+
+/*a.dropdown-toggle {
+          text-align: center;
+          display: block;
+          padding: 0 8px; }
+          a.dropdown-toggle .icon {
+            font-size: 1.6em;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(141, 146, 147, 0.15);
+            color: rgba(141, 146, 147, 0.3);
+            transition: all 0.2s ease;
+            border-radius: 50%;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+                flex-direction: row;
+            -ms-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+            -ms-flex-align: center;
+                align-items: center;
+            -ms-flex-pack: center;
+                justify-content: center; }
+          a.dropdown-toggle .count {
+            position: absolute;
+            top: 0;
+            left: auto;
+            bottom: auto;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+                flex-direction: row;
+            -ms-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+            -ms-flex-align: center;
+                align-items: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+            font-size: 0.70em;
+            font-weight: 400;
+            color: #FFF;
+            background-color: rgba(141, 146, 147, 0.6);
+            box-shadow: 0 1px 2px rgba(141, 146, 147, 0.1);
+            padding: 3px;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            line-height: 1em; }
+a.dropdown-toggle .title {
+            display: none; }
+a.dropdown-toggle:hover .icon {
+            transform: scale(1.1) rotate(7deg); }
+a.dropdown-toggle .icon {
+          background-color: rgba(231, 76, 60, 0.15);
+          color: rgba(231, 76, 60, 0.3); }
+a.dropdown-toggle .count {
+          background-color: rgba(231, 76, 60, 0.7);
+          box-shadow: 0 1px 2px rgba(231, 76, 60, 0.1); }
+a.dropdown-toggle .icon {
+          background-color: rgba(252, 130, 41, 0.15);
+          color: rgba(252, 130, 41, 0.3); }
+a.dropdown-toggle .count {
+          background-color: rgba(252, 130, 41, 0.7);
+          box-shadow: 0 1px 2px rgba(252, 130, 41, 0.1); }
+*/
+
+.card {
+    background-color: white;
+    border-radius: 5px;
+    margin-left: 5%;
+    width: 90%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+    margin-bottom: 20px;
+}
+
+.main {
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 20vh;
+    left: 16vw;
+    min-height: 70vh;
+    width: 80vw;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+    margin-bottom: 20px;
+}
+
+.frame {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+    padding-top: 15px;
+    margin-bottom: 20px;
+    /*overflow-x: hidden;*/
+}
+
+.frame .frametitle {
+    margin-left: 7%;
+}
+
+.frame h1 {
+    margin: 6px 0 6px 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.underline {
+    position: relative;
+    right: 0%;
+    height: 8px;
+    margin-right: 0%;
+    width: 93%;
+    background: rgb(191, 148, 208);
+}
+
+.single-container {
+    padding: 35px 3%;
+}
+
+
+/*------------------------------------------ index------------------------------------------*/
+
+
+/*--------------------------notice--------------------------------*/
+
+.left .notice {
+    position: relative;
+    padding-left: 0%;
+    margin-left: 7%;
+}
+
+.left .notice li {
+    list-style-type: none;
+    margin: 4% 0%;
+    width: 93%;
+}
+
+.left .notice li .title {
+    display: inline-block;
+    font-size: 1.3em;
+    font-weight: 600;
+    width: 80%;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.left .notice li .title:hover {
+    text-decoration: underline;
+}
+
+.left .notice li p.date {
+    color: gray;
+    float: right;
+    vertical-align: bottom;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+
+/*--------------------------right--------------------------------*/
+
+.right .underline {
+    background: rgb(41, 128, 185);
+}
+
+.right .menues {
+    position: relative;
+    height: 88%;
+    width: 93%;
+    margin-left: 7%;
+}
+
+.right .meal {
+    position: relative;
+    height: 20%;
+    margin: 16px 0;
+}
+
+.right .meal h2 {
+    /*float: left;*/
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 16px;
+    /*padding: 5% 0%;*/
+}
+
+.right .meal p, div.div-allergy p {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70%;
+    margin-left: 4%;
+    /*float: right;*/
+}
+
+.right .info {
+    position: relative;
+    width: 90%;
+    background-color: #f0f0f0;
+    display: inline-block;
+    transition: all 0.5s ease;
+}
+
+.right .info:hover {
+    background-color: rgb(191, 148, 208);
+    color: white;
+}
+
+.right img {
+    vertical-align: middle;
+    /*height: 30%;*/
+    height: 25px;
+}
+
+.right div.menues div.meal div.info div.div-allergy {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.blue-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* Standard syntax */
+}
+
+.puple-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* Standard syntax */
+}
+
+.red-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* Standard syntax */
+}
+
+
+/*------------------------------------------ dorm main------------------------------------------*/
+
+
+/*--------------------------etc--------------------------------*/
+
+body {
+    background-color: rgb(191, 148, 208);
+}
+
+.underline {
+    background: rgb(191, 148, 208);
+}
+
+
+/*--------------------------articlelist--------------------------------*/
+
+.articlelist {
+    width: 100%;
+}
+
+
+/*--------------------------table--------------------------------*/
+
+.articlelist table.list {
+    border-collapse: collapse;
+    width: 86.5%;
+    margin-top: 25px;
+    margin-left: 7%;
+}
+
+.articlelist table.list.list th:nth-child(1) {
+    width: 5%;
+}
+
+.articlelist table.list th:nth-child(2) {
+    width: 85%;
+}
+
+.articlelist table.list th:nth-child(3) {
+    width: 10%;
+}
+
+.articlelist table.list .tableheader {
+    background-color: rgb(244, 244, 244);
+}
+
+.articlelist table .tableheader th {
+    padding: 0;
+    border: 0;
+    border-top: 1px solid rgb(191, 148, 208);
+    border-bottom: 2px solid rgb(191, 148, 208);
+    color: rgb(191, 148, 208);
+    height: 32px;
+}
+
+.articlelist table.list td {
+    border-bottom: 1px solid rgb(191, 148, 208);
+    height: 50px;
+}
+
+.articlelist table.list tr:hover {
+    background-color: rgb(244, 244, 244);
+}
+
+.articlelist table.list td:nth-child(2) {
+    text-align: left;
+    font-weight: 900;
+    font-size: 0.9em;
+}
+
+.articlelist table.list td:nth-child(3), table.list td:nth-child(1) {
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+    min-width: 27px;
+}
+
+
+/*--------------------------articlelist page table--------------------------------*/
+
+.articlelist table.page {
+    width: 50%;
+    margin-left: 25%;
+}
+
+.articlelist table.page tr td.page-number {
+    text-align: center;
+    width: 6%;
+    color: rgb(134, 193, 233);
+}
+
+
+/*.articlelist table.page tr td.page-number:nth-child(2) {
+        font-size: 1.5em;
+        font-weight: 500;
+        color: black;
+    }*/
+
+.articlelist table.page td.page-remote {
+    font-size: 0.8em;
+    color: gray;
+    font-weight: 900;
+    width: 10%;
+    text-align: center;
+    min-width: 27px;
+    padding: 0 5px 0 5px;
+}
+
+
+/*------------------------------------------ dorm main article------------------------------------------*/
+
+.articlecontainer {
+    width: 100%;
+}
+
+
+/*--------------------------article--------------------------------*/
+
+.article {
+    line-height: 150%;
+    margin-left: 7%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.article p {
+    width: 93%;
+}
+
+.articlecontainer hr {
+    width: 86%;
+}
+
+.articlecontainer .frametitle {
+    position: relative;
+}
+
+.articlecontainer .frametitle p {
+    font-size: 0.8em;
+    font-weight: 900;
+    color: rgb(100, 100, 100);
+    margin-bottom: 0;
+    position: absolute;
+    margin-bottom: 10px;
+    right: 7%;
+    /*bottom: 0%;*/
+    /*float: right;*/
+}
+
+.articlecontainer h2 {
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+.articlecontainer div.input-container, .articlelist div.input-container {
+    position: absolute;
+    right: 7%;
+    bottom: 16%;
+    margin-top: 15px;
+}
+
+.articlecontainer div.input-container input[type="button"], .articlelist div.input-container input[type="button"] {
+    display: inline-block;
+    background-color: white;
+    height: 40px;
+    border: 1px solid #E9DDDD;
+}
+
+.frametitle {
+    position: relative;
+}
+
+
+/*-------------------------------------qna list.-------------------------------*/
+
+
+/*.qna table tr:nth-child(2), .qna table tr:nth-child(3) {
+        background-color: rgb(191, 148, 208);
+    }
+
+    .qna table tr:nth-child(2) td, .qna table tr:nth-child(3) td {
+        color: white;
+        border-bottom: 1px solid white;
+    }*/
+
+.qna table tr td img {
+    height: 20px;
+}
+
+
+/*-------------------------------------comment.-------------------------------*/
+
+.commentinput {
+    margin-left: 7%;
+    /*margin-bottom: 100px;*/
+}
+
+.commentinput table {
+    width: 93%;
+}
+
+.commentinput table tr td:nth-child(1) {
+    width: 80%;
+}
+
+.commentinput table tr td:nth-child(2) {
+    width: 20%;
+}
+
+.commentinput input {
+    height: 30px;
+}
+
+.commentinput button {
+    background-color: rgb(191, 148, 208);
+    border: none;
+    height: 36px;
+    width: 99%;
+    border: 2px solid rgb(191, 148, 208);
+    border-radius: 4px;
+    transition: all 1s ease;
+    color: white;
+}
+
+.commentinput button:focus {
+    background-color: rgb(162, 88, 193);
+}
+
+.commentinput input[type="text"] {
+    height: 30px;
+    width: 97%;
+    border: 2px solid rgb(191, 148, 208);
+    border-radius: 4px;
+    padding-left: 1%;
+    transition: all 1s ease;
+}
+
+.commentinput input[type="text"]:focus {
+    border: 2px solid rgb(162, 88, 193);
+}
+
+.commentinput table td:nth-child(3), .commentinput table td:nth-child(1) {
+    text-align: left;
+}
+
+.comment {
+    margin-left: 7%;
+}
+
+.comment table {
+    width: 93%;
+    border-collapse: collapse;
+}
+
+.comment tr {
+    border-bottom: 1px solid gray;
+    height: 50px;
+}
+
+.comment table tr td:nth-child(1) {
+    width: 8%;
+    min-width: 60px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.comment table tr td:nth-child(3) {
+    width: 5%;
+    text-align: right;
+    font-size: 0.9em;
+}
+
+.comment table tr td:nth-child(2) {
+    width: 75%;
+    font-size: 0.9em;
+}
+
+.comment table tr td:nth-child(4), .comment table tr td:nth-child(5) {
+    width: 5%;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.comment table .date {
+    display: inline-block;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+}
+
+.comment table td p, .comment table td h3 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.comment table td.hide-no {
+    display: none;
+}
+
+.comment table td input.comment-modify-input {
+    height: 30px;
+    width: 98%;
+    border: 2px solid rgb(191, 148, 208);
+    border-radius: 4px;
+    padding-left: 1%;
+    transition: all 1s ease;
+}
+
+.comment table td input.comment-modify-push {
+    background-color: rgb(191, 148, 208);
+    border: none;
+    height: 36px;
+    width: 100%;
+    border: 2px solid rgb(191, 148, 208);
+    border-radius: 4px;
+    transition: all 1s ease;
+    color: white;
+}
+
+
+/*-------------------------------------qna list.-------------------------------*/
+
+.facility-list table.list tr td:nth-child(4) {
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+    min-width: 27px;
+}
+
+
+/*-------------------------------------mypage.-------------------------------*/
+
+body {
+    background-color: rgb(231, 160, 153);
+}
+
+.mypage {
+    width: 100%;
+}
+
+.left .frametitle .underline {
+    background-color: rgb(231, 160, 153);
+}
+
+.left .info {
+    width: 39.5%;
+    height: 80%;
+    margin-left: 7%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+}
+
+.mypage .info table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 3px solid rgb(231, 160, 153);
+    border-bottom: 3px solid rgb(231, 160, 153);
+}
+
+.mypage .info table tr {
+    border-bottom: 1px solid rgb(231, 160, 153);
+}
+
+.mypage .info table tr:nth-child(3) {
+    border-bottom: 3px solid rgb(231, 160, 153);
+}
+
+.mypage .info table tr td:nth-child(1) {
+    text-align: left;
+    padding-left: 10px;
+    min-width: 50px;
+    width: 20%;
+}
+
+.mypage .info table tr td:nth-child(2) {
+    font-size: 0.8em;
+    padding: 10px;
+}
+
+
+/*------------------------------------- point ----------*/
+
+.pointapply {
+    width: 100%;
+}
+
+.pointapply .selecter {
+    /*margin-left: 57%;*/
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.pointapply .selecter .selectmenu {
+    display: inline-block;
+    /*font-size: 0px;
+    letter-spacing: 0px;
+    word-spacing: -1;*/
+    width: 30%;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.pointapply .selecter .selectmenu:nth-child(1) {
+    background-color: rgb(134, 193, 233);
+    border: 1px solid rgb(134, 193, 233);
+    border-radius: 5px 0px 0px 5px;
+    color: white;
+}
+
+.pointapply .selecter .selectmenu:nth-child(2) {
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid rgb(134, 193, 233);
+}
+
+.pointapply .selecter .selectmenu p {
+    margin: 1%;
+}
+
+.pointapply .individual input[type="text"] {
+    height: 30px;
+    margin-top: 50px;
+    margin-left: 7%;
+    width: 85.5%;
+    border: 2px solid rgb(134, 193, 233);
+    border-radius: 4px;
+    transition: all 1s ease;
+    padding-left: 1%;
+}
+
+.pointapply .individual button {
+    background-color: rgb(134, 193, 233);
+    border: none;
+    height: 36px;
+    width: 87%;
+    border: 2px solid rgb(134, 193, 233);
+    margin-top: 50px;
+    margin-left: 7%;
+    border-radius: 4px;
+    transition: all 1s ease;
+    color: white;
+}
+
+.pointapply .individual button:hover {
+    background-color: rgb(160, 200, 255);
+}
+
+.pointapply .group input:nth-child(2) {
+    margin-top: 20px;
+}
+
+.pointapply .group {
+    display: none;
+}
+
+
+/*----------------------------------------- after ------------------------*/
+
+
+/*.afterapply table .tableheader {
+    background-color: rgb(134,193,233);
+    color: white;
+}*/
+
+.afterapply .frametitle .underline {
+    background-color: rgb(134, 193, 233);
+}
+
+.afterapply table .tableheader th:nth-child(1) {
+    min-width: 50px;
+    width: 10%;
+}
+
+.afterapply table .tableheader th:nth-child(2) {
+    width: 70%;
+}
+
+.afterapply table .tableheader th:nth-child(3) {
+    min-width: 40px;
+    width: 5%;
+}
+
+.afterapply table .tableheader th:nth-child(4) {
+    min-width: 70px;
+    width: 10%;
+}
+
+.afterapply table .tableheader th:nth-child(5) {
+    min-width: 45px;
+    width: 5%:
+}
+
+.afterapply table.list td:nth-child(4), .afterapply table.list td:nth-child(5) {
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+    min-width: 27px;
+}
+
+.afterapply table .tableheader {
+    background-color: rgb(244, 244, 244);
+}
+
+.afterapply table .tableheader th {
+    border-top: 1px solid rgb(134, 193, 233);
+    border-bottom: 2px solid rgb(134, 193, 233);
+    color: rgb(134, 193, 233);
+}
+
+.afterapply table td {
+    border-bottom: 1px solid rgb(134, 193, 233);
+}
+
+.afterapply table {
+    margin-top: 45px;
+}
+
+.afterapply .frametitle p {
+    font-size: 1em;
+    font-weight: 900;
+    color: rgb(100, 100, 100);
+    margin-bottom: 0;
+    position: absolute;
+    margin-bottom: 10px;
+    right: 7%;
+}
+
+
+/*--------------- afterapplypage ----------------------------------*/
+
+.afterapplypage {
+    width: 100%;
+}
+
+.aftercontainer {}
+
+.afterapplypage .afterinfo {
+    position: relative;
+    margin-left: 7%;
+    background-color: #2979FF;
+    display: inline-block;
+    width: 86.5%;
+    margin-top: 50px;
+    color: white;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+    text-align: left;
+    /*border-radius: 5px;*/
+}
+
+.afterapplypage .afterinfo h3 {
+    background-color: #4AD6AC;
+    display: inline-block;
+    margin-left: 15px;
+    padding: 15px;
+    box-shadow: 1.5px 1.5px 10px rgba(0, 0, 0, .5);
+    position: absolute;
+    top: -46px;
+    left: 30px;
+}
+
+.afterapplypage .afterinfo .header {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background-color: #222635;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, .5);
+}
+
+.afterapplypage .afterinfo .header p {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 0;
+}
+
+.afterapplypage .afterinfo p.grade {
+    /*background-color: rgb(134, 193, 233);*/
+    display: inline-block;
+    border-radius: 6px;
+    padding: 2px;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.afterapplypage .afterinfo p#first {
+    margin-left: 40%;
+}
+
+
+/*.afterapplypage .afterinfo p#second, .afterapplypage .afterinfo p#third {
+        background-color: gray;
+    }*/
+
+.afterapplypage .afterinfo p#class {
+    margin-top: 2.5%;
+}
+
+.afterapplypage .afterinfo .bar {
+    display: inline-block;
+    border-radius: 3px;
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    background-color: gray;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.afterapplypage .afterinfo table {
+    margin-left: 40%;
+}
+
+.afterapplypage .afterinfo #member {
+    display: inline-block;
+    margin: 0;
+    margin-left: 40%;
+    margin-right: 10px;
+}
+
+.afterapplypage .afterinfo .bar .in {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 3px;
+    margin: 0;
+    display: inline-block;
+    width: 50%;
+    background-color: #1DE9B6;
+}
+
+.afterapplypage .afterinfo p:nth-child(1) {
+    /*margin-top: 50px;*/
+}
+
+.afterapplypage .afterinfo p {
+    margin-left: 40%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.afterapplypage .afterform {
+    margin-left: 30%;
+    margin-top: 22px;
+}
+
+.afterapplypage .afterform button {
+    background-color: #2979FF;
+    border: none;
+    height: 36px;
+    width: 100%;
+    border: 2px solid #222635;
+    border-bottom: none;
+    transition: all 1s ease;
+    color: white;
+    box-sizing: border-box;
+    border-right: none;
+    border-left: none;
+}
+
+
+/*-------------------------------------------------- apply -------*/
+
+.afterapplypage .afternotice {
+    text-align: center;
+}
+
+.afterapplypage .frametitle img {
+    width: 25px;
+}
+
+.afterapplypage .frametitle h1 {
+    display: inline-block;
+}
+
+
+/*------------------------------- extention ---------------------*/
+
+.extentionapply {
+    width: 100%;
+}
+
+- .extentionapply .seatcontainer {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.extentionapply .seatcontainer .seat {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 8px;
+    text-align: center;
+    line-height: 60px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+}
+
+
+/*---------------------- extentionapply select css-------*/
+
+.extentionapply div.class-selecter-div {
+    position: relative;
+    width: 200px;
+    height: 40px;
+    background: url(../image/selectArrow.png) 180px center no-repeat;
+    /* 화살표 이미지 */
+    border: 1px solid #E9DDDD;
+    display: inline-block;
+}
+
+.extentionapply div.class-selecter-div label {
+    position: absolute;
+    font-size: 14px;
+    color: #a97228;
+    top: 13px;
+    left: 12px;
+    letter-spacing: 1px;
+}
+
+.extentionapply div.class-selecter-div select#class-select {
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    /* IE 8 */
+}
+
+.extentionapply div.selecter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/*---------------------- extentionapply applycancle css-------*/
+
+.extentionapply div.selecter-container input.apply-cancle {
+    display: inline-block;
+    background-color: white;
+    height: 40px;
+    border: 1px solid #E9DDDD;
+}
+
+
+/*----------------------- go home -------------------*/
+
+#calendar thead {
+    background-color: #00a9e0;
+}
+
+#calendar {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    width: 70%;
+    text-align: center;
+    margin: auto;
+    margin-top: 7%;
+    border: 0px solid black;
+}
+
+#calendar tbody td {
+    border: 0.1px solid #000;
+}
+
+#calendar .days, .days td {
+    border: 0 solid #fff;
+    background-color: #6fcef9;
+}
+
+#prev_month {
+    border-top-left-radius: 15px;
+}
+
+#next_month {
+    border-top-right-radius: 15px;
+}
+
+.weeks {
+    cursor: pointer;
+}
+
+#calendar td {
+    width: calc(100%/7);
+    height: 40px;
+}
+
+#apply_form {
+    margin-left: 20%;
+    margin-top: 17%;
+}
+
+#apply_field {
+    width: 80%;
+}
+
+#date {
+    font-size: 120%;
+}
+
+#apply_submit {
+    float: right;
+    margin-right: 7%;
+}
+
+.color {
+    vertical-align: -35%;
+    display: inline-block;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+}
+
+.go_home {
+    background-color: rgb(52, 219, 94);
+}
+
+.go_dom {
+    background-color: rgb(255, 151, 49);
+}
+
+.go_home_duty {
+    background-color: rgb(255, 238, 34);
+}
+
+
+/*------------------------ go out ------------------*/
+
+#select_table {
+    margin: auto;
+    margin-top: 3%;
+    height: 200px;
+}
+
+#select_table td {
+    height: calc(100%/3);
+    border-radius: 10%;
+    background-color: rgb(52, 152, 219);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#select_table td:hover, #submit_button:hover {
+    background-color: rgba(52, 152, 219, 0.5);
+}
+
+#sat, #sun {
+    border-radius: 0 0 10% 10%;
+}
+
+#submit_button {
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    color: white;
+    font-size: 20px;
+    border-radius: 10%;
+    cursor: pointer;
+    background-color: rgb(52, 152, 219);
+    width: 70px;
+    height: 30px;
+}
+
+
+/*------------------------- login -------------------*/
+
+
+/*body {
+    background-color: #00bcfc;
+}*/
+
+#login_title {
+    text-align: left;
+    font-size: 25px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 15px;
+}
+
+#login_card {
+    min-width: 304px;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    width: 30%;
+    height: 350px;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+#login_form input[type="text"], #login_form input[type="password"] {
+    width: 80%;
+    margin: 10px;
+    font-size: 20px;
+}
+
+#auto_login {
+  font-size: 80%;
+}
+
+#recaptcha {
+    width: 304px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#login {
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    margin-top: 25px;
+    margin: auto;
+    font-size: 100%;
+    background-color: #1fa9d8;
+    width: 30%;
+    height: 30px;
+    line-height: 30px;
+}
+
+/*------------------------- register -------------------*/
+
+#register_table {
+  width: 100%;
+}
+
+.register_input {
+    text-align: left;
+}
+
+#register_title {
+    text-align: left;
+    font-size: 25px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 15px;
+}
+
+#register_card {
+    min-width: 304px;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    width: 30%;
+    height: 350px;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+#register_table input {
+    width: 80%;
+    margin: 10px;
+    font-size: 20px;
+}
+
+#register {
+    cursor: pointer;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 8%;
+    font-size: 100%;
+    background-color: #1fa9d8;
+    width: 30%;
+    height: 30px;
+    line-height: 30px;
+}
+
+#code_submit {
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 100%;
+    background-color: #1fa9d8;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+/*-------------------------- facility ------------------------*/
+
+#facility-form {
+    font-size: 125%;
+    margin: auto;
+    width: 100%;
+}
+
+#facility-form>div {
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
+}
+
+#facility-form input[type="text"] {
+    font-size: 125%;
+    width: 100%;
+    padding: 2px;
+    border: 1px solid #a9a9a9;
+    border-radius: 4px;
+}
+
+#facility-submit {
+    font-size: 125%;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(134, 193, 233);
+    border-radius: 4px;
+    transition: all 1s ease;
+    padding: 2px;
+}
+
+
+/*----------------------------- each colors -------------------*/
+
+.frame .frametitle .puple, .puple {
+    background-color: rgb(191, 148, 208);
+}
+
+.frame .frametitle .red, .red {
+    background-color: rgb(231, 160, 153);
+}
+
+.frame .frametitle .blue, .blue {
+    background-color: rgb(134, 193, 233);
+}
+
+.btn-hover-blue:hover, .btn-hover-blue:focus, .btn-hover-blue:active {
+    color: rgb(134, 193, 233);
+}
+
+.btn-hover-red:hover, .btn-hover-red:focus, .btn-hover-red:active {
+    color: rgb(231, 160, 153);
+}
+
+.btn-hover-puple:hover, .btn-hover-puple:focus, .btn-hover-puple:active {
+    color: rgb(191, 148, 208);
+}
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+
+/* All Device */
+
+
+/* Large Devices, Wide Screens : ~ 1200px */
+
+@media only screen and (max-width: 1200px) {}
+
+
+/* Medium Devices, Desktops : ~ 992px */
+
+@media only screen and (max-width: 992px) {
+    .logo {
+        display: none;
+    }
+    .main {
+        /*width: 50%;*/
+        top: 20vh;
+        left: 5vw;
+        width: 90vw;
+    }
+    .frame {
+        width: 50%;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .food {
+        float: none;
+    }
+    .afterapplypage .afterinfo h3 {
+        background-color: #4AD6AC;
+        display: inline-block;
+        margin-left: 15px;
+        padding: 15px;
+        box-shadow: 1.5px 1.5px 10px rgba(0, 0, 0, .5);
+        position: absolute;
+        top: -46px;
+        left: 50%;
+    }
+}
+
+
+/* Small Devices, Tablets : ~ 768px */
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        display: none;
+    }
+    .main {
+        /*width: 50%;*/
+        top: 20vh;
+        left: 5vw;
+        width: 90vw;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .right {
+        float: none;
+    }
+    .mypage .info {
+        width: 86%;
+    }
+    .afterapplypage .afterinfo h3 {
+        left: 50%;
+    }
+    .afterapplypage .afterform button {
+        margin-left: -2px;
+    }
+    .afterapply table .tableheader th:nth-child(1) {
+        min-width: 60px;
+    }
+    .afterapply table .tableheader th:nth-child(3) {
+        min-width: 40px;
+    }
+    .afterapply table .tableheader th:nth-child(4) {
+        min-width: 70px;
+    }
+    .afterapply table .tableheader th:nth-child(5) {
+        min-width: 45px;
+    }
+    .extentionapply .seatcontainer .seat {
+        width: 46px;
+        height: 46px;
+        border-radius: 23px;
+        display: inline-block;
+        margin: 5px;
+        text-align: center;
+        line-height: 46px;
+        overflow: hidden;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+    }
+}
+
+
+/* Extra Small Devices, Phones : ~ 480px */
+
+@media only screen and (max-width: 480px) {
+    .logo {
+        display: none;
+    }
+    .main {
+        /*width: 50%;*/
+        top: 14vh;
+        left: 5vw;
+        width: 90vw;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .right {
+        float: none;
+    }
+    .mypage .info {
+        width: 86%;
+    }
+    .left .notice li .title {
+        width: 70%;
+    }
+    .commentinput input[type="text"] {
+        width: 90%;
+    }
+    .afterapplypage .afterinfo p#first {
+        margin-left: 34%;
+    }
+    .afterapplypage .afterinfo p {
+        margin-left: 35%;
+    }
+    .afterapplypage .afterinfo #member {
+        margin-left: 35%;
+    }
+    .afterapplypage .afterinfo p {
+        margin-left: 35%;
+    }
+    .afterapplypage .afterform button {
+        margin-left: -2px;
+    }
+    .afterapplypage .afterinfo {
+        margin-top: 65px;
+    }
+    .afterapplypage .afterinfo h3 {
+        top: -61px;
+        left: 6%;
+        width: 66%;
+    }
+    .afterapply table .tableheader th:nth-child(3), .afterapply table .tableheader th:nth-child(5) {
+        display: none;
+    }
+    .afterapply table.list tr td:nth-child(3), .afterapply table.list tr td:nth-child(5) {
+        display: none;
+    }
+    .afterapply table .tableheader th:nth-child(1) {
+        min-width: 43px;
+    }
+    .extentionapply .seatcontainer .seat {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        display: inline-block;
+        margin: 4px;
+        text-align: center;
+        line-height: 30px;
+        overflow: hidden;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+        font-size: 0.65em;
+        /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+    }
+}
+
+
+/* Custom, iPhone Retina : ~ 320px */
+
+@media only screen and (max-width: 320px) {
+    .logo {
+        display: none;
+    }
+    .main {
+        /*width: 50%;*/
+        top: 15vh;
+        left: 5vw;
+        width: 90vw;
+    }
+    .right .info {
+        width: 89%;
+    }
+    .left ul li .title {
+        width: 70%;
+    }
+    .frame {
+        width: 100%;
+    }
+    .right {
+        float: none;
+    }
+    .right .info {
+        width: 85%;
+    }
+    .mypage .info {
+        width: 86%;
+    }
+    .left .notice li .title {
+        font-size: 1.2em;
+        width: 70%;
+    }
+    .right .meal h2 {
+        font-size: 1.2em;
+    }
+    .right .meal p {
+        font-size: 0.9em;
+    }
+}

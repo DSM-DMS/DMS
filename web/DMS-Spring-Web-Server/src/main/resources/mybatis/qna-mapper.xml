@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.boxfox.dms.board.mapper.QnaMapper">
+
+    <resultMap type="com.boxfox.dms.board.dto.QnaPostContext" id="ResultList">
+        <result property="title" column="title" />
+        <result property="no" column="no" />
+        <result property="writer" column="writer" />
+        <result property="date" column="question_date" />
+        <result property="privacy" column="privacy"/>
+        <result property="content" column="question_content"/>
+        <result property="result" column="answer_content"/>
+        <result property="resultDate" column="answer_date"/>
+    </resultMap>
+    
+    <resultMap type="com.boxfox.dms.board.dto.Comment" id="CommentResultList">
+        <result property="idx" column="idx" />
+        <result property="no" column="no" />
+        <result property="writer" column="writer" />
+        <result property="date" column="comment_date" />
+        <result property="content" column="content"/>
+    </resultMap>
+    
+    <select id="getPost" resultMap="ResultList">
+        SELECT * FROM facility_report WHERE `no`=#{number}
+    </select>
+    
+    <insert id="writePost" parameterType="com.boxfox.dms.board.dto.QnaPostContext">
+    	INSERT into qna (title, question_content, question_date, writer, privacy) values(#{title}, #{content}, #{date}, #{writer}, #{privacy})
+    </insert>
+    
+    <update id="writeAnswer" parameterType="com.boxfox.dms.board.dto.QnaPostContext">
+    	UPDATE qna set answer_content=#{result}, answer_date=#{resultDate} WHERE `no`=#{no}
+    </update>
+    
+    <insert id="writeComment" parameterType="com.boxfox.dms.board.dto.Comment">
+    	INSERT into qna_comment (no, date, content, writer) values(#{no}, #{date}, #{content}, #{writer})
+    </insert>
+    
+    <update id="editPost" parameterType="com.boxfox.dms.board.dto.QnaPostContext">
+    	UPDATE qna set title=#{title}, content=#{content}, privacy=#{privacy} WHERE `no`=#{no}
+    </update>
+    
+    <update id="editComment" parameterType="com.boxfox.dms.board.dto.Comment">
+    	UPDATE qna_comment set content=#{content} WHERE `idx`=#{index}
+    </update>
+    
+    <select id="getComments" resultMap="CommentResultList">
+    	select * from qna_comment where no=#{no}
+    </select>
+    
+    <update id="deletePost" >
+    	delete from qna WHERE `no`=#{no}
+    </update>
+    
+</mapper>

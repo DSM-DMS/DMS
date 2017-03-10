@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">Application</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_desclogin">로그인을 하시면 더 많은 기능을 사용하실 수 있습니다.</string>
+    <string name="nav_login">로그인</string>
+    <string name="nav_home">홈</string>
+    <string name="nav_apply">신청</string>
+    <string name="nav_extensionapply">연장신청</string>
+    <string name="nav_stayapply">잔류신청</string>
+    <string name="nav_goingoutapply">외출신청</string>
+    <string name="nav_rewardscoreapply">상점신청</string>
+    <string name="nav_afterschoolapply">방과후신청</string>
+    <string name="nav_school">학교 소식</string>
+    <string name="nav_meal">급식</string>
+    <string name="nav_notice">공지사항</string>
+    <string name="nav_newsletter">가정통신문</string>
+    <string name="nav_competition">대회정보</string>
+    <string name="nav_dormitory">기숙사</string>
+    <string name="nav_facilityreport">시설고장신고</string>
+    <string name="nav_rule">기숙사규정</string>
+    <string name="nav_faq">FAQ</string>
+    <string name="nav_qna">문의하기</string>
+    <string name="nav_mypage">마이페이지</string>
+    <string name="nav_settings">설정</string>
+
+    <!-- Login Activity -->
+    <string name="login_id">아이디</string>
+    <string name="login_password">비밀번호</string>
+    <string name="login_login">로그인</string>
+    <string name="login_noid">아이디를 입력하세요.</string>
+    <string name="login_nopassword">비밀번호를 입력하세요.</string>
+    <string name="login_success">님, 환영합니다.</string>
+    <string name="login_failure">아이디 또는 비밀번호를 잘못 입력하셨습니다.</string>
+    <string name="login_error">오류로 인해 로그인에 실패하였습니다.</string>
+
+    <!-- Stay Apply Fragment -->
+    <string name="stayapply_defaultstatus">기본값</string>
+    <string name="stayapply_changedefaultstatus">변경</string>
+    <string name="stayapply_fridaygo">금요귀가</string>
+    <string name="stayapply_saturdaygo">토요귀가</string>
+    <string name="stayapply_saturdaycome">토요귀사</string>
+    <string name="stayapply_stay">잔류</string>
+    <string name="stayapply_apply">신청하기</string>
+    <string name="stayapply_nochecked">값을 선택해주세요.</string>
+    <string name="stayapply_error">오류로 인해 잔류상태 정보를 불러오지 못했습니다.</string>
+    <string name="stayapply_default_error">오류로 인해 잔류상태 기본값 정보를 불러오지 못했습니다.</string>
+    <string name="stayapply_dialog_title">기본값 변경</string>
+    <string name="stayapply_dialog_negative">취소</string>
+    <string name="stayapply_dialog_positive">변경</string>
+    <string name="stayapply_dialog_success">기본값을 변경하였습니다.</string>
+    <string name="stayapply_dialog_failure">기본값을 변경하지 못했습니다.</string>
+    <string name="stayapply_dialog_error">오류로 인해 기본값을 변경하지 못했습니다.</string>
+    <string name="stayapply_apply_success">잔류상태를 변경하였습니다.</string>
+    <string name="stayapply_apply_failure">잔류상태를 변경하지 못했습니다.</string>
+    <string name="stayapply_apply_error">오류로 인해 잔류상태를 변경하지 못했습니다.</string>
+
+    <!-- Goingout Apply Fragment -->
+    <string name="goingoutapply_desc">앱에서 외출신청 후, 별도로 사감실에 방문하여 확인받아야 합니다.</string>
+    <string name="goingoutapply_saturday">토요일</string>
+    <string name="goingoutapply_sunday">일요일</string>
+    <string name="goingoutapply_subdesc">(중복 선택 가능)</string>
+    <string name="goingoutapply_apply">신청하기</string>
+    <string name="goingoutapply_nochecked">값을 선택해주세요.</string>
+    
+    <!-- Rewardscore Apply Fragment -->
+    <string name="rewardscoreapply_rewardscore">상점</string>
+    <string name="rewardscoreapply_recommend">추천</string>
+    <string name="rewardscoreapply_content">내용</string>
+    <string name="rewardscoreapply_recommendee">추천인</string>
+    <string name="rewardscoreapply_apply">신청하기</string>
+    <string name="rewardscoreapply_nocontent">내용을 입력해주세요.</string>
+    <string name="rewardscoreapply_norecommendee">추천인을 입력해주세요.</string>
+    <string name="rewardscoreapply_success">신청이 완료되었습니다.</string>
+    <string name="rewardscoreapply_failure">신청에 실패하였습니다.</string>
+    <string name="rewardscoreapply_error">오류로 인해 신청에 실패했습니다.</string>
+
+    <!-- Afterschool Apply Fragment -->
+    <string name="afterschoolapply_apply">신청</string>
+    <string name="afterschoolapply_empty">방과후신청 목록이 없습니다.</string>
+    <string name="afterschoolapply_error">오류로 인해 방과후신청 목록을 불러오지 못했습니다.</string>
+
+    <!-- Meal Fragment -->
+    <string name="meal_breakfast">아침</string>
+    <string name="meal_lunch">점심</string>
+    <string name="meal_dinner">저녁</string>
+    <string name="meal_meal">급식</string>
+    <string name="meal_allergy">알레르기</string>
+    <string name="meal_error">오류로 인해 급식 정보를 불러오지 못했습니다.</string>
+
+    <!-- Notice Fragment -->
+    <string name="notice_empty">공지사항이 없습니다.</string>
+    <string name="notice_important">중요</string>
+    <string name="notice_failure">공지사항을 불러오지 못했습니다.</string>
+    <string name="notice_error">오류로 인해 공지사항을 불러오지 못했습니다.</string>
+
+    <!-- Newsletter Fragment -->
+    <string name="newsletter_empty">가정통신문이 없습니다.</string>
+
+    <!-- Competition Fragment -->
+    <string name="competition_empty">대회정보가 없습니다.</string>
+
+    <!-- Appcontent -->
+    <string name="appcontent_dialog_title">첨부파일</string>
+    <string name="appcontent_dialog_negative">취소</string>
+    <string name="appcontent_dialog_positive">다운로드</string>
+    <string name="appcontent_btn_more">더보기</string>
+    <string name="appcontent_download_start">다운로드를 시작합니다.</string>
+    <string name="appcontent_download_finish">다운로드가 완료되었습니다.</string>
+
+    <!-- Facility Report Fragment -->
+    <string name="facilityreport_empty">신고 내역이 없습니다.</string>
+    <string name="facilityreport_title">제목</string>
+    <string name="facilityreport_room">호실</string>
+    <string name="facilityreport_content">고장 내용</string>
+    <string name="facilityreport_submit">제출하기</string>
+    <string name="facilityreport_error">오류로 인해 신고 내역을 불러오지 못했습니다.</string>
+    <string name="facilityreport_article_error">오류로 인해 글을 불러오지 못했습니다.</string>
+    <string name="facilityreport_write_error">오류로 인해 신고 사항을 제출하지 못했습니다.</string>
+    <string name="facilityreport_write_success">신고 사항을 제출하였습니다.</string>
+    <string name="facilityreport_write_failure">신고 사항을 제출하지 못했습니다.</string>
+
+    <!-- Rule Fragment -->
+    <string name="rule_empty">기숙사 규정이 없습니다.</string>
+    <string name="rule_error">오류로 인해 기숙사 규정을 불러오지 못했습니다.</string>
+
+    <!-- FAQ Fragment -->
+    <string name="faq_empty">FAQ가 없습니다.</string>
+    <string name="faq_error">오류로 인해 FAQ를 불러오지 못했습니다.</string>
+
+    <!-- QnA Fragment -->
+    <string name="qna_empty">Q<![CDATA[&]]>A가 없습니다.</string>
+    <string name="qna_private">비공개 글입니다.</string>
+    <string name="qna_comment">댓글</string>
+    <string name="qna_title">제목</string>
+    <string name="qna_content">문의 내용</string>
+    <string name="qna_privacy">비공개</string>
+    <string name="qna_submit">제출하기</string>
+    <string name="qna_error">오류로 인해 Q<![CDATA[&]]>A를 불러오지 못했습니다.</string>
+    <string name="qna_article_error">오류로 인해 글을 불러오지 못했습니다.</string>
+    <string name="qna_write_success">문의사항을 제출하였습니다.</string>
+    <string name="qna_write_failure">문의사항을 제출하지 못했습니다.</string>
+    <string name="qna_write_error">오류로 인해 문의사항을 제출하지 못했습니다.</string>
+    
+    <!-- Extra Keys -->
+    <string name="EXTRA_APPCONTENT">com.dms.beinone.extra.APPCONTENT</string>
+    <string name="EXTRA_NOTICE">com.dms.beinone.extra.NOTICE</string>
+    <string name="EXTRA_NEWSLETTER">com.dms.beinone.extra.NEWSLETTER</string>
+    <string name="EXTRA_FACILITYREPORT">com.dms.beinone.extra.FACILITYREPORT</string>
+    <string name="EXTRA_QNA">com.dms.beinone.extra.QNA</string>
+    <string name="EXTRA_NO">com.dms.beinone.extra.NO</string>
+
+    <!-- Arguments -->
+    <string name="ARGS_CATEGORY">com.dms.beinone.args.CATEGORY</string>
+    <string name="ARGS_DEFAULTSTATUS">com.dms.beinone.args.DEFAULTSTATUS</string>
+    <string name="ARGS_DOWNLOAD">com.dms.beinone.args.DOWNLOAD</string>
+
+    <!-- SharedPreferences -->
+
+    <!-- Account -->
+    <string name="PREFS_ACCOUNT">account</string>
+    <string name="PREFS_ACCOUNT_ID">id</string>
+    <string name="PREFS_ACCOUNT_PASSWORD">password</string>
+    <!-- Default Status of Stay Apply -->
+    <string name="PREFS_DEFAULTSTATUS">defaultStatus</string>
+    <string name="PREFS_DEFAULTSTATUS_DEFAULTSTATUS">defaultStatus</string>
+</resources>

@@ -20,10 +20,10 @@ public class DeleteQnaComment implements Handler<RoutingContext> {
 		
 		DataBase database = DataBase.getInstance();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
+		int idx = Integer.parseInt(context.request().getParam("no"));
 		
 		try {
-			database.executeUpdate("DELETE FROM qna_comment WHERE no=", no);
+			database.executeUpdate("DELETE FROM qna_comment WHERE idx=", idx);
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

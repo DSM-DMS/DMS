@@ -20,11 +20,11 @@ public class ModifyQnaComment implements Handler<RoutingContext> {
 		
 		DataBase database = DataBase.getInstance();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
+		int idx = Integer.parseInt(context.request().getParam("no"));
 		String content = context.request().getParam("content");
 		
 		try {
-			database.executeUpdate("UPDATE qna_comment SET content='", content, "' WHERE no=", no);
+			database.executeUpdate("UPDATE qna_comment SET content='", content, "' WHERE idx=", idx);
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

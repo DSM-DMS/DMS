@@ -1,0 +1,143 @@
+@import "remote.css";
+
+body {
+    background-color: rgb(142, 68, 173);
+}
+
+.main {
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 20vh;
+    left: 16%;
+    min-height: 70%;
+    width: 80%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+
+.frame {
+    position: relative;
+    width: 98%;
+    height: 100%;
+    float: left;
+    /*overflow-x: hidden;*/
+}
+
+.frame h2 {
+    display: inline-block;
+    margin-left: 7%;
+    margin-bottom: 1%;
+}
+
+.frame .frametitle p {
+    font-size: 0.8em;
+    font-weight: 900;
+    color: rgb(100, 100, 100);
+    margin-bottom: 0;
+    position: absolute;
+    margin-bottom: 1%;
+    right: 0%;
+    bottom: 0%;
+    /*float: right;*/
+}
+
+
+/*.frame ul {
+    position: relative;
+    margin-left: 7%;
+    padding-left: 0%;
+}
+
+.frame ul li {
+    list-style-type: none;
+    margin: 4% 0%;
+}
+
+.frame ul li .title {
+    display: inline;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.frame ul li p.date {
+    /*display: inline;
+
+color: gray;
+float: right;
+vertical-align: bottom;
+font-size: 0.8em;
+font-weight: 600;
+
+}
+*/
+.frame .frametitle {
+    position: relative;
+    height: 12%;
+}
+.underline {
+    position: relative;
+    right: 0%;
+    height: 8px;
+    margin-left: 7%;
+    margin-right: 0%;
+    width: 93%;
+    background: rgb(142, 68, 173);
+}
+.article {
+    line-height: 150%;
+    margin-left: 7%;
+    margin-top: 30px;
+}
+.frame hr {
+    margin-left: 7%;
+}
+.commentinput {
+    margin-left: 7%;
+    /*margin-bottom: 100px;*/
+}
+.commentinput input {
+    height: 30px;
+}
+.commentinput button {
+    background-color: rgb(142, 68, 173);
+    border: none;
+    height: 36px;
+    width: 15%;
+    border: 2px solid rgb(142, 68, 173);
+    border-radius: 4px;
+}
+.commentinput input[type="text"] {
+    height: 30px;
+    width: 80%;
+    border: 2px solid rgb(142, 68, 173);
+    border-radius: 4px;
+}
+.comment {
+    margin-left: 7%;
+}
+.comment ul {
+    padding-left: 0;
+}
+.comment ul li {
+    list-style-type: none;
+}
+.comment ul li h3 {
+    margin-right: 30px;
+    display: inline-block;
+}
+.comment ul li p {
+    display: inline-block;
+    /*float: right;*/
+}
+
+.comment .date {
+    margin-left: 30px;
+    display: inline-block;
+    color: rgb(100, 100, 100);
+    font-size: 0.8em;
+    font-weight: 900;
+}
+
+.comment hr {
+   margin-left: 0;
+}

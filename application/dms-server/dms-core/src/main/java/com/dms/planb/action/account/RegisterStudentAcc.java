@@ -6,7 +6,6 @@ import org.boxfox.dms.secure.Guardian;
 import org.boxfox.dms.user.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.JobResult;
-import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.planb.support.CORSHeader;
@@ -38,13 +37,14 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
                     context.response().setStatusMessage(result.getMessage()).end();
                     context.response().close();
                 } else {
+                	// Conflict
                     context.response().setStatusCode(409);
                     context.response().setStatusMessage(result.getMessage()).end();
                     context.response().close();
                 }
             } else {
-                Log.l("null 입니다.");
-                // Null in any parameters
+            	context.response().setStatusCode(404);
+                context.response().close();
             }
         } catch (SQLException e) {
             context.response().setStatusCode(500).end();
