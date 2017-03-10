@@ -25,12 +25,17 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
         context = CORSHeader.putHeaders(context);
-
-        String uid = context.request().getParam("uid");
-        String id = context.request().getParam("id");
-        String password = context.request().getParam("password");
+        
+        String uid = null;
+        String id = null;
+        String password = null;
+        
+        uid = context.request().getParam("uid");
+        id = context.request().getParam("id");
+        password = context.request().getParam("password");
+        
         try {
-            if (Guardian.checkParameters(uid, id, password)) {
+        	if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
                 JobResult result = userManager.register(uid, id, password);
                 if (result.isSuccess()) {
                     context.response().setStatusCode(201);
@@ -43,7 +48,8 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
                     context.response().close();
                 }
             } else {
-            	context.response().setStatusCode(404);
+            	// Any null in parameters
+            	context.response().setStatusCode(404).end();
                 context.response().close();
             }
         } catch (SQLException e) {
