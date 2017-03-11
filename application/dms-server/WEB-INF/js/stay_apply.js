@@ -13,6 +13,97 @@ nextMonth.setMonth(newDate.getMonth() + 1);
 
 $('#month').text(currentYear + '.' + currentMonth); //달력 년, 월 표시
 
+/*--------------- ajax ---------------*/
+
+var loadSendDataWeek;
+var applySendDataWeek;
+var applySendDataValue;
+var getDataValue;
+var defaultSel;
+
+$.ajax({
+  url: "http://dsm2015.cafe24.com:8089/apply/stay",
+  type: "GET",
+  async: false,
+  data: {
+    "id": id,
+  },
+  success: function(data) {
+    defaultSel = JSON.parse(data).value;
+  }
+});
+
+var getData = function () {
+  $.ajax({
+    url: "http://dsm2015.cafe24.com:8089/apply/stay",
+    type: "GET",
+    async: false,
+    data: {
+      "id": id,
+      "week": loadSendDataWeek,
+    },
+    success: function(data) {
+      getDataValue = JSON.parse(data).value;
+      valueArray.push(getDataValue);
+    },
+    error: function(xhr){
+      if (xhr.status == 404) {
+        valueArray.push(4);
+      }
+    }
+  });
+};
+
+var applyData = function () {
+  $.ajax({
+    url: "http://dsm2015.cafe24.com:8089/apply/stay",
+    type: "PUT",
+    async: false,
+    data: {
+      "id": id,
+      "week": applySendDataWeek,
+      "value": applySendDataValue
+    },
+    success: function(data) {
+      alert('신청되었습니다.');
+    }
+  });
+};
+
+function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
+  if(five_week) {
+    for (var i = 1; i <= 5; i++) {
+        loadSendDataWeek = dateToString(i);
+        getData();
+    }
+  } else {
+    for (var i = 1; i <= 4; i++) {
+        loadSendDataWeek = dateToString(i);
+        getData();
+    }
+  }
+}
+
+function drawPrev() {
+    loadPrev();
+    for (i = 1; i <= valueArray.length; i++) {
+        if (valueArray[i - 1] == 4) { //잔류
+        } else if (valueArray[i - 1] == 1) {
+            $('tr:eq(' + (i + 1) + ') td.fri').attr('class', 'fri go_home');
+            $('tr:eq(' + (i + 2) + ') td.sun').attr('class', 'sun go_dom');
+        } else if (valueArray[i - 1] == 2) {
+            $('tr:eq(' + (i + 1) + ') td.sat').attr('class', 'sat go_home');
+            $('tr:eq(' + (i + 2) + ') td.sun').attr('class', 'sun go_dom');
+        } else if (valueArray[i - 1] == 3) {
+            $('tr:eq(' + (i + 1) + ') td.fri').attr('class', 'fri go_home');
+            $('tr:eq(' + (i + 1) + ') td.sat').attr('class', 'sat go_dom');
+        }
+    }
+    valueArray = new Array();
+}
+
+/*-------------------그리기---------------*/
+
 drawCalendar(newDate, lastDay); //처음 달력 날짜 표시
 
 //이전 달
@@ -91,14 +182,14 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 1:
-            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
-            for(var k = 9 + date.getDay(); k >= 10; k--) {
-                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
-                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
-            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 11 + i; //월요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+              $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+              $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
             }
             for(var j = 0; idx <= 51; idx++) {
               $('#calendar td:eq(' + idx + ')').text(++j);
@@ -106,14 +197,14 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 2:
-            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
-            for(var k = 9 + date.getDay(); k >= 10; k--) {
-                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
-                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
-            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 12 + i; //화요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+              $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+              $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
             }
             for(var j = 0; idx <= 51; idx++) {
               $('#calendar td:eq(' + idx + ')').text(++j);
@@ -121,14 +212,14 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 3:
-            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
-            for(var k = 9 + date.getDay(); k >= 10; k--) {
-                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
-                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
-            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 13 + i; //수요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+              $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+              $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
             }
             for(var j = 0; idx <= 51; idx++) {
               $('#calendar td:eq(' + idx + ')').text(++j);
@@ -136,14 +227,14 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 4:
-            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
-            for(var k = 9 + date.getDay(); k >= 10; k--) {
-                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
-                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
-            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 14 + i; //목요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+              $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+              $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
             }
             for(var j = 0; idx <= 51; idx++) {
               $('#calendar td:eq(' + idx + ')').text(++j);
@@ -155,14 +246,14 @@ function drawCalendar(date, lastDay) {
               $('#sixth_week').toggle();
               five_week = true;
             }
-            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
-            for(var k = 9 + date.getDay(); k >= 10; k--) {
-                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
-                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
-            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 15 + i; //금요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+              $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+              $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
             }
             for(var j = 0; idx <= 51; idx++) {
               $('#calendar td:eq(' + idx + ')').text(++j);
@@ -174,14 +265,14 @@ function drawCalendar(date, lastDay) {
               $('#sixth_week').toggle();
               five_week = true;
             }
-            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
-            for(var k = 9 + date.getDay(); k >= 10; k--) {
-                $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
-                $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
-            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 16 + i; //토요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
+            }
+            var prevMonthNum = noofdays(prevMonth.getFullYear(), prevMonth.getMonth() + 1);
+            for(var k = 9 + date.getDay(); k >= 10; k--) {
+              $('#calendar td:eq(' + k + ')').text(prevMonthNum--);
+              $('#calendar td:eq(' + k + ')').attr('class', 'other_month');
             }
             for(var j = 0; idx <= 51; idx++) {
               $('#calendar td:eq(' + idx + ')').text(++j);
@@ -196,7 +287,7 @@ function drawCalendar(date, lastDay) {
 function clearCalendar() {
     for (var i = 0; i < 42; i++) {
       var idx = 10 + i;
-        switch (idx % 7) {
+        switch (i % 7) {
           case 0:
             $('#calendar td:eq(' + idx + ')').attr('class', 'sun');
             break;
@@ -214,15 +305,16 @@ function clearCalendar() {
             break;
           case 5:
             $('#calendar td:eq(' + idx + ')').attr('class', 'fri');
+            break;
           case 6:
             $('#calendar td:eq(' + idx + ')').attr('class', 'sat');
             break;
         }
         $('#calendar td:eq(' + idx + ')').text("");
-        $('#calendar tbody tr').css("background-color", "white");
-        $('#sixth_week').toggle();
-        five_week = false;
     }
+    $('#calendar tbody tr').css("background-color", "white");
+    $('#sixth_week').toggle();
+    five_week = false;
 }
 
 $('#first_week').click(function() {
@@ -258,92 +350,18 @@ $('#sixth_week').click(function() {
     alert("다음 달 1주로 신청해주세요.");
 });
 
-function getNextMonth() {
-    return new Date();
+//***********************신청*********************
+
+function dateToString(week) {
+  return newDate.getFullYear().toString() + "-" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
 };
 
-//********************이전 데이터 표시*********************
+$('#date').keydown(function(e) {
+    e.preventDefault();
+});
 
-var loadSendDataWeek;
-var applySendDataWeek;
-var applySendDataValue;
-var getDataValue;
-
-var getData = function () {
-  $.ajax({
-    url: "http://dsm2015.cafe24.com:8089/apply/stay",
-    type: "GET",
-    data: {
-      "id": id,
-      "week": loadSendDataWeek,
-    },
-    success: function(data) {
-      getDataValue = JSON.parse(data);
-    }
-  });
-};
-
-var applyData = function () {
-  $.ajax({
-    url: "http://dsm2015.cafe24.com:8089/apply/stay",
-    type: "PUT",
-    data: {
-      "id": id,
-      "week": applySendDataWeek,
-      "value": applySendDataValue
-    },
-    success: function(data) {
-      alert('신청되었습니다.');
-    }
-  });
-};
-
-function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
-  if(five_week) {
-    for (var i = 1; i <= 5; i++) {
-        loadSendDataWeek = dateToString(i);
-        getData();
-        valueArray.push(getDataValue.value);
-    }
-  } else {
-    for (var i = 1; i <= 4; i++) {
-        loadSendDataWeek = dateToString(i);
-        getData();
-        valueArray.push(getDataValue.value);
-    }
-  }
-}
-
-function drawPrev() {
-    loadPrev();
-    for (i = 1; i <= valueArray.length; i++) {
-        if (valueArray[i] == 4) { //잔류
-        } else if (valueArray[i] == 1) {
-            $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
-            $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
-        } else if (valueArray[i] == 2) {
-            $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_home');
-            $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
-        } else if (valueArray[i] == 3) {
-            $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
-            $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
-        }
-        valueArray = new Array();
-    }
-}
-
-  //***********************신청*********************
-
-  function dateToString(week) {
-    return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
-  };
-
-  $('#date').keydown(function(e) {
-      e.preventDefault();
-  });
-
-  $('#stay_submit').on('click', function() {
-      applySendDataWeek = $('#date').val();
-      applySendDataValue = $("#stay_select option:selected").val();
-      applyData();
-  });
+$('#stay_submit').on('click', function() {
+    applySendDataWeek = $('#date').val();
+    applySendDataValue = $("#stay_select option:selected").val();
+    applyData();
+});
