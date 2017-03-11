@@ -2,6 +2,7 @@ package org.boxfox.dms.user;
 
 import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.secure.Guardian;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -106,14 +107,14 @@ public class UserManager {
         return result;
     }
 
-    public String createSession(String id) {
+    public String createSession() {
         boolean check = true;
         String sessionKey = null;
         do {
             try {
                 sessionKey = UUID.randomUUID().toString();
                 SafeResultSet rs = database.executeQuery("select count(*) from account where session_key='", sessionKey, "'");
-                if (rs.next())
+                if (rs.getInt(1) == 0)
                     check = false;
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -131,20 +132,22 @@ public class UserManager {
     }
 
     public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
-        try {
-            String sessionKey = createSession(id);
-            if (keepLogin) {
-                context.addCookie(Cookie.cookie("UserSession", sessionKey));
-            } else {
-                context.session().put("UserSession", sessionKey);
+        if (Guardian.checkParameters(context, keepLogin, id))
+            try {
+                String sessionKey = createSession();
+                if (keepLogin) {
+                    context.addCookie(Cookie.cookie("UserSession", sessionKey));
+                } else {
+                    context.session().put("UserSession", sessionKey);
+                }
+                if (sessionKey != null) {
+                    DataBase.getInstance().executeQuery("update account set session_key='", sessionKey, "' where id='", id, "'");
+                    return true;
+                }
+            } catch (Exception e) {
             }
-            return true;
-        } catch (Exception e) {
-        }
         return false;
 
     }
-
-    //router.route().handler(CookieHandler.create());
 
 }

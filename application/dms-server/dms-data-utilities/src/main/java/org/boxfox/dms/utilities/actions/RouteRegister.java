@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import io.vertx.ext.web.handler.CookieHandler;
 import org.reflections.Reflections;
 
 import io.vertx.core.Handler;
@@ -47,11 +48,11 @@ public class RouteRegister {
 	public static void registerRouters(Router router, String... packages) {
 		RouteRegister register = new RouteRegister(router);
 		for (String package_s : packages) {
-			searchRouters(register, package_s);
+			register.searchRouters(register, package_s);
 		}
 	}
 
-	private static void searchRouters(RouteRegister register, String pacakge) {
+	private void searchRouters(RouteRegister register, String pacakge) {
 		Reflections reflections = new Reflections(pacakge);
 		Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(RouteRegistration.class);
 		for (Class<?> c : annotated) {
