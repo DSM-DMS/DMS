@@ -19,43 +19,35 @@ $('#point_reco').on('click', function () {
 });
 
 
-// $("#individual_btn").click(function() {
-//     var reason = $("#individual_reason").val();
-//     $.ajax({
-//         url: "http://dsm2015.cafe24.com:10419",
-//         type: "POST",
-//         data: {
-//             "id": id,
-//             "content": reason
-//         },
-//         beforeSend: function(xhr) {
-//             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-//             xhr.setRequestHeader("command", "144");
-//         },
-//         success: function() {
-//             alert("신청되었습니다.");
-//         }
-//     });
-// });
-//
-// // 추천탭 추천버튼 추천 이벤트
-// $("recommend_btn").click(function() {
-//     var reason = $("#recommend_reason").val();
-//     var person = $("#recommend_name").val();
-//     $.ajax({
-//         url: "http://dsm2015.cafe24.com:10419",
-//         type: "POST",
-//         data: JSON.stringify({
-//             "id": id,
-//             "content": reason,
-//             "targer": person
-//         }),
-//         beforeSend: function(xhr) {
-//             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-//             xhr.setRequestHeader("command", "144");
-//         },
-//         success: function() {
-//             alert("신청되었습니다.");
-//         }
-//     });
-// });
+$("#individual_btn").click(function() {
+    var reason = $("#individual_reason").val();
+    $.ajax({
+        url: "http://dsm2015.cafe24.com:8088/apply/merit",
+        type: "POST",
+        data: JSON.stringify({
+            "id": id,
+            "content": reason
+        }),
+        success: function() {
+            alert("신청되었습니다.");
+        }
+    });
+});
+
+// 추천탭 추천버튼 추천 이벤트
+$("recommend_btn").click(function() {
+    var reason = $("#recommend_reason").val();
+    var person = $("#recommend_name").val();
+    $.ajax({
+        url: "http://dsm2015.cafe24.com:8088/apply/merit",
+        type: "GET",
+        data: JSON.stringify({
+            "id": id,
+            "content": reason,
+            "target": person
+        }),
+        success: function() {
+            alert('신청되었습니다.');
+        }
+    });
+});
