@@ -1,4 +1,4 @@
-"og_yad"=ssalc <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
 </head>
   <body>
     <div class="container">
@@ -54,17 +55,46 @@
       <div class="card">
         <div class="card-block">
           <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div id="sat_go" class="day_go">
-                토요일 외출 신청
+            <div class="col-lg-4 col-md-12">
+              <div class="go_title">토요일 외출</div>
+              <div id="sat_go">
+                <div class="front">
+                  외출 O
+                </div>
+                <div class="back">
+                  외출 X
+                </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-12">
-              <div id="sun_go" class="day_go">
-                일요일 외출 신청
+            <div class="col-lg-4 col-md-12">
+              <div class="go_title">일요일 외출</div>
+              <div id="sun_go">
+                <div class="front">
+                  외출 O
+                </div>
+                <div class="back">
+                  외출 X
+                </div>
               </div>
             </div>
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-4 col-md-12">
+              <table id="go_status" class="table-bordered">
+                <thead>
+                  <tr>
+                    <td colspan="2" class="go_title">외출 상태</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>토요일</td>
+                    <td id="sat_val">외출 O</td>
+                  </tr>
+                  <tr>
+                    <td>일요일</td>
+                    <td id="sun_val">외출 O</td>
+                  </tr>
+                </tbody>
+              </table>
               <div id="go_submit">
                 신청
               </div>

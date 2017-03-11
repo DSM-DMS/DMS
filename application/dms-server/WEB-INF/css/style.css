@@ -671,24 +671,47 @@ input.editor-button {
 
 /*---------------- go out ----------------*/
 
-.day_go {
-  background: -webkit-linear-gradient(CadetBlue, DarkSeaGreen);
-
+.go_title {
+  width: 100%;
   text-align: center;
-  height: 400px;
-  line-height: 400px;
-  font-size: 150%;
-  border-radius: 50%;
-  width: 400px;
+  font-size: 25pt;
+}
+
+#sat_go, #sun_go {
+  width: 90%;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
   margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-size: 200%;
 }
 
-#sat_go {
-  background-color:
+#sat_go .front {
+  cursor: pointer;
+  background-color: #30c971;
+  color: #d3d2d5;
+  border-radius: 15px;
 }
 
-#sun_go {
-  background: -webkit-linear-gradient(CadetBlue, DarkSeaGreen);
+#sat_go .back {
+  cursor: pointer;
+  background-color: #9eefc0;
+  border-radius: 15px;
+}
+
+#sun_go .front {
+  cursor: pointer;
+  background-color: #30c971;
+  color: #d3d2d5;
+  border-radius: 15px;
+}
+
+#sun_go .back {
+  cursor: pointer;
+  background-color: #9eefc0;
+  border-radius: 15px;
 }
 
 #go_submit {
@@ -697,6 +720,28 @@ input.editor-button {
   padding: 15px;
   width: 30%;
   margin: auto;
+  margin-top: 2%;
   text-align: center;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+#go_status {
+  text-align: center;
+  font-size: 150%;
+  width: 90%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+#go_status td {
+  padding: 13px;
+}
+
+#go_status tr{
+  border: 0;
+}
+
+#go_status > tbody > tr > td:nth-child(1) {
+  width: 40%;
 }

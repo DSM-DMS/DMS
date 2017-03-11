@@ -1,11 +1,18 @@
-var clickable = true;
+$("#sat_go").flip();
+$("#sun_go").flip();
 
-$("#day_go").click(function(){
-  if(clickable) {
-    $("#day_go").animate({background: '#90EE90'});
-    clickable = false;
-  } else {
-    $("#day_go").animate({background: '#FFB6C1'});
-    clickable = true;
-  }
+$("#sat_go .front").on('click', function () {
+  $("#sat_val").text('외출 X');
+});
+
+$("#sat_go .back").on('click', function () {
+  $("#sat_val").text('외출 O');
+});
+
+$("#sun_go .front").on('click', function () {
+  $("#sun_val").text('외출 X');
+});
+
+$("#sun_go .back").on('click', function () {
+  $("#sun_val").text('외출 O');
 });
