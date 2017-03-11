@@ -8,7 +8,7 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.CORSHeader;
+import com.dms.planb.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -24,7 +24,7 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = CORSHeader.putHeaders(context);
+        context = PrecedingWork.putHeaders(context);
         
         String uid = null;
         String id = null;

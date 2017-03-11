@@ -6,7 +6,7 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.CORSHeader;
+import com.dms.planb.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
-		context = CORSHeader.putHeaders(context);
+		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
