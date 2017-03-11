@@ -271,11 +271,11 @@ var getDataValue;
 var getData = $.ajax({
     url: "http://dsm2015.cafe24.com:8088/apply/stay",
     type: "GET",
-    data: JSON.stringify({
+    data: {
         "id": id,
         "week": loadSendDataWeek,
         "seat": seatArr[loop][innerLoop]
-    }),
+    },
     success: function(data) {
         getDataValue = JSON.parse(data);
     }
@@ -284,11 +284,11 @@ var getData = $.ajax({
 var applyData = $.ajax({
     url: "http://dsm2015.cafe24.com:8088/apply/stay",
     type: "PUT",
-    data: JSON.stringify({
+    data: {
         "id": id,
         "week": applySendDataWeek,
         "value": applySendDataValue
-    }),
+    },
     success: function(data) {
         alert('신청되었습니다.');
     }

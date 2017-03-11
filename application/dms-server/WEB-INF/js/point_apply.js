@@ -24,10 +24,10 @@ $("#individual_btn").click(function() {
     $.ajax({
         url: "http://dsm2015.cafe24.com:8088/apply/merit",
         type: "POST",
-        data: JSON.stringify({
+        data: {
             "id": id,
             "content": reason
-        }),
+        },
         success: function() {
             alert("신청되었습니다.");
         }
@@ -41,11 +41,11 @@ $("recommend_btn").click(function() {
     $.ajax({
         url: "http://dsm2015.cafe24.com:8088/apply/merit",
         type: "GET",
-        data: JSON.stringify({
+        data: {
             "id": id,
             "content": reason,
             "target": person
-        }),
+        },
         success: function() {
             alert('신청되었습니다.');
         }
