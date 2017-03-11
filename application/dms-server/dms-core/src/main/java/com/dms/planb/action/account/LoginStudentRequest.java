@@ -34,25 +34,16 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 		String password = context.request().getParam("password");
 		
 		try {
-			if(context.request().params().contains("has_session")) {
-				// Session login
-				JobResult result = userManager.sessionLogin(context);
-				
-				if(result.isSuccess()) {
-					context.response().setStatusCode(201);
-					context.response().end(responseObject.toString());
-					context.response().close();
-				} else {
-					context.response().setStatusCode(404).end();
-					context.response().close();
-				}
-			}
 			if(context.request().params().contains("auto_login")) {
 				// Checked auto login
 				boolean autoLogin = Boolean.parseBoolean(context.request().getParam("auto_login"));
 				
 				if(Guardian.checkParameters(id, password) && userManager.login(id, password)) {
 					if(userManager.registerSession(context, autoLogin, id)) {
+						JobResult result = userManager.getUserInfo(id);
+						
+						responseObject = getUserData(result, responseObject);
+						
 						context.response().setStatusCode(201);
 						context.response().end(responseObject.toString());
 						context.response().close();
@@ -62,28 +53,29 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 						context.response().close();
 					}
 				} else {
-					// Any null in parameters
+					// Any null in parameters, or login failed
 					context.response().setStatusCode(404).end();
 					context.response().close();
 				}
+			} else if(context.request().params().contains("has_session")) {
+				// Session login
+				JobResult result = userManager.sessionLogin(context);
+				
+				responseObject = getUserData(result, responseObject);
+					
+				context.response().setStatusCode(201);
+				context.response().end(responseObject.toString());
+				context.response().close();
 			} else {
 				// Unchecked auto login
 				if(Guardian.checkParameters(id, password)) {
 		            if(userManager.login(id, password)) {
 		            	JobResult result = userManager.getUserInfo(id);
-		                if(result.isSuccess()) {
-		                    Map<String, Object> datas = (Map) result.getArgs()[0];
-		                    responseObject.put("number", datas.get("number"));
-		                    responseObject.put("name", datas.get("name"));
-		                    responseObject.put("merit", datas.get("merit"));
-		                    responseObject.put("demerit", datas.get("demerit"));
+		                responseObject = getUserData(result, responseObject);
 		                    
-		                    context.response().setStatusCode(201);
-			                context.response().end(responseObject.toString());
-			                context.response().close();
-		                } else {
-		                	// Can't load student's data
-		                }
+		                context.response().setStatusCode(201);
+			            context.response().end(responseObject.toString());
+		                context.response().close();
 		            } else {
 		            	// Login failed
 		            	context.response().setStatusCode(404).end();
@@ -101,5 +93,15 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 			
 			Log.l("SQLException");
 		}
+	}
+	
+	public EasyJsonObject getUserData(JobResult result, EasyJsonObject responseObject) throws SQLException {
+		Map<String, Object> datas = (Map) result.getArgs()[0];
+        responseObject.put("number", datas.get("number"));
+        responseObject.put("name", datas.get("name"));
+        responseObject.put("merit", datas.get("merit"));
+        responseObject.put("demerit", datas.get("demerit"));
+		
+		return responseObject;
 	}
 }
