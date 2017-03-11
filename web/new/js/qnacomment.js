@@ -96,3 +96,10 @@ function addTr(data) {
 
     newComment.appendTo("div.comment");
 }
+
+function setQnestionModifyEvent() {
+    $(".question .content-modify").click(function () {
+        $
+    })
+
+}

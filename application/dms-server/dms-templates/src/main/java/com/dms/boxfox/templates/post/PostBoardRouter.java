@@ -13,16 +13,14 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by boxfox on 2017-03-10.
  */
 
 @RouteRegistration(path = "/post/", method = {HttpMethod.GET})
-public class NoticeBoardRouter implements Handler<RoutingContext> {
+public class PostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
     private DataBase db;
 
@@ -35,7 +33,7 @@ public class NoticeBoardRouter implements Handler<RoutingContext> {
         categories.add(new PostTemplate("facility_report", "시설고장신고", new String[]{"no", "title", "writer", " write_date"}, new String[]{"#", "제목", "작성자", "날짜"}));
     }
 
-    public NoticeBoardRouter() {
+    public PostBoardRouter() {
         db = DataBase.getInstance();
     }
 
@@ -45,10 +43,10 @@ public class NoticeBoardRouter implements Handler<RoutingContext> {
             int page = getPageNumber(context);
 
             try {
-                DmsTemplate templates = new DmsTemplate("board");
-                SafeResultSet rs = db.executeQuery("select ", postTemplate.getColumns(), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
+                DmsTemplate templates = new DmsTemplate("listpage");
+                SafeResultSet rs = db.executeQuery("select ", columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
                 templates.put("Title", postTemplate.getKoreanName());
-                templates.put("Head", postTemplate.getHeads());
+                templates.put("Heads", postTemplate.getHeads());
                 templates.put("Columns", postTemplate.getColumns());
                 templates.put("List", rs.toHashMap());
 
@@ -68,6 +66,15 @@ public class NoticeBoardRouter implements Handler<RoutingContext> {
             context.response().end("page not found");
             context.response().close();
         }
+    }
+
+    private String columnArrayToQuery(String[] arr) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            String str = ((i > 0) ? ", " : "") + arr[i];
+            builder.append(str);
+        }
+        return builder.toString();
     }
 
     private PostTemplate getCategory(RoutingContext context) {

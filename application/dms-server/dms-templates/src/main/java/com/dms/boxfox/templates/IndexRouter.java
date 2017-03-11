@@ -2,6 +2,7 @@ package com.dms.boxfox.templates;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Breakfast", clearMenus(meal, 0));
         templates.put("Lunch", clearMenus(meal, 1));
         templates.put("Dinner", clearMenus(meal, 2));
+        templates.put("Notification", createNotification());
         try {
             context.response().setStatusCode(200);
             context.response().end(templates.process());
@@ -67,5 +69,36 @@ public class IndexRouter implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         return map;
+    }
+
+    private List<Notification> createNotification(){
+        List<Notification> list = new ArrayList<Notification>();
+
+        return list;
+    }
+
+    private class Notification {
+        private String text, styleClass;
+
+        Notification(String text, String styleClass) {
+            this.text = text;
+            this.styleClass = styleClass;
+        }
+
+        public String getStyleClass() {
+            return styleClass;
+        }
+
+        public void setStyleClass(String styleClass) {
+            this.styleClass = styleClass;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
     }
 }

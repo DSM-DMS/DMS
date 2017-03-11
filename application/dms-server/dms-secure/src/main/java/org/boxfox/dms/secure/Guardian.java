@@ -37,4 +37,12 @@ public class Guardian {
         return true;
     }
 
+    public static boolean checkTime(int type){
+        switch(type){
+            case 2:
+                break;
+        }
+        return false;
+    }
+
 }
