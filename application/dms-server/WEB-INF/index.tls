@@ -53,7 +53,7 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
-                            <div class="underbar-title border-red"> 공지사항 <span class="view-more">더보기</span> </div>
+                            <div class="underbar-title border-red"> 공지사항 <a href="/post/?category=notice" class="view-more">더보기</a> </div>
                             <div>
                                 <table class="table table-sm table-hover">
                                     <thead>
@@ -140,7 +140,7 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="underbar-title border-puple">기숙사 규칙<span class="view-more">더보기</span></div>
+                        <div class="underbar-title border-puple">기숙사 규칙<a href="/post/?category=rule" class="view-more">더보기</a></div>
                         <div>
                             <table class="table table-sm table-hover">
                                 <thead>
