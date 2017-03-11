@@ -2,7 +2,7 @@ package com.dms.planb.action.account;
 
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
-import com.dms.planb.support.CORSHeader;
+import com.dms.planb.support.PrecedingWork;
 import com.dms.planb.support.ProfileImage;
 
 import io.vertx.core.Handler;
@@ -13,7 +13,7 @@ import io.vertx.ext.web.RoutingContext;
 public class ModifyProfileImage implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
-		context = CORSHeader.putHeaders(context);
+		context = PrecedingWork.putHeaders(context);
 		
 		String id = context.request().getParam("id");
 		String data = context.request().getParam("profile_image");

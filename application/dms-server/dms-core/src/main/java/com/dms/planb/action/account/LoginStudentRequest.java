@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.CORSHeader;
+import com.dms.planb.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -26,7 +26,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
     
 	@Override
 	public void handle(RoutingContext context) {
-		context = CORSHeader.putHeaders(context);
+		context = PrecedingWork.putHeaders(context);
 		
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
@@ -47,9 +47,10 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 	                    responseObject.put("merit", datas.get("merit"));
 	                    responseObject.put("demerit", datas.get("demerit"));
 	                } else {
-	                	
+	                	// Any null in parameters
+	                	context.response().setStatusCode(404).end();
+	                    context.response().close();
 	                }
-	                
 	                context.response().setStatusCode(201);
 	                context.response().end(responseObject.toString());
 	                context.response().close();
