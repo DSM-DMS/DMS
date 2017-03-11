@@ -31,8 +31,11 @@ function checkIdExists(id) {
 }
 
 function register(params) {
+    alert(params);
     $.post("/account/register/student", params, function (data, status) {
+        alert(status+'  '+data);
         if(status==200){
+            alert('회원가입 성공');
             window.location.href='/';
         }else{
             alert('회원가입 실패');
