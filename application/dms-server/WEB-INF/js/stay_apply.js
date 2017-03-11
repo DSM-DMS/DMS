@@ -268,31 +268,35 @@ var applySendDataWeek;
 var applySendDataValue;
 var getDataValue;
 
-var getData = $.ajax({
+var getData = function () {
+  $.ajax({
     url: "http://dsm2015.cafe24.com:8088/apply/stay",
     type: "GET",
     data: {
-        "id": id,
-        "week": loadSendDataWeek,
-        "seat": seatArr[loop][innerLoop]
+      "id": id,
+      "week": loadSendDataWeek,
+      "seat": seatArr[loop][innerLoop]
     },
     success: function(data) {
-        getDataValue = JSON.parse(data);
+      getDataValue = JSON.parse(data);
     }
-});
+  });
+};
 
-var applyData = $.ajax({
+var applyData = function () {
+  $.ajax({
     url: "http://dsm2015.cafe24.com:8088/apply/stay",
     type: "PUT",
     data: {
-        "id": id,
-        "week": applySendDataWeek,
-        "value": applySendDataValue
+      "id": id,
+      "week": applySendDataWeek,
+      "value": applySendDataValue
     },
     success: function(data) {
-        alert('신청되었습니다.');
+      alert('신청되었습니다.');
     }
-});
+  });
+};
 
 function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
   if(five_week) {
