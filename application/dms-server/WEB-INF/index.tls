@@ -53,7 +53,7 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
-                            <div class="underbar-title border-red"> 공지사항 <span class="view-more">더보기</span> </div>
+                            <div class="underbar-title border-red"> 공지사항 <a href="/post/?category=notice" class="view-more">더보기</a> </div>
                             <div>
                                 <table class="table table-sm table-hover">
                                     <thead>
@@ -139,8 +139,8 @@
         <div class="card">
             <div class="card-block">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="underbar-title border-puple">기숙사 규칙<span class="view-more">더보기</span></div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="underbar-title border-puple">기숙사 규칙<a href="/post/?category=rule" class="view-more">더보기</a></div>
                         <div>
                             <table class="table table-sm table-hover">
                                 <thead>
@@ -160,8 +160,26 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="underbar-title border-blue">학교급식</div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="underbar-title border-blue">자주하는 질문<a href="/post/?category=faq" class="view-more">더보기</a></div>
+                        <div>
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>제목</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <#list Faqs as faq>
+                                        <tr>
+                                            <th scope="row">${faq.no}</th>
+                                            <td>${faq.title}</td>
+                                        </tr>
+                                        </#list>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,6 +187,7 @@
     </div>
     
     
+    <#if isLogin==false>
     <!-- Login  modal-->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -237,12 +256,12 @@
             </div>
         </div>
     </div>
-    
+    </#if>
     
     <div>Icons made by <a href="http://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </body>
 <script type="text/javascript">
-    var isLogin = false;
+    var isLogin = ${isLogin};
 </script>
 <script src="./js/script.js"></script>
 

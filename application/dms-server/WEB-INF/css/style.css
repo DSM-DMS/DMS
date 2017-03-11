@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 * {
     font-family: "hanna";
 }
@@ -15,7 +16,7 @@ body {
 
 .underbar-title {
     position: relative;
-    border-bottom-width: 2px;
+    border-bottom-width: 4px;
     border-bottom-style: solid;
     /*font-weight: bold;*/
     padding-bottom: 3px;
@@ -23,14 +24,15 @@ body {
     margin-bottom: 3px;
 }
 
-.view-more {
+.underbar-title .view-more {
     position: absolute;
     bottom: 0;
     right: 0;
     font-size: 0.7em;
     font-weight: normal;
-    text-decoration: none;
     cursor: pointer;
+    text-decoration: none !important;
+    color: black;
 }
 
 .subinfo {
@@ -481,6 +483,7 @@ table tr {
     text-align: center;
     height: 40px;
     line-height: 40px;
+    margin-bottom: 2%;
 }
 
 #recommend_btn {
@@ -495,6 +498,7 @@ table tr {
     text-align: center;
     height: 40px;
     line-height: 40px;
+    margin-bottom: 2%;
 }
 
 #recommend_reason {
@@ -504,7 +508,7 @@ table tr {
     font-size: 130%;
     border-radius: 5px;
     margin: auto;
-    margin-top: 2%;
+    margin-top: 1%;
     height: 40px;
 }
 
@@ -523,12 +527,14 @@ table tr {
     text-align: center;
     width: 80%;
     margin: auto;
+    margin-top: 2%;
     font-size: 180%;
     border-radius: 5px;
     height: 40px;
 }
 
 #point_sel tr {
+    cursor: pointer;
     border-radius: 5px;
     border: 0;
 }
@@ -540,12 +546,6 @@ table tr {
 #point_reco {
     border-radius: 0 5px 5px 0;
 }
-
-.point_margin {
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
 
 /*---------------------- qna -------------*/
 
@@ -667,4 +667,81 @@ input.editor-button {
 
 #cke_editor1 {
     margin-top: 20px;
+}
+
+/*---------------- go out ----------------*/
+
+.go_title {
+  width: 100%;
+  text-align: center;
+  font-size: 25pt;
+}
+
+#sat_go, #sun_go {
+  width: 90%;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-size: 200%;
+}
+
+#sat_go .front {
+  cursor: pointer;
+  background-color: #30c971;
+  color: #d3d2d5;
+  border-radius: 15px;
+}
+
+#sat_go .back {
+  cursor: pointer;
+  background-color: #9eefc0;
+  border-radius: 15px;
+}
+
+#sun_go .front {
+  cursor: pointer;
+  background-color: #30c971;
+  color: #d3d2d5;
+  border-radius: 15px;
+}
+
+#sun_go .back {
+  cursor: pointer;
+  background-color: #9eefc0;
+  border-radius: 15px;
+}
+
+#go_submit {
+  background-color: #40E0D0;
+  font-size: 130%;
+  padding: 15px;
+  width: 30%;
+  margin: auto;
+  margin-top: 2%;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#go_status {
+  text-align: center;
+  font-size: 150%;
+  width: 90%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+#go_status td {
+  padding: 13px;
+}
+
+#go_status tr{
+  border: 0;
+}
+
+#go_status > tbody > tr > td:nth-child(1) {
+  width: 40%;
 }

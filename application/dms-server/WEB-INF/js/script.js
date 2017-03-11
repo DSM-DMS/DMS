@@ -11,9 +11,8 @@ $('.menu-controller').click(function () {
 function redirect(page) {
     if (!isLogin) {
         $('#myModal').modal('show');
-    }
-    else {
-        window.href = "";
+    } else {
+        window.href = '/'+page;
     }
 }
 
@@ -31,7 +30,6 @@ function checkIdExists(id) {
 }
 
 function register(params) {
-    alert(params);
     $.post("/account/register/student", params, function (data, status) {
         alert(status+'  '+data);
         if(status==200){

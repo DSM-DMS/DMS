@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
 </head>
   <body>
     <div class="container">
@@ -54,25 +55,48 @@
       <div class="card">
         <div class="card-block">
           <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <table id="point_sel">
-                <tr>
-                  <td id="point_apply">
-                    상점신청
-                  </td>
-                  <td id="point_reco">
-                    상점추천
-                  </td>
-                </tr>
-              </table>
-              <div id="individual">
-                <input type="text" name="reason" placeholder="이유를 입력해 주세요." id="individual_reason">
-                <div id="individual_btn">상점신청</div>
+            <div class="col-lg-4 col-md-12">
+              <div class="go_title">토요일 외출</div>
+              <div id="sat_go">
+                <div class="front">
+                  외출 O
+                </div>
+                <div class="back">
+                  외출 X
+                </div>
               </div>
-              <div id="recommend">
-                <input type="text" name="name" placeholder="이름을 입력해 주세요." id="recommend_name">
-                <input type="text" name="reason" placeholder="이유를 입력해 주세요." id="recommend_reason">
-                <div id="recommend_btn">상점추천</div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="go_title">일요일 외출</div>
+              <div id="sun_go">
+                <div class="front">
+                  외출 O
+                </div>
+                <div class="back">
+                  외출 X
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <table id="go_status" class="table-bordered">
+                <thead>
+                  <tr>
+                    <td colspan="2" class="go_title">외출 상태</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>토요일</td>
+                    <td id="sat_val">외출 O</td>
+                  </tr>
+                  <tr>
+                    <td>일요일</td>
+                    <td id="sun_val">외출 O</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div id="go_submit">
+                신청
               </div>
             </div>
           </div>
@@ -84,7 +108,7 @@
 </body>
 
 <script src="./js/script.js"></script>
-<script src="./js/point_apply.js"></script>
+<script src="./js/go_out_apply.js"></script>
 
 
 </html>
