@@ -189,7 +189,7 @@ function drawCalendar(date, lastDay) {
             }
             break;
     }
-    //drawPrev();
+    drawPrev();
 }
 
 //달력 초기화
@@ -276,7 +276,6 @@ var getData = function () {
     data: {
       "id": id,
       "week": loadSendDataWeek,
-      "seat": seatArr[loop][innerLoop]
     },
     success: function(data) {
       getDataValue = JSON.parse(data);
@@ -304,13 +303,13 @@ function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
     for (var i = 1; i <= 5; i++) {
         loadSendDataWeek = dateToString(i);
         getData();
-        valueArray.push(getDataValue);
+        valueArray.push(getDataValue.value);
     }
   } else {
     for (var i = 1; i <= 4; i++) {
         loadSendDataWeek = dateToString(i);
         getData();
-        valueArray.push(getDataValue);
+        valueArray.push(getDataValue.value);
     }
   }
 }
