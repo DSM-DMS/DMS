@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -22,10 +23,12 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/", method = {HttpMethod.GET})
 public class IndexRouter implements Handler<RoutingContext> {
+    private UserManager userManager;
     private DataBase db;
 
     public IndexRouter() {
-        db = DataBase.getInstance();
+        this.db = DataBase.getInstance();
+        this.userManager = new UserManager();
     }
 
     public void handle(RoutingContext context) {
@@ -39,6 +42,7 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Lunch", clearMenus(meal, 1));
         templates.put("Dinner", clearMenus(meal, 2));
         templates.put("Notification", createNotification());
+        templates.put("IsLogin", userManager.isLogined(context));
         try {
             context.response().setStatusCode(200);
             context.response().end(templates.process());
@@ -72,7 +76,7 @@ public class IndexRouter implements Handler<RoutingContext> {
         return map;
     }
 
-    private List<Notification> createNotification(){
+    private List<Notification> createNotification() {
         List<Notification> list = new ArrayList<Notification>();
 
         return list;

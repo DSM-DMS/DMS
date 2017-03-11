@@ -119,8 +119,12 @@ public class UserManager {
                 e.printStackTrace();
             }
         } while (check);
-        
+
         return sessionKey;
+    }
+
+    public boolean isLogined(RoutingContext context) {
+        return ((getRegistredSessionKey(context) == null) ? false : true);
     }
 
     public String getRegistredSessionKey(RoutingContext context) {

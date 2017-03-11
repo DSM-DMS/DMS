@@ -54,19 +54,21 @@
       <div class="card-wrapper">
         <div class="card">
         <div class="card-block">
-        <div class="underbar-title border-blue">${title}</div>
+        <div class="underbar-title border-blue">${Title}</div>
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>제목</th>
+                                        <#list Heads as head>
+                                            <th>${head}</th>
+                                        </#list>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Rules as rule>
+                                        <#list List as list>
                                         <tr>
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
+                                            <#list Columns as column>
+                                                <td>${list[column]}</td>
+                                            </#list>
                                         </tr>
                                         </#list>
                                 </tbody>
