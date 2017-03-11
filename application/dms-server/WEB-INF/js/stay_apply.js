@@ -261,51 +261,84 @@ function getNextMonth() {
     return new Date()
 }
 
-// //********************이전 데이터 표시*********************
-// function dateToString(week) {
-//     return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
-// }
-//
-// function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
-//   if(five_week) {
-//     for (var i = 1; i <= 5; i++) { //한달이 5주인 경우도 고려하고, 다음달 1주도 받도록 수정 해야함!!!
-//         this.sendData.week = dateToString(i);
-//         this.getData();
-//         valueArray.push(this.ajaxData);
-//     }
-//   } else {
-//     for (var i = 1; i <= 4; i++) { //한달이 5주인 경우도 고려하고, 다음달 1주도 받도록 수정 해야함!!!
-//         this.sendData.week = dateToString(i);
-//         this.getData();
-//         valueArray.push(this.ajaxData);
-//     }
-//   }
-// }
-//
-// function drawPrev() {
-//     loadPrev();
-//     for (i = 1; i <= valueArray.length; i++) {
-//         if (valueArray[i] == 4) { //잔류
-//         } else if (valueArray[i] == 1) {
-//             $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
-//             $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
-//         } else if (valueArray[i] == 2) {
-//             $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_home');
-//             $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
-//         } else if (valueArray[i] == 3) {
-//             $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
-//             $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
-//         }
-//         valueArray = new Array();
-//     }
-//
-//     //***********************신청*********************
-//     $('#date').keydown(function(e) {
-//         e.preventDefault();
-//     });
-//
-//     $('#stay_submit').on('click', function() {
-//         this.sendData.week = $('#date').val();
-//         this.sendData.value = $("#stay_select option:selected").val();
-//         this.applyData();
-//     });
+//********************이전 데이터 표시*********************
+
+var loadSendDataWeek;
+var applySendDataWeek;
+var applySendDataValue;
+var getDataValue;
+
+var getData = $.ajax({
+    url: "http://dsm2015.cafe24.com:8088/apply/stay",
+    type: "GET",
+    data: JSON.stringify({
+        "id": id,
+        "week": loadSendDataWeek,
+        "seat": seatArr[loop][innerLoop]
+    }),
+    success: function(data) {
+        getDataValue = JSON.parse(data);
+    }
+});
+
+var applyData = $.ajax({
+    url: "http://dsm2015.cafe24.com:8088/apply/stay",
+    type: "PUT",
+    data: JSON.stringify({
+        "id": id,
+        "week": applySendDataWeek,
+        "value": applySendDataValue
+    }),
+    success: function(data) {
+        alert('신청되었습니다.');
+    }
+});
+
+function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
+  if(five_week) {
+    for (var i = 1; i <= 5; i++) {
+        loadSendDataWeek = dateToString(i);
+        getData();
+        valueArray.push(getDataValue);
+    }
+  } else {
+    for (var i = 1; i <= 4; i++) {
+        loadSendDataWeek = dateToString(i);
+        getData();
+        valueArray.push(getDataValue);
+    }
+  }
+}
+
+function drawPrev() {
+    loadPrev();
+    for (i = 1; i <= valueArray.length; i++) {
+        if (valueArray[i] == 4) { //잔류
+        } else if (valueArray[i] == 1) {
+            $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
+            $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
+        } else if (valueArray[i] == 2) {
+            $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_home');
+            $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
+        } else if (valueArray[i] == 3) {
+            $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
+            $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
+        }
+        valueArray = new Array();
+    }
+
+    //***********************신청*********************
+
+    function dateToString(week) {
+      return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
+    }
+
+    $('#date').keydown(function(e) {
+        e.preventDefault();
+    });
+
+    $('#stay_submit').on('click', function() {
+        applySendDataWeek = $('#date').val();
+        applySendDataValue = $("#stay_select option:selected").val();
+        applyData();
+    });
