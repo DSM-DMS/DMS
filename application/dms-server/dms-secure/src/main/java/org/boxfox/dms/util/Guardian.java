@@ -1,4 +1,4 @@
-package org.boxfox.dms.secure;
+package org.boxfox.dms.util;
 
 import org.boxfox.dms.algorithm.AES256;
 
@@ -37,7 +37,7 @@ public class Guardian {
         return true;
     }
 
-    public static boolean checkTime(int type){
+    public static boolean checkApplyAvailable(int type){
         switch(type){
             case 2:
                 break;

@@ -1,8 +1,7 @@
-package org.boxfox.dms.user;
+package org.boxfox.dms.util;
 
 import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.secure.Guardian;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;

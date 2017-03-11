@@ -3,7 +3,7 @@ package com.dms.planb.action.account;
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.boxfox.dms.user.UserManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;

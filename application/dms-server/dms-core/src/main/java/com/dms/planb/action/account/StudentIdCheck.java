@@ -1,6 +1,6 @@
 package com.dms.planb.action.account;
 
-import org.boxfox.dms.user.UserManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.planb.support.PrecedingWork;
