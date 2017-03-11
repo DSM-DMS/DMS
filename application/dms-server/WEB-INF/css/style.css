@@ -483,6 +483,7 @@ table tr {
     text-align: center;
     height: 40px;
     line-height: 40px;
+    margin-bottom: 2%;
 }
 
 #recommend_btn {
@@ -497,6 +498,7 @@ table tr {
     text-align: center;
     height: 40px;
     line-height: 40px;
+    margin-bottom: 2%;
 }
 
 #recommend_reason {
@@ -525,6 +527,7 @@ table tr {
     text-align: center;
     width: 80%;
     margin: auto;
+    margin-top: 2%;
     font-size: 180%;
     border-radius: 5px;
     height: 40px;
@@ -543,12 +546,6 @@ table tr {
 #point_reco {
     border-radius: 0 5px 5px 0;
 }
-
-.point_margin {
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
 
 /*---------------------- qna -------------*/
 
@@ -670,4 +667,36 @@ input.editor-button {
 
 #cke_editor1 {
     margin-top: 20px;
+}
+
+/*---------------- go out ----------------*/
+
+.day_go {
+  background: -webkit-linear-gradient(CadetBlue, DarkSeaGreen);
+
+  text-align: center;
+  height: 400px;
+  line-height: 400px;
+  font-size: 150%;
+  border-radius: 50%;
+  width: 400px;
+  margin: auto;
+}
+
+#sat_go {
+  background-color:
+}
+
+#sun_go {
+  background: -webkit-linear-gradient(CadetBlue, DarkSeaGreen);
+}
+
+#go_submit {
+  background-color: #40E0D0;
+  font-size: 130%;
+  padding: 15px;
+  width: 30%;
+  margin: auto;
+  text-align: center;
+  border-radius: 5px;
 }
