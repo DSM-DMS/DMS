@@ -22,7 +22,7 @@ $('#point_reco').on('click', function () {
 $("#individual_btn").click(function() {
     var reason = $("#individual_reason").val();
     $.ajax({
-        url: "http://dsm2015.cafe24.com:8088/apply/merit",
+        url: "http://dsm2015.cafe24.com:8089/apply/merit",
         type: "POST",
         data: {
             "id": id,
@@ -39,7 +39,7 @@ $("recommend_btn").click(function() {
     var reason = $("#recommend_reason").val();
     var person = $("#recommend_name").val();
     $.ajax({
-        url: "http://dsm2015.cafe24.com:8088/apply/merit",
+        url: "http://dsm2015.cafe24.com:8089/apply/merit",
         type: "GET",
         data: {
             "id": id,

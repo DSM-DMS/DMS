@@ -1,3 +1,4 @@
+var id = "test";
 var valueArray = new Array();
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear();
@@ -270,7 +271,7 @@ var getDataValue;
 
 var getData = function () {
   $.ajax({
-    url: "http://dsm2015.cafe24.com:8088/apply/stay",
+    url: "http://dsm2015.cafe24.com:8089/apply/stay",
     type: "GET",
     data: {
       "id": id,
@@ -285,7 +286,7 @@ var getData = function () {
 
 var applyData = function () {
   $.ajax({
-    url: "http://dsm2015.cafe24.com:8088/apply/stay",
+    url: "http://dsm2015.cafe24.com:8089/apply/stay",
     type: "PUT",
     data: {
       "id": id,
