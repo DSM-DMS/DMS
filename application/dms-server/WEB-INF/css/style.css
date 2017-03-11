@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 * {
     font-family: "hanna";
 }
@@ -15,7 +16,7 @@ body {
 
 .underbar-title {
     position: relative;
-    border-bottom-width: 2px;
+    border-bottom-width: 4px;
     border-bottom-style: solid;
     /*font-weight: bold;*/
     padding-bottom: 3px;
@@ -23,14 +24,15 @@ body {
     margin-bottom: 3px;
 }
 
-.view-more {
+.underbar-title .view-more {
     position: absolute;
     bottom: 0;
     right: 0;
     font-size: 0.7em;
     font-weight: normal;
-    text-decoration: none;
     cursor: pointer;
+    text-decoration: none !important;
+    color: black;
 }
 
 .subinfo {

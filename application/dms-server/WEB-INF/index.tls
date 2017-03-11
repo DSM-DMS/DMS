@@ -160,8 +160,26 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="underbar-title border-blue">학교급식</div>
+                    <div class="col-sm-6 col-md-12">
+                        <div class="underbar-title border-blue">자주하는 질문<a href="/post/?category=faq" class="view-more">더보기</a></div>
+                        <div>
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>제목</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <#list Faqs as faq>
+                                        <tr>
+                                            <th scope="row">${faq.no}</th>
+                                            <td>${faq.title}</td>
+                                        </tr>
+                                        </#list>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
