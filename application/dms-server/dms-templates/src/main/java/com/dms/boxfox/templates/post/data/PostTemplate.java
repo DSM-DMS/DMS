@@ -8,7 +8,7 @@ public class PostTemplate {
     private String [] heads;
     private String [] columns;
 
-    public PostTemplate(String category, String koreanName, String [] heads, String [] columns){
+    public PostTemplate(String category, String koreanName, String [] columns, String [] heads){
         this.category = category;
         this.koreanName = koreanName;
         this.heads = heads;
