@@ -258,8 +258,8 @@ $('#sixth_week').click(function() {
 });
 
 function getNextMonth() {
-    return new Date()
-}
+    return new Date();
+};
 
 //********************이전 데이터 표시*********************
 
@@ -326,19 +326,20 @@ function drawPrev() {
         }
         valueArray = new Array();
     }
+}
 
-    //***********************신청*********************
+  //***********************신청*********************
 
-    function dateToString(week) {
-      return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
-    }
+  function dateToString(week) {
+    return newDate.getFullYear().toString() + "-" + (newDate.getMonth + 1).toString() + "-0" + week.toString();
+  };
 
-    $('#date').keydown(function(e) {
-        e.preventDefault();
-    });
+  $('#date').keydown(function(e) {
+      e.preventDefault();
+  });
 
-    $('#stay_submit').on('click', function() {
-        applySendDataWeek = $('#date').val();
-        applySendDataValue = $("#stay_select option:selected").val();
-        applyData();
-    });
+  $('#stay_submit').on('click', function() {
+      applySendDataWeek = $('#date').val();
+      applySendDataValue = $("#stay_select option:selected").val();
+      applyData();
+  });
