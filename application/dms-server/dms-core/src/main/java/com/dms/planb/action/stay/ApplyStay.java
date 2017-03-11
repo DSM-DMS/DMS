@@ -6,6 +6,7 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
+import com.dms.planb.support.LimitConfig;
 import com.dms.planb.support.PrecedingWork;
 
 import io.vertx.core.Handler;
@@ -40,11 +41,16 @@ public class ApplyStay implements Handler<RoutingContext> {
 		String week = context.request().getParam("week");
 		
 		try {
-			database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
-			database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
+			if(LimitConfig.canApplyStay(week)) {
+				database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
+				database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
 			
-			context.response().setStatusCode(200).end();
-			context.response().close();
+				context.response().setStatusCode(200).end();
+				context.response().close();
+			} else {
+				context.response().setStatusCode(404).end();
+				context.response().close();
+			}
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
