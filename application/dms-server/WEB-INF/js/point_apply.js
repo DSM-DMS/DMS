@@ -18,14 +18,44 @@ $('#point_reco').on('click', function () {
   $('#individual').hide();
 });
 
-$('#sat_out').on('click', function () {
-  $('#sat_out').css('background-color', 'rgb(255, 122, 249)');
-  $('#sun_out').css('background-color', 'rgb(230, 230, 230)');
-  $('#out_day').val('sat');
-});
 
-$('#sun_out').on('click', function () {
-  $('#sun_out').css('background-color', 'rgb(255, 122, 249)');
-  $('#sat_out').css('background-color', 'rgb(230, 230, 230)');
-  $('#out_day').val('sun');
-});
+// $("#individual_btn").click(function() {
+//     var reason = $("#individual_reason").val();
+//     $.ajax({
+//         url: "http://dsm2015.cafe24.com:10419",
+//         type: "POST",
+//         data: {
+//             "id": id,
+//             "content": reason
+//         },
+//         beforeSend: function(xhr) {
+//             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+//             xhr.setRequestHeader("command", "144");
+//         },
+//         success: function() {
+//             alert("신청되었습니다.");
+//         }
+//     });
+// });
+//
+// // 추천탭 추천버튼 추천 이벤트
+// $("recommend_btn").click(function() {
+//     var reason = $("#recommend_reason").val();
+//     var person = $("#recommend_name").val();
+//     $.ajax({
+//         url: "http://dsm2015.cafe24.com:10419",
+//         type: "POST",
+//         data: JSON.stringify({
+//             "id": id,
+//             "content": reason,
+//             "targer": person
+//         }),
+//         beforeSend: function(xhr) {
+//             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+//             xhr.setRequestHeader("command", "144");
+//         },
+//         success: function() {
+//             alert("신청되었습니다.");
+//         }
+//     });
+// });
