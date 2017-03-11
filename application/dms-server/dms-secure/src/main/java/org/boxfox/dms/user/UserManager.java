@@ -120,6 +120,7 @@ public class UserManager {
                 e.printStackTrace();
             }
         } while (check);
+        
         return sessionKey;
     }
 
@@ -149,5 +150,4 @@ public class UserManager {
         return false;
 
     }
-
 }

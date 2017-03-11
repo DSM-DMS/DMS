@@ -37,7 +37,6 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 					tempObject = new EasyJsonObject();
 					
 					tempObject.put("date", resultSet.getBoolean("date"));
-					tempObject.put("reason", resultSet.getString("reason"));
 					
 					tempArray.add(tempObject);
 				} while(resultSet.next());
