@@ -716,7 +716,7 @@ input.editor-button {
 
 #go_submit {
   background-color: #40E0D0;
-  font-size: 130%;
+  font-size: 135%;
   padding: 15px;
   width: 30%;
   margin: auto;
@@ -744,4 +744,9 @@ input.editor-button {
 
 #go_status > tbody > tr > td:nth-child(1) {
   width: 40%;
+}
+
+#go_row {
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
