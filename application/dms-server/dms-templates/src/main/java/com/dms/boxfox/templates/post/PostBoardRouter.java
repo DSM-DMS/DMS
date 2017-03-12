@@ -8,6 +8,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.io.IOException;
@@ -19,12 +20,14 @@ import java.util.List;
  * Created by boxfox on 2017-03-10.
  */
 
+
 @RouteRegistration(path = "/post/", method = {HttpMethod.GET})
 public class PostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
     private DataBase db;
 
     static {
+        //설정파일로 출력가능 예상
         categories = new ArrayList<PostTemplate>();
         categories.add(new PostTemplate("notice", "공지사항", new String[]{"no", "title", "writer"}, new String[]{"#", "제목", "작성자"}));
         categories.add(new PostTemplate("rule", "기숙사 규칙", new String[]{"no", "title"}, new String[]{"#", "제목"}));
@@ -44,7 +47,7 @@ public class PostBoardRouter implements Handler<RoutingContext> {
 
             try {
                 DmsTemplate templates = new DmsTemplate("listpage");
-                SafeResultSet rs = db.executeQuery("select ", columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
+                SafeResultSet rs = db.executeQuery("select ", QueryUtils.columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
                 templates.put("Title", postTemplate.getKoreanName());
                 templates.put("Heads", postTemplate.getHeads());
                 templates.put("Columns", postTemplate.getColumns());
@@ -66,15 +69,6 @@ public class PostBoardRouter implements Handler<RoutingContext> {
             context.response().end("page not found");
             context.response().close();
         }
-    }
-
-    private String columnArrayToQuery(String[] arr) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < arr.length; i++) {
-            String str = ((i > 0) ? ", " : "") + arr[i];
-            builder.append(str);
-        }
-        return builder.toString();
     }
 
     private PostTemplate getCategory(RoutingContext context) {

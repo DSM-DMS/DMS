@@ -70,6 +70,15 @@ public class QueryUtils {
         return format + builder.toString();
     }
 
+    public static String columnArrayToQuery(String[] arr) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            String str = ((i > 0) ? ", " : "") + arr[i];
+            builder.append(str);
+        }
+        return builder.toString();
+    }
+
     public static boolean checkDate(String str) {
         boolean dateValidity = true;
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA); // 20041102101244

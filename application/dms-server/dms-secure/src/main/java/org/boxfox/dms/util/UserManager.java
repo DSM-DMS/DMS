@@ -126,7 +126,23 @@ public class UserManager {
     }
 
     public boolean isLogined(RoutingContext context) {
-        return ((getRegistredSessionKey(context) == null) ? false : true);
+        return ((getIdFromSession(context) == null) ? false : true);
+    }
+
+    public String getIdFromSession(RoutingContext context) {
+        String sessionKey = getRegistredSessionKey(context);
+        String result = null;
+        if (sessionKey != null) {
+            try {
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from account where session_key=", sessionKey);
+                if(rs.next()){
+                    result = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     public String getRegistredSessionKey(RoutingContext context) {
@@ -147,7 +163,7 @@ public class UserManager {
                 Cookie cookie = Cookie.cookie("UserSession", sessionKey);
                 String path = "/";
                 cookie.setPath(path);
-                cookie.setMaxAge(356*24*60*60);
+                cookie.setMaxAge(356 * 24 * 60 * 60);
                 context.addCookie(cookie);
             } else {
                 context.session().put("UserSession", sessionKey);
@@ -159,6 +175,5 @@ public class UserManager {
         } catch (Exception e) {
         }
         return false;
-
     }
 }
