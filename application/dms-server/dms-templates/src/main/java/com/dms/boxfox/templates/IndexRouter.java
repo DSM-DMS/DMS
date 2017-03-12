@@ -2,11 +2,12 @@ package com.dms.boxfox.templates;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+import io.vertx.core.http.HttpHeaders;
+import io.vertx.ext.web.Cookie;
+import io.vertx.ext.web.Session;
+import io.vertx.ext.web.sstore.impl.SessionImpl;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -44,8 +45,11 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Notification", createNotification());
         templates.put("IsLogin", userManager.isLogined(context));
         try {
+            String content = templates.process();
+            context.response().putHeader(HttpHeaders.CONTENT_TYPE, "text/html; charset=utf-8");
+            context.response().putHeader(HttpHeaders.CONTENT_LENGTH, content.length()+"");
             context.response().setStatusCode(200);
-            context.response().end(templates.process());
+            context.response().end(content);
             context.response().close();
         } catch (IOException e) {
             e.printStackTrace();

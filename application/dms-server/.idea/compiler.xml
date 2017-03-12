@@ -21,7 +21,7 @@
       <module name="dms-parser" target="1.8" />
       <module name="dms-secure" target="1.8" />
       <module name="dms-server" target="1.5" />
-      <module name="dms-templates" target="1.5" />
+      <module name="dms-templates" target="1.8" />
       <module name="dms-utilities" target="1.7" />
       <module name="dms_secure" target="1.8" />
     </bytecodeTargetLevel>

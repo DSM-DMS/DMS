@@ -2,6 +2,7 @@ package org.boxfox.dms.util;
 
 import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.sstore.impl.SessionImpl;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -128,28 +129,34 @@ public class UserManager {
     }
 
     public String getRegistredSessionKey(RoutingContext context) {
-        String key = context.session().get("UserSession");
-        if (key == null) {
+        String key = null;
+        if (context.session() != null) {
+            key = context.session().get("UserSession");
+        }
+        if (key == null && context.getCookie("UserSession") != null) {
             key = context.getCookie("UserSession").getValue();
         }
         return key;
     }
 
     public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
-        if (Guardian.checkParameters(context, keepLogin, id))
-            try {
-                String sessionKey = createSession();
-                if (keepLogin) {
-                    context.addCookie(Cookie.cookie("UserSession", sessionKey));
-                } else {
-                    context.session().put("UserSession", sessionKey);
-                }
-                if (sessionKey != null) {
-                    DataBase.getInstance().executeQuery("update account set session_key='", sessionKey, "' where id='", id, "'");
-                    return true;
-                }
-            } catch (Exception e) {
+        try {
+            String sessionKey = createSession();
+            if (keepLogin || context.session() == null) {
+                Cookie cookie = Cookie.cookie("UserSession", sessionKey);
+                String path = "/";
+                cookie.setPath(path);
+                cookie.setMaxAge(356*24*60*60);
+                context.addCookie(cookie);
+            } else {
+                context.session().put("UserSession", sessionKey);
             }
+            if (sessionKey != null) {
+                DataBase.getInstance().executeQuery("update account set session_key='", sessionKey, "' where id='", id, "'");
+                return true;
+            }
+        } catch (Exception e) {
+        }
         return false;
 
     }

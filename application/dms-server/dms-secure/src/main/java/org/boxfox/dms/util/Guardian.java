@@ -37,12 +37,4 @@ public class Guardian {
         return true;
     }
 
-    public static boolean checkApplyAvailable(int type){
-        switch(type){
-            case 2:
-                break;
-        }
-        return false;
-    }
-
 }
