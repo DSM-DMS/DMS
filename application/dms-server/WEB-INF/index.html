@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row padding">
             <div class="col card bg-success">
                 <div class="card-block card-block-notice" style="color: white">연장학습 신청이 가능한 시간입니다.</div>
@@ -112,7 +112,7 @@
                 <div class="card-block card-block-notice" style="color: white">상점을 신청할 수 있습니다!</div>
             </div>
         </div>
-        
+
         <div class="row padding">
             <div class="col-lg-6 col-md-12 card display-inline-block">
                 <div class="card-block">
@@ -186,8 +186,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <!-- Login  modal-->
     <!-- Login  modal-->
     <div class="modal fade" id="myModal" role="dialog">
@@ -234,7 +234,7 @@
                                     <div class="form-group">
                                         <label for="id" class="col-md-3 control-label">아이디</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="id" placeholder="ID" onchange="checkIdExists(this)"> </div>
+                                            <input type="text" class="form-control" name="id" placeholder="ID" onchange="checkIdExists()" id="register-id"> </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="col-md-3 control-label">비밀번호</label>
@@ -247,7 +247,8 @@
                                             <input type="text" class="form-control" name="uid" placeholder="Code"> </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button id="btn-signup" type="button" class="btn btn-info" onclick="register($('#signupform').serialize());">회원가입</button>
+                                        <span id="register-warn" class="text-danger text-center" style="margin-right: 15px;">동일한 아이디가 이미 있습니다.</span>
+                                        <button id="btn-register" type="button" class="btn btn-info" onclick="register($('#signupform').serialize());">회원가입</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </form>
@@ -258,8 +259,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div>Icons made by <a href="http://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </body>
 <script type="text/javascript">

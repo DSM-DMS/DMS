@@ -1,3 +1,6 @@
+var classVal = $("#btn-register").attr('class');
+$("#register-warn").hide();
+
 $('.menu-controller').click(function () {
     var top = $('.slider-menu-container');
     if (top.hasClass("hides")) {
@@ -16,16 +19,28 @@ function redirect(page) {
     }
 }
 
-function checkIdExists(inputObj) {
-    var idStr = inputObj.value();
-    $.post("/account/idcheck/student/", {
-        id: idStr
-    }, function (data, status) {
-        if(status==201){
-            alert('asasv');
-        }else{
-            
-        }
+
+
+function checkIdExists() {
+    var idStr = $('#register-id').val();
+    $.ajax({
+        url: "http://dsm2015.cafe24.com:8089/account/idcheck/student",
+        type: "POST",
+        data: {
+            "id": idStr
+        },
+        success: function(data, status) {
+          $("#btn-register").attr('class', classVal);
+          $("#btn-register").removeAttr('disabled');
+          $("#register-warn").hide();
+        },
+        error: function (xhr) {
+          if(xhr.status == 404) {
+            $("#btn-register").attr('class', (classVal + ' disabled'));
+            $("#btn-register").attr('disabled', 'disalbed');
+            $("#register-warn").show();
+          }
+        },
     });
 }
 
