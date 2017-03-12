@@ -1,6 +1,8 @@
 package com.dms.planb.action.account;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
@@ -23,33 +25,34 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeaders(context);
-        
+    public void handle(final RoutingContext context) {
+        PrecedingWork.putHeaders(context);
+
         String uid = null;
         String id = null;
         String password = null;
-        
-        uid = context.request().getParam("uid");
+        String recapcha = null;
+        uid = context.request().formAttributes().get("uid");
         id = context.request().getParam("id");
         password = context.request().getParam("password");
-        
+
+
         try {
-        	if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
+            if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
                 JobResult result = userManager.register(uid, id, password);
                 if (result.isSuccess()) {
                     context.response().setStatusCode(201);
                     context.response().setStatusMessage(result.getMessage()).end();
                     context.response().close();
                 } else {
-                	// Conflict
+                    // Conflict
                     context.response().setStatusCode(409);
                     context.response().setStatusMessage(result.getMessage()).end();
                     context.response().close();
                 }
             } else {
-            	// Any null in parameters
-            	context.response().setStatusCode(404).end();
+                // Any null in parameters
+                context.response().setStatusCode(404).end();
                 context.response().close();
             }
         } catch (SQLException e) {
@@ -58,7 +61,7 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 
             Log.l("SQLException");
         }
-        Log.l("Register Request (",id,", ",context.request().remoteAddress(),") status : "+context.response().getStatusCode());
+        Log.l("Register Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
 
     }
 }
