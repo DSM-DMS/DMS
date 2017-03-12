@@ -187,6 +187,7 @@
     </div>
     
     
+    <#if isLogin==false>
     <!-- Login  modal-->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -255,12 +256,12 @@
             </div>
         </div>
     </div>
-    
+    </#if>
     
     <div>Icons made by <a href="http://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </body>
 <script type="text/javascript">
-    var isLogin = false;
+    var isLogin = ${isLogin};
 </script>
 <script src="./js/script.js"></script>
 
