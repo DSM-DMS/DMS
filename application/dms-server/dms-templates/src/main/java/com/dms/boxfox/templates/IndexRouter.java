@@ -43,13 +43,10 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Lunch", clearMenus(meal, 1));
         templates.put("Dinner", clearMenus(meal, 2));
         templates.put("Notification", createNotification());
-        templates.put("IsLogin", userManager.isLogined(context));
+        templates.put("isLogin", userManager.isLogined(context));
         try {
-            String content = templates.process();
-            context.response().putHeader(HttpHeaders.CONTENT_TYPE, "text/html; charset=utf-8");
-            context.response().putHeader(HttpHeaders.CONTENT_LENGTH, content.length()+"");
             context.response().setStatusCode(200);
-            context.response().end(content);
+            context.response().end(templates.process());
             context.response().close();
         } catch (IOException e) {
             e.printStackTrace();
