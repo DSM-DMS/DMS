@@ -39,6 +39,7 @@ public class UserManager {
                 int result = database.executeUpdate("update account set id='", id, "', password='", password, "' where uid='", key, "'");
                 if (result == 1) {
                     message = "회원가입에 성공했습니다.";
+                    database.executeUpdate("insert into stay_apply_default(id, value) values('", id, "', 4)");
                     check = true;
                 } else {
                     message = "회원가입에 실패했습니다.";
