@@ -13,7 +13,7 @@ function setCancleEvent() {
     $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
         // 신청취소 ajax
         $.ajax({
-            url: "http://dsm2015.cafe24.com:8088/apply/extension",
+            url: "http://dsm2015.cafe24.com:8089/apply/extension",
             type: "DELETE",
             data: JSON.stringify({
                 "id": id
@@ -125,7 +125,7 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
-        url: "http://dsm2015.cafe24.com:8088/apply/extension/class",
+        url: "http://dsm2015.cafe24.com:8089/apply/extension/class",
         type: "PUT",
         data: JSON.stringify({
             "option": "map",
@@ -185,7 +185,7 @@ function drawSeat(seatArr, borderSize) {
                             selected = $(this);
                             // 신청하는 ajax
                             $.ajax({
-                                url: "http://dsm2015.cafe24.com:8088/apply/extension",
+                                url: "http://dsm2015.cafe24.com:8089/apply/extension",
                                 type: "PUT",
                                 data: JSON.stringify({
                                     "id": id,

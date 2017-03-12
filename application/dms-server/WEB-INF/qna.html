@@ -56,22 +56,26 @@
             <div class="card">
                 <div class="card-block question">
                     <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
+                    
                     <!-- 수정삭제 버튼임 자신의 글이 아니면, 숨겨야함 -->
                     <div class="content-button-container">
                         <span class="content-button content-modify">수정</span><span class="content-button content-delete">삭제</span>
                     </div>
+                    
                     <div class="content question">
-                        ${content} 아 아 아 하기 싫다. 프론트엔드 개발자가되면 이런짓을 매일하게 되는건가. <br> 이게 맞는건가. 모르겠다. 잘하고싶다. 왜인지 모르겠다. 알고싶다. 그런데 <br> 귀찮다. 지구가 폭발했으면 좋겠다. <br> 더 바라는게 있는데, 사망뒤에는 무(無)가 있으면 좋겠다. 이걸 있다고 표현하는게 맞는건지는 모르겠다. 그냥 다시 태어나고싶지 않다.
+                        ${content}
                     </div>
                 </div>
                 <div class="card-block answer">
-                    <div class="underbar-title border-red">${Answer}<span class="subinfo">${subinfo}</span></div>
+                    <div class="underbar-title border-red">답변<span class="subinfo">${answer_subinfo}</span></div>
+                    
                     <!-- 수정삭제 버튼임. 관리자가 아니면, 숨겨야함 -->
                     <div class="content-button-container">
                         <span class="content-button content-modify">수정</span><span class="content-button content-delete">삭제</span>
                     </div>
+                    
                     <div class="content answer">
-                        ${content} This is english test. i'm gonna be a star
+                        ${answer_content}
                     </div>
                 </div>
                 <div class="card-block">
