@@ -3,6 +3,8 @@
 var id = "test";
 var name = "momo";
 
+var mainUrl = "http://dsm2015.cafe24.com:8089/apply/extension";
+
 setCancleEvent();
 setSelecterOptions();
 setSelecterEvent();
@@ -15,7 +17,7 @@ function setCancleEvent() {
     $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
         // 신청취소 ajax
         $.ajax({
-            url: "http://dsm2015.cafe24.com:8089/apply/extension",
+            url: mainUrl,
             type: "DELETE",
             data: {
                 "id": id
@@ -127,7 +129,7 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
-        url: "http://dsm2015.cafe24.com:8089/apply/extension/class",
+        url: mainUrl + "/class",
         type: "GET",
         data: {
             "option": "map",
@@ -181,25 +183,22 @@ function drawSeat(seatArr, borderSize) {
                         console.log(selected);
                         console.log($(this).get(0));
                         if (selected !== undefined && selected.get(0) == this) {
-                            console.log("ASD");
                             selected.css({
                                 "border": "0 solid black",
                                 "background": "rgb(231,160,153)"
                             })
-                            selected.text("신청됨");
                             selected = $(this);
                             console.log("test = " + seatArr[loop - 1][innerLoop - 1] + "test2 = " + $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val());
                             // 신청 ajax
                             $.ajax({
-                                url: "http://dsm2015.cafe24.com:8089/apply/extension",
+                                url: mainUrl,
                                 type: "PUT",
-                                data: JSON.stringify({
-                                    "id": "test",
+                                data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
-                                    "seat": 0,
-                                    "name": "momo"
-                                }),
+                                    "seat": newSeat.data("seat")
+                                },
                                 success: function(data) {
+                                    selected.text("신청됨");
                                     $("div.seatcontainer").html("");
                                     drawSeat(getSeatData(), "7.5px");
                                 }
