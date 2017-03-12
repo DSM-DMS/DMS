@@ -718,10 +718,9 @@ input.editor-button {
 }
 
 #go_submit {
-  background-color: #40E0D0;
   font-size: 135%;
   padding: 15px;
-  width: 30%;
+  width: 80%;
   margin: auto;
   margin-top: 2%;
   text-align: center;
@@ -732,7 +731,7 @@ input.editor-button {
 #go_status {
   text-align: center;
   font-size: 150%;
-  width: 90%;
+  width: 95%;
   margin: auto;
   margin-top: 2%;
 }
@@ -750,6 +749,6 @@ input.editor-button {
 }
 
 #go_row {
-  padding-top: 100px;
+  padding-top: 50px;
   padding-bottom: 100px;
 }

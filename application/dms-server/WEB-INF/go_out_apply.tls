@@ -54,7 +54,6 @@
     <div class="card-wrapper">
       <div class="card">
         <div class="card-block">
-            <div class="underbar-title border-red">주말 외출신청</div>
           <div class="row" id="go_row">
             <div class="col-lg-4 col-md-12">
               <div class="go_title">토요일 외출</div>
@@ -96,9 +95,9 @@
                   </tr>
                 </tbody>
               </table>
-              <button id="go_submit" class="btn btn-info center-block" >
+              <div id="go_submit">
                 신청
-              </button>
+              </div>
             </div>
           </div>
         </div>
