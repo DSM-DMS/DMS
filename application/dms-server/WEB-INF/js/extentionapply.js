@@ -19,9 +19,6 @@ function setCancleEvent() {
         $.ajax({
             url: mainUrl,
             type: "DELETE",
-            data: {
-                "id": id
-            },
             success: function(data) {
                 // alert("취소 완료.");
                 // 화면을 리로드하는 코드
