@@ -30,7 +30,7 @@ public class LoadStayDefault implements Handler<RoutingContext> {
 			resultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE id='", id, "'");
 			
 			if(resultSet.next()) {
-				responseObject.put("value", resultSet.getString("value"));
+				responseObject.put("value", resultSet.getInt("value"));
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
