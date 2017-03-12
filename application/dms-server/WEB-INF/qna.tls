@@ -57,10 +57,12 @@
                 <div class="card-block question">
                     <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
                     
+                    <#if isWriter==true>
                     <!-- 수정삭제 버튼임 자신의 글이 아니면, 숨겨야함 -->
                     <div class="content-button-container">
                         <span class="content-button content-modify">수정</span><span class="content-button content-delete">삭제</span>
                     </div>
+                    </#if>
                     
                     <div class="content question">
                         ${content}
@@ -69,10 +71,12 @@
                 <div class="card-block answer">
                     <div class="underbar-title border-red">답변<span class="subinfo">${answer_subinfo}</span></div>
                     
+                    <#if isAdim==true>
                     <!-- 수정삭제 버튼임. 관리자가 아니면, 숨겨야함 -->
                     <div class="content-button-container">
                         <span class="content-button content-modify">수정</span><span class="content-button content-delete">삭제</span>
                     </div>
+                    </#if>
                     
                     <div class="content answer">
                         ${answer_content}
