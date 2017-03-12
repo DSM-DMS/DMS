@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
     <meta charset="UTF-8">
     <title>DMS</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -19,34 +19,34 @@
 
     <div class="row slider-menu-container hides">
         <div class="menu-controller show">
-            <img src="../image/arrow.png">
+            <img src="/images/arrow.png">
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/megaphone.png" />
+            <img src="/images/megaphone.png" />
             <div>공지사항</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/writing.png" />
+            <img src="/images/writing.png" />
             <div>연장신청</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/settings.png" />
+            <img src="/images/settings.png" />
             <div>수리신고</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/chicken.png" />
+            <img src="/images/chicken.png" />
             <div>학교급식</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/crown.png" />
+            <img src="/images/crown.png" />
             <div>상점신청</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/bug.png" />
+            <img src="/images/bug.png" />
             <div>버그신고</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="images/man.png" />
+            <img src="/images/man.png" />
             <div>내정보</div>
         </div>
     </div>
@@ -90,8 +90,8 @@
     </div>
 </body>
 
-<script src="./js/script.js"></script>
-<script src="./js/qnacomment.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/qnacomment.js"></script>
 
 
 </html>

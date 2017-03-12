@@ -61,13 +61,13 @@
                     <div class="content-button-container">
                         <span class="content-button content-modify">수정</span><span class="content-button content-delete">삭제</span>
                     </div>
-                    
+                    <div>${room}</div>
                     <div class="content question">
                         ${content}
                     </div>
                 </div>
                 <div class="card-block answer">
-                    <div class="underbar-title border-red">답변<span class="subinfo">${answer_subinfo}</span></div>
+                    <div class="underbar-title border-red">처리결과<span class="subinfo">${result_subinfo}</span></div>
                     
                     <!-- 수정삭제 버튼임. 관리자가 아니면, 숨겨야함 -->
                     <div class="content-button-container">
@@ -75,15 +75,8 @@
                     </div>
                     
                     <div class="content answer">
-                        ${answer_content}
+                        ${result_content}
                     </div>
-                </div>
-                <div class="card-block">
-                    <textarea class="form-control comment-input-text" name="name" rows="8" cols="80" placeholder="댓글을 쓰세요"></textarea>
-                    <input class="btn btn-default comment-input-button" type="button" name="button" value="작성" />
-                </div>
-                <div class="commnet">
-                    <!-- <div class="underbar-title border-puple"></div> -->
                 </div>
             </div>
         </div>
