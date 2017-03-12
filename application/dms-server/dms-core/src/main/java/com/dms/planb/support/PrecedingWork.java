@@ -23,25 +23,4 @@ public class PrecedingWork {
 
         return context;
     }
-
-    public static Map<String, String> getQueryMap(String query) {
-        String[] params = query.split("&");
-        Map<String, String> map = new HashMap<String, String>();
-        for (String param : params) {
-            String name = param.split("=")[0];
-            String value = "";
-
-            try {
-                value = URLDecoder.decode(param.split("=")[1], "UTF-8");
-
-            } catch (Exception e) {
-                System.out.println("wtf exception: " + e.getMessage());
-            }
-
-
-            map.put(name, value);
-        }
-
-        return map;
-    }
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.boxfox.dms.secure.VerifyRecaptcha;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
@@ -31,11 +32,9 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
         String uid = null;
         String id = null;
         String password = null;
-        String recapcha = null;
         uid = context.request().formAttributes().get("uid");
         id = context.request().getParam("id");
         password = context.request().getParam("password");
-
 
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
