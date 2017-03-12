@@ -457,6 +457,9 @@ table tr {
     color: rgb(2, 117, 217);
 }
 
+#calendar thead i {
+  cursor: pointer;
+}
 
 /*--------------------- go out apply -------------------*/
 

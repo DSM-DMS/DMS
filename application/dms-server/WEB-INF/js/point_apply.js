@@ -1,3 +1,5 @@
+var id = "test";
+
 $('#recommend').hide();
 $('#point_apply').css('background-color', 'rgb(91, 192, 222)');
 $('#point_reco').css('background-color', 'rgb(230, 230, 230)');
@@ -35,12 +37,12 @@ $("#individual_btn").click(function() {
 });
 
 // 추천탭 추천버튼 추천 이벤트
-$("recommend_btn").click(function() {
+$("#recommend_btn").click(function() {
     var reason = $("#recommend_reason").val();
     var person = $("#recommend_name").val();
     $.ajax({
         url: "http://dsm2015.cafe24.com:8089/apply/merit",
-        type: "GET",
+        type: "POST",
         data: {
             "id": id,
             "content": reason,

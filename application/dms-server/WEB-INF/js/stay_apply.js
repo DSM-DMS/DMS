@@ -19,17 +19,17 @@ var loadSendDataWeek;
 var applySendDataWeek;
 var applySendDataValue;
 var getDataValue;
-var defaultSel;
+var defaultValue;
 
 $.ajax({
-  url: "http://dsm2015.cafe24.com:8089/apply/stay",
+  url: "http://dsm2015.cafe24.com:8089/apply/stay/default",
   type: "GET",
   async: false,
   data: {
     "id": id,
   },
   success: function(data) {
-    defaultSel = JSON.parse(data).value;
+    defaultValue = JSON.parse(data).value;
   }
 });
 
@@ -43,13 +43,11 @@ var getData = function () {
       "week": loadSendDataWeek,
     },
     success: function(data) {
-      getDataValue = JSON.parse(data).value;
-      valueArray.push(getDataValue);
+      valueArray.push(JSON.parse(data).value);
     },
     error: function(xhr){
-      if (xhr.status == 404) {
-        valueArray.push(4);
-      }
+      console.log('['+ loadSendDataWeek + '] 404 error : push defalutValue (' + defaultValue + ')');
+      valueArray.push(defaultValue);
     }
   });
 };
@@ -58,13 +56,12 @@ var applyData = function () {
   $.ajax({
     url: "http://dsm2015.cafe24.com:8089/apply/stay",
     type: "PUT",
-    async: false,
     data: {
       "id": id,
       "week": applySendDataWeek,
       "value": applySendDataValue
     },
-    success: function(data) {
+    success: function() {
       alert('신청되었습니다.');
     }
   });
@@ -89,14 +86,14 @@ function drawPrev() {
     for (i = 1; i <= valueArray.length; i++) {
         if (valueArray[i - 1] == 4) { //잔류
         } else if (valueArray[i - 1] == 1) {
-            $('tr:eq(' + (i + 1) + ') td.fri').attr('class', 'fri go_home');
-            $('tr:eq(' + (i + 2) + ') td.sun').attr('class', 'sun go_dom');
+            $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
+            $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
         } else if (valueArray[i - 1] == 2) {
-            $('tr:eq(' + (i + 1) + ') td.sat').attr('class', 'sat go_home');
-            $('tr:eq(' + (i + 2) + ') td.sun').attr('class', 'sun go_dom');
+            $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_home');
+            $('tr:eq(' + (i + 2) + ') .sun').attr('class', 'sun go_dom');
         } else if (valueArray[i - 1] == 3) {
-            $('tr:eq(' + (i + 1) + ') td.fri').attr('class', 'fri go_home');
-            $('tr:eq(' + (i + 1) + ') td.sat').attr('class', 'sat go_dom');
+            $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
+            $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
         }
     }
     valueArray = new Array();
@@ -320,29 +317,55 @@ function clearCalendar() {
 $('#first_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#first_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '01');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '01');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '01');
+    }
 });
 
 $('#second_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#second_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '02');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '02');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '02');
+    }
 });
 
 $('#third_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#third_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '03');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '03');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '03');
+    }
 });
 
 $('#fourth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fourth_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '04');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '04');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '04');
+    }
 });
 
 $('#fifth_week').click(function() {
+  if (five_week) {
+    $('#calendar tbody tr').css("background-color", "white");
+    $('#fifth_week').css("background-color", "#f1f1f1");
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '05');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '05');
+    }
+  } else {
     alert("다음 달 1주로 신청해주세요.");
+  }
 });
 
 
@@ -353,7 +376,11 @@ $('#sixth_week').click(function() {
 //***********************신청*********************
 
 function dateToString(week) {
-  return newDate.getFullYear().toString() + "-" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
+  if(newDate.getMonth() + 1 < 10) {
+    return newDate.getFullYear().toString() + "-0" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
+  } else {
+    return newDate.getFullYear().toString() + "-" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
+  }
 };
 
 $('#date').keydown(function(e) {
