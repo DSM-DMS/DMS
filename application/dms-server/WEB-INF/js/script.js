@@ -16,16 +16,16 @@ function redirect(page) {
     }
 }
 
-function checkIdExists(id) {
-    $.post("/account/", {
+function checkIdExists(inputObj) {
+    var idStr = inputObj.value();
+    $.post("/account/idcheck/student/", {
         id: idStr
     }, function (data, status) {
-        if(status){
-            window.location.href='/';
+        if(status==201){
+            alert('asasv');
         }else{
-            alert('로그인 실패');
+            
         }
-        alert("Data: " + data + "\nStatus: " + status);
     });
 }
 
