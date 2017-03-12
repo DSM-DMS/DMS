@@ -317,32 +317,52 @@ function clearCalendar() {
 $('#first_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#first_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '01');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '01');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '01');
+    }
 });
 
 $('#second_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#second_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '02');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '02');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '02');
+    }
 });
 
 $('#third_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#third_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '03');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '03');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '03');
+    }
 });
 
 $('#fourth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fourth_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '04');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '04');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '04');
+    }
 });
 
 $('#fifth_week').click(function() {
   if (five_week) {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fifth_week').css("background-color", "#f1f1f1");
-    $('#date').val(currentYear + '-' + currentMonth + '-' + '05');
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-' + '05');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-' + '05');
+    }
   } else {
     alert("다음 달 1주로 신청해주세요.");
   }
@@ -356,7 +376,11 @@ $('#sixth_week').click(function() {
 //***********************신청*********************
 
 function dateToString(week) {
-  return newDate.getFullYear().toString() + "-" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
+  if(newDate.getMonth() + 1 < 10) {
+    return newDate.getFullYear().toString() + "-0" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
+  } else {
+    return newDate.getFullYear().toString() + "-" + (newDate.getMonth() + 1).toString() + "-0" + week.toString();
+  }
 };
 
 $('#date').keydown(function(e) {
