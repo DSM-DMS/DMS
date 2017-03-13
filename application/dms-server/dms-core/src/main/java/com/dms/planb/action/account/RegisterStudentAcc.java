@@ -1,5 +1,7 @@
 package com.dms.planb.action.account;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,12 +31,9 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
     public void handle(final RoutingContext context) {
         PrecedingWork.putHeaders(context);
 
-        String uid = null;
-        String id = null;
-        String password = null;
-        uid = context.request().formAttributes().get("uid");
-        id = context.request().getParam("id");
-        password = context.request().getParam("password");
+        String uid = context.request().getParam("uid");
+        String id = context.request().getParam("id");
+        String password = context.request().getParam("password");
 
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
@@ -42,17 +41,14 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
                 if (result.isSuccess()) {
                     context.response().setStatusCode(201);
                     context.response().setStatusMessage(result.getMessage()).end();
-                    context.response().close();
                 } else {
                     // Conflict
-                    context.response().setStatusCode(409);
+                    context.response().setStatusCode(409);;
                     context.response().setStatusMessage(result.getMessage()).end();
-                    context.response().close();
                 }
             } else {
                 // Any null in parameters
                 context.response().setStatusCode(404).end();
-                context.response().close();
             }
         } catch (SQLException e) {
             context.response().setStatusCode(500).end();
@@ -61,6 +57,6 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
             Log.l("SQLException");
         }
         Log.l("Register Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
-
     }
+
 }

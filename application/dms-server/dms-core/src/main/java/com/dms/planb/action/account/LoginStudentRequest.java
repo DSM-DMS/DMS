@@ -34,7 +34,8 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");
         String remember = context.request().getParam("remember");
-        String recapcha = context.request().getParam("q-recaptcha-response"); //recapcha response 이름 수정해야함
+        String recapcha = context.request().getParam("g-recaptcha-response"); //recapcha response 이름 수정해야함
+        remember = (remember == null) ? "false" : "true";
 
         if (Guardian.checkParameters(id, password, recapcha, remember) && VerifyRecaptcha.verify(recapcha))
             try {
@@ -60,6 +61,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
             context.response().setStatusCode(400).end();
             context.response().close();
         }
+        Log.l("Login Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
     }
 
     public EasyJsonObject getUserData(JobResult result, EasyJsonObject responseObject) throws SQLException {

@@ -22,7 +22,7 @@ import java.util.List;
 @RouteRegistration(path = "/post/content", method = {HttpMethod.GET})
 public class PostContextRouter implements Handler<RoutingContext> {
     private UserManager userManager;
-    private static List<PostContextTemplate> categories;
+    private List<PostContextTemplate> categories;
     private DataBase db;
 
 
@@ -66,6 +66,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
     public PostContextRouter() {
         db = DataBase.getInstance();
         userManager = new UserManager();
+        initCategorys();
     }
 
     public void handle(RoutingContext context) {

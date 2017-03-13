@@ -44,11 +44,9 @@ public class LoadMypage implements Handler<RoutingContext> {
 				responseObject.put("demerit", datas.get("demerit"));
 
 				context.response().setStatusCode(200).end();
-				System.out.println("200 responsed");
 				context.response().close();
 			} else {
 				context.response().setStatusCode(404).end();
-				System.out.println("404 responsed");
 				context.response().close();
 			}
 		} catch (SQLException e) {

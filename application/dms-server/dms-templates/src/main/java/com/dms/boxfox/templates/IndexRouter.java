@@ -33,6 +33,7 @@ public class IndexRouter implements Handler<RoutingContext> {
     }
 
     public void handle(RoutingContext context) {
+        System.out.println(userManager.getRegistredSessionKey(context));
         Calendar calendar = Calendar.getInstance();
         JSONArray meal = (JSONArray) MealModel.getMealAtDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)).toJSONObject().get("Meals");
         DmsTemplate templates = new DmsTemplate("index");
