@@ -17,6 +17,11 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/stay", method={HttpMethod.GET})
 public class LoadStayApplyStatus implements Handler<RoutingContext> {
+	UserManager userManager;
+	public LoadStayApplyStatus() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -28,7 +33,7 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
 		String id = context.request().getParam("id");
 		String uid = null;
 		try {
-			uid = UserManager.getUid(id);
+			uid = userManager.getUid(id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
