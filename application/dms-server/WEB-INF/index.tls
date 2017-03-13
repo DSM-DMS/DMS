@@ -36,15 +36,15 @@
                  <img src="/images/chicken.png"/>
                  <div>학교급식</div>
              </div>
-             <div class="icon-menu-item text-center">
+             <div class="icon-menu-item text-center" onclick="redirect('score')">
                  <img src="/images/crown.png"/>
                  <div>상점신청</div>
              </div>
-             <div class="icon-menu-item text-center">
+             <div class="icon-menu-item text-center" onclick="redirect('bug')">
                  <img src="/images/bug.png"/>
                  <div>버그신고</div>
              </div>
-             <div class="icon-menu-item text-center">
+             <div class="icon-menu-item text-center" onclick="redirect('mypage')">
                  <img src="/images/man.png"/>
                  <div>내정보</div>
              </div>
@@ -219,7 +219,7 @@
                                         <div style="width:100%; text-align:left;"> 아이디가 없으신가요? <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
                                             회원가입 하기
                                         </a> </div>
-                                        <span id="login-warn" class="text-danger text-center" style="margin-right: 15px;">로그인에 실패했습니다.</span>
+                                        <span id="login-warn" class="text-warning text-center" style="margin-right: 15px;">로그인에 실패했습니다.</span>
                                         <button id="btn-signup" type="button" class="btn btn-info" onclick="login($('#loginform').serialize())">로그인</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
@@ -249,7 +249,7 @@
                                             <input type="text" class="form-control" name="uid" placeholder="Code"> </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <span id="register-warn" class="text-danger text-center" style="margin-right: 15px;">동일한 아이디가 이미 있습니다.</span>
+                                        <span id="register-warn" class="text-warning text-center" style="margin-right: 15px;">동일한 아이디가 이미 있습니다.</span>
                                         <button id="btn-register" type="button" class="btn btn-info" onclick="register($('#signupform').serialize());">회원가입</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>

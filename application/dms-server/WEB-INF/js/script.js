@@ -16,7 +16,7 @@ function redirect(page) {
     if (!isLogin) {
         $('#myModal').modal('show');
     } else {
-        window.href = '/'+page;
+        location.href = '/'+page;
     }
 }
 
@@ -37,6 +37,9 @@ function checkIdExists() {
           if(xhr.status == 404) {
             $("#btn-register").attr('class', (classVal + ' disabled'));
             $("#btn-register").attr('disabled', 'disalbed');
+            $("#register-warn").removeClass('text-success');
+            $("#register-warn").addClass('text-warning');
+            $("#register-warn").text('이미 존재하는 아이디입니다.');
             $("#register-warn").show();
           }
         },
@@ -63,10 +66,16 @@ function register(params) {
         type: "POST",
         data: params,
         success: function(data, status) {
-              alert('회원가입 성공');
+            $("#register-warn").addClass('text-success');
+            $("#register-warn").removeClass('text-warning');
+            $("#register-warn").text('회원가입에 성공했습니다.');
+            $("#register-warn").show();
         },
         error: function (xhr) {
-              alert('회원가입 실패');
+            $("#register-warn").removeClass('text-success');
+            $("#register-warn").addClass('text-warning');
+            $("#register-warn").text('회원가입에 실패했습니다.');
+            $("#register-warn").show();
         },
     });
 }
