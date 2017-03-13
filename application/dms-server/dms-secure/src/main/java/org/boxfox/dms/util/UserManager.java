@@ -21,7 +21,7 @@ public class UserManager {
     private static AES256 aes;
     private DataBase database;
 
-    static{
+    static {
         aes = new AES256(".s@!31VAsv!@312231");
     }
 
@@ -78,7 +78,16 @@ public class UserManager {
         return result;
     }
 
-    private String getUid(String id) throws SQLException {
+    public String getUid(RoutingContext context) throws SQLException {
+        String uid = null;
+        String key = SHA256.encrypt(getRegistredSessionKey(context));
+        SafeResultSet rs = DataBase.getInstance().executeQuery("select uid from account where session_key='", key, "'");
+        if (rs.next())
+            uid = rs.getString(1);
+        return uid;
+    }
+
+    public String getUid(String id) throws SQLException {
         String uid = null;
         String idEncrypt = aes.encrypt(id);
         if (checkIdExists(id))

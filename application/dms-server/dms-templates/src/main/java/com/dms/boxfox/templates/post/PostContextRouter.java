@@ -57,7 +57,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
     private void initCategorys() {
         categories = new ArrayList<PostContextTemplate>();
         categories.add(createDefaultPost("notice").putTarget("subinfo", new String[]{"writer"}));
-        categories.add(createDefaultPost("rule").putTarget("subinfo", new String[]{"writer"}));
+        categories.add(createDefaultPost("rule"));
         categories.add(createDefaultPost("faq"));
         categories.add(createQnaPost());
         categories.add(createFacilityPost());
