@@ -17,9 +17,11 @@ public class PrecedingWork {
         context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com/");
         context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com");
         context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        
         Log.l("Requested : " + context.request().host());
         Log.l("Absolute URI : " + context.request().absoluteURI());
         Log.l("Parameters : " + context.request().params());
+        Log.l("Body : " + context.request().formAttributes());
 
         return context;
     }
