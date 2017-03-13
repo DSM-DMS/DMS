@@ -15,6 +15,12 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/account/student", method={HttpMethod.PATCH})
 public class ModifyStudentData implements Handler<RoutingContext> {
+	private UserManager userManager;
+
+	public ModifyStudentData(){
+		userManager = new UserManager();
+	}
+
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -24,7 +30,7 @@ public class ModifyStudentData implements Handler<RoutingContext> {
 		String id = context.request().getParam("id");
 		String uid = null;
 		try {
-			uid = UserManager.getUid(id);
+			uid = userManager.getUid(id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

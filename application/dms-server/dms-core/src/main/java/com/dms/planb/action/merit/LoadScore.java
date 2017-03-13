@@ -15,42 +15,48 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/score", method={HttpMethod.GET})
+@RouteRegistration(path = "/score", method = {HttpMethod.GET})
 public class LoadScore implements Handler<RoutingContext> {
-	@Override
-	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
-		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
-		EasyJsonObject responseObject = new EasyJsonObject();
-		
-		String id = context.request().getParam("id");
-		String uid = null;
-		try {
-			uid = UserManager.getUid(id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		
-		try {
-			resultSet = database.executeQuery("SELECT * FROM student_score WHERE uid='", uid, "'");
-			if(resultSet.next()) {
-				responseObject.put("merit", resultSet.getInt("merit"));
-				responseObject.put("demerit", resultSet.getInt("demerit"));
-				
-				context.response().setStatusCode(200);
-				context.response().end(responseObject.toString());
-				context.response().close();
-			} else {
-				context.response().setStatusCode(404).end();
-				context.response().close();
-			}
-		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
-			
-			Log.l("SQLException");
-		}
-	}
+    private UserManager userManager;
+
+    public LoadScore() {
+        userManager = new UserManager();
+    }
+
+    @Override
+    public void handle(RoutingContext context) {
+        context = PrecedingWork.putHeaders(context);
+
+        DataBase database = DataBase.getInstance();
+        SafeResultSet resultSet;
+        EasyJsonObject responseObject = new EasyJsonObject();
+
+        String id = context.request().getParam("id");
+        String uid = null;
+        try {
+            uid = userManager.getUid(id);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+
+        try {
+            resultSet = database.executeQuery("SELECT * FROM student_score WHERE uid='", uid, "'");
+            if (resultSet.next()) {
+                responseObject.put("merit", resultSet.getInt("merit"));
+                responseObject.put("demerit", resultSet.getInt("demerit"));
+
+                context.response().setStatusCode(200);
+                context.response().end(responseObject.toString());
+                context.response().close();
+            } else {
+                context.response().setStatusCode(404).end();
+                context.response().close();
+            }
+        } catch (SQLException e) {
+            context.response().setStatusCode(500).end();
+            context.response().close();
+
+            Log.l("SQLException");
+        }
+    }
 }

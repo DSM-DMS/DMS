@@ -36,15 +36,17 @@ public class ApplyExtension implements Handler<RoutingContext> {
         String classId = context.request().getParam("class");
         String seatId = context.request().getParam("seat");
         String id = userManager.getIdFromSession(context);
-        String key = null;
-		try {
-			key = userManager.getUid(userManager.getIdFromSession(context));
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-        if (Guardian.checkParameters(classId, id, seatId)) {
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (Guardian.checkParameters(classId, id, seatId, uid)) {
             try {
                 String name = ((Map<String, Object>) userManager.getUserInfo(id).getArgs()[0]).get("name").toString();
+                System.out.println(name);
                 int hour = currentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = currentTime.get(Calendar.MINUTE);
 
@@ -54,9 +56,8 @@ public class ApplyExtension implements Handler<RoutingContext> {
                     context.response().setStatusCode(404).end();
                     context.response().close();
                 } else {
-                    database.executeUpdate("DELETE FROM extension_apply WHERE uid='", key, "'");
-                    database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", key, "')");
-
+                    database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
+                    database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");
                     context.response().setStatusCode(200).end();
                     context.response().close();
                 }
