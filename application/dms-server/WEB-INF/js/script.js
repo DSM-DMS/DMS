@@ -23,7 +23,7 @@ function redirect(page) {
 function checkIdExists() {
     var idStr = $('#register-id').val();
     $.ajax({
-        url: "http://dsm2015.cafe24.com:8089/account/idcheck/student",
+        url: "/account/idcheck/student",
         type: "POST",
         data: {
             "id": idStr
