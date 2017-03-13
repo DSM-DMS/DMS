@@ -36,7 +36,12 @@ public class ApplyExtension implements Handler<RoutingContext> {
         String classId = context.request().getParam("class");
         String seatId = context.request().getParam("seat");
         String id = userManager.getIdFromSession(context);
-        String key = userManager.getUid(userManager.getIdFromSession(context));
+        String key = null;
+		try {
+			key = userManager.getUid(userManager.getIdFromSession(context));
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
         if (Guardian.checkParameters(classId, id, seatId)) {
             try {
                 String name = ((Map<String, Object>) userManager.getUserInfo(id).getArgs()[0]).get("name").toString();
@@ -49,8 +54,8 @@ public class ApplyExtension implements Handler<RoutingContext> {
                     context.response().setStatusCode(404).end();
                     context.response().close();
                 } else {
-                    database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
-                    database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");
+                    database.executeUpdate("DELETE FROM extension_apply WHERE uid='", key, "'");
+                    database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", key, "')");
 
                     context.response().setStatusCode(200).end();
                     context.response().close();
