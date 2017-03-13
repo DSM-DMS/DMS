@@ -2,6 +2,7 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -25,10 +26,16 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		String id = context.request().getParam("id");
+		String uid = null;
+		try {
+			uid = UserManager.getUid(id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		String week = context.request().getParam("week");
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
 			
 			if(resultSet.next()) {
 				responseObject.put("value", resultSet.getInt("value"));

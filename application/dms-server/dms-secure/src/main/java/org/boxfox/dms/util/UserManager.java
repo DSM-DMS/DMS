@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public class UserManager {
     private static AES256 aes;
-    private DataBase database;
+    private static DataBase database;
     static {
         aes = new AES256(".s@!31VAsv!@312231");
     }
@@ -85,7 +85,7 @@ public class UserManager {
             return uid;
         }
 
-    public boolean checkIdExists(String id) {
+    public static boolean checkIdExists(String id) {
         boolean check = false;
         id = aes.encrypt(id);
         try {
