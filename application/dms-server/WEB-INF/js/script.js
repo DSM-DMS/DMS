@@ -46,6 +46,10 @@ function checkIdExists() {
     });
 }
 
+function viewPost(category, no){
+    location.href= '/post/content?category='+category+'&no='+no;
+}
+
 function login(params) {
     $.ajax({
         url: "/account/login/student",

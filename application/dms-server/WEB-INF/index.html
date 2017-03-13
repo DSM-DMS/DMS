@@ -66,7 +66,7 @@
                                     </thead>
                                     <tbody>
                                         <#list Notices as notice>
-                                        <tr>
+                                        <tr onclick="viewPost('notice', ${notice.no})">
                                             <th scope="row">${notice.no}</th>
                                             <td>${notice.title}</td>
                                             <td>${notice.writer}</td>
@@ -152,7 +152,7 @@
                                 </thead>
                                 <tbody>
                                         <#list Rules as rule>
-                                        <tr>
+                                        <tr onclick="viewPost('rule', ${notice.no})">
                                             <th scope="row">${rule.no}</th>
                                             <td>${rule.title}</td>
                                         </tr>
@@ -173,7 +173,7 @@
                                 </thead>
                                 <tbody>
                                         <#list Faqs as faq>
-                                        <tr>
+                                        <tr onclick="viewPost('faq', ${notice.no})">
                                             <th scope="row">${faq.no}</th>
                                             <td>${faq.title}</td>
                                         </tr>

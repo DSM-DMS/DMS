@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>DMS</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
 <body>
     <div class="container">
-        <h1>DSM Dormitory System</h1> </div>
+    <h1>DSM Dormitory System</h1> 
+</div>
+    
     <div class="row slider-menu-container hides">
              <div class="menu-controller show">
                     <img src="/images/arrow.png">
@@ -47,222 +48,20 @@
                  <div>내정보</div>
              </div>
         </div>
-    <div class="main">
-        <div class="card-wrapper">
-            <div class="card">
-                <div class="card-block">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <div class="underbar-title border-red"> 공지사항 <a href="/post/?category=notice" class="view-more">더보기</a> </div>
-                            <div>
-                                <table class="table table-sm table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <#list Notices as notice>
-                                        <tr>
-                                            <th scope="row">${notice.no}</th>
-                                            <td>${notice.title}</td>
-                                            <td>${notice.writer}</td>
-                                        </tr>
-                                        </#list>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <div class="underbar-title border-blue">학교급식</div>
-                            <div class="menues">
-                                <div class="mornig meal">
-                                    <div class="info">
-                                        <h4 class="col-2 text-center">아침</h4>
-                                        <p class="col-9">${Breakfast}</p>
-                                    </div> <img src="/images/arrow.png" alt="arrow image to see allergy"> </div>
-                                <div class="lunch meal">
-                                    <div class="info">
-                                        <h4 class="col-2 text-center">점심</h4>
-                                        <p class="col-9">${Lunch}</p>
-                                    </div> <img src="/images/arrow.png" alt="arrow image to see allergy"> </div>
-                                <div class="dinner meal">
-                                    <div class="info">
-                                        <h4 class="col-2 text-center">저녁</h4>
-                                        <p class="col-9">${Dinner}</p>
-                                    </div> <img src="/images/arrow.png" alt="arrow image to see allergy"> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row padding">
-            <div class="col card bg-success">
-                <div class="card-block card-block-notice" style="color: white">연장학습 신청이 가능한 시간입니다.</div>
-            </div>
-            <div class="col card bg-warning">
-                <div class="card-block card-block-notice" style="color: white">잔류신청이 얼마남지 않았습니다!</div>
-            </div>
-            <div class="col card bg-info">
-                <div class="card-block card-block-notice" style="color: white">상점을 신청할 수 있습니다!</div>
-            </div>
-        </div>
-        
-        <div class="row padding">
-            <div class="col-lg-6 col-md-12 card display-inline-block">
-                <div class="card-block">
-                    <h4 class="card-title">연장학습 신청</h4>
-                    <p class="card-text">기숙사 시스템의 연장학습 신청은 오후 5시 30분 부터 8시 이전까지 가능합니다.</p> <a href="#" onclick="redirect('extension')" class="card-link">신청하러 가기</a> </div>
-            </div>
-            <div class="col-lg-6 col-md-12 card display-inline-block">
-                <div class="card-block">
-                    <h4 class="card-title">잔류신청</h4>
-                    <p class="card-text">잔류 및 귀가 신청은 월요일 부터 목요일 8시 이전까지 가능합니다.</p> <a href="#" onclick="redirect('stay')" class="card-link">신청하러 가기</a> </div>
-            </div>
-        </div>
-        <div class="row padding" style="padding:0 15px;">
-            <div class="col-lg-6 col-md-12 card display-inline-block">
-                <div class="card-block">
-                    <h4 class="card-title">외출 신청</h4>
-                    <p class="card-text">주말에 잔류를 하신다면 오후 1시부터 5시 사이에 외출을 신청할 수 있습니다.</p> <a href="#" onclick="redirect('out')" class="card-link">신청하러 가기</a> </div>
-            </div>
-            <div class="col-lg-6 col-md-12 card display-inline-block">
-                <div class="card-block">
-                    <h4 class="card-title">잔류신청</h4>
-                    <p class="card-text">잔류 및 귀가 신청은 월요일 부터 목요일 8시 이전까지 가능합니다.</p> <a href="#" class="card-link">신청하러 가기</a> </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="underbar-title border-puple">기숙사 규칙<a href="/post/?category=rule" class="view-more">더보기</a></div>
-                        <div>
-                            <table class="table table-sm table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>제목</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <#list Rules as rule>
-                                        <tr>
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
-                                        </tr>
-                                        </#list>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="underbar-title border-blue">자주하는 질문<a href="/post/?category=faq" class="view-more">더보기</a></div>
-                        <div>
-                            <table class="table table-sm table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>제목</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <#list Faqs as faq>
-                                        <tr>
-                                            <th scope="row">${faq.no}</th>
-                                            <td>${faq.title}</td>
-                                        </tr>
-                                        </#list>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
-    
-    <#if isLogin==false>
-    <!-- Login  modal-->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container">
-                        <div id="loginbox">
-                            <div style="padding-top:30px" class="panel-body">
-                                <div class="panel-heading">
-                                    <div class="panel-title">로그인</div>
-                                </div>
-                                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                                <form id="loginform" class="form-horizontal" role="form">
-                                    <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="id" value="" placeholder="ID"> </div>
-                                    <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="Password"> </div>
-                                    <div class="input-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me </label>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div style="width:100%; text-align:left;"> 아이디가 없으신가요? <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                            회원가입 하기
-                                        </a> </div>
-                                        <button id="btn-signup" type="button" class="btn btn-info">로그인</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div id="signupbox" style="display:none;">
-                            <div class="panel-heading">
-                                <div class="panel-title">회원가입</div>
-                                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">로그인</a></div>
-                            </div>
-                            <div class="panel-body">
-                                <form id="signupform" class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label for="id" class="col-md-3 control-label">아이디</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" name="id" placeholder="ID"> </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password" class="col-md-3 control-label">비밀번호</label>
-                                        <div class="col-md-9">
-                                            <input type="password" class="form-control" name="password" placeholder="Password"> </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="code" class="col-md-3 control-label">코드</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" name="uid" placeholder="Code"> </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="btn-signup" type="button" class="btn btn-info" onclick="register($('#signupform').serialize());">회원가입</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="main">
+      <div class="card-wrapper">
+    <div class="card">
+    <div class="card-block">
+        <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
+        ${content}
         </div>
-    </div>
-    </#if>
-    
-    <div>Icons made by <a href="http://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        </div>
+        </div>
+        </div>
+      
 </body>
-<script type="text/javascript">
-    var isLogin = ${isLogin?c};
-</script>
-<script src="./js/script.js"></script>
+    
+<script src="/js/script.js"></script>
 
 </html>
