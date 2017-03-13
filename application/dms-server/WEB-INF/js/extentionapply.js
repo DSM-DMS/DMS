@@ -197,7 +197,13 @@ function drawSeat(seatArr, borderSize) {
                                 success: function(data) {
                                     selected.text("신청됨");
                                     $("div.seatcontainer").html("");
-                                    drawSeat(getSeatData(), "7.5px");
+                                    getSeatData(function(data) {
+                                        drawSeat(data, "7.5px")
+                                    });
+                                },
+                                error: function(request, status, error) {
+                                    alert("신청가능한 시간이 아닙니다.");
+
                                 }
                             });
                         } else {

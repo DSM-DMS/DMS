@@ -1,26 +1,27 @@
-function getQnaCommentList(callback) {
+function getProfilePicture(callback) {
     $.ajax({
-        url: "http://dsm2015.cafe24.com:8088/post/qna/comment",
+        url: "/account/student",
         type: "GET",
-        data: JSON.stringify({
-            "no": no
-        }),
+        data: {
+        },
         success: function(data) {
-            // alert("취소 완료.");
-            // 화면을 리로드하는 코드
-            // seatcontainer의 html을 백지화
-            $("div.seatcontainer").html("");
-            getSeatData(function(data) {
-                for (var loop = 0; loop < JSON.parse(data).result.length; loop++) {
-                    callback(JSON.parse(data).result[loop]);
-                }
-                drawSeat(data, "7.5px")
-            });
+            callback(data.profile_image);
         }
     });
 }
 
-
+function getQnaCommentList(callback) {
+    $.ajax({
+        url: "/post/qna/comment",
+        type: "GET",
+        data: {
+            "no": no
+        },
+        success: function(data) {
+            callback(data);
+        }
+    });
+}
 
 function addTr(data) {
     var newComment = $('<div/>', {
@@ -62,7 +63,7 @@ function addTr(data) {
                 class: "comment-box-component comment-input-button",
                 click: function() {
                     $.ajax({
-                        url: "http://dsm2015.cafe24.com:8088/post/qna/comment",
+                        url: "/post/qna/comment",
                         type: "PATCH",
                         data: {
                             "no": data.no,
@@ -82,7 +83,7 @@ function addTr(data) {
         text: "삭제",
         click: function() {
             $.ajax({
-                url: "http://dsm2015.cafe24.com:8088/post/qna/comment",
+                url: "/post/qna/comment",
                 type: "DELETE",
                 data: {
                     "no": data.no

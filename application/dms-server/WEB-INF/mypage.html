@@ -71,6 +71,30 @@
                             <img class="profile-pic" src="images/chayoung.jpg" alt="default image">
                             <h3>손채영</h3>
                             <h4>30220</h4>
+                            <a href="#">프로필 사진 수정</a> <br>
+                            <a class="modify-password" href="#myModal" data-toggle="modal">비밀번호 수정</a> <br>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">비밀번호 수정</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <input id="modify-password" type="password" class="form-control" name="id" value="" placeholder="새로운 비밀번호"> </div>
+                                            <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <input id="modify-password-re" type="password" class="form-control" name="id" value="" placeholder="비밀번호 재확인"> </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="modify-password-btn btn btn-info">변경</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-9 col-md-12 mb-5">
                             <div class="row">
