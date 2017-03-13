@@ -116,7 +116,6 @@ public class PostContextRouter implements Handler<RoutingContext> {
                 check = rs.getBoolean(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return check;
     }

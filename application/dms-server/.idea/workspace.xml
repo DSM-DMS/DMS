@@ -25,80 +25,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
+      <file leaf-file-name="Guardian.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/Guardian.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1442">
-              <caret line="96" column="10" lean-forward="false" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#677#678#0" expanded="true" />
-                <element signature="e#726#727#0" expanded="true" />
-                <element signature="e#2440#2456#0" expanded="true" />
-                <element signature="e#5191#5192#0" expanded="true" />
-                <element signature="e#5266#5267#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SecureManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/secure/SecureManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SHA256.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/SHA256.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RSA.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/RSA.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-399">
-              <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PostContextRouter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="39" column="23" lean-forward="false" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AES256.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/AES256.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
-              <caret line="56" column="39" lean-forward="true" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DmsMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="124" column="52" lean-forward="false" selection-start-line="124" selection-start-column="52" selection-end-line="124" selection-end-column="52" />
+            <state relative-caret-position="230">
+              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,8 +38,8 @@
       <file leaf-file-name="ApplyExtension.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+            <state relative-caret-position="112">
+              <caret line="48" column="41" lean-forward="false" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -117,18 +48,92 @@
       <file leaf-file-name="DmsVerticle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="228">
+              <caret line="24" column="75" lean-forward="false" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExtensionRouter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/ExtensionRouter.java">
+      <file leaf-file-name="PostContextRouter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="32" column="31" lean-forward="false" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+            <state relative-caret-position="252">
+              <caret line="84" column="37" lean-forward="true" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModifyStayDefault.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/ModifyStayDefault.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+              <folding>
+                <element signature="e#617#618#0" expanded="true" />
+                <element signature="e#655#656#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModifyStudentData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/ModifyStudentData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+              <folding>
+                <element signature="e#617#618#0" expanded="true" />
+                <element signature="e#655#656#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoadStayDefault.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/LoadStayDefault.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding>
+                <element signature="e#731#732#0" expanded="true" />
+                <element signature="e#778#779#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoadScore.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/merit/LoadScore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding>
+                <element signature="e#707#708#0" expanded="true" />
+                <element signature="e#754#755#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginStudentRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginStudentApplicationRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentApplicationRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-133">
+              <caret line="41" column="58" lean-forward="true" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -147,15 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>queryBuilder(</find>
-      <find>executeQuery</find>
-      <find>title</find>
-      <find>System.</find>
-      <find>Head</find>
-      <find>Faqs</find>
-      <find>check</find>
-      <find>HEAD</find>
-      <find>verticle</find>
       <find>preceding</find>
       <find>class precedingwork</find>
       <find>vertx =</find>
@@ -177,6 +173,15 @@
       <find>uid</find>
       <find>getUid</find>
       <find>getRegistredSessionKey</find>
+      <find>getIDFrom</find>
+      <find>getUSerInfo</find>
+      <find>class ModifyStayDefault</find>
+      <find>class ModifyStay</find>
+      <find>class ModifyStayData</find>
+      <find>class ModifyStudentData</find>
+      <find>LoadStayDefault</find>
+      <find>class LoadScore</find>
+      <find>postIsPrivacy</find>
     </findStrings>
     <replaceStrings>
       <replace>database</replace>
@@ -191,11 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/JsRouter.java" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/CssRouter.java" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/ImagesRouter.java" />
-        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionClassStatus.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/ResponsePostContext.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/router/IndexRouter.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/post/dto/WriterPostContext.java" />
@@ -236,12 +236,17 @@
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoadMypage.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentRequest.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/IndexRouter.java" />
-        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java" />
         <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/SHA256.java" />
         <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/AES256.java" />
-        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java" />
-        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java" />
         <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/ModifyStayDefault.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/ModifyStudentData.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/LoadStayDefault.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/merit/LoadScore.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentApplicationRequest.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java" />
+        <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java" />
       </list>
     </option>
   </component>
@@ -852,7 +857,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="extension" />
+              <option name="myItemId" value="account" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -873,6 +878,7 @@
       <recent name="com.dms.boxfox.templates" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.dms.planb.action.account" />
       <recent name="com.dms.boxfox.templates" />
       <recent name="com.dms.boxfox.xlsx" />
     </key>
@@ -1172,7 +1178,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28668684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="503" y="58" width="359" height="651" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30112723" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30107528" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1231,67 +1237,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/LoadStayDefault.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/time/TimeChecker.java" />
-    <entry file="file://$PROJECT_DIR$/dms-templates/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1250">
-          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/TestVerticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.m2/repository/io/vertx/vertx-core/3.4.0/vertx-core-3.4.0.jar!/io/vertx/core/shareddata/impl/SharedDataImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="32" column="32" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/Guardian.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/DataSaveAble.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1418,14 +1368,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/ModifyStudentData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/secure/VerifyRecaptcha.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
@@ -1489,18 +1431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="43" column="28" lean-forward="false" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#803#804#0" expanded="true" />
-            <element signature="e#850#851#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/support/ProfileImage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1549,26 +1479,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/secure/SecureManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="55">
           <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/SHA256.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1591,34 +1505,144 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java">
+    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/SHA256.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="39" column="23" lean-forward="false" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+        <state relative-caret-position="95">
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionClassStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+        <state relative-caret-position="95">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/WithdrawExtensionApply.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/LoadExtensionApplyStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1442">
-          <caret line="96" column="10" lean-forward="false" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+        <state relative-caret-position="157">
+          <caret line="70" column="33" lean-forward="true" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#677#678#0" expanded="true" />
             <element signature="e#726#727#0" expanded="true" />
             <element signature="e#2440#2456#0" expanded="true" />
-            <element signature="e#5191#5192#0" expanded="true" />
-            <element signature="e#5266#5267#0" expanded="true" />
+            <element signature="e#4846#4847#0" expanded="true" />
+            <element signature="e#4921#4922#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/Guardian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="48" column="41" lean-forward="false" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/ModifyStayDefault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+          <folding>
+            <element signature="e#617#618#0" expanded="true" />
+            <element signature="e#655#656#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/ModifyStudentData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding>
+            <element signature="e#617#618#0" expanded="true" />
+            <element signature="e#655#656#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/stay/LoadStayDefault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#731#732#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/merit/LoadScore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#707#708#0" expanded="true" />
+            <element signature="e#754#755#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/account/LoginStudentApplicationRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-133">
+          <caret line="41" column="58" lean-forward="true" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="24" column="75" lean-forward="false" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="84" column="37" lean-forward="true" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
