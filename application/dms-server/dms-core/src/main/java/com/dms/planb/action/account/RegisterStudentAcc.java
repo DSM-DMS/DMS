@@ -1,12 +1,7 @@
 package com.dms.planb.action.account;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.boxfox.dms.secure.VerifyRecaptcha;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
@@ -43,7 +38,7 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
                     context.response().setStatusMessage(result.getMessage()).end();
                 } else {
                     // Conflict
-                    context.response().setStatusCode(409);;
+                    context.response().setStatusCode(409);
                     context.response().setStatusMessage(result.getMessage()).end();
                 }
             } else {
