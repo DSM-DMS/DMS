@@ -263,7 +263,6 @@ table tr {
     /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
 }
 
-
 /*---------------------- extentionapply select css------------*/
 
 .extentionapply div.class-selecter-div {
@@ -366,7 +365,7 @@ table tr {
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     border: 1px solid rgb(220, 220, 220);
-    font-size: 200%;
+    font-size: 130%;
     width: 90%;
     text-align: center;
     margin: auto;
@@ -376,7 +375,7 @@ table tr {
 
 #stay_select {
     width: 80%;
-    font-size: 200%;
+    font-size: 130%;
 }
 
 #calendar .days, .days td {
@@ -401,7 +400,7 @@ table tr {
     width: 90%;
     margin-top: 10%;
     margin-bottom: 3%;
-    font-size: 200%;
+    font-size: 130%;
 }
 
 #date {
@@ -889,3 +888,12 @@ input.editor-button {
 /*.first-row {
     margin-top: 40px;
 }*/
+
+/*---------------- 설명 ------------------*/
+
+.page_info {
+    visibility: sub;
+    float: right;
+    font-size: 15px;
+    height: 40px;
+}
