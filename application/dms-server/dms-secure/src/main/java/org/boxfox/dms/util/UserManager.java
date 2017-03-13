@@ -134,7 +134,7 @@ public class UserManager {
         String result = null;
         if (sessionKey != null) {
             try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from account where session_key=", sessionKey);
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from account where session_key='", sessionKey,"'");
                 if(rs.next()){
                     result = rs.getString(1);
                 }
@@ -169,7 +169,7 @@ public class UserManager {
                 context.session().put("UserSession", sessionKey);
             }
             if (sessionKey != null) {
-                DataBase.getInstance().executeQuery("update account set session_key='", sessionKey, "' where id='", id, "'");
+                DataBase.getInstance().executeUpdate("update account set session_key='", sessionKey, "' where id='", id, "'");
                 return true;
             }
         } catch (Exception e) {

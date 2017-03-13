@@ -14,7 +14,7 @@ import org.json.simple.JSONValue;
 public class VerifyRecaptcha {
 	 
     public static final String url = "https://www.google.com/recaptcha/api/siteverify";
-    public static final String secret = "6LePhxsTAAAAANhJeahDXqsu-WwViadC0oJrn3UZ";
+    public static final String secret = "6LerpRgUAAAAACjXsLiXvBwSrmB1UdYCfliI8yME";
     private final static String USER_AGENT = "Mozilla/5.0";
  
     public static boolean verify(String gRecaptchaResponse){

@@ -22,6 +22,6 @@ public class DmsVerticle extends AbstractVerticle {
         router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
         RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb", "com.dms.boxfox.templates");
         router.route().handler(StaticHandler.create());
-        vertx.createHttpServer().requestHandler(router::accept).listen(8089);
+        vertx.createHttpServer().requestHandler(router::accept).listen(8080);
     }
 }
