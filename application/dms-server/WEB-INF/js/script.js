@@ -1,5 +1,6 @@
 var classVal = $("#btn-register").attr('class');
 $("#register-warn").hide();
+$("#login-warn").hide();
 
 $('.menu-controller').click(function () {
     var top = $('.slider-menu-container');
@@ -18,8 +19,6 @@ function redirect(page) {
         window.href = '/'+page;
     }
 }
-
-
 
 function checkIdExists() {
     var idStr = $('#register-id').val();
@@ -44,14 +43,30 @@ function checkIdExists() {
     });
 }
 
+function login(params) {
+    $.ajax({
+        url: "/account/login/student",
+        type: "POST",
+        data: params,
+        success: function(data, status) {
+          location.reload();
+        },
+        error: function (xhr) {
+            $("#login-warn").show();
+        },
+    });
+}
+
 function register(params) {
-    $.post("/account/register/student", params, function (data, status) {
-        alert(status+'  '+data);
-        if(status==200){
-            alert('회원가입 성공');
-            window.location.href='/';
-        }else{
-            alert('회원가입 실패');
-        }
+    $.ajax({
+        url: "/account/register/student",
+        type: "POST",
+        data: params,
+        success: function(data, status) {
+              alert('회원가입 성공');
+        },
+        error: function (xhr) {
+              alert('회원가입 실패');
+        },
     });
 }
