@@ -2,7 +2,6 @@ package org.boxfox.dms.util;
 
 import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.sstore.impl.SessionImpl;
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.utilities.actions.support.JobResult;
@@ -20,7 +19,6 @@ import java.util.UUID;
 public class UserManager {
     private static AES256 aes;
     private DataBase database;
-
     static {
         aes = new AES256(".s@!31VAsv!@312231");
     }
@@ -63,17 +61,18 @@ public class UserManager {
 
     public JobResult getUserInfo(String id) throws SQLException {
         JobResult result = new JobResult(false);
-        String uid = (getUid(id));
-        SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
-        if (rs.next()) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("number", rs.getInt("number"));
-            map.put("name", rs.getString("name"));
-            map.put("merit", rs.getInt("merit"));
-            map.put("demerit", rs.getInt("demerit"));
-            result.setSuccess(true);
-            result.setArgs(map);
-//            }
+        String uid = getUid(id);
+        if (uid != null) {
+            SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
+            if (rs.next()) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("number", rs.getInt("number"));
+                map.put("name", rs.getString("name"));
+                map.put("merit", rs.getInt("merit"));
+                map.put("demerit", rs.getInt("demerit"));
+                result.setSuccess(true);
+                result.setArgs(map);
+            }
         }
         return result;
     }
@@ -88,12 +87,12 @@ public class UserManager {
     }
 
     public String getUid(String id) throws SQLException {
-        String uid = null;
-        String idEncrypt = aes.encrypt(id);
-        if (checkIdExists(id))
-            uid = DataBase.getInstance().executeQuery("select uid from account where id='", idEncrypt, "'").nextAndReturn().getString(1);
-        return uid;
-    }
+            String uid = null;
+            String idEncrypt = aes.encrypt(id);
+            if (checkIdExists(id))
+                uid = DataBase.getInstance().executeQuery("select uid from account where id='", idEncrypt, "'").nextAndReturn().getString(1);
+            return uid;
+        }
 
     public boolean checkIdExists(String id) {
         boolean check = false;

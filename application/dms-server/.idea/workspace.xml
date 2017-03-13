@@ -25,18 +25,18 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="78" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
+            <state relative-caret-position="1442">
+              <caret line="96" column="10" lean-forward="false" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#727#728#0" expanded="true" />
-                <element signature="e#776#777#0" expanded="true" />
-                <element signature="e#2453#2469#0" expanded="true" />
-                <element signature="e#5158#5159#0" expanded="true" />
-                <element signature="e#5233#5234#0" expanded="true" />
+                <element signature="e#677#678#0" expanded="true" />
+                <element signature="e#726#727#0" expanded="true" />
+                <element signature="e#2440#2456#0" expanded="true" />
+                <element signature="e#5191#5192#0" expanded="true" />
+                <element signature="e#5266#5267#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -104,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplyExtension.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ApplyExtension.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="41" column="34" lean-forward="false" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+            <state relative-caret-position="218">
+              <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -240,8 +240,8 @@
         <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/SHA256.java" />
         <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/algorithm/AES256.java" />
         <option value="$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/post/PostContextRouter.java" />
-        <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java" />
+        <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java" />
       </list>
     </option>
   </component>
@@ -1599,26 +1599,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="78" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#727#728#0" expanded="true" />
-            <element signature="e#776#777#0" expanded="true" />
-            <element signature="e#2453#2469#0" expanded="true" />
-            <element signature="e#5158#5159#0" expanded="true" />
-            <element signature="e#5233#5234#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="218">
+          <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
+    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="41" column="34" lean-forward="false" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="1442">
+          <caret line="96" column="10" lean-forward="false" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#677#678#0" expanded="true" />
+            <element signature="e#726#727#0" expanded="true" />
+            <element signature="e#2440#2456#0" expanded="true" />
+            <element signature="e#5191#5192#0" expanded="true" />
+            <element signature="e#5266#5267#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -91,9 +91,9 @@ public class ResidualDownload {
     private void initResidualMaps(String date, HashMap<String, String> map) {
         List<ResidualData> list = new ArrayList<ResidualData>();
         try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT student_data.id, number, status, value FROM student_data right join stay_apply_default on student_data.id = stay_apply_default.id");
+            SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT student_data.uid, number, status, value FROM student_data right join stay_apply_default on student_data.uid = stay_apply_default.id");
             ResidualData data = new ResidualData();
-            data.setId(rs.getString("id"));
+            data.setId(rs.getString("uid"));
             data.setNumber(rs.getInt("number"));
             data.setStatus(rs.getInt("status"));
             data.setResidualDefault(rs.getInt("value"));
