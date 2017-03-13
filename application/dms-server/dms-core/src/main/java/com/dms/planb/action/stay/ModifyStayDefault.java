@@ -2,6 +2,7 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -21,10 +22,16 @@ public class ModifyStayDefault implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		
 		String id = context.request().getParam("id");
+		String uid = null;
+		try {
+			uid = UserManager.getUid(id);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		int value = Integer.parseInt(context.request().getParam("value"));
 		
 		try {
-			database.executeUpdate("UPDATE stay_apply_default SET value=", value, " WHERE id='", id, "'");
+			database.executeUpdate("UPDATE stay_apply_default SET value=", value, " WHERE uid='", uid, "'");
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

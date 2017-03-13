@@ -16,7 +16,7 @@ import java.util.UUID;
  * Created by boxfox on 2017-03-04.
  */
 public class UserManager {
-    private DataBase database;
+    private static DataBase database;
 
     public UserManager() {
         database = DataBase.getInstance();
@@ -40,7 +40,7 @@ public class UserManager {
                 int result = database.executeUpdate("update account set id='", id, "', password='", password, "' where uid='", key, "'");
                 if (result == 1) {
                     message = "회원가입에 성공했습니다.";
-                    database.executeUpdate("insert into stay_apply_default(id, value) values('", id, "', 4)");
+                    database.executeUpdate("insert into stay_apply_default(uid, value) values('", key, "', 4)");
                     check = true;
                 } else {
                     message = "회원가입에 실패했습니다.";
@@ -56,9 +56,9 @@ public class UserManager {
 
     public JobResult getUserInfo(String id) throws SQLException {
         JobResult result = new JobResult(false);
-//        String uid = getUid(id);
-//        if (uid != null) {
-        SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.id = b.id where a.id='", id, "'");
+        String uid = getUid(id);
+        if (uid != null) {
+        SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
         if (rs.next()) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("number", rs.getInt("number"));
@@ -67,19 +67,19 @@ public class UserManager {
             map.put("demerit", rs.getInt("demerit"));
             result.setSuccess(true);
             result.setArgs(map);
-//            }
+            }
         }
         return result;
     }
 
-    private String getUid(String id) throws SQLException {
+    public static String getUid(String id) throws SQLException {
         String uid = null;
         if (checkIdExists(id))
             uid = DataBase.getInstance().executeQuery("select uid from account where id='", id, "'").nextAndReturn().getString(1);
         return uid;
     }
 
-    public boolean checkIdExists(String id) {
+    public static boolean checkIdExists(String id) {
         boolean check = false;
         try {
             int result = database.executeQuery("select count(*) from account where id='", id, "'").nextAndReturn().getInt(1);
