@@ -3,7 +3,7 @@
 var id = "test";
 var name = "momo";
 
-var mainUrl = "http://dsm2015.cafe24.com:8089/apply/extension";
+var mainUrl = "/apply/extension";
 
 setCancleEvent();
 setSelecterOptions();

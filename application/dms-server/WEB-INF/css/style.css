@@ -458,8 +458,9 @@ table tr {
 }
 
 #calendar thead i {
-  cursor: pointer;
+    cursor: pointer;
 }
+
 
 /*--------------------- go out apply -------------------*/
 
@@ -549,6 +550,7 @@ table tr {
 #point_reco {
     border-radius: 0 5px 5px 0;
 }
+
 
 /*---------------------- qna -------------*/
 
@@ -672,84 +674,192 @@ input.editor-button {
     margin-top: 20px;
 }
 
+
 /*---------------- go out ----------------*/
 
 .go_title {
-  width: 100%;
-  text-align: center;
-  font-size: 25pt;
+    width: 100%;
+    text-align: center;
+    font-size: 25pt;
 }
 
 #sat_go, #sun_go {
-  width: 90%;
-  height: 200px;
-  line-height: 200px;
-  text-align: center;
-  margin: auto;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  font-size: 200%;
+    width: 90%;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 200%;
 }
 
 #sat_go .front {
-  cursor: pointer;
-  background-color: #30c971;
-  color: #d3d2d5;
-  border-radius: 15px;
+    cursor: pointer;
+    background-color: #30c971;
+    color: #d3d2d5;
+    border-radius: 15px;
 }
 
 #sat_go .back {
-  cursor: pointer;
-  background-color: #9eefc0;
-  border-radius: 15px;
+    cursor: pointer;
+    background-color: #9eefc0;
+    border-radius: 15px;
 }
 
 #sun_go .front {
-  cursor: pointer;
-  background-color: #30c971;
-  color: #d3d2d5;
-  border-radius: 15px;
+    cursor: pointer;
+    background-color: #30c971;
+    color: #d3d2d5;
+    border-radius: 15px;
 }
 
 #sun_go .back {
-  cursor: pointer;
-  background-color: #9eefc0;
-  border-radius: 15px;
+    cursor: pointer;
+    background-color: #9eefc0;
+    border-radius: 15px;
 }
 
 #go_submit {
-  background-color: #40E0D0;
-  font-size: 135%;
-  padding: 15px;
-  width: 30%;
-  margin: auto;
-  margin-top: 2%;
-  text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
+    background-color: #40E0D0;
+    font-size: 135%;
+    padding: 15px;
+    width: 30%;
+    margin: auto;
+    margin-top: 2%;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #go_status {
-  text-align: center;
-  font-size: 150%;
-  width: 90%;
-  margin: auto;
-  margin-top: 2%;
+    text-align: center;
+    font-size: 150%;
+    width: 90%;
+    margin: auto;
+    margin-top: 2%;
 }
 
 #go_status td {
-  padding: 13px;
+    padding: 13px;
 }
 
-#go_status tr{
-  border: 0;
+#go_status tr {
+    border: 0;
 }
 
-#go_status > tbody > tr > td:nth-child(1) {
-  width: 40%;
+#go_status>tbody>tr>td:nth-child(1) {
+    width: 40%;
 }
 
 #go_row {
-  padding-top: 100px;
-  padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
+
+
+/*---------------- my page ----------------*/
+
+.profile-pic {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.mypage-row {
+    margin-top: 6%;
+}
+
+.main-profile {
+    margin-left: 30px;
+}
+
+.mypage-container {
+    width: 80%;
+}
+
+.mypage-component {
+    min-height: 12rem;
+    transition: all 0.5s;
+    /*border-radius: 6px !important;*/
+}
+
+.content-container {
+    margin: 10px;
+}
+
+.mypage-component-container {
+    padding-right: 0 !important;
+    transition: all 0.5s;
+}
+
+.moreinfo-span {
+    position: absolute;
+    bottom: 10px;
+    right : 10px;
+    color: #F6538F;
+}
+
+.move-a {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.move-a:hover {
+    text-decoration: underline;
+}
+
+.detail-container {
+     display: none;
+     margin-bottom: 23px;
+}
+
+.detail-container {
+     margin-bottom: 23px;
+}
+
+
+
+.w-1 {
+    width: 10%;
+}
+
+.w-2 {
+    width: 20%;
+}
+
+.w-3 {
+    width: 30%;
+}
+
+.w-4 {
+    width: 40%;
+}
+
+.w-5 {
+    width: 50%;
+}
+
+.w-6 {
+    width: 60%;
+}
+
+.w-7 {
+    width: 70%;
+}
+
+.w-8 {
+    width: 80%;
+}
+
+.w-9 {
+    width: 90%;
+}
+
+.w-10 {
+    width: 100%;
+}
+
+/*.first-row {
+    margin-top: 40px;
+}*/
