@@ -842,7 +842,9 @@ input.editor-button {
      margin-bottom: 23px;
 }
 
-
+.mypage-qna .detail-container a, .mypage-comment .detail-container a{
+    display: block;
+}
 
 .w-1 {
     width: 10%;
