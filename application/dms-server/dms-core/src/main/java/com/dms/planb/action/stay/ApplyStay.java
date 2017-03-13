@@ -16,6 +16,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/stay", method={HttpMethod.PUT})
 public class ApplyStay implements Handler<RoutingContext> {
+	private UserManager userManager;
+	public ApplyStay(){
+		this.userManager = new UserManager();
+	}
 		/**
 		 * Apply stay - about value of date
 		 * 
@@ -40,7 +44,7 @@ public class ApplyStay implements Handler<RoutingContext> {
 		String id = context.request().getParam("id");
 		String uid = null;
 		try {
-			uid = UserManager.getUid(id);
+			uid = userManager.getUid(id);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

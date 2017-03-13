@@ -9,6 +9,7 @@ import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.planb.support.PrecedingWork;
@@ -45,14 +46,17 @@ public class ApplyExtension implements Handler<RoutingContext> {
         }
         if (Guardian.checkParameters(classId, id, seatId, uid)) {
             try {
-                String name = ((Map<String, Object>) userManager.getUserInfo(id).getArgs()[0]).get("name").toString();
+                String name = null;
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", id, "'");
+                if (rs.next())
+                    name = rs.getString(1);
                 System.out.println(name);
                 int hour = currentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = currentTime.get(Calendar.MINUTE);
 
                 int setHour = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[0]);
                 int setMinute = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[1]);
-                if (hour < setHour || (hour == setHour && minute < setMinute)) {
+                if (!(hour < setHour || (hour == setHour && minute < setMinute))) {
                     context.response().setStatusCode(404).end();
                     context.response().close();
                 } else {
