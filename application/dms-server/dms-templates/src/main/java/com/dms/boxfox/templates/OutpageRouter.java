@@ -1,5 +1,6 @@
 package com.dms.boxfox.templates;
 
+import com.dms.boxfox.templates.DmsTemplate;
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -14,10 +15,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 @RouteRegistration(path = "/mypage/", method = {HttpMethod.GET})
-public class MypageRouter implements Handler<RoutingContext> {
+public class OutpageRouter implements Handler<RoutingContext> {
     private UserManager userManager;
 
-    public MypageRouter() {
+    public OutpageRouter() {
         this.userManager = new UserManager();
     }
 
@@ -25,21 +26,11 @@ public class MypageRouter implements Handler<RoutingContext> {
         boolean isLogin = userManager.isLogined(context);
         if (isLogin) {
             try {
-                JobResult result = userManager.getUserInfo(userManager.getIdFromSession(context));
-                if (result.isSuccess()) {
-                    HashMap<String, Object> infos = (HashMap<String, Object>) result.getArgs()[0];
-                    DmsTemplate templates = new DmsTemplate("mypage");
-                    templates.put("name", infos.get("name"));
-                    templates.put("number", infos.get("number"));
-                    templates.put("merit", infos.get("merit"));
-                    templates.put("demerit", infos.get("demerit"));
-                    templates.put("room", infos.get("room"));
-                    templates.put("seat", infos.get("seat"));
-                    templates.put("stay_status", userManager.getStayStatus(userManager.getIdFromSession(context), currentWeek()));
-                    context.response().setStatusCode(200);
-                    context.response().end(templates.process());
-                    context.response().close();
-                }
+                DmsTemplate templates = new DmsTemplate("out");
+                context.response().setStatusCode(200);
+                context.response().end(templates.process());
+                context.response().close();
+
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (TemplateException e) {

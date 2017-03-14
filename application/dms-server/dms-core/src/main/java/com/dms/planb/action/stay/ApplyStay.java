@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.LimitConfig;
+import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -37,7 +37,7 @@ public class ApplyStay implements Handler<RoutingContext> {
 		String week = context.request().getParam("week");
 		
 		try {
-			if(LimitConfig.canApplyStay(week)) {
+			if(ApplyDataUtil.canApplyStay(week)) {
 				database.executeUpdate("DELETE FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
 				database.executeUpdate("INSERT INTO stay_apply(uid, value, week) VALUES('", uid, "', ", value, ", '", week, "')");
 			

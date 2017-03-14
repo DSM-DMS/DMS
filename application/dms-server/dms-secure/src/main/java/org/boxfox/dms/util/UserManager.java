@@ -4,6 +4,7 @@ import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
+import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -92,24 +93,24 @@ public class UserManager {
     }
 
     public String getStayStatus(String id, String week){
+        String status = "";
         try {
-            String status = "";
             String uid = getUid(id);
             SafeResultSet rs = database.executeQuery("SELECT value FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
             if(rs.next()){
                 int value = rs.getInt(1);
-
+                status = ApplyDataUtil.stayDataToString(value);
             }else{
                 rs = database.executeQuery("SELECT value FROM stay_apply_default WHERE uid='",uid,"'");
                 if(rs.next()){
                     int value = rs.getInt(1);
-
+                    status = ApplyDataUtil.stayDataToString(value);
                 }
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return status;
     }
 
     public String getUid(String id) throws SQLException {

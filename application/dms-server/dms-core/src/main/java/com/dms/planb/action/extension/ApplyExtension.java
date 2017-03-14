@@ -8,7 +8,7 @@ import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.LimitConfig;
+import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
@@ -32,7 +32,6 @@ public class ApplyExtension implements Handler<RoutingContext> {
         context = PrecedingWork.putHeaders(context);
 
         DataBase database = DataBase.getInstance();
-        Calendar currentTime = Calendar.getInstance();
 
         String classId = context.request().getParam("class");
         String seatId = context.request().getParam("seat");
@@ -50,12 +49,7 @@ public class ApplyExtension implements Handler<RoutingContext> {
                 SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", uid, "'");
                 if (rs.next())
                     name = rs.getString(1);
-                int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = currentTime.get(Calendar.MINUTE);
-
-                int setHour = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[0]);
-                int setMinute = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[1]);
-                if (!(hour < setHour || (hour == setHour && minute < setMinute))) {
+                if (!ApplyDataUtil.canApplyExtension()) {
                     context.response().setStatusCode(404).end();
                     context.response().close();
                 } else {
