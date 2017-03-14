@@ -19,8 +19,13 @@ import java.util.UUID;
 public class UserManager {
     private static AES256 aes;
     private static DataBase database;
+
     static {
         aes = new AES256(".s@!31VAsv!@312231");
+    }
+
+    public static AES256 getAES() {
+        return aes;
     }
 
     public UserManager() {
@@ -66,7 +71,7 @@ public class UserManager {
             SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
             if (rs.next()) {
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("number", aes.decrypt(rs.getInt("number")+""));
+                map.put("number", aes.decrypt(rs.getInt("number") + ""));
                 map.put("name", aes.decrypt(rs.getString("name")));
                 map.put("merit", rs.getInt("merit"));
                 map.put("demerit", rs.getInt("demerit"));
@@ -78,12 +83,12 @@ public class UserManager {
     }
 
     public String getUid(String id) throws SQLException {
-            String uid = null;
-            String idEncrypt = aes.encrypt(id);
-            if (checkIdExists(id))
-                uid = DataBase.getInstance().executeQuery("select uid from account where id='", idEncrypt, "'").nextAndReturn().getString(1);
-            return uid;
-        }
+        String uid = null;
+        String idEncrypt = aes.encrypt(id);
+        if (checkIdExists(id))
+            uid = DataBase.getInstance().executeQuery("select uid from account where id='", idEncrypt, "'").nextAndReturn().getString(1);
+        return uid;
+    }
 
     public static boolean checkIdExists(String id) {
         boolean check = false;

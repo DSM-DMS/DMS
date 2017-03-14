@@ -47,10 +47,9 @@ public class ApplyExtension implements Handler<RoutingContext> {
         if (Guardian.checkParameters(classId, id, seatId, uid)) {
             try {
                 String name = null;
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", id, "'");
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", uid, "'");
                 if (rs.next())
                     name = rs.getString(1);
-                System.out.println(name);
                 int hour = currentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = currentTime.get(Calendar.MINUTE);
 
@@ -68,7 +67,7 @@ public class ApplyExtension implements Handler<RoutingContext> {
             } catch (SQLException e) {
                 context.response().setStatusCode(500).end();
                 context.response().close();
-
+                e.printStackTrace();
                 Log.l("SQLException");
             }
         } else {

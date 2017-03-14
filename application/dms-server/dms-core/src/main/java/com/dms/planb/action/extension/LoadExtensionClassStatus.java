@@ -3,6 +3,7 @@ package com.dms.planb.action.extension;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -45,16 +46,15 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 				break;
 			case "status":
 				classId = Integer.parseInt(context.request().getParam("class"));
-				
 				break;
 			}
-
 			context.response().setStatusCode(200);
 			context.response().end(json.toString());
 			context.response().close();
 		} catch (SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
+			e.printStackTrace();
 
 			Log.l("SQLException");
 		}
@@ -65,7 +65,8 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 		SafeResultSet resultSet = DataBase.getInstance().executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
 
 		while (resultSet.next()) {
-			map.put(resultSet.getInt("seat"), resultSet.getString("name"));
+			System.out.println(resultSet.getString("name"));
+			map.put(resultSet.getInt("seat"), UserManager.getAES().decrypt(resultSet.getString("name")));
 		}
 		
 		return map;

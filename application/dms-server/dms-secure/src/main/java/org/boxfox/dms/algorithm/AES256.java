@@ -30,7 +30,7 @@ public class AES256 {
             this.ips = key.substring(0, 16);
             this.keySpec = keySpec;
         } catch (Exception e) {
-            Log.e(e.toString());
+            e.printStackTrace();
         }
     }
 
@@ -49,7 +49,7 @@ public class AES256 {
                 | InvalidKeyException | InvalidAlgorithmParameterException
                 | IllegalBlockSizeException | BadPaddingException
                 | UnsupportedEncodingException e) {
-            Log.e(e.toString());
+            e.printStackTrace();
         }
         return null;
     }
@@ -70,7 +70,7 @@ public class AES256 {
                 | InvalidKeyException | InvalidAlgorithmParameterException
                 | IllegalBlockSizeException | BadPaddingException
                 | UnsupportedEncodingException e) {
-            Log.e(e.toString());
+            e.printStackTrace();
         }
         return null;
     }
