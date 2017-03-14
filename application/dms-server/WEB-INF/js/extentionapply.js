@@ -126,7 +126,7 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
-        url: "http://dsm2015.cafe24.com"+mainUrl + "/class",
+        url: mainUrl + "/class",
         type: "GET",
         data: {
             "option": "map",
@@ -184,7 +184,7 @@ function drawSeat(seatArr, borderSize) {
                             // 신청 ajax
                             // console.log("value test = "+$(this).data("seat"))
                             $.ajax({
-                                url: "http://dsm2015.cafe24.com/"+mainUrl,
+                                url: mainUrl,
                                 type: "PUT",
                                 data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
