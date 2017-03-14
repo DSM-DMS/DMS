@@ -126,7 +126,7 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
-        url: mainUrl + "/class",
+        url: "http://dsm2015.cafe24.com"+mainUrl + "/class",
         type: "GET",
         data: {
             "option": "map",
@@ -143,7 +143,6 @@ function drawSeat(seatArr, borderSize) {
     var selected;
     for (var loop = 0; loop < seatArr.length; loop++) {
         for (var innerLoop = 0; innerLoop < seatArr[0].length; innerLoop++) {
-            console.log(innerLoop);
             // draw circle
             // 자리가 벽이 아니면
             if (seatArr[loop][innerLoop] != 0) {
@@ -166,33 +165,30 @@ function drawSeat(seatArr, borderSize) {
                         },
                     });
                     newSeat.data("seat", seatArr[loop][innerLoop]);
-                    // console.log("seat test = "+newSeat.data("seat"))
+                    console.log("seat test = "+newSeat.data("seat"))
                     newSeat.appendTo(".seatcontainer");
                     newSeat.click(function() {
                         if (selected !== undefined) {
-                            console.log(selected);
                             selected.css({
                                 "background": "white",
                                 "border": borderSize + " solid rgb(134,193,233)"
                             });
                             selected.text("");
                         }
-                        console.log(selected);
-                        console.log($(this).get(0));
                         if (selected !== undefined && selected.get(0) == this) {
                             selected.css({
                                 "border": "0 solid black",
                                 "background": "rgb(231,160,153)"
                             })
                             selected = $(this);
-                            console.log("test = " + seatArr[loop - 1][innerLoop - 1] + "test2 = " + $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val());
                             // 신청 ajax
+                            // console.log("value test = "+$(this).data("seat"))
                             $.ajax({
-                                url: mainUrl,
+                                url: "http://dsm2015.cafe24.com/"+mainUrl,
                                 type: "PUT",
                                 data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
-                                    "seat": newSeat.data("seat")
+                                    "seat": $(this).data("seat")
                                 },
                                 success: function(data) {
                                     selected.text("신청됨");
@@ -203,11 +199,9 @@ function drawSeat(seatArr, borderSize) {
                                 },
                                 error: function(request, status, error) {
                                     alert("신청가능한 시간이 아닙니다.");
-
                                 }
                             });
                         } else {
-                            console.log("wht");
                             selected = $(this);
                             $(this).css({
                                 "border": "0 solid black",

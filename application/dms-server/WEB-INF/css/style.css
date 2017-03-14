@@ -845,6 +845,18 @@ input.editor-button {
     display: block;
 }
 
+.preview-picture {
+    /*width: 70px;
+    height: 70px;*/
+    border-radius: 50%;
+}
+
+#modify-profile-picture {
+    display: inline-block;
+}
+
+
+
 .w-1 {
     width: 10%;
 }
@@ -884,6 +896,7 @@ input.editor-button {
 .w-10 {
     width: 100%;
 }
+
 
 /*.first-row {
     margin-top: 40px;
