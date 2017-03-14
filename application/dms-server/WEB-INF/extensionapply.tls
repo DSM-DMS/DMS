@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
     <meta charset="UTF-8">
     <title>DMS</title>
@@ -12,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-    <h1>DSM Dormitory System</h1> 
+    <h1>DSM Dormitory System</h1>
 </div>
     
     <div class="row slider-menu-container hides">
@@ -48,20 +49,43 @@
                  <div>내정보</div>
              </div>
         </div>
-    
+
   <div class="main">
       <div class="card-wrapper">
     <div class="card">
     <div class="card-block">
-        <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
-        ${content}
+        <div class="underbar-title border-blue">연장신청</div>
+        <div class="extentionapply text-center">
+            <div class="selecter-container">
+                <div class="class-selecter-div">
+                    <label for="class-select">가온실</label>
+                    <select id="class-select">
+                        <!--받은 데이터를 통해 호실의 개수를 정하도록 리팩토링 요구 - 출시후에-->
+                      <option selected="selected" value="1">가온실</option>
+                      <option value="2">나온실</option>
+                      <option value="3">다온실</option>
+                      <option value="4">라온실</option>
+                      <option value="5">3층 독서실</option>
+                      <option value="6">4층 독서실</option>
+                      <option value="7">5층 자유구역</option>
+                  </select>
+                </div>
+                <input class="apply-cancle" type="button" name="" value="신청취소">
+            </div>
+
+            <div class="seatcontainer">
+
+            </div>
+        </div>
+    </div>
+      </div>
         </div>
         </div>
-        </div>
-        </div>
-      
+
 </body>
-    
+
 <script src="/js/script.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="/js/extentionapply.js"></script>
 
 </html>

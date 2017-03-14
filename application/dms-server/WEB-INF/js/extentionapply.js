@@ -3,6 +3,8 @@
 var id = "test";
 var name = "momo";
 
+var mainUrl = "/apply/extension";
+
 setCancleEvent();
 setSelecterOptions();
 setSelecterEvent();
@@ -15,11 +17,12 @@ function setCancleEvent() {
     $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
         // 신청취소 ajax
         $.ajax({
+<<<<<<< HEAD
             url: "http://localhost:8089/apply/extension",
+=======
+            url: mainUrl,
+>>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
             type: "DELETE",
-            data: {
-                "id": id
-            },
             success: function(data) {
                 // alert("취소 완료.");
                 // 화면을 리로드하는 코드
@@ -127,7 +130,11 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
+<<<<<<< HEAD
         url: "http://localhost:8089/apply/extension/class",
+=======
+        url: mainUrl + "/class",
+>>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
         type: "GET",
         data: {
             "option": "map",
@@ -181,27 +188,34 @@ function drawSeat(seatArr, borderSize) {
                         console.log(selected);
                         console.log($(this).get(0));
                         if (selected !== undefined && selected.get(0) == this) {
-                            console.log("ASD");
                             selected.css({
                                 "border": "0 solid black",
                                 "background": "rgb(231,160,153)"
                             })
-                            selected.text("신청됨");
                             selected = $(this);
                             console.log("test = " + seatArr[loop - 1][innerLoop - 1] + "test2 = " + $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val());
                             // 신청 ajax
                             $.ajax({
+<<<<<<< HEAD
                                 url: "http://localhost:8089/apply/extension",
+=======
+                                url: mainUrl,
+>>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
                                 type: "PUT",
-                                data: JSON.stringify({
-                                    "id": "test",
+                                data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
-                                    "seat": 0,
-                                    "name": "momo"
-                                }),
+                                    "seat": newSeat.data("seat")
+                                },
                                 success: function(data) {
+                                    selected.text("신청됨");
                                     $("div.seatcontainer").html("");
-                                    drawSeat(getSeatData(), "7.5px");
+                                    getSeatData(function(data) {
+                                        drawSeat(data, "7.5px")
+                                    });
+                                },
+                                error: function(request, status, error) {
+                                    alert("신청가능한 시간이 아닙니다.");
+
                                 }
                             });
                         } else {

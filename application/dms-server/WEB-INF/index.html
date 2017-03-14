@@ -43,7 +43,7 @@
                  <img src="./images/bug.png"/>
                  <div>버그신고</div>
              </div>
-             <div class="icon-menu-item text-center">
+             <div class="icon-menu-item text-center" onclick="redirect('mypage')">
                  <img src="./images/man.png"/>
                  <div>내정보</div>
              </div>
@@ -66,7 +66,7 @@
                                     </thead>
                                     <tbody>
                                         <#list Notices as notice>
-                                        <tr>
+                                        <tr onclick="viewPost('notice', ${notice.no})">
                                             <th scope="row">${notice.no}</th>
                                             <td>${notice.title}</td>
                                             <td>${notice.writer}</td>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row padding">
             <div class="col card bg-success">
                 <div class="card-block card-block-notice" style="color: white">연장학습 신청이 가능한 시간입니다.</div>
@@ -112,7 +112,7 @@
                 <div class="card-block card-block-notice" style="color: white">상점을 신청할 수 있습니다!</div>
             </div>
         </div>
-        
+
         <div class="row padding">
             <div class="col-lg-6 col-md-12 card display-inline-block">
                 <div class="card-block">
@@ -133,8 +133,8 @@
             </div>
             <div class="col-lg-6 col-md-12 card display-inline-block">
                 <div class="card-block">
-                    <h4 class="card-title">잔류신청</h4>
-                    <p class="card-text">잔류 및 귀가 신청은 월요일 부터 목요일 8시 이전까지 가능합니다.</p> <a href="#" class="card-link">신청하러 가기</a> </div>
+                    <h4 class="card-title">상점신청</h4>
+                    <p class="card-text">착한 활동을 했다면 상점을 신청할 수 있습니다!</p> <a href="#" class="card-link">신청하러 가기</a> </div>
             </div>
         </div>
         <div class="card">
@@ -152,7 +152,7 @@
                                 </thead>
                                 <tbody>
                                         <#list Rules as rule>
-                                        <tr>
+                                        <tr onclick="viewPost('rule', ${rule.no})">
                                             <th scope="row">${rule.no}</th>
                                             <td>${rule.title}</td>
                                         </tr>
@@ -173,7 +173,7 @@
                                 </thead>
                                 <tbody>
                                         <#list Faqs as faq>
-                                        <tr>
+                                        <tr onclick="viewPost('faq', ${faq.no})">
                                             <th scope="row">${faq.no}</th>
                                             <td>${faq.title}</td>
                                         </tr>
@@ -186,9 +186,8 @@
             </div>
         </div>
     </div>
-    
-    
-    <!-- Login  modal-->
+
+
     <!-- Login  modal-->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -207,7 +206,7 @@
                                         <input id="login-username" type="text" class="form-control" name="id" value="" placeholder="ID"> </div>
                                     <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input id="login-password" type="password" class="form-control" name="password" placeholder="Password"> </div>
-                                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LdPphUUAAAAALXbBtZQa5Jtau60XENpmPX8YG9-"></div>
+                                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LerpRgUAAAAAC5EctefxMtAtYj6XUKrm8fj_ZSX"></div>
                                     <div class="input-group">
                                         <div class="checkbox">
                                             <label>
@@ -218,7 +217,8 @@
                                         <div style="width:100%; text-align:left;"> 아이디가 없으신가요? <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
                                             회원가입 하기
                                         </a> </div>
-                                        <button id="btn-signup" type="button" class="btn btn-info">로그인</button>
+                                        <span id="login-warn" class="text-warning text-center" style="margin-right: 15px;">로그인에 실패했습니다.</span>
+                                        <button id="btn-signup" type="button" class="btn btn-info" onclick="login($('#loginform').serialize())">로그인</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </form>
@@ -234,7 +234,7 @@
                                     <div class="form-group">
                                         <label for="id" class="col-md-3 control-label">아이디</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="id" placeholder="ID" onchange="checkIdExists(this)"> </div>
+                                            <input type="text" class="form-control" name="id" placeholder="ID" onchange="checkIdExists()" id="register-id"> </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="col-md-3 control-label">비밀번호</label>
@@ -247,7 +247,8 @@
                                             <input type="text" class="form-control" name="uid" placeholder="Code"> </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button id="btn-signup" type="button" class="btn btn-info" onclick="register($('#signupform').serialize());">회원가입</button>
+                                        <span id="register-warn" class="text-warning text-center" style="margin-right: 15px;">동일한 아이디가 이미 있습니다.</span>
+                                        <button id="btn-register" type="button" class="btn btn-info" onclick="register($('#signupform').serialize());">회원가입</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </form>
@@ -258,8 +259,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div>Icons made by <a href="http://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </body>
 <script type="text/javascript">

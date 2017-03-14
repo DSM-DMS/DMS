@@ -68,18 +68,48 @@ public class UserManager {
         JobResult result = new JobResult(false);
         String uid = getUid(id);
         if (uid != null) {
+            String room = "";
+            String seat = "";
+            SafeResultSet rss = database.executeQuery("select class, seat from extension_apply where uid='", uid, "'");
+            if (rss.next()) {
+                room = rss.getInt(1) + "";
+                seat = rss.getInt(2) + "";
+            }
             SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
             if (rs.next()) {
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("number", aes.decrypt(rs.getInt("number") + ""));
+                map.put("number", aes.decrypt(rs.getString("number") + ""));
                 map.put("name", aes.decrypt(rs.getString("name")));
                 map.put("merit", rs.getInt("merit"));
                 map.put("demerit", rs.getInt("demerit"));
+                map.put("room", room);
+                map.put("seat", seat);
                 result.setSuccess(true);
                 result.setArgs(map);
             }
         }
         return result;
+    }
+
+    public String getStayStatus(String id, String week){
+        try {
+            String status = "";
+            String uid = getUid(id);
+            SafeResultSet rs = database.executeQuery("SELECT value FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
+            if(rs.next()){
+                int value = rs.getInt(1);
+
+            }else{
+                rs = database.executeQuery("SELECT value FROM stay_apply_default WHERE uid='",uid,"'");
+                if(rs.next()){
+                    int value = rs.getInt(1);
+
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getUid(String id) throws SQLException {
