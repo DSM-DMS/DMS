@@ -4,10 +4,10 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.LimitConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.LimitConfig;
 import com.dms.planb.support.PrecedingWork;
 
 import io.vertx.core.Handler;
