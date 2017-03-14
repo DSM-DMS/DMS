@@ -32,4 +32,8 @@ public class LimitConfig {
 			return true;
 		}
 	}
+	
+	public static boolean canApplyGoingout() {
+		return true;
+	}
 }
