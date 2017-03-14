@@ -27,13 +27,14 @@ public class ModifyStayDefault implements Handler<RoutingContext> {
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
-		String uid = null;
-		try {
-			uid = userManager.getUid(id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		int value = Integer.parseInt(context.request().getParam("value"));
 		
 		try {

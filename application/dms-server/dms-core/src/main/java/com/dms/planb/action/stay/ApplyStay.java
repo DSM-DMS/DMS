@@ -17,22 +17,26 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path="/apply/stay", method={HttpMethod.PUT})
 public class ApplyStay implements Handler<RoutingContext> {
 	UserManager userManager;
+	
 	public ApplyStay() {
 		userManager = new UserManager();
 	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
-		String uid = null;
-		try {
-			uid = userManager.getUid(id);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
 		int value = Integer.parseInt(context.request().getParam("value"));
 		String week = context.request().getParam("week");
 		

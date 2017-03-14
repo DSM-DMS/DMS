@@ -2,6 +2,7 @@ package com.dms.planb.action.merit;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -17,6 +18,12 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/merit", method={HttpMethod.GET})
 public class LoadMeritApplyStatus implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public LoadMeritApplyStatus() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -27,10 +34,17 @@ public class LoadMeritApplyStatus implements Handler<RoutingContext> {
 		EasyJsonObject tempObject = new EasyJsonObject();
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE id='", id, "'");
+			resultSet = database.executeQuery("SELECT * FROM merit_apply WHERE uid='", uid, "'");
 			
 			if(resultSet.next()) {
 				do {

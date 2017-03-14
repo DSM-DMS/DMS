@@ -2,6 +2,7 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -15,18 +16,30 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/afterschool", method={HttpMethod.POST})
 public class ApplyAfterschool implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public ApplyAfterschool() {
+		userManager = new UserManager();
+	}
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		int no = Integer.parseInt(context.request().getParam("no"));
 		
 		try {
 			if(Afterschool.canApply(id, no)) {
-				database.executeUpdate("INSERT INTO afterschool_apply(id, no) VALUES('", id, "', ", no, ")");
+				database.executeUpdate("INSERT INTO afterschool_apply(uid, no) VALUES('", uid, "', ", no, ")");
 				
 				context.response().setStatusCode(201).end();
 				context.response().close();

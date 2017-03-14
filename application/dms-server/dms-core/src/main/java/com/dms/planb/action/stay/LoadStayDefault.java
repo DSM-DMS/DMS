@@ -31,12 +31,13 @@ public class LoadStayDefault implements Handler<RoutingContext> {
         SafeResultSet resultSet;
         EasyJsonObject responseObject = new EasyJsonObject();
 
-        String id = context.request().getParam("id");
+        String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            uid = userManager.getUid(id);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         try {

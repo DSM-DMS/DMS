@@ -19,7 +19,7 @@ public class Afterschool {
 	 * 3 : Saturday
 	 */
 
-	public static boolean canApply(String id, int no) throws SQLException {
+	public static boolean canApply(String uid, int no) throws SQLException {
 		database = DataBase.getInstance();
 				
 		resultSet = database.executeQuery("SELECT * FROM afterschool_list WHERE no=", no);
@@ -37,7 +37,7 @@ public class Afterschool {
 		 * Target subject's date of course
 		 */
 
-		resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE id='", id, "'");
+		resultSet = database.executeQuery("SELECT * FROM afterschool_apply WHERE uid='", uid, "'");
 
 		if (resultSet.next()) {
 			/*
