@@ -50,7 +50,7 @@ public class LoadQnaComment implements Handler<RoutingContext> {
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {
-				context.response().setStatusCode(404).end();
+				context.response().setStatusCode(204).end();
 				context.response().close();
 			}
 		} catch(SQLException e) {
