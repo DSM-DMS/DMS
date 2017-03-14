@@ -80,8 +80,8 @@
                                             <h4 class="modal-title">프로필 사진 변경</h4>
                                         </div>
                                         <div class="modal-body form-horizontal pl-5 pr-5" role="form">
-                                            <input id="modify-profile-picture" type="file" class="" name="id" onchange="readURL(this);">
-                                            <img class="preview-picture" src="#" alt="your image"/>
+                                            <input id="modify-profile-picture" type="file" class="" name="profile_image" onchange="readURL(this);">
+                                            <img class="preview-picture" src="#" alt="your image" />
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="modify-profile-picture-btn btn btn-info">변경</button>
@@ -100,18 +100,19 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title">비밀번호 수정</h4>
                                         </div>
-                                        <div class="modal-body form-horizontal pl-5 pr-5" role="form">
-                                            <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input id="modify-password" type="password" class="form-control" name="id" value="" placeholder="새로운 비밀번호"> </div>
-                                            <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input id="modify-password-re" type="password" class="form-control" name="id" value="" placeholder="비밀번호 재확인"> </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="modify-password-btn btn btn-info">변경</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
+                                        <form class="modify-password-form">
+                                            <div class="modal-body form-horizontal pl-5 pr-5" role="form">
+                                                <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                    <input id="modify-password" type="password" class="form-control" name="id" value="" placeholder="새로운 비밀번호" required> </div>
+                                                <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                    <input id="modify-password-re" type="password" class="form-control" name="id" value="" placeholder="비밀번호 재확인" required> </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="modify-password-btn btn btn-info">변경</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
