@@ -1,4 +1,4 @@
-package com.dms.planb.support;
+package org.boxfox.dms.utilities.actions.support;
 
 import java.util.Calendar;
 
@@ -31,5 +31,9 @@ public class LimitConfig {
 		} else {
 			return true;
 		}
+	}
+	
+	public static boolean canApplyGoingout() {
+		return true;
 	}
 }
