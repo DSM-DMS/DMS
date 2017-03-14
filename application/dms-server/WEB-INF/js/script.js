@@ -70,13 +70,12 @@ function register(params) {
         type: "POST",
         data: params,
         success: function(data, status) {
-            $("#register-warn").addClass('text-success');
             $("#register-warn").removeClass('text-warning');
-            $("#register-warn").text('회원가입에 성공했습니다.');
-            $("#register-warn").show();
+            alert("회원가입에 성공했습니다.")
+            $('#signupbox').hide();
+            $('#loginbox').show()
         },
         error: function (xhr) {
-            $("#register-warn").removeClass('text-success');
             $("#register-warn").addClass('text-warning');
             $("#register-warn").text('회원가입에 실패했습니다.');
             $("#register-warn").show();
