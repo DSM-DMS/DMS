@@ -16,25 +16,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/stay", method={HttpMethod.PUT})
 public class ApplyStay implements Handler<RoutingContext> {
-	private UserManager userManager;
-	public ApplyStay(){
-		this.userManager = new UserManager();
+	UserManager userManager;
+	public ApplyStay() {
+		userManager = new UserManager();
 	}
-		/**
-		 * Apply stay - about value of date
-		 * 
-		 * Table Name : stay_apply
-		 * 
-		 * id VARCHAR(20) NN
-		 * value INT(1) NN
-		 * week DATE NN
-		 * 
-		 * DATE format : YYYY-MM-DD
-		 * Friday home coming : 1
-		 * Saturday home coming : 2
-		 * Saturday dormitory coming : 3
-		 * Stay : 4
-		 */
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
