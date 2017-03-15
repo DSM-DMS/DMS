@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="post/faq/write", method={HttpMethod.GET})
+@RouteRegistration(path="/post/faq/write", method={HttpMethod.GET})
 public class FaqEditor implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
