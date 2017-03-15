@@ -109,23 +109,22 @@
 
 <script src="/js/script.js"></script>
 <script src="/js/go_out_apply.js"></script>
-
 <script type="text/javascript">
 $('#sat_go').flip();
 $('#sun_go').flip();
 
-var checkSat = function () {
-  var val = $("#sat_go").data("flip-model");
-  if(val.isFlipped) {
+var fillSat = function () {
+  var val = ${status_1?c};
+  if(val) {
     $("#sat_val").text('외출 X');
   } else {
     $("#sat_val").text('외출 O');
   }
 }
 
-var checkSun = function () {
-  var val = $("#sun_go").data("flip-model");
-  if(val.isFlipped) {
+var fillSun = function () {
+  var val = ${status_2?c}
+  if(val) {
     $("#sun_val").text('외출 X');
   } else {
     $("#sun_val").text('외출 O');
