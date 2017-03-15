@@ -142,16 +142,16 @@ function getSeatData(callback) {
         },
         success: function(data) {
             // result = JSON.parse(data);
-            callback(JSON.parse(data).map)
+            callback(JSON.parse(data).map, "7.5px");
         }
     });
 }
 
 function drawSeat(seatArr, borderSize) {
+    var seatDiv = $('<div/>');
     var selected;
     for (var loop = 0; loop < seatArr.length; loop++) {
         for (var innerLoop = 0; innerLoop < seatArr[0].length; innerLoop++) {
-            console.log(innerLoop);
             // draw circle
             // 자리가 벽이 아니면
             if (seatArr[loop][innerLoop] != 0) {
@@ -163,7 +163,7 @@ function drawSeat(seatArr, borderSize) {
                             "background": "rgb(134,193,233)"
                         },
                         text: seatArr[loop][innerLoop]
-                    }).appendTo(".seatcontainer");
+                    }).appendTo(seatDiv);
                 }
                 // 자리가 선택가능하면
                 else {
@@ -174,27 +174,24 @@ function drawSeat(seatArr, borderSize) {
                         },
                     });
                     newSeat.data("seat", seatArr[loop][innerLoop]);
-                    // console.log("seat test = "+newSeat.data("seat"))
-                    newSeat.appendTo(".seatcontainer");
+                    console.log("seat test = "+newSeat.data("seat"))
+                    newSeat.appendTo(seatDiv);
                     newSeat.click(function() {
                         if (selected !== undefined) {
-                            console.log(selected);
                             selected.css({
                                 "background": "white",
                                 "border": borderSize + " solid rgb(134,193,233)"
                             });
                             selected.text("");
                         }
-                        console.log(selected);
-                        console.log($(this).get(0));
                         if (selected !== undefined && selected.get(0) == this) {
                             selected.css({
                                 "border": "0 solid black",
                                 "background": "rgb(231,160,153)"
                             })
                             selected = $(this);
-                            console.log("test = " + seatArr[loop - 1][innerLoop - 1] + "test2 = " + $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val());
                             // 신청 ajax
+                            // console.log("value test = "+$(this).data("seat"))
                             $.ajax({
 <<<<<<< HEAD
                                 url: "http://localhost:8089/apply/extension",
@@ -204,22 +201,20 @@ function drawSeat(seatArr, borderSize) {
                                 type: "PUT",
                                 data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
-                                    "seat": newSeat.data("seat")
+                                    "seat": $(this).data("seat")
                                 },
                                 success: function(data) {
                                     selected.text("신청됨");
-                                    $("div.seatcontainer").html("");
+                                    // $("div.seatcontainer").html("");
                                     getSeatData(function(data) {
                                         drawSeat(data, "7.5px")
                                     });
                                 },
                                 error: function(request, status, error) {
                                     alert("신청가능한 시간이 아닙니다.");
-
                                 }
                             });
                         } else {
-                            console.log("wht");
                             selected = $(this);
                             $(this).css({
                                 "border": "0 solid black",
@@ -237,11 +232,14 @@ function drawSeat(seatArr, borderSize) {
                         // "background": "#f6f6f6",
                         "border": borderSize + " solid #757575"
                     }
-                }).appendTo(".seatcontainer");
+                }).appendTo(seatDiv);
             }
         }
-        $('</br>').appendTo(".seatcontainer");
+        $('</br>').appendTo(seatDiv);
     }
+    //seatDiv.appendTo(".seatcontainer");
+    console.log("AAAA");
+    $(".seatcontainer").html(seatDiv);
 }
 
 
@@ -500,16 +498,16 @@ function drawSeat(seatArr, borderSize) {
 // //     [0, 0, 0, 0, 0, 0, 0]
 // // ];
 // //
-// // var naon2 = [
-// //     [0, 0, 0, 0, 0, 0, 0],
-// //     [0, "루시우", "디바", "메르시", "트레이서", "정크렛", 0],
-// //     [0, "솔저", 0, "라인하르트", 0, "메이", 0],
-// //     [0, "맥크리", 0, "리퍼", 0, "겐지", 0],
-// //     [0, "아나", 0, "솜브라", 0, "젠야타", 0],
-// //     [0, "바스티온", 0, "한조", 0, "파라", 0],
-// //     [0, 0, 0, 0, 0, 0, 0]
-// // ];
-// //
+var naon2 = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, "루시우", "디바", "메르시", "트레이서", "정크렛", 0],
+    [0, "솔저", 0, "라인하르트", 0, "메이", 0],
+    [0, "맥크리", 0, "리퍼", 0, "겐지", 0],
+    [0, "아나", 0, "솜브라", 0, "젠야타", 0],
+    [0, "바스티온", 0, "한조", 0, "파라", 0],
+    [0, 0, 0, 0, 0, 0, 0]
+];
+
 // // var daon = [
 // //     [0, 0, 0, 0, 0, 0, 0],
 // //     [0, 1, 1, 1, 1, 1, 0],
@@ -524,19 +522,19 @@ function drawSeat(seatArr, borderSize) {
 // //     [0, 0, 0, 0, 0, 0, 0]
 // // ];
 // //
-// // var daon2 = [
-// //     [0, 0, 0, 0, 0, 0, 0],
-// //     [0, "호랑이", "사자", "사슴", "노루", "거북이", 0],
-// //     [0, 0, 0, 0, 0, 0, 0],
-// //     [0, 1, "코끼리", "기린", 1, "코뿔소", 0],
-// //     [0, 0, 0, 0, 0, 0, 0],
-// //     [0, 1, "하마", 1, "개미", 1, 0],
-// //     [0, 0, 0, 0, 0, 0, 0],
-// //     [0, "펭귄", 1, "여우", 1, "늑대", 0],
-// //     [0, 0, 0, 0, 0, 0, 0],
-// //     [0, 1, 1, "수달", 1, 1, 0],
-// //     [0, 0, 0, 0, 0, 0, 0]
-// // ];
+var daon2 = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, "호랑이", "사자", "사슴", "노루", "거북이", 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 1, "코끼리", "기린", 1, "코뿔소", 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 1, "하마", 1, "개미", 1, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, "펭귄", 1, "여우", 1, "늑대", 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, "수달", 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0]
+];
 // //
 // // drawSeat(gaon2, "7.5px");
 // // $(".extentionapply div.class-selecter-div select#class-select").change(function() {

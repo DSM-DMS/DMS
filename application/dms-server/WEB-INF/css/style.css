@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 * {
-    font-family: "hanna";
+    font-family: "나눔고딕";
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 
 .underbar-title {
     position: relative;
-    border-bottom-width: 4px;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
     /*font-weight: bold;*/
     padding-bottom: 3px;
@@ -236,6 +236,10 @@ table tr {
     /* Standard syntax */
 }
 
+p.allergy {
+    display: none !important;
+}
+
 
 /*------------------------------- extention ---------------------*/
 
@@ -262,6 +266,7 @@ table tr {
     transition: all 0.3s ease;
     /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
 }
+
 
 /*---------------------- extentionapply select css------------*/
 
@@ -673,6 +678,14 @@ input.editor-button {
     margin-top: 20px;
 }
 
+/*---------------------- qnaQuestionWrite -------------*/
+
+.ckeckbox-label {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
 
 /*---------------- go out ----------------*/
 
@@ -720,25 +733,23 @@ input.editor-button {
 }
 
 #go_submit {
-<<<<<<< HEAD
-  font-size: 135%;
-  padding: 15px;
-  width: 80%;
-  margin: auto;
-  margin-top: 2%;
-  text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
+    <<<<<<< HEAD font-size: 135%;
+    padding: 15px;
+    width: 80%;
+    margin: auto;
+    margin-top: 2%;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #go_status {
-  text-align: center;
-  font-size: 150%;
-  width: 95%;
-  margin: auto;
-  margin-top: 2%;
-=======
-    background-color: #40E0D0;
+    text-align: center;
+    font-size: 150%;
+    width: 95%;
+    margin: auto;
+    margin-top: 2%;
+    =======background-color: #40E0D0;
     font-size: 135%;
     padding: 15px;
     width: 30%;
@@ -755,7 +766,7 @@ input.editor-button {
     width: 90%;
     margin: auto;
     margin-top: 2%;
->>>>>>> b455b4d12266b9c8d3e84d3fd02e438eb859c837
+    >>>>>>>b455b4d12266b9c8d3e84d3fd02e438eb859c837
 }
 
 #go_status td {
@@ -771,11 +782,9 @@ input.editor-button {
 }
 
 #go_row {
-<<<<<<< HEAD
-  padding-top: 50px;
-  padding-bottom: 100px;
-=======
-    padding-top: 100px;
+    <<<<<<< HEAD padding-top: 50px;
+    padding-bottom: 100px;
+    =======padding-top: 100px;
     padding-bottom: 100px;
 }
 
@@ -812,13 +821,13 @@ input.editor-button {
 .mypage-component-container {
     padding-right: 0 !important;
     transition: all 0.5s;
->>>>>>> b455b4d12266b9c8d3e84d3fd02e438eb859c837
+    >>>>>>>b455b4d12266b9c8d3e84d3fd02e438eb859c837
 }
 
 .moreinfo-span {
     position: absolute;
     bottom: 10px;
-    right : 10px;
+    right: 10px;
     color: #F6538F;
 }
 
@@ -833,16 +842,26 @@ input.editor-button {
 }
 
 .detail-container {
-     display: none;
-     margin-bottom: 23px;
+    display: none;
+    margin-bottom: 23px;
 }
 
 .detail-container {
-     margin-bottom: 23px;
+    margin-bottom: 23px;
 }
 
-.mypage-qna .detail-container a, .mypage-comment .detail-container a{
+.mypage-qna .detail-container a, .mypage-comment .detail-container a {
     display: block;
+}
+
+.preview-picture {
+    /*width: 70px;
+    height: 70px;*/
+    border-radius: 50%;
+}
+
+#modify-profile-picture {
+    display: inline-block;
 }
 
 .w-1 {
@@ -885,9 +904,11 @@ input.editor-button {
     width: 100%;
 }
 
+
 /*.first-row {
     margin-top: 40px;
 }*/
+
 
 /*---------------- 설명 ------------------*/
 
@@ -896,4 +917,53 @@ input.editor-button {
     float: right;
     font-size: 15px;
     height: 40px;
+}
+
+
+/*---------------- 새로운 상점신청 ------------------*/
+
+.post-card {
+    margin: 30px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 7px;
+    display: inline-block;
+    width: 60%;
+    min-height: 400px;
+    position: relative;
+}
+
+.form-box {
+    /*background-image: url("../images/postImage1.jpg");*/
+    /*background-size: cover;*/
+    background-color: white;
+    min-height: 300px;
+    padding: 20px;
+    border-radius: 7px;
+}
+
+.point-apply-btn {
+    /*position: absolute;
+    right: 0;
+    margin: 20px;*/
+    margin-top: 10px;
+}
+
+.point-apply-to {
+    float: right;
+}
+
+.point-apply-content {
+    margin-bottom: 20px;
+}
+
+.point-apply-content-recommand {
+    height: 124px !important;
+}
+
+.point-apply-target {
+    display: inline-block !important;
+    width: 65% !important;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
