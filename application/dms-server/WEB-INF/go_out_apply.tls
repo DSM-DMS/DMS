@@ -62,7 +62,7 @@
                 <div class="front">
                   외출 O
                 </div>
-                <div class="back">
+                <div class="back" hidden>
                   외출 X
                 </div>
               </div>
@@ -73,7 +73,7 @@
                 <div class="front">
                   외출 O
                 </div>
-                <div class="back">
+                <div class="back" hidden>
                   외출 X
                 </div>
               </div>
@@ -137,5 +137,8 @@ $('#sun_go').flip(${status_2?c});
 
 checkSat();
 checkSun();
+
+$('#sat_go .back').removeAttr('hidden');
+$('#sun_go .back').removeAttr('hidden');
 </script>
 </html>
