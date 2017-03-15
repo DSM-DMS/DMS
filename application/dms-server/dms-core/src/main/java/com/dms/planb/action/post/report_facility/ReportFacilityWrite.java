@@ -14,10 +14,10 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/report/write", method={HttpMethod.GET})
-public class ReportFacilityEditor implements Handler<RoutingContext> {
+public class ReportFacilityWrite implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public ReportFacilityEditor() {
+	public ReportFacilityWrite() {
 		userManager = new UserManager();
 	}
 	

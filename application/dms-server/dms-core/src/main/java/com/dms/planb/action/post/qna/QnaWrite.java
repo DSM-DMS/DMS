@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.notice;
+package com.dms.planb.action.post.qna;
 
 import java.io.IOException;
 
@@ -13,11 +13,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/notice/write", method={HttpMethod.GET})
-public class NoticeEditor implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/qna/write", method={HttpMethod.GET})
+public class QnaWrite implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public NoticeEditor() {
+	public QnaWrite() {
 		userManager = new UserManager();
 	}
 	

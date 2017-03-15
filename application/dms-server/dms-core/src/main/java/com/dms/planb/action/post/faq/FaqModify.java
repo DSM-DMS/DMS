@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.qna;
+package com.dms.planb.action.post.faq;
 
 import java.io.IOException;
 
@@ -13,11 +13,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/qna/write", method={HttpMethod.GET})
-public class QnaEditor implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
+public class FaqModify implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public QnaEditor() {
+	public FaqModify() {
 		userManager = new UserManager();
 	}
 	
@@ -25,6 +25,8 @@ public class QnaEditor implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
+			templates.put("category", "faq");
+			templates.put("type", "modify");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
@@ -32,7 +34,7 @@ public class QnaEditor implements Handler<RoutingContext> {
 			} catch(IOException e) {
 				Log.l("IOException");
 			} catch(TemplateException e) {
-				Log.l("TemplateException");
+				e.printStackTrace();
 			}
 		} else {
 			context.response().setStatusCode(200);

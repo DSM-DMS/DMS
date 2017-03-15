@@ -1,4 +1,4 @@
-package com.dms.boxfox.templates.post;
+package com.dms.planb.action.post.notice;
 
 import java.io.IOException;
 
@@ -13,11 +13,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/rule/write", method = {HttpMethod.GET})
-public class RuleEditor implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/notice/write", method={HttpMethod.GET})
+public class NoticeWrite implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public RuleEditor() {
+	public NoticeWrite() {
 		userManager = new UserManager();
 	}
 	
@@ -25,6 +25,8 @@ public class RuleEditor implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
+			templates.put("category", "notice");
+			templates.put("type", "write");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
