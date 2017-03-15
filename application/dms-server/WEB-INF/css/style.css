@@ -236,6 +236,10 @@ table tr {
     /* Standard syntax */
 }
 
+p.allergy {
+    display: none !important;
+}
+
 
 /*------------------------------- extention ---------------------*/
 
@@ -672,6 +676,14 @@ input.editor-button {
 
 #cke_editor1 {
     margin-top: 20px;
+}
+
+/*---------------------- qnaQuestionWrite -------------*/
+
+.ckeckbox-label {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-right: 10px;
 }
 
 
