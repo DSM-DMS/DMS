@@ -1,13 +1,17 @@
+$("#sat_go").flip();
+$("#sun_go").flip();
+
 $("#sat_go").on('flip:done',function(){
-  var val = $("#sat_go").data("flip-model")
+  var val = $("#sat_go").data("flip-model");
   if(val.isFlipped) {
     $("#sat_val").text('외출 X');
   } else {
     $("#sat_val").text('외출 O');
   }
+});
 
 $("#sun_go").on('flip:done',function(){
-  var val = $("#sun_go").data("flip-model")
+  var val = $("#sun_go").data("flip-model");
   if(val.isFlipped) {
     $("#sun_val").text('외출 X');
   } else {
