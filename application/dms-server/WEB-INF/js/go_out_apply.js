@@ -2,6 +2,8 @@ $("#sat_go").flip();
 $("#sun_go").flip();
 $("#sat_go").flip(satBool);
 $("#sun_go").flip(sunBool);
+$("#sat_go .back").removeAttr('hidden');
+$("#sun_go .back").removeAttr('hidden');
 
 var checkSat = function () {
   var val = $("#sat_go").data("flip-model");
