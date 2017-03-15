@@ -17,7 +17,7 @@ import io.vertx.ext.web.Router;
 public class DmsVerticle extends AbstractVerticle {
     public void start() throws Exception {
         Router router = Router.router(vertx);
-        router.route().handler(BodyHandler.create());
+        router.route().handler(BodyHandler.create().setUploadsDirectory("/root/DMS-Test-Server/upload-files"));
         router.route().handler(CookieHandler.create());
         router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
         RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb", "com.dms.boxfox.templates");

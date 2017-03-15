@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
 
-@RouteRegistration(path = "/mypage/", method = {HttpMethod.GET})
+@RouteRegistration(path = "/out/", method = {HttpMethod.GET})
 public class OutpageRouter implements Handler<RoutingContext> {
     private UserManager userManager;
 
@@ -26,7 +26,10 @@ public class OutpageRouter implements Handler<RoutingContext> {
         boolean isLogin = userManager.isLogined(context);
         if (isLogin) {
             try {
-                DmsTemplate templates = new DmsTemplate("out");
+                DmsTemplate templates = new DmsTemplate("go_out_apply");
+                boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(context));
+                templates.put("status_1", !status[0]);
+                templates.put("status_2", !status[1]);
                 context.response().setStatusCode(200);
                 context.response().end(templates.process());
                 context.response().close();

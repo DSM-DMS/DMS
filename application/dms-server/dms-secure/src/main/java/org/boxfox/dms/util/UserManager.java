@@ -10,9 +10,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by boxfox on 2017-03-04.
@@ -92,17 +90,29 @@ public class UserManager {
         return result;
     }
 
-    public String getStayStatus(String id, String week){
+    public boolean[] getOutStatus(String id) throws SQLException {
+        boolean[] list = new boolean[2];
+        String uid = getUid(id);
+        SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT sat,sun FROM goingout_apply WHERE uid='", uid, "'");
+        if (rs.next()) {
+            list[0] = rs.getBoolean(1);
+            list[1] = rs.getBoolean(2);
+        }
+        return list;
+
+    }
+
+    public String getStayStatus(String id, String week) {
         String status = "";
         try {
             String uid = getUid(id);
             SafeResultSet rs = database.executeQuery("SELECT value FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
-            if(rs.next()){
+            if (rs.next()) {
                 int value = rs.getInt(1);
                 status = ApplyDataUtil.stayDataToString(value);
-            }else{
-                rs = database.executeQuery("SELECT value FROM stay_apply_default WHERE uid='",uid,"'");
-                if(rs.next()){
+            } else {
+                rs = database.executeQuery("SELECT value FROM stay_apply_default WHERE uid='", uid, "'");
+                if (rs.next()) {
                     int value = rs.getInt(1);
                     status = ApplyDataUtil.stayDataToString(value);
                 }
