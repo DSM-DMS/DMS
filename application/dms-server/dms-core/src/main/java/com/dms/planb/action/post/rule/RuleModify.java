@@ -1,4 +1,4 @@
-package com.dms.boxfox.templates.post;
+package com.dms.planb.action.post.rule;
 
 import java.io.IOException;
 
@@ -13,11 +13,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/rule/write", method = {HttpMethod.GET})
-public class RuleEditor implements Handler<RoutingContext> {
+@RouteRegistration(path = "/post/rule/modify", method = {HttpMethod.GET})
+public class RuleModify implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public RuleEditor() {
+	public RuleModify() {
 		userManager = new UserManager();
 	}
 	

@@ -13,11 +13,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/faq/write", method={HttpMethod.GET})
-public class FaqEditor implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
+public class FaqModify implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public FaqEditor() {
+	public FaqModify() {
 		userManager = new UserManager();
 	}
 	
@@ -32,7 +32,7 @@ public class FaqEditor implements Handler<RoutingContext> {
 			} catch(IOException e) {
 				Log.l("IOException");
 			} catch(TemplateException e) {
-				Log.l("TemplateException");
+				e.printStackTrace();
 			}
 		} else {
 			context.response().setStatusCode(200);
