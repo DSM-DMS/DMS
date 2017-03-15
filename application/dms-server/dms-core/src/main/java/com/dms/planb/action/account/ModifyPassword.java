@@ -2,6 +2,7 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -14,17 +15,30 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/account/password/student", method={HttpMethod.PATCH})
 public class ModifyPassword implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public ModifyPassword() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		String password = context.request().getParam("password");
 		
 		try {
-			database.executeUpdate("UPDATE account SET password='", password, "' WHERE id='", id, "'");
+			database.executeUpdate("UPDATE account SET password='", password, "' WHERE uid='", uid, "'");
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

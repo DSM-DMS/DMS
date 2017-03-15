@@ -30,10 +30,17 @@ public class LoadMypage implements Handler<RoutingContext> {
 		
 		EasyJsonObject responseObject = new EasyJsonObject();
 
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 		try {
-			JobResult result = userManager.getUserInfo(id);
+			JobResult result = userManager.getUserInfo(uid);
 			if (result.isSuccess()) {
 				responseObject.put("profile_image", ProfileImage.getProfileImage(id));
 				
