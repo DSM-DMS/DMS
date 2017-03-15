@@ -2,6 +2,7 @@ package com.dms.planb.action.extension;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -16,6 +17,12 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/extension", method={HttpMethod.GET})
 public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public LoadExtensionApplyStatus() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -24,10 +31,17 @@ public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE id='", id, "'");
+			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE uid='", uid, "'");
 			
 			if(resultSet.next()) {
 				responseObject.put("class", resultSet.getInt("class"));

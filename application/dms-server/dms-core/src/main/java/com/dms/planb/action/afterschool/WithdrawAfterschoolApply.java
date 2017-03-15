@@ -2,6 +2,7 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -14,17 +15,30 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/afterschool", method={HttpMethod.DELETE})
 public class WithdrawAfterschoolApply implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public WithdrawAfterschoolApply() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		int no = Integer.parseInt(context.request().getParam("no"));
 		
 		try {
-			database.executeUpdate("DELETE FROM afterschool_apply WHERE id='", id, "' AND no=", no);
+			database.executeUpdate("DELETE FROM afterschool_apply WHERE uid='", uid, "' AND no=", no);
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

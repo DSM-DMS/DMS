@@ -11,19 +11,13 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/account/idcheck/student", method={ HttpMethod.POST })
 public class StudentIdCheck implements Handler<RoutingContext> {
-	private UserManager userManager;
-
-	public StudentIdCheck() {
-		userManager = new UserManager();
-	}
-
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		String id = context.request().getParam("id");
 
-		if (userManager.checkIdExists(id)) {
+		if (UserManager.checkIdExists(id)) {
 			context.response().setStatusCode(404).end();
 			context.response().close();
 		} else {

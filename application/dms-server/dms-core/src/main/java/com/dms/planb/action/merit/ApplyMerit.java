@@ -2,6 +2,7 @@ package com.dms.planb.action.merit;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -14,22 +15,35 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/merit", method={HttpMethod.POST})
 public class ApplyMerit implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public ApplyMerit() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		String content = context.request().getParam("content");
 		
 		try {
 			if(context.request().params().contains("target")) {
 				String target = context.request().getParam("target");
 				
-				database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES('", id, "', '", target, "', '", content, "')");
+				database.executeUpdate("INSERT INTO merit_apply(uid, target, content) VALUES('", uid, "', '", target, "', '", content, "')");
 			} else {
-				database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES('", id, "', '", content, "')");
+				database.executeUpdate("INSERT INTO merit_apply(uid, content) VALUES('", uid, "', '", content, "')");
 			}
 			
 			context.response().setStatusCode(201).end();

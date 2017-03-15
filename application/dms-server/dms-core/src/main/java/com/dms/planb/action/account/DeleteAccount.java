@@ -2,6 +2,7 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -14,16 +15,29 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/account/student", method={HttpMethod.DELETE})
 public class DeleteAccount implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public DeleteAccount() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		
-		String id = context.request().getParam("id");
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null)
+                uid = userManager.getUid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		
 		try {
-			database.executeUpdate("DELETE FROM account WHERE id=", id);
+			database.executeUpdate("DELETE FROM account WHERE uid=", uid);
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();
