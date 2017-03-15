@@ -71,7 +71,26 @@
                             <img class="profile-pic" src="images/chayoung.jpg" alt="default image">
                             <h3>${name}</h3>
                             <h4>${number}</h4>
-                            <a href="#">프로필 사진 수정</a> <br>
+                            <a href="#profileModal" data-toggle="modal">프로필 사진 수정</a> <br>
+                            <div class="modal fade" id="profileModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">프로필 사진 변경</h4>
+                                        </div>
+                                        <div class="modal-body form-horizontal pl-5 pr-5" role="form">
+                                            <input id="modify-profile-picture" type="file" class="" name="profile_image" onchange="readURL(this);">
+                                            <img class="preview-picture" src="#" alt="your image" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="modify-profile-picture-btn btn btn-info">변경</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             <a class="modify-password" href="#myModal" data-toggle="modal">비밀번호 수정</a> <br>
                             <!-- Modal -->
                             <div class="modal fade" id="myModal" role="dialog">
