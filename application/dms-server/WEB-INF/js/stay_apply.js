@@ -22,7 +22,7 @@ var getDataValue;
 var defaultValue;
 
 $.ajax({
-  url: "http://dsm2015.cafe24.com:8089/apply/stay/default",
+  url: "/apply/stay/default",
   type: "GET",
   async: false,
   data: {
@@ -35,7 +35,7 @@ $.ajax({
 
 var getData = function () {
   $.ajax({
-    url: "http://dsm2015.cafe24.com:8089/apply/stay",
+    url: "/apply/stay",
     type: "GET",
     async: false,
     data: {
@@ -54,7 +54,7 @@ var getData = function () {
 
 var applyData = function () {
   $.ajax({
-    url: "http://dsm2015.cafe24.com:8089/apply/stay",
+    url: "/apply/stay",
     type: "PUT",
     data: {
       "id": id,
