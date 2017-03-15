@@ -1,3 +1,6 @@
+$("#sat_go").flip();
+$("#sun_go").flip();
+
 $("#sat_go .front").on('click', function () {
   $("#sat_val").text('외출 X');
 });
