@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
@@ -66,7 +66,7 @@
                 <div class="front">
                   외출 O
                 </div>
-                <div class="back">
+                <div class="back" hidden>
                   외출 X
                 </div>
               </div>
@@ -77,7 +77,7 @@
                 <div class="front">
                   외출 O
                 </div>
-                <div class="back">
+                <div class="back" hidden>
                   외출 X
                 </div>
               </div>
@@ -113,12 +113,35 @@
 
 <script src="/js/script.js"></script>
 <script src="/js/go_out_apply.js"></script>
-
 <script type="text/javascript">
 $('#sat_go').flip();
 $('#sun_go').flip();
 
+var fillSat = function () {
+  var val = ${status_1?c};
+  if(val) {
+    $("#sat_val").text('외출 X');
+  } else {
+    $("#sat_val").text('외출 O');
+  }
+}
+
+var fillSun = function () {
+  var val = ${status_2?c}
+  if(val) {
+    $("#sun_val").text('외출 X');
+  } else {
+    $("#sun_val").text('외출 O');
+  }
+}
+
 $('#sat_go').flip(${status_1?c});
 $('#sun_go').flip(${status_2?c});
+
+fillSat();
+fillSun();
+
+$('#sat_go .back').removeAttr('hidden');
+$('#sun_go .back').removeAttr('hidden');
 </script>
 </html>
