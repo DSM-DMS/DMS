@@ -134,8 +134,8 @@ var fillSun = function () {
 $('#sat_go').flip(${status_1?c});
 $('#sun_go').flip(${status_2?c});
 
-checkSat();
-checkSun();
+fillSat();
+fillSun();
 
 $('#sat_go .back').removeAttr('hidden');
 $('#sun_go .back').removeAttr('hidden');
