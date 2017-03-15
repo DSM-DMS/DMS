@@ -25,6 +25,8 @@ public class NoticeWrite implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
+			templates.put("category", "notice");
+			templates.put("type", "write");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

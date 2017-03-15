@@ -25,6 +25,8 @@ public class FaqModify implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
+			templates.put("category", "faq");
+			templates.put("type", "modify");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

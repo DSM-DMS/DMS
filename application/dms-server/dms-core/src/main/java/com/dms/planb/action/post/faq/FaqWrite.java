@@ -25,14 +25,18 @@ public class FaqWrite implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
+			templates.put("category", "faq");
+			templates.put("type", "write");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();
 			} catch(IOException e) {
+				e.printStackTrace();
 				Log.l("IOException");
 			} catch(TemplateException e) {
 				e.printStackTrace();
+				Log.l("TemplateException");
 			}
 		} else {
 			context.response().setStatusCode(200);
