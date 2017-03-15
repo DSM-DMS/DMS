@@ -38,6 +38,8 @@ public class OutpageRouter implements Handler<RoutingContext> {
                 e.printStackTrace();
             } catch (TemplateException e) {
                 e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } else {
             context.response().setStatusCode(200);

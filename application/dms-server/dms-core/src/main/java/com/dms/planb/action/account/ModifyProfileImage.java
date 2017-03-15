@@ -6,7 +6,7 @@ import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.planb.support.PrecedingWork;
-import com.dms.planb.support.ProfileImage;
+//import com.dms.planb.support.ProfileImage;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -34,7 +34,7 @@ public class ModifyProfileImage implements Handler<RoutingContext> {
         }
 		String data = context.request().getParam("profile_image");
 		
-		ProfileImage.setProfileImage(id, data);
+		//ProfileImage.setProfileImage(id, data);
 		
 		context.response().setStatusCode(200).end();
 		context.response().close();

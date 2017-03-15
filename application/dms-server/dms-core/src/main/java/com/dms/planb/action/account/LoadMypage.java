@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.planb.support.PrecedingWork;
-import com.dms.planb.support.ProfileImage;
+//import com.dms.planb.support.ProfileImage;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -42,7 +42,7 @@ public class LoadMypage implements Handler<RoutingContext> {
 		try {
 			JobResult result = userManager.getUserInfo(uid);
 			if (result.isSuccess()) {
-				responseObject.put("profile_image", ProfileImage.getProfileImage(id));
+				//aesponseObject.put("profile_image", ProfileImage.geProfileImage(id));
 				
 				Map<String, Object> datas = (Map) result.getArgs()[0];
 				responseObject.put("number", datas.get("number"));
