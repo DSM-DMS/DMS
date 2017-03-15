@@ -9,11 +9,12 @@ import org.boxfox.dms.utilities.log.Log;
 import com.dms.boxfox.templates.DmsTemplate;
 
 import freemarker.template.TemplateException;
+import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="post/notice/write", method={HttpMethod.GET})
-public class NoticeEditor {
+public class NoticeEditor implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
 	public NoticeEditor() {
