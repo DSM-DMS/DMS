@@ -24,7 +24,7 @@ $("#go_submit").on('click', function () {
     sunVal = true;
   }
   $.ajax({
-    url: "http://dsm2015.cafe24.com:8089/apply/goingout",
+    url: "/apply/goingout",
     type: "PUT",
     data: {
       "sat": satVal,
