@@ -1,5 +1,7 @@
 $("#sat_go").flip();
 $("#sun_go").flip();
+$("#sat_go").flip(satBool);
+$("#sun_go").flip(sunBool);
 
 var checkSat = function () {
   var val = $("#sat_go").data("flip-model");
@@ -8,7 +10,7 @@ var checkSat = function () {
   } else {
     $("#sat_val").text('외출 O');
   }
-}
+};
 
 var checkSun = function () {
   var val = $("#sun_go").data("flip-model");
@@ -17,7 +19,7 @@ var checkSun = function () {
   } else {
     $("#sun_val").text('외출 O');
   }
-}
+};
 
 checkSat();
 checkSun();
