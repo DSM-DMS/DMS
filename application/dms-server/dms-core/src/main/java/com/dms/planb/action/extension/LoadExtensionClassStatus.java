@@ -3,6 +3,7 @@ package com.dms.planb.action.extension;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -30,6 +31,12 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 		EasyJson json = null;
 
 		String option = context.request().getParam("option");
+		
+		if(!Guardian.checkParameters(option)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 
 		try {
 			int classId = -1;

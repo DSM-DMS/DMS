@@ -40,7 +40,7 @@ public class WithdrawAfterschoolApply implements Handler<RoutingContext> {
 		int no = Integer.parseInt(context.request().getParam("no"));
 		
 		if(!Guardian.checkParameters(id, uid, no)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }

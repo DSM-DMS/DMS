@@ -41,7 +41,7 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 		int targetNo = Integer.parseInt(context.request().getParam("target_no"));
 		
 		if(!Guardian.checkParameters(no, id, uid, targetNo)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }

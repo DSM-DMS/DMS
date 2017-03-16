@@ -34,7 +34,7 @@ public class UploadAfterschoolItem implements Handler<RoutingContext> {
 		int personnel = Integer.parseInt(context.request().getParam("personnel"));
 		
 		if(!Guardian.checkParameters(no, title, target, place, onMonday, onTuesday, onWednesday, onSaturday, instructor, personnel)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }
