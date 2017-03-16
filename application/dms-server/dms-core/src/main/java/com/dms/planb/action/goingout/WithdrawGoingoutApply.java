@@ -2,6 +2,7 @@ package com.dms.planb.action.goingout;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -30,15 +31,26 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		boolean date = Boolean.parseBoolean(context.request().getParam("date"));
+        String target = context.request().getParam("date");
+        
+        if(!Guardian.checkParameters(id, uid, target)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
-			database.executeUpdate("DELETE FROM goingout_apply WHERE uid='", uid, "' AND date=", date);
+			if(target == "sat") {
+				database.executeUpdate("UPDATE goingout_apply SET sat=false WHERE uid='", uid, "'");
+			} else if(target == "sun") {
+				database.executeUpdate("UPDATE goingout_apply SET sun=false WHERE uid='", uid, "'");
+			}
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

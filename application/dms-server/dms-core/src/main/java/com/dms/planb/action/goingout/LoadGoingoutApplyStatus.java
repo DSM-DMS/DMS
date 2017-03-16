@@ -2,6 +2,7 @@ package com.dms.planb.action.goingout;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -31,31 +32,29 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		EasyJsonObject tempObject = new EasyJsonObject();
-		EasyJsonArray tempArray = new EasyJsonArray();
 		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        
+        if(!Guardian.checkParameters(id, uid)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
         }
 		
 		try {
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
 			
 			if(resultSet.next()) {
-				do {
-					tempObject = new EasyJsonObject();
-					
-					tempObject.put("date", resultSet.getBoolean("date"));
-					
-					tempArray.add(tempObject);
-				} while(resultSet.next());
-				
-				responseObject.put("result", tempArray);
+				responseObject.put("sat", resultSet.getBoolean("sat"));
+				responseObject.put("sun", resultSet.getBoolean("sun"));
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());

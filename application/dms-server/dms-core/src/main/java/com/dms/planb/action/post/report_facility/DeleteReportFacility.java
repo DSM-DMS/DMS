@@ -2,6 +2,7 @@ package com.dms.planb.action.post.report_facility;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -21,6 +22,12 @@ public class DeleteReportFacility implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		
 		int no = Integer.parseInt(context.request().getParam("no"));
+		
+		if(!Guardian.checkParameters(no)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("DELETE FROM facility_report WHERE no=", no);

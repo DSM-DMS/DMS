@@ -2,6 +2,7 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -31,12 +32,19 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 		int targetNo = Integer.parseInt(context.request().getParam("target_no"));
+		
+		if(!Guardian.checkParameters(no, id, uid, targetNo)) {
+        	context.response().setStatusCode(400).end();
+        	context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("UPDATE afterschool_apply SET no=", no, " WHERE no=", targetNo, " AND uid='", uid, "'");

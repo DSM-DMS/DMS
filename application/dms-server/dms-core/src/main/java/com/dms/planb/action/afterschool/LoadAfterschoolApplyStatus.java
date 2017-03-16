@@ -2,6 +2,7 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -34,14 +35,20 @@ public class LoadAfterschoolApplyStatus implements Handler<RoutingContext> {
 		EasyJsonObject tempObject = new EasyJsonObject();
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
-		int no;
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        
+        if(!Guardian.checkParameters(id, uid)) {
+        	context.response().setStatusCode(400).end();
+        	context.response().close();
+        	return;
         }
 		
 		try {
@@ -51,7 +58,7 @@ public class LoadAfterschoolApplyStatus implements Handler<RoutingContext> {
 				do {
 					tempObject = new EasyJsonObject();
 					
-					no = resultSet.getInt("no");
+					int no = resultSet.getInt("no");
 					SafeResultSet tempResultSet = database.executeQuery("SELECT on_monday, on_tuesday, on_wednesday, on_saturday FROM afterschool_list WHERE no=", no);
 					
 					tempObject.put("no", resultSet.getInt("no"));

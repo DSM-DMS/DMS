@@ -38,7 +38,6 @@ public class ApplyGoingout implements Handler<RoutingContext> {
             } catch (SQLException e) {
                 context.response().setStatusCode(500).end();
                 context.response().close();
-                e.printStackTrace();
                 Log.l("SQLException");
             }
         } else {
