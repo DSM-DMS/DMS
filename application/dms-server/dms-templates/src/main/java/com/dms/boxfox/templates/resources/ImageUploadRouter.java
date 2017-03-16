@@ -34,12 +34,12 @@ public class ImageUploadRouter implements Handler<RoutingContext> {
                 String extension = Files.getFileExtension(upload.fileName());
                 File file = new File(upload.uploadedFileName());
                 if (checkExtensions(extension)) {
-                    File files = new File(file.getParent() + "\\" + id);
+                    File files = new File(file.getParent() + "/" + id);
                     try {
                         if (files.exists()) {
                             files.delete();
                         }
-                        files.createNewFile();
+                        boolean check = files.createNewFile();
                         FileInputStream fin = new FileInputStream(file);
                         FileOutputStream fout = new FileOutputStream(files);
                         byte[] bytes = new byte[1024];
@@ -58,7 +58,6 @@ public class ImageUploadRouter implements Handler<RoutingContext> {
                     context.response().setStatusMessage("It's Not Image File").end();
                     context.response().close();
                 }
-                file.delete();
             }
             if (!context.response().ended()) {
                 context.response().setStatusCode(200).end();
@@ -68,6 +67,10 @@ public class ImageUploadRouter implements Handler<RoutingContext> {
             context.response().setStatusCode(400);
             context.response().setStatusMessage("Need Login").end();
             context.response().close();
+        }
+        for (FileUpload upload : context.fileUploads()) {
+            File file = new File(upload.uploadedFileName());
+            file.delete();
         }
     }
 
