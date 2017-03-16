@@ -2,6 +2,7 @@ package com.dms.planb.action.afterschool;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -31,6 +32,12 @@ public class UploadAfterschoolItem implements Handler<RoutingContext> {
 		boolean onSaturday = Boolean.parseBoolean(context.request().getParam("on_saturday"));
 		String instructor = context.request().getParam("instructor");
 		int personnel = Integer.parseInt(context.request().getParam("personnel"));
+		
+		if(!Guardian.checkParameters(no, title, target, place, onMonday, onTuesday, onWednesday, onSaturday, instructor, personnel)) {
+        	context.response().setStatusCode(404).end();
+        	context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor, personnel) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "', ", personnel, ")");
