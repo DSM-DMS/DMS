@@ -19,7 +19,7 @@ public class StudentIdCheck implements Handler<RoutingContext> {
 		String id = context.request().getParam("id");
 		
 		if(!Guardian.checkParameters(id)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }

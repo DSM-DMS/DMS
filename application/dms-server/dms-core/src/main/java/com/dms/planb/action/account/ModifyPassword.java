@@ -40,7 +40,7 @@ public class ModifyPassword implements Handler<RoutingContext> {
 		String password = context.request().getParam("password");
 		
 		if(!Guardian.checkParameters(id, uid, password)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }

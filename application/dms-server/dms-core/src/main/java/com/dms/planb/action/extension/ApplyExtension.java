@@ -38,37 +38,42 @@ public class ApplyExtension implements Handler<RoutingContext> {
         String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (Guardian.checkParameters(classId, id, seatId, uid)) {
-            try {
-                String name = null;
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", uid, "'");
-                if (rs.next())
-                    name = rs.getString(1);
-                if (!ApplyDataUtil.canApplyExtension()) {
-                    context.response().setStatusCode(404).end();
-                    context.response().close();
-                } else {
-                    database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
-                    database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");
-                    context.response().setStatusCode(200).end();
-                    context.response().close();
-                }
-            } catch (SQLException e) {
-                context.response().setStatusCode(500).end();
-                context.response().close();
-                e.printStackTrace();
-                Log.l("SQLException");
-            }
-        } else {
-            context.response().setStatusMessage("Check parameter or after than login");
+        
+        if(!Guardian.checkParameters(classId, seatId, id, uid)) {
+        	context.response().setStatusMessage("Check parameter or after than login");
             context.response().setStatusCode(400).end();
             context.response().close();
+        	return;
         }
+        
         Log.l("Extension Apply (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+        
+        try {
+            String name = null;
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", uid, "'");
+            if (rs.next()) {
+                name = rs.getString(1);
+            }
+            if (!ApplyDataUtil.canApplyExtension()) {
+                context.response().setStatusCode(404).end();
+                context.response().close();
+            } else {
+                database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
+                database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");
+                context.response().setStatusCode(200).end();
+                context.response().close();
+            }
+        } catch (SQLException e) {
+            context.response().setStatusCode(500).end();
+            context.response().close();
+            e.printStackTrace();
+            Log.l("SQLException");
+        }
     }
 }

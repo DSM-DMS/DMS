@@ -41,7 +41,7 @@ public class ModifyStudentData implements Handler<RoutingContext> {
 		String name = context.request().getParam("name");
 		
 		if(!Guardian.checkParameters(id, uid, number, name)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }

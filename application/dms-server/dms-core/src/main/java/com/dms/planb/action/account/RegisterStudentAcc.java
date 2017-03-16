@@ -30,12 +30,6 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");
         
-        if(!Guardian.checkParameters(id, uid, password)) {
-        	context.response().setStatusCode(404).end();
-        	context.response().close();
-        	return;
-        }
-
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
                 JobResult result = userManager.register(uid, id, password);
@@ -49,12 +43,12 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
                 }
             } else {
                 // Any null in parameters
-                context.response().setStatusCode(404).end();
+                context.response().setStatusCode(400).end();
+                context.response().close();
             }
         } catch (SQLException e) {
             context.response().setStatusCode(500).end();
             context.response().close();
-            e.printStackTrace();
             Log.l("SQLException");
         }
         Log.l("Register Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());

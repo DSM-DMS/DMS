@@ -38,7 +38,7 @@ public class DeleteAccount implements Handler<RoutingContext> {
         }
         
         if(!Guardian.checkParameters(id, uid)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }

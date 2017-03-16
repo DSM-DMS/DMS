@@ -35,7 +35,7 @@ public class LoginStudentApplicationRequest implements Handler<RoutingContext> {
         remember = (remember == null) ? "false" : "true";
         
         if(!Guardian.checkParameters(id, password, remember)) {
-        	context.response().setStatusCode(404).end();
+        	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }
