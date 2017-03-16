@@ -35,10 +35,14 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		boolean date = Boolean.parseBoolean(context.request().getParam("date"));
+        String target = context.request().getParam("date");
 		
 		try {
-			database.executeUpdate("DELETE FROM goingout_apply WHERE uid='", uid, "' AND date=", date);
+			if(target == "sat") {
+				database.executeUpdate("UPDATE goingout_apply SET sat=false WHERE uid='", uid, "'");
+			} else if(target == "sun") {
+				database.executeUpdate("UPDATE goingout_apply SET sun=false WHERE uid='", uid, "'");
+			}
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

@@ -47,15 +47,8 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
 			
 			if(resultSet.next()) {
-				do {
-					tempObject = new EasyJsonObject();
-					
-					tempObject.put("date", resultSet.getBoolean("date"));
-					
-					tempArray.add(tempObject);
-				} while(resultSet.next());
-				
-				responseObject.put("result", tempArray);
+				responseObject.put("sat", resultSet.getBoolean("sat"));
+				responseObject.put("sun", resultSet.getBoolean("sun"));
 				
 				context.response().setStatusCode(200);
 				context.response().end(responseObject.toString());
