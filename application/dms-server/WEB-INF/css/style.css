@@ -402,10 +402,7 @@ p.allergy {
 
 #stay_div {
     margin: auto;
-    width: 90%;
-    margin-top: 10%;
-    margin-bottom: 3%;
-    font-size: 130%;
+    font-size: 20px;
 }
 
 #date {
@@ -433,16 +430,16 @@ p.allergy {
 .color {
     text-align: middle;
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
 }
 
 .color_ex {
-    font-size: 200%;
-    width: 75%;
-    margin: auto;
-    margin-bottom: 5%;
+    display: inline-block;
+    font-size: 1.5em;
+    margin-right: 30px;
+    vertical-align: middle;
 }
 
 .other_month {

@@ -68,7 +68,7 @@
                 <div class="card-block center-block mypage-container">
                     <div class="row mypage-row">
                         <div class="col-lg-3 col-md-12">
-                            <img class="profile-pic" src="images/chayoung.jpg" alt="default image">
+                            <img class="profile-pic" src="/lookup/image/${profile}" alt="default image">
                             <h3>${name}</h3>
                             <h4>${number}</h4>
                             <a href="#profileModal" data-toggle="modal">프로필 사진 수정</a> <br>

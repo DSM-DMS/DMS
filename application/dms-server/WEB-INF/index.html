@@ -142,7 +142,7 @@
         <div class="card">
             <div class="card-block">
                 <div class="row">
-                    <div class="col-sm-6 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="underbar-title border-puple">기숙사 규칙<a href="/post/?category=rule" class="view-more">더보기</a></div>
                         <div>
                             <table class="table table-sm table-hover">
@@ -153,17 +153,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Rules as rule>
-                                        <tr onclick="viewPost('rule', ${rule.no})">
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
-                                        </tr>
-                                        </#list>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="underbar-title border-blue">자주하는 질문<a href="/post/?category=faq" class="view-more">더보기</a></div>
                         <div>
                             <table class="table table-sm table-hover">
@@ -174,12 +168,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Faqs as faq>
-                                        <tr onclick="viewPost('faq', ${faq.no})">
-                                            <th scope="row">${faq.no}</th>
-                                            <td>${faq.title}</td>
-                                        </tr>
-                                        </#list>
                                 </tbody>
                             </table>
                         </div>
