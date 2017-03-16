@@ -3,6 +3,7 @@ package com.dms.planb.action.post.notice;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -31,8 +32,14 @@ public class NoticeModify implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
-			DmsTemplate templates = new DmsTemplate("editor");
 			
+			if(!Guardian.checkParameters(no)) {
+	            context.response().setStatusCode(400).end();
+	            context.response().close();
+	        	return;
+	        }
+			
+			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);

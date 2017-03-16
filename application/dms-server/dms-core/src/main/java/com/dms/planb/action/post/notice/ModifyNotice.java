@@ -2,6 +2,7 @@ package com.dms.planb.action.post.notice;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -23,6 +24,12 @@ public class ModifyNotice implements Handler<RoutingContext> {
 		int no = Integer.parseInt(context.request().getParam("no"));
 		String title = context.request().getParam("title");
 		String content = context.request().getParam("content");
+		
+		if(!Guardian.checkParameters(no, title, content)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("UPDATE notice SET title='", title, "' WHERE no=", no);
