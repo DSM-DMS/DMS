@@ -1,12 +1,15 @@
 package com.dms.boxfox.templates.resources;
 
+import com.google.common.io.Files;
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
+import java.io.*;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -14,19 +17,66 @@ import java.util.Set;
  * Created by boxfox on 2017-03-15.
  */
 
-@RouteRegistration(path="/upload/image/", method = {HttpMethod.POST})
+@RouteRegistration(path = "/upload/image/", method = {HttpMethod.POST})
 public class ImageUploadRouter implements Handler<RoutingContext> {
+    private static final String[] extensions = {"jpg", "png", "gif"};
+    private UserManager userManager;
+
+    public ImageUploadRouter() {
+        userManager = new UserManager();
+    }
 
     @Override
     public void handle(RoutingContext context) {
-        MultiMap attributes = context.request().formAttributes();
-        System.out.println(attributes);
-        for (FileUpload f : context.fileUploads()) {
-            System.out.println("Filename: " + f.fileName());
-            System.out.println("Size: " + f.size());
+        if (userManager.isLogined(context)) {
+            String id = userManager.getIdFromSession(context);
+            for (FileUpload upload : context.fileUploads()) {
+                String extension = Files.getFileExtension(upload.fileName());
+                File file = new File(upload.uploadedFileName());
+                if (checkExtensions(extension)) {
+                    File files = new File(file.getParent() + "\\" + id);
+                    try {
+                        if (files.exists()) {
+                            files.delete();
+                        }
+                        files.createNewFile();
+                        FileInputStream fin = new FileInputStream(file);
+                        FileOutputStream fout = new FileOutputStream(files);
+                        byte[] bytes = new byte[1024];
+                        int len = 0;
+                        while ((len = fin.read(bytes)) > -1) {
+                            fout.write(bytes, 0, len);
+                        }
+                        fin.close();
+                        fout.flush();
+                        fout.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    context.response().setStatusCode(400);
+                    context.response().setStatusMessage("It's Not Image File");
+                    context.response().end();
+                }
+                file.delete();
+            }
+            if (!context.response().ended()) {
+                context.response().setStatusCode(200);
+                context.response().end();
+            }
+        } else {
+            context.response().setStatusCode(400);
+            context.response().setStatusMessage("Need Login");
+            context.response().end();
         }
-        System.out.println("a222svasv");
-        context.response().setStatusCode(200);
-        context.response().end();
+    }
+
+    private boolean checkExtensions(String extension) {
+        extension = extension.toLowerCase();
+        for (String str : extensions) {
+            if (extension.equals(str))
+                return true;
+        }
+        return false;
     }
 }

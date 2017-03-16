@@ -131,7 +131,7 @@ class DmsMain {
 		 * @see http://vertx.io/docs/apidocs/io/vertx/core/Vertx.html
 		 * @see com.dms.planb.core .DmsVerticle
 		 */
-		vertx.deployVerticle(new Server());
+		vertx.deployVerticle(new DmsVerticle());
 		/*
 		 * Deploy a verticle instance that you have created yourself. Branch off
 		 * DmsVerticle class
