@@ -1,6 +1,7 @@
 package com.dms.planb.action.post.rule;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
