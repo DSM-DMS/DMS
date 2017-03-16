@@ -33,6 +33,7 @@ public class FaqWrite implements Handler<RoutingContext> {
 				context.response().end(templates.process());
 				context.response().close();
 			} catch(IOException e) {
+				e.printStackTrace();
 				Log.l("IOException");
 			} catch(TemplateException e) {
 				Log.l("TemplateException");
