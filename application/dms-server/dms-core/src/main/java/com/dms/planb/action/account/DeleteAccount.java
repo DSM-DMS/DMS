@@ -2,6 +2,7 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -34,6 +35,12 @@ public class DeleteAccount implements Handler<RoutingContext> {
                 uid = userManager.getUid(id);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        
+        if(!Guardian.checkParameters(id, uid)) {
+        	context.response().setStatusCode(404).end();
+        	context.response().close();
+        	return;
         }
 		
 		try {

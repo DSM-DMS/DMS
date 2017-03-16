@@ -29,6 +29,12 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
         String uid = context.request().getParam("uid");
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");
+        
+        if(!Guardian.checkParameters(id, uid, password)) {
+        	context.response().setStatusCode(404).end();
+        	context.response().close();
+        	return;
+        }
 
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {

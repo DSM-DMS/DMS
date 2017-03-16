@@ -1,5 +1,6 @@
 package com.dms.planb.action.account;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
@@ -16,6 +17,12 @@ public class StudentIdCheck implements Handler<RoutingContext> {
 		context = PrecedingWork.putHeaders(context);
 		
 		String id = context.request().getParam("id");
+		
+		if(!Guardian.checkParameters(id)) {
+        	context.response().setStatusCode(404).end();
+        	context.response().close();
+        	return;
+        }
 
 		if (UserManager.checkIdExists(id)) {
 			context.response().setStatusCode(404).end();

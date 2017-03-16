@@ -36,32 +36,33 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
         String remember = context.request().getParam("remember");
         String recapcha = context.request().getParam("g-recaptcha-response"); //recapcha response 이름 수정해야함
         remember = (remember == null) ? "false" : "true";
-
-        if (Guardian.checkParameters(id, password, recapcha, remember) && VerifyRecaptcha.verify(recapcha))
-            try {
-                boolean check = userManager.login(id, password);
-                if (check) {
-                    userManager.registerSession(context, Boolean.valueOf(remember), id);
-                    context.response().setStatusCode(201);
-                    context.response().end(responseObject.toString());
-                    context.response().close();
-                } else {
-                    context.response().setStatusCode(400);
-                    context.response().end(responseObject.toString());
-                    context.response().close();
-                }
-
-            } catch (SQLException e) {
-                context.response().setStatusCode(500).end();
-                context.response().close();
-
-                Log.l("SQLException");
-            }
-        else {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+        
+        if(!Guardian.checkParameters(id, password, remember)) {
+        	context.response().setStatusCode(404).end();
+        	context.response().close();
+        	return;
         }
+        
         Log.l("Login Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+
+        try {
+            boolean check = userManager.login(id, password);
+            if (check) {
+            	userManager.registerSession(context, Boolean.valueOf(remember), id);
+            	context.response().setStatusCode(201);
+                context.response().end(responseObject.toString());
+                context.response().close();
+            } else {
+                context.response().setStatusCode(400);
+                context.response().end(responseObject.toString());
+                context.response().close();
+            }
+        } catch (SQLException e) {
+            context.response().setStatusCode(500).end();
+            context.response().close();
+
+            Log.l("SQLException");
+        }   
     }
 
     public EasyJsonObject getUserData(JobResult result, EasyJsonObject responseObject) throws SQLException {

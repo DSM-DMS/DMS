@@ -2,6 +2,7 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -30,13 +31,20 @@ public class ModifyStudentData implements Handler<RoutingContext> {
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 		int number = Integer.parseInt(context.request().getParam("number"));
 		String name = context.request().getParam("name");
+		
+		if(!Guardian.checkParameters(id, uid, number, name)) {
+        	context.response().setStatusCode(404).end();
+        	context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("UPDATE student_data SET number=", number, " WHERE uid='", uid, "'");
