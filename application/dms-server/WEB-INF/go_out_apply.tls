@@ -59,7 +59,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="go_title">토요일 외출</div>
               <div id="sat_go">
-                <div class="front">
+                <div class="front" hidden>
                   외출 O
                 </div>
                 <div class="back" hidden>
@@ -70,7 +70,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="go_title">일요일 외출</div>
               <div id="sun_go">
-                <div class="front">
+                <div class="front" hidden>
                   외출 O
                 </div>
                 <div class="back" hidden>
