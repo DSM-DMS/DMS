@@ -21,7 +21,6 @@ public class ImageLookupRouter implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
         String fileName = context.request().getParam("filename");
-        System.out.println(fileName);
         context.response().sendFile("upload-files/" + fileName);
     }
 }
