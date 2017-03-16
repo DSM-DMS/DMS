@@ -49,8 +49,11 @@ public class LoadMypage implements Handler<RoutingContext> {
 				responseObject.put("name", datas.get("name"));
 				responseObject.put("merit", datas.get("merit"));
 				responseObject.put("demerit", datas.get("demerit"));
+				responseObject.put("room", datas.get("room"));
+				responseObject.put("seat", datas.get("seat"));
 
-				context.response().setStatusCode(200).end();
+				context.response().setStatusCode(200);
+				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {
 				context.response().setStatusCode(204).end();

@@ -55,19 +55,19 @@ public class ImageUploadRouter implements Handler<RoutingContext> {
                     }
                 } else {
                     context.response().setStatusCode(400);
-                    context.response().setStatusMessage("It's Not Image File");
-                    context.response().end();
+                    context.response().setStatusMessage("It's Not Image File").end();
+                    context.response().close();
                 }
                 file.delete();
             }
             if (!context.response().ended()) {
-                context.response().setStatusCode(200);
-                context.response().end();
+                context.response().setStatusCode(200).end();
+                context.response().close();
             }
         } else {
             context.response().setStatusCode(400);
-            context.response().setStatusMessage("Need Login");
-            context.response().end();
+            context.response().setStatusMessage("Need Login").end();
+            context.response().close();
         }
     }
 
