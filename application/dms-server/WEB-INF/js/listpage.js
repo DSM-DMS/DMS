@@ -1,4 +1,4 @@
-$("write-btn").click(function () {
+$(".write-btn").click(function () {
     // $.ajax({
     //     url: "post/" + getAllUrlParams(document.URL).category + "write",
     //     type: "GET",
@@ -13,9 +13,13 @@ $("write-btn").click(function () {
     //         alert("글을 작성할 수 없어요 TT");
     //     }
     // })
-    redirect("/post/" + getAllUrlParams(document.URL).category + "/write");
+    console.log("post/" + getAllUrlParams(document.URL).category + "/write");
+    redirect("post/" + getAllUrlParams(document.URL).category + "/write");
 })
 
+function redirect(page) {
+        location.href = '/' + page;
+}
 
 function getAllUrlParams(url) {
 
