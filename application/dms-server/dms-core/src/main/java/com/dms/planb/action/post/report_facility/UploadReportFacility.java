@@ -2,6 +2,7 @@ package com.dms.planb.action.post.report_facility;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -24,6 +25,12 @@ public class UploadReportFacility implements Handler<RoutingContext> {
 		String content = context.request().getParam("content");
 		int room = Integer.parseInt(context.request().getParam("room"));
 		String writer = context.request().getParam("writer");
+		
+		if(!Guardian.checkParameters(title, content, room, writer)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {			
 			database.executeUpdate("INSERT INTO facility_report(title, content, room, write_date, writer) VALUES('", title, "', '", content, "', ", room, ", NOW(), '", writer, "')");

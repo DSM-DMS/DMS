@@ -2,6 +2,7 @@ package com.dms.planb.action.post.report_facility;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -25,6 +26,12 @@ public class LoadReportFacility implements Handler<RoutingContext> {
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
 		int no = Integer.parseInt(context.request().getParam("no"));
+		
+		if(!Guardian.checkParameters(no)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);

@@ -2,6 +2,7 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -28,6 +29,12 @@ public class LoadQnaComment implements Handler<RoutingContext> {
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
 		int no = Integer.parseInt(context.request().getParam("no"));
+		
+		if(!Guardian.checkParameters(no)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			resultSet = database.executeQuery("SELECT * FROM qna_comment WHERE no=", no);

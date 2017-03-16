@@ -2,6 +2,7 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 
@@ -23,6 +24,12 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
 		String content = context.request().getParam("content");
 		String writer = context.request().getParam("writer");
 		boolean privacy = Boolean.parseBoolean(context.request().getParam("privacy"));
+		
+		if(!Guardian.checkParameters(title, content, writer, privacy)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, ")");

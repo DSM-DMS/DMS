@@ -2,6 +2,7 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -22,6 +23,12 @@ public class ModifyQnaComment implements Handler<RoutingContext> {
 		
 		int idx = Integer.parseInt(context.request().getParam("no"));
 		String content = context.request().getParam("content");
+		
+		if(!Guardian.checkParameters(idx, content)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			database.executeUpdate("UPDATE qna_comment SET content='", content, "' WHERE idx=", idx);
