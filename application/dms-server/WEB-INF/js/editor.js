@@ -7,3 +7,7 @@ function setWriteBtnEvent() {
         // 수정요청코드
     })
 }
+
+function facilityWrite() {
+    console.log("facil");
+}

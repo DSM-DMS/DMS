@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 * {
-    font-family: "hanna";
+    font-family: "나눔고딕";
 }
 
 body {
@@ -234,6 +234,10 @@ table tr {
     /* For Firefox 3.6 to 15 */
     background: linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
     /* Standard syntax */
+}
+
+p.allergy {
+    display: none !important;
 }
 
 
@@ -672,6 +676,14 @@ input.editor-button {
 
 #cke_editor1 {
     margin-top: 20px;
+}
+
+/*---------------------- qnaQuestionWrite -------------*/
+
+.ckeckbox-label {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-right: 10px;
 }
 
 

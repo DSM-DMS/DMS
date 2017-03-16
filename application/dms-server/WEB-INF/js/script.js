@@ -82,3 +82,8 @@ function register(params) {
         },
     });
 }
+
+function showAllergy(dom) {
+    console.log($(dom).siblings(".info").get(0));
+    $(dom).siblings(".info").children("allergy").show(500);
+}

@@ -111,37 +111,10 @@
   </div>
 </body>
 
+<script type="text/javascript">
+var satBool = ${status_1?c};
+var sunBool = ${status_2?c};
+</script>
 <script src="/js/script.js"></script>
 <script src="/js/go_out_apply.js"></script>
-<script type="text/javascript">
-$('#sat_go').flip();
-$('#sun_go').flip();
-
-var fillSat = function () {
-  var val = ${status_1?c};
-  if(val) {
-    $("#sat_val").text('외출 X');
-  } else {
-    $("#sat_val").text('외출 O');
-  }
-}
-
-var fillSun = function () {
-  var val = ${status_2?c}
-  if(val) {
-    $("#sun_val").text('외출 X');
-  } else {
-    $("#sun_val").text('외출 O');
-  }
-}
-
-$('#sat_go').flip(${status_1?c});
-$('#sun_go').flip(${status_2?c});
-
-fillSat();
-fillSun();
-
-$('#sat_go .back').removeAttr('hidden');
-$('#sun_go .back').removeAttr('hidden');
-</script>
 </html>

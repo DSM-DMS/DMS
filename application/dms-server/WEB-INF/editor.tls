@@ -55,9 +55,36 @@
         <div class="card-wrapper">
             <div class="card">
                 <div class="card-block">
+<<<<<<< HEAD
                     <div class="underbar-title border-blue"><input class="clear-input" type="text" name="title" value="${value}"></div>
                     <textarea name="editor1" id="editor1" rows="10" cols="80">${content}</textarea>
                     <input type="button" name="" value="작성" class="editor-button btn btn-default">
+=======
+                    <#if (${categoty}=="notice" && ${type}=="write" ) || (${categoty}=="rule" && ${type}=="write" ) || (${categoty}=="faq" && ${type}=="write" )>
+                        <div class="underbar-title border-blue"><input class="clear-input" type="text" name="title" value="" placeholder="제목을 쓰세요"></div>
+                        <textarea name="editor1" id="editor1" rows="10" cols="80"></textarea>
+                        <input type="button" name="" value="작성" class="editor-button btn btn-default">
+                        <#elseif (${categoty}=="qnaAnswer" && ${type}=="write" ) || (${categoty}=="reportResult" && ${type}=="write" )>
+                            <div class="underbar-title border-blue">답변</div>
+                            <textarea name="editor1" id="editor1" rows="10" cols="80"></textarea>
+                            <input type="button" name="" value="작성" class="editor-button btn btn-default">
+                            <#elseif (${categoty}=="qnaQuestion" && ${type}=="write" )>
+                                <div class="underbar-title border-blue"><input class="clear-input" type="text" name="title" value="" placeholder="제목을 입력하세요"><label for="privacy" class="ckeckbox-label">비빌글</label><input class="privacy-check" type="checkbox" name="privacy"></div>
+                                <textarea name="editor1" id="editor1" rows="10" cols="80">${content}</textarea>
+                                <input type="button" name="" value="작성" class="editor-button btn btn-default">
+                                <#elseif (${categoty}=="report" && ${type}=="write" )>
+                                    <div class="underbar-title border-blue"><input class="clear-input title" type="text" name="title" value="" placeholer="제목을 쓰세요"><input class="room" type="text" name="room" value="${room}" placeholder="호실을 입력하세요"></div>
+                                    <textarea name="editor1" id="editor1" rows="10" cols="80">${content}</textarea>
+                                    <input type="button" name="" value="작성" class="editor-button btn btn-default">
+                                    <#elseif (${categoty}=="notice" && ${type}=="modify" ) || (${categoty}=="rule" && ${type}=="modify" ) || (${categoty}=="faq" && ${type}=="modify" ) || (${categoty}=="qnaQuestion" && ${type}=="modify" )>
+                                        <div class="underbar-title border-blue"><input class="clear-input" type="text" name="title" value="${title}"></div>
+                                        <textarea name="editor1" id="editor1" rows="10" cols="80">${content}</textarea>
+                                        <input type="button" name="" value="작성" class="editor-button btn btn-default">
+                                        <#elseif (${categoty}=="report" && ${type}=="modify" )>
+                                            <div class="underbar-title border-blue"><input class="clear-input title" type="text" name="title" value="${value}"><input class="room" type="text" name="room" value="${room}"></div>
+                                            <textarea name="editor1" id="editor1" rows="10" cols="80">${content}</textarea>
+                                            <input type="button" name="" value="작성" class="editor-button btn btn-default">
+>>>>>>> 46c7e1bcbd1fe3465ec3964c0d5760d37544783c
                 </div>
             </div>
         </div>
