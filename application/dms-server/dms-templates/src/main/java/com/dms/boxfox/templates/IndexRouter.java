@@ -12,6 +12,7 @@ import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.log.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -33,7 +34,7 @@ public class IndexRouter implements Handler<RoutingContext> {
     }
 
     public void handle(RoutingContext context) {
-        System.out.println(userManager.getRegistredSessionKey(context));
+        Log.l("Index Access : " + userManager.getRegistredSessionKey(context));
         Calendar calendar = Calendar.getInstance();
         JSONArray meal = (JSONArray) MealModel.getMealAtDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)).toJSONObject().get("Meals");
         DmsTemplate templates = new DmsTemplate("index");

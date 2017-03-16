@@ -36,8 +36,13 @@ public class MypageRouter implements Handler<RoutingContext> {
                     templates.put("room", infos.get("room"));
                     templates.put("seat", infos.get("seat"));
                     templates.put("stay_status", userManager.getStayStatus(userManager.getIdFromSession(context), currentWeek()));
+                    templates.put("profile", userManager.getIdFromSession(context));
+
                     context.response().setStatusCode(200);
                     context.response().end(templates.process());
+                    context.response().close();
+                }else{
+                    context.response().setStatusCode(500);
                     context.response().close();
                 }
             } catch (IOException e) {
@@ -49,7 +54,7 @@ public class MypageRouter implements Handler<RoutingContext> {
             }
         } else {
             context.response().setStatusCode(200);
-            context.response().putHeader("Content-type", "text/html; utf-8");
+            context.response().putHeader("Content-type", "twext/html; utf-8");
             context.response().end("<script>window.location.href='/'</script>");
             context.response().close();
         }

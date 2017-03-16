@@ -63,8 +63,9 @@ public class UserManager {
         return new JobResult(check, message);
     }
 
-    public JobResult getUserInfo(String uid) throws SQLException {
+    public JobResult getUserInfo(String id) throws SQLException {
         JobResult result = new JobResult(false);
+        String uid = getUid(id);
         if (uid != null) {
             String room = "";
             String seat = "";
