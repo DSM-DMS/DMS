@@ -1,9 +1,12 @@
 package com.dms.planb.action.post.notice;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
@@ -22,12 +25,23 @@ public class NoticeModify implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
+		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet;
+		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
+			int no = Integer.parseInt(context.request().getParam("no"));
 			DmsTemplate templates = new DmsTemplate("editor");
-			templates.put("category", "notice");
-			templates.put("type", "modify");
+			
+			
 			try {
+				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
+				
+				templates.put("category", "notice");
+				templates.put("type", "modify");
+				templates.put("title", resultSet.getString("title"));
+				templates.put("content", resultSet.getString("content"));
+				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();
@@ -35,6 +49,8 @@ public class NoticeModify implements Handler<RoutingContext> {
 				Log.l("IOException");
 			} catch(TemplateException e) {
 				Log.l("TemplateException");
+			} catch(SQLException e) {
+				Log.l("SQLException");
 			}
 		} else {
 			context.response().setStatusCode(200);

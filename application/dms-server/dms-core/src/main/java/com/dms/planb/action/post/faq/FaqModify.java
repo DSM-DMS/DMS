@@ -31,17 +31,16 @@ public class FaqModify implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
+			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
-			} catch (SQLException e) {
-				Log.l("SQLException");
-			}
-			
-			DmsTemplate templates = new DmsTemplate("editor");
-			templates.put("category", "faq");
-			templates.put("type", "modify");
-			try {
+				
+				templates.put("category", "faq");
+				templates.put("type", "modify");
+				templates.put("title", resultSet.getString("title"));
+				templates.put("content", resultSet.getString("content"));
+				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();
@@ -49,6 +48,8 @@ public class FaqModify implements Handler<RoutingContext> {
 				Log.l("IOException");
 			} catch(TemplateException e) {
 				Log.l("TemplateException");
+			} catch(SQLException e) {
+				Log.l("SQLException");
 			}
 		} else {
 			context.response().setStatusCode(200);
