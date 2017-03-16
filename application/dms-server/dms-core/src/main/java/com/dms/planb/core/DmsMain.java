@@ -38,24 +38,9 @@ class DmsMain {
 	private static Vertx vertx;
 	private static VertxOptions options;
 
-	/**
-	 * @see com.dms.planb.action.account.ModifyProfileImage
-	 */
-	private static File profileImgDir = new File("Profile Images");
-	/*
-	 * Current path, directory which named "Profile Images"
-	 */
-
 	private static void initialize() {
 		/*
 		 * Initializing method when server started.
-		 */
-
-		if (!profileImgDir.exists()) {
-			profileImgDir.mkdir();
-		}
-		/*
-		 * Create profile image directory if not exists
 		 */
 
 		/**
