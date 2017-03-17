@@ -31,8 +31,9 @@ public class DeleteAccount implements Handler<RoutingContext> {
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
