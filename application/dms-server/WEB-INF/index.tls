@@ -46,7 +46,11 @@
              </div>
              <div class="icon-menu-item text-center" onclick="redirect('mypage')">
                  <img src="/images/man.png"/>
+              <#if isLogin==false>
+                 <div>로그인</div>
+             <#else>
                  <div>내정보</div>
+             </#if>
              </div>
         </div>
     <div class="main">
@@ -152,12 +156,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Rules as rule>
-                                        <tr onclick="viewPost('rule', ${rule.no})">
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
-                                        </tr>
-                                        </#list>
                                 </tbody>
                             </table>
                         </div>
@@ -173,12 +171,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Faqs as faq>
-                                        <tr onclick="viewPost('faq', ${faq.no})">
-                                            <th scope="row">${faq.no}</th>
-                                            <td>${faq.title}</td>
-                                        </tr>
-                                        </#list>
                                 </tbody>
                             </table>
                         </div>
@@ -187,6 +179,7 @@
             </div>
         </div>
     </div>
+
     
     
     <#if isLogin==false>

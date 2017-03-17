@@ -2,53 +2,53 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>DMS</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>DMS</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
   <body>
     <div class="container">
       <h1>DSM Dormitory System</h1>
     </div>
 
-    <div class="row slider-menu-container hide">
-       <div class="menu-controller show">
-              <img src="../image/arrow.png">
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/megaphone.png"/>
-           <div>공지사항</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/writing.png"/>
-           <div>연장신청</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/settings.png"/>
-           <div>수리신고</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/chicken.png"/>
-           <div>학교급식</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/crown.png"/>
-           <div>상점신청</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/bug.png"/>
-           <div>버그신고</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src="images/man.png"/>
-           <div>내정보</div>
-      </div>
-  </div>
+    <div class="row slider-menu-container hides">
+             <div class="menu-controller show">
+                    <img src="./images/arrow.png">
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/megaphone.png"/>
+                 <div>공지사항</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/writing.png"/>
+                 <div>연장신청</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/settings.png"/>
+                 <div>수리신고</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/chicken.png"/>
+                 <div>학교급식</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/crown.png"/>
+                 <div>상점신청</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/bug.png"/>
+                 <div>버그신고</div>
+             </div>
+             <div class="icon-menu-item text-center" onclick="redirect('mypage')">
+                 <img src="./images/man.png"/>
+                 <div>내정보</div>
+             </div>
+        </div>
 
   <div class="main">
     <div class="card-wrapper">
@@ -56,8 +56,11 @@
         <div class="card-block">
           <div class="underbar-title border-blue">
             잔류신청
-            <div class="text-warning text-right page_info"><br>이번 주 잔류신청은 금주의 목요일까지 가능합니다.</div>
           </div>
+            ㅁㄴㅍㅁㄴㅍㅁㄴㅍㅁ
+            ㅣㄴㅍㅁㄴㅍㅁㄴㅍ
+            ㅁㅍ
+            ㅁㄴㅍㅁ
           <div class="row">
             <div class="col-lg-7 col-md-12">
               <table id="calendar" cellspacing="0">
@@ -136,9 +139,6 @@
               </table>
             </div>
             <div class="col-lg-5 col-md-10" style="margin: auto;">
-              <table id="stay_table">
-                <tr>
-                  <td>
                     <div class="color_ex">
                       <span class="color" style="background-color: rgb(52, 219, 94);"></span>&nbsp&nbsp귀가
                     </div>
@@ -148,24 +148,15 @@
                     <div class="color_ex">
                       <span class="color" style="background-color: rgb(2, 117, 217);"></span>&nbsp&nbsp의무귀가
                     </div>
-                  </td>
-                  <td>
+                    <div id="stay_div">
                     <select id="stay_select" class="selectpicker">
                       <option value="4">잔류</option>
                       <option value="1">금요귀가</option>
                       <option value="2">토요귀가</option>
                       <option value="3">토요귀사</option>
                     </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <div id="stay_div">
                       <input type="text" name="date" id="date"><button type="button" class="btn btn-secondary" id="stay_submit">신청</button>
                     </div>
-                  </td>
-                </tr>
-              </table>
             </div>
           </div>
         </div>
