@@ -171,7 +171,7 @@ function setWriteBtnEvent() {
             url: url,
             type: type,
             data: data,
-            success: callback();
+            success: callback(),
             error: function () {
                 alert(errorMessage);
             }

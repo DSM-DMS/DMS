@@ -31,10 +31,11 @@ $(".modify-password-btn").click(function() {
             data: {
                 password: $("modify-password").val()
             },
-            success: function () {
-                alert("변경이 완료되었어요!")
+            success: function() {
+                alert("변경이 완료되었어요!");
+                $(".profile-pic").attr("src", $(".profile-pic").attr("src"));
             },
-            error: function () {
+            error: function() {
                 alert("변경에 실패했어요. ㅠㅠ")
             }
         })
@@ -61,7 +62,6 @@ $(".modify-password-btn").click(function() {
 
 
 $(".modify-profile-picture-btn").click(function() {
-    console.log($(".preview-picture").attr("src"));
     if ($(".preview-picture").attr("src") !== null) {
         var formData = new FormData();
         formData.append("profile_image", $("#modify-profile-picture")[0].files[0]);
@@ -72,7 +72,8 @@ $(".modify-profile-picture-btn").click(function() {
             contentType: false,
             type: 'POST',
             success: function(data) {
-                alert("변경이 완료되었어요.")
+                $(".profile-pic").attr("src", $(".profile-pic").attr("src") + "?");
+                alert("변경이 완료되었어요.");
             },
             error: function(data) {
                 alert("변경에 실패했어요. TT")
@@ -86,7 +87,7 @@ $(".modify-profile-picture-btn").click(function() {
 function fileToImg(file, result) {
     //var result = $("<img/>");
     var fileReader = new FileReader();
-    fileReader.onload = function (e) {
+    fileReader.onload = function(e) {
         result.attr("src", e.target.result);
     }
     fileReader.readAsDataURL(file);
@@ -101,7 +102,7 @@ function readURL(input) {
                 .width(150)
                 .height(150);
         };
-        console.log("file test = "+input.files[0]);
+        // console.log("file test = "+input.files[0]);
         reader.readAsDataURL(input.files[0]);
     }
 }
