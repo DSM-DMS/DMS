@@ -675,6 +675,16 @@ input.editor-button {
     margin-top: 20px;
 }
 
+.hide {
+    display: none;
+}
+
+.write-btn {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+}
+
 /*---------------------- qnaQuestionWrite -------------*/
 
 .ckeckbox-label {
