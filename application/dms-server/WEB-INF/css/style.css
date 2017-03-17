@@ -379,8 +379,8 @@ p.allergy {
 }
 
 #stay_select {
-    width: 80%;
     font-size: 130%;
+    padding: 0.5px;
 }
 
 #calendar .days, .days td {
@@ -416,15 +416,8 @@ p.allergy {
     border: 2px solid rgb(220, 220, 220);
     border-radius: 5%;
     font-size: 100%;
-    width: 20%;
-    margin-left: 5%;
-}
-
-#stay_table {
-    height: 100%;
-    margin-top: 5%;
-    margin: auto;
     width: 100%;
+    margin-top: 4px;
 }
 
 .color {
@@ -432,19 +425,19 @@ p.allergy {
     display: inline-block;
     width: 15px;
     height: 15px;
+    margin-right: 30px;
     border-radius: 50%;
 }
 
 .color_ex {
     display: inline-block;
     font-size: 1.5em;
-    margin-right: 30px;
     vertical-align: middle;
 }
 
 .other_month {
     color: rgb(220, 220, 220);
-}
+}   
 
 .go_home {
     color: rgb(52, 219, 94);

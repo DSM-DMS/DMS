@@ -139,15 +139,20 @@
               </table>
             </div>
             <div class="col-lg-5 col-md-10" style="margin: auto;">
-                    <div class="color_ex">
-                      <span class="color" style="background-color: rgb(52, 219, 94);"></span>&nbsp&nbsp귀가
-                    </div>
-                    <div class="color_ex">
-                      <span class="color" style="background-color: rgb(255, 151, 49);"></span>&nbsp&nbsp귀사
-                    </div>
-                    <div class="color_ex">
-                      <span class="color" style="background-color: rgb(2, 117, 217);"></span>&nbsp&nbsp의무귀가
-                    </div>
+                <ul class="list-group">
+                        <li class="list-group-item">
+                        <span class="badge">14</span>
+                            <span class="color" style="background-color: rgb(52, 219, 94);"></span>귀가
+                        </li>
+                        <li class="list-group-item">
+                        <span class="badge">14</span>
+                        <span class="color" style="background-color: rgb(255, 151, 49);"></span>귀사
+                        </li>
+                        <li class="list-group-item">
+                        <span class="badge">14</span>
+                        <span class="color" style="background-color: rgb(2, 117, 217);"></span>의무귀가
+                        </li>
+                    </ul>
                     <div id="stay_div">
                     <select id="stay_select" class="selectpicker">
                       <option value="4">잔류</option>
@@ -155,7 +160,7 @@
                       <option value="2">토요귀가</option>
                       <option value="3">토요귀사</option>
                     </select>
-                      <input type="text" name="date" id="date"><button type="button" class="btn btn-secondary" id="stay_submit">신청</button>
+                      <input type="text" name="date" id="date" readonly><button type="button" class="btn btn-secondary" id="stay_submit">신청</button>
                     </div>
             </div>
           </div>
