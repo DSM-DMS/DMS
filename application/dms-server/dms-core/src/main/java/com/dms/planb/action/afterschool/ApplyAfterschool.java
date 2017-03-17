@@ -22,6 +22,7 @@ public class ApplyAfterschool implements Handler<RoutingContext> {
 	public ApplyAfterschool() {
 		userManager = new UserManager();
 	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
