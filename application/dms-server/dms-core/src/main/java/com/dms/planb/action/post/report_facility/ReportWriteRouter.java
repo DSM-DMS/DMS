@@ -14,17 +14,17 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/report/write", method={HttpMethod.GET})
-public class ReportFacilityWriteRouter implements Handler<RoutingContext> {
+public class ReportWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public ReportFacilityWriteRouter() {
+	public ReportWriteRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("reportWrite");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
