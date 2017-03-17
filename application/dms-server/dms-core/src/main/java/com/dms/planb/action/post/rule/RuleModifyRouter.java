@@ -39,13 +39,11 @@ public class RuleModifyRouter implements Handler<RoutingContext> {
 	        	return;
 	        }
 			
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("ruleModify");
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
 				
-				templates.put("category", "rule");
-				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));
 				
