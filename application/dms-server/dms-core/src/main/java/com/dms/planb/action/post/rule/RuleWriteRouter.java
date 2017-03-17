@@ -14,10 +14,10 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/post/rule/write", method = {HttpMethod.GET})
-public class RuleWrite implements Handler<RoutingContext> {
+public class RuleWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public RuleWrite() {
+	public RuleWriteRouter() {
 		userManager = new UserManager();
 	}
 	

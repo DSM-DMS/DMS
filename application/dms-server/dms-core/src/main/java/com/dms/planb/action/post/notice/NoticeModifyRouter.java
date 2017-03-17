@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.rule;
+package com.dms.planb.action.post.notice;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,11 +17,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/rule/modify", method = {HttpMethod.GET})
-public class RuleModify implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/notice/modify", method={HttpMethod.GET})
+public class NoticeModifyRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public RuleModify() {
+	public NoticeModifyRouter() {
 		userManager = new UserManager();
 	}
 	
@@ -42,9 +42,9 @@ public class RuleModify implements Handler<RoutingContext> {
 			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
 				
-				templates.put("category", "rule");
+				templates.put("category", "notice");
 				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));

@@ -18,10 +18,10 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
-public class FaqModify implements Handler<RoutingContext> {
+public class FaqModifyRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public FaqModify() {
+	public FaqModifyRouter() {
 		userManager = new UserManager();
 	}
 	
