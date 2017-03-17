@@ -92,11 +92,11 @@
                 <tbody>
                   <tr>
                     <td>토요일</td>
-                    <td id="sat_val">외출 O</td>
+                    <td id="sat_val">외출</td>
                   </tr>
                   <tr>
                     <td>일요일</td>
-                    <td id="sun_val">외출 O</td>
+                    <td id="sun_val">외출</td>
                   </tr>
                 </tbody>
               </table>
