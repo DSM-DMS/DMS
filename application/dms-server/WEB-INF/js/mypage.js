@@ -65,11 +65,7 @@ $(".modify-profile-picture-btn").click(function() {
         var formData = new FormData();
         formData.append("profile_image", $("#modify-profile-picture")[0].files[0]);
         $.ajax({
-<<<<<<< HEAD
             url: "/upload/image/",
-=======
-            url: "/upload/image",
->>>>>>> d1e3ffb27823fd2a9475559a393febbd8682bc49
             data: formData,
             processData: false,
             contentType: false,
