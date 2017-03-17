@@ -46,7 +46,11 @@
              </div>
              <div class="icon-menu-item text-center" onclick="redirect('mypage')">
                  <img src="/images/man.png"/>
+              <#if isLogin==false>
+                 <div>로그인</div>
+             <#else>
                  <div>내정보</div>
+             </#if>
              </div>
         </div>
     <div class="main">
