@@ -8,10 +8,9 @@ import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.log.Log;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by boxfox on 2017-03-15.
@@ -72,6 +71,7 @@ public class ImageUploadRouter implements Handler<RoutingContext> {
             File file = new File(upload.uploadedFileName());
             file.delete();
         }
+        Log.l("Login Request ( ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode() + "  :  " + context.response().getStatusMessage());
     }
 
     private boolean checkExtensions(String extension) {

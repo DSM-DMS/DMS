@@ -10,6 +10,7 @@ import io.vertx.ext.web.Session;
 import io.vertx.ext.web.sstore.impl.SessionImpl;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
@@ -81,7 +82,12 @@ public class IndexRouter implements Handler<RoutingContext> {
 
     private List<Notification> createNotification() {
         List<Notification> list = new ArrayList<Notification>();
-
+        if (ApplyDataUtil.canApplyExtension())
+            list.add(new Notification("연장학습 신청이 가능합니다!", "bg-success"));
+        if (ApplyDataUtil.canApplyGoingout())
+            list.add(new Notification("주말외출 신청이 가능합니다!", "bg-info"));
+        if (ApplyDataUtil.canApplyStay())
+            list.add(new Notification("주말외출 신청이 가능합니다!", "bg-info"));
         return list;
     }
 

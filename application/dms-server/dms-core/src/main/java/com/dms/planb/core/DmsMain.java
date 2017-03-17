@@ -33,12 +33,14 @@ import com.dms.parser.dataio.post.PostUpdateListener;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
+import org.boxfox.dms.utilities.log.Log;
 
 class DmsMain {
 	private static Vertx vertx;
 	private static VertxOptions options;
 
 	private static void initialize() {
+		Log.setPath("log");
 		/*
 		 * Initializing method when server started.
 		 */

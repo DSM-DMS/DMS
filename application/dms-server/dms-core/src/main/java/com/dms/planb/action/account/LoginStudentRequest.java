@@ -42,9 +42,6 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
         	context.response().close();
         	return;
         }
-        
-        Log.l("Login Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
-
         try {
             boolean check = userManager.login(id, password);
             if (check) {
@@ -62,7 +59,8 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
             context.response().close();
 
             Log.l("SQLException");
-        }   
+        }
+        Log.l("Login Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
     }
 
     public EasyJsonObject getUserData(JobResult result, EasyJsonObject responseObject) throws SQLException {
