@@ -2,6 +2,7 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
@@ -31,14 +32,21 @@ public class ApplyStay implements Handler<RoutingContext> {
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {
-            if (id != null)
+            if (id != null) {
                 uid = userManager.getUid(id);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
 		int value = Integer.parseInt(context.request().getParam("value"));
 		String week = context.request().getParam("week");
+		
+		if(!Guardian.checkParameters(id, uid, value, week)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
 		
 		try {
 			if(ApplyDataUtil.canApplyStay(week)) {
