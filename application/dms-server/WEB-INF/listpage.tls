@@ -12,10 +12,10 @@
 </head>
 <body>
     <div class="container">
-    <h1>DSM Dormitory System</h1> 
+    <h1>DSM Dormitory System</h1>
 </div>
-    
-    
+
+
     <div class="row slider-menu-container hides">
              <div class="menu-controller show">
                     <img src="/images/arrow.png">
@@ -49,12 +49,12 @@
                  <div>내정보</div>
              </div>
         </div>
-    
+
   <div class="main">
       <div class="card-wrapper">
         <div class="card">
         <div class="card-block">
-        <div class="underbar-title border-blue">${Title}</div>
+        <div class="underbar-title border-blue">${Title}<input class="btn btn-primary write-btn" type="button" name="" value="글 쓰기"></div>
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
@@ -78,7 +78,6 @@
         </div>
     </div>
 </body>
-    
 <script src="/js/script.js"></script>
-
+<script src="/js/listpage.js"></script>
 </html>

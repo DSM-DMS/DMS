@@ -62,7 +62,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="go_title">토요일 외출</div>
               <div id="sat_go">
-                <div class="front">
+                <div class="front" hidden>
                   외출 O
                 </div>
                 <div class="back" hidden>
@@ -73,7 +73,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="go_title">일요일 외출</div>
               <div id="sun_go">
-                <div class="front">
+                <div class="front" hidden>
                   외출 O
                 </div>
                 <div class="back" hidden>
@@ -91,11 +91,11 @@
                 <tbody>
                   <tr>
                     <td>토요일</td>
-                    <td id="sat_val">외출 O</td>
+                    <td id="sat_val"></td>
                   </tr>
                   <tr>
                     <td>일요일</td>
-                    <td id="sun_val">외출 O</td>
+                    <td id="sun_val"></td>
                   </tr>
                 </tbody>
               </table>
@@ -113,8 +113,4 @@
 
 <script src="./js/script.js"></script>
 <script src="./js/go_out_apply.js"></script>
-<script type="text/javascript">
-$('#sat_go .back').removeAttr('hidden');
-$('#sun_go .back').removeAttr('hidden');
-</script>
 </html>

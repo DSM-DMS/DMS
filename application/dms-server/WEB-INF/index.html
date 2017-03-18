@@ -11,7 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
-
 <body>
     <div class="container">
         <h1><img src="./images/log3.png" style="height: 80px; vertical-align: -55%;">Domitory System</h1>
@@ -83,19 +82,21 @@
                                 <div class="mornig meal">
                                     <div class="info">
                                         <h4 class="col-2 text-center">아침</h4>
-                                        <p class="col-9">${Breakfast}</p>
+                                        <p class="col-9 menu">${Breakfast}</p>
                                         <p class="col-9 allergy">${BreakfastAllergy}</p>
-                                    </div> <img src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
+                                    </div> <img class="allergy-arrow" src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
                                 <div class="lunch meal">
                                     <div class="info">
                                         <h4 class="col-2 text-center">점심</h4>
-                                        <p class="col-9">${Lunch}</p>
-                                    </div> <img src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
+                                        <p class="col-9 menu">${Lunch}</p>
+                                        <p class="col-9 allergy">${LunchAllergy}</p>
+                                    </div> <img class="allergy-arrow" src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
                                 <div class="dinner meal">
                                     <div class="info">
                                         <h4 class="col-2 text-center">저녁</h4>
-                                        <p class="col-9">${Dinner}</p>
-                                    </div> <img src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
+                                        <p class="col-9 menu">${Dinner}</p>
+                                        <p class="col-9 allergy">${DinnerAllergy}</p>
+                                    </div> <img class="allergy-arrow" src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +143,7 @@
         <div class="card">
             <div class="card-block">
                 <div class="row">
-                    <div class="col-sm-6 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="underbar-title border-puple">기숙사 규칙<a href="/post/?category=rule" class="view-more">더보기</a></div>
                         <div>
                             <table class="table table-sm table-hover">
@@ -153,17 +154,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Rules as rule>
-                                        <tr onclick="viewPost('rule', ${rule.no})">
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
-                                        </tr>
-                                        </#list>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="underbar-title border-blue">자주하는 질문<a href="/post/?category=faq" class="view-more">더보기</a></div>
                         <div>
                             <table class="table table-sm table-hover">
@@ -174,12 +169,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Faqs as faq>
-                                        <tr onclick="viewPost('faq', ${faq.no})">
-                                            <th scope="row">${faq.no}</th>
-                                            <td>${faq.title}</td>
-                                        </tr>
-                                        </#list>
                                 </tbody>
                             </table>
                         </div>

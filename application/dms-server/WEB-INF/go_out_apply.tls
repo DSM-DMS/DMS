@@ -51,15 +51,19 @@
              </div>
         </div>
 
-  <div class="main">
+    <div class="main">
     <div class="card-wrapper">
       <div class="card">
         <div class="card-block">
+            <div class="underbar-title border-red">
+              주말 외출신청
+              <div class="text-warning text-right page_info"><br>주말 외출은 점심시간부터 5시 30분까지 입니다.</div>
+            </div>
           <div class="row" id="go_row">
             <div class="col-lg-4 col-md-12">
               <div class="go_title">토요일 외출</div>
               <div id="sat_go">
-                <div class="front">
+                <div class="front" hidden>
                   외출 O
                 </div>
                 <div class="back" hidden>
@@ -70,7 +74,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="go_title">일요일 외출</div>
               <div id="sun_go">
-                <div class="front">
+                <div class="front" hidden>
                   외출 O
                 </div>
                 <div class="back" hidden>
@@ -88,11 +92,11 @@
                 <tbody>
                   <tr>
                     <td>토요일</td>
-                    <td id="sat_val">외출 O</td>
+                    <td id="sat_val"></td>
                   </tr>
                   <tr>
                     <td>일요일</td>
-                    <td id="sun_val">외출 O</td>
+                    <td id="sun_val"></td>
                   </tr>
                 </tbody>
               </table>
