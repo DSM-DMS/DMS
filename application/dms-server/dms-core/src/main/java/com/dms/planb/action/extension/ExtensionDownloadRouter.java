@@ -30,11 +30,11 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
     
 	@Override
 	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		SafeResultSet tempResultSet;
-		
-		context = PrecedingWork.putHeaders(context);
 		
 		File file = getFile();
 
