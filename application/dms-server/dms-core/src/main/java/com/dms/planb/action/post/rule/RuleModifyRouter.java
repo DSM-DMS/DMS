@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.notice;
+package com.dms.planb.action.post.rule;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,21 +11,24 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.planb.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/notice/modify", method={HttpMethod.GET})
-public class NoticeModify implements Handler<RoutingContext> {
+@RouteRegistration(path = "/post/rule/modify", method = {HttpMethod.GET})
+public class RuleModifyRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public NoticeModify() {
+	public RuleModifyRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
@@ -39,13 +42,11 @@ public class NoticeModify implements Handler<RoutingContext> {
 	        	return;
 	        }
 			
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("ruleModify");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
 				
-				templates.put("category", "notice");
-				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));
 				

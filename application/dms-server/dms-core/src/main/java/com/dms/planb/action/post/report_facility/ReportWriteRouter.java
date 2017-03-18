@@ -7,24 +7,27 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.planb.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/report/modify", method={HttpMethod.GET})
-public class ReportFacilityModify implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/report/write", method={HttpMethod.GET})
+public class ReportWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public ReportFacilityModify() {
+	public ReportWriteRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
+		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("reportWrite");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.qna;
+package com.dms.planb.action.post.rule;
 
 import java.io.IOException;
 
@@ -7,24 +7,27 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.planb.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/qna/modify", method={HttpMethod.GET})
-public class QnaModify implements Handler<RoutingContext> {
+@RouteRegistration(path = "/post/rule/write", method = {HttpMethod.GET})
+public class RuleWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public QnaModify() {
+	public RuleWriteRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
+		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("ruleWrite");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

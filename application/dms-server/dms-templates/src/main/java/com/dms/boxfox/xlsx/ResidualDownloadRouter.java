@@ -1,14 +1,12 @@
 package com.dms.boxfox.xlsx;
 
-import com.dms.boxfox.templates.DmsTemplate;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+
 import com.sun.javafx.binding.StringFormatter;
-import freemarker.template.TemplateException;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-
-import java.io.IOException;
 
 @RouteRegistration(path = "/stay/download", method={HttpMethod.POST})
 public class ResidualDownloadRouter implements Handler<RoutingContext> {

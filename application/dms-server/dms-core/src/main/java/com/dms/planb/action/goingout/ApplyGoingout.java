@@ -25,8 +25,10 @@ public class ApplyGoingout implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
         context = PrecedingWork.putHeaders(context);
+        
         String sat = context.request().getParam("sat");
         String sun = context.request().getParam("sun");
+        
         if (Guardian.checkParameters(sat, sun) && userManager.isLogined(context)) {
             try {
                 String uid = userManager.getUid(userManager.getIdFromSession(context));

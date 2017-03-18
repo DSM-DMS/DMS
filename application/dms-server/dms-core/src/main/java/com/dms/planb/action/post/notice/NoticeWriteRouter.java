@@ -7,6 +7,7 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.planb.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -14,14 +15,16 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/notice/write", method={HttpMethod.GET})
-public class NoticeWrite implements Handler<RoutingContext> {
+public class NoticeWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public NoticeWrite() {
+	public NoticeWriteRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
+		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
