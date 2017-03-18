@@ -20,11 +20,11 @@
         <div class="menu-controller show">
             <img src="/images/arrow.png">
         </div>
-        <div class="icon-menu-item text-center">
+        <div class="icon-menu-item text-center" onclick="redirect('post/?category=notice')">
             <img src="/images/megaphone.png" />
             <div>공지사항</div>
         </div>
-        <div class="icon-menu-item text-center">
+        <div class="icon-menu-item text-center" onclick="redirect('extensionapply')">
             <img src="/images/writing.png" />
             <div>연장신청</div>
         </div>
@@ -141,8 +141,8 @@
             </div>
             <div class="col-lg-6 col-md-12 card display-inline-block">
                 <div class="card-block">
-                    <h4 class="card-title">잔류신청</h4>
-                    <p class="card-text">잔류 및 귀가 신청은 월요일 부터 목요일 8시 이전까지 가능합니다.</p> <a href="#" class="card-link">신청하러 가기</a> </div>
+                    <h4 class="card-title">상점신청</h4>
+                    <p class="card-text">착한 활동을 했다면 상점을 신청할 수 있습니다!</p> <a class="card-link text-warning">아직 준비되지 않았습니다!</a> </div>
             </div>
         </div>
         <div class="card">
