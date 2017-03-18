@@ -3,7 +3,7 @@ package com.dms.planb.action.post.parsed;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.parser.dataio.plan.PlanModel;
-import com.dms.planb.support.PrecedingWork;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;

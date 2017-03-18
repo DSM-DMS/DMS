@@ -11,7 +11,7 @@ import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.PrecedingWork;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;

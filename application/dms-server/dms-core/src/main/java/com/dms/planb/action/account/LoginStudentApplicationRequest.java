@@ -1,10 +1,9 @@
 package com.dms.planb.action.account;
 
-import com.dms.planb.support.PrecedingWork;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.secure.VerifyRecaptcha;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;

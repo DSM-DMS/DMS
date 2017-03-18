@@ -86,8 +86,8 @@ public class IndexRouter implements Handler<RoutingContext> {
             list.add(new Notification("연장학습 신청이 가능합니다!", "bg-success"));
         if (ApplyDataUtil.canApplyGoingout())
             list.add(new Notification("주말외출 신청이 가능합니다!", "bg-info"));
-        if (ApplyDataUtil.canApplyStay())
-            list.add(new Notification("주말외출 신청이 가능합니다!", "bg-info"));
+        if (ApplyDataUtil.warningStayApply())
+            list.add(new Notification("잔류 신청이 얼마 남지 않았습니다!", "bg-info"));
         return list;
     }
 

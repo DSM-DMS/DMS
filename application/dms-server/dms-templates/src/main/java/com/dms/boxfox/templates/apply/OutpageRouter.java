@@ -1,4 +1,4 @@
-package com.dms.boxfox.templates;
+package com.dms.boxfox.templates.apply;
 
 import com.dms.boxfox.templates.DmsTemplate;
 import freemarker.template.TemplateException;

@@ -10,7 +10,7 @@ import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.PrecedingWork;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 //import com.dms.planb.support.ProfileImage;
 
 import io.vertx.core.Handler;

@@ -1,13 +1,13 @@
-package com.dms.planb.action.stay;
+package com.dms.boxfox.templates.apply;
 
 import java.io.IOException;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import com.dms.planb.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -24,7 +24,7 @@ private UserManager userManager;
 	
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
-		
+
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("stay_apply");

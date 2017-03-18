@@ -20,7 +20,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import com.dms.planb.support.PrecedingWork;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 @RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {

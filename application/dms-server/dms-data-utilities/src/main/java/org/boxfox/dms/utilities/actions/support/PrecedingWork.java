@@ -1,4 +1,4 @@
-package com.dms.planb.support;
+package org.boxfox.dms.utilities.actions.support;
 
 import com.google.common.net.HttpHeaders;
 import org.boxfox.dms.utilities.log.Log;

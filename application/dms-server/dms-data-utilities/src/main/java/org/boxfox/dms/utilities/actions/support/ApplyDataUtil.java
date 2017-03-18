@@ -1,5 +1,7 @@
 package org.boxfox.dms.utilities.actions.support;
 
+import sun.util.resources.cldr.ne.CalendarData_ne_NP;
+
 import java.util.Calendar;
 
 public class ApplyDataUtil {
@@ -51,6 +53,13 @@ public class ApplyDataUtil {
             check = true;
         }
         return check;
+    }
+
+    public static boolean warningStayApply() {
+        Calendar currentTime = Calendar.getInstance();
+        if (currentTime.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY)
+            return true;
+        return false;
     }
 
     public static String stayDataToString(int num) {

@@ -1,5 +1,6 @@
-package com.dms.boxfox.templates;
+package com.dms.boxfox.templates.apply;
 
+import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.parser.dataio.meal.MealModel;
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
