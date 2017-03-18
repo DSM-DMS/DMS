@@ -14,11 +14,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/qna/modify", method={HttpMethod.GET})
-public class QnaModify implements Handler<RoutingContext> {
-	private UserManager userManager;
+@RouteRegistration(path="/post/answer/write", method={HttpMethod.GET})
+public class QnaAnswerWriteRouter implements Handler<RoutingContext> {
+private UserManager userManager;
 	
-	public QnaModify() {
+	public QnaAnswerWriteRouter() {
 		userManager = new UserManager();
 	}
 	
@@ -27,7 +27,8 @@ public class QnaModify implements Handler<RoutingContext> {
 		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("qnaAnswerWrite");
+			
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
