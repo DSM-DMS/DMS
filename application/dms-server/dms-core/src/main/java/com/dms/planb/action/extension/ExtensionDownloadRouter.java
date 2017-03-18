@@ -25,6 +25,7 @@ import io.vertx.ext.web.RoutingContext;
 public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
     private final String FILE_DIR = "files/";
+    private final String[] CLASS_NAMES = {"미신청", "가온실", "나온실", "다온실", "3층 독서실", "4층 독서실", "5층 열린교실"};
 	private XSSFWorkbook wb;
     
 	@Override
@@ -51,8 +52,7 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 						sb.insert(1, "0");
 						
 						int studentNumber = Integer.valueOf(sb.toString());
-						int classId = -1;
-						String className = null;
+						int classId = 0;
 						
 						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", studentNumber);
 						
@@ -63,36 +63,9 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 							classId = tempResultSet.getInt("class");
 						}
 						
-						switch(classId) {
-						case 1:
-							className = "가온실";
-							break;
-						case 2:
-							className = "나온실";
-							break;
-						case 3:
-							className = "다온실";
-							break;
-						case 4:
-							className = "라온실";
-							break;
-						case 5:
-							className = "3층 독서실";
-							break;
-						case 6:
-							className = "4층 독서실";
-							break;
-						case 7:
-							className = "5층 열린교실";
-							break;
-						default:
-							className = "미신청";
-							break;
-						}
-						
 						XSSFRow extensionStateRow = sheet.getRow(cell.getRowIndex());
 						Cell extensionStateCell = extensionStateRow.getCell(cell.getColumnIndex() + 2);
-						extensionStateCell.setCellValue(className);
+						extensionStateCell.setCellValue(CLASS_NAMES[classId]);
 						
 						break;
 					}
