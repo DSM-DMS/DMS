@@ -19,7 +19,6 @@ public class ResidualDownload {
     private static final String FILE = "files/";
     private static final String[] RESIDUAL_TYPE = new String[]{"금요귀가", "토요귀가", "토요귀사", "잔류"};
 
-
     public String readExcel(String date) {
         HashMap<String, String> map = new HashMap<String, String>();
         initResidualMaps(date, map);
