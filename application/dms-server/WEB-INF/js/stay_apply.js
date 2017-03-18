@@ -20,7 +20,7 @@ var applySendDataWeek;
 var applySendDataValue;
 var getDataValue;
 var defaultValue;
-var defalutSelector = new Array();
+var defaultSelector = new Array();
 
 $.ajax({
   url: "/apply/stay/default",
@@ -41,12 +41,12 @@ var getData = function () {
     },
     success: function(data) {
       valueArray.push(JSON.parse(data).value);
-      defalutSelector.push(false);
+      defaultSelector.push(false);
     },
     error: function(xhr){
-      console.log('['+ loadSendDataWeek + '] 404 error : push defalutValue (' + defaultValue + ')');
+      console.log('['+ loadSendDataWeek + '] 404 error : push defaultValue (' + defaultValue + ')');
       valueArray.push(defaultValue);
-      defalutSelector.push(true);
+      defaultSelector.push(true);
     }
   });
 };
@@ -82,6 +82,9 @@ function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
 function drawPrev() {
     loadPrev();
     for (i = 1; i <= valueArray.length; i++) {
+        if(defaultSelector[i - 1]) {
+            $('tr:eq(' + (i + 1) + ')').css('border', '1px solid red')
+        }
         if (valueArray[i - 1] == 4) { //잔류
         } else if (valueArray[i - 1] == 1) {
             $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
@@ -309,6 +312,11 @@ function clearCalendar() {
         $('#calendar td:eq(' + idx + ')').text("");
     }
     $('#calendar tbody tr').css("background-color", "white");
+    $('#first_week').css('border', '0px');
+    $('#second_week').css('border', '0px');
+    $('#third_week').css('border', '0px');
+    $('#fourth_week').css('border', '0px');
+    $('#fifth_week').css('border', '0px');
     $('#sixth_week').toggle();
     five_week = false;
 }
@@ -393,6 +401,6 @@ $('#date').keydown(function(e) {
 
 $('#stay_submit').on('click', function() {
     applySendDataWeek = $('#date').val();
-    applySendDataValue = $("#stay_select option:selected").val();
+    applySendDataValue = $("#stay_select").val();
     applyData();
 });
