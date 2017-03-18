@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import com.dms.planb.support.PrecedingWork;
 
@@ -22,12 +23,15 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/extension/download", method={HttpMethod.POST})
 public class ExtensionDownloadRouter implements Handler<RoutingContext> {
-	private static final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
-    private static final String FILE_DIR = "files/";
+	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
+    private final String FILE_DIR = "files/";
+	private XSSFWorkbook wb;
     
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet;
+		SafeResultSet tempResultSet;
 		
 		context = PrecedingWork.putHeaders(context);
 		
@@ -35,11 +39,9 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 
 		try {
 			System.out.println(file.getPath());
-			XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(file));
+			wb = new XSSFWorkbook(new FileInputStream(file));
 
 			XSSFSheet sheet = wb.getSheetAt(0);
-			
-			int cnt = 0;
 			
 			for (Row row : sheet) {
 				for (Cell cell : row) {
@@ -48,13 +50,18 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 						StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 						sb.insert(1, "0");
 						
-						int number = Integer.valueOf(sb.toString());
-						String uid = database.executeQuery("SELECT * FROM student_data WHERE number=", number).getString("uid");
-						int classId = database.executeQuery("SELECT * FROM extension_apply WHERE uid='", uid, "'").getInt("class");
-						
-						// 연장신청 안된 경우 수정
-						
+						int studentNumber = Integer.valueOf(sb.toString());
+						int classId = -1;
 						String className = null;
+						
+						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", studentNumber);
+						
+						if(resultSet.next()) {
+							String uid = resultSet.getString("uid");
+							tempResultSet = database.executeQuery("SELECT * FROM extension_apply WHERE uid='", uid, "'");
+							tempResultSet.next();
+							classId = tempResultSet.getInt("class");
+						}
 						
 						switch(classId) {
 						case 1:
