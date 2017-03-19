@@ -39,7 +39,6 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 		File file = getFile();
 
 		try {
-			System.out.println(file.getPath());
 			wb = new XSSFWorkbook(new FileInputStream(file));
 
 			XSSFSheet sheet = wb.getSheetAt(0);
