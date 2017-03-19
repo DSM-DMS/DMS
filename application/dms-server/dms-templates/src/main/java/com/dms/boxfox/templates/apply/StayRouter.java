@@ -14,7 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/stay", method={HttpMethod.GET})
+@RouteRegistration(path="/stayapply", method={HttpMethod.GET})
 public class StayRouter implements Handler<RoutingContext> {
 private UserManager userManager;
 	
