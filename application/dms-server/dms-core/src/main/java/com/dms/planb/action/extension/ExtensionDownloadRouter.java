@@ -8,14 +8,14 @@ import java.sql.SQLException;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
-
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -34,7 +34,7 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
-		SafeResultSet tempResultSet;
+		SafeResultSet extensionStateResultSet;
 		
 		File file = getFile();
 
@@ -57,13 +57,13 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 						
 						if(resultSet.next()) {
 							String uid = resultSet.getString("uid");
-							tempResultSet = database.executeQuery("SELECT * FROM extension_apply WHERE uid='", uid, "'");
-							tempResultSet.next();
-							classId = tempResultSet.getInt("class");
+							extensionStateResultSet = database.executeQuery("SELECT * FROM extension_apply WHERE uid='", uid, "'");
+							extensionStateResultSet.next();
+							classId = extensionStateResultSet.getInt("class");
 						}
 						
-						XSSFRow extensionStateRow = sheet.getRow(cell.getRowIndex());
-						Cell extensionStateCell = extensionStateRow.getCell(cell.getColumnIndex() + 2);
+						XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
+						XSSFCell extensionStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
 						extensionStateCell.setCellValue(CLASS_NAMES[classId]);
 						
 						break;
@@ -79,7 +79,8 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 			context.response().sendFile(FILE_DIR + "잔류신청.xlsx");
 			context.response().close();
 		} catch (IOException | SQLException e) {
-			e.printStackTrace();
+			context.response().setStatusCode(500).end();
+			context.response().close();
 		}
 	}
 	
