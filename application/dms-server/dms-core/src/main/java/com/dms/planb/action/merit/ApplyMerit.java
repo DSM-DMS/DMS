@@ -2,41 +2,65 @@ package com.dms.planb.action.merit;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.APPLY_MERIT)
-public class ApplyMerit implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/merit", method={HttpMethod.POST})
+public class ApplyMerit implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public ApplyMerit() {
+		userManager = new UserManager();
+	}
+	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Apply merit - about target and content
-		 * 
-		 * Table Name : merit_apply
-		 * 
-		 * no INT(11) PK NN AI
-		 * id VARCHAR(20) NN
-		 * target VARCHAR(45) Default NULL
-		 * content VARCHAR(500) NN
-		 */
-		String id = requestObject.getString("id");
-		String content = requestObject.getString("content");
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		int status = 1;
-		if(requestObject.containsKey("target")) {
-			// Case that merit recommendation
-			String recommendTarget = requestObject.getString("target");
-			status = database.executeUpdate("INSERT INTO merit_apply(id, target, content) VALUES('", id, "', '", recommendTarget, "', '", content, "')");
-		} else {
-			status = database.executeUpdate("INSERT INTO merit_apply(id, content) VALUES('", id, "', '", content, "')");
+		DataBase database = DataBase.getInstance();
+		
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null) {
+                uid = userManager.getUid(id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		String content = context.request().getParam("content");
+		
+		if(!Guardian.checkParameters(id, uid, content)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
+		
+		try {
+			if(context.request().params().contains("target")) {
+				String target = context.request().getParam("target");
+				
+				database.executeUpdate("INSERT INTO merit_apply(uid, target, content) VALUES('", uid, "', '", target, "', '", content, "')");
+			} else {
+				database.executeUpdate("INSERT INTO merit_apply(uid, content) VALUES('", uid, "', '", content, "')");
+			}
+			
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

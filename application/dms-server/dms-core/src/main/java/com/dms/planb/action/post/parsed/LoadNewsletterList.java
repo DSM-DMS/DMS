@@ -1,24 +1,24 @@
 package com.dms.planb.action.post.parsed;
 
-import java.sql.SQLException;
-
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.parser.dataio.post.PostModel;
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.LOAD_NEWSLETTER_LIST)
-public class LoadNewsletterList implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/school/newsletter/list", method={HttpMethod.GET})
+public class LoadNewsletterList implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int category = requestObject.getInt("category");
-		int no = requestObject.getInt("page");
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		responseObject.put("result", PostModel.getPostsAtPage(category, no));
+		int page = Integer.parseInt(context.request().getParam("page"));
 		
-		return responseObject;
+		context.response().setStatusCode(200);
+		context.response().end(PostModel.getPostsAtPage(1, page).toString());
+		context.response().close();
 	}
 }

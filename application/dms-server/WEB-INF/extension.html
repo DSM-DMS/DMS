@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>DMS</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+    <h1>DSM Dormitory System</h1>
+</div>
+
+    <div class="row slider-menu-container hides">
+             <div class="menu-controller show">
+                    <img src="./images/arrow.png">
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/megaphone.png"/>
+                 <div>공지사항</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/writing.png"/>
+                 <div>연장신청</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/settings.png"/>
+                 <div>수리신고</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/chicken.png"/>
+                 <div>학교급식</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/crown.png"/>
+                 <div>상점신청</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/bug.png"/>
+                 <div>버그신고</div>
+             </div>
+             <div class="icon-menu-item text-center">
+                 <img src="./images/man.png"/>
+                 <div>내정보</div>
+             </div>
+        </div>
+
+  <div class="main">
+      <div class="card-wrapper">
+    <div class="card">
+    <div class="card-block">
+        <div class="underbar-title border-blue">
+          연장신청
+          <div class="text-warning text-right page_info">연장학습 신청은 당일 8시 30분까지 신청 가능합니다.<br> 원하는 호실을 선택한 후 원하는 자리를 클릭하여 신청 가능합니다.</div>
+        </div>
+        <div class="extentionapply text-center">
+            <div class="selecter-container">
+                <div class="class-selecter-div">
+                    <label for="class-select">가온실</label>
+                    <select id="class-select">
+                        <!--받은 데이터를 통해 호실의 개수를 정하도록 리팩토링 요구 - 출시후에-->
+                      <option selected="selected" value="1">가온실</option>
+                      <option value="2">나온실</option>
+                      <option value="3">다온실</option>
+                      <option value="4">라온실</option>
+                      <option value="5">3층 독서실</option>
+                      <option value="6">4층 독서실</option>
+                      <option value="7">5층 자유구역</option>
+                  </select>
+                </div>
+                <input class="apply-cancle" type="button" name="" value="신청취소">
+            </div>
+
+            <div class="seatcontainer">
+
+            </div>
+        </div>
+    </div>
+      </div>
+        </div>
+        </div>
+
+</body>
+
+<script src="./js/script.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="./js/extentionapply.js"></script>
+
+</html>

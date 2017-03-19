@@ -62,6 +62,7 @@ public class Log {
 	public static String cleanStringBuilder(Object ... args){
 		StringBuilder builder = new StringBuilder();
 		for(Object obj : args){
+			if(obj==null) obj = "null";
 			builder.append(obj.toString());
 		}
 		return builder.toString();

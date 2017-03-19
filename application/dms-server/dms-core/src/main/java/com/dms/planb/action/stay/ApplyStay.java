@@ -2,41 +2,68 @@ package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.APPLY_STAY)
-public class ApplyStay implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/apply/stay", method={HttpMethod.PUT})
+public class ApplyStay implements Handler<RoutingContext> {
+	UserManager userManager;
+	
+	public ApplyStay() {
+		userManager = new UserManager();
+	}
+	
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Apply stay - about value of date
-		 * 
-		 * Table Name : stay_apply
-		 * 
-		 * id VARCHAR(20) NN
-		 * value INT(1) NN
-		 * week DATE NN
-		 * 
-		 * DATE format : YYYY-MM-DD
-		 * Friday home coming : 1
-		 * Saturday home coming : 2
-		 * Saturday dormitory coming : 3
-		 * Stay : 4
-		 */
-		String id = requestObject.getString("id");
-		int value = requestObject.getInt("value");
-		String week = requestObject.getString("week");
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		database.executeUpdate("DELETE FROM stay_apply WHERE id='", id, "' AND week='", week, "'");
-		int status = database.executeUpdate("INSERT INTO stay_apply(id, value, week) VALUES('", id, "', ", value, ", '", week, "')");
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null) {
+                uid = userManager.getUid(id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+		int value = Integer.parseInt(context.request().getParam("value"));
+		String week = context.request().getParam("week");
 		
-		return responseObject;
+		if(!Guardian.checkParameters(id, uid, value, week)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
+		
+		try {
+			if(ApplyDataUtil.canApplyStay(week)) {
+				database.executeUpdate("DELETE FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
+				database.executeUpdate("INSERT INTO stay_apply(uid, value, week) VALUES('", uid, "', ", value, ", '", week, "')");
+			
+				context.response().setStatusCode(200).end();
+				context.response().close();
+			} else {
+				context.response().setStatusCode(404).end();
+				context.response().close();
+			}
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+
+			Log.l("SQLException");
+		}
 	}
 }

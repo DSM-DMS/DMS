@@ -2,39 +2,66 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.LOAD_QNA)
-public class LoadQna implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/qna", method={HttpMethod.GET})
+public class LoadQna implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		SafeResultSet resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+		DataBase database = DataBase.getInstance();
+		SafeResultSet resultSet;
+		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		if(resultSet.next()) {
-			responseObject.put("title", resultSet.getString("title"));
-			responseObject.put("question_content", resultSet.getString("question_content"));
-			responseObject.put("question_date", resultSet.getString("question_date"));
-			responseObject.put("writer", resultSet.getString("writer"));
-			responseObject.put("privacy", resultSet.getBoolean("privacy"));
-			if(resultSet.getString("answer_content") != null) {
-				responseObject.put("has_answer", true);
-				responseObject.put("answer_content", resultSet.getString("answer_content"));
-				responseObject.put("answer_date", resultSet.getString("answer_date"));
+		int no = Integer.parseInt(context.request().getParam("no"));
+		
+		if(!Guardian.checkParameters(no)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
+		
+		try {
+			resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+			
+			if(resultSet.next()) {
+				responseObject.put("title", resultSet.getString("title"));
+				responseObject.put("question_content", resultSet.getString("question_content"));
+				responseObject.put("question_date", resultSet.getString("question_date"));
+				responseObject.put("writer", resultSet.getString("writer"));
+				responseObject.put("privacy", resultSet.getBoolean("privacy"));
+				if(resultSet.getString("answer_content") != null) {
+					responseObject.put("has_answer", true);
+					responseObject.put("answer_content", resultSet.getString("answer_content"));
+					responseObject.put("answer_date", resultSet.getString("answer_date"));
+				} else {
+					responseObject.put("has_answer", false);
+				}
+				
+				context.response().setStatusCode(200);
+				context.response().end(responseObject.toString());
+				context.response().close();
 			} else {
-				responseObject.put("has_answer", false);
+				context.response().setStatusCode(204).end();
+				context.response().close();
 			}
-		} else {
-			responseObject.put("status", 404);
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		
-		return responseObject;
 	}
 }

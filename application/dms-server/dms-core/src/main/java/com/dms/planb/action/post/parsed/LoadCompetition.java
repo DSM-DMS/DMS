@@ -1,30 +1,24 @@
 package com.dms.planb.action.post.parsed;
 
-import java.sql.SQLException;
-
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.parser.dataio.post.PostModel;
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.LOAD_COMPETITION)
-public class LoadCompetition implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/school/competition", method={HttpMethod.GET})
+public class LoadCompetition implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int number = requestObject.getInt("number");
-		int category = requestObject.getInt("category");
-		/*
-		 * Categories
-		 * Notice : 0
-		 * Newsletter : 1
-		 * Competition : 2
-		 */
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		responseObject.put("result", PostModel.getPost(category, number));
+		int no = Integer.parseInt(context.request().getParam("no"));
 		
-		return responseObject;
+		context.response().setStatusCode(200);
+		context.response().end(PostModel.getPost(2, no).toString());
+		context.response().close();
 	}
 }

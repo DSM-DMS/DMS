@@ -1,0 +1,964 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+* {
+    font-family: "hanna";
+}
+
+body {
+    background: #F1F1F1 !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+/*-------------------------- under bar title box--------------------------------*/
+
+.underbar-title {
+    position: relative;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    /*font-weight: bold;*/
+    padding-bottom: 3px;
+    font-size: 2.2em;
+    margin-bottom: 3px;
+}
+
+.underbar-title .view-more {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.7em;
+    font-weight: normal;
+    cursor: pointer;
+    text-decoration: none !important;
+    color: black;
+}
+
+.subinfo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.5em;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.border-red {
+    border-color: #F92F24;
+}
+
+.border-blue {
+    border-color: #007BD3;
+}
+
+.border-puple {
+    border-color: #583E80;
+}
+
+table tr {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+
+/*--------------------------icon menu--------------------------------*/
+
+.icon-menu-item {
+    height: 3.5em;
+    position: relative;
+    margin: 0 0.5em;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.menu-controller {
+    vertical-align: middle;
+    height: 2em;
+    margin: 0.5em 0.2em;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.slider-menu-container.hides .menu-controller {
+    height: 3.5em;
+    width: 3.5em;
+    transform: rotate(180deg);
+    background: #ffffff;
+    border-radius: 360px;
+    margin-top: 0;
+    display: inline-block;
+    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.slider-menu-container.hides .menu-controller img {
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.menu-controller img {
+    width: 2.5em;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.slider-menu-container {
+    position: fixed;
+    right: 10px;
+    bottom: 5px;
+    z-index: 1;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.slider-menu-container.hides {
+    transform: translate(calc(100% - 4.3em), 0);
+}
+
+.icon-menu-item:hover>img {
+    opacity: 0;
+}
+
+.icon-menu-item:hover>div {
+    opacity: 100;
+}
+
+.icon-menu-item img {
+    width: 3.5em;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    -moz-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+    -o-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.icon-menu-item div {
+    position: absolute;
+    top: 1.5em;
+    width: 100%;
+    font-size: 0.7em;
+    opacity: 0;
+}
+
+
+/*--------------------------meal--------------------------------*/
+
+.underline {
+    background: rgb(41, 128, 185);
+}
+
+.menues {
+    position: relative;
+    padding-top: 10px;
+}
+
+.menues .meal {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.menues .meal h4 {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+}
+
+.menues .meal p, div.div-allergy p {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: 10px 0
+}
+
+.menues .meal .info {
+    position: relative;
+    width: calc(100% - 40px);
+    background-color: #f0f0f0;
+    display: inline-block;
+    transition: all 0.5s ease;
+}
+
+.menues .meal .info:hover {
+    background-color: rgb(191, 148, 208);
+    color: white;
+}
+
+.menues img {
+    vertical-align: middle;
+    width: 25px;
+    cursor: pointer;
+}
+
+.blue-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(134, 193, 233), rgb(191, 148, 208));
+    /* Standard syntax */
+}
+
+.puple-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(191, 148, 208), rgb(231, 160, 153));
+    /* Standard syntax */
+}
+
+.red-gradient {
+    background: red;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, rgb(231, 160, 153), rgb(134, 193, 233));
+    /* Standard syntax */
+}
+
+/*------------------------------- extention ---------------------*/
+
+.extentionapply {
+    width: 100%;
+}
+
+- .extentionapply .seatcontainer {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.extentionapply .seatcontainer .seat {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 8px;
+    text-align: center;
+    line-height: 60px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    /*box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);*/
+}
+
+
+/*---------------------- extentionapply select css------------*/
+
+.extentionapply div.class-selecter-div {
+    position: relative;
+    width: 200px;
+    height: 40px;
+    background: url(../image/selectArrow.png) 180px center no-repeat;
+    /* 화살표 이미지 */
+    border: 1px solid #E9DDDD;
+    display: inline-block;
+}
+
+.extentionapply div.class-selecter-div label {
+    position: absolute;
+    font-size: 14px;
+    color: #a97228;
+    top: 13px;
+    left: 12px;
+    letter-spacing: 1px;
+}
+
+.extentionapply div.class-selecter-div select#class-select {
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    /* IE 8 */
+}
+
+.extentionapply div.selecter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/*---------------------- extentionapply applycancle css-------*/
+
+.extentionapply div.selecter-container input.apply-cancle {
+    display: inline-block;
+    background-color: white;
+    height: 40px;
+    border: 1px solid #E9DDDD;
+}
+
+.display-inline-block {
+    display: inline-block !important;
+}
+
+.card {
+    margin-bottom: 5px;
+}
+
+.row.padding {
+    padding: 0 15px;
+}
+
+.card-block-notice {
+    padding: 5px !important;
+    text-align: center;
+}
+
+.main {
+    padding: 0 15px;
+    position: relative;
+}
+
+
+/*---------------------- modal to center -------------*/
+
+.modal {
+    text-align: center;
+    padding: 0!important;
+}
+
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+
+/*--------------------- stay apply ----------------------*/
+
+#calendar thead {
+    background-color: rgb(220, 220, 220);
+}
+
+#calendar {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border: 1px solid rgb(220, 220, 220);
+    font-size: 130%;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+#stay_select {
+    font-size: 130%;
+    padding: 0.5px;
+}
+
+#calendar .days, .days td {
+    font-weight: bold;
+}
+
+#calendar tr, #stay_table tr {
+    border-width: 0px;
+}
+
+.weeks {
+    cursor: pointer;
+}
+
+#calendar td {
+    width: calc(100%/7);
+    height: 75px;
+}
+
+#stay_div {
+    margin: auto;
+    font-size: 20px;
+}
+
+#date {
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 5%;
+    text-align: center;
+    width: 70%;
+}
+
+#stay_submit {
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 5%;
+    font-size: 100%;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.color {
+    text-align: middle;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 30px;
+    border-radius: 50%;
+}
+
+.color_ex {
+    display: inline-block;
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
+.other_month {
+    color: rgb(220, 220, 220);
+}   
+
+.go_home {
+    color: rgb(52, 219, 94);
+}
+
+.go_dom {
+    color: rgb(255, 151, 49);
+}
+
+.go_home_duty {
+    color: rgb(2, 117, 217);
+}
+
+#calendar thead i {
+    cursor: pointer;
+}
+
+
+/*--------------------- go out apply -------------------*/
+
+#individual_reason {
+    display: block;
+    border: 2px solid rgb(220, 220, 220);
+    width: 80%;
+    font-size: 130%;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 2%;
+    height: 40px;
+}
+
+#individual_btn {
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(91, 192, 222);
+    width: 20%;
+    margin: auto;
+    margin-top: 2%;
+    font-size: 130%;
+    cursor: pointer;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 2%;
+}
+
+#recommend_btn {
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(91, 192, 222);
+    width: 20%;
+    margin: auto;
+    margin-top: 2%;
+    font-size: 130%;
+    cursor: pointer;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 2%;
+}
+
+#recommend_reason {
+    display: block;
+    border: 2px solid rgb(220, 220, 220);
+    width: 80%;
+    font-size: 130%;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 1%;
+    height: 40px;
+}
+
+#recommend_name {
+    display: block;
+    border: 2px solid rgb(220, 220, 220);
+    width: 80%;
+    font-size: 130%;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 2%;
+    height: 40px;
+}
+
+#point_sel {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 2%;
+    font-size: 180%;
+    border-radius: 5px;
+    height: 40px;
+}
+
+#point_sel tr {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 0;
+}
+
+#point_apply {
+    border-radius: 5px 0 0 5px;
+}
+
+#point_reco {
+    border-radius: 0 5px 5px 0;
+}
+
+
+/*---------------------- qna -------------*/
+
+.content {
+    margin-top: 20px;
+    font-size: 1.75rem;
+}
+
+div.commnet {
+    /*background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);*/
+    /*background: linear-gradient(141deg, rgb(246, 228, 165) 0%, white 100%);*/
+    margin: 1.25rem;
+    /*margin-top: 50px;*/
+}
+
+div.comment-box {
+    min-height: 80px;
+    background-color: rgba(255, 255, 255, 0);
+    /*border-radius: 8px;*/
+    border: 0.5px solid white;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.comment-box .profile {
+    /*margin-top: 5px;*/
+    /*margin-left: 5px;*/
+    height: 70px;
+    width: 70px;
+    float: left;
+    margin-left: 20px;
+    border-radius: 50%;
+    /*the magic*/
+    /*box-shadow: 1px 1px 1px;*/
+}
+
+.comment-box-component {
+    margin-top: 10px;
+}
+
+.comment-name, .comment-date {
+    /*width: 90px;*/
+    display: inline-block;
+    border-right: 1px solid white;
+    padding-right: 5px;
+    /*color: white;*/
+    margin-left: 10px;
+}
+
+.comment-content {
+    margin-left: 100px;
+}
+
+.comment-input {
+    background: linear-gradient(141deg, rgb(246, 228, 165) 0%, rgb(252, 243, 211) 100%);
+    min-height: 80px;
+    margin: 1.25rem;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+body textarea.comment-input-text {
+    height: 60px;
+    width: 85%;
+    display: inline-block;
+}
+
+input.comment-input-button {
+    margin-left: 20px;
+    width: 10%;
+    bottom: 12.5px;
+    position: relative;
+}
+
+.comment-button {
+    text-decoration: underline;
+}
+
+.comment-modify-input {
+    width: 77.5% !important;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.comment-input-button {
+    bottom: 10px;
+}
+
+.comment-delete {
+    display: inline-block;
+    margin-right: 100px;
+}
+
+.content-button {
+    margin-left: 1.25rem;
+    text-decoration: underline;
+}
+
+.content-button-container {
+    position: absolute;
+    right: 0;
+    margin-right: 1.25em;
+}
+
+
+/*---------------------- editor -------------*/
+
+.clear-input {
+    border: 0;
+    margin-left: 20px;
+    width: 90%;
+}
+
+input.editor-button {
+    float: right;
+    margin-top: 10px;
+}
+
+#cke_editor1 {
+    margin-top: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.write-btn {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+}
+
+/*---------------------- qnaQuestionWrite -------------*/
+
+.ckeckbox-label {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+
+/*---------------- go out ----------------*/
+
+.go_title {
+    width: 100%;
+    text-align: center;
+    font-size: 25pt;
+}
+
+#sat_go, #sun_go {
+    width: 90%;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 200%;
+}
+
+#sat_go .front {
+    cursor: pointer;
+    background-color: #30c971;
+    color: #d3d2d5;
+    border-radius: 15px;
+}
+
+#sat_go .back {
+    cursor: pointer;
+    background-color: #9eefc0;
+    border-radius: 15px;
+}
+
+#sun_go .front {
+    cursor: pointer;
+    background-color: #30c971;
+    color: #d3d2d5;
+    border-radius: 15px;
+}
+
+#sun_go .back {
+    cursor: pointer;
+    background-color: #9eefc0;
+    border-radius: 15px;
+}
+
+#go_submit {
+    <<<<<<< HEAD font-size: 135%;
+    padding: 15px;
+    width: 80%;
+    margin: auto;
+    margin-top: 2%;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#go_status {
+    text-align: center;
+    font-size: 150%;
+    width: 95%;
+    margin: auto;
+    margin-top: 2%;
+    =======background-color: #40E0D0;
+    font-size: 135%;
+    padding: 15px;
+    width: 30%;
+    margin: auto;
+    margin-top: 2%;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#go_status {
+    text-align: center;
+    font-size: 150%;
+    width: 90%;
+    margin: auto;
+    margin-top: 2%;
+    >>>>>>>b455b4d12266b9c8d3e84d3fd02e438eb859c837
+}
+
+#go_status td {
+    padding: 13px;
+}
+
+#go_status tr {
+    border: 0;
+}
+
+#go_status>tbody>tr>td:nth-child(1) {
+    width: 40%;
+}
+
+#go_row {
+    <<<<<<< HEAD padding-top: 50px;
+    padding-bottom: 100px;
+    =======padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+/*---------------- my page ----------------*/
+
+.profile-pic {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.mypage-row {
+    margin-top: 6%;
+}
+
+.main-profile {
+    margin-left: 30px;
+}
+
+.mypage-container {
+    width: 80%;
+}
+
+.mypage-component {
+    min-height: 12rem;
+    transition: all 0.5s;
+    /*border-radius: 6px !important;*/
+}
+
+.content-container {
+    margin: 10px;
+}
+
+.mypage-component-container {
+    padding-right: 0 !important;
+    transition: all 0.5s;
+    >>>>>>>b455b4d12266b9c8d3e84d3fd02e438eb859c837
+}
+
+.moreinfo-span {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #F6538F;
+}
+
+.move-a {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.move-a:hover {
+    text-decoration: underline;
+}
+
+.detail-container {
+    display: none;
+    margin-bottom: 23px;
+}
+
+.detail-container {
+    margin-bottom: 23px;
+}
+
+.mypage-qna .detail-container a, .mypage-comment .detail-container a {
+    display: block;
+}
+
+.preview-picture {
+    /*width: 70px;
+    height: 70px;*/
+    border-radius: 50%;
+}
+
+#modify-profile-picture {
+    display: inline-block;
+}
+
+.w-1 {
+    width: 10%;
+}
+
+.w-2 {
+    width: 20%;
+}
+
+.w-3 {
+    width: 30%;
+}
+
+.w-4 {
+    width: 40%;
+}
+
+.w-5 {
+    width: 50%;
+}
+
+.w-6 {
+    width: 60%;
+}
+
+.w-7 {
+    width: 70%;
+}
+
+.w-8 {
+    width: 80%;
+}
+
+.w-9 {
+    width: 90%;
+}
+
+.w-10 {
+    width: 100%;
+}
+
+
+/*.first-row {
+    margin-top: 40px;
+}*/
+
+
+/*---------------- 설명 ------------------*/
+
+.page_info {
+    visibility: sub;
+    float: right;
+    font-size: 15px;
+    height: 40px;
+}
+
+
+/*---------------- 새로운 상점신청 ------------------*/
+
+.post-card {
+    margin: 30px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 7px;
+    display: inline-block;
+    width: 60%;
+    min-height: 400px;
+    position: relative;
+}
+
+.form-box {
+    /*background-image: url("../images/postImage1.jpg");*/
+    /*background-size: cover;*/
+    background-color: white;
+    min-height: 300px;
+    padding: 20px;
+    border-radius: 7px;
+}
+
+.point-apply-btn {
+    /*position: absolute;
+    right: 0;
+    margin: 20px;*/
+    margin-top: 10px;
+}
+
+.point-apply-to {
+    float: right;
+}
+
+.point-apply-content {
+    margin-bottom: 20px;
+}
+
+.point-apply-content-recommand {
+    height: 124px !important;
+}
+
+.point-apply-target {
+    display: inline-block !important;
+    width: 65% !important;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}

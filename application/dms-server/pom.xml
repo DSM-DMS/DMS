@@ -34,6 +34,7 @@
 		<module>dms-data-utilities</module>
 		<module>dms-secure</module>
 		<module>dms-parser</module>
+		<module>dms-templates</module>
 	</modules>
 
 	<dependencies>
@@ -48,6 +49,18 @@
 			<artifactId>vertx-core</artifactId>
 			<version>${vertx.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-web</artifactId>
+			<version>${vertx.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.vertx/vertx-lang-groovy -->
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-lang-groovy</artifactId>
+			<version>${vertx.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-transport</artifactId>

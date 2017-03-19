@@ -2,49 +2,44 @@ package com.dms.planb.action.post.faq;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.UPLOAD_FAQ)
-public class UploadFaq implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/faq", method={HttpMethod.POST})
+public class UploadFaq implements Handler<RoutingContext> {
 	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Frequently asked questions
-		 * 
-		 * Table Name : faq
-		 * 
-		 * no INT(11) PK NN AI
-		 * title VARCHAR(45) NN
-		 * content VARCHAR(5000) NN
-		 */
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		String title = requestObject.getString("title");
-		String content = requestObject.getString("content");
+		DataBase database = DataBase.getInstance();
 		
-		int status = 1;
+		String title = context.request().getParam("title");
+		String content = context.request().getParam("content");
 		
-		if(requestObject.containsKey("no")) {
-			/*
-			 * Judge modify
-			 */
-			int no = requestObject.getInt("no");
+		if(!Guardian.checkParameters(title, content)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
+		
+		try {
+			database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
 			
-			database.executeUpdate("UPDATE faq SET title='", title, "' WHERE no=", no);
-			database.executeUpdate("UPDATE faq SET content='", content, "' WHERE no=", no);
-		} else {
-			/*
-			 * Judge upload
-			 */
-			status = database.executeUpdate("INSERT INTO faq(title, content) VALUES('", title, "', '", content, "')");
+			context.response().setStatusCode(201).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
 		}
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
 	}
 }

@@ -1,48 +1,76 @@
 package com.dms.planb.action.extension;
 
 import java.sql.SQLException;
-import java.util.Calendar;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.LimitConfig;
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.APPLY_EXTENSION)
-public class ApplyExtension implements Actionable {
-	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		/**
-		 * Table Name : extension_apply
-		 * 
-		 * class INT(1) NN PK,
-		 * seat INT(2) NN PK,
-		 * name VARCHAR(20) NN
-		 */
-		Calendar currentTime = Calendar.getInstance();
-		int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-		int minute = currentTime.get(Calendar.MINUTE);
-		int setHour = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[0]);
-		int setMinute = Integer.valueOf(LimitConfig.EXTENSION_APPLY_TIME.split(":")[1]);
-		if(hour<setHour||(hour==setHour&&minute<setMinute)){
-			responseObject.put("status", 404);
-			
-			return responseObject;
-		}
-		
-		int classId = requestObject.getInt("class");
-		int seatId = requestObject.getInt("seat");
-		String name = requestObject.getString("name");
-		String id = requestObject.getString("id");
-		
-		database.executeUpdate("DELETE FROM extension_apply WHERE id='", id, "'");
-		int status = database.executeUpdate("INSERT INTO extension_apply(class, seat, name, id) VALUES(", classId, ", ", seatId, ", '", name, "', '", id, "')");
-		
-		responseObject.put("status", status);
-		
-		return responseObject;
-	}
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path = "/apply/extension", method = {HttpMethod.PUT})
+public class ApplyExtension implements Handler<RoutingContext> {
+    private UserManager userManager;
+
+    public ApplyExtension() {
+        userManager = new UserManager();
+    }
+
+    @Override
+    public void handle(RoutingContext context) {
+        context = PrecedingWork.putHeaders(context);
+
+        DataBase database = DataBase.getInstance();
+
+        String classId = context.request().getParam("class");
+        String seatId = context.request().getParam("seat");
+        String id = userManager.getIdFromSession(context);
+        String uid = null;
+        try {
+            if (id != null) {
+                uid = userManager.getUid(id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        if(!Guardian.checkParameters(classId, seatId, id, uid)) {
+        	context.response().setStatusMessage("Check parameter or after than login");
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
+        
+        Log.l("Extension Apply (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+        
+        try {
+            String name = null;
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", uid, "'");
+            if (rs.next()) {
+                name = rs.getString(1);
+            }
+            if (!ApplyDataUtil.canApplyExtension()) {
+                context.response().setStatusCode(404).end();
+                context.response().close();
+            } else {
+                database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
+                database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");
+                context.response().setStatusCode(200).end();
+                context.response().close();
+            }
+        } catch (SQLException e) {
+            context.response().setStatusCode(500).end();
+            context.response().close();
+            e.printStackTrace();
+            Log.l("SQLException");
+        }
+    }
 }

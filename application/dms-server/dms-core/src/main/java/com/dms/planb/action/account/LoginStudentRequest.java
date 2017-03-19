@@ -1,48 +1,74 @@
 package com.dms.planb.action.account;
 
 import java.sql.SQLException;
+import java.util.Map;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.LOGIN_STUDENT_REQUEST)
-public class LoginStudentRequest implements Actionable {
-	@Override
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		String id = requestObject.getString("id");
-		String password = requestObject.getString("password");
-		
-		SafeResultSet resultSet = database.executeQuery("SELECT password FROM account WHERE id='", id, "'");
-		
-		if(!resultSet.next() || !resultSet.getString("password").equals(password)) {
-			/**
-			 * !resultSet.next() : Can't find any row of id
-			 * !resultSet.getString("password").equals(password) : Incorrect password
-			 * 
-			 * Can't find id or incorrect password, set permit to false
-			 */
-			responseObject.put("permit", false);
-		}
-		else if(resultSet.getString("password").equals(password)) {
-			/*
-			 * Correct password
-			 */
-			responseObject.put("permit", true);
-			
-			SafeResultSet tempResultSet = database.executeQuery("SELECT * FROM student_data WHERE id='", id, "'");
-			tempResultSet.next();
-			
-			responseObject.put("number", tempResultSet.getInt("number"));
-			responseObject.put("name", tempResultSet.getString("name"));
-			responseObject.put("merit", tempResultSet.getInt("merit"));
-			responseObject.put("demerit", tempResultSet.getInt("demerit"));
-		}
-		
-		return responseObject;
-	}
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path = "/account/login/student", method = {HttpMethod.POST})
+public class LoginStudentRequest implements Handler<RoutingContext> {
+    private UserManager userManager;
+
+    public LoginStudentRequest() {
+        userManager = new UserManager();
+    }
+
+    @Override
+    public void handle(RoutingContext context) {
+        context = PrecedingWork.putHeaders(context);
+
+        EasyJsonObject responseObject = new EasyJsonObject();
+
+        String id = context.request().getParam("id");
+        String password = context.request().getParam("password");
+        String remember = context.request().getParam("remember");
+        String recapcha = context.request().getParam("g-recaptcha-response"); //recapcha response 이름 수정해야함
+        remember = (remember == null) ? "false" : "true";
+        
+        if(!Guardian.checkParameters(id, password, remember)) {
+        	context.response().setStatusCode(400).end();
+        	context.response().close();
+        	return;
+        }
+        try {
+            boolean check = userManager.login(id, password);
+            if (check) {
+            	userManager.registerSession(context, Boolean.valueOf(remember), id);
+            	context.response().setStatusCode(201);
+                context.response().end(responseObject.toString());
+                context.response().close();
+            } else {
+                context.response().setStatusCode(400);
+                context.response().end(responseObject.toString());
+                context.response().close();
+            }
+        } catch (SQLException e) {
+            context.response().setStatusCode(500).end();
+            context.response().close();
+
+            Log.l("SQLException");
+        }
+        Log.l("Login Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+    }
+
+    public EasyJsonObject getUserData(JobResult result, EasyJsonObject responseObject) throws SQLException {
+        Map<String, Object> datas = (Map) result.getArgs()[0];
+        responseObject.put("number", datas.get("number"));
+        responseObject.put("name", datas.get("name"));
+        responseObject.put("merit", datas.get("merit"));
+        responseObject.put("demerit", datas.get("demerit"));
+
+        return responseObject;
+    }
 }

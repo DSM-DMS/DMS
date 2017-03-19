@@ -2,48 +2,48 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.actions.ActionRegistration;
-import org.boxfox.dms.utilities.actions.Actionable;
-import org.boxfox.dms.utilities.actions.support.Sender;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
+import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.log.Log;
 
-import com.dms.planb.support.Commands;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
-@ActionRegistration(command = Commands.MODIFY_QNA_QUESTION)
-public class ModifyQnaQuestion implements Actionable {
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+
+@RouteRegistration(path="/post/qna/question", method={HttpMethod.PATCH})
+public class ModifyQnaQuestion implements Handler<RoutingContext> {
 	@Override
-	@Deprecated
-	public EasyJsonObject action(Sender sender, int command, EasyJsonObject requestObject) throws SQLException {
-		int no = requestObject.getInt("no");
+	public void handle(RoutingContext context) {
+		context = PrecedingWork.putHeaders(context);
 		
-		int status = 1;
-		if(requestObject.containsKey("title")) {
-			status = database.executeUpdate("UPDATE qna SET title='", requestObject.getString("title"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
-		}
-		if(requestObject.containsKey("question_content")) {
-			status = database.executeUpdate("UPDATE qna SET question_content='", requestObject.getString("question_content"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
-		}
-		if(requestObject.containsKey("writer")) {
-			status = database.executeUpdate("UPDATE qna SET writer='", requestObject.getString("writer"), "' WHERE no=", no);
-			if(status == 0) {
-				// If failed
-				responseObject.put("status", status);
-				return responseObject;
-			}
-		}
+		DataBase database = DataBase.getInstance();
 		
-		responseObject.put("status", status);
+		int no = Integer.parseInt(context.request().getParam("no"));
+		String title = context.request().getParam("title");
+		String content = context.request().getParam("content");
+		String writer = context.request().getParam("writer");
 		
-		return responseObject;
+		if(!Guardian.checkParameters(no, title, content, writer)) {
+            context.response().setStatusCode(400).end();
+            context.response().close();
+        	return;
+        }
+		
+		try {
+			database.executeUpdate("UPDATE qna SET title='", title, "' WHERE no=", no);
+			database.executeUpdate("UPDATE qna SET question_content='", content, "' WHERE no=", no);
+			database.executeUpdate("UPDATE qna SET writer='", writer, "' WHERE no=", no);
+			
+			context.response().setStatusCode(200).end();
+			context.response().close();
+		} catch(SQLException e) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
+			Log.l("SQLException");
+		}
 	}
 }
