@@ -89,7 +89,7 @@ function drawPrev() {
     loadPrev();
     for (i = 1; i <= valueArray.length; i++) {
         if(defaultSelector[i - 1]) {
-            $('tr:eq(' + (i + 1) + ')').css('border', '1px solid red')
+            $('tr:eq(' + (i + 1) + ')').css('color', 'rgb(255, 82, 82)');
         }
         if (valueArray[i - 1] == 4) { //잔류
         } else if (valueArray[i - 1] == 1) {
@@ -320,11 +320,11 @@ function clearCalendar() {
         $('#calendar td:eq(' + idx + ')').text("");
     }
     $('#calendar tbody tr').css("background-color", "white");
-    $('#first_week').css('border', '0px');
-    $('#second_week').css('border', '0px');
-    $('#third_week').css('border', '0px');
-    $('#fourth_week').css('border', '0px');
-    $('#fifth_week').css('border', '0px');
+    $('#first_week').css('color', 'black');
+    $('#second_week').css('color', 'black');
+    $('#third_week').css('color', 'black');
+    $('#fourth_week').css('color', 'black');
+    $('#fifth_week').css('color', 'black');
     $('#sixth_week').toggle();
     five_week = false;
 }

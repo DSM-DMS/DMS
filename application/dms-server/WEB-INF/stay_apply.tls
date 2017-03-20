@@ -148,6 +148,10 @@
                         <span class="badge">14</span>
                         <span class="color" style="background-color: rgb(2, 117, 217);"></span>의무귀가
                         </li>
+                        <li class="list-group-item">
+                        <span class="badge">14</span>
+                        <span class="color" style="background-color: rgb(255, 82, 82);"></span>신청안됨
+                        </li>
                     </ul>
                     <div id="stay_div">
                     <select id="stay_select" class="selectpicker">
