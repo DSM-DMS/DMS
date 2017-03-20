@@ -45,6 +45,9 @@ public class IndexRouter implements Handler<RoutingContext> {
         templates.put("Breakfast", clearMenus(meal, 0));
         templates.put("Lunch", clearMenus(meal, 1));
         templates.put("Dinner", clearMenus(meal, 2));
+        templates.put("BreakfastAllergy", clearAllergys(meal, 0));
+        templates.put("LunchAllergy", clearAllergys(meal, 1));
+        templates.put("DinnerAllergy", clearAllergys(meal, 2));
         templates.put("Notification", createNotification());
         templates.put("isLogin", userManager.isLogined(context));
         try {
@@ -56,6 +59,17 @@ public class IndexRouter implements Handler<RoutingContext> {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
+    }
+
+    private String clearAllergys(JSONArray meal, int index){
+        JSONArray arr = ((JSONArray) ((JSONObject) meal.get(index)).get("Allergy"));
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < arr.size(); i++) {
+            builder.append(arr.get(i));
+            if (i != arr.size() - 1)
+                builder.append(", ");
+        }
+        return builder.toString();
     }
 
     private String clearMenus(JSONArray meal, int index) {
@@ -80,39 +94,21 @@ public class IndexRouter implements Handler<RoutingContext> {
         return map;
     }
 
-    private List<Notification> createNotification() {
-        List<Notification> list = new ArrayList<Notification>();
+    private List< Map<String, String>> createNotification() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         if (ApplyDataUtil.canApplyExtension())
-            list.add(new Notification("연장학습 신청이 가능합니다!", "bg-success"));
+            list.add(createNotifi("연장학습 신청이 가능합니다!", "bg-success"));
         if (ApplyDataUtil.canApplyGoingout())
-            list.add(new Notification("주말외출 신청이 가능합니다!", "bg-info"));
+            list.add(createNotifi("주말외출 신청이 가능합니다!", "bg-info"));
         if (ApplyDataUtil.warningStayApply())
-            list.add(new Notification("잔류 신청이 얼마 남지 않았습니다!", "bg-info"));
+            list.add(createNotifi("잔류 신청이 얼마 남지 않았습니다!", "bg-info"));
         return list;
     }
 
-    private class Notification {
-        private String text, styleClass;
-
-        Notification(String text, String styleClass) {
-            this.text = text;
-            this.styleClass = styleClass;
-        }
-
-        public String getStyleClass() {
-            return styleClass;
-        }
-
-        public void setStyleClass(String styleClass) {
-            this.styleClass = styleClass;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public void setText(String text) {
-            this.text = text;
-        }
+    private Map<String, String> createNotifi(String text, String styleClass){
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("text", text);
+        map.put("styleClass", styleClass);
+        return map;
     }
 }
