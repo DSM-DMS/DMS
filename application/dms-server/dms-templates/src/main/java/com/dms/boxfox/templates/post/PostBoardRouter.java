@@ -65,7 +65,7 @@ public class PostBoardRouter implements Handler<RoutingContext> {
                 e.printStackTrace();
             }
         } else {
-            context.response().setStatusCode(404);
+            context.response().setStatusCode(204);
             context.response().end("page not found");
             context.response().close();
         }

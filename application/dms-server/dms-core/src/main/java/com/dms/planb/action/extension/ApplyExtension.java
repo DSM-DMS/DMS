@@ -58,7 +58,7 @@ public class ApplyExtension implements Handler<RoutingContext> {
                 name = rs.getString(1);
             }
             if (!ApplyDataUtil.canApplyExtension()) {
-                context.response().setStatusCode(404).end();
+                context.response().setStatusCode(204).end();
                 context.response().close();
             } else {
                 database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");

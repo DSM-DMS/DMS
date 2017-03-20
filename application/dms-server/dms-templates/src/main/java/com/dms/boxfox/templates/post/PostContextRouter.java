@@ -101,7 +101,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
             }
             context.response().close();
         } else {
-            context.response().setStatusCode(404);
+            context.response().setStatusCode(204);
             context.response().end("page not found");
             context.response().close();
         }

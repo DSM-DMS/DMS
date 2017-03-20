@@ -25,7 +25,7 @@ public class StudentIdCheck implements Handler<RoutingContext> {
         }
 
 		if (UserManager.checkIdExists(id)) {
-			context.response().setStatusCode(404).end();
+			context.response().setStatusCode(409).end();
 			context.response().close();
 		} else {
 			context.response().setStatusCode(201).end();
