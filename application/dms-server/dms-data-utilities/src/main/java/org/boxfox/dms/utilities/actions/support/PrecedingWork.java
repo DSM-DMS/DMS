@@ -19,6 +19,7 @@ public class PrecedingWork {
         context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
         
         Log.l("Requested : " + context.request().host());
+        Log.l("Method : " + context.request().method());
         Log.l("Absolute URI : " + context.request().absoluteURI());
         Log.l("Parameters : " + context.request().params());
         Log.l("Body : " + context.request().formAttributes());

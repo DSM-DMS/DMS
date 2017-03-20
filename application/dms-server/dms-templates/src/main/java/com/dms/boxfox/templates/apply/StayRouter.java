@@ -24,7 +24,7 @@ private UserManager userManager;
 	
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
-
+		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("stay_apply");
