@@ -30,6 +30,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 
 import com.dms.parser.dataio.post.PostChangeDetector;
 import com.dms.parser.dataio.post.PostUpdateListener;
+import com.dms.planb.support.TableDropper;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
@@ -45,44 +46,12 @@ class DmsMain {
 		 * Initializing method when server started.
 		 */
 
-		/**
-		 * @see com.dms.parser.dataio.post .PostChangeDetector
-		 */
-		// PostChangeDetector.getInstance().start();
 		/*
-		 * Post(in school web page) change detector(thread)
+		 * @see com.dms.planb.support .TableDropper
 		 */
-		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
-			/*
-			 * Refresh databases at regular intervals
-			 */
-			@Override
-			public void update(int currentCategory) {
-				Calendar currentTime = Calendar.getInstance();
-				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
-				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-				if (dayOfWeek == Calendar.MONDAY) {
-					try {
-						DataBase.getInstance().executeUpdate("delete from goingout_apply");
-						/*
-						 * Every Monday, refresh goingout_apply table
-						 */
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if (hour >= 0 && hour <= 8) {
-					try {
-						DataBase.getInstance().executeUpdate("delete from extension_apply");
-						/*
-						 * Every day, refresh extension_apply table
-						 */
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
+		Thread t = TableDropper.getInstance();
+		t.setDaemon(true);
+		t.start();
 
 		/**
 		 * @see pom.xml : vert.x and netty syntax
@@ -111,7 +80,7 @@ class DmsMain {
 		/*
 		 * Sets the value of max event loop execute time, in ns.
 		 */
-		
+
 		/**
 		 * (non-Javadoc)
 		 * 
