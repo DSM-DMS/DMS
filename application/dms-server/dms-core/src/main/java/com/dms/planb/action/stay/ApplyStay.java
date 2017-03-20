@@ -56,7 +56,7 @@ public class ApplyStay implements Handler<RoutingContext> {
 				context.response().setStatusCode(200).end();
 				context.response().close();
 			} else {
-				context.response().setStatusCode(404).end();
+				context.response().setStatusCode(204).end();
 				context.response().close();
 			}
 		} catch(SQLException e) {
