@@ -19,10 +19,10 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/report/modify", method={HttpMethod.GET})
-public class ReportyModifyRouter implements Handler<RoutingContext> {
+public class ReportModifyRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public ReportyModifyRouter() {
+	public ReportModifyRouter() {
 		userManager = new UserManager();
 	}
 	
@@ -47,6 +47,9 @@ public class ReportyModifyRouter implements Handler<RoutingContext> {
 			try {
 				resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
 				
+				templates.put("category", "report");
+				templates.put("type", "modify");
+				templates.put("room", resultSet.getInt("room"));
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));
 				

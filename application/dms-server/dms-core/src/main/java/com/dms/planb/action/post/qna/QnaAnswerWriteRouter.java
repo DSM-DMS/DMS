@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/answer/write", method={HttpMethod.GET})
 public class QnaAnswerWriteRouter implements Handler<RoutingContext> {
-private UserManager userManager;
+	private UserManager userManager;
 	
 	public QnaAnswerWriteRouter() {
 		userManager = new UserManager();
@@ -27,9 +27,12 @@ private UserManager userManager;
 		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("qnaAnswerWrite");
+			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
+				templates.put("category", "qnaAnswer");
+				templates.put("type", "write");
+				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();

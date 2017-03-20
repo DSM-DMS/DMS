@@ -42,11 +42,13 @@ public class QnaQuestionModifyRouter implements Handler<RoutingContext> {
 	        	return;
 	        }
 			
-			DmsTemplate templates = new DmsTemplate("qnaQuestionModify");
+			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
 				
+				templates.put("category", "qnaQuestion");
+				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("question_content"));
 				

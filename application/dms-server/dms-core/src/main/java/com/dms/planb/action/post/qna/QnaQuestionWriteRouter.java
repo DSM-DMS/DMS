@@ -27,9 +27,12 @@ public class QnaQuestionWriteRouter implements Handler<RoutingContext> {
 		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("qnaQuestionWrite");
+			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
+				templates.put("category", "qnaQuestion");
+				templates.put("type", "write");
+				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();
