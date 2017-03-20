@@ -1,4 +1,3 @@
-var id = "test";
 var valueArray = new Array();
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear();
