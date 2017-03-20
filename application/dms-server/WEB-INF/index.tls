@@ -108,17 +108,12 @@
                 </div>
             </div>
         </div>
-
         <div class="row padding">
-            <div class="col card bg-success">
-                <div class="card-block card-block-notice" style="color: white">연장학습 신청이 가능한 시간입니다.</div>
+            <#list Notification as notifi>
+            <div class="col card ${notifi.styleClass}">
+                <div class="card-block card-block-notice" style="color: white">${notifi.text}</div>
             </div>
-            <div class="col card bg-warning">
-                <div class="card-block card-block-notice" style="color: white">잔류신청이 얼마남지 않았습니다!</div>
-            </div>
-            <div class="col card bg-info">
-                <div class="card-block card-block-notice" style="color: white">상점을 신청할 수 있습니다!</div>
-            </div>
+            </#list>
         </div>
 
         <div class="row padding">
@@ -265,9 +260,7 @@
     </div>
 </body>
 <script type="text/javascript">
-    var isLogin = $ {
-        isLogin ? c
-    };
+    var isLogin = ${isLogin?c};
 </script>
 <script src="/js/script.js"></script>
 
