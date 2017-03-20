@@ -411,5 +411,8 @@ $('#stay_submit').on('click', function() {
     applySendDataWeek = $('#date').val();
     applySendDataValue = $("#stay_select").val();
     applyData();
-    location.href = '/stay';
+    defaultSelector = new Array();
+    valueArray = new Array();
+    clearCalendar();
+    drawCalendar(newDate, lastDay);
 });
