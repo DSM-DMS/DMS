@@ -26,7 +26,7 @@ $.ajax({
   type: "GET",
   async: false,
   success: function(data) {
-    defaultValue = JSON.parse(data).value;
+    defaultValue = data.value;
   }
 });
 
@@ -39,7 +39,7 @@ var getData = function () {
       "week": loadSendDataWeek,
     },
     success: function(data) {
-      valueArray.push(JSON.parse(data).value);
+      valueArray.push(data.value);
       defaultSelector.push(false);
     },
     error: function(xhr){
