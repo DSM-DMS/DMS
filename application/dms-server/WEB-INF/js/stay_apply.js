@@ -408,13 +408,59 @@ $('#fifth_week').click(function() {
       $('#date').val(currentYear + '-' + currentMonth + '-05');
     }
   } else {
-    alert("다음 달 1주로 신청해주세요.");
+    defaultSelector = new Array();
+    valueArray = new Array();
+    if (currentMonth == 12) {
+        currentYear++;
+        currentMonth = 1;
+    } else {
+        currentMonth++;
+    }
+    $('#month').text(currentYear + '.' + currentMonth);
+    newDate = new Date(currentYear, currentMonth - 1, 1);
+    prevMonth.setMonth(newDate.getMonth() - 1);
+    nextMonth.setMonth(newDate.getMonth() + 1);
+    lastDay = noofdays(currentYear, currentMonth);
+    clearCalendar();
+    drawCalendar(newDate, lastDay);
+
+    $('#stay_select').val(valueArray[0]);
+    $('#calendar tbody tr').css("background-color", "white");
+    $('#first_week').css("background-color", "#f1f1f1");
+    if (currentMonth < 10) {
+      $('#date').val(currentYear + '-0' + currentMonth + '-01');
+    } else {
+      $('#date').val(currentYear + '-' + currentMonth + '-01');
+    }
   }
 });
 
 
 $('#sixth_week').click(function() {
-    alert("다음 달 1주로 신청해주세요.");
+  defaultSelector = new Array();
+  valueArray = new Array();
+  if (currentMonth == 12) {
+      currentYear++;
+      currentMonth = 1;
+  } else {
+      currentMonth++;
+  }
+  $('#month').text(currentYear + '.' + currentMonth);
+  newDate = new Date(currentYear, currentMonth - 1, 1);
+  prevMonth.setMonth(newDate.getMonth() - 1);
+  nextMonth.setMonth(newDate.getMonth() + 1);
+  lastDay = noofdays(currentYear, currentMonth);
+  clearCalendar();
+  drawCalendar(newDate, lastDay);
+
+  $('#stay_select').val(valueArray[0]);
+  $('#calendar tbody tr').css("background-color", "white");
+  $('#first_week').css("background-color", "#f1f1f1");
+  if (currentMonth < 10) {
+    $('#date').val(currentYear + '-0' + currentMonth + '-01');
+  } else {
+    $('#date').val(currentYear + '-' + currentMonth + '-01');
+  }
 });
 
 //***********************신청*********************
