@@ -13,9 +13,11 @@ $(".write-btn").click(function () {
     //         alert("글을 작성할 수 없어요 TT");
     //     }
     // })
+    localStorage.setItem('category', getAllUrlParams(document.URL).category);
+    localStorage.setItem('type', 'write');
     console.log("post/" + getAllUrlParams(document.URL).category + "/write");
     redirect("post/" + getAllUrlParams(document.URL).category + "/write");
-})
+});
 
 function redirect(page) {
         location.href = '/' + page;
