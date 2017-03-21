@@ -14,7 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/report/result", method={HttpMethod.GET})
+@RouteRegistration(path="/post/result/write", method={HttpMethod.GET})
 public class ReportResultWriteRouter implements Handler<RoutingContext> {
 private UserManager userManager;
 	
