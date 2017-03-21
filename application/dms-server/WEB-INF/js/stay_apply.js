@@ -74,16 +74,37 @@ var applyData = function () {
   });
 };
 
+function getWeek(date) {
+  var weekNum = new Date(date.getFullYear(), date.getMonth(), 1);
+  return parseInt(((date.getDate() - 1) + weekNum.getDay()) / 7) + 1;
+}
+
 function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
+  var weekNum = 0;
+  if((newDate.getFullYear() == currentDate.getFullYear()) && (newDate.getMonth() == currentDate.getMonth())) {
+    weekNum = getWeek(currentDate);
+  } else if(newDate.getFullYear() < currentDate.getFullYear() || (newDate.getFullYear() == currentDate.getFullYear()) && (newDate.getMonth() < currentDate.getMonth())) {
+    weekNum = 100;
+  } else {
+    weekNum = 1;
+  }
   if(five_week) {
     for (var i = 1; i <= 5; i++) {
-        loadSendDataWeek = dateToString(i);
-        getData();
+        if(i < weekNum) {
+          valueArray.push(0);
+        } else {
+          loadSendDataWeek = dateToString(i);
+          getData();
+        }
     }
   } else {
     for (var i = 1; i <= 4; i++) {
-        loadSendDataWeek = dateToString(i);
-        getData();
+        if(i < weekNum) {
+          valueArray.push(0);
+        } else {
+          loadSendDataWeek = dateToString(i);
+          getData();
+        }
     }
   }
 }
@@ -337,9 +358,9 @@ $('#first_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#first_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-' + '01');
+      $('#date').val(currentYear + '-0' + currentMonth + '-01');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-' + '01');
+      $('#date').val(currentYear + '-' + currentMonth + '-01');
     }
 });
 
@@ -348,9 +369,9 @@ $('#second_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#second_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-' + '02');
+      $('#date').val(currentYear + '-0' + currentMonth + '-02');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-' + '02');
+      $('#date').val(currentYear + '-' + currentMonth + '-02');
     }
 });
 
@@ -359,9 +380,9 @@ $('#third_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#third_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-' + '03');
+      $('#date').val(currentYear + '-0' + currentMonth + '-03');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-' + '03');
+      $('#date').val(currentYear + '-' + currentMonth + '-03');
     }
 });
 
@@ -370,9 +391,9 @@ $('#fourth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fourth_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-' + '04');
+      $('#date').val(currentYear + '-0' + currentMonth + '-04');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-' + '04');
+      $('#date').val(currentYear + '-' + currentMonth + '-04');
     }
 });
 
@@ -382,9 +403,9 @@ $('#fifth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fifth_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-' + '05');
+      $('#date').val(currentYear + '-0' + currentMonth + '-05');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-' + '05');
+      $('#date').val(currentYear + '-' + currentMonth + '-05');
     }
   } else {
     alert("다음 달 1주로 신청해주세요.");
