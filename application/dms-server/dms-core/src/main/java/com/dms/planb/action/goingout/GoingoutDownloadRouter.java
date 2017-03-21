@@ -52,9 +52,9 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 						StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 						sb.insert(1, "0");
 						
-						int studentNumber = Integer.valueOf(sb.toString());
+						String studentNumber = sb.toString();
 						
-						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", studentNumber);
+						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");
 						
 						if(resultSet.next()) {
 							String uid = resultSet.getString("uid");

@@ -50,10 +50,10 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 						StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 						sb.insert(1, "0");
 						
-						int studentNumber = Integer.valueOf(sb.toString());
+						String studentNumber = sb.toString();
 						int classId = 0;
 						
-						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number=", studentNumber);
+						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");
 						
 						if(resultSet.next()) {
 							String uid = resultSet.getString("uid");
@@ -79,6 +79,7 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 			context.response().sendFile(FILE_DIR + "잔류신청.xlsx");
 			context.response().close();
 		} catch (IOException | SQLException e) {
+			e.printStackTrace();
 			context.response().setStatusCode(500).end();
 			context.response().close();
 		}
