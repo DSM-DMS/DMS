@@ -384,6 +384,7 @@ table tr {
 #stay_select {
     font-size: 130%;
     padding: 0.5px;
+    width: 22%;
 }
 
 #calendar .days, .days td {
@@ -412,7 +413,7 @@ table tr {
     border: 2px solid rgb(220, 220, 220);
     border-radius: 5%;
     text-align: center;
-    width: 70%;
+    width: 76.5%;
 }
 
 #stay_submit {
@@ -454,10 +455,9 @@ table tr {
     color: rgb(2, 117, 217);
 }
 
-#calendar thead i {
+#prev_month, #next_month {
     cursor: pointer;
 }
-
 
 /*--------------------- go out apply -------------------*/
 
@@ -537,7 +537,7 @@ table tr {
 #point_sel tr {
     cursor: pointer;
     border-radius: 5px;
-    border: 0;
+    border: 0px;
 }
 
 #point_apply {
@@ -736,7 +736,7 @@ input.editor-button {
 }
 
 #go_submit {
-    <<<<<<< HEAD font-size: 135%;
+    font-size: 135%;
     padding: 15px;
     width: 80%;
     margin: auto;
@@ -752,7 +752,6 @@ input.editor-button {
     width: 95%;
     margin: auto;
     margin-top: 2%;
-    =======background-color: #40E0D0;
     font-size: 135%;
     padding: 15px;
     width: 30%;
@@ -769,7 +768,6 @@ input.editor-button {
     width: 90%;
     margin: auto;
     margin-top: 2%;
-    >>>>>>>b455b4d12266b9c8d3e84d3fd02e438eb859c837
 }
 
 #go_status td {
@@ -785,9 +783,9 @@ input.editor-button {
 }
 
 #go_row {
-    <<<<<<< HEAD padding-top: 50px;
+    padding-top: 50px;
     padding-bottom: 100px;
-    =======padding-top: 100px;
+    padding-top: 100px;
     padding-bottom: 100px;
 }
 
@@ -824,7 +822,6 @@ input.editor-button {
 .mypage-component-container {
     padding-right: 0 !important;
     transition: all 0.5s;
-    >>>>>>>b455b4d12266b9c8d3e84d3fd02e438eb859c837
 }
 
 .moreinfo-span {

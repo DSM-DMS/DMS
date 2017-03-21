@@ -1,4 +1,3 @@
-var id = "test";
 var valueArray = new Array();
 var currentDate = new Date();
 var currentYear = currentDate.getFullYear();
@@ -20,16 +19,14 @@ var applySendDataWeek;
 var applySendDataValue;
 var getDataValue;
 var defaultValue;
+var defaultSelector = new Array();
 
 $.ajax({
   url: "/apply/stay/default",
   type: "GET",
   async: false,
-  data: {
-    "id": id,
-  },
-  success: function(data) {
-    defaultValue = JSON.parse(data).value;
+  success: function(defData) {
+    defaultValue = jQuery.parseJSON(defData).value;
   }
 });
 
@@ -39,15 +36,22 @@ var getData = function () {
     type: "GET",
     async: false,
     data: {
-      "id": id,
       "week": loadSendDataWeek,
     },
-    success: function(data) {
-      valueArray.push(JSON.parse(data).value);
+    success: function(prevData) {
+      try {
+        valueArray.push(jQuery.parseJSON(prevData).value);
+        defaultSelector.push(false);
+      } catch(err) {
+        console.log('['+ loadSendDataWeek + '] catch error : push defaultValue (' + defaultValue + ')');
+        valueArray.push(defaultValue);
+        defaultSelector.push(true);
+      }
     },
     error: function(xhr){
-      console.log('['+ loadSendDataWeek + '] 404 error : push defalutValue (' + defaultValue + ')');
+      console.log('['+ loadSendDataWeek + '] 404 error : push defaultValue (' + defaultValue + ')');
       valueArray.push(defaultValue);
+      defaultSelector.push(true);
     }
   });
 };
@@ -56,13 +60,16 @@ var applyData = function () {
   $.ajax({
     url: "/apply/stay",
     type: "PUT",
+    async: false,
     data: {
-      "id": id,
       "week": applySendDataWeek,
       "value": applySendDataValue
     },
     success: function() {
       alert('신청되었습니다.');
+    },
+    error: function(xhr, status, err) {
+      alert('신청 시간이 아닙니다.')
     }
   });
 };
@@ -84,6 +91,9 @@ function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
 function drawPrev() {
     loadPrev();
     for (i = 1; i <= valueArray.length; i++) {
+        if(defaultSelector[i - 1]) {
+            $('tr:eq(' + (i + 1) + ')').css('color', 'rgb(255, 82, 82)');
+        }
         if (valueArray[i - 1] == 4) { //잔류
         } else if (valueArray[i - 1] == 1) {
             $('tr:eq(' + (i + 1) + ') .fri').attr('class', 'fri go_home');
@@ -96,7 +106,6 @@ function drawPrev() {
             $('tr:eq(' + (i + 1) + ') .sat').attr('class', 'sat go_dom');
         }
     }
-    valueArray = new Array();
 }
 
 /*-------------------그리기---------------*/
@@ -105,6 +114,8 @@ drawCalendar(newDate, lastDay); //처음 달력 날짜 표시
 
 //이전 달
 $('#prev_month').click(function() {
+    defaultSelector = new Array();
+    valueArray = new Array();
     if (currentMonth == 1) {
         currentYear--;
         currentMonth = 12;
@@ -122,6 +133,8 @@ $('#prev_month').click(function() {
 
 //다음 달
 $('#next_month').click(function() {
+    defaultSelector = new Array();
+    valueArray = new Array();
     if (currentMonth == 12) {
         currentYear++;
         currentMonth = 1;
@@ -310,11 +323,17 @@ function clearCalendar() {
         $('#calendar td:eq(' + idx + ')').text("");
     }
     $('#calendar tbody tr').css("background-color", "white");
+    $('#first_week').css('color', 'black');
+    $('#second_week').css('color', 'black');
+    $('#third_week').css('color', 'black');
+    $('#fourth_week').css('color', 'black');
+    $('#fifth_week').css('color', 'black');
     $('#sixth_week').toggle();
     five_week = false;
 }
 
 $('#first_week').click(function() {
+    $('#stay_select').val(valueArray[0]);
     $('#calendar tbody tr').css("background-color", "white");
     $('#first_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
@@ -325,6 +344,7 @@ $('#first_week').click(function() {
 });
 
 $('#second_week').click(function() {
+    $('#stay_select').val(valueArray[1]);
     $('#calendar tbody tr').css("background-color", "white");
     $('#second_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
@@ -335,6 +355,7 @@ $('#second_week').click(function() {
 });
 
 $('#third_week').click(function() {
+    $('#stay_select').val(valueArray[2]);
     $('#calendar tbody tr').css("background-color", "white");
     $('#third_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
@@ -345,6 +366,7 @@ $('#third_week').click(function() {
 });
 
 $('#fourth_week').click(function() {
+    $('#stay_select').val(valueArray[3]);
     $('#calendar tbody tr').css("background-color", "white");
     $('#fourth_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
@@ -356,6 +378,7 @@ $('#fourth_week').click(function() {
 
 $('#fifth_week').click(function() {
   if (five_week) {
+    $('#stay_select').val(valueArray[4]);
     $('#calendar tbody tr').css("background-color", "white");
     $('#fifth_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
@@ -389,6 +412,10 @@ $('#date').keydown(function(e) {
 
 $('#stay_submit').on('click', function() {
     applySendDataWeek = $('#date').val();
-    applySendDataValue = $("#stay_select option:selected").val();
+    applySendDataValue = $("#stay_select").val();
     applyData();
+    defaultSelector = new Array();
+    valueArray = new Array();
+    clearCalendar();
+    drawCalendar(newDate, lastDay);
 });
