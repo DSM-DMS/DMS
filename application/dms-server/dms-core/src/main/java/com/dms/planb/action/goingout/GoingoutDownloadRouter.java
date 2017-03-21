@@ -86,7 +86,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 										// 일요일만 외출
 										goingoutStateCell.setCellValue("일요일 외출");
 									} else {
-										goingoutStateCell.setCellValue("미외출 잔류");
+										goingoutStateCell.setCellValue("미신청");
 									}
 								} else {
 									// 잔류가 아닐 때
