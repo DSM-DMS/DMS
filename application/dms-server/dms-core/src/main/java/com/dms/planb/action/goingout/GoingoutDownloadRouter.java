@@ -13,6 +13,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.boxfox.dms.algorithm.AES256;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -36,7 +38,9 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 		SafeResultSet resultSet;
 		SafeResultSet stayStateResultSet;
 		SafeResultSet goingoutStateResultSet;
+		AES256 aes = UserManager.getAES();
 		String currentWeek = getCurrentWeek();
+		
 		
 		File file = getFile();
 		
@@ -52,7 +56,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 						StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 						sb.insert(1, "0");
 						
-						String studentNumber = sb.toString();
+						String studentNumber = aes.encrypt(sb.toString().substring(0, 4));
 						
 						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");
 						
