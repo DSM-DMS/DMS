@@ -61,8 +61,6 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 						
 						if(resultSet.next()) {
 							String uid = resultSet.getString("uid");
-							System.out.println(uid);
-							System.out.println(currentWeek);
 							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", currentWeek, "'");
 
 							if (stayStateResultSet.next()) {
@@ -73,12 +71,8 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 									XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
 
 									goingoutStateResultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
-									if (!goingoutStateResultSet.next()) {
-										// 외출신청 여부 없음
-										goingoutStateCell.setCellValue("외출신청 여부 없음");
-										continue;
-									}
-
+									goingoutStateResultSet.next();
+									
 									boolean sat = goingoutStateResultSet.getBoolean("sat");
 									boolean sun = goingoutStateResultSet.getBoolean("sun");
 
@@ -91,6 +85,8 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 									} else if ((!sat) && sun) {
 										// 일요일만 외출
 										goingoutStateCell.setCellValue("일요일 외출");
+									} else {
+										goingoutStateCell.setCellValue("미외출 잔류");
 									}
 								} else {
 									// 잔류가 아닐 때
@@ -138,12 +134,13 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);
+		// 0 ~ 11
 		int week = calendar.get(Calendar.WEEK_OF_MONTH);
 
 		StringBuilder currentWeek = new StringBuilder();
 
 		currentWeek.append(Integer.toString(year)).append("-0");
-		currentWeek.append(Integer.toString(month)).append("-0");
+		currentWeek.append(Integer.toString(month + 1)).append("-0");
 		currentWeek.append(Integer.toString(week));
 
 		return currentWeek.toString();
