@@ -24,12 +24,12 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/goingout/download", method={HttpMethod.POST})
+@RouteRegistration(path = "/goingout/download", method = { HttpMethod.POST })
 public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
 	private final String FILE_DIR = "files/";
 	private XSSFWorkbook wb;
-	
+
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -54,7 +54,6 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 					switch(cell.getCellType()) {
 					case Cell.CELL_TYPE_NUMERIC:
 						StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
-						sb.insert(1, "0");
 						
 						String studentNumber = aes.encrypt(sb.toString().substring(0, 4));
 						
@@ -62,38 +61,49 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 						
 						if(resultSet.next()) {
 							String uid = resultSet.getString("uid");
+							System.out.println(uid);
+							System.out.println(currentWeek);
 							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", currentWeek, "'");
-							
-							if(stayStateResultSet.getInt("value") == 4) {
-								// 잔류일 때
+
+							if (stayStateResultSet.next()) {
+								// 잔류신청을 한 경우
+								if (stayStateResultSet.getInt("value") == 4) {
+									// 잔류일 때
+									XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
+									XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
+
+									goingoutStateResultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
+									if (!goingoutStateResultSet.next()) {
+										// 외출신청 여부 없음
+										goingoutStateCell.setCellValue("외출신청 여부 없음");
+										continue;
+									}
+
+									boolean sat = goingoutStateResultSet.getBoolean("sat");
+									boolean sun = goingoutStateResultSet.getBoolean("sun");
+
+									if (sat && sun) {
+										// 모두 외출
+										goingoutStateCell.setCellValue("토요일, 일요일 외출");
+									} else if (sat && (!sun)) {
+										// 토요일만 외출
+										goingoutStateCell.setCellValue("토요일 외출");
+									} else if ((!sat) && sun) {
+										// 일요일만 외출
+										goingoutStateCell.setCellValue("일요일 외출");
+									}
+								} else {
+									// 잔류가 아닐 때
+									XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
+									studentRow.getCell(cell.getColumnIndex()).setCellValue("");
+									studentRow.getCell(cell.getColumnIndex() + 1).setCellValue("");
+								}
+							} else {
+								// 잔류신청 정보 없음
 								XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
 								XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
 								
-								goingoutStateResultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
-								if(!goingoutStateResultSet.next()) {
-									// 외출신청 여부 없음
-									goingoutStateCell.setCellValue("외출신청 여부 없음");
-									continue;
-								}
-								
-								boolean sat = goingoutStateResultSet.getBoolean("sat");
-								boolean sun = goingoutStateResultSet.getBoolean("sun");
-								
-								if(sat && sun) {
-									// 모두 외출
-									goingoutStateCell.setCellValue("토요일, 일요일 외출");
-								} else if(sat && (!sun)) {
-									// 토요일만 외출
-									goingoutStateCell.setCellValue("토요일 외출");
-								} else if((!sat) && sun) {
-									// 일요일만 외출
-									goingoutStateCell.setCellValue("일요일 외출");
-								}
-							} else {
-								// 잔류가 아닐 때
-								XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
-								studentRow.getCell(cell.getColumnIndex()).setCellValue("");
-								studentRow.getCell(cell.getColumnIndex() + 1).setCellValue("");
+								goingoutStateCell.setCellValue("잔류신청 정보 없음");
 							}
 						}
 						
@@ -114,28 +124,28 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 			context.response().close();
 		}
 	}
-	
+
 	private File getFile() {
 		File file = new File(FILE_DIR + FORMAT_XLSX_FILE);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        return file;
-    }
-	
+		if (!file.exists()) {
+			file.mkdir();
+		}
+		return file;
+	}
+
 	private String getCurrentWeek() {
 		Calendar calendar = Calendar.getInstance();
-		
+
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);
 		int week = calendar.get(Calendar.WEEK_OF_MONTH);
-		
+
 		StringBuilder currentWeek = new StringBuilder();
-		
+
 		currentWeek.append(Integer.toString(year)).append("-0");
 		currentWeek.append(Integer.toString(month)).append("-0");
 		currentWeek.append(Integer.toString(week));
-		
+
 		return currentWeek.toString();
 	}
 }

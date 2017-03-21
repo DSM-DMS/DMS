@@ -41,35 +41,47 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String month = context.request().getParam("month");
+//        String month = context.request().getParam("month");
+        String week = context.request().getParam("week");
         
-        if(!Guardian.checkParameters(id, uid, month)) {
+        if(!Guardian.checkParameters(id, uid, week)) {
             context.response().setStatusCode(400).end();
             context.response().close();
         	return;
         }
 
         try {
-            resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week like'%", month, "'");
+//            resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week like'%", month, "'");
+        	resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
 
-            if (resultSet.next()) {
-            	int weekCount = 1;
-            	
-            	do {
-            		if(resultSet.toHashMap().contains("value")) {
-            			responseObject.put(month + "-0" + Integer.toString(weekCount++), resultSet.getInt("value"));
-            		} else {
-            			responseObject.put(month + "-0" + Integer.toString(weekCount++), 0);
-            		}
-            	} while(resultSet.next());
-
-                context.response().setStatusCode(200);
-                context.response().end(responseObject.toString());
-                context.response().close();
-            } else {
-                context.response().setStatusCode(204).end();
-                context.response().close();
-            }
+        	if(resultSet.next()) {
+        		responseObject.put("value", resultSet.getInt("value"));
+        		
+        		context.response().setStatusCode(200);
+        		context.response().end(responseObject.toString());
+        		context.response().close();
+        	} else {
+        		context.response().setStatusCode(204).end();
+        		context.response().close();
+        	}
+//            if (resultSet.next()) {
+//            	int weekCount = 1;
+//            	
+//            	do {
+//            		if(resultSet.toHashMap().contains("value")) {
+//            			responseObject.put(month + "-0" + Integer.toString(weekCount++), resultSet.getInt("value"));
+//            		} else {
+//            			responseObject.put(month + "-0" + Integer.toString(weekCount++), 0);
+//            		}
+//            	} while(resultSet.next());
+//
+//                context.response().setStatusCode(200);
+//                context.response().end(responseObject.toString());
+//                context.response().close();
+//            } else {
+//                context.response().setStatusCode(204).end();
+//                context.response().close();
+//            }
         } catch (SQLException e) {
             context.response().setStatusCode(500).end();
             context.response().close();
