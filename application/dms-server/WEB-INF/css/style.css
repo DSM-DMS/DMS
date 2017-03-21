@@ -242,7 +242,7 @@ table tr {
     width: 100%;
 }
 
-- .extentionapply .seatcontainer {
+.extentionapply .seatcontainer {
     width: 100%;
     margin-top: 20px;
     text-align: center;
@@ -354,6 +354,14 @@ table tr {
     vertical-align: middle;
 }
 
+.door {
+    margin-top: 20px;
+    height: 15px;
+    background-color: rgb(134,193,233);
+    width: 300px;
+    display: inline-block;
+}
+
 
 /*--------------------- stay apply ----------------------*/
 
@@ -432,7 +440,7 @@ table tr {
 
 .other_month {
     color: rgb(220, 220, 220);
-}   
+}
 
 .go_home {
     color: rgb(52, 219, 94);
