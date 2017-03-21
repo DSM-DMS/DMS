@@ -79,7 +79,6 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 			context.response().sendFile(FILE_DIR + "잔류신청.xlsx");
 			context.response().close();
 		} catch (IOException | SQLException e) {
-			e.printStackTrace();
 			context.response().setStatusCode(500).end();
 			context.response().close();
 		}
