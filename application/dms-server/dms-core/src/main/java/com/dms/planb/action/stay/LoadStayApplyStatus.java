@@ -41,19 +41,27 @@ public class LoadStayApplyStatus implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String week = context.request().getParam("week");
+        String month = context.request().getParam("month");
         
-        if(!Guardian.checkParameters(id, uid, week)) {
+        if(!Guardian.checkParameters(id, uid, month)) {
             context.response().setStatusCode(400).end();
             context.response().close();
         	return;
         }
 
         try {
-            resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
+            resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week like'%", month, "'");
 
             if (resultSet.next()) {
-                responseObject.put("value", resultSet.getInt("value"));
+            	int weekCount = 1;
+            	
+            	do {
+            		if(resultSet.toHashMap().contains("value")) {
+            			responseObject.put(month + "-0" + Integer.toString(weekCount++), resultSet.getInt("value"));
+            		} else {
+            			responseObject.put(month + "-0" + Integer.toString(weekCount++), 0);
+            		}
+            	} while(resultSet.next());
 
                 context.response().setStatusCode(200);
                 context.response().end(responseObject.toString());
