@@ -57,6 +57,8 @@ public class ApplyExtension implements Handler<RoutingContext> {
             if (rs.next()) {
                 name = rs.getString(1);
             }
+            System.out.println(ApplyDataUtil.EXTENSION_APPLY_TIME);
+            System.out.println(ApplyDataUtil.canApplyExtension());
             if (!ApplyDataUtil.canApplyExtension()) {
                 context.response().setStatusCode(204).end();
                 context.response().close();

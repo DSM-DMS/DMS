@@ -49,6 +49,7 @@ public class ApplyDataUtil {
 
         int setHour = Integer.valueOf(ApplyDataUtil.EXTENSION_APPLY_TIME.split(":")[0]);
         int setMinute = Integer.valueOf(ApplyDataUtil.EXTENSION_APPLY_TIME.split(":")[1]);
+        
         if (!(hour < setHour || (hour == setHour && minute < setMinute))) {
             check = true;
         }
