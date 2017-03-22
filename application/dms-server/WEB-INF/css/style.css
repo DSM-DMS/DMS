@@ -967,3 +967,80 @@ input.editor-button {
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
+/*--------------------- admin page ---------------*/
+
+.admin_btn {
+    text-align: center;
+    font-size: 200%;
+    background-color: white;
+    border-radius: 15px;
+    width: 80%;
+    height: 60px;
+    line-height: 60px;
+    margin: auto;
+    margin-top: 70px;
+    cursor: pointer;
+}
+
+#extention_download {
+  border: 3px solid #34db5e;
+  color: #34db5e;
+}
+
+#extention_download:hover {
+  background-color: #34db5e;
+  color: white;
+}
+
+#stay_download {
+  border: 3px solid #ff9731;
+  color: #ff9731;
+}
+
+#stay_download:hover {
+  background-color: #ff9731;
+  color: white;
+}
+
+
+#goOut_download {
+  border: 3px solid #0275d9;
+  color: #0275d9;
+}
+
+#goOut_download:hover {
+  background-color: #0275d9;
+  color: white;
+}
+
+#facility_download {
+  border: 3px solid #ef6b6b;
+  color: #ef6b6b;
+}
+
+#facility_download:hover {
+  background-color: #ef6b6b;
+  color: white;
+}
+
+#write_notice {
+  border: 3px solid #dc80ff;
+  color: #dc80ff;
+}
+
+#write_notice:hover {
+  background-color: #dc80ff;
+  color: white;
+}
+
+#write_rule {
+  border: 3px solid #57d4ea;
+  color: #57d4ea;
+  margin-bottom: 35px;
+}
+
+#write_rule:hover {
+  background-color: #57d4ea;
+  color: white;
+}
