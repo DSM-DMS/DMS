@@ -10,3 +10,11 @@ $('#stay_download').on('click', function () {
   var week = getWeek(today);
   location.href = 'http://dsm2015.cafe24.com/stay/download?year=' + year + '&month=' + month + '&week=' + week;
 });
+
+$('#goOut_download').on('click', function () {
+  location.href = 'http://dsm2015.cafe24.com/goingout/download';
+})
+
+$('#extension_download').on('click', function () {
+  location.href = 'http://dsm2015.cafe24.com/extension/download';
+})

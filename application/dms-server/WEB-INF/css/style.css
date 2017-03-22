@@ -987,12 +987,12 @@ input.editor-button {
     cursor: pointer;
 }
 
-#extention_download {
+#extension_download {
   border: 3px solid #34db5e;
   color: #34db5e;
 }
 
-#extention_download:hover {
+#extension_download:hover {
   background-color: #34db5e;
   color: white;
 }
