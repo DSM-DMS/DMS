@@ -967,3 +967,8 @@ input.editor-button {
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
+/*------------------- bug report -----------------------*/
+#bug-editor {
+    width: 100%;
+}
