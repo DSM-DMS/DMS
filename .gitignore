@@ -1,5 +1,4 @@
 target/
 log/
-config/
 *.log
 *.cnf
