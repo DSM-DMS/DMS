@@ -358,9 +358,9 @@ $('#first_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#first_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-01');
+      $('#date').val(currentYear + '-0' + currentMonth + '-01주');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-01');
+      $('#date').val(currentYear + '-' + currentMonth + '-01주');
     }
 });
 
@@ -369,9 +369,9 @@ $('#second_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#second_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-02');
+      $('#date').val(currentYear + '-0' + currentMonth + '-02주');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-02');
+      $('#date').val(currentYear + '-' + currentMonth + '-02주');
     }
 });
 
@@ -380,9 +380,9 @@ $('#third_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#third_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-03');
+      $('#date').val(currentYear + '-0' + currentMonth + '-03주');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-03');
+      $('#date').val(currentYear + '-' + currentMonth + '-03주');
     }
 });
 
@@ -391,9 +391,9 @@ $('#fourth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fourth_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-04');
+      $('#date').val(currentYear + '-0' + currentMonth + '-04주');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-04');
+      $('#date').val(currentYear + '-' + currentMonth + '-04주');
     }
 });
 
@@ -403,9 +403,9 @@ $('#fifth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#fifth_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-05');
+      $('#date').val(currentYear + '-0' + currentMonth + '-05주');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-05');
+      $('#date').val(currentYear + '-' + currentMonth + '-05주');
     }
   } else {
     defaultSelector = new Array();
@@ -428,9 +428,9 @@ $('#fifth_week').click(function() {
     $('#calendar tbody tr').css("background-color", "white");
     $('#first_week').css("background-color", "#f1f1f1");
     if (currentMonth < 10) {
-      $('#date').val(currentYear + '-0' + currentMonth + '-01');
+      $('#date').val(currentYear + '-0' + currentMonth + '-01주');
     } else {
-      $('#date').val(currentYear + '-' + currentMonth + '-01');
+      $('#date').val(currentYear + '-' + currentMonth + '-01주');
     }
   }
 });
@@ -457,9 +457,9 @@ $('#sixth_week').click(function() {
   $('#calendar tbody tr').css("background-color", "white");
   $('#first_week').css("background-color", "#f1f1f1");
   if (currentMonth < 10) {
-    $('#date').val(currentYear + '-0' + currentMonth + '-01');
+    $('#date').val(currentYear + '-0' + currentMonth + '-01주');
   } else {
-    $('#date').val(currentYear + '-' + currentMonth + '-01');
+    $('#date').val(currentYear + '-' + currentMonth + '-01주');
   }
 });
 
@@ -478,7 +478,7 @@ $('#date').keydown(function(e) {
 });
 
 $('#stay_submit').on('click', function() {
-    applySendDataWeek = $('#date').val();
+    applySendDataWeek = $('#date').val().slice(0, -1);
     applySendDataValue = $("#stay_select").val();
     applyData();
     defaultSelector = new Array();
