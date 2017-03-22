@@ -8,8 +8,8 @@ package org.boxfox.dms.utilities;
  *  - DataBase.getInstance().execute(쿼리);
  *  - ResultSet rs = DataBase.getInstance().executeQuery(쿼리);
  *  - int num = DataBase.getInstance().executeUpdate(쿼리);
- *  - DataBase.getInstance().execute(DataSaveAble);
- *  
+ *  - DataBase.getInstance().execute(DataSaveAble); ㅏ
+ * | '
  *   < com.boxfox.dms.utilities.database.SafeResultSet >
  *    - 하나의 connection을 이용하여 쿼리를 다루게 되면 사용중인 ResultSet의 변경이 일어나 충돌이 일어날 수 있음
  *    - 이를 방지하기 위해 ResultSet을 Object로 저장하여 다른 쿼리결과에 영향을 받지 않도록 함

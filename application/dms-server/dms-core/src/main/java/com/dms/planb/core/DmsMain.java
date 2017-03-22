@@ -26,6 +26,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 
 import com.dms.parser.dataio.post.PostChangeDetector;
@@ -66,6 +67,10 @@ class DmsMain {
 	}
 
 	public static void main(String[] args) {
+		if(SecureConfig.get("database")==null||SecureConfig.get("AES")==null){
+			System.err.println("Key Config is not defined!");
+			return;
+		}
 		initialize();
 		/*
 		 * Branch off initialize() method

@@ -48,9 +48,6 @@ public class ApplyExtension implements Handler<RoutingContext> {
             context.response().close();
         	return;
         }
-        
-        Log.l("Extension Apply (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
-        
         try {
             String name = null;
             SafeResultSet rs = DataBase.getInstance().executeQuery("select name from student_data where uid='", uid, "'");
@@ -72,5 +69,6 @@ public class ApplyExtension implements Handler<RoutingContext> {
             e.printStackTrace();
             Log.l("SQLException");
         }
+        Log.l("Extension Apply (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
     }
 }

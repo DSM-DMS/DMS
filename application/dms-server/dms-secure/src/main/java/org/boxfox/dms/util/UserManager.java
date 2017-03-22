@@ -6,6 +6,7 @@ import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.actions.support.JobResult;
+import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
@@ -20,7 +21,7 @@ public class UserManager {
     private static DataBase database;
 
     static {
-        aes = new AES256(".s@!31VAsv!@312231");
+        aes = new AES256(SecureConfig.get("AES"));
     }
 
     public static AES256 getAES() {
