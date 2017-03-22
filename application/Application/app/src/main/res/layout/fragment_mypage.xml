@@ -7,11 +7,13 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout_mypage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout_mypage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@color/colorPrimary"
@@ -19,25 +21,28 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="256dp">
+                android:layout_height="256dp"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
 
-                <!--<com.makeramen.roundedimageview.RoundedImageView-->
-                <!--android:id="@+id/iv_mypage_profile"-->
-                <!--android:layout_width="88dp"-->
-                <!--android:layout_height="88dp"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_marginBottom="16dp"-->
-                <!--android:layout_marginTop="64dp"-->
-                <!--app:layout_collapseMode="parallax"-->
-                <!--app:layout_collapseParallaxMultiplier="0.7"-->
-                <!--riv:riv_oval="true" />-->
-
-                <ImageView
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/iv_mypage_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.7" />
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="64dp"
+                    android:background="@android:color/darker_gray"
+                    android:src="@drawable/ic_person_outline_white_48dp"
+                    riv:riv_oval="true"
+                    riv:riv_mutate_background="true" />
+
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_mypage_profile"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:layout_collapseMode="parallax"-->
+                <!--app:layout_collapseParallaxMultiplier="0.7" />-->
 
                 <TextView
                     android:id="@+id/tv_mypage_number"
@@ -46,8 +51,9 @@
                     android:layout_below="@id/iv_mypage_profile"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="8dp"
+                    android:text="3학년 1반 18번"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_mypage_name"
@@ -55,8 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_mypage_number"
                     android:layout_centerHorizontal="true"
+                    android:text="조성빈"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
@@ -162,110 +169,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical" />
                 </LinearLayout>
-            </LinearLayout>
-
-            <!-- sex -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
-                    android:text="성별"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:id="@+id/tv_mypage_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-
-            <!-- phone -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
-                    android:text="전화번호"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:id="@+id/tv_mypage_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-
-            <!-- status -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
-                    android:text="상태"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:id="@+id/tv_mypage_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-
-            <!-- parent -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
-                    android:text="학부모"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:id="@+id/tv_mypage_parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black" />
             </LinearLayout>
 
         </LinearLayout>

@@ -12,13 +12,14 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-03-02.
@@ -26,12 +27,15 @@ import java.io.IOException;
 
 public class DeleteFacilityReportDialog extends DialogFragment {
 
+    private Context mContext;
+
     public static DeleteFacilityReportDialog newInstance(Context context, int no) {
         Bundle args = new Bundle();
         args.putInt(context.getString(R.string.ARGS_NO), no);
 
         DeleteFacilityReportDialog fragment = new DeleteFacilityReportDialog();
         fragment.setArguments(args);
+        fragment.mContext = context;
 
         return fragment;
     }
@@ -99,12 +103,11 @@ public class DeleteFacilityReportDialog extends DialogFragment {
         }
 
         private int deleteFacilityReport(int no) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("no", no);
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("no", String.valueOf(no));
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.DELETE_REPORT_FACILITY)
-                    .putBodyData(requestJSONObject)
+            Response response = HttpBox.post(mContext, "/post/qna/comment", Request.TYPE_DELETE)
+                    .putBodyData(requestParams)
                     .push();
 
             return response.getCode();

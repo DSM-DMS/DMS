@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 
 /**
  * Created by BeINone on 2017-01-26.

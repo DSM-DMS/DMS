@@ -1,10 +1,10 @@
 package com.dms.beinone.application.mypage;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,10 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -31,8 +31,6 @@ import java.io.IOException;
 
 public class MypageActivity extends AppCompatActivity {
 
-    private SharedPreferences mAccountPrefs;
-
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
     private ImageView mProfileIV;
@@ -40,10 +38,8 @@ public class MypageActivity extends AppCompatActivity {
     private TextView mMeritTV;
     private TextView mDemeritTV;
     private TextView mTotalTV;
-    private TextView mSexTV;
-    private TextView mPhoneTV;
-    private TextView mStatusTV;
-    private TextView mParentTV;
+
+    private String mProfileImageString;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,28 +59,39 @@ public class MypageActivity extends AppCompatActivity {
         mMeritTV = (TextView) findViewById(R.id.tv_mypage_merit);
         mDemeritTV = (TextView) findViewById(R.id.tv_mypage_demerit);
         mTotalTV = (TextView) findViewById(R.id.tv_mypage_total);
-        mSexTV = (TextView) findViewById(R.id.tv_mypage_sex);
-        mPhoneTV = (TextView) findViewById(R.id.tv_mypage_phone);
-        mStatusTV = (TextView) findViewById(R.id.tv_mypage_status);
-        mParentTV = (TextView) findViewById(R.id.tv_mypage_parent);
 
-        mAccountPrefs = getSharedPreferences(
-                getString(R.string.PREFS_ACCOUNT), Context.MODE_PRIVATE);
+        final CollapsingToolbarLayout collapsingToolbarLayout =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout_mypage);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout_mypage);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            int scrollRange = -1;
 
-        setTitle("조성빈");
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle("조성빈");
+                } else {
+                    collapsingToolbarLayout.setTitle(" ");
+                }
+            }
+        });
+
         setSupportActionBar(mToolbar);
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String id = mAccountPrefs.getString("id", "");
-        new LoadMypageTask().execute(id);
+        new LoadMypageTask().execute();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        Glide.with(this).load(R.drawable.test).centerCrop().into(mProfileIV);
+        if (mProfileImageString != null) {
+            Glide.with(this).load(mProfileImageString).centerCrop().into(mProfileIV);
+        }
     }
 
     @Override
@@ -99,7 +106,6 @@ public class MypageActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-
         Glide.clear(mProfileIV);
     }
 
@@ -108,22 +114,19 @@ public class MypageActivity extends AppCompatActivity {
         mMeritTV.setText(String.valueOf(student.getMerit()));
         mDemeritTV.setText(String.valueOf(student.getDemerit()));
         mTotalTV.setText(String.valueOf(student.getMerit() - student.getDemerit()));
-        // true = "여자", false = "남자"
-        mSexTV.setText(student.getSex() ? "여자" : "남자");
-        mPhoneTV.setText(student.getPhone());
-        mStatusTV.setText(String.valueOf(student.getStatus()));
-        mParentTV.setText(student.getParent());
+        if (student.getProfileImage() != null) {
+            Glide.with(this).load(student.getProfileImage()).centerCrop().into(mProfileIV);
+        }
     }
 
-    private class LoadMypageTask extends AsyncTask<String, Void, Student> {
+    private class LoadMypageTask extends AsyncTask<Void, Void, Student> {
 
         @Override
-        protected Student doInBackground(String... params) {
+        protected Student doInBackground(Void... params) {
             Student student = null;
 
             try {
-                String id = params[0];
-                student = loadMypage(id);
+                student = loadMypage();
             } catch (IOException e) {
                 return null;
             } catch (JSONException e) {
@@ -140,18 +143,27 @@ public class MypageActivity extends AppCompatActivity {
             if (student == null) {
                 Toast.makeText(MypageActivity.this, R.string.mypage_error, Toast.LENGTH_SHORT).show();
             } else {
+                mProfileImageString = student.getProfileImage();
                 bind(student);
             }
         }
 
-        private Student loadMypage(String id) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("id", id);
+//        public Bitmap stringToBitmap(String encodedString){
+//            try{
+//                byte [] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+//                Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+//                return bitmap;
+//            }catch(Exception e){
+//                e.getMessage();
+//                return null;
+//            }
+//        }
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_MYPAGE)
-                    .putBodyData(requestJSONObject)
+        private Student loadMypage() throws IOException, JSONException {
+            Response response =
+                    HttpBox.post(MypageActivity.this, "/account/student", Request.TYPE_GET)
                     .push();
+
             JSONObject responseJSONObject = response.getJsonObject();
 
             return JSONParser.parseStudentJSON(responseJSONObject);

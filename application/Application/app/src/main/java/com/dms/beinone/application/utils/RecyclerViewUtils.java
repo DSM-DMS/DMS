@@ -1,9 +1,12 @@
-package com.dms.beinone.application;
+package com.dms.beinone.application.utils;
 
 import android.content.Context;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+
+import com.dms.beinone.application.EmptySupportedRecyclerView;
+import com.dms.beinone.application.VerticalSpaceItemDecoration;
 
 /**
  * Created by BeINone on 2017-01-23.

@@ -9,20 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.EditTextUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import lib.kingja.switchbutton.SwitchMultiButton;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-24.
@@ -33,16 +30,22 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int POS_TAB_MAN = 0;
     private static final int POS_TAB_WOMAN = 1;
 
+    private EditText mUidET;
     private EditText mIdET;
     private EditText mPasswordET;
-    private EditText mNameET;
-    private EditText mNumberET;
-    private SwitchMultiButton mSexSwitchBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mUidET = (EditText) findViewById(R.id.et_register_uid);
+        mUidET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditTextUtils.hideKeyboard(RegisterActivity.this, (EditText) v);
+            }
+        });
 
         mIdET = (EditText) findViewById(R.id.et_register_id);
         mIdET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -60,39 +63,28 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mNameET = (EditText) findViewById(R.id.et_register_name);
-        mNameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                EditTextUtils.hideKeyboard(RegisterActivity.this, (EditText) v);
-            }
-        });
-
-        mNumberET = (EditText) findViewById(R.id.et_register_number);
-        mNumberET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                EditTextUtils.hideKeyboard(RegisterActivity.this, (EditText) v);
-            }
-        });
-
-        List<String> sexTabTextList = Arrays.asList("남자", "여자");
-        mSexSwitchBtn = (SwitchMultiButton) findViewById(R.id.switchbtn_register_sex);
-        mSexSwitchBtn.setText(sexTabTextList);
-
         Button registerBtn = (Button) findViewById(R.id.btn_register_register);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String uid = mUidET.getText().toString().trim();
                 String id = mIdET.getText().toString().trim();
                 String password = mPasswordET.getText().toString().trim();
-                String name = mNameET.getText().toString().trim();
-                int number = Integer.valueOf(mNumberET.getText().toString().trim());
-                // man: false, woman: true
-                boolean sex = mSexSwitchBtn.getSelectedTab() == POS_TAB_WOMAN;
 
-                StudentAccount studentAccount = new StudentAccount(id, password, name, number, sex);
-                new RegisterStudentAccountTask().execute(studentAccount);
+                if (uid.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, R.string.register_nouid,
+                            Toast.LENGTH_SHORT).show();
+                } else if (id.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, R.string.register_id,
+                            Toast.LENGTH_SHORT).show();
+                } else if (password.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, R.string.register_password,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    StudentAccount studentAccount = new StudentAccount(uid, id, password);
+                    new RegisterStudentAccountTask().execute(studentAccount);
+                }
+
             }
         });
     }
@@ -118,15 +110,19 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(Integer code) {
             super.onPostExecute(code);
 
-            if (code == 200) {
+            if (code == 201) {
                 // success
-                Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(RegisterActivity.this, R.string.register_success,
+                        Toast.LENGTH_SHORT).show();
                 finish();
-            } else if (code == 204) {
+            } else if (code == 409) {
+                // conflict
+                Toast.makeText(RegisterActivity.this, R.string.register_conflict,
+                        Toast.LENGTH_SHORT).show();
+            } else if (code == 404) {
                 // empty
-                Toast.makeText(RegisterActivity.this, R.string.register_failure, Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(RegisterActivity.this, R.string.register_failure,
+                        Toast.LENGTH_SHORT).show();
             } else {
                 // error
                 Toast.makeText(RegisterActivity.this, R.string.register_error, Toast.LENGTH_SHORT)
@@ -136,21 +132,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         private int registerStudentAccount(StudentAccount studentAccount)
                 throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("id", studentAccount.getId());
-            requestJSONObject.put("password", studentAccount.getPassword());
-            requestJSONObject.put("name", studentAccount.getName());
-            requestJSONObject.put("number", studentAccount.getNumber());
-            requestJSONObject.put("sex", studentAccount.getSex());
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("uid", studentAccount.getUid());
+            requestParams.put("id", studentAccount.getId());
+            requestParams.put("password", studentAccount.getPassword());
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.REGISTER_STUDENT_ACC)
-                    .putBodyData(requestJSONObject)
+            Response response =
+                    HttpBox.post(RegisterActivity.this, "/account/register/student", Request.TYPE_POST)
+                    .putBodyData(requestParams)
                     .push();
 
             return response.getCode();
         }
-
     }
 
 }

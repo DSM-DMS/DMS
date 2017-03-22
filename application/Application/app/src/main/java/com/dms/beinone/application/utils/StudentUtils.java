@@ -1,4 +1,4 @@
-package com.dms.beinone.application;
+package com.dms.beinone.application.utils;
 
 /**
  * Created by BeINone on 2017-02-23.

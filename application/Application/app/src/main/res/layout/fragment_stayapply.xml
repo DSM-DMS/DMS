@@ -40,10 +40,10 @@
                     android:id="@+id/btn_stayapply_changedefaultstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:drawableRight="@drawable/ic_chevron_right_white_18dp"
+                    android:layout_alignParentRight="true"
                     android:drawableEnd="@drawable/ic_chevron_right_white_18dp"
+                    android:drawableRight="@drawable/ic_chevron_right_white_18dp"
                     android:text="@string/stayapply_changedefaultstatus"
                     android:textSize="@dimen/text_roundedbtn"
                     dmsbtn:dmsbtn_style="round" />
@@ -86,8 +86,8 @@
                     android:id="@+id/tv_stayapply_selectedweekstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/colorPrimary" />
 
@@ -110,9 +110,9 @@
                         android:id="@+id/rb_stayapply_fridaygo"
                         android:layout_width="0dp"
                         android:layout_height="64dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_fridaygo"
                         android:textOn="@string/stayapply_fridaygo" />
 
@@ -120,9 +120,9 @@
                         android:id="@+id/rb_stayapply_saturdaygo"
                         android:layout_width="0dp"
                         android:layout_height="64dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_saturdaygo"
                         android:textOn="@string/stayapply_saturdaygo" />
 
@@ -130,9 +130,9 @@
                         android:id="@+id/rb_stayapply_saturdaycome"
                         android:layout_width="0dp"
                         android:layout_height="64dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_saturdaycome"
                         android:textOn="@string/stayapply_saturdaycome" />
 
@@ -140,9 +140,9 @@
                         android:id="@+id/rb_stayapply_stay"
                         android:layout_width="0dp"
                         android:layout_height="64dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
                         android:textOff="@string/stayapply_stay"
                         android:textOn="@string/stayapply_stay" />
 
@@ -160,12 +160,12 @@
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:text="@string/stayapply_apply"
-        dmsbtn:dmsbtn_style="rectangle"
         dmsbtn:dmsbtn_backgroundColor="@android:color/black"
         dmsbtn:dmsbtn_strokeColor="@android:color/black"
+        dmsbtn:dmsbtn_style="rectangle"
+        dmsbtn:dmsbtn_textColor="@android:color/white"
         dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"
         dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"
-        dmsbtn:dmsbtn_textColor="@android:color/white"
         dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
 
 </RelativeLayout>

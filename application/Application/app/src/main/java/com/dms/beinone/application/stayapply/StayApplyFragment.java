@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.DateUtils;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSRadioButton;
+import com.dms.beinone.application.utils.DateUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 import com.samsistemas.calendarview.widget.CalendarView;
 
@@ -29,7 +29,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.dms.beinone.application.stayapply.StayApplyUtils.FRIDAY_GO;
@@ -79,17 +81,16 @@ public class StayApplyFragment extends Fragment {
         final CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_stayapply);
 
         // load and display default stay status of user
-        final String id = mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), null);
-        new LoadDefaultStayStatusTask().execute(id);
+        new LoadDefaultStayStatusTask().execute();
 
         Button changeDefaultStatusBtn = (Button) rootView.findViewById(R.id.btn_stayapply_changedefaultstatus);
         changeDefaultStatusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeDefaultStatusDialogFragment.newInstance(
+                ChangeDefaultStatusDialog.newInstance(
                         getContext(),
                         mDefaultStatusPrefs.getInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), STAY),
-                        new ChangeDefaultStatusDialogFragment.ChangeDefaultStatusListener() {
+                        new ChangeDefaultStatusDialog.ChangeDefaultStatusListener() {
                             @Override
                             public void onChangeDefaultStatus(int defaultStatus) {
                                 mDefaultStatusPrefs.edit()
@@ -107,7 +108,7 @@ public class StayApplyFragment extends Fragment {
 
         // load and display stay status of selected week at initially
         mSelectedDate = new Date();
-        new LoadStayStatusTask().execute(id, DateUtils.dateToWeekDateString(mSelectedDate));
+        new LoadStayStatusTask().execute(DateUtils.dateToWeekDateString(mSelectedDate));
 
         calendarView.setOnDateClickListener(new CalendarView.OnDateClickListener() {
             @Override
@@ -118,8 +119,7 @@ public class StayApplyFragment extends Fragment {
                 setSelectedWeekStatusTV(null);
 
                 // load and display stay status of selected week
-                String id = mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), null);
-                new LoadStayStatusTask().execute(id, DateUtils.dateToWeekDateString(mSelectedDate));
+                new LoadStayStatusTask().execute(DateUtils.dateToWeekDateString(mSelectedDate));
             }
         });
 
@@ -138,16 +138,16 @@ public class StayApplyFragment extends Fragment {
             public void onClick(View view) {
                 if (fridayGoRB.isChecked()) {
                     new ApplyStayStatusTask()
-                            .execute(id, FRIDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
+                            .execute(FRIDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
                 } else if (saturdayGoRB.isChecked()) {
                     new ApplyStayStatusTask()
-                            .execute(id, SATURDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
+                            .execute(SATURDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
                 } else if (saturdayComeRB.isChecked()) {
                     new ApplyStayStatusTask()
-                            .execute(id, SATURDAY_COME, DateUtils.dateToWeekDateString(mSelectedDate));
+                            .execute(SATURDAY_COME, DateUtils.dateToWeekDateString(mSelectedDate));
                 } else if (stayRB.isChecked()) {
                     new ApplyStayStatusTask()
-                            .execute(id, STAY, DateUtils.dateToWeekDateString(mSelectedDate));
+                            .execute(STAY, DateUtils.dateToWeekDateString(mSelectedDate));
                 } else {
                     Toast.makeText(getContext(), R.string.stayapply_nochecked, Toast.LENGTH_SHORT).show();
                 }
@@ -182,11 +182,13 @@ public class StayApplyFragment extends Fragment {
             int[] values = null;
 
             try {
-                values = loadStayStatus(params[0], params[1]);
+                values = loadStayStatus(params[0]);
             } catch (IOException e) {
-                return new int[]{ -1, -1 };
+                e.printStackTrace();
+                return new int[]{-1, -1};
             } catch (JSONException e) {
-                return new int[]{ -1, -1 };
+                e.printStackTrace();
+                return new int[]{-1, -1};
             }
 
             return values;
@@ -200,34 +202,32 @@ public class StayApplyFragment extends Fragment {
             int stayStatus = values[1];
 
             if (code == 200 || code == 204) {
-                /* succeed */
+                // success
                 setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
             } else {
-                /* error */
+                // error
                 Toast.makeText(getContext(), R.string.stayapply_error, Toast.LENGTH_SHORT).show();
             }
         }
 
-        private int[] loadStayStatus(String id, String week) throws IOException, JSONException {
-            JSONObject requestJsonObject = new JSONObject();
-            requestJsonObject.put("id", id);
-            requestJsonObject.put("week", week);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_STAY_APPLY_STATUS)
-                    .putBodyData(requestJsonObject)
+        private int[] loadStayStatus(String week) throws IOException, JSONException {
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("week", week);
+
+            Response response = HttpBox.post(getContext(), "/apply/stay", Request.TYPE_GET)
+                    .putBodyData(requestParams)
                     .push();
 
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            int stayStatus = 0;
-            if (responseJSONObject.has("value")) {
-                stayStatus = responseJSONObject.getInt("value");
-            } else {
+            int code = response.getCode();
+            int stayStatus = -1;
+            if (code == 200) {
+                stayStatus = response.getJsonObject().getInt("value");
+            } else if (code == 204) {
                 stayStatus = mDefaultStatusPrefs.getInt(
                         getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), 0);
             }
 
-            return new int[]{ response.getCode(), stayStatus };
+            return new int[]{response.getCode(), stayStatus};
         }
 
     }
@@ -235,14 +235,14 @@ public class StayApplyFragment extends Fragment {
     /**
      * load default stay status of the user from server and display it
      */
-    private class LoadDefaultStayStatusTask extends AsyncTask<String, Void, Integer> {
+    private class LoadDefaultStayStatusTask extends AsyncTask<Void, Void, Integer> {
 
         @Override
-        protected Integer doInBackground(String... params) {
+        protected Integer doInBackground(Void... params) {
             int stayStatus = -1;
 
             try {
-                stayStatus = loadDefaultStayStatus(params[0]);
+                stayStatus = loadDefaultStayStatus();
             } catch (IOException e) {
                 return -1;
             } catch (JSONException e) {
@@ -266,14 +266,12 @@ public class StayApplyFragment extends Fragment {
                     .apply();
         }
 
-        private int loadDefaultStayStatus(String id) throws IOException, JSONException {
-            JSONObject requestJsonObject = new JSONObject();
-            requestJsonObject.put("id", id);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_STAY_DEFAULT)
-                    .putBodyData(requestJsonObject)
-                    .push();
+        private int loadDefaultStayStatus() throws IOException, JSONException {
+            Map<String, String> requestParams = new HashMap<>();
 
+            Response response = HttpBox.post(getContext(), "/apply/stay/default", Request.TYPE_GET)
+                    .putBodyData(requestParams)
+                    .push();
             JSONObject stayStatusJSONObject = response.getJsonObject();
 
             return stayStatusJSONObject.getInt("value");
@@ -288,7 +286,9 @@ public class StayApplyFragment extends Fragment {
             int[] values = null;
 
             try {
-                values = applyStayStatus(params[0].toString(), (int) params[1], params[2].toString());
+                int value = (int) params[0];
+                String week = params[1].toString();
+                values = applyStayStatus(value, week);
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -323,17 +323,14 @@ public class StayApplyFragment extends Fragment {
             }
         }
 
-        private int[] applyStayStatus(String id, int value, String week)
-                throws IOException, JSONException {
+        private int[] applyStayStatus(int value, String week) throws IOException, JSONException {
 
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("id", id);
-            requestJSONObject.put("value", value);
-            requestJSONObject.put("week", week);
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("value", String.valueOf(value));
+            requestParams.put("week", week);
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.APPLY_STAY)
-                    .putBodyData(requestJSONObject)
+            Response response = HttpBox.post(getContext(), "/apply/stay", Request.TYPE_PUT)
+                    .putBodyData(requestParams)
                     .push();
 
             return new int[]{response.getCode(), value};

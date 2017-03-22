@@ -1,4 +1,4 @@
-package com.dms.beinone.application;
+package com.dms.beinone.application.utils;
 
 import com.dms.beinone.application.afterschoolapply.Afterschool;
 import com.dms.beinone.application.appcontent.Appcontent;
@@ -7,6 +7,7 @@ import com.dms.beinone.application.comment.Comment;
 import com.dms.beinone.application.facilityreport.FacilityReport;
 import com.dms.beinone.application.faq.FAQ;
 import com.dms.beinone.application.faq.FAQContent;
+import com.dms.beinone.application.goingoutapply.Goingout;
 import com.dms.beinone.application.meal.Meal;
 import com.dms.beinone.application.mypage.Student;
 import com.dms.beinone.application.qna.QnA;
@@ -36,10 +37,7 @@ public class JSONParser {
     }
 
     public static Meal parseMealJSON(JSONObject rootJSONObject) throws JSONException {
-        JSONObject resultJSONObject = rootJSONObject.getJSONObject("result");
-
-        JSONArray mealJSONArray = resultJSONObject.getJSONArray("Meals");
-
+        JSONArray mealJSONArray = rootJSONObject.getJSONArray("Meals");
 
         Meal meal = new Meal();
         for (int index = 0; index < mealJSONArray.length(); index++) {
@@ -90,13 +88,14 @@ public class JSONParser {
         return meal;
     }
 
-//    public static List<Goingout> parseGoingoutApplyStatusJSON(JSONObject rootJSONObject)
-//            throws JSONException {
-//
-//        List<Goingout> goingoutList = new ArrayList<>();
-//
-//        JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-//    }
+    public static Goingout parseGoingoutApplyStatusJSON(JSONObject rootJSONObject)
+            throws JSONException {
+
+        boolean sat = rootJSONObject.getBoolean("sat");
+        boolean sun = rootJSONObject.getBoolean("sun");
+
+        return new Goingout(sat, sun);
+    }
 
     public static List<Afterschool> parseAfterschoolListJSON(JSONObject rootJSONObject)
             throws JSONException {
@@ -125,14 +124,13 @@ public class JSONParser {
         return afterschoolList;
     }
 
-    public static List<Appcontent> parseAppcontentListJSON(JSONObject rootJSONObject)
+    public static List<Appcontent> parseAppcontentListJSON(JSONArray rootJSONArray)
             throws JSONException {
 
         List<Appcontent> appcontentList = new ArrayList<>();
 
-        JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-        for (int index = 0; index < resultJSONArray.length(); index++) {
-            JSONObject noticeJSONObject = resultJSONArray.getJSONObject(index);
+        for (int index = 0; index < rootJSONArray.length(); index++) {
+            JSONObject noticeJSONObject = rootJSONArray.getJSONObject(index);
 
             int category = noticeJSONObject.getInt("Category");
             int number = noticeJSONObject.getInt("HomeNumber");
@@ -147,16 +145,14 @@ public class JSONParser {
     }
 
     public static Appcontent parseAppcontentJSON(JSONObject rootJSONObject) throws JSONException {
-        JSONObject resultJSONObject = rootJSONObject.getJSONObject("result");
-
-        int category = resultJSONObject.getInt("Category");
-        int number = resultJSONObject.getInt("HomeNumber");
-        String title = resultJSONObject.getString("Title");
-        String content = resultJSONObject.getString("Content");
-        String writer = resultJSONObject.getString("Writer");
-        String date = resultJSONObject.getString("Date");
+        int category = rootJSONObject.getInt("Category");
+        int number = rootJSONObject.getInt("HomeNumber");
+        String title = rootJSONObject.getString("Title");
+        String content = rootJSONObject.getString("Content");
+        String writer = rootJSONObject.getString("Writer");
+        String date = rootJSONObject.getString("Date");
         List<Attachment> attachmentList =
-                parseAttachmentsJSON(resultJSONObject.getJSONObject("Attachments"));
+                parseAttachmentsJSON(rootJSONObject.getJSONObject("Attachments"));
 
         return new Appcontent(category, number, title, content, writer, date, attachmentList);
     }
@@ -317,14 +313,11 @@ public class JSONParser {
     public static Student parseStudentJSON(JSONObject rootJSONObject) throws JSONException {
         int number = rootJSONObject.getInt("number");
         String name = rootJSONObject.getString("name");
-        boolean sex = rootJSONObject.getBoolean("sex");
-        int status = rootJSONObject.getInt("status");
-        String phone = rootJSONObject.getString("phone");
-        String parent = rootJSONObject.getString("p_name");
         int merit = rootJSONObject.getInt("merit");
         int demerit = rootJSONObject.getInt("demerit");
+        String profileImage = rootJSONObject.getString("profile_image");
 
-        return new Student(number, name, sex, status, phone, parent, merit, demerit);
+        return new Student(number, name, merit, demerit, profileImage);
     }
 
 }

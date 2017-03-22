@@ -6,28 +6,28 @@ package com.dms.beinone.application.goingoutapply;
 
 public class Goingout {
 
-    private boolean date;
-    private String reason;
+    private boolean sat;
+    private boolean sun;
 
-    public Goingout(boolean date, String reason) {
-        setDate(date);
-        setReason(reason);
+    public Goingout(boolean sat, boolean sun) {
+        setSat(sat);
+        setSun(sun);
     }
 
-    public boolean getDate() {
-        return date;
+    public boolean isSat() {
+        return sat;
     }
 
-    public void setDate(boolean date) {
-        this.date = date;
+    public void setSat(boolean sat) {
+        this.sat = sat;
     }
 
-    public String getReason() {
-        return reason;
+    public boolean isSun() {
+        return sun;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setSun(boolean sun) {
+        this.sun = sun;
     }
 
 }

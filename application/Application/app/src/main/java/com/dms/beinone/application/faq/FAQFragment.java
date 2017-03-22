@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -98,7 +98,7 @@ public class FAQFragment extends Fragment {
         }
 
         private Object[] loadFAQList() throws IOException, JSONException {
-            Response response = HttpBox.post().setCommand(Commands.LOAD_FAQ).putBodyData().push();
+            Response response = HttpBox.post(getContext(), "/post/faq/list", Request.TYPE_GET).push();
             JSONObject responseJSONObject = response.getJsonObject();
 
             int code = response.getCode();

@@ -14,8 +14,8 @@ import com.dms.beinone.application.R;
 
 import java.util.List;
 
-import static com.dms.beinone.application.RecyclerViewUtils.TYPE_FOOTER;
-import static com.dms.beinone.application.RecyclerViewUtils.TYPE_ITEM;
+import static com.dms.beinone.application.utils.RecyclerViewUtils.TYPE_FOOTER;
+import static com.dms.beinone.application.utils.RecyclerViewUtils.TYPE_ITEM;
 
 /**
  * Created by BeINone on 2017-01-20.
@@ -92,7 +92,7 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 @Override
                 public void onClick(View v) {
                     FacilityReport facilityReport = mFacilityReportList.get(getAdapterPosition());
-                    viewArticle(facilityReport.getNo(), facilityReport.getWriter());
+                    viewArticle(facilityReport);
                 }
             });
         }
@@ -105,12 +105,11 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         /**
          * start a new activity to display article
-         * @param no index of FacilityReport article
+         * @param facilityReport
          */
-        private void viewArticle(int no, String writer) {
+        private void viewArticle(FacilityReport facilityReport) {
             Intent intent = new Intent(mContext, FacilityReportArticleActivity.class);
-            intent.putExtra(mContext.getString(R.string.EXTRA_NO), no);
-            intent.putExtra(mContext.getString(R.string.EXTRA_WRITER), writer);
+            intent.putExtra(mContext.getString(R.string.EXTRA_FACILITYREPORT), facilityReport);
             mContext.startActivity(intent);
         }
     }

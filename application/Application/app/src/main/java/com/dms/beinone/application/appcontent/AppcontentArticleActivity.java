@@ -9,18 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-26.
@@ -41,7 +43,8 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         Appcontent appcontent = getIntent().getParcelableExtra(getString(R.string.EXTRA_APPCONTENT));
         bind(appcontent);
 
-        new LoadAppcontentTask().execute(appcontent.getCategory(), appcontent.getNumber());
+        new LoadAppcontentTask(appcontent.getCategory())
+                .execute(appcontent.getCategory(), appcontent.getNumber());
     }
 
     @Override
@@ -68,12 +71,12 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         TextView titleTV = (TextView) findViewById(R.id.tv_appcontent_article_title);
         TextView writerTV = (TextView) findViewById(R.id.tv_appcontent_article_writer);
         TextView dateTV = (TextView) findViewById(R.id.tv_appcontent_article_date);
-        WebView contentWebView = (WebView) findViewById(R.id.webview_appcontent_article_content);
+        WebView contentWV = (WebView) findViewById(R.id.wv_appcontent_article_content);
 
         titleTV.setText(appcontent.getTitle());
         writerTV.setText(appcontent.getWriter());
         dateTV.setText(appcontent.getDate());
-        contentWebView.loadData(appcontent.getContent(), "text/html; charset=UTF-8", null);
+        contentWV.loadData(appcontent.getContent(), "text/html; charset=UTF-8", null);
 
         mFAB = (FloatingActionButton) findViewById(R.id.fab_appcontent_article);
         final List<Attachment> attachmentList = appcontent.getAttachmentList();
@@ -91,14 +94,20 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         }
     }
 
-    private class LoadAppcontentTask extends AsyncTask<Integer, Void, Appcontent> {
+    private class LoadAppcontentTask extends AsyncTask<Integer, Void, Object[]> {
+
+        private int mCategory;
+
+        public LoadAppcontentTask(int category) {
+            mCategory = category;
+        }
 
         @Override
-        protected Appcontent doInBackground(Integer... params) {
-            Appcontent appcontent = null;
+        protected Object[] doInBackground(Integer... params) {
+            Object[] results = null;
 
             try {
-                appcontent = loadAppcontent(params[0], params[1]);
+                results = loadAppcontent(params[0], params[1]);
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -107,41 +116,72 @@ public class AppcontentArticleActivity extends AppCompatActivity {
                 return null;
             }
 
-            return appcontent;
+            return results;
         }
 
         @Override
-        protected void onPostExecute(Appcontent appcontent) {
-            super.onPostExecute(appcontent);
+        protected void onPostExecute(Object[] results) {
+            super.onPostExecute(results);
 
-            bind(appcontent);
+            int errorMsgResId = -1;
+            int emptyMsgResId = -1;
+
+            if (mCategory == Appcontent.NOTICE) {
+                errorMsgResId = R.string.appcontent_notice_error;
+                emptyMsgResId = R.string.appcontent_notice_empty;
+            } else if (mCategory == Appcontent.NEWSLETTER) {
+                errorMsgResId = R.string.appcontent_newsletter_error;
+                emptyMsgResId = R.string.appcontent_newsletter_empty;
+            } else {
+                errorMsgResId = R.string.appcontent_competition_error;
+                emptyMsgResId = R.string.appcontent_competition_empty;
+            }
+
+            int code = (int) results[0];
+            Appcontent appcontent = (Appcontent) results[1];
+
+            if (code == 200) {
+                // success
+                bind(appcontent);
+            } else if (code == 204) {
+                // failure
+                Toast.makeText(AppcontentArticleActivity.this, emptyMsgResId, Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                // error
+                Toast.makeText(AppcontentArticleActivity.this, errorMsgResId, Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
 
-        private Appcontent loadAppcontent(int category, int number) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("category", category);
-            requestJSONObject.put("number", number);
+        private Object[] loadAppcontent(int category, int number) throws IOException, JSONException {
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("no", String.valueOf(number));
 
-            int command = 0;
+            String path = null;
             switch (category) {
                 case Appcontent.NOTICE:
-                    command = Commands.LOAD_NOTICE;
+                    path = "/post/school/notice";
                     break;
                 case Appcontent.NEWSLETTER:
-                    command = Commands.LOAD_NEWSLETTER;
+                    path = "/post/school/newsletter";
                     break;
                 case Appcontent.COMPETITION:
-                    command = Commands.LOAD_COMPETITION;
+                    path = "/post/school/competition";
                     break;
-                default:
-                    break;
+                default: break;
             }
-            Response response =
-                    HttpBox.post().setCommand(command).putBodyData(requestJSONObject).push();
+            Response response = HttpBox.post(AppcontentArticleActivity.this, path, Request.TYPE_GET)
+                    .putBodyData(requestParams)
+                    .push();
 
-            JSONObject responseJSONObject = response.getJsonObject();
+            int code = response.getCode();
+            Appcontent appcontent = null;
+            if (code == 200) {
+                appcontent = JSONParser.parseAppcontentJSON(response.getJsonObject());
+            }
 
-            return JSONParser.parseAppcontentJSON(responseJSONObject);
+            return new Object[]{code, appcontent};
         }
     }
 

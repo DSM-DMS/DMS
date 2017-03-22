@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.dms.beinone.application.afterschoolapply.AfterschoolApplyFragment;
 import com.dms.beinone.application.appcontent.Appcontent;
 import com.dms.beinone.application.appcontent.AppcontentFragment;
+import com.dms.beinone.application.extensionapply.ExtensionApplyFragment;
 import com.dms.beinone.application.facilityreport.FacilityReportFragment;
 import com.dms.beinone.application.faq.FAQFragment;
 import com.dms.beinone.application.goingoutapply.GoingoutApplyFragment;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
+//        mAccountPrefs.edit().putString("id", "test").apply();
+//        mAccountPrefs.edit().putString("password", "1234").apply();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
@@ -123,12 +126,12 @@ public class MainActivity extends AppCompatActivity
 
         if (mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "").equals("")) {
             if (mNavigationView.getHeaderView(0) != mLoginNavHeaderView) {
-                hideMemberMenuItems();
+//                hideMemberMenuItems();
                 setLoginHeaderView();
             }
         } else {
             if (mNavigationView.getHeaderView(0) != mLogoutNavHeaderView) {
-                showMemberMenuItems();
+//                showMemberMenuItems();
                 setLogoutHeaderView();
             }
         }
@@ -144,28 +147,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -175,10 +156,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_item_home) {
             replaceFragmentWithBackStack(new HomeFragment());
         } else if (id == R.id.nav_item_extensionapply) {
-
+            replaceFragmentWithBackStack(new ExtensionApplyFragment());
         } else if (id == R.id.nav_item_stayapply) {
             replaceFragmentWithBackStack(new StayApplyFragment());
         } else if (id == R.id.nav_item_goingoutapply) {
+//            replaceFragmentWithBackStack(new NewGoingoutApplyFragment());
             replaceFragmentWithBackStack(new GoingoutApplyFragment());
         } else if (id == R.id.nav_item_rewardscoreapply) {
             replaceFragmentWithBackStack(new RewardscoreApplyFragment());
@@ -224,10 +206,10 @@ public class MainActivity extends AppCompatActivity
         TextView demeritTV = (TextView) mLogoutNavHeaderView.findViewById(R.id.tv_nav_header_demerit);
 
         int number = mAccountPrefs.getInt(getString(R.string.PREFS_ACCOUNT_NUMBER), 0);
-        numberTV.setText(String.valueOf(StudentUtils.numberToString(number)));
-        nameTV.setText(mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_NAME), ""));
-        meritTV.setText(String.valueOf(mAccountPrefs.getInt(getString(R.string.PREFS_ACCOUNT_MERIT), 0)));
-        demeritTV.setText(String.valueOf(mAccountPrefs.getInt(getString(R.string.PREFS_ACCOUNT_DEMERIT), 0)));
+//        numberTV.setText(String.valueOf(StudentUtils.numberToString(number)));
+//        nameTV.setText(mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_NAME), ""));
+//        meritTV.setText(String.valueOf(mAccountPrefs.getInt(getString(R.string.PREFS_ACCOUNT_MERIT), 0)));
+//        demeritTV.setText(String.valueOf(mAccountPrefs.getInt(getString(R.string.PREFS_ACCOUNT_DEMERIT), 0)));
 
         mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
         mNavigationView.addHeaderView(mLogoutNavHeaderView);

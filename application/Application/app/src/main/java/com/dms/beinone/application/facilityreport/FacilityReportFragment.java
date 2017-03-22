@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 
 /**
  * Created by BeINone on 2017-01-20.
@@ -61,7 +61,7 @@ public class FacilityReportFragment extends Fragment {
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), FacilityReportWriteActivity.class));
+                startActivity(new Intent(getContext(), FacilityReportUploadActivity.class));
             }
         });
 

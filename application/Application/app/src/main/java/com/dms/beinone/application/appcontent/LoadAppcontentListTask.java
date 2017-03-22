@@ -5,17 +5,18 @@ import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-03.
@@ -90,31 +91,30 @@ public class LoadAppcontentListTask extends AsyncTask<Void, Void, List<Appconten
     }
 
     private List<Appcontent> loadAppcontentList() throws IOException, JSONException {
-        JSONObject requestJSONObject = new JSONObject();
-        requestJSONObject.put("category", mCategory);
-        requestJSONObject.put("page", AppcontentFragment.page);
+        Map<String, String> requestParams = new HashMap<>();
+        requestParams.put("category", String.valueOf(mCategory));
+        requestParams.put("page", String.valueOf(AppcontentFragment.page));
 
-        int command = 0;
+        String path = null;
 
         switch (mCategory) {
             case Appcontent.NOTICE:
-                command = Commands.LOAD_NOTICE_LIST;
+                path = "/post/school/notice/list";
                 break;
             case Appcontent.NEWSLETTER:
-                command = Commands.LOAD_NEWSLETTER_LIST;
+                path = "/post/school/newsletter/list";
                 break;
             case Appcontent.COMPETITION:
-                command = Commands.LOAD_COMPETITION_LIST;
+                path = "/post/school/competition/list";
                 break;
             default:
                 break;
         }
 
-        Response response = HttpBox.post()
-                .setCommand(command)
-                .putBodyData(requestJSONObject)
+        Response response = HttpBox.post(mContext, path, Request.TYPE_GET)
+                .putBodyData(requestParams)
                 .push();
 
-        return JSONParser.parseAppcontentListJSON(response.getJsonObject());
+        return JSONParser.parseAppcontentListJSON(response.getJsonArray());
     }
 }

@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -99,8 +99,7 @@ public class AfterschoolApplyFragment extends Fragment {
         }
 
         private Object[] loadAfterschoolList() throws IOException, JSONException {
-            Response response =
-                    HttpBox.post().setCommand(Commands.LOAD_AFTERSCHOOL_ITEM_LIST).putBodyData().push();
+            Response response = HttpBox.post(getContext(), "/apply/afterschool/item", Request.TYPE_GET).push();
 
             JSONObject responseJSONObject = response.getJsonObject();
 

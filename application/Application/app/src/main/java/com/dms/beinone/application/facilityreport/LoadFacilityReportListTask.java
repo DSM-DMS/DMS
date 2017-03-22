@@ -5,10 +5,10 @@ import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -16,7 +16,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-22.
@@ -77,13 +79,12 @@ public class LoadFacilityReportListTask extends AsyncTask<Void, Void, Object[]> 
     }
 
     private Object[] loadFacilityReportList() throws IOException, JSONException {
-        JSONObject requestJSONObject = new JSONObject();
-        requestJSONObject.put("page", FacilityReportFragment.page);
-        requestJSONObject.put("limit", LIMIT);
+        Map<String, String> requestParams = new HashMap<>();
+        requestParams.put("page", String.valueOf(FacilityReportFragment.page));
+        requestParams.put("limit", String.valueOf(LIMIT));
 
-        Response response = HttpBox.post()
-                .setCommand(Commands.LOAD_REPORT_FACILITY_LIST)
-                .putBodyData()
+        Response response = HttpBox.post(mContext, "/post/report/list", Request.TYPE_GET)
+                .putBodyData(requestParams)
                 .push();
 
         JSONObject responseJSONObject = response.getJsonObject();

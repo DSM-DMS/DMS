@@ -57,7 +57,7 @@
             dmsbtn:dmsbtn_touchBackgroundColor="@color/colorAccent"
             dmsbtn:dmsbtn_touchStrokeColor="@color/colorAccent"
             dmsbtn:dmsbtn_textColor="@color/colorAccent"
-            dmsbtn:dmsbtn_touchTextColor="@android:color/transparent" />
+            dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
 
         <com.dms.beinone.application.dmsview.DMSButton
             android:id="@+id/btn_login_register"

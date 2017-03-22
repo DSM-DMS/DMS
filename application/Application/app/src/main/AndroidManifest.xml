@@ -29,9 +29,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".appcontent.AppcontentArticleActivity" />
         <activity android:name=".facilityreport.FacilityReportArticleActivity" />
-        <activity android:name=".facilityreport.FacilityReportWriteActivity" />
+        <activity android:name=".facilityreport.FacilityReportUploadActivity" />
         <activity android:name=".qna.QnAArticleActivity" />
-        <activity android:name=".qna.QnAWriteActivity" />
+        <activity android:name=".qna.QnAUploadActivity" />
         <activity android:name=".comment.CommentActivity" />
         <activity android:name=".mypage.MypageActivity"
             android:label="@string/nav_mypage"

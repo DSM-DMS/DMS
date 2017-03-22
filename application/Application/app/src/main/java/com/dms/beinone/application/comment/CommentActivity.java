@@ -12,17 +12,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-24.
@@ -85,9 +87,9 @@ public class CommentActivity extends AppCompatActivity {
             try {
                 int no = params[0];
                 commentList = loadComment(no);
-            } catch (IOException ie) {
+            } catch (IOException e) {
                 return null;
-            } catch (JSONException je) {
+            } catch (JSONException e) {
                 return null;
             }
 
@@ -102,11 +104,12 @@ public class CommentActivity extends AppCompatActivity {
         }
 
         private List<Comment> loadComment(int no) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("no", no);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_QNA_COMMENT)
-                    .putBodyData(requestJSONObject)
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("no", String.valueOf(no));
+
+            Response response =
+                    HttpBox.post(CommentActivity.this, "/post/qna/comment", Request.TYPE_GET)
+                    .putBodyData(requestParams)
                     .push();
 
             JSONObject responseJsonObject = response.getJsonObject();
@@ -144,7 +147,7 @@ public class CommentActivity extends AppCompatActivity {
         protected void onPostExecute(Integer code) {
             super.onPostExecute(code);
 
-            if (code == 200) {
+            if (code == 201) {
                 // success
                 clearView();
                 new LoadCommentTask().execute(mNo);
@@ -162,14 +165,14 @@ public class CommentActivity extends AppCompatActivity {
         private int uploadComment(int no, String content, String writer)
             throws IOException, JSONException {
 
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("no", no);
-            requestJSONObject.put("content", content);
-            requestJSONObject.put("writer", writer);
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("no", String.valueOf(no));
+            requestParams.put("content", content);
+            requestParams.put("writer", writer);
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.UPLOAD_QNA_COMMENT)
-                    .putBodyData(requestJSONObject)
+            Response response =
+                    HttpBox.post(CommentActivity.this, "/post/qna/comment", Request.TYPE_POST)
+                    .putBodyData(requestParams)
                     .push();
 
             return response.getCode();

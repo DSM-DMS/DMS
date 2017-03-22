@@ -12,18 +12,20 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.comment.CommentActivity;
 import com.dms.beinone.application.dmsview.DMSButton;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-23.
@@ -142,11 +144,12 @@ public class QnAArticleActivity extends AppCompatActivity {
         }
 
         private QnA loadQnA(int no) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("no", no);
-            Response response =
-                    HttpBox.post().setCommand(Commands.LOAD_QNA).putBodyData(requestJSONObject).push();
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("no", String.valueOf(no));
 
+            Response response = HttpBox.post(QnAArticleActivity.this, "/post/qna", Request.TYPE_GET)
+                    .putBodyData(requestParams)
+                    .push();
             JSONObject responseJSONObject = response.getJsonObject();
 
             return JSONParser.parseQnAJSON(responseJSONObject, no);

@@ -17,8 +17,8 @@ import com.dms.beinone.application.R;
 
 import java.util.List;
 
-import static com.dms.beinone.application.RecyclerViewUtils.TYPE_FOOTER;
-import static com.dms.beinone.application.RecyclerViewUtils.TYPE_ITEM;
+import static com.dms.beinone.application.utils.RecyclerViewUtils.TYPE_FOOTER;
+import static com.dms.beinone.application.utils.RecyclerViewUtils.TYPE_ITEM;
 
 /**
  * Created by BeINone on 2017-01-23.

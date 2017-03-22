@@ -14,22 +14,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.EditTextUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-13.
  */
 
-public class QnAWriteActivity extends AppCompatActivity {
+public class QnAUploadActivity extends AppCompatActivity {
 
     private TextView mTitleTV;
     private EditText mTitleET;
@@ -42,6 +43,7 @@ public class QnAWriteActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna_write);
+        setTitle(R.string.title_write);
 
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,12 +59,12 @@ public class QnAWriteActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     mTitleTV.setTextColor(
-                            ContextCompat.getColor(QnAWriteActivity.this, R.color.colorPrimary));
+                            ContextCompat.getColor(QnAUploadActivity.this, R.color.colorPrimary));
                 } else {
                     mTitleTV.setTextColor(
-                            ContextCompat.getColor(QnAWriteActivity.this, android.R.color.primary_text_light));
+                            ContextCompat.getColor(QnAUploadActivity.this, android.R.color.primary_text_light));
                     // hide the soft keyboard when touch outside
-                    EditTextUtils.hideKeyboard(QnAWriteActivity.this, (EditText) v);
+                    EditTextUtils.hideKeyboard(QnAUploadActivity.this, (EditText) v);
                 }
             }
         });
@@ -74,20 +76,20 @@ public class QnAWriteActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     mContentTV.setTextColor(
-                            ContextCompat.getColor(QnAWriteActivity.this, R.color.colorPrimary));
+                            ContextCompat.getColor(QnAUploadActivity.this, R.color.colorPrimary));
                 } else {
                     mContentTV.setTextColor(
-                            ContextCompat.getColor(QnAWriteActivity.this, android.R.color.primary_text_light));
+                            ContextCompat.getColor(QnAUploadActivity.this, android.R.color.primary_text_light));
                     // hide the soft keyboard when touch outside
-                    EditTextUtils.hideKeyboard(QnAWriteActivity.this, (EditText) v);
+                    EditTextUtils.hideKeyboard(QnAUploadActivity.this, (EditText) v);
                 }
             }
         });
 
         mPrivacySwitch = (SwitchCompat) findViewById(R.id.switch_qna_write_privacy);
 
-        Button submitBtn = (Button) findViewById(R.id.btn_qna_write_submit);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
+        mSubmitBtn = (Button) findViewById(R.id.btn_qna_write_submit);
+        mSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = mTitleET.getText().toString().trim();
@@ -129,32 +131,32 @@ public class QnAWriteActivity extends AppCompatActivity {
         protected void onPostExecute(Integer code) {
             super.onPostExecute(code);
 
-            if (code == 200) {
+            if (code == 201) {
                 // success
-                Toast.makeText(QnAWriteActivity.this, R.string.qna_write_success, Toast.LENGTH_SHORT)
+                Toast.makeText(QnAUploadActivity.this, R.string.qna_write_success, Toast.LENGTH_SHORT)
                         .show();
                 finish();
             } else if (code == 500) {
                 // failure
-                Toast.makeText(QnAWriteActivity.this, R.string.qna_write_failure, Toast.LENGTH_SHORT)
+                Toast.makeText(QnAUploadActivity.this, R.string.qna_write_failure, Toast.LENGTH_SHORT)
                         .show();
             } else {
                 // error
-                Toast.makeText(QnAWriteActivity.this, R.string.qna_write_error, Toast.LENGTH_SHORT)
+                Toast.makeText(QnAUploadActivity.this, R.string.qna_write_error, Toast.LENGTH_SHORT)
                         .show();
             }
         }
 
         private int uploadQnA(QnA qna) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("title", qna.getTitle());
-            requestJSONObject.put("question_content", qna.getQuestionContent());
-            requestJSONObject.put("writer", qna.getWriter());
-            requestJSONObject.put("privacy", qna.isPrivacy());
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("title", qna.getTitle());
+            requestParams.put("content", qna.getQuestionContent());
+            requestParams.put("writer", qna.getWriter());
+            requestParams.put("privacy", String.valueOf(qna.isPrivacy()));
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.UPLOAD_QNA_QUESTION)
-                    .putBodyData(requestJSONObject)
+            Response response =
+                    HttpBox.post(QnAUploadActivity.this, "/post/qna/answer", Request.TYPE_PUT)
+                    .putBodyData(requestParams)
                     .push();
 
             return response.getCode();

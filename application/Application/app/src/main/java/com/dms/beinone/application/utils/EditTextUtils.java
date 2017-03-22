@@ -1,4 +1,4 @@
-package com.dms.beinone.application;
+package com.dms.beinone.application.utils;
 
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;

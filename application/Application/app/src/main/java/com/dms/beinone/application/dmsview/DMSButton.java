@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import com.dms.beinone.application.DensityConverter;
+import com.dms.beinone.application.utils.DensityConverter;
 import com.dms.beinone.application.R;
 
 import static android.R.attr.textSize;

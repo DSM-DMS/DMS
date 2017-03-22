@@ -14,18 +14,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSEditText;
+import com.dms.beinone.application.utils.EditTextUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-17.
@@ -73,7 +74,7 @@ public class RewardscoreFragment extends Fragment {
                 getContext().getSharedPreferences(getString(R.string.PREFS_ACCOUNT), Context.MODE_PRIVATE);
         final String id = prefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
 
-        DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_rewardscore_apply);
+        DMSButton applyBtn = (DMSButton) getActivity().findViewById(R.id.btn_rewardscoreapply_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,7 @@ public class RewardscoreFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.rewardscoreapply_nocontent, Toast.LENGTH_SHORT)
                             .show();
                 } else {
-                    new ApplyRewardscoreTask().execute(id, content);
+                    new ApplyRewardscoreTask().execute(content);
                 }
             }
         });
@@ -99,10 +100,12 @@ public class RewardscoreFragment extends Fragment {
             int code = 0;
 
             try {
-                code = applyRewardscore(params[0], params[1]);
+                code = applyRewardscore(params[0]);
             } catch (IOException e) {
+                e.printStackTrace();
                 return -1;
             } catch (JSONException e) {
+                e.printStackTrace();
                 return -1;
             }
 
@@ -113,7 +116,7 @@ public class RewardscoreFragment extends Fragment {
         protected void onPostExecute(Integer code) {
             super.onPostExecute(code);
 
-            if (code == 200) {
+            if (code == 201) {
                 // succeed
                 Toast.makeText(getContext(), R.string.rewardscoreapply_success, Toast.LENGTH_SHORT)
                         .show();
@@ -129,15 +132,14 @@ public class RewardscoreFragment extends Fragment {
             }
         }
 
-        private int applyRewardscore(String id, String content)
+        private int applyRewardscore(String content)
                 throws IOException, JSONException {
 
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("id", id);
-            requestJSONObject.put("content", content);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.APPLY_MERIT)
-                    .putBodyData(requestJSONObject)
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("content", content);
+
+            Response response = HttpBox.post(getContext(), "/apply/merit", Request.TYPE_POST)
+                    .putBodyData(requestParams)
                     .push();
 
             return response.getCode();

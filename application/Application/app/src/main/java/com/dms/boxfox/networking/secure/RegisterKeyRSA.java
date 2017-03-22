@@ -1,8 +1,8 @@
 package com.dms.boxfox.networking.secure;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Base64;
-
 
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.datamodel.Response;
@@ -33,21 +33,28 @@ public class RegisterKeyRSA {
 
     //프로토콜에 암호화를 수행하기 위해 스플래쉬 화면에서 해당 메소드 호출
     //Gradle의 dependency 라이브러리 반드시 필요
-    public static void register(){
-        new RSARegister().execute();
+    public static void register(Context context) {
+        new RSARegister(context).execute();
     }
 
     private static class RSARegister extends AsyncTask {
+
+        private Context mContext;
+
+        public RSARegister(Context context) {
+            mContext = context;
+        }
+
         @Override
         protected Object doInBackground(Object... params) {
             try {
-                Response response = HttpBox.post().setCommand(COMMAND_RSA).putBodyData().push();
+                Response response = HttpBox.post(mContext).setCommand(COMMAND_RSA).putBodyData().push();
                 if (response.getCode() == Response.SUCCESS) {
                     JSONObject obj = response.getJsonObject();
                     String key = getResult(obj.getString("PublicKey"), AESKeyGenerator.merge(obj.getString("KeyPice")));
                     JSONObject requestObj = new JSONObject();
                     requestObj.put("AESKey", key);
-                    response = HttpBox.post().setCommand(COMMAND_AES).putBodyData(requestObj).push();
+                    response = HttpBox.post(mContext).setCommand(COMMAND_AES).putBodyData(requestObj).push();
                     if(response.getCode() == Response.SUCCESS){
                         new AES256(key);
                     }

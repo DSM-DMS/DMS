@@ -28,4 +28,10 @@
         <attr name="dmset_focusStrokeColor" format="color" />
         <attr name="dmset_cursorColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="SlimDatePicker">
+        <attr name="sdp_textColor" format="color" />
+        <attr name="sdp_buttonColor" format="color" />
+        <attr name="sdp_backgroundColor" format="color" />
+    </declare-styleable>
 </resources>

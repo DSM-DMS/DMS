@@ -1,4 +1,4 @@
-package com.dms.beinone.application;
+package com.dms.beinone.application.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,11 +10,6 @@ import java.util.Locale;
  */
 
 public class DateUtils {
-
-    public static String dateToString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-        return sdf.format(date);
-    }
 
     public static String dateToWeekDateString(Date date) {
         Calendar cal = Calendar.getInstance(Locale.KOREA);

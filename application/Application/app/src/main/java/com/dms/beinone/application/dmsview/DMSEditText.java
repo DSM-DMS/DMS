@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.EditText;
 
-import com.dms.beinone.application.DensityConverter;
+import com.dms.beinone.application.utils.DensityConverter;
 import com.dms.beinone.application.R;
 
 import static android.R.attr.textSize;

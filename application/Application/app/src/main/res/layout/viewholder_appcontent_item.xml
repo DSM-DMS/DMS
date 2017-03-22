@@ -9,6 +9,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingBottom="2dp">
+
         <TextView
             android:id="@+id/tv_appcontent_title"
             android:layout_width="match_parent"

@@ -14,32 +14,33 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-31.
  */
 
-public class ChangeDefaultStatusDialogFragment extends DialogFragment {
+public class ChangeDefaultStatusDialog extends DialogFragment {
 
     private Context mContext;
     private ChangeDefaultStatusListener mListener;
 
     private SharedPreferences mAccountPrefs;
 
-    public static ChangeDefaultStatusDialogFragment newInstance(
+    public static ChangeDefaultStatusDialog newInstance(
             Context context, int defaultStatus, ChangeDefaultStatusListener listener) {
 
         Bundle args = new Bundle();
         args.putInt(context.getString(R.string.ARGS_DEFAULTSTATUS), defaultStatus);
 
-        ChangeDefaultStatusDialogFragment fragment = new ChangeDefaultStatusDialogFragment();
+        ChangeDefaultStatusDialog fragment = new ChangeDefaultStatusDialog();
         fragment.setArguments(args);
         fragment.mContext = context;
         fragment.mListener = listener;
@@ -73,7 +74,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                                 ListView listView = ((AlertDialog) dialog).getListView();
                                 int value = listView.getCheckedItemPosition() + 1;
 
-                                new ChangeDefaultStatusTask().execute(id, value);
+                                new ChangeDefaultStatusTask().execute(value);
                             }
                         })
                 .create();
@@ -83,41 +84,45 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
 
         @Override
         protected int[] doInBackground(Object... params) {
-            int[] ints = null;
+            int[] results = null;
 
             try {
-                String id = params[0].toString();
-                int value = (int) params[1];
-                ints = changeDefaultStatus(id, value);
+                int value = (int) params[0];
+                results = changeDefaultStatus(value);
             } catch (IOException e) {
                 return null;
             } catch (JSONException e) {
                 return null;
             }
 
-            return ints;
+            return results;
         }
 
         @Override
-        protected void onPostExecute(int[] ints) {
-            super.onPostExecute(ints);
+        protected void onPostExecute(int[] results) {
+            super.onPostExecute(results);
 
-            int code = ints[0];
-            int value = ints[1];
+            if (results != null) {
+                int code = results[0];
+                int value = results[1];
 
-            if (code == 200) {
-                /* success */
-                Toast.makeText(mContext, R.string.stayapply_dialog_success, Toast.LENGTH_SHORT)
-                        .show();
+                if (code == 200) {
+                    // success
+                    Toast.makeText(mContext, R.string.stayapply_dialog_success, Toast.LENGTH_SHORT)
+                            .show();
 
-                // notify the StayApplyFragment of changed default status
-                mListener.onChangeDefaultStatus(value);
-            } else if (code == 500) {
-                /* failure */
-                Toast.makeText(mContext, R.string.stayapply_dialog_failure, Toast.LENGTH_SHORT)
-                        .show();
+                    // notify the StayApplyFragment of changed default status
+                    mListener.onChangeDefaultStatus(value);
+                } else if (code == 500) {
+                    // failure
+                    Toast.makeText(mContext, R.string.stayapply_dialog_failure, Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    // error
+                    Toast.makeText(mContext, R.string.stayapply_dialog_error, Toast.LENGTH_SHORT)
+                            .show();
+                }
             } else {
-                /* error */
                 Toast.makeText(mContext, R.string.stayapply_dialog_error, Toast.LENGTH_SHORT)
                         .show();
             }
@@ -125,16 +130,15 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
             dismiss();
         }
 
-        private int[] changeDefaultStatus(String id, int value) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("id", id);
-            requestJSONObject.put("value", value);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.MODIFY_STAY_DEFAULT)
-                    .putBodyData(requestJSONObject)
+        private int[] changeDefaultStatus(int value) throws IOException, JSONException {
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("value", String.valueOf(value));
+
+            Response response = HttpBox.post(mContext, "/apply/stay/default", Request.TYPE_PATCH)
+                    .putBodyData(requestParams)
                     .push();
 
-            return new int[] { response.getCode(), value };
+            return new int[]{response.getCode(), value};
         }
     }
 

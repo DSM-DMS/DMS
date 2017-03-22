@@ -76,7 +76,7 @@ public class RewardscoreApplyFragment extends Fragment {
     private void replaceFragment(Fragment fragment) {
         getChildFragmentManager()
                 .beginTransaction()
-                .replace(R.id.relativelayout_rewardscoreapply_container, fragment)
+                .replace(R.id.layout_rewardscoreapply_container, fragment)
                 .commit();
     }
 

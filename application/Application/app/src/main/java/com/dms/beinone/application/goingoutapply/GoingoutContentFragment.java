@@ -1,7 +1,6 @@
 package com.dms.beinone.application.goingoutapply;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,18 +13,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.EditTextUtils;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSEditText;
+import com.dms.beinone.application.utils.EditTextUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-24.
@@ -33,12 +33,15 @@ import java.io.IOException;
 
 public class GoingoutContentFragment extends Fragment {
 
+    public static final String SATURDAY = "saturday";
+    public static final String SUNDAY = "sunday";
+
     private EditText mReasonET;
     private TextView mReasonTV;
 
-    public static GoingoutContentFragment newInstance(Context context, boolean date) {
+    public static GoingoutContentFragment newInstance(Context context, String date) {
         Bundle args = new Bundle();
-        args.putBoolean(context.getString(R.string.ARGS_DATE), date);
+        args.putString(context.getString(R.string.ARGS_DATE), date);
 
         GoingoutContentFragment fragment = new GoingoutContentFragment();
         fragment.setArguments(args);
@@ -79,10 +82,6 @@ public class GoingoutContentFragment extends Fragment {
             }
         });
 
-        SharedPreferences prefs =
-                getContext().getSharedPreferences(getString(R.string.PREFS_ACCOUNT), Context.MODE_PRIVATE);
-        final String id = prefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
-
         DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_goingoutcontent_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +91,8 @@ public class GoingoutContentFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.rewardscoreapply_nocontent, Toast.LENGTH_SHORT)
                             .show();
                 } else {
-                    boolean date = getArguments().getBoolean(getString(R.string.ARGS_DATE));
-                    new ApplyGoingoutTask().execute(id, date, reason);
+                    String date = getArguments().getString(getString(R.string.ARGS_DATE));
+                    new ApplyGoingoutTask().execute(date, reason);
                 }
             }
         });
@@ -110,14 +109,18 @@ public class GoingoutContentFragment extends Fragment {
             int code = -1;
 
             try {
-                String id = params[0].toString();
-                boolean date = (boolean) params[1];
-                String reason = params[2].toString();
+                String date = params[0].toString();
+                boolean sat = false;
+                boolean sun = false;
+                if (date.equals(SATURDAY)) sat = true;
+                else sun = true;
 
-                code = applyGoingout(id, date, reason);
+                code = applyGoingout(sat, sun);
             } catch (IOException e) {
+                e.printStackTrace();
                 return -1;
             } catch (JSONException e) {
+                e.printStackTrace();
                 return -1;
             }
 
@@ -128,15 +131,11 @@ public class GoingoutContentFragment extends Fragment {
         protected void onPostExecute(Integer code) {
             super.onPostExecute(code);
 
-            if (code == 200) {
+            if (code == 201) {
                 // succeed
                 Toast.makeText(getContext(), R.string.goingoutapply_apply_success, Toast.LENGTH_SHORT)
                         .show();
                 clearView();
-            } else if (code == 204) {
-                // failed
-                Toast.makeText(getContext(), R.string.goingoutapply_apply_failure, Toast.LENGTH_SHORT)
-                        .show();
             } else {
                 // error
                 Toast.makeText(getContext(), R.string.goingoutapply_apply_error, Toast.LENGTH_SHORT)
@@ -144,16 +143,14 @@ public class GoingoutContentFragment extends Fragment {
             }
         }
 
-        private int applyGoingout(String id, boolean date, String reason)
+        private int applyGoingout(boolean sat, boolean sun)
                 throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("id", id);
-            requestJSONObject.put("date", date);
-            requestJSONObject.put("reason", reason);
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("sat", String.valueOf(sat));
+            requestParams.put("sun", String.valueOf(sun));
 
-            Response response = HttpBox.post()
-                    .setCommand(Commands.APPLY_GOINGOUT)
-                    .putBodyData(requestJSONObject)
+            Response response = HttpBox.post(getContext(), "/apply/goingout", Request.TYPE_PUT)
+                    .putBodyData(requestParams)
                     .push();
 
             return response.getCode();
