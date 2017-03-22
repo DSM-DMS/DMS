@@ -37,16 +37,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplyExtension.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ApplyExtension.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-208">
-              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="StayRouter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-templates/src/main/java/com/dms/boxfox/templates/apply/StayRouter.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -60,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SecureConfig.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SecureConfig.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/config/SecureConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="18" column="60" lean-forward="false" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+            <state relative-caret-position="169">
+              <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1308#1309#0" expanded="true" />
@@ -97,11 +87,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+            <state relative-caret-position="938">
+              <caret line="236" column="13" lean-forward="true" selection-start-line="236" selection-start-column="13" selection-end-line="236" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#762#763#0" expanded="true" />
+                <element signature="e#788#789#0" expanded="true" />
+                <element signature="e#816#817#0" expanded="true" />
+                <element signature="e#865#866#0" expanded="true" />
+                <element signature="e#2889#2905#0" expanded="true" />
+                <element signature="e#6586#6587#0" expanded="true" />
+                <element signature="e#6661#6662#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Guardian.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/Guardian.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -110,8 +119,8 @@
       <file leaf-file-name="ExtensionDownloadRouter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ExtensionDownloadRouter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="21" column="39" lean-forward="false" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+            <state relative-caret-position="209">
+              <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -152,7 +161,6 @@
     <findStrings>
       <find>checkid</find>
       <find>isLogined</find>
-      <find>registerSession</find>
       <find>System</find>
       <find>str</find>
       <find>join</find>
@@ -180,6 +188,7 @@
       <find>path</find>
       <find>Notification</find>
       <find>createSession</find>
+      <find>registerSession</find>
     </findStrings>
     <replaceStrings>
       <replace>database</replace>
@@ -242,9 +251,9 @@
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/config/AccessConfig.java" />
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/database/DataBase.java" />
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/Module_info.java" />
-        <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java" />
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/config/SecureConfig.java" />
+        <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java" />
       </list>
     </option>
   </component>
@@ -644,52 +653,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dms-data-utilities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="boxfox" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utilities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dms-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dms-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="dms-core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1073,7 +1036,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="9" width="1312" height="718" extended-state="0" />
+    <frame x="-7" y="9" width="1312" height="718" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1148,13 +1111,6 @@
         <state relative-caret-position="95">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/Guardian.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1471,8 +1427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/extension/ExtensionDownloadRouter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="21" column="39" lean-forward="false" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+        <state relative-caret-position="209">
+          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1503,14 +1459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -1521,12 +1469,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/config/SecureConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="18" column="60" lean-forward="false" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
+        <state relative-caret-position="169">
+          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1308#1309#0" expanded="true" />
             <element signature="e#1357#1358#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/Guardian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/UserManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="938">
+          <caret line="236" column="13" lean-forward="true" selection-start-line="236" selection-start-column="13" selection-end-line="236" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#788#789#0" expanded="true" />
+            <element signature="e#816#817#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#2889#2905#0" expanded="true" />
+            <element signature="e#6586#6587#0" expanded="true" />
+            <element signature="e#6661#6662#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -210,10 +210,35 @@ public class UserManager {
         return key;
     }
 
+    private String getSessionKey(String id) throws SQLException {
+        String result = null;
+        SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from account where uid = '", getUid(id), "'");
+        if (rs.next()) {
+            result = rs.getString(1);
+        }
+        return result;
+    }
+
+    public boolean resetSession(String id) {
+        boolean result = false;
+        String sessionKey = createSession();
+        try {
+            int r = DataBase.getInstance().executeUpdate("Update account set session_key='", sessionKey, "'");
+            if(r==1)
+                result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
         String idEncrypt = aes.encrypt(id);
         try {
-            String sessionKey = createSession();
+            String sessionKey = getSessionKey(id);
+            if (sessionKey == null) {
+                sessionKey = createSession();
+            }
             if (keepLogin) {
                 Cookie cookie = Cookie.cookie("UserSession", sessionKey);
                 String path = "/";
