@@ -14,7 +14,7 @@ function getQnaCommentList(callback) {
                 for (var loop = 0; loop < JSON.parse(data).result.length; loop++) {
                     callback(JSON.parse(data).result[loop]);
                 }
-                drawSeat(data, "7.5px")
+                drawSeat(data, "7.5px");
             });
         }
     });
