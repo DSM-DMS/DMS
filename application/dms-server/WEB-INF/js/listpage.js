@@ -23,6 +23,16 @@ function redirect(page) {
         location.href = '/' + page;
 }
 
+function setListEvent() {
+    $("table tr").click(function () {
+      console.log($(this).children("td").eq(0).text());
+        redirect("post/content?category=" + getAllUrlParams(document.URL).category + "&no=" + $(this).children("td").eq(0).text());
+    });
+}
+setListEvent();
+
+
+
 function getAllUrlParams(url) {
 
   // get query string from url (optional) or window
