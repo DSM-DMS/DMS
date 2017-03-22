@@ -1,4 +1,4 @@
-package com.dms.boxfox.xlsx;
+package com.dms.boxfox.templates.xlsx;
 
 /**
  * Created by boxfox on 2017-03-04.

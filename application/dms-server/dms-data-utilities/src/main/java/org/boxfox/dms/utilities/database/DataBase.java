@@ -51,7 +51,7 @@ public class DataBase {
 		try {
 			if (connection == null || connection.isClosed()) {
 				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET + DB_ATTRIBUTE, DB_ID,
-						SecureConfig.get("Database"));
+						SecureConfig.get("database"));
 				statement = connection.createStatement();
 				Log.l("Database connected successfully!");
 			}

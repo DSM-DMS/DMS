@@ -1,4 +1,4 @@
-package com.dms.boxfox.xlsx;
+package com.dms.boxfox.templates.xlsx;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -10,7 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
 //2016.03.12
@@ -90,13 +92,16 @@ public class ResidualDownload {
     private void initResidualMaps(String date, HashMap<String, String> map) {
         List<ResidualData> list = new ArrayList<ResidualData>();
         try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT student_data.uid, number, status, value FROM student_data right join stay_apply_default on student_data.uid = stay_apply_default.id");
-            ResidualData data = new ResidualData();
-            data.setId(rs.getString("uid"));
-            data.setNumber(rs.getInt("number"));
-            data.setStatus(rs.getInt("status"));
-            data.setResidualDefault(rs.getInt("value"));
-            list.add(data);
+            SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT student_data.uid, number, value FROM student_data right join stay_apply_default on student_data.uid = stay_apply_default.uid");
+            while (rs.next()) {
+                ResidualData data = new ResidualData();
+                data.setId(rs.getString("uid"));
+                String uid = UserManager.getAES().decrypt(rs.getString("number"));
+                if (uid == null || uid.length() == 0) continue;
+                data.setNumber(Integer.valueOf(uid));
+                data.setResidualDefault(rs.getInt("value"));
+                list.add(data);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -104,9 +109,12 @@ public class ResidualDownload {
         for (ResidualData user : list) {
             try {
                 int type;
-                SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT value FROM stay_apply where id = '", user.getId(), "' AND week = '", date, "'");
+                String query = QueryUtils.queryBuilder("SELECT value FROM stay_apply where uid = '", user.getId(), "' AND week = '", date, "'");
+                SafeResultSet rs = DataBase.getInstance().executeQuery(query);
+                System.out.println(query);
                 if (rs.next()) type = rs.getInt(1);
                 else type = user.getResidualDefault();
+                System.out.println(type);
                 map.put(user.getNumber() + "", RESIDUAL_TYPE[type - 1]);
             } catch (SQLException e) {
                 e.printStackTrace();
