@@ -23,7 +23,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/extension/download", method={HttpMethod.POST})
+@RouteRegistration(path = "/extension/download", method={HttpMethod.GET})
 public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
     private final String FILE_DIR = "files/";
@@ -78,7 +78,7 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 			wb.write(xlsToSave);
 			xlsToSave.close();
 			
-			context.response().setStatusCode(201);
+			context.response().setStatusCode(200);
 			context.response().sendFile(FILE_DIR + "연장신청.xlsx");
 			context.response().close();
 		} catch (IOException | SQLException e) {
