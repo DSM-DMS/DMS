@@ -48,7 +48,7 @@ public class PostContextTemplate {
             template.put(key, getString(no, columns));
         }
         template.put("isWriter", check);
-        return template.process();
+         return template.process();
     }
 
     private String getString(int no, String[] columArr) throws SQLException {

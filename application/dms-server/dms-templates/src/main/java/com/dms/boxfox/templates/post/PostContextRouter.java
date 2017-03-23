@@ -72,37 +72,44 @@ public class PostContextRouter implements Handler<RoutingContext> {
     public void handle(RoutingContext context) {
         int no = getPostNombuer(context);
         String category = context.request().getParam("category");
-        boolean isPrivacy = postIsPrivacy(no, category);
-        boolean isWriter = checkPostWriter(context, no, category);
-        PostContextTemplate postWriter = null;
-        if (!isPrivacy || (isPrivacy && isWriter))
-            postWriter = getPostCategory(context);
-        if (postWriter != null) {
-            try {
-                context.response().setStatusCode(200);
-                context.response().end(postWriter.processContent(no, isWriter));
-                context.response().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (TemplateException e) {
-                e.printStackTrace();
+        try {
+            if (checkPostExists(no, category)) {
+                boolean isPrivacy = postIsPrivacy(no, category);
+                boolean isWriter = checkPostWriter(context, no, category);
+                PostContextTemplate postWriter = null;
+                if (!isPrivacy || (isPrivacy && isWriter))
+                    postWriter = getPostCategory(category);
+                if (postWriter != null) {
+                    try {
+                        context.response().setStatusCode(200);
+                        context.response().end(postWriter.processContent(no, isWriter));
+                        context.response().close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (TemplateException e) {
+                        e.printStackTrace();
+                    }
+                } else if (isPrivacy) {
+                    DmsTemplate template = new DmsTemplate("privacy");
+                    context.response().setStatusCode(200);
+                    try {
+                        context.response().end(template.process());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (TemplateException e) {
+                        e.printStackTrace();
+                    }
+                    context.response().close();
+                }
             }
-        } else if (isPrivacy) {
-            DmsTemplate template = new DmsTemplate("privacy");
-            context.response().setStatusCode(200);
-            try {
-                context.response().end(template.process());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (TemplateException e) {
-                e.printStackTrace();
-            }
-            context.response().close();
-        } else {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (!context.response().closed()) {
             context.response().setStatusCode(204);
-            context.response().end("page not found");
+            context.response().end("post not found");
             context.response().close();
         }
     }
@@ -121,19 +128,23 @@ public class PostContextRouter implements Handler<RoutingContext> {
     }
 
     private boolean checkPostWriter(RoutingContext ctx, int no, String category) {
-        String currentId = userManager.getIdFromSession(ctx);
         boolean check = false;
-        if (currentId != null) {
-            try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from ", category, " where no=", no);
-                if (rs.next()) {
-                    String writerId = rs.getString(1);
-                    if (writerId.equals(currentId))
-                        check = true;
+        try {
+            String currentId = userManager.getUid(userManager.getIdFromSession(ctx));
+            if (currentId != null) {
+                try {
+                    SafeResultSet rs = DataBase.getInstance().executeQuery("select uid from ", category, " where no=", no);
+                    if (rs.next()) {
+                        String writerId = rs.getString(1);
+                        if (writerId.equals(currentId))
+                            check = true;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return check;
     }
@@ -147,15 +158,14 @@ public class PostContextRouter implements Handler<RoutingContext> {
         return check;
     }
 
-    private PostContextTemplate getPostCategory(RoutingContext context) {
+    private PostContextTemplate getPostCategory(String category) {
         PostContextTemplate result = null;
-        String category = context.request().getParam("category");
-        if (category == null) category = "notice";
-        for (PostContextTemplate template : categories) {
-            if (template.getCategory().equals(category)) {
-                result = template;
+        if (category != null)
+            for (PostContextTemplate template : categories) {
+                if (template.getCategory().equals(category)) {
+                    result = template;
+                }
             }
-        }
         return result;
     }
 

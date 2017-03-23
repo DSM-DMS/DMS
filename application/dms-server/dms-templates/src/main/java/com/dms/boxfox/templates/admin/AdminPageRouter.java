@@ -34,8 +34,6 @@ public class AdminPageRouter implements Handler<RoutingContext> {
             }
             context.response().end();
             return;
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (TemplateException e) {
             e.printStackTrace();
         } catch (IOException e) {
