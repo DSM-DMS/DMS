@@ -27,8 +27,7 @@ public class RuleModifyRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+		if (!UserManager.isAdmin(context)) return;
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		

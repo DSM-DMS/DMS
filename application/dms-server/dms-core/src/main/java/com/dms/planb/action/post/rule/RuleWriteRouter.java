@@ -23,8 +23,7 @@ public class RuleWriteRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+		if (!UserManager.isAdmin(context)) return;
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
