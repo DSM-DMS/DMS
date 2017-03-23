@@ -10,6 +10,7 @@ import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -132,7 +133,7 @@ public class UserManager {
         return uid;
     }
 
-    public static boolean checkIdExists(String id) {
+    public boolean checkIdExists(String id) {
         boolean check = false;
         id = aes.encrypt(id);
         try {
@@ -144,22 +145,6 @@ public class UserManager {
             e.printStackTrace();
         }
         return check;
-    }
-
-    public JobResult sessionLogin(RoutingContext context) throws SQLException {
-        String sessionKey = SHA256.encrypt(getRegistredSessionKey(context));
-        JobResult result = new JobResult(false);
-        if (sessionKey != null) {
-            SafeResultSet rs = database.executeQuery("select id from account where session_key='", sessionKey, "'");
-            if (rs.next()) {
-                String id = rs.getString(1);
-                result.setSuccess(true);
-                result.setArgs(id);
-            }
-        } else {
-            result.setSuccess(false);
-        }
-        return result;
     }
 
     public String createSession() {
@@ -184,7 +169,7 @@ public class UserManager {
     }
 
     public String getIdFromSession(RoutingContext context) {
-        String sessionKey = SHA256.encrypt(getRegistredSessionKey(context));
+        String sessionKey = getRegistredSessionKey(context);
         String result = null;
         if (sessionKey != null) {
             try {
@@ -224,7 +209,7 @@ public class UserManager {
         String sessionKey = createSession();
         try {
             int r = DataBase.getInstance().executeUpdate("Update account set session_key='", sessionKey, "'");
-            if(r==1)
+            if (r == 1)
                 result = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -237,7 +222,7 @@ public class UserManager {
         try {
             String sessionKey = getSessionKey(id);
             if (sessionKey == null) {
-                sessionKey = createSession();
+                sessionKey = SHA256.encrypt(createSession());
             }
             if (keepLogin) {
                 Cookie cookie = Cookie.cookie("UserSession", sessionKey);
@@ -249,12 +234,22 @@ public class UserManager {
                 context.session().put("UserSession", sessionKey);
             }
             if (sessionKey != null) {
-                DataBase.getInstance().executeUpdate("update account set session_key='", SHA256.encrypt(sessionKey), "' where id='", idEncrypt, "'");
+                DataBase.getInstance().executeUpdate("update account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
                 return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean isAdmin(RoutingContext ctx) throws SQLException {
+        boolean check = false;
+        String sessionKey = getRegistredSessionKey(ctx);
+        SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where uid='", sessionKey, "'");
+        if (rs.next() && rs.getBoolean(1) == true) {
+            check = true;
+        }
+        return check;
     }
 }
