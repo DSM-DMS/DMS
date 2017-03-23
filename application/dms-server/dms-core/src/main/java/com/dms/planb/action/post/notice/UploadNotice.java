@@ -3,6 +3,7 @@ package com.dms.planb.action.post.notice;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 
@@ -16,6 +17,7 @@ import io.vertx.ext.web.RoutingContext;
 public class UploadNotice implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		if (!UserManager.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();

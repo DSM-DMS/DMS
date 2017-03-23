@@ -23,6 +23,7 @@ public class NoticeWriteRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
+		if (!UserManager.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		boolean isLogin = userManager.isLogined(context);

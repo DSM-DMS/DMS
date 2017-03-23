@@ -184,7 +184,7 @@ public class UserManager {
         return aes.decrypt(result);
     }
 
-    public String getRegistredSessionKey(RoutingContext context) {
+    public static String getRegistredSessionKey(RoutingContext context) {
         String key = null;
         if (context.session() != null) {
             key = context.session().get("UserSession");
@@ -243,12 +243,16 @@ public class UserManager {
         return false;
     }
 
-    public boolean isAdmin(RoutingContext ctx) throws SQLException {
+    public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
         String sessionKey = getRegistredSessionKey(ctx);
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where uid='", sessionKey, "'");
-        if (rs.next() && rs.getBoolean(1) == true) {
-            check = true;
+        try {
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where uid='", sessionKey, "'");
+            if (rs.next() && rs.getBoolean(1) == true) {
+                check = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return check;
     }
