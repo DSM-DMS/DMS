@@ -9,8 +9,8 @@ setCancleEvent();
 setSelecterOptions();
 setSelecterEvent();
 getSeatData(function(data) {
-    drawSeat(data, "7.5px")
-})
+    drawSeat(data, "7.5px");
+});
 
 // 취소 이벤트 등록
 function setCancleEvent() {
@@ -29,11 +29,11 @@ function setCancleEvent() {
                 // seatcontainer의 html을 백지화
                 $("div.seatcontainer").html("");
                 getSeatData(function(data) {
-                    drawSeat(data, "7.5px")
+                    drawSeat(data, "7.5px");
                 });
             }
         });
-    })
+    });
 }
 
 function setSelecterOptions() {
@@ -107,14 +107,14 @@ function setSelecterEvent() {
         // 리로드하늠ㄴ 함수 만들어야댐 망
         $("div.seatcontainer").html("");
         getSeatData(function(data) {
-            drawSeat(data, "7.5px")
+            drawSeat(data, "7.5px");
         });
-    })
+    });
 }
 
 function getBorderSize() {
     var windowWidth = $(window).width();
-    console.log(windowWidth)
+    console.log(windowWidth);
     if (windowWidth > 992) {
         return "15px";
     } else if (windowWidth > 768) {
@@ -174,7 +174,7 @@ function drawSeat(seatArr, borderSize) {
                         },
                     });
                     newSeat.data("seat", seatArr[loop][innerLoop]);
-                    console.log("seat test = "+newSeat.data("seat"))
+                    console.log("seat test = " + newSeat.data("seat"));
                     newSeat.appendTo(seatDiv);
                     newSeat.click(function() {
                         if (selected !== undefined) {
@@ -188,7 +188,7 @@ function drawSeat(seatArr, borderSize) {
                             selected.css({
                                 "border": "0 solid black",
                                 "background": "rgb(231,160,153)"
-                            })
+                            });
                             selected = $(this);
                             // 신청 ajax
                             // console.log("value test = "+$(this).data("seat"))
@@ -203,11 +203,17 @@ function drawSeat(seatArr, borderSize) {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
                                     "seat": $(this).data("seat")
                                 },
-                                success: function(data) {
+                                statusCode: {
+                                    204: function() {
+                                        alert("신청가능한 시간이 아닙니다.");
+                                    }
+                                },
+                                success: function(data, xhr) {
                                     selected.text("신청됨");
                                     // $("div.seatcontainer").html("");
                                     getSeatData(function(data) {
-                                        drawSeat(data, "7.5px")
+                                        drawSeat(data, "7.5px");
+                                        console.log("status = " + xhr.status);
                                     });
                                 },
                                 error: function(request, status, error) {
@@ -222,7 +228,7 @@ function drawSeat(seatArr, borderSize) {
                             });
                             $(this).text("신청?");
                         }
-                    })
+                    });
                 }
             } else {
                 $('<div/>', {

@@ -40,9 +40,8 @@
            <div>상점신청</div>
        </div>
        <div class="icon-menu-item text-center">
-           <a href="#bugModal" data-toggle="modal"><img src="./images/bug.png" /></a>
-           <div><a href="#bugModal" data-toggle="modal">버그신고</a><br>
-           </div>
+           <img src"images/bug.png"/>
+           <div>버그신고</div>
        </div>
        <div class="icon-menu-item text-center">
            <img src"images/man.png"/>
@@ -54,31 +53,21 @@
     <div class="card-wrapper">
       <div class="card">
         <div class="card-block">
-          <div class="underbar-title border-blue">
-            상점신청/추천
-            <div class="text-warning text-right page_info"><br>신청 후 검토작업을 거쳐 상점이 부여됩니다.</div>
+          <div class="underbar-title border-red">
+            관리자 페이지
           </div>
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <table id="point_sel">
-                <tr>
-                  <td id="point_apply">
-                    상점신청
-                  </td>
-                  <td id="point_reco">
-                    상점추천
-                  </td>
-                </tr>
-              </table>
-              <div id="individual">
-                <input type="text" name="reason" placeholder="이유를 입력해 주세요." id="individual_reason">
-                <div id="individual_btn">상점신청</div>
-              </div>
-              <div id="recommend">
-                <input type="text" name="name" placeholder="이름을 입력해 주세요." id="recommend_name">
-                <input type="text" name="reason" placeholder="이유를 입력해 주세요." id="recommend_reason">
-                <div id="recommend_btn">상점추천</div>
-              </div>
+          <div class="row" style="margin-top: 5px; margin-bottom: 35px;">
+            <div class="col-lg-4 col-md-12">
+              <div class="admin_btn" id="extension_download">연장신청 다운로드</div>
+              <div class="admin_btn" id="stay_download">잔류신청 다운로드</div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="admin_btn" id="goOut_download">외출신청 다운로드</div>
+              <div class="admin_btn" id="facility_download">시설고장신고 다운로드</div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="admin_btn" id="write_notice">공지사항 작성</div>
+              <div class="admin_btn" id="write_rule">기숙사규칙 작성</div>
             </div>
           </div>
         </div>
@@ -89,7 +78,5 @@
 </body>
 
 <script src="./js/script.js"></script>
-<script src="./js/point_apply.js"></script>
-
-
+<script src="./js/admin_page.js"></script>
 </html>

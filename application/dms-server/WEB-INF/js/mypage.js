@@ -16,7 +16,7 @@ for (var loop = 2; loop < cardsArr.length; loop++) {
             $(this).siblings(".detail-container").show(500);
             $(this).data("clicked", true);
         }
-    })
+    });
 }
 
 
@@ -35,9 +35,9 @@ $(".modify-password-btn").click(function() {
                 $(".profile-pic").attr("src", $(".profile-pic").attr("src"));
             },
             error: function() {
-                alert("변경에 실패했어요. ㅠㅠ")
+                alert("변경에 실패했어요. ㅠㅠ");
             }
-        })
+        });
     } else {
         $("#modify-password-re").css({
             "background-color": "#F06868"
@@ -54,9 +54,9 @@ $(".modify-password-btn").click(function() {
             $("#modify-password-re").css({
                 "background-color": "white"
             });
-        }, 2000)
+        }, 2000);
     }
-})
+});
 
 
 
@@ -75,20 +75,20 @@ $(".modify-profile-picture-btn").click(function() {
                 alert("변경이 완료되었어요.");
             },
             error: function(data) {
-                alert("변경에 실패했어요. TT")
+                alert("변경에 실패했어요. TT");
             }
-        })
+        });
     } else {
-        alert("사진을 업로드 해주세요.")
+        alert("사진을 업로드 해주세요.");
     }
-})
+});
 
 function fileToImg(file, result) {
     //var result = $("<img/>");
     var fileReader = new FileReader();
     fileReader.onload = function(e) {
         result.attr("src", e.target.result);
-    }
+    };
     fileReader.readAsDataURL(file);
 }
 

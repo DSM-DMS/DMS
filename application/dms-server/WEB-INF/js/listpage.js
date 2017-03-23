@@ -13,13 +13,25 @@ $(".write-btn").click(function () {
     //         alert("글을 작성할 수 없어요 TT");
     //     }
     // })
+    localStorage.setItem('category', getAllUrlParams(document.URL).category);
+    localStorage.setItem('type', 'write');
     console.log("post/" + getAllUrlParams(document.URL).category + "/write");
     redirect("post/" + getAllUrlParams(document.URL).category + "/write");
-})
+});
 
 function redirect(page) {
         location.href = '/' + page;
 }
+
+function setListEvent() {
+    $("table tr").click(function () {
+      console.log($(this).children("td").eq(0).text());
+        redirect("post/content?category=" + getAllUrlParams(document.URL).category + "&no=" + $(this).children("td").eq(0).text());
+    });
+}
+setListEvent();
+
+
 
 function getAllUrlParams(url) {
 

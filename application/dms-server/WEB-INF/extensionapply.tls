@@ -15,7 +15,7 @@
     <div class="container">
     <h1>DSM Dormitory System</h1>
 </div>
-    
+
     <div class="row slider-menu-container hides">
              <div class="menu-controller show">
                     <img src="/images/arrow.png">
@@ -71,6 +71,10 @@
                   </select>
                 </div>
                 <input class="apply-cancle" type="button" name="" value="신청취소">
+                <br>
+                <div class="door">
+                칠판
+                </div>
             </div>
 
             <div class="seatcontainer">
