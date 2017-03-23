@@ -6,12 +6,6 @@ import java.util.Calendar;
 import org.boxfox.dms.utilities.database.DataBase;
 
 public class TableDropper extends Thread {
-	static TableDropper dropper = new TableDropper();
-	
-	public static TableDropper getInstance() {
-		return dropper;
-	}
-	
 	public void run() {
 		Calendar currentTime = Calendar.getInstance();
 		int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);

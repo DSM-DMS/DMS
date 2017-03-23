@@ -50,9 +50,8 @@ class DmsMain {
 		/*
 		 * @see com.dms.planb.support .TableDropper
 		 */
-		Thread t = TableDropper.getInstance();
-		t.setDaemon(true);
-		t.start();
+		TableDropper dropper = new TableDropper();
+		dropper.start();
 
 		/**
 		 * @see pom.xml : vert.x and netty syntax
