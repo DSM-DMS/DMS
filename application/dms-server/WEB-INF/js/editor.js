@@ -124,19 +124,20 @@ function checkCategotyAndType() {
             // /post/?category=notice
             redirect("/post/?category=rule");
         };
-    } else if (localStorage.category == "qnaQuestion" && localStorage.type == "write") {
+    } else if (localStorage.category == "qna" && localStorage.type == "write") {
         // qna질문 작성
         url = "/post/qna/question";
         type = "POST";
         data = {
             title: $(".clear-input").val(),
-            content: CKEDITOR.instances.editor1.getData()
+            content: CKEDITOR.instances.editor1.getData(),
+            writer: "writer"
         };
         callback = function() {
             // /post/?category=notice
             redirect("/post/?category=qna");
         };
-    } else if (localStorage.category == "qnaQuestion" && localStorage.type == "modify") {
+    } else if (localStorage.category == "qna" && localStorage.type == "modify") {
         // qna질문 수정
         url = "/post/qna/question";
         type = "PATCH";

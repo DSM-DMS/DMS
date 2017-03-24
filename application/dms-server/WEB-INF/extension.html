@@ -11,58 +11,60 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <div class="container">
-    <h1>DSM Dormitory System</h1>
-</div>
+        <h1>DSM Dormitory System</h1>
+    </div>
 
     <div class="row slider-menu-container hides">
-             <div class="menu-controller show">
-                    <img src="./images/arrow.png">
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/megaphone.png"/>
-                 <div>공지사항</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/writing.png"/>
-                 <div>연장신청</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/settings.png"/>
-                 <div>수리신고</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/chicken.png"/>
-                 <div>학교급식</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/crown.png"/>
-                 <div>상점신청</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/bug.png"/>
-                 <div>버그신고</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="./images/man.png"/>
-                 <div>내정보</div>
-             </div>
+        <div class="menu-controller show">
+            <img src="./images/arrow.png">
         </div>
+        <div class="icon-menu-item text-center">
+            <img src="./images/megaphone.png" />
+            <div>공지사항</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="./images/writing.png" />
+            <div>연장신청</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="./images/settings.png" />
+            <div>수리신고</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="./images/chicken.png" />
+            <div>학교급식</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="./images/crown.png" />
+            <div>상점신청</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <a href="#bugModal" data-toggle="modal"><img src="./images/bug.png" /></a>
+            <div><a href="#bugModal" data-toggle="modal">버그신고</a><br>
+            </div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="./images/man.png" />
+            <div>내정보</div>
+        </div>
+    </div>
 
-  <div class="main">
-      <div class="card-wrapper">
-    <div class="card">
-    <div class="card-block">
-        <div class="underbar-title border-blue">
-          연장신청
-          <div class="text-warning text-right page_info">연장학습 신청은 당일 8시 30분까지 신청 가능합니다.<br> 원하는 호실을 선택한 후 원하는 자리를 클릭하여 신청 가능합니다.</div>
-        </div>
-        <div class="extentionapply text-center">
-            <div class="selecter-container">
-                <div class="class-selecter-div">
-                    <label for="class-select">가온실</label>
-                    <select id="class-select">
+    <div class="main">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-block">
+                    <div class="underbar-title border-blue">
+                        연장신청
+                        <div class="text-warning text-right page_info">연장학습 신청은 당일 8시 30분까지 신청 가능합니다.<br> 원하는 호실을 선택한 후 원하는 자리를 클릭하여 신청 가능합니다.</div>
+                    </div>
+                    <div class="extentionapply text-center">
+                        <div class="selecter-container">
+                            <div class="class-selecter-div">
+                                <label for="class-select">가온실</label>
+                                <select id="class-select">
                         <!--받은 데이터를 통해 호실의 개수를 정하도록 리팩토링 요구 - 출시후에-->
                       <option selected="selected" value="1">가온실</option>
                       <option value="2">나온실</option>
@@ -72,22 +74,46 @@
                       <option value="6">4층 독서실</option>
                       <option value="7">5층 자유구역</option>
                   </select>
-                </div>
-                <input class="apply-cancle" type="button" name="" value="신청취소">
-                <br>
-                <div class="door">
-                칠판
-                </div>
-            </div>
+                            </div>
+                            <input class="apply-cancle" type="button" name="" value="신청취소">
+                            <br>
+                            <div class="door">
+                                칠판
+                            </div>
+                        </div>
 
-            <div class="seatcontainer">
+                        <div class="seatcontainer">
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-      </div>
+    <!-- Bug report Modal -->
+    <div class="modal fade" id="bugModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">버그신고</h4>
+                </div>
+                <form class="modify-password-form">
+                    <div class="modal-body form-horizontal pl-5 pr-5" role="form">
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <input id="modify-password" type="text" class="form-control bug-title-input" name="id" value="" placeholder="제목을 입력하세요." required> </div>
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <textarea name="editor1" id="bug-editor" class="form-control" rows="10" cols="80"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="bug-report-btn btn btn-info">신고</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        </div>
+    </div>
 
 </body>
 

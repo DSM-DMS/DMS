@@ -180,7 +180,7 @@
               <form class="modify-password-form">
                   <div class="modal-body form-horizontal pl-5 pr-5" role="form">
                       <div style="margin-bottom: 25px" class="input-group">
-                          <input id="modify-password" type="password" class="form-control bug-title-input" name="id" value="" placeholder="제목을 입력하세요." required> </div>
+                          <input id="modify-password" type="text" class="form-control bug-title-input" name="id" value="" placeholder="제목을 입력하세요." required> </div>
                       <div style="margin-bottom: 25px" class="input-group">
                           <textarea name="editor1" id="bug-editor" class="form-control" rows="10" cols="80"></textarea>
                       </div>
