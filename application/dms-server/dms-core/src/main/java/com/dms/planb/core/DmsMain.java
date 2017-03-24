@@ -47,12 +47,6 @@ class DmsMain {
 		 * Initializing method when server started.
 		 */
 
-		/*
-		 * @see com.dms.planb.support .TableDropper
-		 */
-		TableDropper dropper = new TableDropper();
-		dropper.start();
-
 		/**
 		 * @see pom.xml : vert.x and netty syntax
 		 */
