@@ -31,7 +31,7 @@ public class TableDropper extends Thread {
 					e.printStackTrace();
 				}
 			}
-			Thread.sleep(3600000)
+			Thread.sleep(3600000);
 		}
 	}
 }
