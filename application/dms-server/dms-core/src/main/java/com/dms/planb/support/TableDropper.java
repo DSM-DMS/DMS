@@ -31,7 +31,11 @@ public class TableDropper extends Thread {
 					e.printStackTrace();
 				}
 			}
-			Thread.sleep(3600000);
+			try {
+				Thread.sleep(3600000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
