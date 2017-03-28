@@ -244,7 +244,6 @@ public class UserManager {
     }
 
     public static boolean isAdmin(RoutingContext ctx) {
-    	System.out.println("Branched");
         boolean check = false;
         String sessionKey = getRegistredSessionKey(ctx);
         try {
