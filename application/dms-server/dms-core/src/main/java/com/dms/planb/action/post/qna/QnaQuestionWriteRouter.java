@@ -14,7 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/question/modify", method={HttpMethod.GET})
+@RouteRegistration(path="/post/question/write", method={HttpMethod.GET})
 public class QnaQuestionWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	

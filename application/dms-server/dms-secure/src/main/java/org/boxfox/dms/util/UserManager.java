@@ -227,4 +227,18 @@ public class UserManager {
         }
         return false;
     }
+
+    public static boolean isAdmin(RoutingContext ctx) {
+        boolean check = false;
+        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "UserSession");
+        try {
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where session_key='", sessionKey, "'");
+            if (rs.next() && rs.getBoolean(1) == true) {
+                check = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
 }

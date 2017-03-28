@@ -23,7 +23,9 @@ public class FaqWriteRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!Guardian.isAdmin(context)) return;
+		if (!UserManager.isAdmin(context)) {
+			return;
+		}
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
@@ -35,7 +37,6 @@ public class FaqWriteRouter implements Handler<RoutingContext> {
 				context.response().end(templates.process());
 				context.response().close();
 			} catch(IOException e) {
-				e.printStackTrace();
 				Log.l("IOException");
 			} catch(TemplateException e) {
 				Log.l("TemplateException");

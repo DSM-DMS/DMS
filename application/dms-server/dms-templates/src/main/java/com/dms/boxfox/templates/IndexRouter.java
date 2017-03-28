@@ -8,6 +8,7 @@ import io.vertx.core.http.HttpHeaders;
 import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.sstore.impl.SessionImpl;
+import org.boxfox.dms.util.SessionUtil;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
@@ -35,7 +36,7 @@ public class IndexRouter implements Handler<RoutingContext> {
     }
 
     public void handle(RoutingContext context) {
-        Log.l("Index Access : " + userManager.getRegistredSessionKey(context));
+        Log.l("Index Access : " + SessionUtil.getRegistredSessionKey(context, "UserSession"));
         Calendar calendar = Calendar.getInstance();
         JSONArray meal = (JSONArray) MealModel.getMealAtDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)).toJSONObject().get("Meals");
         DmsTemplate templates = new DmsTemplate("index");

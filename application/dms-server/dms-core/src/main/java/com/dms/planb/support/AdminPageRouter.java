@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.rule;
+package com.dms.planb.support;
 
 import java.io.IOException;
 
@@ -7,37 +7,35 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/rule/write", method = {HttpMethod.GET})
-public class RuleWriteRouter implements Handler<RoutingContext> {
+@RouteRegistration(path = "/admin", method = { HttpMethod.GET })
+public class AdminPageRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
-	
-	public RuleWriteRouter() {
+
+	public AdminPageRouter() {
 		userManager = new UserManager();
 	}
-	
+
 	public void handle(RoutingContext context) {
-		if (!UserManager.isAdmin(context)) return;
+		if (!UserManager.isAdmin(context)) {
+			return;
+		}
 		boolean isLogin = userManager.isLogined(context);
-		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+		if (isLogin) {
+			DmsTemplate templates = new DmsTemplate("admin_page");
 			try {
-				templates.put("category", "rule");
-				templates.put("type", "write");
-				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();
-			} catch(IOException e) {
-				Log.l("IOException");
-			} catch(TemplateException e) {
+			} catch (TemplateException e) {
 				Log.l("TemplateException");
+			} catch (IOException e) {
+				Log.l("IOException");
 			}
 		} else {
 			context.response().setStatusCode(200);

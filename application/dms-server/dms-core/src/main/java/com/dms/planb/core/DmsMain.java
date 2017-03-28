@@ -47,13 +47,6 @@ class DmsMain {
 		 * Initializing method when server started.
 		 */
 
-		/*
-		 * @see com.dms.planb.support .TableDropper
-		 */
-		Thread t = TableDropper.getInstance();
-		t.setDaemon(true);
-		t.start();
-
 		/**
 		 * @see pom.xml : vert.x and netty syntax
 		 */
