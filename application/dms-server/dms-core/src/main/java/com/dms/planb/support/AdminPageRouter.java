@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.faq;
+package com.dms.planb.support;
 
 import java.io.IOException;
 
@@ -13,32 +13,29 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/faq/write", method={HttpMethod.GET})
-public class FaqWriteRouter implements Handler<RoutingContext> {
+@RouteRegistration(path = "/admin", method = { HttpMethod.GET })
+public class AdminPageRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
-	
-	public FaqWriteRouter() {
+
+	public AdminPageRouter() {
 		userManager = new UserManager();
 	}
-	
+
 	public void handle(RoutingContext context) {
 		if (!UserManager.isAdmin(context)) {
 			return;
 		}
 		boolean isLogin = userManager.isLogined(context);
-		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+		if (isLogin) {
+			DmsTemplate templates = new DmsTemplate("admin_page");
 			try {
-				templates.put("category", "faq");
-				templates.put("type", "write");
-				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
 				context.response().close();
-			} catch(IOException e) {
-				Log.l("IOException");
-			} catch(TemplateException e) {
+			} catch (TemplateException e) {
 				Log.l("TemplateException");
+			} catch (IOException e) {
+				Log.l("IOException");
 			}
 		} else {
 			context.response().setStatusCode(200);

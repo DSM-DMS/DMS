@@ -247,7 +247,7 @@ public class UserManager {
         boolean check = false;
         String sessionKey = getRegistredSessionKey(ctx);
         try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where uid='", sessionKey, "'");
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where session_key='", sessionKey, "'");
             if (rs.next() && rs.getBoolean(1) == true) {
                 check = true;
             }
