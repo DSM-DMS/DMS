@@ -27,7 +27,7 @@ public class NoticeModifyRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!UserManager.isAdmin(context)) return;
+		if (!Guardian.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();

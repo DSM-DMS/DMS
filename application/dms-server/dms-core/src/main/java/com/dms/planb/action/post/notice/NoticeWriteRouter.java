@@ -2,6 +2,7 @@ package com.dms.planb.action.post.notice;
 
 import java.io.IOException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
@@ -23,7 +24,7 @@ public class NoticeWriteRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!UserManager.isAdmin(context)) return;
+		if (!Guardian.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		boolean isLogin = userManager.isLogined(context);

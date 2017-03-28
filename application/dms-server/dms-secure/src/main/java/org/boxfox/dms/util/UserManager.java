@@ -169,7 +169,7 @@ public class UserManager {
     }
 
     public String getIdFromSession(RoutingContext context) {
-        String sessionKey = getRegistredSessionKey(context);
+        String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
         String result = null;
         if (sessionKey != null) {
             try {
@@ -182,17 +182,6 @@ public class UserManager {
             }
         }
         return aes.decrypt(result);
-    }
-
-    public static String getRegistredSessionKey(RoutingContext context) {
-        String key = null;
-        if (context.session() != null) {
-            key = context.session().get("UserSession");
-        }
-        if (key == null && context.getCookie("UserSession") != null) {
-            key = context.getCookie("UserSession").getValue();
-        }
-        return key;
     }
 
     private String getSessionKey(String id) throws SQLException {
@@ -225,13 +214,9 @@ public class UserManager {
                 sessionKey = SHA256.encrypt(createSession());
             }
             if (keepLogin) {
-                Cookie cookie = Cookie.cookie("UserSession", sessionKey);
-                String path = "/";
-                cookie.setPath(path);
-                cookie.setMaxAge(356 * 24 * 60 * 60);
-                context.addCookie(cookie);
+                SessionUtil.registerCookie(context, "UserSession", sessionKey);
             } else {
-                context.session().put("UserSession", sessionKey);
+                SessionUtil.registerSession(context, "UserSession", sessionKey);
             }
             if (sessionKey != null) {
                 DataBase.getInstance().executeUpdate("update account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
@@ -241,19 +226,5 @@ public class UserManager {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static boolean isAdmin(RoutingContext ctx) {
-        boolean check = false;
-        String sessionKey = getRegistredSessionKey(ctx);
-        try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where uid='", sessionKey, "'");
-            if (rs.next() && rs.getBoolean(1) == true) {
-                check = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return check;
     }
 }

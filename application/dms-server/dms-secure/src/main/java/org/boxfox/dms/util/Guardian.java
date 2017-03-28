@@ -1,6 +1,12 @@
 package org.boxfox.dms.util;
 
+import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.algorithm.AES256;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.QueryUtils;
+import org.boxfox.dms.utilities.database.SafeResultSet;
+
+import java.sql.SQLException;
 
 /**
  * Created by boxfox on 2017-03-04.
@@ -16,8 +22,8 @@ public class Guardian {
         aes = new AES256(KEY);
     }
 
-    public static String encrypt(int key, String value){
-        switch (key){
+    public static String encrypt(int key, String value) {
+        switch (key) {
             case AES:
                 //value = aes.encrypt(value);
                 break;
@@ -31,10 +37,25 @@ public class Guardian {
     public static boolean checkParameters(Object... args) {
         for (Object obj : args) {
             if (obj == null) {
-            	return false;
+                return false;
             }
         }
         return true;
+    }
+
+    public static boolean isAdmin(RoutingContext ctx) {
+        boolean check = false;
+        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
+        if (sessionKey != null)
+            try {
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_ccount where sessionKey='", sessionKey, "'");
+                if (rs.next() && rs.getInt(1) != 0) {
+                    check = true;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        return check;
     }
 
 }

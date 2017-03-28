@@ -17,7 +17,7 @@ import io.vertx.ext.web.RoutingContext;
 public class UploadNotice implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
-		if (!UserManager.isAdmin(context)) return;
+		if (!Guardian.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();

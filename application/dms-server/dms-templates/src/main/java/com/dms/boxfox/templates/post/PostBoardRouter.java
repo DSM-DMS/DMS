@@ -50,6 +50,7 @@ public class PostBoardRouter implements Handler<RoutingContext> {
                 SafeResultSet rs = db.executeQuery("select ", QueryUtils.columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
                 templates.put("Title", postTemplate.getKoreanName());
                 templates.put("Heads", postTemplate.getHeads());
+                System.out.println(postTemplate.getColumns()[0]);
                 templates.put("Columns", postTemplate.getColumns());
                 templates.put("List", rs.toHashMap());
 

@@ -48,15 +48,17 @@ public class PostContextTemplate {
             template.put(key, getString(no, columns));
         }
         template.put("isWriter", check);
-         return template.process();
+        return template.process();
     }
 
     private String getString(int no, String[] columArr) throws SQLException {
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select ", QueryUtils.columnArrayToQuery(columArr), " from ", category, " where no=", no);
         String str = "";
-        if (rs.next()) {
-            for (int i = 1; i <= rs.getColumnSize(); i++) {
-                str += rs.getString(i);
+        if (columArr != null && columArr.length > 0) {
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select ", QueryUtils.columnArrayToQuery(columArr), " from ", category, " where no=", no);
+            if (rs.next()) {
+                for (int i = 1; i <= rs.getColumnSize(); i++) {
+                    str += rs.getString(i);
+                }
             }
         }
         return str;

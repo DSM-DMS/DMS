@@ -3,6 +3,7 @@ package com.dms.planb.action.post.qna;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
@@ -24,7 +25,7 @@ public class QnaAnswerWriteRouter implements Handler<RoutingContext> {
     }
 
     public void handle(RoutingContext context) {
-        if (!UserManager.isAdmin(context)) return;
+        if (!Guardian.isAdmin(context)) return;
         context = PrecedingWork.putHeaders(context);
 
         DmsTemplate templates = new DmsTemplate("editor");

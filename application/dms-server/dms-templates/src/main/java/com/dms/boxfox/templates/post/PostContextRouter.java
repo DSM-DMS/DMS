@@ -9,6 +9,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
         PostContextTemplate template = new PostContextTemplate(category);
         template.putTarget("title", new String[]{"title"});
         template.putTarget("content", new String[]{"content"});
+        template.putTarget("subinfo", null);
         return template;
     }
 
@@ -41,7 +43,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
         template.putTarget("answer_content", new String[]{"answer_content"});
         template.putTarget("answer_subinfo", new String[]{"answer_date"});
         return template;
-    }
+    }           
 
     private PostContextTemplate createFacilityPost() {
         PostContextTemplate template = new PostContextTemplate("facility_report", "facility_report");
@@ -53,8 +55,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
         template.putTarget("result_subinfo", new String[]{"result_date"});
         return template;
     }
-
-    private void initCategorys() {
+   private void initCategorys() {
         categories = new ArrayList<PostContextTemplate>();
         categories.add(createDefaultPost("notice").putTarget("subinfo", new String[]{"writer"}));
         categories.add(createDefaultPost("rule"));
@@ -132,19 +133,14 @@ public class PostContextRouter implements Handler<RoutingContext> {
         try {
             String currentId = userManager.getUid(userManager.getIdFromSession(ctx));
             if (currentId != null) {
-                try {
                     SafeResultSet rs = DataBase.getInstance().executeQuery("select uid from ", category, " where no=", no);
                     if (rs.next()) {
                         String writerId = rs.getString(1);
                         if (writerId.equals(currentId))
                             check = true;
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return check;
     }

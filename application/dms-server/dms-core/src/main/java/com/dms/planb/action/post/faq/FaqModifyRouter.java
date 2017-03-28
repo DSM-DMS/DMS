@@ -26,7 +26,7 @@ public class FaqModifyRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!UserManager.isAdmin(context)) return;
+		if (!Guardian.isAdmin(context)) return;
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		

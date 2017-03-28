@@ -5,6 +5,7 @@ import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
@@ -16,15 +17,10 @@ import java.sql.SQLException;
  */
 @RouteRegistration(path = "/admin/", method = {HttpMethod.GET})
 public class AdminPageRouter implements Handler<RoutingContext> {
-    private UserManager userManager;
-
-    public AdminPageRouter() {
-        this.userManager = new UserManager();
-    }
 
     public void handle(RoutingContext context) {
         try {
-            if (userManager.isAdmin(context)) {
+            if (Guardian.isAdmin(context)) {
                 DmsTemplate template = new DmsTemplate("adminpage");
                 context.response().write(template.process());
                 context.response().setStatusCode(200);
