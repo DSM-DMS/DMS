@@ -23,10 +23,10 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
         context = PrecedingWork.putHeaders(context);
-
-        String id = context.request().getParam("id");
-        String password = context.request().getParam("password");
-        String remember = context.request().getParam("remember");
+        
+        String id = context.request().getFormAttribute("id");
+        String password = context.request().getFormAttribute("password");
+        String remember = context.request().getFormAttribute("remember");
 //        String recapcha = context.request().getParam("g-recaptcha-response"); //recapcha response 이름 수정해야함
         remember = (remember == null) ? "false" : "true";
         

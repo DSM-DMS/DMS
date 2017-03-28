@@ -133,14 +133,14 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 		Calendar calendar = Calendar.getInstance();
 
 		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH);
+		int month = calendar.get(Calendar.MONTH) + 1;
 		// 0 ~ 11
 		int week = calendar.get(Calendar.WEEK_OF_MONTH);
 
 		StringBuilder currentWeek = new StringBuilder();
 
 		currentWeek.append(Integer.toString(year)).append("-0");
-		currentWeek.append(Integer.toString(month + 1)).append("-0");
+		currentWeek.append(Integer.toString(month)).append("-0");
 		currentWeek.append(Integer.toString(week));
 
 		return currentWeek.toString();
