@@ -1,7 +1,10 @@
 package org.boxfox.dms.util;
 
-import io.vertx.ext.web.Cookie;
-import io.vertx.ext.web.RoutingContext;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
@@ -10,9 +13,7 @@ import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
-import javax.xml.crypto.Data;
-import java.sql.SQLException;
-import java.util.*;
+import io.vertx.ext.web.RoutingContext;
 
 /**
  * Created by boxfox on 2017-03-04.
@@ -41,6 +42,15 @@ public class UserManager {
         }
         return check;
     }
+    
+	public boolean adminLogin(String id, String password) throws SQLException {
+		boolean check = false;
+    	SafeResultSet rs = database.executeQuery("select * from admin_account where id='", aes.encrypt(id), "'AND password='", SHA256.encrypt(password), "'");
+		if (rs.next()) {
+			check = true;
+		}
+		return check;
+	}
 
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
