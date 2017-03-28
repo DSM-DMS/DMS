@@ -194,6 +194,10 @@ public class UserManager {
     public boolean isLogined(RoutingContext context) {
         return ((getIdFromSession(context) == null) ? false : true);
     }
+    
+    public boolean isAdminLogined(RoutingContext context) {
+    	return ((getAdminIdFromSession(context) == null) ? false : true);
+    }
 
     public String getIdFromSession(RoutingContext context) {
         String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
@@ -201,6 +205,22 @@ public class UserManager {
         if (sessionKey != null) {
             try {
                 SafeResultSet rs = DataBase.getInstance().executeQuery("select id from account where session_key='", sessionKey, "'");
+                if (rs.next()) {
+                    result = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return aes.decrypt(result);
+    }
+    
+    public String getAdminIdFromSession(RoutingContext context) {
+        String sessionKey = SessionUtil.getRegistredSessionKey(context, "AdminSession");
+        String result = null;
+        if (sessionKey != null) {
+            try {
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from admin_account where session_key='", sessionKey, "'");
                 if (rs.next()) {
                     result = rs.getString(1);
                 }
