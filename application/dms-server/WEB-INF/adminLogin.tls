@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DMS</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body style="text-align: center">
+    <h1>환영합니다.</h1>
+    <!-- Login  modal-->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div id="loginbox">
+                            <div style="padding-top:30px" class="panel-body">
+                                <div class="panel-heading">
+                                    <div class="panel-title">로그인</div>
+                                </div>
+                                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                                <form id="loginform" class="form-horizontal" role="form">
+                                    <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="id" value="" placeholder="ID"></div>
+                                    <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="Password"> </div>
+                                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LerpRgUAAAAAC5EctefxMtAtYj6XUKrm8fj_ZSX"></div>
+                                    <div class="input-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me </label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <span id="login-warn" class="text-warning text-center" style="margin-right: 15px;">로그인에 실패했습니다.</span>
+                                        <button id="btn-signup" type="button" class="btn btn-info" onclick="login($('#loginform').serialize())">로그인</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="./js/script.js"></script>
+<script src="./js/adminLogin.js"></script>
+
+</html>
