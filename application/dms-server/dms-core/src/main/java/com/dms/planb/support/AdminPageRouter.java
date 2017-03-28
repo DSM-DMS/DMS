@@ -22,7 +22,7 @@ public class AdminPageRouter implements Handler<RoutingContext> {
 	}
 
 	public void handle(RoutingContext context) {
-		boolean isLogin = userManager.isLogined(context);
+		boolean isLogin = userManager.isAdminLogined(context);
 		if (isLogin) {
 			DmsTemplate templates = new DmsTemplate("admin_page");
 			try {
