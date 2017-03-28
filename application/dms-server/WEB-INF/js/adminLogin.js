@@ -1,6 +1,6 @@
 $('#myModal').modal('show');
 
-function login(params) {
+function adminLogin(params) {
     $.ajax({
         url: "/account/login/admin",
         type: "POST",
