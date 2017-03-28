@@ -35,6 +35,7 @@ public class LoadMypage implements Handler<RoutingContext> {
         String uid = null;
         try {
             if (id != null) {
+            	System.out.println("Get uid success");
                 uid = userManager.getUid(id);
             }
         } catch (SQLException e) {
@@ -42,14 +43,16 @@ public class LoadMypage implements Handler<RoutingContext> {
         }
         
         if(!Guardian.checkParameters(id, uid)) {
+        	System.out.println("Parameter null");
         	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }
 
 		try {
-			JobResult result = userManager.getUserInfo(uid);
+			JobResult result = userManager.getUserInfo(userManager.getIdFromSession(context));
 			if (result.isSuccess()) {
+				System.out.println("Get user info success");
 				//aesponseObject.put("profile_image", ProfileImage.geProfileImage(id));
 				
 				Map<String, Object> datas = (Map) result.getArgs()[0];
@@ -64,6 +67,7 @@ public class LoadMypage implements Handler<RoutingContext> {
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {
+				System.out.println("Get user info fail");
 				context.response().setStatusCode(204).end();
 				context.response().close();
 			}
