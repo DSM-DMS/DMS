@@ -22,23 +22,15 @@ public class AdminLoginPageRouter implements Handler<RoutingContext> {
 	}
 
 	public void handle(RoutingContext context) {
-		boolean isLogin = userManager.isLogined(context);
-		if (isLogin) {
-			DmsTemplate templates = new DmsTemplate("admin_login");
-			try {
-				context.response().setStatusCode(200);
-				context.response().end(templates.process());
-				context.response().close();
-			} catch (TemplateException e) {
-				Log.l("TemplateException");
-			} catch (IOException e) {
-				Log.l("IOException");
-			}
-		} else {
+		DmsTemplate templates = new DmsTemplate("admin_login");
+		try {
 			context.response().setStatusCode(200);
-            context.response().putHeader("Content-type", "text/html; utf-8");
-            context.response().end("<script>window.location.href='/'</script>");
-            context.response().close();
+			context.response().end(templates.process());
+			context.response().close();
+		} catch (TemplateException e) {
+			Log.l("TemplateException");
+		} catch (IOException e) {
+			Log.l("IOException");
 		}
 	}
 }

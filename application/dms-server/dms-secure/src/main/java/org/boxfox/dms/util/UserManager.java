@@ -173,6 +173,23 @@ public class UserManager {
 
         return sessionKey;
     }
+    
+    public String createAdminSession() {
+        boolean check = true;
+        String sessionKey = null;
+        do {
+            try {
+                sessionKey = UUID.randomUUID().toString();
+                SafeResultSet rs = database.executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
+                if (rs.next() && rs.getInt(1) == 0)
+                    check = false;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } while (check);
+
+        return sessionKey;
+    }
 
     public boolean isLogined(RoutingContext context) {
         return ((getIdFromSession(context) == null) ? false : true);
@@ -197,6 +214,15 @@ public class UserManager {
     private String getSessionKey(String id) throws SQLException {
         String result = null;
         SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from account where uid = '", getUid(id), "'");
+        if (rs.next()) {
+            result = rs.getString(1);
+        }
+        return result;
+    }
+    
+    private String getAdminSessionKey(String id) throws SQLException {
+    	String result = null;
+        SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from admin_account where id = '", id, "'");
         if (rs.next()) {
             result = rs.getString(1);
         }
@@ -237,13 +263,35 @@ public class UserManager {
         }
         return false;
     }
+    
+    public boolean registerAdminSession(RoutingContext context, boolean keepLogin, String id) {
+    	String idEncrypt = aes.encrypt(id);
+        try {
+            String sessionKey = getAdminSessionKey(id);
+            if (sessionKey == null) {
+                sessionKey = SHA256.encrypt(createAdminSession());
+            }
+            if (keepLogin) {
+                SessionUtil.registerCookie(context, "AdminSession", sessionKey);
+            } else {
+                SessionUtil.registerSession(context, "AdminSession", sessionKey);
+            }
+            if (sessionKey != null) {
+                DataBase.getInstance().executeUpdate("update admin_account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
-        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "UserSession");
+        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
         try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where session_key='", sessionKey, "'");
-            if (rs.next() && rs.getBoolean(1) == true) {
+            SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
+            if (rs.next() && rs.getInt(1) > 0) {
                 check = true;
             }
         } catch (SQLException e) {
