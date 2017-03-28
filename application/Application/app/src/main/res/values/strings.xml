@@ -148,6 +148,7 @@
     <string name="meal_dinner">저녁</string>
     <string name="meal_meal">급식</string>
     <string name="meal_allergy">알레르기</string>
+    <string name="meal_failure">급식 정보를 불러오지 못했습니다.</string>
     <string name="meal_error">오류로 인해 급식 정보를 불러오지 못했습니다.</string>
 
     <!-- Appcontent -->

@@ -17,6 +17,8 @@ import com.dms.beinone.application.R;
 
 public class HomeMealFragment extends Fragment {
 
+    private String mMealString;
+
     public static HomeMealFragment newInstance(Context context, String meal) {
         Bundle args = new Bundle();
         args.putString(context.getString(R.string.ARGS_MEAL), meal);
@@ -41,9 +43,18 @@ public class HomeMealFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
+        mMealString = getArguments().getString(getString(R.string.ARGS_MEAL));
         String meal = getArguments().getString(getString(R.string.ARGS_MEAL));
         TextView mealTV = (TextView) rootView.findViewById(R.id.tv_home_meal);
         mealTV.setText(meal);
+    }
+
+    public String getMealString() {
+        return mMealString;
+    }
+
+    public void setMealString(String mealString) {
+        mMealString = mealString;
     }
 
 }

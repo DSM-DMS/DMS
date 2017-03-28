@@ -26,11 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -104,7 +101,7 @@ public class StayApplyFragment extends Fragment {
         });
 
         // display selected week at initially
-        setSelectedWeekTV(calendarView.getLastSelectedDay());
+        setSelectedWeekTV(calendarView.getLastSelectedWeekString());
 
         // load and display stay status of selected week at initially
         mSelectedDate = new Date();
@@ -114,7 +111,7 @@ public class StayApplyFragment extends Fragment {
             @Override
             public void onDateClick(@NonNull Date date) {
                 mSelectedDate = date;
-                setSelectedWeekTV(date);
+                setSelectedWeekTV(calendarView.getLastSelectedWeekString());
 
                 setSelectedWeekStatusTV(null);
 
@@ -155,13 +152,8 @@ public class StayApplyFragment extends Fragment {
         });
     }
 
-    private void setSelectedWeekTV(Date date) {
-        // 토요일 기준으로 주 구분
-        Calendar cal = Calendar.getInstance(Locale.KOREA);
-        cal.setTime(date);
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 M월 W주", Locale.KOREA);
-        mSelectedWeekTV.setText(sdf.format(cal.getTime()));
+    private void setSelectedWeekTV(String week) {
+        mSelectedWeekTV.setText(week);
     }
 
     private void setDefaultStatusTV(String stayState) {

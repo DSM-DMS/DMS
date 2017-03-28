@@ -65,7 +65,8 @@
                 cal:titleLayoutBackgroundColor="@color/colorPrimary"
                 cal:weekLayoutBackgroundColor="@color/colorPrimary"
                 cal:weekend="saturday|sunday"
-                cal:weekendColor="@android:color/white" />
+                cal:weekendColor="@android:color/white"
+                cal:mode="week" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

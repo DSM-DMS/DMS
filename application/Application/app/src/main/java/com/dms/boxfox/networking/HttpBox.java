@@ -1,7 +1,6 @@
 package com.dms.boxfox.networking;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.dms.boxfox.networking.datamodel.HeaderProperty;
 import com.dms.boxfox.networking.datamodel.Request;
@@ -42,7 +41,6 @@ public class HttpBox {
         for (int i = 0; i < request.getHeaderPropertiesSize(); i++) {
             HeaderProperty property = request.getProperty(i);
             urlConnection.setRequestProperty(property.getKey(), property.getValue());
-            Log.d("testLog", property.getKey() + ": " + property.getValue());
         }
 
         if (!urlConnection.getRequestMethod().equals(Request.TYPE_GET)) {
