@@ -2,6 +2,7 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
@@ -14,10 +15,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/login/admin", method = {HttpMethod.POST})
 public class LoginAdminRequest implements Handler<RoutingContext> {
-    private UserManager userManager;
+    private AdminManager adminManager;
 
     public LoginAdminRequest() {
-        userManager = new UserManager();
+        adminManager = new AdminManager();
     }
 
     @Override
@@ -36,9 +37,9 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
         	return;
         }
         try {
-            boolean check = userManager.adminLogin(id, password);
+            boolean check = adminManager.login(id, password);
             if (check) {
-            	userManager.registerAdminSession(context, Boolean.valueOf(remember), id);
+            	adminManager.registerSession(context, Boolean.valueOf(remember), id);
             	context.response().setStatusCode(201).end();
                 context.response().close();
             } else {

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -20,20 +20,20 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/notice/modify", method={HttpMethod.GET})
 public class NoticeModifyRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
+	private AdminManager adminManager;
 	
 	public NoticeModifyRouter() {
-		userManager = new UserManager();
+		adminManager = new AdminManager();
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!Guardian.isAdmin(context)) return;
+		if (!AdminManager.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
-		boolean isLogin = userManager.isLogined(context);
+		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
 			

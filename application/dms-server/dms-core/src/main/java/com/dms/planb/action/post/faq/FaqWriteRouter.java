@@ -2,8 +2,7 @@ package com.dms.planb.action.post.faq;
 
 import java.io.IOException;
 
-import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -16,17 +15,17 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/faq/write", method={HttpMethod.GET})
 public class FaqWriteRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
+	private AdminManager adminManager;
 	
 	public FaqWriteRouter() {
-		userManager = new UserManager();
+		adminManager = new AdminManager();
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!UserManager.isAdmin(context)) {
+		if (!AdminManager.isAdmin(context)) {
 			return;
 		}
-		boolean isLogin = userManager.isLogined(context);
+		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
 			try {

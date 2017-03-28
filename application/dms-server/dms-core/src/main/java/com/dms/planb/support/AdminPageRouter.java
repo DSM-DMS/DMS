@@ -2,7 +2,7 @@ package com.dms.planb.support;
 
 import java.io.IOException;
 
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -15,14 +15,14 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/admin", method = { HttpMethod.GET })
 public class AdminPageRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
+	private AdminManager adminManager;
 
 	public AdminPageRouter() {
-		userManager = new UserManager();
+		adminManager = new AdminManager();
 	}
 
 	public void handle(RoutingContext context) {
-		boolean isLogin = userManager.isAdminLogined(context);
+		boolean isLogin = adminManager.isLogined(context);
 		if (isLogin) {
 			DmsTemplate templates = new DmsTemplate("admin_page");
 			try {

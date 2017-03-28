@@ -18,7 +18,7 @@ import io.vertx.ext.web.RoutingContext;
 /**
  * Created by boxfox on 2017-03-04.
  */
-public class UserManager {
+public class UserManager implements AccountManageable {
     private static AES256 aes;
     private static DataBase database;
 
@@ -33,25 +33,7 @@ public class UserManager {
     public UserManager() {
         database = DataBase.getInstance();
     }
-
-    public boolean login(String id, String password) throws SQLException {
-        boolean check = false;
-        SafeResultSet rs = database.executeQuery("select * from account where id='", aes.encrypt(id), "' AND password='", SHA256.encrypt(password), "'");
-        if (rs.next()) {
-            check = true;
-        }
-        return check;
-    }
     
-	public boolean adminLogin(String id, String password) throws SQLException {
-		boolean check = false;
-    	SafeResultSet rs = database.executeQuery("select * from admin_account where id='", aes.encrypt(id), "'AND password='", SHA256.encrypt(password), "'");
-		if (rs.next()) {
-			check = true;
-		}
-		return check;
-	}
-
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
@@ -156,7 +138,31 @@ public class UserManager {
         }
         return check;
     }
-
+    
+    public boolean resetSession(String id) {
+        boolean result = false;
+        String sessionKey = createSession();
+        try {
+            int r = DataBase.getInstance().executeUpdate("Update account set session_key='", sessionKey, "'");
+            if (r == 1)
+                result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    @Override
+    public boolean login(String id, String password) throws SQLException {
+        boolean check = false;
+        SafeResultSet rs = database.executeQuery("select * from account where id='", aes.encrypt(id), "' AND password='", SHA256.encrypt(password), "'");
+        if (rs.next()) {
+            check = true;
+        }
+        return check;
+    }
+    
+    @Override
     public String createSession() {
         boolean check = true;
         String sessionKey = null;
@@ -174,31 +180,12 @@ public class UserManager {
         return sessionKey;
     }
     
-    public String createAdminSession() {
-        boolean check = true;
-        String sessionKey = null;
-        do {
-            try {
-                sessionKey = UUID.randomUUID().toString();
-                SafeResultSet rs = database.executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
-                if (rs.next() && rs.getInt(1) == 0)
-                    check = false;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } while (check);
-
-        return sessionKey;
-    }
-
+    @Override
     public boolean isLogined(RoutingContext context) {
         return ((getIdFromSession(context) == null) ? false : true);
     }
     
-    public boolean isAdminLogined(RoutingContext context) {
-    	return ((getAdminIdFromSession(context) == null) ? false : true);
-    }
-
+    @Override
     public String getIdFromSession(RoutingContext context) {
         String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
         String result = null;
@@ -215,23 +202,8 @@ public class UserManager {
         return aes.decrypt(result);
     }
     
-    public String getAdminIdFromSession(RoutingContext context) {
-        String sessionKey = SessionUtil.getRegistredSessionKey(context, "AdminSession");
-        String result = null;
-        if (sessionKey != null) {
-            try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from admin_account where session_key='", sessionKey, "'");
-                if (rs.next()) {
-                    result = rs.getString(1);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return aes.decrypt(result);
-    }
-
-    private String getSessionKey(String id) throws SQLException {
+    @Override
+    public String getSessionKey(String id) throws SQLException {
         String result = null;
         SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from account where uid = '", getUid(id), "'");
         if (rs.next()) {
@@ -239,29 +211,8 @@ public class UserManager {
         }
         return result;
     }
-    
-    private String getAdminSessionKey(String id) throws SQLException {
-    	String result = null;
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from admin_account where id = '", id, "'");
-        if (rs.next()) {
-            result = rs.getString(1);
-        }
-        return result;
-    }
 
-    public boolean resetSession(String id) {
-        boolean result = false;
-        String sessionKey = createSession();
-        try {
-            int r = DataBase.getInstance().executeUpdate("Update account set session_key='", sessionKey, "'");
-            if (r == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
+    @Override
     public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
         String idEncrypt = aes.encrypt(id);
         try {
@@ -282,41 +233,5 @@ public class UserManager {
             e.printStackTrace();
         }
         return false;
-    }
-    
-    public boolean registerAdminSession(RoutingContext context, boolean keepLogin, String id) {
-    	String idEncrypt = aes.encrypt(id);
-        try {
-            String sessionKey = getAdminSessionKey(id);
-            if (sessionKey == null) {
-                sessionKey = SHA256.encrypt(createAdminSession());
-            }
-            if (keepLogin) {
-                SessionUtil.registerCookie(context, "AdminSession", sessionKey);
-            } else {
-                SessionUtil.registerSession(context, "AdminSession", sessionKey);
-            }
-            if (sessionKey != null) {
-                DataBase.getInstance().executeUpdate("update admin_account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static boolean isAdmin(RoutingContext ctx) {
-        boolean check = false;
-        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
-        try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
-            if (rs.next() && rs.getInt(1) > 0) {
-                check = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return check;
     }
 }

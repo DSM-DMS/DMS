@@ -15,12 +15,6 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/admin/login", method = { HttpMethod.GET })
 public class AdminLoginPageRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
-
-	public AdminLoginPageRouter() {
-		userManager = new UserManager();
-	}
-
 	public void handle(RoutingContext context) {
 		DmsTemplate templates = new DmsTemplate("admin_login");
 		try {
