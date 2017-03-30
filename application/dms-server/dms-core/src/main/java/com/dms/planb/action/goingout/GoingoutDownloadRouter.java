@@ -39,8 +39,8 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 		SafeResultSet stayStateResultSet;
 		SafeResultSet goingoutStateResultSet;
 		AES256 aes = UserManager.getAES();
-		String currentWeek = getCurrentWeek();
 		
+		String week = (context.request().getParam("year") + "-" + context.request().getParam("month") + "-" + context.request().getParam("week"));
 		
 		File file = getFile();
 		
@@ -61,7 +61,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 						
 						if(resultSet.next()) {
 							String uid = resultSet.getString("uid");
-							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", currentWeek, "'");
+							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
 
 							if (stayStateResultSet.next()) {
 								// 잔류신청을 한 경우
@@ -127,22 +127,5 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 			file.mkdir();
 		}
 		return file;
-	}
-
-	private String getCurrentWeek() {
-		Calendar calendar = Calendar.getInstance();
-
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		// 0 ~ 11
-		int week = calendar.get(Calendar.WEEK_OF_MONTH);
-
-		StringBuilder currentWeek = new StringBuilder();
-
-		currentWeek.append(Integer.toString(year)).append("-0");
-		currentWeek.append(Integer.toString(month)).append("-0");
-		currentWeek.append(Integer.toString(week));
-
-		return currentWeek.toString();
 	}
 }
