@@ -48,7 +48,7 @@ public class LoadMypage implements Handler<RoutingContext> {
         }
 
 		try {
-			JobResult result = userManager.getUserInfo(uid);
+			JobResult result = userManager.getUserInfo(userManager.getIdFromSession(context));
 			if (result.isSuccess()) {
 				//aesponseObject.put("profile_image", ProfileImage.geProfileImage(id));
 				
@@ -61,6 +61,7 @@ public class LoadMypage implements Handler<RoutingContext> {
 				responseObject.put("seat", datas.get("seat"));
 
 				context.response().setStatusCode(200);
+				System.out.println(responseObject.toString());
 				context.response().end(responseObject.toString());
 				context.response().close();
 			} else {

@@ -1,7 +1,10 @@
 package org.boxfox.dms.util;
 
-import io.vertx.ext.web.Cookie;
-import io.vertx.ext.web.RoutingContext;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
@@ -10,14 +13,12 @@ import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
-import javax.xml.crypto.Data;
-import java.sql.SQLException;
-import java.util.*;
+import io.vertx.ext.web.RoutingContext;
 
 /**
  * Created by boxfox on 2017-03-04.
  */
-public class UserManager {
+public class UserManager implements AccountManageable {
     private static AES256 aes;
     private static DataBase database;
 
@@ -32,16 +33,7 @@ public class UserManager {
     public UserManager() {
         database = DataBase.getInstance();
     }
-
-    public boolean login(String id, String password) throws SQLException {
-        boolean check = false;
-        SafeResultSet rs = database.executeQuery("select * from account where id='", aes.encrypt(id), "' AND password='", SHA256.encrypt(password), "'");
-        if (rs.next()) {
-            check = true;
-        }
-        return check;
-    }
-
+    
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
@@ -146,7 +138,31 @@ public class UserManager {
         }
         return check;
     }
-
+    
+    public boolean resetSession(String id) {
+        boolean result = false;
+        String sessionKey = createSession();
+        try {
+            int r = DataBase.getInstance().executeUpdate("Update account set session_key='", sessionKey, "'");
+            if (r == 1)
+                result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    @Override
+    public boolean login(String id, String password) throws SQLException {
+        boolean check = false;
+        SafeResultSet rs = database.executeQuery("select * from account where id='", aes.encrypt(id), "' AND password='", SHA256.encrypt(password), "'");
+        if (rs.next()) {
+            check = true;
+        }
+        return check;
+    }
+    
+    @Override
     public String createSession() {
         boolean check = true;
         String sessionKey = null;
@@ -163,11 +179,13 @@ public class UserManager {
 
         return sessionKey;
     }
-
+    
+    @Override
     public boolean isLogined(RoutingContext context) {
         return ((getIdFromSession(context) == null) ? false : true);
     }
-
+    
+    @Override
     public String getIdFromSession(RoutingContext context) {
         String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
         String result = null;
@@ -183,8 +201,9 @@ public class UserManager {
         }
         return aes.decrypt(result);
     }
-
-    private String getSessionKey(String id) throws SQLException {
+    
+    @Override
+    public String getSessionKey(String id) throws SQLException {
         String result = null;
         SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from account where uid = '", getUid(id), "'");
         if (rs.next()) {
@@ -193,19 +212,7 @@ public class UserManager {
         return result;
     }
 
-    public boolean resetSession(String id) {
-        boolean result = false;
-        String sessionKey = createSession();
-        try {
-            int r = DataBase.getInstance().executeUpdate("Update account set session_key='", sessionKey, "'");
-            if (r == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
+    @Override
     public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
         String idEncrypt = aes.encrypt(id);
         try {
@@ -226,19 +233,5 @@ public class UserManager {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static boolean isAdmin(RoutingContext ctx) {
-        boolean check = false;
-        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "UserSession");
-        try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select permission from account where session_key='", sessionKey, "'");
-            if (rs.next() && rs.getBoolean(1) == true) {
-                check = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return check;
     }
 }
