@@ -1,4 +1,4 @@
-package com.dms.planb.action.goingout;
+package com.dms.planb.template_routers;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -71,7 +71,9 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 								// 잔류신청 정보 없음
 								stayDefaultResultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
 								// default 값 조회
-								setCellValues(stayDefaultResultSet, database, sheet, cell, uid);
+								if(stayDefaultResultSet.next()) {
+									setCellValues(stayDefaultResultSet, database, sheet, cell, uid);
+								}
 							}
 						}
 						
@@ -108,8 +110,8 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 			XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
 			
 			SafeResultSet goingoutStateResultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
-			goingoutStateResultSet.next();
 			
+			goingoutStateResultSet.next();
 			boolean sat = goingoutStateResultSet.getBoolean("sat");
 			boolean sun = goingoutStateResultSet.getBoolean("sun");
 

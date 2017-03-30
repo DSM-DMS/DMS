@@ -26,6 +26,8 @@ public class ApplyGoingout implements Handler<RoutingContext> {
     public void handle(RoutingContext context) {
         context = PrecedingWork.putHeaders(context);
         
+        DataBase database = DataBase.getInstance();
+        
         String sat = context.request().getParam("sat");
         String sun = context.request().getParam("sun");
         
@@ -34,7 +36,9 @@ public class ApplyGoingout implements Handler<RoutingContext> {
                 String uid = userManager.getUid(userManager.getIdFromSession(context));
                 boolean satBool = Boolean.valueOf(sat);
                 boolean sunBool = Boolean.valueOf(sun);
-                DataBase.getInstance().executeUpdate("update goingout_apply set sat=", satBool, ", sun=", sunBool, " where uid='", uid, "'");
+                database.executeUpdate("DELETE FROM goingout_apply WHERE uid='", uid, "'");
+                database.executeUpdate("INSERT INTO goingout_apply VALUES('", uid, "', '", satBool, "', '", sunBool, "')");
+                
                 context.response().setStatusCode(201).end();
                 context.response().close();
             } catch (SQLException e) {

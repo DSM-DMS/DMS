@@ -1,33 +1,36 @@
-package com.dms.planb.action.post.rule;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 
-import org.boxfox.dms.util.AdminManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/rule/write", method = {HttpMethod.GET})
-public class RuleWriteRouter implements Handler<RoutingContext> {
-	private AdminManager adminManager;
+@RouteRegistration(path="/post/result/write", method={HttpMethod.GET})
+public class ReportResultWriteRouter implements Handler<RoutingContext> {
+private UserManager userManager;
 	
-	public RuleWriteRouter() {
-		adminManager = new AdminManager();
+	public ReportResultWriteRouter() {
+		userManager = new UserManager();
 	}
 	
+	@Override
 	public void handle(RoutingContext context) {
-		if (!AdminManager.isAdmin(context)) return;
-		boolean isLogin = adminManager.isLogined(context);
+		context = PrecedingWork.putHeaders(context);
+		
+		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
 			try {
-				templates.put("category", "rule");
+				templates.put("category", "reportResult");
 				templates.put("type", "write");
 				
 				context.response().setStatusCode(200);

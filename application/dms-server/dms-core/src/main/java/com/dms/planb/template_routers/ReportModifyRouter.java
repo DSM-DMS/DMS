@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.faq;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,28 +11,31 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
-public class FaqModifyRouter implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/report/modify", method={HttpMethod.GET})
+public class ReportModifyRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public FaqModifyRouter() {
+	public ReportModifyRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!Guardian.isAdmin(context)) return;
+		context = PrecedingWork.putHeaders(context);
+		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
+			
 			if(!Guardian.checkParameters(no)) {
 	            context.response().setStatusCode(400).end();
 	            context.response().close();
@@ -42,10 +45,11 @@ public class FaqModifyRouter implements Handler<RoutingContext> {
 			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
 				
-				templates.put("category", "faq");
+				templates.put("category", "report");
 				templates.put("type", "modify");
+				templates.put("room", resultSet.getInt("room"));
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));
 				

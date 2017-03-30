@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.qna;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,31 +11,28 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/question/modify", method={HttpMethod.GET})
-public class QnaQuestionModifyRouter implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
+public class FaqModifyRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public QnaQuestionModifyRouter() {
+	public FaqModifyRouter() {
 		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+		if (!Guardian.isAdmin(context)) return;
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
-			
 			if(!Guardian.checkParameters(no)) {
 	            context.response().setStatusCode(400).end();
 	            context.response().close();
@@ -45,12 +42,12 @@ public class QnaQuestionModifyRouter implements Handler<RoutingContext> {
 			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
 				
-				templates.put("category", "qnaQuestion");
+				templates.put("category", "faq");
 				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
-				templates.put("content", resultSet.getString("question_content"));
+				templates.put("content", resultSet.getString("content"));
 				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

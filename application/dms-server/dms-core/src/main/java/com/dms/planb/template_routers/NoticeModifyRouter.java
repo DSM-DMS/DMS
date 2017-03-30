@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.notice;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 import java.sql.SQLException;
