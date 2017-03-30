@@ -258,9 +258,9 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 4:
-            if(lastDay == 31) [
+            if(lastDay == 31) {
               five_week = true;
-            ]
+            }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 14 + i; //목요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
