@@ -1,6 +1,5 @@
 package com.dms.planb.action.account;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import org.boxfox.dms.algorithm.SHA256;
@@ -23,6 +22,9 @@ public class InitializeAccount implements Handler<RoutingContext> {
 		context = PrecedingWork.putHeaders(context);
 
 		if (!AdminManager.isAdmin(context)) {
+			context.response().setStatusCode(500).end();
+			context.response().close();
+			
 			return;
 		}
 

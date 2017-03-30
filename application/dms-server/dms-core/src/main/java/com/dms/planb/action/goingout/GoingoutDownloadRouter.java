@@ -37,6 +37,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		SafeResultSet stayStateResultSet;
+		SafeResultSet stayDefaultResultSet;
 		SafeResultSet goingoutStateResultSet;
 		AES256 aes = UserManager.getAES();
 		
@@ -96,6 +97,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 								}
 							} else {
 								// 잔류신청 정보 없음
+								stayDefaultResultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
 								XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
 								XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
 								
