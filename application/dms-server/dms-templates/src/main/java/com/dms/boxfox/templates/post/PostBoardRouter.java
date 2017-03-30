@@ -6,6 +6,7 @@ import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.QueryUtils;
@@ -41,38 +42,26 @@ public class PostBoardRouter implements Handler<RoutingContext> {
     }
 
     public void handle(RoutingContext context) {
-        PostTemplate postTemplate = getCategory(context);
-        if (postTemplate != null) {
-            int page = getPageNumber(context);
-
+        DmsTemplate template = createTemplate(context);
+        if (template != null) {
             try {
-                DmsTemplate templates = new DmsTemplate("listpage");
-                SafeResultSet rs = db.executeQuery("select ", QueryUtils.columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
-                templates.put("Title", postTemplate.getKoreanName());
-                templates.put("Heads", postTemplate.getHeads());
-                System.out.println(postTemplate.getColumns()[0]);
-                templates.put("Columns", postTemplate.getColumns());
-                templates.put("List", rs.toHashMap());
-
-                rs.toHashMap();
                 context.response().setStatusCode(200);
-                context.response().end(templates.process());
+                context.response().end(template.process());
                 context.response().close();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
                 e.printStackTrace();
             } catch (TemplateException e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+        if (context.response().closed()) {
             context.response().setStatusCode(204);
             context.response().end("page not found");
             context.response().close();
         }
     }
 
-    private PostTemplate getCategory(RoutingContext context) {
+    protected PostTemplate getCategory(RoutingContext context) {
         PostTemplate result = null;
         String category = context.request().getParam("category");
         if (category == null) category = "notice";
@@ -84,7 +73,7 @@ public class PostBoardRouter implements Handler<RoutingContext> {
         return result;
     }
 
-    private int getPageNumber(RoutingContext context) {
+    protected int getPageNumber(RoutingContext context) {
         int page;
         if (context.request().getParam("page") == null) {
             page = 0;
@@ -92,5 +81,26 @@ public class PostBoardRouter implements Handler<RoutingContext> {
             page = Integer.valueOf(context.request().getParam("page"));
         page *= 10;
         return page;
+    }
+
+    protected DmsTemplate createTemplate(RoutingContext context) {
+        PostTemplate postTemplate = getCategory(context);
+        DmsTemplate templates = null;
+        if (postTemplate != null) {
+            try {
+                int page = getPageNumber(context);
+                templates = new DmsTemplate("listpage");
+                SafeResultSet rs = null;
+                rs = db.executeQuery("select ", QueryUtils.columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
+                templates.put("Title", postTemplate.getKoreanName());
+                templates.put("Heads", postTemplate.getHeads());
+                templates.put("Columns", postTemplate.getColumns());
+                templates.put("List", rs.toHashMap());
+                templates.put("admin", AdminManager.isAdmin(context));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return templates;
     }
 }
