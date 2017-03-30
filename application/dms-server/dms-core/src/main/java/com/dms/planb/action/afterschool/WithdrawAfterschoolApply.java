@@ -30,6 +30,7 @@ public class WithdrawAfterschoolApply implements Handler<RoutingContext> {
 		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);
@@ -37,6 +38,7 @@ public class WithdrawAfterschoolApply implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
 		int no = Integer.parseInt(context.request().getParam("no"));
 		
 		if(!Guardian.checkParameters(id, uid, no)) {

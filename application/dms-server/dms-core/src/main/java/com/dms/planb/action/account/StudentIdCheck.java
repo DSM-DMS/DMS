@@ -13,6 +13,7 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path="/account/idcheck/student", method={ HttpMethod.POST })
 public class StudentIdCheck implements Handler<RoutingContext> {
 	private UserManager userManager;
+	
 	public StudentIdCheck(){
 		userManager = new UserManager();
 	}

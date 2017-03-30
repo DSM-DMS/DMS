@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.faq;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 

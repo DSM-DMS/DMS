@@ -19,7 +19,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/afterschool", method={HttpMethod.GET})
 public class LoadAfterschoolApplyStatus implements Handler<RoutingContext> {
-	UserManager userManager;
+	private UserManager userManager;
 	
 	public LoadAfterschoolApplyStatus() {
 		userManager = new UserManager();
@@ -37,6 +37,7 @@ public class LoadAfterschoolApplyStatus implements Handler<RoutingContext> {
 		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);

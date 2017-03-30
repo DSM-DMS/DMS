@@ -15,6 +15,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/afterschool/item", method={HttpMethod.POST})
 public class UploadAfterschoolItem implements Handler<RoutingContext> {
+	public UploadAfterschoolItem() {
+		
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);

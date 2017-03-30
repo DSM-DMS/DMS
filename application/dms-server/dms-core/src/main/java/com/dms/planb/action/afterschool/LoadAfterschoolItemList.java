@@ -18,10 +18,8 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/afterschool/item", method={HttpMethod.GET})
 public class LoadAfterschoolItemList implements Handler<RoutingContext> {
-	UserManager userManager;
-	
 	public LoadAfterschoolItemList() {
-		userManager = new UserManager();
+		
 	}
 	
 	@Override

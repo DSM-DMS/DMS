@@ -2,15 +2,13 @@ package com.dms.planb.action.post.faq;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
-
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -18,6 +16,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/faq/list", method={HttpMethod.GET})
 public class LoadFaqWithList implements Handler<RoutingContext> {
+	public LoadFaqWithList() {
+		
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);

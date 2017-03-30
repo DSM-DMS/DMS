@@ -1,16 +1,12 @@
 package com.dms.planb.action.account;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.JobResult;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.boxfox.dms.utilities.log.Log;
-
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
+import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -31,7 +27,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");
         String remember = context.request().getParam("remember");
-        String recapcha = context.request().getParam("g-recaptcha-response"); //recapcha response 이름 수정해야함
+        String recaptcha = context.request().getParam("g-recaptcha-response"); //recaptcha response 이름 수정해야함
         remember = (remember == null) ? "false" : "true";
         
         if(!Guardian.checkParameters(id, password, remember)) {
@@ -39,10 +35,12 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
         	context.response().close();
         	return;
         }
+        
         try {
             boolean check = userManager.login(id, password);
             if (check) {
             	userManager.registerSession(context, Boolean.valueOf(remember), id);
+            	
             	context.response().setStatusCode(201).end();
                 context.response().close();
             } else {

@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
@@ -28,7 +27,6 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");
         String remember = context.request().getParam("remember");
-//        String recapcha = context.request().getParam("g-recaptcha-response"); //recapcha response 이름 수정해야함
         remember = (remember == null) ? "false" : "true";
         
         if(!Guardian.checkParameters(id, password)) {
@@ -36,10 +34,12 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
         	context.response().close();
         	return;
         }
+        
         try {
             boolean check = adminManager.login(id, password);
             if (check) {
             	adminManager.registerSession(context, Boolean.valueOf(remember), id);
+            	
             	context.response().setStatusCode(201).end();
                 context.response().close();
             } else {

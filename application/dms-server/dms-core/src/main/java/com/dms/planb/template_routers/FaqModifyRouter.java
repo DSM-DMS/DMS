@@ -1,42 +1,38 @@
-package com.dms.planb.action.post.notice;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.AdminManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/notice/modify", method={HttpMethod.GET})
-public class NoticeModifyRouter implements Handler<RoutingContext> {
-	private AdminManager adminManager;
+@RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
+public class FaqModifyRouter implements Handler<RoutingContext> {
+	private UserManager userManager;
 	
-	public NoticeModifyRouter() {
-		adminManager = new AdminManager();
+	public FaqModifyRouter() {
+		userManager = new UserManager();
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!AdminManager.isAdmin(context)) return;
-		context = PrecedingWork.putHeaders(context);
-		
+		if (!Guardian.isAdmin(context)) return;
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
-		boolean isLogin = adminManager.isLogined(context);
+		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
-			
 			if(!Guardian.checkParameters(no)) {
 	            context.response().setStatusCode(400).end();
 	            context.response().close();
@@ -46,9 +42,10 @@ public class NoticeModifyRouter implements Handler<RoutingContext> {
 			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
+				resultSet.next();
 				
-				templates.put("category", "notice");
+				templates.put("category", "faq");
 				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));

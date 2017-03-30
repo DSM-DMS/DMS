@@ -1,4 +1,4 @@
-package com.dms.planb.action.post.qna;
+package com.dms.planb.template_routers;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -46,6 +46,7 @@ public class QnaQuestionModifyRouter implements Handler<RoutingContext> {
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+				resultSet.next();
 				
 				templates.put("category", "qnaQuestion");
 				templates.put("type", "modify");
