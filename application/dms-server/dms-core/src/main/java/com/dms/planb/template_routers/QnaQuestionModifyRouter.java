@@ -46,6 +46,7 @@ public class QnaQuestionModifyRouter implements Handler<RoutingContext> {
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+				resultSet.next();
 				
 				templates.put("category", "qnaQuestion");
 				templates.put("type", "modify");

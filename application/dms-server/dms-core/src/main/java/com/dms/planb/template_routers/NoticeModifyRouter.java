@@ -47,6 +47,7 @@ public class NoticeModifyRouter implements Handler<RoutingContext> {
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
+				resultSet.next();
 				
 				templates.put("category", "notice");
 				templates.put("type", "modify");

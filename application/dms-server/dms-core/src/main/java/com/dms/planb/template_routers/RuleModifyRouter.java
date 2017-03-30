@@ -44,6 +44,7 @@ public class RuleModifyRouter implements Handler<RoutingContext> {
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM rule WHERE no=", no);
+				resultSet.next();
 				
 				templates.put("category", "rule");
 				templates.put("type", "modify");

@@ -46,6 +46,7 @@ public class ReportModifyRouter implements Handler<RoutingContext> {
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
+				resultSet.next();
 				
 				templates.put("category", "report");
 				templates.put("type", "modify");

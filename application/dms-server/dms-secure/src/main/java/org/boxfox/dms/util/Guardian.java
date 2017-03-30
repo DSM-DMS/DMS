@@ -48,7 +48,7 @@ public class Guardian {
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
         if (sessionKey != null)
             try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_ccount where sessionKey='", sessionKey, "'");
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
                 if (rs.next() && rs.getInt(1) != 0) {
                     check = true;
                 }
