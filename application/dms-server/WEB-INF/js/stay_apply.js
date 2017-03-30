@@ -258,6 +258,9 @@ function drawCalendar(date, lastDay) {
             }
             break;
         case 4:
+            if(lastDay == 31) [
+              five_week = true;
+            ]
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 14 + i; //목요일
                 $('#calendar td:eq(' + idx + ')').text(i + 1);
@@ -275,6 +278,8 @@ function drawCalendar(date, lastDay) {
         case 5:
             if(lastDay == 31) {
               $('#sixth_week').toggle();
+              five_week = true;
+            } else if(lastDay == 30) {
               five_week = true;
             }
             for (var i = 0; i <= lastDay; i++) {
@@ -295,6 +300,8 @@ function drawCalendar(date, lastDay) {
             if(lastDay == 31 || lastDay == 30) {
               $('#sixth_week').toggle();
               five_week = true;
+            } else if(lastDay == 29) {
+              five_week == true;
             }
             for (var i = 0; i <= lastDay; i++) {
                 var idx = 16 + i; //토요일
