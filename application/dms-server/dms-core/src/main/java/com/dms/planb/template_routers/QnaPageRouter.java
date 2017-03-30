@@ -47,12 +47,26 @@ public class QnaPageRouter implements Handler<RoutingContext> {
 			
 			try {
 				resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+				resultSet.next();
 				
 				templates.put("title", resultSet.getString("title"));
 				templates.put("subinfo", resultSet.getString("writer"));
-				templates.put("content", resultSet.getString("content"));
+				templates.put("content", resultSet.getString("question_content"));
 				templates.put("answer_subinfo", resultSet.getString("answer_date"));
 				templates.put("answer_content", resultSet.getString("answer_content"));
+				if(Guardian.isAdmin(context)) {
+					templates.put("isWriter", false);
+					templates.put("isAdmin", true);
+				} else {
+					String uid = userManager.getUid(userManager.getIdFromSession(context));
+					if(resultSet.getString("owner") == uid) {
+						templates.put("isWriter", true);
+						templates.put("isAdmin", false);
+					} else {
+						templates.put("isWriter", false);
+						templates.put("isAdmin", false);
+					}
+				}
 				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
