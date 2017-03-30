@@ -459,6 +459,12 @@ table tr {
     cursor: pointer;
 }
 
+#this_week {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
 /*--------------------- go out apply -------------------*/
 
 #individual_reason {
