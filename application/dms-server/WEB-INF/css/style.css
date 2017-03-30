@@ -1049,6 +1049,36 @@ input.editor-button {
   color: white;
 }
 
+#control_qna {
+  border: 3px solid #97d4da;
+  color: #97d4da;
+}
+
+#control_qna:hover {
+  background-color: #97d4da;
+  color: white;
+}
+
+#control_faq {
+  border: 3px solid #529aaa;
+  color: #529aaa;
+}
+
+#control_faq:hover {
+  background-color: #529aaa;
+  color: white;
+}
+
+#control_none {
+  border: 3px solid #a9ade7;
+  color: #a9ade7;
+}
+
+#control_none:hover {
+  background-color: #a9ade7;
+  color: white;
+}
+
 /*------------------------ logo ------------------------*/
 
 .logo {
