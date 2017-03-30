@@ -3,13 +3,11 @@ package com.dms.planb.action.post.faq;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
-
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -17,10 +15,19 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/faq", method={HttpMethod.DELETE})
 public class DeleteFaq implements Handler<RoutingContext> {
+	public DeleteFaq() {
+		
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
-		if (!Guardian.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
+		
+		if (!Guardian.isAdmin(context)) {
+			context.response().setStatusCode(400).end();
+			context.response().close();
+			return;
+		}
 		
 		DataBase database = DataBase.getInstance();
 		EasyJsonObject responseObject = new EasyJsonObject();

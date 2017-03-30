@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/extension", method={HttpMethod.DELETE})
 public class WithdrawExtensionApply implements Handler<RoutingContext> {
-	UserManager userManager;
+	private UserManager userManager;
 	
 	public WithdrawExtensionApply() {
 		userManager = new UserManager();
@@ -30,6 +30,7 @@ public class WithdrawExtensionApply implements Handler<RoutingContext> {
 		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);

@@ -37,6 +37,7 @@ public class ModifyPassword implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
 		String password = context.request().getParam("password");
 		
 		if(!Guardian.checkParameters(id, uid, password)) {

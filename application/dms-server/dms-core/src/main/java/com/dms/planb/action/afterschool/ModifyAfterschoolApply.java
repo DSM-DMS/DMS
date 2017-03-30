@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/afterschool", method={HttpMethod.PATCH})
 public class ModifyAfterschoolApply implements Handler<RoutingContext> {
-	UserManager userManager;
+	private UserManager userManager;
 	
 	public ModifyAfterschoolApply() {
 		userManager = new UserManager();
@@ -28,9 +28,10 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 		
 		DataBase database = DataBase.getInstance();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
+		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);
@@ -38,6 +39,8 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        int no = Integer.parseInt(context.request().getParam("no"));
 		int targetNo = Integer.parseInt(context.request().getParam("target_no"));
 		
 		if(!Guardian.checkParameters(no, id, uid, targetNo)) {

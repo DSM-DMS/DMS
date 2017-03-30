@@ -30,6 +30,7 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
 		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);
@@ -37,6 +38,7 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         String target = context.request().getParam("date");
         
         if(!Guardian.checkParameters(id, uid, target)) {

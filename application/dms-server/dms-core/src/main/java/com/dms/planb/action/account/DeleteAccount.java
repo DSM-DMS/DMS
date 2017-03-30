@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/account/student", method={HttpMethod.DELETE})
 public class DeleteAccount implements Handler<RoutingContext> {
-	UserManager userManager;
+	private UserManager userManager;
 	
 	public DeleteAccount() {
 		userManager = new UserManager();

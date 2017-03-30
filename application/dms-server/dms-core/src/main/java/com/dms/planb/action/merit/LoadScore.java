@@ -34,6 +34,7 @@ public class LoadScore implements Handler<RoutingContext> {
 
         String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);

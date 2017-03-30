@@ -45,6 +45,7 @@ public class LoginStudentApplicationRequest implements Handler<RoutingContext> {
         	boolean check = userManager.login(id, password);
             if (check) {
             	userManager.registerSession(context, Boolean.valueOf(remember), id);
+            	
                 context.response().setStatusCode(201);
                 context.response().end(responseObject.toString());
                 context.response().close();

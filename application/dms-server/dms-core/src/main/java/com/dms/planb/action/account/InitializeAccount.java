@@ -15,6 +15,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/initialize", method = { HttpMethod.POST })
 public class InitializeAccount implements Handler<RoutingContext> {
+	public InitializeAccount() {
+		
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
@@ -22,9 +26,8 @@ public class InitializeAccount implements Handler<RoutingContext> {
 		context = PrecedingWork.putHeaders(context);
 
 		if (!AdminManager.isAdmin(context)) {
-			context.response().setStatusCode(500).end();
+			context.response().setStatusCode(400).end();
 			context.response().close();
-			
 			return;
 		}
 

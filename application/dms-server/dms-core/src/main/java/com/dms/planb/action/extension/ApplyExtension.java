@@ -30,10 +30,9 @@ public class ApplyExtension implements Handler<RoutingContext> {
 
         DataBase database = DataBase.getInstance();
 
-        String classId = context.request().getParam("class");
-        String seatId = context.request().getParam("seat");
         String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);
@@ -41,6 +40,9 @@ public class ApplyExtension implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        String classId = context.request().getParam("class");
+        String seatId = context.request().getParam("seat");
         
         if(!Guardian.checkParameters(classId, seatId, id, uid)) {
         	context.response().setStatusMessage("Check parameter or after than login");

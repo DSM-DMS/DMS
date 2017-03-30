@@ -24,6 +24,10 @@ import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 @RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
+	public LoadExtensionClassStatus() {
+		
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -55,13 +59,13 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 				classId = Integer.parseInt(context.request().getParam("class"));
 				break;
 			}
+			
 			context.response().setStatusCode(200);
 			context.response().end(json.toString());
 			context.response().close();
 		} catch (SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
-			e.printStackTrace();
 
 			Log.l("SQLException");
 		}

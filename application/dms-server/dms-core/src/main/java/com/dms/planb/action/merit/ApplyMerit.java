@@ -16,7 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/apply/merit", method={HttpMethod.POST})
 public class ApplyMerit implements Handler<RoutingContext> {
-	UserManager userManager;
+	private UserManager userManager;
 	
 	public ApplyMerit() {
 		userManager = new UserManager();
@@ -30,6 +30,7 @@ public class ApplyMerit implements Handler<RoutingContext> {
 		
 		String id = userManager.getIdFromSession(context);
         String uid = null;
+        
         try {
             if (id != null) {
                 uid = userManager.getUid(id);
@@ -37,6 +38,7 @@ public class ApplyMerit implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
 		String content = context.request().getParam("content");
 		
 		if(!Guardian.checkParameters(id, uid, content)) {
