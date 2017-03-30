@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,6 +18,8 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+
+import com.sun.javafx.binding.StringFormatter;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -38,10 +39,9 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 		SafeResultSet resultSet;
 		SafeResultSet stayStateResultSet;
 		SafeResultSet stayDefaultResultSet;
-		SafeResultSet goingoutStateResultSet;
 		AES256 aes = UserManager.getAES();
 		
-		String week = (context.request().getParam("year") + "-" + context.request().getParam("month") + "-" + context.request().getParam("week"));
+		String week = (StringFormatter.format("%4d-%02d-%02d", context.request().getParam("year"), context.request().getParam("month"), context.request().getParam("week"))).getValue();
 		
 		File file = getFile();
 		
@@ -66,42 +66,12 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 
 							if (stayStateResultSet.next()) {
 								// 잔류신청을 한 경우
-								if (stayStateResultSet.getInt("value") == 4) {
-									// 잔류일 때
-									XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
-									XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
-
-									goingoutStateResultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
-									goingoutStateResultSet.next();
-									
-									boolean sat = goingoutStateResultSet.getBoolean("sat");
-									boolean sun = goingoutStateResultSet.getBoolean("sun");
-
-									if (sat && sun) {
-										// 모두 외출
-										goingoutStateCell.setCellValue("토요일, 일요일 외출");
-									} else if (sat && (!sun)) {
-										// 토요일만 외출
-										goingoutStateCell.setCellValue("토요일 외출");
-									} else if ((!sat) && sun) {
-										// 일요일만 외출
-										goingoutStateCell.setCellValue("일요일 외출");
-									} else {
-										goingoutStateCell.setCellValue("미신청");
-									}
-								} else {
-									// 잔류가 아닐 때
-									XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
-									studentRow.getCell(cell.getColumnIndex()).setCellValue("");
-									studentRow.getCell(cell.getColumnIndex() + 1).setCellValue("");
-								}
+								setCellValues(stayStateResultSet, database, sheet, cell, uid);
 							} else {
 								// 잔류신청 정보 없음
 								stayDefaultResultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
-								XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
-								XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
-								
-								goingoutStateCell.setCellValue("잔류신청 정보 없음");
+								// default 값 조회
+								setCellValues(stayDefaultResultSet, database, sheet, cell, uid);
 							}
 						}
 						
@@ -129,5 +99,38 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 			file.mkdir();
 		}
 		return file;
+	}
+	
+	private void setCellValues(SafeResultSet stayStateResultSet, DataBase database, XSSFSheet sheet, Cell cell, String uid) throws SQLException {
+		if(stayStateResultSet.getInt("value") == 4 || stayStateResultSet.getInt("value") == 3) {
+			// default 값이 잔류 또는 토요귀사일 때
+			XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
+			XSSFCell goingoutStateCell = studentRow.getCell(cell.getColumnIndex() + 2);
+			
+			SafeResultSet goingoutStateResultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
+			goingoutStateResultSet.next();
+			
+			boolean sat = goingoutStateResultSet.getBoolean("sat");
+			boolean sun = goingoutStateResultSet.getBoolean("sun");
+
+			if (sat && sun) {
+				// 모두 외출
+				goingoutStateCell.setCellValue("토요일, 일요일 외출");
+			} else if (sat && (!sun)) {
+				// 토요일만 외출
+				goingoutStateCell.setCellValue("토요일 외출");
+			} else if ((!sat) && sun) {
+				// 일요일만 외출
+				goingoutStateCell.setCellValue("일요일 외출");
+			} else {
+				goingoutStateCell.setCellValue("미신청");
+			}
+		} else {
+			// default 값이 금요귀가 또는 토요귀가일 때
+			XSSFRow studentRow = sheet.getRow(cell.getRowIndex());
+			studentRow.getCell(cell.getColumnIndex()).setCellValue("");
+			studentRow.getCell(cell.getColumnIndex() + 1).setCellValue("");
+			// 학생 학번과 이름 셀 삭제
+		}
 	}
 }
