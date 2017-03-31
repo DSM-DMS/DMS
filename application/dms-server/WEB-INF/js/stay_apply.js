@@ -533,13 +533,16 @@ function setThisWeek(thisDate) {
     week = 1;
   }
   var year = thisDate.getFullYear();
-  var month = thisDate.getMonth() + 1;
+  var month = thisDate.getMonth();
+
+  var weekData= year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
+  console.log(weekData);
 
   $.ajax({
     url: "/apply/stay",
     type: "GET",
     data: {
-      "week": year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2)
+      "week": weekData
     },
     success: function(prevData) {
       try {
