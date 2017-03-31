@@ -2,6 +2,7 @@ package com.dms.boxfox.templates.post.data;
 
 import com.dms.boxfox.templates.DmsTemplate;
 import freemarker.template.TemplateException;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -41,13 +42,14 @@ public class PostContextTemplate {
         return category;
     }
 
-    public String processContent(int no, boolean check) throws IOException, TemplateException, SQLException {
+    public String processContent(int no, boolean isWriter, boolean isAdmin) throws IOException, TemplateException, SQLException {
         DmsTemplate template = new DmsTemplate(targetTemplate);
         for (String key : list.keySet()) {
             String[] columns = list.get(key);
             template.put(key, getString(no, columns));
         }
-        template.put("isWriter", check);
+        template.put("isWriter", isWriter);
+        template.put("isAdmin", isAdmin);
         return template.process();
     }
 

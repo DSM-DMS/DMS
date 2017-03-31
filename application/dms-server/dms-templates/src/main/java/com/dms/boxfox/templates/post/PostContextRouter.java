@@ -6,6 +6,7 @@ import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
@@ -83,7 +84,7 @@ public class PostContextRouter implements Handler<RoutingContext> {
                 if (postWriter != null) {
                     try {
                         context.response().setStatusCode(200);
-                        context.response().end(postWriter.processContent(no, isWriter));
+                        context.response().end(postWriter.processContent(no, isWriter, AdminManager.isAdmin(context)));
                         context.response().close();
                     } catch (IOException e) {
                         e.printStackTrace();
