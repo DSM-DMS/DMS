@@ -3,6 +3,7 @@ package com.dms.planb.action.post.qna;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -44,6 +45,7 @@ public class LoadQnaComment implements Handler<RoutingContext> {
 				tempObject = new EasyJsonObject();
 				
 				tempObject.put("no", resultSet.getInt("idx"));
+				tempObject.put("id", UserManager.getAES().decrypt(resultSet.getString("id")));
 				tempObject.put("writer", resultSet.getString("writer"));
 				tempObject.put("comment_date", resultSet.getString("comment_date"));
 				tempObject.put("content", resultSet.getString("content"));
