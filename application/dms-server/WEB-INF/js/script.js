@@ -99,3 +99,24 @@ function showAllergy(dom) {
         $(dom).attr("src", "./images/arrow2.png")
     }
 }
+
+bugReportEvent();
+function bugReportEvent() {
+    $(".bug-report-btn").click(function () {
+        $.ajax({
+            url: "/post/bug",
+            type: "POST",
+            data: {
+                title: $(".bug-title-input").val(),
+                content: $(".bug-title-input").val()
+            },
+            success: function () {
+                alert("버그를 제보해 주셔서 고맙습니다!");
+                $("#bugModal button:nth-child(2)").click();
+            },
+            error: function () {
+                alert("버그신고에 실패했어요 TT");
+            }
+        });
+    });
+}
