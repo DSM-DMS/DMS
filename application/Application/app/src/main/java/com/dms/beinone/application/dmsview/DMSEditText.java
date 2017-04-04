@@ -34,7 +34,7 @@ public class DMSEditText extends EditText {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DMSEditText);
-        int style = a.getInt(R.styleable.DMSImageButton_ib_style, STYLE_NORMAL);
+        int style = a.getInt(R.styleable.DMSEditText_dmset_style, STYLE_NORMAL);
 
         int defBackgroundColor = ContextCompat.getColor(context, android.R.color.white);
         int defStrokeColor = ContextCompat.getColor(context, R.color.colorPrimary);
