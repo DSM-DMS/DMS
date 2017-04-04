@@ -96,8 +96,10 @@ public class MypageFragment extends Fragment {
             try {
                 student = loadMypage();
             } catch (IOException e) {
+                e.printStackTrace();
                 return null;
             } catch (JSONException e) {
+                e.printStackTrace();
                 return null;
             }
 
@@ -109,7 +111,7 @@ public class MypageFragment extends Fragment {
             super.onPostExecute(student);
 
             if (student == null) {
-                Toast.makeText(getContext(), R.string.mypage_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
             } else {
                 bind(student);
             }

@@ -1,6 +1,7 @@
 package com.dms.boxfox.networking;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.dms.boxfox.networking.datamodel.HeaderProperty;
 import com.dms.boxfox.networking.datamodel.Request;
@@ -16,7 +17,7 @@ import java.util.Scanner;
 
 public class HttpBox {
     //아래와 같이 사용
-    //HttpBox.post().setCommand(1234).putBodyData(JSonObject).push();
+    //HttpBox.post().setCommand(1234).putBodyData(JsonObject).push();
 
     //해당 url 수정 필요
     public static final String SERVER_URL = "http://dsm2015.cafe24.com:80";
@@ -50,6 +51,7 @@ public class HttpBox {
         if (request.getBodyData() != null) {
             BufferedWriter httpRequestBodyWriter = new BufferedWriter(
                     new OutputStreamWriter(urlConnection.getOutputStream()));
+            Log.d("testLog", request.getBodyData());
             httpRequestBodyWriter.write(request.getBodyData());
             httpRequestBodyWriter.close();
         }

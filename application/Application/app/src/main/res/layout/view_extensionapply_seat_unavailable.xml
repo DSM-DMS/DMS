@@ -4,6 +4,7 @@
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:padding="0dp"
     dmsbtn:dmsbtn_style="rectangle"
     dmsbtn:dmsbtn_backgroundColor="@color/colorAccent"
     dmsbtn:dmsbtn_strokeColor="@color/colorAccent"

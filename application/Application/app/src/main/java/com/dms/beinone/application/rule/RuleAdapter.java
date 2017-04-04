@@ -166,7 +166,15 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
         }
 
         public void bind(String content) {
-            mContentWV.loadData(content, "text/html; charset=UTF-8", null);
+            String data = "<html>"
+                    + "<head>"
+                    + "<style type=\"text/css\">body{color: #fff;}</style>"
+                    + "</head>"
+                    + "<body>"
+                    + content
+                    + "</body>"
+                    + "</html>";
+            mContentWV.loadData(data, "text/html; charset=UTF-8", null);
         }
 
     }

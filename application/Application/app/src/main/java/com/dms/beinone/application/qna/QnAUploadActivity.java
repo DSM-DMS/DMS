@@ -1,6 +1,5 @@
 package com.dms.beinone.application.qna;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -48,10 +47,6 @@ public class QnAUploadActivity extends AppCompatActivity {
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences prefs =
-                getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
-        final String writer = prefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
-
         mTitleTV = (TextView) findViewById(R.id.tv_qna_write_title);
         mTitleET = (EditText) findViewById(R.id.et_qna_write_title);
         mTitleET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -96,7 +91,7 @@ public class QnAUploadActivity extends AppCompatActivity {
                 String content = mContentET.getText().toString().trim();
                 boolean privacy = mPrivacySwitch.isChecked();
 
-                new UploadQnATask().execute(new QnA(title, content, writer, privacy));
+                new UploadQnATask().execute(new QnA(title, content, privacy));
             }
         });
     }
@@ -151,7 +146,6 @@ public class QnAUploadActivity extends AppCompatActivity {
             Map<String, String> requestParams = new HashMap<>();
             requestParams.put("title", qna.getTitle());
             requestParams.put("content", qna.getQuestionContent());
-            requestParams.put("writer", qna.getWriter());
             requestParams.put("privacy", String.valueOf(qna.isPrivacy()));
 
             Response response =

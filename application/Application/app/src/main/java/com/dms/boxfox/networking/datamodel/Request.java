@@ -154,12 +154,16 @@ public class Request {
         return this;
     }
 
-    public Request putBodyData(JSONObject obj) {
-        String str = obj.toString();
+    public Request putBodyData(String str) {
         if(aes!=null)
             str = aes.encrypt(str);
         this.bodyData = str;
         return this;
+    }
+
+    public Request putBodyData(JSONObject obj) {
+        String str = obj.toString();
+        return putBodyData(str);
     }
 
     public Request putBodyData(){

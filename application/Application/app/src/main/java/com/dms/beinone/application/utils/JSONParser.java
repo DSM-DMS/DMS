@@ -311,13 +311,22 @@ public class JSONParser {
     }
 
     public static Student parseStudentJSON(JSONObject rootJSONObject) throws JSONException {
-        int number = rootJSONObject.getInt("number");
+        int number = Integer.valueOf(rootJSONObject.getString("number"));
         String name = rootJSONObject.getString("name");
-        int merit = rootJSONObject.getInt("merit");
-        int demerit = rootJSONObject.getInt("demerit");
-        String profileImage = rootJSONObject.getString("profile_image");
+        int merit = Integer.valueOf(rootJSONObject.getString("merit"));
+        int demerit = Integer.valueOf(rootJSONObject.getString("demerit"));
+        int room = safeIntegerValueOf(rootJSONObject.getString("room"));
+        int seat = safeIntegerValueOf(rootJSONObject.getString("seat"));
 
-        return new Student(number, name, merit, demerit, profileImage);
+        return new Student(number, name, merit, demerit, room, seat);
+    }
+
+    private static int safeIntegerValueOf(String s) {
+        if (s.equals("")) {
+            return -1;
+        } else {
+            return Integer.valueOf(s);
+        }
     }
 
 }

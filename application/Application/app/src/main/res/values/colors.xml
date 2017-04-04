@@ -9,6 +9,6 @@
     
     <color name="disabled">#61000000</color>
 
-    <color name="merit">#66BB6A</color>
-    <color name="demerit">#EF5350</color>
+    <color name="positive">#66BB6A</color>
+    <color name="negative">#EF5350</color>
 </resources>

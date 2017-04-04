@@ -3,7 +3,6 @@ package com.dms.beinone.application.home;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 /**
  * Created by BeINone on 2017-03-12.
@@ -31,7 +30,6 @@ public class HomeMealFragmentStatePagerAdapter extends FragmentStatePagerAdapter
 
     @Override
     public Fragment getItem(int position) {
-        Log.d("testLog", "getItem: " + position);
         return mHomeMealFragments[position];
     }
 

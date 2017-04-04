@@ -7,8 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
@@ -51,14 +51,13 @@ public class CommentActivity extends AppCompatActivity {
         mRecyclerView = (EmptySupportedRecyclerView) findViewById(R.id.rv_comment);
 
         mCommentET = (EditText) findViewById(R.id.et_comment_comment);
-        Button postBtn = (Button) findViewById(R.id.ib_comment_post);
-        postBtn.setOnClickListener(new View.OnClickListener() {
+        ImageButton postIB = (ImageButton) findViewById(R.id.ib_comment_post);
+        postIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String comment = mCommentET.getText().toString().trim();
-                String id = mAccountPrefs.getString("id", "");
 
-                new UploadCommentTask().execute(mNo, comment, id);
+                new UploadCommentTask().execute(mNo, comment);
             }
         });
 
@@ -131,12 +130,13 @@ public class CommentActivity extends AppCompatActivity {
             try {
                 int no = (int) params[0];
                 String content = params[1].toString();
-                String writer = params[2].toString();
 
-                code = uploadComment(no, content, writer);
+                code = uploadComment(no, content);
             } catch (IOException e) {
+                e.printStackTrace();
                 return -1;
             } catch (JSONException e) {
+                e.printStackTrace();
                 return -1;
             }
 
@@ -151,7 +151,7 @@ public class CommentActivity extends AppCompatActivity {
                 // success
                 clearView();
                 new LoadCommentTask().execute(mNo);
-            } else if (code == 204) {
+            } else if (code == 400) {
                 // failure
                 Toast.makeText(CommentActivity.this, R.string.comment_upload_failure,
                         Toast.LENGTH_SHORT).show();
@@ -162,13 +162,12 @@ public class CommentActivity extends AppCompatActivity {
             }
         }
 
-        private int uploadComment(int no, String content, String writer)
+        private int uploadComment(int no, String content)
             throws IOException, JSONException {
 
             Map<String, String> requestParams = new HashMap<>();
             requestParams.put("no", String.valueOf(no));
             requestParams.put("content", content);
-            requestParams.put("writer", writer);
 
             Response response =
                     HttpBox.post(CommentActivity.this, "/post/qna/comment", Request.TYPE_POST)

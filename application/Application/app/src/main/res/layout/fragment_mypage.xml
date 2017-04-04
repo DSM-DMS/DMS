@@ -95,11 +95,10 @@
                     android:layout_height="56dp">
 
                     <!-- merit -->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@color/merit"
                         android:paddingEnd="16dp"
                         android:paddingLeft="16dp"
                         android:paddingRight="16dp"
@@ -108,24 +107,30 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:layout_centerVertical="true"
                             android:text="상점"
-                            android:textColor="@android:color/white" />
+                            android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/tv_mypage_merit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:textColor="@android:color/white" />
-                    </LinearLayout>
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/positive" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
 
                     <!-- demerit -->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@color/demerit"
                         android:paddingEnd="16dp"
                         android:paddingLeft="16dp"
                         android:paddingRight="16dp"
@@ -134,21 +139,28 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:layout_centerVertical="true"
                             android:text="벌점"
-                            android:textColor="@android:color/white" />
+                            android:textColor="@android:color/black" />
 
                         <TextView
                             android:id="@+id/tv_mypage_demerit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:textColor="@android:color/white" />
-                    </LinearLayout>
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/negative" />
+                    </RelativeLayout>
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
                 <!-- total -->
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:paddingEnd="16dp"
@@ -159,7 +171,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_centerVertical="true"
                         android:text="총점"
                         android:textColor="@android:color/black" />
 
@@ -167,8 +179,41 @@
                         android:id="@+id/tv_mypage_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical" />
-                </LinearLayout>
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+                <!-- extension apply status -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingEnd="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="연장신청 상태"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_mypage_extensionapply_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+                </RelativeLayout>
+
             </LinearLayout>
 
         </LinearLayout>

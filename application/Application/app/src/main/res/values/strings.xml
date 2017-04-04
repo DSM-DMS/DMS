@@ -213,11 +213,13 @@
     <string name="mypage_merit">상점</string>
     <string name="mypage_demerit">벌점</string>
     <string name="mypage_total">총점</string>
-    <string name="mypage_sex">성별</string>
-    <string name="mypage_phone">전화번호</string>
     <string name="mypage_status">상태</string>
-    <string name="mypage_parent">학부모</string>
-    <string name="mypage_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
+    <string name="mypage_applied">신청됨</string>
+    <string name="mypage_notapplied">미신청</string>
+    <string name="mypage_load_info_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
+    <string name="mypage_upload_profile_success">프로필 사진을 변경하였습니다.</string>
+    <string name="mypage_upload_profile_message_notimagefile">이미지 파일이 아닙니다.</string>
+    <string name="mypage_upload_profile_message_needlogin">로그인이 필요합니다.</string>
 
     <!-- Menu -->
     <string name="menu_delete">삭제</string>

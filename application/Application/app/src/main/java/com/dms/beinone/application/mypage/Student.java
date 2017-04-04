@@ -10,7 +10,8 @@ public class Student {
     private String name;
     private int merit;
     private int demerit;
-    private String profileImage;
+    private int room;
+    private int seat;
 
     public Student() {
 
@@ -23,12 +24,13 @@ public class Student {
         setDemerit(demerit);
     }
 
-    public Student(int number, String name, int merit, int demerit, String profileImage) {
+    public Student(int number, String name, int merit, int demerit, int room, int seat) {
         setNumber(number);
         setName(name);
         setMerit(merit);
         setDemerit(demerit);
-        setProfileImage(profileImage);
+        setRoom(room);
+        setSeat(seat);
     }
 
     public int getNumber() {
@@ -63,12 +65,20 @@ public class Student {
         this.demerit = demerit;
     }
 
-    public String getProfileImage() {
-        return profileImage;
+    public int getRoom() {
+        return room;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public void setRoom(int room) {
+        this.room = room;
+    }
+
+    public int getSeat() {
+        return seat;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
     }
 
 }
