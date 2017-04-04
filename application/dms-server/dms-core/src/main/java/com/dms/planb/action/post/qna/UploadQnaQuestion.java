@@ -28,7 +28,6 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
 		
 		String title = context.request().getParam("title");
 		String content = context.request().getParam("content");
-		String writer = context.request().getParam("writer");
 		boolean privacy = Boolean.parseBoolean(context.request().getParam("privacy"));
 		String uid = null;
 		try {
@@ -37,14 +36,14 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
 			e.printStackTrace();
 		}
 		
-		if(!Guardian.checkParameters(title, content, writer, privacy)) {
+		if(!Guardian.checkParameters(title, content, privacy)) {
             context.response().setStatusCode(400).end();
             context.response().close();
         	return;
         }
 		
 		try {
-			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, writer, privacy, owner) VALUES('", title, "', '", content, "', now(), '", writer, "', ", privacy, "', '", uid, ")");
+			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, ")");
 			
 			context.response().setStatusCode(201).end();
 			context.response().close();

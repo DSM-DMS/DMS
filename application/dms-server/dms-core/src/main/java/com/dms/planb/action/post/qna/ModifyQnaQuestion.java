@@ -24,9 +24,8 @@ public class ModifyQnaQuestion implements Handler<RoutingContext> {
 		int no = Integer.parseInt(context.request().getParam("no"));
 		String title = context.request().getParam("title");
 		String content = context.request().getParam("content");
-		String writer = context.request().getParam("writer");
 		
-		if(!Guardian.checkParameters(no, title, content, writer)) {
+		if(!Guardian.checkParameters(no, title, content)) {
             context.response().setStatusCode(400).end();
             context.response().close();
         	return;
@@ -35,7 +34,6 @@ public class ModifyQnaQuestion implements Handler<RoutingContext> {
 		try {
 			database.executeUpdate("UPDATE qna SET title='", title, "' WHERE no=", no);
 			database.executeUpdate("UPDATE qna SET question_content='", content, "' WHERE no=", no);
-			database.executeUpdate("UPDATE qna SET writer='", writer, "' WHERE no=", no);
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

@@ -59,9 +59,9 @@ public class ApplyExtension implements Handler<RoutingContext> {
             if (!ApplyDataUtil.canApplyExtension()) {
                 context.response().setStatusCode(204).end();
                 context.response().close();
-            } else if(database.executeQuery("SELECT FROM extension_apply WHERE class=", classId, " AND seat=", seatId).next()) {
-            	context.response().setStatusCode(409).end();
-            	context.response().close();
+//            } else if(database.executeQuery("SELECT FROM extension_apply WHERE class=", classId, " AND seat=", seatId).next()) {
+//            	context.response().setStatusCode(409).end();
+//            	context.response().close();
             } else {
                 database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
                 database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");

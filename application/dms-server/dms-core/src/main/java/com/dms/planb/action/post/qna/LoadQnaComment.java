@@ -46,7 +46,6 @@ public class LoadQnaComment implements Handler<RoutingContext> {
 				
 				tempObject.put("no", resultSet.getInt("idx"));
 				tempObject.put("id", UserManager.getAES().decrypt(resultSet.getString("id")));
-				tempObject.put("writer", resultSet.getString("writer"));
 				tempObject.put("comment_date", resultSet.getString("comment_date"));
 				tempObject.put("content", resultSet.getString("content"));
 				
