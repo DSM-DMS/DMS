@@ -58,20 +58,6 @@ $(".modify-password-btn").click(function() {
     }
 });
 
-$(".delete-account-btn").click(function() {
-    $.ajax({
-        url: "/account/initialize",
-        type: "POST",
-        data: {
-            uid: $(".uid-code").val()
-        },
-        success: function() {
-            alert("삭제가 완료되었습니다.");
-        }
-    })
-})
-
-
 $(".modify-profile-picture-btn").click(function() {
     if ($(".preview-picture").attr("src") !== null) {
         var formData = new FormData();

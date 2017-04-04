@@ -68,10 +68,23 @@ $('#goOut_download').on('click', function () {
   }
   var year = today.getFullYear();
   var month = today.getMonth() + 1;
-  
+
   location.href = 'http://dsm2015.cafe24.com/goingout/download?year=' + year + '&month=' + month + '&week=' + week;
 })
 
 $('#extension_download').on('click', function () {
   location.href = 'http://dsm2015.cafe24.com/extension/download';
+})
+
+$(".delete-account-btn").click(function() {
+    $.ajax({
+        url: "/account/initialize",
+        type: "POST",
+        data: {
+            uid: $(".uid-code").val()
+        },
+        success: function() {
+            alert("삭제가 완료되었습니다.");
+        }
+    })
 })

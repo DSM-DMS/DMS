@@ -133,8 +133,8 @@ function setCommentBtnEvent() {
             type: "POST",
             data: {
                 no: getAllUrlParams(document.URL).no,
-                content: $(".comment-input-text").val(),
-                writer: "writer"
+                content: $(".comment-input-text").val()
+              //  writer: "writer"
             },
             success: function(data) {
                 getQnaCommentList(addTr);
