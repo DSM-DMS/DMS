@@ -1,7 +1,5 @@
 package org.boxfox.dms.utilities.actions.support;
 
-import sun.util.resources.cldr.ne.CalendarData_ne_NP;
-
 import java.util.Calendar;
 
 public class ApplyDataUtil {
