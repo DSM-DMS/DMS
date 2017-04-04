@@ -1,6 +1,14 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Serif');
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 * {
-    font-family: "hanna";
+    font-family: "Noto Sans KR", "Nanum Gothic";
+}
+
+h1, h2, h3, h4, h5, h6, .underbar-title {
+    font-family:  'Noto Sans KR', "Noto Serif";
 }
 
 body {
