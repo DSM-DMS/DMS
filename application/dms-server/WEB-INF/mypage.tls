@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DMS</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -18,26 +18,26 @@
 
     <div class="row slider-menu-container hides">
         <div class="menu-controller show">
-            <img src="/images/arrow.png">
+            <img src="../image/arrow.png">
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/megaphone.png" />
+            <img src="images/megaphone.png" />
             <div>공지사항</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/writing.png" />
+            <img src="images/writing.png" />
             <div>연장신청</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/settings.png" />
+            <img src="images/settings.png" />
             <div>수리신고</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/chicken.png" />
+            <img src="images/chicken.png" />
             <div>학교급식</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/crown.png" />
+            <img src="images/crown.png" />
             <div>상점신청</div>
         </div>
         <div class="icon-menu-item text-center">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/man.png" />
+            <img src="images/man.png" />
             <div>내정보</div>
         </div>
     </div>
@@ -69,9 +69,9 @@
                 <div class="card-block center-block mypage-container">
                     <div class="row mypage-row">
                         <div class="col-lg-3 col-md-12">
-                            <img class="profile-pic" src="/lookup/image/${profile}" alt="default image">
-                            <h3>${name}</h3>
-                            <h4>${number}</h4>
+                            <img class="profile-pic" src="images/chayoung.jpg" alt="default image">
+                            <h3>손채영</h3>
+                            <h4>30220</h4>
                             <a href="#profileModal" data-toggle="modal">프로필 사진 수정</a> <br>
                             <div class="modal fade" id="profileModal" role="dialog">
                                 <div class="modal-dialog">
@@ -92,29 +92,53 @@
 
                                 </div>
                             </div>
-                            <a class="modify-password" href="#myModal" data-toggle="modal">비밀번호 수정</a> <br>
+                            <a class="modify-password" href="#passwordModal" data-toggle="modal">비밀번호 수정</a> <br>
                             <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal fade" id="passwordModal" role="dialog">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title">비밀번호 수정</h4>
                                         </div>
-                                        <div class="modal-body">
-                                            <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input id="modify-password" type="password" class="form-control" name="id" value="" placeholder="새로운 비밀번호"> </div>
-                                            <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input id="modify-password-re" type="password" class="form-control" name="id" value="" placeholder="비밀번호 재확인"> </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="modify-password-btn btn btn-info">변경</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
+                                        <form class="modify-password-form">
+                                            <div class="modal-body form-horizontal pl-5 pr-5" role="form">
+                                                <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                    <input id="modify-password" type="password" class="form-control" name="id" value="" placeholder="새로운 비밀번호" required> </div>
+                                                <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                    <input id="modify-password-re" type="password" class="form-control" name="id" value="" placeholder="비밀번호 재확인" required> </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="modify-password-btn btn btn-info">변경</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
                                     </div>
-
                                 </div>
                             </div>
+                            <a class="init-info" href="#initModal" data-toggle="modal">계정 삭제</a> <br>
+                            <!-- Modal -->
+                            <div class="modal fade" id="initModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">계정 삭제</h4>
+                                        </div>
+                                        <form class="modify-password-form">
+                                            <div class="modal-body form-horizontal pl-5 pr-5" role="form">
+                                                <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign"></i></span>
+                                                    <input id="init-info" type="text" class="uid-code form-control" name="code" value="" placeholder="가입시, 입력한 코드를 입력하세요." required></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="delete-account-btn btn btn-danger">삭제</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="col-lg-9 col-md-12 mb-5">
                             <div class="row">
@@ -132,7 +156,7 @@
                                         <div class="card-block">
                                             <h4>연장학습 신청상태</h4>
                                             <div class="simple-container">
-                                                <span>${room} ${seat}</span>
+                                                <span>${class} ${seat}</span>
                                             </div>
                                             <div class="detail-container">
 
@@ -187,7 +211,11 @@
                                         <div class="card-block">
                                             <h4>잔류신청 상태</h4>
                                             <div class="simple-container">
-                                                <p>이번 주 : ${stay_status}</p>
+                                                <p>이번 주 : ${status}</p>
+                                            </div>
+                                            <div class="detail-container">
+                                                <p>이번 주 : ${status}</p>
+                                                <p>다음 주 : ${status}</p>
                                             </div>
                                             <a class="move-a" href="#">잔류신청 하러가기</a>
                                             <span class="moreinfo-span">클릭하여 자세히보기</span>
@@ -320,7 +348,7 @@
 
 </body>
 
-<script src="/js/script.js"></script>
-<script src="/js/mypage.js"></script>
+<script src="./js/script.js"></script>
+<script src="./js/mypage.js"></script>
 
 </html>
