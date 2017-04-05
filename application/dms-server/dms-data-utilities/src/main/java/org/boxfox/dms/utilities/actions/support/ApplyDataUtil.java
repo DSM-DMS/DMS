@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class ApplyDataUtil {
     //this class change to .config file later
-    public static String EXTENSION_APPLY_TIME = "17:40";
+    public static String EXTENSION_APPLY_TIME = "17:30";
 
     public static boolean canApplyStay(String week) {
         Calendar calendar = Calendar.getInstance();
