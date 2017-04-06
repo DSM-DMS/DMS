@@ -35,7 +35,8 @@
 		<module>dms-secure</module>
 		<module>dms-parser</module>
 		<module>dms-templates</module>
-	</modules>
+        <module>dms-api</module>
+    </modules>
 
 	<dependencies>
 		<dependency>
