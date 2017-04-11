@@ -67,6 +67,7 @@ var applyData = function () {
     },
     success: function() {
       alert('신청되었습니다.');
+      setThisWeek(new Date());
     },
     error: function(xhr, status, err) {
       alert('신청 시간이 아닙니다.')
@@ -496,7 +497,7 @@ $('#stay_submit').on('click', function() {
 
 //------------------ 이번 주 정보 --------------
 
-var leadingZeros = function (data, num) {
+function leadingZeros (data, num) {
 	 var zero = '';
 	 data = data.toString();
 
@@ -533,12 +534,13 @@ function setThisWeek(thisDate) {
     week = 1;
   }
   var year = thisDate.getFullYear();
-  var month = thisDate.getMonth();
+  var month = thisDate.getMonth() + 1;
 
   var weekData= year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
   console.log(weekData);
 
-  $.ajax({
+
+$.ajax({
     url: "/apply/stay",
     type: "GET",
     data: {
