@@ -93,6 +93,7 @@ function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
     for (var i = 1; i <= 5; i++) {
         if(i < weekNum) {
           valueArray.push(0);
+          defaultSelector.push(false);
         } else {
           loadSendDataWeek = dateToString(i);
           getData();
@@ -102,6 +103,7 @@ function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
     for (var i = 1; i <= 4; i++) {
         if(i < weekNum) {
           valueArray.push(0);
+          defaultSelector.push(false);
         } else {
           loadSendDataWeek = dateToString(i);
           getData();
@@ -112,6 +114,7 @@ function loadPrev() { //valueArray에 해당 달의 신청 상태 저장
 
 function drawPrev() {
     loadPrev();
+    console.log(defaultSelector);
     for (i = 1; i <= valueArray.length; i++) {
         if(defaultSelector[i - 1]) {
             $('tr:eq(' + (i + 1) + ')').css('color', 'rgb(255, 82, 82)');
