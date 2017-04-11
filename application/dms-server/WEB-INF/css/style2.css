@@ -10,6 +10,16 @@ h1, h2, h3, h4, h5, h6, .underbar-title {
     font-family: 'Noto Sans KR', "Noto Serif";
 }
 
+h1 {
+  font-size: 5.9vw;
+}
+h2 {
+  font-size: 3.0vh;
+}
+p {
+  font-size: 2vmin;
+}
+
 body {
     background: #F1F1F1 !important;
 }
@@ -22,6 +32,11 @@ body {
     text-decoration: none;
     color: #333333;
 }
+
+/*.Header-Logo:hover {
+    text-decoration: none;
+    color: #333333;
+}*/
 
 
 /*-------------------------- under bar title box--------------------------------*/
@@ -262,7 +277,7 @@ table tr {
 }
 
 .extentionapply .seatcontainer .seat {
-    position: relative;
+    position: fixed;
     width: 60px;
     height: 60px;
     border-radius: 30px;
