@@ -234,4 +234,15 @@ public class UserManager implements AccountManageable {
         }
         return false;
     }
+    
+    public void removeCookie(RoutingContext context) {
+    	String idEncrypt = aes.encrypt(getIdFromSession(context));
+    	
+    	SessionUtil.removeCookie(context, "UserSession");
+    	try {
+			DataBase.getInstance().executeUpdate("UPDATE account SET session_key='' WHERE id='", idEncrypt, "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
 }
