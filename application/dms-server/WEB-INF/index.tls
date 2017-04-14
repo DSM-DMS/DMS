@@ -14,8 +14,9 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>DSM Dormitory System</h1> </div>
+    <div class="container logo-header">
+      <h1 class="logo"><img src="./images/dsmlogo.png" style="height: 50px; vertical-align: -55%;"></h1>
+    </div>
     <div class="row slider-menu-container hides">
         <div class="menu-controller show">
             <img src="/images/arrow.png">
@@ -50,9 +51,15 @@
             <#if isLogin==false>
                 <div>로그인</div>
                 <#else>
-                    <div>내정보</div>
+                  <div>내정보</div>
             </#if>
         </div>
+        <#if isLogin==true>
+        <div class="icon-menu-item text-center" onclick="logout()">
+            <img src="./images/logout.ico" />
+            <div>로그아웃</div>
+        </div>
+        </#if>
     </div>
     <div class="main">
         <div class="card-wrapper">
@@ -155,6 +162,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <#list Rules as rule>
+                                        <tr onclick="viewPost('rule', ${rule.no})">
+                                            <th scope="row">${rule.no}</th>
+                                            <td>${rule.title}</td>
+                                        </tr>
+                                    </#list>
                                 </tbody>
                             </table>
                         </div>
@@ -170,6 +183,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <#list Faqs as faq>
+                                        <tr onclick="viewPost('faq', ${faq.no})">
+                                            <th scope="row">${faq.no}</th>
+                                            <td>${faq.title}</td>
+                                        </tr>
+                                    </#list>
                                 </tbody>
                             </table>
                         </div>

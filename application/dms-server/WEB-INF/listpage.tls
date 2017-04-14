@@ -11,9 +11,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-    <h1>DSM Dormitory System</h1>
-</div>
+  <div class="container logo-header">
+      <h1 class="Header-Logo"><a class="Header-Logo" href="http://dsm2015.cafe24.com/"><img src="./images/dsmlogo.png" style="height: 50px; vertical-align: -55%;"></a></h1>
+  </div>
 
 
     <div class="row slider-menu-container hides">

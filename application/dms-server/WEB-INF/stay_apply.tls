@@ -12,10 +12,9 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
   <body>
-    <div class="container">
-      <h1 class="Header-Logo"><a class="Header-Logo" href="http://dsm2015.cafe24.com/">DSM Dormitory System</a></h1>
+    <div class="container logo-header">
+       <h1 class="Header-Logo"><a class="Header-Logo" href="http://dsm2015.cafe24.com/"><img src="./images/dsmlogo.png" style="height: 50px; vertical-align: -55%;"></a></h1>
     </div>
-
     <div class="row slider-menu-container hides">
              <div class="menu-controller show">
                     <img src="./images/arrow.png">
