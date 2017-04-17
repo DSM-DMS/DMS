@@ -27,7 +27,7 @@ import io.vertx.ext.web.RoutingContext;
 public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
     private final String FILE_DIR = "files/";
-    private final String[] CLASS_NAMES = {"", "가온실", "나온실", "다온실", "3층 독서실", "4층 독서실", "5층 열린교실"};
+    private final String[] CLASS_NAMES = {"", "가온실", "나온실", "다온실", "라온실", "3층 독서실", "4층 독서실", "5층 열린교실"};
 	private XSSFWorkbook wb;
 
 	@Override
