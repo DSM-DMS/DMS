@@ -40,9 +40,12 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 		SafeResultSet stayStateResultSet;
 		SafeResultSet stayDefaultResultSet;
 		AES256 aes = UserManager.getAES();
-
-		String week = (StringFormatter.format("%4d-%02d-%02d", context.request().getParam("year"),
-				context.request().getParam("month"), context.request().getParam("week"))).getValue();
+		
+		int year = Integer.parseInt(context.request().getParam("year"));
+		int month = Integer.parseInt(context.request().getParam("month"));
+		int week = Integer.parseInt(context.request().getParam("week"));
+		
+		String targetWeek = StringFormatter.format("%4d-%02d-%02d", year, month, week).getValue();
 
 		File file = getFile();
 
@@ -63,7 +66,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 
 						if (resultSet.next()) {
 							String uid = resultSet.getString("uid");
-							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
+							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", targetWeek, "'");
 
 							if (stayStateResultSet.next()) {
 								// 잔류신청을 한 경우
