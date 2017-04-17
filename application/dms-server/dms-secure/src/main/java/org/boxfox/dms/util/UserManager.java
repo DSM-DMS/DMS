@@ -226,7 +226,7 @@ public class UserManager implements AccountManageable {
         String idEncrypt = aes.encrypt(id);
         try {
             String sessionKey = getSessionKey(id);
-            if (sessionKey.equals("NULL")) {
+            if (sessionKey == null || sessionKey.equals("NULL")) {
                 sessionKey = SHA256.encrypt(createSession());
                 System.out.println(sessionKey);
             }
@@ -235,12 +235,12 @@ public class UserManager implements AccountManageable {
             } else {
                 SessionUtil.registerSession(context, "UserSession", sessionKey);
             }
-            if (!sessionKey.equals("NULL")) {
+            if (sessionKey != null || !sessionKey.equals("NULL")) {
                 DataBase.getInstance().executeUpdate("update account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
                 return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
         return false;
     }
