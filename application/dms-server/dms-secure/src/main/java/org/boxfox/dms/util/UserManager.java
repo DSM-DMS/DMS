@@ -226,7 +226,7 @@ public class UserManager implements AccountManageable {
         String idEncrypt = aes.encrypt(id);
         try {
             String sessionKey = getSessionKey(id);
-            if (sessionKey == null || sessionKey.equals("NULL")) {
+            if (sessionKey == null) {
                 sessionKey = SHA256.encrypt(createSession());
                 System.out.println(sessionKey);
             }
@@ -235,7 +235,7 @@ public class UserManager implements AccountManageable {
             } else {
                 SessionUtil.registerSession(context, "UserSession", sessionKey);
             }
-            if (sessionKey != null || !sessionKey.equals("NULL")) {
+            if (sessionKey != null) {
                 DataBase.getInstance().executeUpdate("update account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
                 return true;
             }
@@ -250,7 +250,7 @@ public class UserManager implements AccountManageable {
     	
     	SessionUtil.removeCookie(context, "UserSession");
     	try {
-			DataBase.getInstance().executeUpdate("UPDATE account SET session_key='NULL' WHERE id='", idEncrypt, "'");
+			DataBase.getInstance().executeUpdate("UPDATE account SET session_key=null WHERE id='", idEncrypt, "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
