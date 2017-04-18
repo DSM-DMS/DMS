@@ -12,7 +12,7 @@
 </head>
 <body>
   <div class="container logo-header">
-      <h1 class="Header-Logo"><a class="Header-Logo" href="http://dsm2015.cafe24.com/"><img src="./images/dsmlogo.png" style="height: 50px; vertical-align: -55%;"></a></h1>
+      <h1 class="Header-Logo"><a class="Header-Logo" href="http://dsm2015.cafe24.com/"><img src="../images/dsmlogo.png" style="height: 50px; vertical-align: -55%;"></a></h1>
   </div>
 
 

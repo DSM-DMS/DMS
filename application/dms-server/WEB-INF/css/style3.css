@@ -26,10 +26,6 @@ body {
 
 /*-------------------------- under bar title box--------------------------------*/
 
-.logo-header {
-    margin-bottom: 15px;
-}
-
 .underbar-title {
     position: relative;
     border-bottom-width: 2px;
@@ -1119,4 +1115,10 @@ input.editor-button {
 }
 
 
+
+
 /*------------------------ logo ------------------------*/
+
+/*.logo {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}*/
