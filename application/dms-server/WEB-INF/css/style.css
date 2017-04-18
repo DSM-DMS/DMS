@@ -32,11 +32,12 @@ body {
 .title .logo{
   position: absolute;
   top:0;
-  width: 100%;
+  width:100%;
   height: 100%;
-  background-image: url("../images/logo.png");
+  background-image: url("../images/log3.png");
   background-repeat: no-repeat;
   background-position: center center;
+    background-size: 20% auto;
 }
 
 .icon-ul{
