@@ -32,7 +32,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="/post/?category=notice">공지사항</a>
-          <a class="dropdown-item" href="/post/?category=rle">기숙사 규칙</a>
+          <a class="dropdown-item" href="/post/?category=rule">기숙사 규칙</a>
           <a class="dropdown-item" href="/post/?category=faq">FAQ</a>
           <a class="dropdown-item disabled" href="#">Q&amp;A</a>
         </div>
@@ -77,34 +77,6 @@
         <div class="menu-controller show">
             <img src="/images/arrow.png">
         </div>
-<<<<<<< HEAD
-        <div class="icon-menu-item text-center" onclick="redirect('post/?category=notice')">
-            <img src="/images/megaphone.png" />
-            <div>공지사항</div>
-        </div>
-        <div class="icon-menu-item text-center" onclick="redirect('extensionapply')">
-            <img src="/images/writing.png" />
-            <div>연장신청</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="/images/settings.png" />
-            <div>수리신고</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="/images/chicken.png" />
-            <div>학교급식</div>
-        </div>
-        <div class="icon-menu-item text-center" onclick="redirect('score')">
-            <img src="/images/crown.png" />
-            <div>상점신청</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="./images/bug.png" />
-            <div><a href="#bugModal" data-toggle="modal" class="non-deco-a">버그신고</a><br>
-            </div>
-        </div>
-=======
->>>>>>> f29501baa80b54c27efe077968a5ceebe2860f15
         <div class="icon-menu-item text-center" onclick="redirect('mypage')">
             <img src="/images/man.png" />
             <#if isLogin==false>
