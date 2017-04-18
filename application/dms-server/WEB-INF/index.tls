@@ -11,69 +11,68 @@
 </head>
 
 <body>
-
-    <div class="title" id="intro">
-      <img src="./images/momo.jpg">
-      <div class="logo text-center">
-      </div>
+  <div class="title" id="intro">
+    <img src="./images/momo.jpg">
+    <div class="logo text-center">
     </div>
-    <nav id="title_bar" class="navbar navbar-toggleable-md navbar-light bg-faded" style="background: #ffffff; margin-bottom: 8px;">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">
-      <img src="./images/logo.png" width="60" height="30" class="d-inline-block align-top" alt="">
-    </a>
+  </div>
+  <nav id="title_bar" class="navbar navbar-toggleable-md navbar-light bg-faded" style="background: #ffffff; margin-bottom: 8px;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">
+    <img src="./images/logo.png" width="60" height="30" class="d-inline-block align-top" alt="">
+  </a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Posts
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/post/?category=notice">공지사항</a>
+          <a class="dropdown-item" href="/post/?category=rle">기숙사 규칙</a>
+          <a class="dropdown-item" href="/post/?category=faq">FAQ</a>
+          <a class="dropdown-item disabled" href="#">Q&amp;A</a>
+        </div>
+      </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Posts
+            Applys
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/post/?category=notice">공지사항</a>
-            <a class="dropdown-item" href="/post/?category=rle">기숙사 규칙</a>
-            <a class="dropdown-item" href="/post/?category=faq">FAQ</a>
-            <a class="dropdown-item disabled" href="#">Q&amp;A</a>
+            <a class="dropdown-item" href="/extensionapply">연장학습</a>
+            <a class="dropdown-item" href="/stay">주말잔류</a>
+            <a class="dropdown-item" href="/out">주말외출</a>
+            <a class="dropdown-item disabled" href="#">모범상점</a>
+            <a class="dropdown-item disabled" href="#">학교 방과후 학습</a>
           </div>
         </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Applys
+              Inform
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/extensionapply">연장학습</a>
-              <a class="dropdown-item" href="/stay">주말잔류</a>
-              <a class="dropdown-item" href="/out">주말외출</a>
-              <a class="dropdown-item disabled" href="#">모범상점</a>
-              <a class="dropdown-item disabled" href="#">학교 방과후 학습</a>
+              <a class="dropdown-item disabled" href="/extensionapply">시설고장신고</a>
+              <a class="dropdown-item"  href="#bugModal" data-toggle="modal">버그신고</a>
             </div>
           </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Inform
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item disabled" href="/extensionapply">시설고장신고</a>
-                <a class="dropdown-item"  href="#bugModal" data-toggle="modal">버그신고</a>
-              </div>
-            </li>
-      </ul>
-      <ul class="form-inline my-2 my-lg-0 icon-ul">
+    </ul>
+    <ul class="form-inline my-2 my-lg-0 icon-ul">
+      <li>
+        <a href="https://www.facebook.com/%EB%8C%80%EB%8D%95sw%EB%A7%88%EC%9D%B4%EC%8A%A4%ED%84%B0-%EA%B8%B0%EC%88%99%EC%82%AC-%EC%8B%9C%EC%8A%A4%ED%85%9C-1441582682527680/?fref=ts" target="_blank">
+          <img src="./images/facebook.png">
+        </a>
+      </li>
         <li>
-          <a href="https://www.facebook.com/%EB%8C%80%EB%8D%95sw%EB%A7%88%EC%9D%B4%EC%8A%A4%ED%84%B0-%EA%B8%B0%EC%88%99%EC%82%AC-%EC%8B%9C%EC%8A%A4%ED%85%9C-1441582682527680/?fref=ts" target="_blank">
-            <img src="./images/facebook.png">
+          <a href="https://github.com/rlatjdfo112/DSM-Dormitory-System" target="_blank">
+            <img src="./images/github.png">
           </a>
         </li>
-          <li>
-            <a href="https://github.com/rlatjdfo112/DSM-Dormitory-System" target="_blank">
-              <img src="./images/github.png">
-            </a>
-          </li>
-      </ul>
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>
     <div class="row slider-menu-container hides">
         <div class="menu-controller show">
             <img src="/images/arrow.png">
