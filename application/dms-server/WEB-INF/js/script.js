@@ -151,3 +151,18 @@ function logout() {
     });
 
 }
+
+$(window).on('scroll', function() {
+
+ var y = $(window).scrollTop(),
+     topBar = $('header');
+     topBarContent = $('header .row');
+ var offsetY = $('#intro').height();
+  if (y > offsetY) {
+  console.log(y+'  '+offsetY);
+      $('#title_bar').addClass('fixed_bar');
+  }else{
+      $('#title_bar').removeClass('fixed_bar');
+  }
+
+});
