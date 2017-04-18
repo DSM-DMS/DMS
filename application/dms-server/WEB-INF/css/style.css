@@ -23,6 +23,38 @@ body {
     color: #333333;
 }
 
+/*-------------------------- header title box--------------------------------*/
+.title{
+  width: 100%;
+  position: relative;
+}
+
+.title img{
+  width:100%;
+  height: 100%;
+}
+
+.title .logo{
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.fixed_bar{
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 1;
+}
+
+@media screen and (max-width: 780px) {
+.title .logo{
+  background-size: 50% auto;
+}
+}
 
 /*-------------------------- under bar title box--------------------------------*/
 
