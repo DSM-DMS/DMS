@@ -5,6 +5,7 @@ import android.content.Context;
 import com.dms.beinone.application.utils.Cookie;
 import com.dms.beinone.application.utils.CookieManager;
 import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.HttpBoxException;
 import com.dms.boxfox.networking.secure.AES256;
 
@@ -67,8 +68,8 @@ public class Request {
         return this;
     }
 
-    public Response push() throws IOException {
-        return HttpBox.push(this);
+    public void push(HttpBoxCallback callback) throws IOException {
+        HttpBox.push(this, callback);
     }
 
     public Request setCommand(int cmd) {
