@@ -22,8 +22,8 @@ import java.util.List;
  */
 
 
-@RouteRegistration(path = "/post", method = {HttpMethod.GET})
-public class PostBoardRouter implements Handler<RoutingContext> {
+@RouteRegistration(path = "/post/admin", method = {HttpMethod.GET})
+public class AdminPostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
     private DataBase db;
 
@@ -37,7 +37,7 @@ public class PostBoardRouter implements Handler<RoutingContext> {
         categories.add(new PostTemplate("facility_report", "시설고장신고", new String[]{"no", "title", "writer", " write_date"}, new String[]{"#", "제목", "작성자", "날짜"}));
     }
 
-    public PostBoardRouter() {
+    public AdminPostBoardRouter() {
         db = DataBase.getInstance();
     }
 
@@ -89,7 +89,7 @@ public class PostBoardRouter implements Handler<RoutingContext> {
         if (postTemplate != null) {
             try {
                 int page = getPageNumber(context);
-                templates = new DmsTemplate("listpage");
+                templates = new DmsTemplate("admin_listpage");
                 SafeResultSet rs = null;
                 rs = db.executeQuery("select ", QueryUtils.columnArrayToQuery(postTemplate.getColumns()), " from ", postTemplate.getCategory(), " order by no desc limit ", page, ", ", page + 10, "");
                 templates.put("Title", postTemplate.getKoreanName());

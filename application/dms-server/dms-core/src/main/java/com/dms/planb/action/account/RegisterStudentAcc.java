@@ -24,7 +24,7 @@ public class RegisterStudentAcc implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeaders(context);
+        context = PrecedingWork.putHeadersOnly(context);
         
         String uid = context.request().getParam("uid");
         String id = context.request().getParam("id");

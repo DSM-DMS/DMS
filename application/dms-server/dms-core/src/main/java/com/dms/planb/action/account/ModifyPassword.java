@@ -24,7 +24,7 @@ public class ModifyPassword implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
+		context = PrecedingWork.putHeadersOnly(context);
 		
 		DataBase database = DataBase.getInstance();
 		

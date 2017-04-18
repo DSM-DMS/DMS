@@ -20,7 +20,7 @@ public class StudentIdCheck implements Handler<RoutingContext> {
 
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
+		context = PrecedingWork.putHeadersOnly(context);
 		
 		String id = context.request().getParam("id");
 		
