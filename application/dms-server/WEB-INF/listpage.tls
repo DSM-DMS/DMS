@@ -55,7 +55,7 @@
       <div class="card-wrapper">
         <div class="card">
         <div class="card-block">
-        <div class="underbar-title border-blue">${Title}<input class="btn btn-primary write-btn" type="button" name="" value="글 쓰기"></div>
+        <div class="underbar-title border-blue">${Title}</div>
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
