@@ -1,16 +1,11 @@
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Serif');
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-* {
-    font-family: "Noto Sans KR", "Nanum Gothic";
-}
-
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 h1, h2, h3, h4, h5, h6, .underbar-title {
-    font-family: 'Noto Sans KR', "Noto Serif";
+    font-family: 'Jeju Gothic', serif;
 }
 
 body {
+  font-family: 'Noto Sans KR', sans-serif !important;
     background: #F1F1F1 !important;
 }
 
