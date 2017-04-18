@@ -17,7 +17,7 @@
     <div class="logo text-center">
     </div>
   </div>
-  <nav id="title_bar" class="navbar navbar-toggleable-md navbar-light bg-faded" style="background: #ffffff; margin-bottom: 5px;">
+  <nav id="title_bar" class="navbar navbar-toggleable-md navbar-light bg-faded" style="background: #ffffff; margin-bottom: 8px;">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -27,58 +27,57 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
+          Posts
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="/post/?category=notice">공지사항</a>
+          <a class="dropdown-item" href="/post/?category=rle">기숙사 규칙</a>
+          <a class="dropdown-item" href="/post/?category=faq">FAQ</a>
+          <a class="dropdown-item disabled" href="#">Q&amp;A</a>
         </div>
       </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Applys
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/extensionapply">연장학습</a>
+            <a class="dropdown-item" href="/stay">주말잔류</a>
+            <a class="dropdown-item" href="/out">주말외출</a>
+            <a class="dropdown-item disabled" href="#">모범상점</a>
+            <a class="dropdown-item disabled" href="#">학교 방과후 학습</a>
+          </div>
+        </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Inform
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item disabled" href="/extensionapply">시설고장신고</a>
+              <a class="dropdown-item"  href="#bugModal" data-toggle="modal">버그신고</a>
+            </div>
+          </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="form-inline my-2 my-lg-0 icon-ul">
+      <li>
+        <a href="https://www.facebook.com/%EB%8C%80%EB%8D%95sw%EB%A7%88%EC%9D%B4%EC%8A%A4%ED%84%B0-%EA%B8%B0%EC%88%99%EC%82%AC-%EC%8B%9C%EC%8A%A4%ED%85%9C-1441582682527680/?fref=ts" target="_blank">
+          <img src="./images/facebook.png">
+        </a>
+      </li>
+        <li>
+          <a href="https://github.com/rlatjdfo112/DSM-Dormitory-System" target="_blank">
+            <img src="./images/github.png">
+          </a>
+        </li>
+    </ul>
   </div>
 </nav>
     <div class="row slider-menu-container hides">
-        <div class="menu-controller show">
-            <img src="./images/arrow.png">
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="./images/megaphone.png" />
-            <div>공지사항</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="./images/writing.png" />
-            <div>연장신청</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="./images/settings.png" />
-            <div>수리신고</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="./images/chicken.png" />
-            <div>학교급식</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <img src="./images/crown.png" />
-            <div>상점신청</div>
-        </div>
-        <div class="icon-menu-item text-center">
-            <a href="#bugModal" data-toggle="modal"><img src="./images/bug.png" /></a>
-            <div><a href="#bugModal" data-toggle="modal">버그신고</a><br>
-            </div>
-        </div>
+          <div class="menu-controller show">
+              <img src="/images/arrow.png">
+          </div>
         <div class="icon-menu-item text-center" onclick="redirect('mypage')">
             <img src="./images/man.png" />
             <div>내정보</div>

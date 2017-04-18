@@ -44,10 +44,19 @@ body {
   background-position: center center;
 }
 
+.icon-ul{
+  list-style-type: none;
+}
+
+.icon-ul li img{
+  margin: auto 4px;
+}
+
 .fixed_bar{
   position: fixed !important;
   top: 0 !important;
   z-index: 1;
+  width: 100%;
 }
 
 @media screen and (max-width: 780px) {
