@@ -45,7 +45,7 @@ public class ModifyNotice implements Handler<RoutingContext> {
 			database.executeUpdate("UPDATE notice SET content='", content, "' WHERE no=", no);
 			
 			context.response().setStatusCode(200).end();
-			context.response().end();
+			context.response().close();
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
