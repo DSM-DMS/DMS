@@ -101,8 +101,9 @@ function showAllergy(dom) {
 }
 
 bugReportEvent();
+
 function bugReportEvent() {
-    $(".bug-report-btn").click(function () {
+    $(".bug-report-btn").click(function() {
         $.ajax({
             url: "/post/bug",
             type: "POST",
@@ -110,13 +111,58 @@ function bugReportEvent() {
                 title: $(".bug-title-input").val(),
                 content: $(".bug-title-input").val()
             },
-            success: function () {
+            success: function() {
                 alert("버그를 제보해 주셔서 고맙습니다!");
                 $("#bugModal button:nth-child(2)").click();
             },
-            error: function () {
+            error: function() {
                 alert("버그신고에 실패했어요 TT");
             }
         });
     });
 }
+
+function setCookie(name, value, d) {
+    document.cookie = name + '=' + escape(value) + '; path=/' + (d ? '; expires=' + (function(t) {
+        t.setDate(t.getDate() + d);
+        return t
+    })(new Date).toGMTString() : '');
+}
+
+function deleteCookie(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+function logout() {
+    $.ajax({
+        url: "/account/logout/student",
+        type: "POST",
+        success: function() {
+            console.log("logout");
+            setCookie('UserSession', '', '-1');
+            setCookie('vertx-web.session', '', '-1');
+            deleteCookie('UserSession');
+            deleteCookie('vertx-web.session');
+            window.location.reload();
+        },
+        error: function() {
+            alert("로그아웃에 실패했어요 TT");
+        }
+    });
+
+}
+
+$(window).on('scroll', function() {
+
+ var y = $(window).scrollTop(),
+     topBar = $('header');
+     topBarContent = $('header .row');
+ var offsetY = $('#intro').height();
+  if (y > offsetY) {
+  console.log(y+'  '+offsetY);
+      $('#title_bar').addClass('fixed_bar');
+  }else{
+      $('#title_bar').removeClass('fixed_bar');
+  }
+
+});

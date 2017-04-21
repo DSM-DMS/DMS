@@ -1,11 +1,26 @@
-@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Serif');
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+* {
+    font-family: "Noto Sans KR", "Nanum Gothic";
+}
+
 h1, h2, h3, h4, h5, h6, .underbar-title {
-    font-family: 'Jeju Gothic', serif;
+    font-family: 'Noto Sans KR', "Noto Serif";
+}
+
+h1 {
+  font-size: 5.9vw;
+}
+h2 {
+  font-size: 3.0vh;
+}
+p {
+  font-size: 2vmin;
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif !important;
     background: #F1F1F1 !important;
 }
 
@@ -18,54 +33,13 @@ body {
     color: #333333;
 }
 
-/*-------------------------- header title box--------------------------------*/
-.title{
-  width: 100%;
-  position: relative;
-}
+/*.Header-Logo:hover {
+    text-decoration: none;
+    color: #333333;
+}*/
 
-.title img{
-  width:100%;
-  height: 100%;
-}
-
-.title .logo{
-  position: absolute;
-  top:0;
-  width:100%;
-  height: 100%;
-  background-image: url("../images/log3.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-    background-size: 20% auto;
-}
-
-.icon-ul{
-  list-style-type: none;
-}
-
-.icon-ul li img{
-  margin: auto 4px;
-}
-
-.fixed_bar{
-  position: fixed !important;
-  top: 0 !important;
-  z-index: 1;
-  width: 100%;
-}
-
-@media screen and (max-width: 780px) {
-.title .logo{
-  background-size: 50% auto;
-}
-}
 
 /*-------------------------- under bar title box--------------------------------*/
-
-.logo-header {
-    margin-bottom: 15px;
-}
 
 .underbar-title {
     position: relative;
@@ -303,7 +277,7 @@ table tr {
 }
 
 .extentionapply .seatcontainer .seat {
-    position: relative;
+    position: fixed;
     width: 60px;
     height: 60px;
     border-radius: 30px;
@@ -1054,10 +1028,6 @@ input.editor-button {
     cursor: pointer;
 }
 
-.admin_btn_a:hover {
-    text-decoration: none !important;
-}
-
 #extension_download {
     border: 3px solid #34db5e;
     color: #34db5e;
@@ -1149,15 +1119,9 @@ input.editor-button {
     color: white;
 }
 
-.non-deco-a {
-    color: black;
-    text-decoration: none;
-}
-
-.non-deco-a:hover {
-    color: black;
-    text-decoration: none;
-}
-
 
 /*------------------------ logo ------------------------*/
+
+.logo {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}

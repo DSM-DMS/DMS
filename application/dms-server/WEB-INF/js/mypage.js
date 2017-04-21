@@ -28,7 +28,7 @@ $(".modify-password-btn").click(function() {
             url: "/account/password/student",
             type: "PATCH",
             data: {
-                password: $("modify-password").val()
+                password: $("#modify-password").val()
             },
             success: function() {
                 alert("변경이 완료되었어요!");
@@ -58,8 +58,6 @@ $(".modify-password-btn").click(function() {
     }
 });
 
-
-
 $(".modify-profile-picture-btn").click(function() {
     if ($(".preview-picture").attr("src") !== null) {
         var formData = new FormData();
@@ -82,6 +80,13 @@ $(".modify-profile-picture-btn").click(function() {
         alert("사진을 업로드 해주세요.");
     }
 });
+
+imgCheck();
+function imgCheck() {
+    if($(".profile-pic").height() <= 0) {
+        $(".profile-pic").attr("src", "../images/man.png");
+    }
+}
 
 function fileToImg(file, result) {
     //var result = $("<img/>");

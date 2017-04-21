@@ -95,6 +95,28 @@
 
                                 </div>
                             </div>
+                            <a class="init-info" href="#initModal" data-toggle="modal">계정 삭제</a> <br>
+                            <!-- Modal -->
+                            <div class="modal fade" id="initModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">계정 삭제</h4>
+                                        </div>
+                                        <form class="modify-password-form">
+                                            <div class="modal-body form-horizontal pl-5 pr-5" role="form">
+                                                <div style="margin-bottom: 25px" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-exclamation-sign"></i></span>
+                                                    <input id="init-info" type="text" class="uid-code form-control" name="code" value="" placeholder="가입시, 입력한 코드를 입력하세요." required></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="delete-account-btn btn btn-danger">삭제</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-9 col-md-12 mb-5">
                             <div class="row">

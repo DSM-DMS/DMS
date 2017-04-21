@@ -206,6 +206,15 @@ function drawSeat(seatArr, borderSize) {
                                 statusCode: {
                                     204: function() {
                                         alert("신청가능한 시간이 아닙니다.");
+                                        getSeatData(function(data) {
+                                            drawSeat(data, "7.5px");
+                                        });
+                                    },
+                                    500: function() {
+                                        alert("신청중에 오류가 발생하였습니다.");
+                                        getSeatData(function(data) {
+                                            drawSeat(data, "7.5px");
+                                        });
                                     }
                                 },
                                 success: function(data, xhr) {
@@ -217,7 +226,7 @@ function drawSeat(seatArr, borderSize) {
                                     });
                                 },
                                 error: function(request, status, error) {
-                                    alert("신청가능한 시간이 아닙니다.");
+                                    console.log(status);
                                 }
                             });
                         } else {

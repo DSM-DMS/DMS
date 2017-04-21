@@ -54,7 +54,12 @@
       <div class="card-wrapper">
     <div class="card">
     <div class="card-block">
-        <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
+        <div class="underbar-title border-blue">${title}
+          <#if isAdmin==true>
+              <input class="btn btn-primary modify-btn" type="button" name="" value="수정">
+              <input class="btn btn-primary delete-btn" type="button" name="" value="삭제">
+          </#if>
+          <span class="subinfo">${subinfo}</span></div>
         ${content}
         </div>
         </div>
@@ -111,6 +116,9 @@
 
 </body>
 
-<script src="/js/script.js"></script>
+<script src="../js/script.js"></script>
+<#if isAdmin==true>
+    <script src="../js/admin_article.js"></script>
+</#if>
 
 </html>

@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>DSM Dormitory System</h1>
+    <div class="container logo-header">
+        <h1 class="Header-Logo"><a class="Header-Logo" href="http://dsm2015.cafe24.com/"><img src="./images/dsmlogo.png" style="height: 50px; vertical-align: -55%;"></a></h1>
     </div>
 
     <div class="row slider-menu-container hides">
@@ -56,7 +56,9 @@
         <div class="card-wrapper">
             <div class="card">
                 <div class="card-block">
-                    <div class="underbar-title border-blue">연장신청</div>
+                    <div class="underbar-title border-blue">연장신청
+                      <div class="text-warning text-right page_info">연장학습 신청은 당일 8시 30분까지 신청 가능합니다.<br> 원하는 교실을 선택한 후 원하는 자리를 클릭하여 신청 가능합니다.</div>
+</div>
                     <div class="extentionapply text-center">
                         <div class="selecter-container">
                             <div class="class-selecter-div">
