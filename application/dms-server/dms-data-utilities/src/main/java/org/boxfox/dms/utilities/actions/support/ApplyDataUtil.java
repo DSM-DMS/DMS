@@ -8,8 +8,11 @@ public class ApplyDataUtil {
 
     public static boolean canApplyStay(String week) {
         Calendar calendar = Calendar.getInstance();
+        int month = Integer.parseInt(week.split("-")[1]);
         int weekInMonth = Integer.parseInt(week.split("-")[2]);
-        if (weekInMonth == calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)) {
+        
+        if (month == calendar.get(Calendar.MONTH) + 1 &&
+        	weekInMonth == calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)) {
             return canApplyStay();
         } else {
             return true;
