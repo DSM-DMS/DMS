@@ -1,17 +1,19 @@
 package org.boxfox.dms.utilities.actions.support;
 
-import sun.util.resources.cldr.ne.CalendarData_ne_NP;
-
 import java.util.Calendar;
 
 public class ApplyDataUtil {
     //this class change to .config file later
-    public static String EXTENSION_APPLY_TIME = "17:40";
+	private static String EXTENSION_APPLY_START = "17:30";
+	private static String EXTENSION_APPLY_LIMIT = "20:30";
 
     public static boolean canApplyStay(String week) {
         Calendar calendar = Calendar.getInstance();
+        int month = Integer.parseInt(week.split("-")[1]);
         int weekInMonth = Integer.parseInt(week.split("-")[2]);
-        if (weekInMonth == calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)) {
+        
+        if (month == calendar.get(Calendar.MONTH) + 1 &&
+        	weekInMonth == calendar.get(Calendar.WEEK_OF_MONTH)) {
             return canApplyStay();
         } else {
             return true;
@@ -47,12 +49,15 @@ public class ApplyDataUtil {
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
         int minute = currentTime.get(Calendar.MINUTE);
 
-        int setHour = Integer.valueOf(ApplyDataUtil.EXTENSION_APPLY_TIME.split(":")[0]);
-        int setMinute = Integer.valueOf(ApplyDataUtil.EXTENSION_APPLY_TIME.split(":")[1]);
+        int setHourStart = Integer.valueOf(EXTENSION_APPLY_START.split(":")[0]);
+        int setMinuteStart = Integer.valueOf(EXTENSION_APPLY_START.split(":")[1]);
+        int setHourLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT.split(":")[0]);
+        int setMinuteLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT.split(":")[1]);
         
-        if (!(hour < setHour || (hour == setHour && minute < setMinute))) {
-            check = true;
+        if((hour > setHourStart || (hour == setHourStart && minute > setMinuteStart)) && (hour < setHourLimit || (hour == setHourLimit && minute < setMinuteLimit))) {
+        	check = true;
         }
+        
         return check;
     }
 

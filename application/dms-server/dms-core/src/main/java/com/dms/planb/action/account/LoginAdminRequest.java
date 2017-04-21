@@ -22,7 +22,7 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeaders(context);
+        context = PrecedingWork.putHeadersOnly(context);
         
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");

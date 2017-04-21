@@ -7,6 +7,7 @@ import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
@@ -31,14 +32,21 @@ public class InitializeAccount implements Handler<RoutingContext> {
 			return;
 		}
 
-		String uid = context.request().getParam("uid");
-		String encyptedUid = SHA256.encrypt(uid);
+		String number = context.request().getParam("number");
+		String encryptedNumber = SHA256.encrypt(number);
 
 		try {
-			database.executeUpdate("UPDATE account SET id=null, password=null, session_key=null WHERE uid='", encyptedUid, "'");
-			
-			context.response().setStatusCode(200).end();
-			context.response().end();
+			SafeResultSet studentData = database.executeQuery("SELECT uid FROM student_data WHERE number='", encryptedNumber, "'");
+			if(studentData.next()) {
+				String uid = studentData.getString("uid");
+				database.executeUpdate("UPDATE account SET id=null, password=null, session_key=null WHERE uid='", uid, "'");
+				
+				context.response().setStatusCode(200).end();
+				context.response().close();
+			} else {
+				context.response().setStatusCode(204).end();
+				context.response().close();
+			}
 		} catch (SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();

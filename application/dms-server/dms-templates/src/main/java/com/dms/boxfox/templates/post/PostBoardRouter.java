@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 
-@RouteRegistration(path = "/post/", method = {HttpMethod.GET})
+@RouteRegistration(path = "/post", method = {HttpMethod.GET})
 public class PostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
     private DataBase db;

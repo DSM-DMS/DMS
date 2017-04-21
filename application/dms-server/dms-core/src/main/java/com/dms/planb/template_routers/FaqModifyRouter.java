@@ -3,6 +3,7 @@ package com.dms.planb.template_routers;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
@@ -26,7 +27,7 @@ public class FaqModifyRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		if (!Guardian.isAdmin(context)) return;
+		if (!AdminManager.isAdmin(context)) return;
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		

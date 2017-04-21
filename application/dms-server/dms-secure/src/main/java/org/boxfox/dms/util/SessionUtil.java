@@ -30,5 +30,8 @@ public class SessionUtil {
         cookie.setMaxAge(356 * 24 * 60 * 60);
         context.addCookie(cookie);
     }
-
+    
+    public static void removeCookie(RoutingContext context, String key) {
+    	context.getCookie(key).setMaxAge(0);
+    }
 }

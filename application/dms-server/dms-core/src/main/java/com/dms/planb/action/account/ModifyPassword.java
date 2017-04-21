@@ -2,13 +2,13 @@ package com.dms.planb.action.account;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
-
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -24,7 +24,7 @@ public class ModifyPassword implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
+		context = PrecedingWork.putHeadersOnly(context);
 		
 		DataBase database = DataBase.getInstance();
 		
@@ -38,16 +38,16 @@ public class ModifyPassword implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-		String password = context.request().getParam("password");
+		String encryptedPassword = SHA256.encrypt(context.request().getParam("password"));
 		
-		if(!Guardian.checkParameters(id, uid, password)) {
+		if(!Guardian.checkParameters(uid, encryptedPassword)) {
         	context.response().setStatusCode(400).end();
         	context.response().close();
         	return;
         }
 		
 		try {
-			database.executeUpdate("UPDATE account SET password='", password, "' WHERE uid='", uid, "'");
+			database.executeUpdate("UPDATE account SET password='", encryptedPassword, "' WHERE uid='", uid, "'");
 			
 			context.response().setStatusCode(200).end();
 			context.response().close();

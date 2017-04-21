@@ -24,7 +24,7 @@ public class LoginStudentApplicationRequest implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeaders(context);
+        context = PrecedingWork.putHeadersOnly(context);
 
         EasyJsonObject responseObject = new EasyJsonObject();
 

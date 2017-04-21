@@ -59,6 +59,10 @@ public class UserManager implements AccountManageable {
 
     public JobResult getUserInfo(String id) throws SQLException {
         JobResult result = new JobResult(false);
+        if(id == null) {
+        	result.setSuccess(false);
+        	return result;
+        }
         String uid = getUid(id);
         if (uid != null) {
             String room = "";
@@ -188,6 +192,7 @@ public class UserManager implements AccountManageable {
     @Override
     public String getIdFromSession(RoutingContext context) {
         String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
+        System.out.println(sessionKey);
         String result = null;
         if (sessionKey != null) {
             try {
@@ -199,7 +204,11 @@ public class UserManager implements AccountManageable {
                 e.printStackTrace();
             }
         }
-        return aes.decrypt(result);
+        if(result != null) {
+        	return aes.decrypt(result);
+        } else {
+        	return null;
+        }
     }
     
     @Override
@@ -219,6 +228,7 @@ public class UserManager implements AccountManageable {
             String sessionKey = getSessionKey(id);
             if (sessionKey == null) {
                 sessionKey = SHA256.encrypt(createSession());
+                System.out.println(sessionKey);
             }
             if (keepLogin) {
                 SessionUtil.registerCookie(context, "UserSession", sessionKey);
@@ -230,8 +240,19 @@ public class UserManager implements AccountManageable {
                 return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
         return false;
+    }
+    
+    public void removeCookie(RoutingContext context) {
+    	String idEncrypt = aes.encrypt(getIdFromSession(context));
+    	
+    	SessionUtil.removeCookie(context, "UserSession");
+    	try {
+			DataBase.getInstance().executeUpdate("UPDATE account SET session_key=null WHERE id='", idEncrypt, "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 }

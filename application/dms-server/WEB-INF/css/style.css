@@ -1,9 +1,11 @@
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-* {
-    font-family: "hanna";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+h1, h2, h3, h4, h5, h6, .underbar-title {
+    font-family: 'Jeju Gothic', serif;
 }
 
 body {
+  font-family: 'Noto Sans KR', sans-serif !important;
     background: #F1F1F1 !important;
 }
 
@@ -11,8 +13,59 @@ body {
     display: none;
 }
 
+.Header-Logo {
+    text-decoration: none;
+    color: #333333;
+}
+
+/*-------------------------- header title box--------------------------------*/
+.title{
+  width: 100%;
+  position: relative;
+}
+
+.title img{
+  width:100%;
+  height: 100%;
+}
+
+.title .logo{
+  position: absolute;
+  top:0;
+  width:100%;
+  height: 100%;
+  background-image: url("../images/log3.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+    background-size: 20% auto;
+}
+
+.icon-ul{
+  list-style-type: none;
+}
+
+.icon-ul li img{
+  margin: auto 4px;
+}
+
+.fixed_bar{
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 1;
+  width: 100%;
+}
+
+@media screen and (max-width: 780px) {
+.title .logo{
+  background-size: 50% auto;
+}
+}
 
 /*-------------------------- under bar title box--------------------------------*/
+
+.logo-header {
+    margin-bottom: 15px;
+}
 
 .underbar-title {
     position: relative;
@@ -236,6 +289,7 @@ table tr {
     /* Standard syntax */
 }
 
+
 /*------------------------------- extention ---------------------*/
 
 .extentionapply {
@@ -249,6 +303,7 @@ table tr {
 }
 
 .extentionapply .seatcontainer .seat {
+    position: relative;
     width: 60px;
     height: 60px;
     border-radius: 30px;
@@ -357,7 +412,7 @@ table tr {
 .door {
     margin-top: 20px;
     height: 15px;
-    background-color: rgb(134,193,233);
+    background-color: rgb(134, 193, 233);
     width: 300px;
     display: inline-block;
 }
@@ -460,10 +515,11 @@ table tr {
 }
 
 #this_week {
-  width: 70%;
-  margin: auto;
-  text-align: center;
+    width: 70%;
+    margin: auto;
+    text-align: center;
 }
+
 
 /*--------------------- go out apply -------------------*/
 
@@ -686,6 +742,7 @@ input.editor-button {
     right: 0;
     bottom: 5px;
 }
+
 
 /*---------------------- qnaQuestionWrite -------------*/
 
@@ -974,10 +1031,14 @@ input.editor-button {
     margin-bottom: 10px;
 }
 
+
 /*------------------- bug report -----------------------*/
+
 #bug-editor {
     width: 100%;
 }
+
+
 /*--------------------- admin page ---------------*/
 
 .admin_btn {
@@ -993,100 +1054,110 @@ input.editor-button {
     cursor: pointer;
 }
 
+.admin_btn_a:hover {
+    text-decoration: none !important;
+}
+
 #extension_download {
-  border: 3px solid #34db5e;
-  color: #34db5e;
+    border: 3px solid #34db5e;
+    color: #34db5e;
 }
 
 #extension_download:hover {
-  background-color: #34db5e;
-  color: white;
+    background-color: #34db5e;
+    color: white;
 }
 
 #stay_download {
-  border: 3px solid #ff9731;
-  color: #ff9731;
+    border: 3px solid #ff9731;
+    color: #ff9731;
 }
 
 #stay_download:hover {
-  background-color: #ff9731;
-  color: white;
+    background-color: #ff9731;
+    color: white;
 }
 
-
 #goOut_download {
-  border: 3px solid #0275d9;
-  color: #0275d9;
+    border: 3px solid #0275d9;
+    color: #0275d9;
 }
 
 #goOut_download:hover {
-  background-color: #0275d9;
-  color: white;
+    background-color: #0275d9;
+    color: white;
 }
 
 #facility_download {
-  border: 3px solid #ef6b6b;
-  color: #ef6b6b;
+    border: 3px solid #ef6b6b;
+    color: #ef6b6b;
 }
 
 #facility_download:hover {
-  background-color: #ef6b6b;
-  color: white;
+    background-color: #ef6b6b;
+    color: white;
 }
 
 #write_notice {
-  border: 3px solid #dc80ff;
-  color: #dc80ff;
+    border: 3px solid #dc80ff;
+    color: #dc80ff;
 }
 
 #write_notice:hover {
-  background-color: #dc80ff;
-  color: white;
+    background-color: #dc80ff;
+    color: white;
 }
 
 #write_rule {
-  border: 3px solid #57d4ea;
-  color: #57d4ea;
-  margin-bottom: 35px;
+    border: 3px solid #57d4ea;
+    color: #57d4ea;
+    margin-bottom: 35px;
 }
 
 #write_rule:hover {
-  background-color: #57d4ea;
-  color: white;
+    background-color: #57d4ea;
+    color: white;
 }
 
 #control_qna {
-  border: 3px solid #97d4da;
-  color: #97d4da;
+    border: 3px solid #97d4da;
+    color: #97d4da;
 }
 
 #control_qna:hover {
-  background-color: #97d4da;
-  color: white;
+    background-color: #97d4da;
+    color: white;
 }
 
 #control_faq {
-  border: 3px solid #529aaa;
-  color: #529aaa;
+    border: 3px solid #529aaa;
+    color: #529aaa;
 }
 
 #control_faq:hover {
-  background-color: #529aaa;
-  color: white;
+    background-color: #529aaa;
+    color: white;
 }
 
 #control_none {
-  border: 3px solid #a9ade7;
-  color: #a9ade7;
+    border: 3px solid #a9ade7;
+    color: #a9ade7;
 }
 
 #control_none:hover {
-  background-color: #a9ade7;
-  color: white;
+    background-color: #a9ade7;
+    color: white;
 }
+
+.non-deco-a {
+    color: black;
+    text-decoration: none;
+}
+
+.non-deco-a:hover {
+    color: black;
+    text-decoration: none;
+}
+
 
 /*------------------------ logo ------------------------*/
-
-.logo {
-    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-}

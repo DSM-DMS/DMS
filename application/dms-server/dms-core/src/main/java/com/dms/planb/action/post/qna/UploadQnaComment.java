@@ -23,16 +23,15 @@ public class UploadQnaComment implements Handler<RoutingContext> {
 		
 		int targetQna = Integer.parseInt(context.request().getParam("no"));
 		String content = context.request().getParam("content");
-		String writer = context.request().getParam("writer");
 		
-		if(!Guardian.checkParameters(targetQna, content, writer)) {
+		if(!Guardian.checkParameters(targetQna, content)) {
             context.response().setStatusCode(400).end();
             context.response().close();
         	return;
         }
 		
 		try {
-			database.executeUpdate("INSERT INTO qna_comment(no, writer, comment_date, content) VALUES(", targetQna, ", '", writer, "', now(), '", content, "')");
+			database.executeUpdate("INSERT INTO qna_comment(no, comment_date, content) VALUES(", targetQna, ", now(), '", content, "')");
 			
 			context.response().setStatusCode(201).end();
 			context.response().close();

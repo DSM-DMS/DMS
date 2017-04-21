@@ -33,7 +33,8 @@ function checkCategotyAndType() {
         type = "PATCH";
         data = {
             title: $(".clear-input").val(),
-            content: CKEDITOR.instances.editor1.getData()
+            content: CKEDITOR.instances.editor1.getData(),
+            no: Number(localStorage.getItem('no'))
         };
         callback = function() {
             // /post/?category=notice
@@ -183,7 +184,7 @@ function setWriteBtnEvent() {
 }
 
 function redirect(page) {
-        location.href = document.location.origin + '/' + page;
+      location.href = document.location.origin + '/' + page;
 }
 
 setWriteBtnEvent();
