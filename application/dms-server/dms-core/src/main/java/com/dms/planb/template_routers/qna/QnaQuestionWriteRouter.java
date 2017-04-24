@@ -1,4 +1,4 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.qna;
 
 import java.io.IOException;
 
@@ -14,11 +14,11 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/report/write", method={HttpMethod.GET})
-public class ReportWriteRouter implements Handler<RoutingContext> {
+@RouteRegistration(path="/post/question/write", method={HttpMethod.GET})
+public class QnaQuestionWriteRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 	
-	public ReportWriteRouter() {
+	public QnaQuestionWriteRouter() {
 		userManager = new UserManager();
 	}
 	
@@ -28,8 +28,9 @@ public class ReportWriteRouter implements Handler<RoutingContext> {
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
+			
 			try {
-				templates.put("category", "report");
+				templates.put("category", "qnaQuestion");
 				templates.put("type", "write");
 				
 				context.response().setStatusCode(200);

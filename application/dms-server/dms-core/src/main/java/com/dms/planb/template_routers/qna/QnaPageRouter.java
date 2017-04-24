@@ -1,58 +1,72 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.qna;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.AdminManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/notice/modify", method={HttpMethod.GET})
-public class NoticeModifyRouter implements Handler<RoutingContext> {
-	private AdminManager adminManager;
+@RouteRegistration(path="/post/question", method={HttpMethod.GET})
+public class QnaPageRouter implements Handler<RoutingContext> {
+	private UserManager userManager;
 	
-	public NoticeModifyRouter() {
-		adminManager = new AdminManager();
+	public QnaPageRouter() {
+		userManager = new UserManager();
 	}
-	
+
+	@Override
 	public void handle(RoutingContext context) {
-		if (!AdminManager.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
-		boolean isLogin = adminManager.isLogined(context);
+		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
 			
 			if(!Guardian.checkParameters(no)) {
-	            context.response().setStatusCode(400).end();
+				context.response().setStatusCode(400).end();
 	            context.response().close();
 	        	return;
-	        }
+			}
 			
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("qna");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM qna WHERE no=", no);
 				resultSet.next();
 				
-				templates.put("category", "notice");
-				templates.put("type", "modify");
 				templates.put("title", resultSet.getString("title"));
-				templates.put("content", resultSet.getString("content"));
+				templates.put("subinfo", resultSet.getString("writer"));
+				templates.put("content", resultSet.getString("question_content"));
+				templates.put("answer_subinfo", resultSet.getString("answer_date"));
+				templates.put("answer_content", resultSet.getString("answer_content"));
+				if(Guardian.isAdmin(context)) {
+					templates.put("isWriter", false);
+					templates.put("isAdmin", true);
+				} else {
+					String uid = userManager.getUid(userManager.getIdFromSession(context));
+					if(resultSet.getString("owner") == uid) {
+						templates.put("isWriter", true);
+						templates.put("isAdmin", false);
+					} else {
+						templates.put("isWriter", false);
+						templates.put("isAdmin", false);
+					}
+				}
 				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

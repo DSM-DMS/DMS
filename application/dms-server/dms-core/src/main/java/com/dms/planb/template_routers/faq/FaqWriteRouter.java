@@ -1,36 +1,38 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.faq;
 
 import java.io.IOException;
 
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/result/write", method={HttpMethod.GET})
-public class ReportResultWriteRouter implements Handler<RoutingContext> {
-private UserManager userManager;
+@RouteRegistration(path="/post/faq/write", method={HttpMethod.GET})
+public class FaqWriteRouter implements Handler<RoutingContext> {
+	private AdminManager adminManager;
 	
-	public ReportResultWriteRouter() {
-		userManager = new UserManager();
+	public FaqWriteRouter() {
+		adminManager = new AdminManager();
 	}
 	
-	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
-		boolean isLogin = userManager.isLogined(context);
+		if (!AdminManager.isAdmin(context)) {
+			return;
+		}
+		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
 			try {
-				templates.put("category", "reportResult");
+				templates.put("category", "faq");
 				templates.put("type", "write");
 				
 				context.response().setStatusCode(200);

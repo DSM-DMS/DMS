@@ -1,4 +1,4 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.qna;
 
 import java.io.IOException;
 import java.sql.SQLException;
