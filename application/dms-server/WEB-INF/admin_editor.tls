@@ -114,5 +114,6 @@
 
 </body>
 <script src="js/ckeditor/ckeditor.js"></script>
-<script src="js/editor.js"></script>
+<script src="js/admin_editor.js"></script>
+
 </html>
