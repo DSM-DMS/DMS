@@ -1,4 +1,4 @@
-package com.dms.boxfox.templates.post;
+       package com.dms.boxfox.templates.post;
 
 import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.boxfox.templates.post.data.PostTemplate;
@@ -25,6 +25,7 @@ import java.util.List;
 @RouteRegistration(path = "/post/admin", method = {HttpMethod.GET})
 public class AdminPostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
+    private AdminManager adminManager;
     private DataBase db;
 
     static {
@@ -39,22 +40,25 @@ public class AdminPostBoardRouter implements Handler<RoutingContext> {
 
     public AdminPostBoardRouter() {
         db = DataBase.getInstance();
+        adminManager = new AdminManager();
     }
 
     public void handle(RoutingContext context) {
-        DmsTemplate template = createTemplate(context);
-        if (template != null) {
-            try {
-                context.response().setStatusCode(200);
-                context.response().end(template.process());
-                context.response().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (TemplateException e) {
-                e.printStackTrace();
+        if(adminManager.isAdmin(context)) {
+            DmsTemplate template = createTemplate(context);
+            if (template != null) {
+                try {
+                    context.response().setStatusCode(200);
+                    context.response().end(template.process());
+                    context.response().close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (TemplateException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        if (context.response().closed()) {
+        if (!context.response().closed()) {
             context.response().setStatusCode(204);
             context.response().end("page not found");
             context.response().close();
