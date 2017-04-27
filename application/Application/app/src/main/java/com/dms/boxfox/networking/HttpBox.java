@@ -1,7 +1,7 @@
 package com.dms.boxfox.networking;
 
 import android.content.Context;
-import android.util.Log;
+import android.os.AsyncTask;
 
 import com.dms.boxfox.networking.datamodel.HeaderProperty;
 import com.dms.boxfox.networking.datamodel.Request;
@@ -16,57 +16,75 @@ import java.util.Scanner;
 
 
 public class HttpBox {
-    //아래와 같이 사용
-    //HttpBox.post().setCommand(1234).putBodyData(JsonObject).push();
+    public static final String SERVER_URL = "http://dsm2015.cafe24.com/";
 
-    //해당 url 수정 필요
-    public static final String SERVER_URL = "http://dsm2015.cafe24.com:80";
 
-    public static Request post(Context context) {
-        return new Request(context, SERVER_URL, Request.TYPE_GET);
+
+    public static Request post(Context context, String path) {
+        return init(context, SERVER_URL + path, Request.TYPE_POST);
     }
 
-    public static Request post(Context context, String url) {
-        return new Request(context, url, Request.TYPE_POST);
+    public static Request get(Context context, String path) {
+        return init(context, SERVER_URL + path, Request.TYPE_GET);
     }
 
-    public static Request post(Context context, String path, String type) {
+    public static Request put(Context context, String path) {
+        return init(context, SERVER_URL + path, Request.TYPE_PUT);
+    }
+
+    public static Request patch(Context context, String path) {
+        return init(context, SERVER_URL + path, Request.TYPE_PATCH);
+    }
+
+    public static Request delete(Context context, String path) {
+        return init(context, SERVER_URL + path, Request.TYPE_DELETE);
+    }
+
+    public static Request init(Context context, String path, String type) {
         return new Request(context, SERVER_URL + path, type);
     }
 
-    public static Response push(Request request) throws HttpBoxException, IOException {
-        URL serverUrl = new URL(request.getUrl());
-        HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
-        urlConnection.setRequestMethod(request.getType());
+    public static void push(final Request request, final HttpBoxCallback callback) {
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    URL serverUrl = new URL(request.getUrl());
+                    HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
+                    urlConnection.setRequestMethod(request.getType());
 
-        for (int i = 0; i < request.getHeaderPropertiesSize(); i++) {
-            HeaderProperty property = request.getProperty(i);
-            urlConnection.setRequestProperty(property.getKey(), property.getValue());
-        }
+                    for (int i = 0; i < request.getHeaderPropertiesSize(); i++) {
+                        HeaderProperty property = request.getProperty(i);
+                        urlConnection.setRequestProperty(property.getKey(), property.getValue());
+                    }
 
-        if (!urlConnection.getRequestMethod().equals(Request.TYPE_GET)) {
-            urlConnection.setDoOutput(true);
-        }
+                    if (!urlConnection.getRequestMethod().equals(Request.TYPE_GET)) {
+                        urlConnection.setDoOutput(true);
+                    }
 
-        if (request.getBodyData() != null) {
-            BufferedWriter httpRequestBodyWriter = new BufferedWriter(
-                    new OutputStreamWriter(urlConnection.getOutputStream()));
-            Log.d("testLog", request.getBodyData());
-            httpRequestBodyWriter.write(request.getBodyData());
-            httpRequestBodyWriter.close();
-        }
+                    if (request.getBodyData() != null) {
+                        BufferedWriter httpRequestBodyWriter = new BufferedWriter(
+                                new OutputStreamWriter(urlConnection.getOutputStream()));
+                        httpRequestBodyWriter.write(request.getBodyData());
+                        httpRequestBodyWriter.close();
+                    }
 
-        Response response = new Response(urlConnection.getResponseCode(),
-                urlConnection.getResponseMessage(), urlConnection.getHeaderFields());
+                    Response response = new Response(urlConnection.getResponseCode(),
+                            urlConnection.getResponseMessage(), urlConnection.getHeaderFields());
 
-        Scanner httpResponseScanner = new Scanner(urlConnection.getInputStream());
-        while (httpResponseScanner.hasNextLine()) {
-            response.appendBody(httpResponseScanner.nextLine());
-        }
-        httpResponseScanner.close();
+                    Scanner httpResponseScanner = new Scanner(urlConnection.getInputStream());
+                    while (httpResponseScanner.hasNextLine()) {
+                        response.appendBody(httpResponseScanner.nextLine());
+                    }
+                    httpResponseScanner.close();
 
-        urlConnection.getHeaderFields();
-
-        return response;
+                    urlConnection.getHeaderFields();
+                    callback.done(response);
+                } catch (HttpBoxException | IOException e) {
+                    callback.err(e);
+                }
+                return null;
+            }
+        }.execute();
     }
 }
