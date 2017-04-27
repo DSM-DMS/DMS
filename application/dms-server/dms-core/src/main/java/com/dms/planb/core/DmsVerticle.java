@@ -1,8 +1,9 @@
 package com.dms.planb.core;
 
+import com.dms.parser.dataio.post.PostChangeDetector;
+import com.dms.parser.dataio.post.PostUpdateListener;
 import org.boxfox.dms.utilities.actions.RouteRegister;
 
-import com.dms.planb.support.TableDropper;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.web.Router;
@@ -25,8 +26,13 @@ public class DmsVerticle extends AbstractVerticle {
         /*
 		 * @see com.dms.planb.support .TableDropper
 		 */
-		TableDropper dropper = new TableDropper();
-		dropper.start();
+        PostChangeDetector.getInstance().start();
+        PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
+            @Override
+            public void update(int currentCategory) {
+
+            }
+        });
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
     }
 }
