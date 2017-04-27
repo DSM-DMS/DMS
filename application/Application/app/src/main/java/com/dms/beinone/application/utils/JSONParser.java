@@ -9,7 +9,7 @@ import com.dms.beinone.application.faq.FAQ;
 import com.dms.beinone.application.faq.FAQContent;
 import com.dms.beinone.application.goingoutapply.Goingout;
 import com.dms.beinone.application.meal.Meal;
-import com.dms.beinone.application.mypage.Student;
+import com.dms.beinone.application.mypage.Account;
 import com.dms.beinone.application.qna.QnA;
 import com.dms.beinone.application.rule.Rule;
 import com.dms.beinone.application.rule.RuleContent;
@@ -27,13 +27,13 @@ import java.util.List;
 
 public class JSONParser {
 
-    public static Student parseLoginJSON(JSONObject rootJSONObject) throws JSONException {
+    public static Account parseLoginJSON(JSONObject rootJSONObject) throws JSONException {
         int number = rootJSONObject.getInt("number");
         String name = rootJSONObject.getString("name");
         int merit = rootJSONObject.getInt("merit");
         int demerit = rootJSONObject.getInt("demerit");
 
-        return new Student(number, name, merit, demerit);
+        return new Account(number, name, merit, demerit);
     }
 
     public static Meal parseMealJSON(JSONObject rootJSONObject) throws JSONException {
@@ -104,7 +104,7 @@ public class JSONParser {
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
 
-        for (int index = 0; index < resultJSONArray.length(); index++) {
+        for (int index = resultJSONArray.length(); index >= 0; index++) {
             JSONObject afterschoolJSONObject = resultJSONArray.getJSONObject(index);
 
             int no = afterschoolJSONObject.getInt("no");
@@ -180,7 +180,7 @@ public class JSONParser {
         List<FacilityReport> facilityReportList = new ArrayList<>();
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-        for (int index = 0; index < resultJSONArray.length(); index++) {
+        for (int index = resultJSONArray.length() - 1; index >= 0; index--) {
             JSONObject facilityReportJSONObject = resultJSONArray.getJSONObject(index);
 
             int no = facilityReportJSONObject.getInt("no");
@@ -222,7 +222,7 @@ public class JSONParser {
         List<FAQ> faqList = new ArrayList<>();
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-        for (int index = 0; index < resultJSONArray.length(); index++) {
+        for (int index = resultJSONArray.length() - 1; index >= 0; index--) {
             JSONObject noticeJSONObject = resultJSONArray.getJSONObject(index);
 
             int no = noticeJSONObject.getInt("no");
@@ -241,7 +241,7 @@ public class JSONParser {
         List<Rule> ruleList = new ArrayList<>();
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-        for (int index = 0; index < resultJSONArray.length(); index++) {
+        for (int index = resultJSONArray.length() - 1; index >= 0; index--) {
             JSONObject ruleJSONObject = resultJSONArray.getJSONObject(index);
 
             int no = ruleJSONObject.getInt("no");
@@ -260,7 +260,7 @@ public class JSONParser {
         List<QnA> qnaList = new ArrayList<>();
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-        for (int index = 0; index < resultJSONArray.length(); index++) {
+        for (int index = resultJSONArray.length() - 1; index >= 0; index--) {
             JSONObject qnaJSONObject = resultJSONArray.getJSONObject(index);
 
             int no = qnaJSONObject.getInt("no");
@@ -297,7 +297,7 @@ public class JSONParser {
         List<Comment> commentList = new ArrayList<>();
 
         JSONArray resultJSONArray = rootJSONObject.getJSONArray("result");
-        for (int index = 0; index < resultJSONArray.length(); index++) {
+        for (int index = resultJSONArray.length(); index >= 0; index--) {
             JSONObject commentJSONObject = resultJSONArray.getJSONObject(index);
 
             String writer = commentJSONObject.getString("writer");
@@ -310,7 +310,7 @@ public class JSONParser {
         return commentList;
     }
 
-    public static Student parseStudentJSON(JSONObject rootJSONObject) throws JSONException {
+    public static Account parseStudentJSON(JSONObject rootJSONObject) throws JSONException {
         int number = Integer.valueOf(rootJSONObject.getString("number"));
         String name = rootJSONObject.getString("name");
         int merit = Integer.valueOf(rootJSONObject.getString("merit"));
@@ -318,7 +318,7 @@ public class JSONParser {
         int room = safeIntegerValueOf(rootJSONObject.getString("room"));
         int seat = safeIntegerValueOf(rootJSONObject.getString("seat"));
 
-        return new Student(number, name, merit, demerit, room, seat);
+        return new Account(number, name, merit, demerit, room, seat);
     }
 
     private static int safeIntegerValueOf(String s) {

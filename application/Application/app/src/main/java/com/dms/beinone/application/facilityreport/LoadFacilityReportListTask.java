@@ -42,9 +42,9 @@ public class LoadFacilityReportListTask extends AsyncTask<Void, Void, Object[]> 
 
         try {
             results = loadFacilityReportList();
-        } catch (IOException ie) {
+        } catch (IOException e) {
             return null;
-        } catch (JSONException je) {
+        } catch (JSONException e) {
             return null;
         }
 

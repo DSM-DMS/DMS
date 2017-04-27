@@ -15,7 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.beinone.application.utils.MultipartUtility;
@@ -37,6 +37,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by BeINone on 2017-02-20.
@@ -124,13 +129,37 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
-        new LoadMypageTask().execute();
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://dsm2015.cafe24.com:80")
+                .build();
+
+        DMSService dmsService = retrofit.create(DMSService.class);
+        Call<Account> call = dmsService.loadMyPage();
+
+        call.enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, retrofit2.Response<Account> response) {
+                if (response.code() == 200) {
+                    Account account = response.body();
+                    bind(account);
+                } else {
+                    Toast.makeText(MypageActivity.this, R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                Toast.makeText(MypageActivity.this, R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        new LoadMypageTask().execute();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("testLog", "onStart");
         if (mProfileImageString != null) {
             Glide.with(this).load(mProfileImageString).centerCrop().into(mProfileIV);
         }
@@ -198,12 +227,12 @@ public class MypageActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), ACTIVITY_REQUEST_PICK_IMAGE);
     }
 
-    private void bind(Student student) {
-        mNameTV.setText(student.getName());
-        mMeritTV.setText(String.valueOf(student.getMerit()));
-        mDemeritTV.setText(String.valueOf(student.getDemerit()));
-        mTotalTV.setText(String.valueOf(student.getMerit() - student.getDemerit()));
-        if (student.getRoom() == -1) {
+    private void bind(Account account) {
+        mNameTV.setText(account.getName());
+        mMeritTV.setText(String.valueOf(account.getMerit()));
+        mDemeritTV.setText(String.valueOf(account.getDemerit()));
+        mTotalTV.setText(String.valueOf(account.getMerit() - account.getDemerit()));
+        if (account.getRoom() == -1) {
             // not applied
             mExtensionApplyStatusTV.setText(R.string.mypage_notapplied);
             mExtensionApplyStatusTV.setTextColor(ContextCompat.getColor(this, R.color.negative));
@@ -212,8 +241,8 @@ public class MypageActivity extends AppCompatActivity {
             mExtensionApplyStatusTV.setText(R.string.mypage_applied);
             mExtensionApplyStatusTV.setTextColor(ContextCompat.getColor(this, R.color.positive));
         }
-//        if (student.getProfileImage() != null) {
-//            Glide.with(this).load(student.getProfileImage()).centerCrop().into(mProfileIV);
+//        if (account.getProfileImage() != null) {
+//            Glide.with(this).load(account.getProfileImage()).centerCrop().into(mProfileIV);
 //        }
     }
 
@@ -229,32 +258,32 @@ public class MypageActivity extends AppCompatActivity {
         return byteBuffer.toByteArray();
     }
 
-    private class LoadMypageTask extends AsyncTask<Void, Void, Student> {
+    private class LoadMypageTask extends AsyncTask<Void, Void, Account> {
 
         @Override
-        protected Student doInBackground(Void... params) {
-            Student student = null;
+        protected Account doInBackground(Void... params) {
+            Account account = null;
 
             try {
-                student = loadMypage();
+                account = loadMypage();
             } catch (IOException e) {
                 return null;
             } catch (JSONException e) {
                 return null;
             }
 
-            return student;
+            return account;
         }
 
         @Override
-        protected void onPostExecute(Student student) {
-            super.onPostExecute(student);
+        protected void onPostExecute(Account account) {
+            super.onPostExecute(account);
 
-            if (student == null) {
+            if (account == null) {
                 Toast.makeText(MypageActivity.this, R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
             } else {
-//                mProfileImageString = student.getProfileImage();
-                bind(student);
+//                mProfileImageString = account.getProfileImage();
+                bind(account);
             }
         }
 
@@ -269,20 +298,20 @@ public class MypageActivity extends AppCompatActivity {
 //            }
 //        }
 
-        private Student loadMypage() throws IOException, JSONException {
+        private Account loadMypage() throws IOException, JSONException {
             Response response =
                     HttpBox.post(MypageActivity.this, "/account/student", Request.TYPE_GET)
                             .push();
 
             JSONObject responseJSONObject = response.getJsonObject();
 
-            Student student = null;
+            Account account = null;
             int code = response.getCode();
             if (code == 200) {
-                student = JSONParser.parseStudentJSON(responseJSONObject);
+                account = JSONParser.parseStudentJSON(responseJSONObject);
             }
 
-            return student;
+            return account;
         }
     }
 

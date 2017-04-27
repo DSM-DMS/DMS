@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 //        @Override
-//        protected void onPostExecute(Student student) {
+//        protected void onPostExecute(Account account) {
 //            super.onPostExecute(student);
 //
 //            if (student == null) {

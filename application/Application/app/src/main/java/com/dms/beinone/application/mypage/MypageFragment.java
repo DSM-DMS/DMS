@@ -80,21 +80,21 @@ public class MypageFragment extends Fragment {
         Glide.clear(mProfileIV);
     }
 
-    private void bind(Student student) {
-        mNameTV.setText(student.getName());
-        mMeritTV.setText(String.valueOf(student.getMerit()));
-        mDemeritTV.setText(String.valueOf(student.getDemerit()));
-        mTotalTV.setText(String.valueOf(student.getMerit() - student.getDemerit()));
+    private void bind(Account account) {
+        mNameTV.setText(account.getName());
+        mMeritTV.setText(String.valueOf(account.getMerit()));
+        mDemeritTV.setText(String.valueOf(account.getDemerit()));
+        mTotalTV.setText(String.valueOf(account.getMerit() - account.getDemerit()));
     }
 
-    private class LoadMypageTask extends AsyncTask<Void, Void, Student> {
+    private class LoadMypageTask extends AsyncTask<Void, Void, Account> {
 
         @Override
-        protected Student doInBackground(Void... params) {
-            Student student = null;
+        protected Account doInBackground(Void... params) {
+            Account account = null;
 
             try {
-                student = loadMypage();
+                account = loadMypage();
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -103,21 +103,21 @@ public class MypageFragment extends Fragment {
                 return null;
             }
 
-            return student;
+            return account;
         }
 
         @Override
-        protected void onPostExecute(Student student) {
-            super.onPostExecute(student);
+        protected void onPostExecute(Account account) {
+            super.onPostExecute(account);
 
-            if (student == null) {
+            if (account == null) {
                 Toast.makeText(getContext(), R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
             } else {
-                bind(student);
+                bind(account);
             }
         }
 
-        private Student loadMypage() throws IOException, JSONException {
+        private Account loadMypage() throws IOException, JSONException {
             Map<String, String> requestParams = new HashMap<>();
 
             Response response = HttpBox.post(getContext(), "/account/student", Request.TYPE_GET)

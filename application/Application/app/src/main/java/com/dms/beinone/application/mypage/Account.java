@@ -4,7 +4,7 @@ package com.dms.beinone.application.mypage;
  * Created by BeINone on 2017-02-20.
  */
 
-public class Student {
+public class Account {
 
     private int number;
     private String name;
@@ -13,18 +13,18 @@ public class Student {
     private int room;
     private int seat;
 
-    public Student() {
+    public Account() {
 
     }
 
-    public Student(int number, String name, int merit, int demerit) {
+    public Account(int number, String name, int merit, int demerit) {
         setNumber(number);
         setName(name);
         setMerit(merit);
         setDemerit(demerit);
     }
 
-    public Student(int number, String name, int merit, int demerit, int room, int seat) {
+    public Account(int number, String name, int merit, int demerit, int room, int seat) {
         setNumber(number);
         setName(name);
         setMerit(merit);
