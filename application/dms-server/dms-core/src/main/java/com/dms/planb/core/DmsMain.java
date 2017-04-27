@@ -31,7 +31,6 @@ import org.boxfox.dms.utilities.database.DataBase;
 
 import com.dms.parser.dataio.post.PostChangeDetector;
 import com.dms.parser.dataio.post.PostUpdateListener;
-import com.dms.planb.support.TableDropper;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
@@ -57,6 +56,43 @@ class DmsMain {
 
 		options = new VertxOptions();
 		// System.setErr(new LogErrorOutputStream(System.err));
+		
+		PostChangeDetector.getInstance().start();
+		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
+			@Override
+			public void update(int currentCategory) {
+				while (true) {
+					Calendar currentTime = Calendar.getInstance();
+					int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
+					int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+					if (dayOfWeek == Calendar.MONDAY) {
+						try {
+							DataBase.getInstance().executeUpdate("delete from goingout_apply");
+							/*
+							 * Every Monday, refresh goingout_apply table
+							 */
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (hour >= 0 && hour <= 8) {
+						try {
+							DataBase.getInstance().executeUpdate("delete from extension_apply");
+							/*
+							 * Every day, refresh extension_apply table
+							 */
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					try {
+						Thread.sleep(3600000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 	}
 
 	public static void main(String[] args) {
