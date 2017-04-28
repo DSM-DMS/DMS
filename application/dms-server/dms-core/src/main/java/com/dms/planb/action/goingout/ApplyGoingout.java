@@ -38,7 +38,7 @@ public class ApplyGoingout implements Handler<RoutingContext> {
                 database.executeUpdate("DELETE FROM goingout_apply WHERE uid='", uid, "'");
                 database.executeUpdate("INSERT INTO goingout_apply(uid, sat, sun) VALUES('", uid, "', ", sat, ", ", sun, ")");
                 
-                context.response().setStatusCode(201).end();
+                context.response().setStatusCode(200).end();
                 context.response().close();
             } catch (SQLException e) {
             	e.printStackTrace();
