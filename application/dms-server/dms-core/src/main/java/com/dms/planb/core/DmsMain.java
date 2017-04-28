@@ -22,16 +22,7 @@ package com.dms.planb.core;
  * @see pom.xml
  */
 
-import java.io.File;
-import java.sql.SQLException;
-import java.util.Calendar;
-
 import org.boxfox.dms.utilities.config.SecureConfig;
-import org.boxfox.dms.utilities.database.DataBase;
-
-import com.dms.parser.dataio.post.PostChangeDetector;
-import com.dms.parser.dataio.post.PostUpdateListener;
-import com.dms.planb.support.TableDropper;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
