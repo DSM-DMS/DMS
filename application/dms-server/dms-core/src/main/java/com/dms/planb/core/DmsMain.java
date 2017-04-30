@@ -60,16 +60,13 @@ class DmsMain {
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			@Override
 			public void update(int currentCategory) {
-				while (true) {
 					Calendar currentTime = Calendar.getInstance();
 					int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
 					int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+					Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
 					if (dayOfWeek == Calendar.MONDAY) {
 						try {
 							DataBase.getInstance().executeUpdate("delete from goingout_apply");
-							/*
-							 * Every Monday, refresh goingout_apply table
-							 */
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
@@ -77,19 +74,10 @@ class DmsMain {
 					if (hour >= 0 && hour <= 8) {
 						try {
 							DataBase.getInstance().executeUpdate("delete from extension_apply");
-							/*
-							 * Every day, refresh extension_apply table
-							 */
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
 					}
-					try {
-						Thread.sleep(3600000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
 			}
 		});
 	}
