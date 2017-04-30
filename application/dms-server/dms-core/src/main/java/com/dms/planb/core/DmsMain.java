@@ -55,29 +55,29 @@ class DmsMain {
 
 		options = new VertxOptions();
 		// System.setErr(new LogErrorOutputStream(System.err));
-		
+
 		PostChangeDetector.getInstance().start();
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			@Override
 			public void update(int currentCategory) {
-					Calendar currentTime = Calendar.getInstance();
-					int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
-					int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-					Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
-					if (dayOfWeek == Calendar.MONDAY) {
-						try {
-							DataBase.getInstance().executeUpdate("delete from goingout_apply");
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
+				Calendar currentTime = Calendar.getInstance();
+				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
+				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+				Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
+				if (dayOfWeek == Calendar.MONDAY) {
+					try {
+						DataBase.getInstance().executeUpdate("delete from goingout_apply");
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
-					if (hour >= 0 && hour <= 8) {
-						try {
-							DataBase.getInstance().executeUpdate("delete from extension_apply");
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
+				}
+				if (hour >= 0 && hour <= 8) {
+					try {
+						DataBase.getInstance().executeUpdate("delete from extension_apply");
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
+				}
 			}
 		});
 	}
