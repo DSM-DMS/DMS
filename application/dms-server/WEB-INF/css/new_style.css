@@ -19,7 +19,7 @@ body {
     float: right;
     right: 0;
     height: 100%;
-    z-index: -1;
+    z-index: -2;
 }
 
 #background-image img {
@@ -212,8 +212,54 @@ body {
 }
 
 
+/*연장신청페이지--------------------------*/
+
+#extension-apply-window {
+    width: 74%;
+    height: 100vh;
+    opacity: 0;
+    /*z-index: -1;*/
+    position: absolute;
+    right: 0;
+    transition: 0.3s ease;
+}
+
+#extension-apply-window table {
+    margin-top: 14vh;
+    height: 72vh;
+    width: 36vh;
+    margin-left: 15%;
+    color: white;
+    text-align: center;
+}
+
+#extension-apply-window table td {
+    border-radius: 999px;
+    width: 18vh;
+    height: 18vh;
+}
+
+#extension-apply-window table td:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+#extension-apply-window p {
+    font-size: 3rem;
+    font-weight: 100;
+    margin: 0;
+}
+
+span {
+    font-size: 0.5rem;
+}
+
+
 /*animaion------------------------------------------------------------------------*/
 
 .left-move {
     transform: translateX(-74%);
+}
+
+.fade-in {
+    opacity: 1 !important;
 }
