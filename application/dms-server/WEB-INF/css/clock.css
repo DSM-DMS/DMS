@@ -1,26 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
-#main {
-    position: relative;
-    width: 400px;
-    height: 300px;
-    margin: 20px auto 0 auto;
-    list-style: none;
-    background-color: #f0f2f8;
-    border: 15px solid white;
-    border-radius: 4px;
-    -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
-}
-
 #clock-in {
-    margin: 0;
     padding: 0;
     position: relative;
     width: 185px;
     height: 185px;
     margin: auto;
     list-style: none;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 200px;
     border: 8px solid white;
 }
