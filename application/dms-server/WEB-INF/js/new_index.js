@@ -1,12 +1,25 @@
 var $foldingButton = $("#extension-apply");
 var $panel = $("#panel");
 var $extensionWindow = $("#extension-apply-window");
+var $loginBtn = $(".login");
+var $trigger = $(".trigger");
+var $menu = $("#menu");
 
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
-    console.log("asdf");
     $extensionWindow.toggleClass("fade-in");
 });
+
+$trigger.on("click", function() {
+    $('.modal-wrapper').toggleClass('open');
+    $panel.toggleClass('blur');
+    $menu.toggleClass('blur');
+    return false;
+});
+
+
+
+
 
 var mapData = [
     [1, 2, 0, 3, 4],
