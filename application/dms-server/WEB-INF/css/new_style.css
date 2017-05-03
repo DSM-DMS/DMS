@@ -1,3 +1,19 @@
+* {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 body {
     position: relative;
     background: black;
@@ -192,7 +208,8 @@ body {
     /*padding: 0 20px 0 20px;*/
 }
 
-.meal-title, .meal-content {
+.meal-title,
+.meal-content {
     display: inline-block;
 }
 
@@ -221,6 +238,7 @@ body {
     flex-direction: column;
     margin-top: 10vh;
     height: 100vh;
+    transition: 0.3s ease;
 }
 
 .menu-item {
@@ -258,6 +276,18 @@ body {
     transition: 0.3s ease;
 }
 
+#extension-apply-window img {
+    height: 8vh;
+    width: 4vh;
+    position: absolute;
+    top: 5vh;
+    right: 5vh;
+}
+
+#extension-apply-window img:hover {
+    cursor: pointer;
+}
+
 #extension-apply-window .extension-class-select {
     margin-top: 14vh;
     height: 72vh;
@@ -276,6 +306,7 @@ body {
 
 #extension-apply-window .extension-class-select td:hover {
     background-color: rgba(255, 255, 255, .2);
+    cursor: pointer;
 }
 
 #extension-apply-window .extension-class-select p {
@@ -323,7 +354,6 @@ body {
     border-radius: 10vh;
     display: inline-block;
     margin: 0.5vw;
-
     /*margin: 10px;*/
 }
 
@@ -336,4 +366,8 @@ body {
 
 .fade-in {
     opacity: 1 !important;
+}
+
+.fade-out {
+    opacity: 0 !important;
 }
