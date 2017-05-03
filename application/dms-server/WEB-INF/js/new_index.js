@@ -18,6 +18,17 @@ $closeButton.on("click", function() {
     $menu.toggleClass("fade-out");
 });
 
+var speechBubble = $('#speech-bubble');
+
+$("#stay-apply").click(function() {
+    speechBubble.toggleClass('fade-in');
+    speechBubble.focus();
+});
+
+$('#speech-bubble button').click(function() {
+    speechBubble.toggleClass('fade-in');
+});
+
 $trigger.on("click", function() {
     $('.modal-wrapper').toggleClass('open');
     $panel.toggleClass('blur');
