@@ -212,6 +212,41 @@ body {
 }
 
 
+/*기타 메뉴*/
+
+#menu {
+    position: absolute;
+    top: 0px;
+    right: 10vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10vh;
+    height: 100vh;
+}
+
+.menu-item {
+    height: 8vh;
+    margin-bottom: 4vh;
+    margin-top: 4vh;
+    width: 10vh;
+    text-align: center;
+}
+
+.menu-item:hover {
+    cursor: pointer;
+}
+
+.menu-item img {
+    height: 100%;
+    width: 100%;
+}
+
+.menu-item span {
+    font-size: 0.2rem;
+    color: white;
+}
+
+
 /*연장신청페이지--------------------------*/
 
 #extension-apply-window {
@@ -249,7 +284,7 @@ body {
     margin: 0;
 }
 
-span {
+td span {
     font-size: 0.5rem;
 }
 
