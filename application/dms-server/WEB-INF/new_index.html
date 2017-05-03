@@ -1,21 +1,69 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="D:\Projects\DSM-Dormitory-System\application\dms-server\WEB-INF\css\new_style.css">
+    <link rel="stylesheet" href="./css/new_style.css">
+    <link rel="stylesheet" href="./css/clock.css">
 </head>
+
 <body>
+    <script src="./js/jquery.js"></script>
     <div id="background-image">
-        <img src="D:\사진\Twice\17861864_1306766442692183_6381298034028156219_n.jpg"/>
+        <img src="./images/chayoung.jpg" />
+    </div>
+    <div class="line">
+
     </div>
     <div id="panel">
         <div id="left-panel">
-            <img src="D:\리소스\dsm2015-prototype\curved.png"/>
+            <div class="notice">
+
+            </div>
+            <div class="meal">
+                <div class="meal-remote-control">
+                    <span class="meal-left">&lt;</span>
+                    <span class="meal-date">2017.05.03 수</span>
+                    <span class="meal-right">&gt;</span>
+                </div>
+                <div class="meal-info">
+                    <div class="meal-block">
+                        <span class="meal-title">아침</span>
+                        <span class="meal-content"><p>모모 모모 모모 모모 모모 모모 모모 모모 모 </p></span>
+                    </div>
+                    <div class="meal-block">
+                        <span class="meal-title">점심</span>
+                        <span class="meal-content"><p>모모 모모 모모 모모 모모 모모 모모 모모 모모 모모 모모 모모 </p></span>
+                    </div>
+                    <div class="meal-block">
+                        <span class="meal-title">저녁</span>
+                        <span class="meal-content"><p>모모 모모 모모 모모 모모 모모 모모 모모 모모 모모 모모 모모 </p></span>
+                    </div>
+                </div>
+            </div>
+            <img src="./images/curved.png" />
         </div>
         <div id="right-panel">
-            <img src="D:\리소스\dsm2015-prototype\curved2.png"/>
+            <img src="./images/curved2.png"/>
+            <div id="stay-apply-container">
+                
+            </div>
+            <div id="extension-apply-container">
+                <div id="current-status">
+                    <p>연장신청이 가능합니다</p>
+                </div>
+                <script src="./js/clock.js"></script>
+                <ul id="clock-in">	
+                    <li id="sec"></li>
+                    <li id="hour"></li>
+                    <li id="min"></li>
+                </ul>
+                <button id="extension-apply">연장학습 신청</button>
+            </div>
+            <img src="./images/curved2.png" />
         </div>
     </div>
     <div id="menu"></div>
 </body>
+
 </html>

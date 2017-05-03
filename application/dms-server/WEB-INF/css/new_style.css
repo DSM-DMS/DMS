@@ -3,6 +3,15 @@ body {
     background: black;
     margin: 0;
     height: 100vh;
+    overflow: hidden;
+}
+
+.line {
+    height: 100%;
+    position: absolute;
+    width: 12px;
+    background-color: #607D8B;
+    z-index: 3;
 }
 
 #background-image {
@@ -24,24 +33,117 @@ body {
     width: 75%;
     background: white;
     display: flex;
+    height: 100%;
 }
 
 #left-panel {
-    width: 50%;
+    width: 60%;
     background: white;
+    position: relative;
 }
 
 #left-panel img {
     float: right;
     transform: translateX(100%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
 
 #right-panel {
-    width: 50%;
+    width: 40%;
     background: #607D8B;
+    position: relative;
 }
 
 #right-panel img {
     float: right;
     transform: translateX(100%);
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#stay-apply-container {
+    height: 50%;
+}
+
+#extension-apply-container {
+    height: 50%;
+    transform: translateX(15%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#current-status {}
+
+#current-status p {
+    color: white;
+    padding: 0px;
+    font-size: 2vh;
+}
+
+#extension-apply {
+    margin-left: 25%;
+    width: 50%;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 10000000000px;
+    color: white;
+    line-height: 5vh;
+}
+
+
+/*notice ----------------------------------------------------------*/
+
+.notice {
+    height: 50%;
+}
+
+
+/*meal ----------------------------------------------------------*/
+
+.meal {
+    width: 100%;
+    height: 50%;
+    padding-left: 50px;
+    /*display: flex;
+    flex-direction: column;
+    justify-content: space-between;*/
+}
+
+.meal-remote-control {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.meal-info {
+    height: 80%;
+}
+
+.meal-block {
+    display: flex;
+    height: 33%;
+    /*padding: 0 20px 0 20px;*/
+}
+
+.meal-title,
+.meal-content {
+    display: inline-block;
+}
+
+.meal-content {
+    transform: translateY(5%);
+    font-size: 1.1rem;
+    flex: 6.5 0 0%;
+    z-index: 3;
+}
+
+.meal-title {
+    flex: 1 0 0%;
+    min-width: 90px;
+    font-size: 2.1rem;
+    font-weight: 200;
 }
