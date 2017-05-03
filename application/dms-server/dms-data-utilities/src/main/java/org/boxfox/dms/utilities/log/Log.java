@@ -41,7 +41,6 @@ public class Log {
 			str += "/";
 		}
 		path = str;
-
 	}
 
 	/// <summary>
