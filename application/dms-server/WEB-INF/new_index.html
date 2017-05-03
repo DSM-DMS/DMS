@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/new_style.css">
     <link rel="stylesheet" href="./css/clock.css">
+    <link rel="stylesheet" href="./css/hover.css">
 </head>
 
 <body>
@@ -41,15 +42,18 @@
                     </div>
                 </div>
             </div>
-            <img src="./images/curved.png" />
+            <img src="./images/curved.png" class="curved-image"/>
         </div>
         <div id="right-panel">
-            <img src="./images/curved2.png"/>
             <div id="stay-apply-container">
-                
+                <div class="current-status">
+                    <p>금요귀가</p>
+                </div>
+                <img src="./images/return-fri.png"/>
+                <button id="extension-apply" class="hvr-shutter-out-horizontal">잔류 신청</button>
             </div>
             <div id="extension-apply-container">
-                <div id="current-status">
+                <div class="current-status">
                     <p>연장신청이 가능합니다</p>
                 </div>
                 <script src="./js/clock.js"></script>
@@ -58,9 +62,9 @@
                     <li id="hour"></li>
                     <li id="min"></li>
                 </ul>
-                <button id="extension-apply">연장학습 신청</button>
+                <button id="extension-apply" class="hvr-shutter-out-horizontal">연장학습 신청</button>
             </div>
-            <img src="./images/curved2.png" />
+            <img src="./images/curved2.png" class="curved-image"/>
         </div>
     </div>
     <div id="menu"></div>
