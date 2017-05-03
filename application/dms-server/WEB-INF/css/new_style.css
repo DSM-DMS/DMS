@@ -1,0 +1,47 @@
+body {
+    position: relative;
+    background: black;
+    margin: 0;
+    height: 100vh;
+}
+
+#background-image {
+    position: absolute;
+    float: right;
+    right: 0;
+    height: 100%;
+    z-index: -1;
+}
+
+#background-image img {
+    height: 100%;
+    transform: scale(1.1);
+    filter: blur(5px) brightness(50%);
+    -webkit-filter: blur(5px) brightness(50%);
+}
+
+#panel {
+    width: 75%;
+    background: white;
+    display: flex;
+}
+
+#left-panel {
+    width: 50%;
+    background: white;
+}
+
+#left-panel img {
+    float: right;
+    transform: translateX(100%);
+}
+
+#right-panel {
+    width: 50%;
+    background: #607D8B;
+}
+
+#right-panel img {
+    float: right;
+    transform: translateX(100%);
+}
