@@ -3,6 +3,7 @@ body {
     background: black;
     margin: 0;
     height: 100vh;
+    overflow: hidden;
 }
 
 #background-image {
@@ -24,24 +25,34 @@ body {
     width: 75%;
     background: white;
     display: flex;
+    height: 100%;
 }
 
 #left-panel {
     width: 50%;
     background: white;
+    position: relative;
 }
 
 #left-panel img {
     float: right;
     transform: translateX(100%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
 
 #right-panel {
     width: 50%;
     background: #607D8B;
+    position: relative;
 }
 
 #right-panel img {
     float: right;
     transform: translateX(100%);
+    position: absolute;
+    top: 0;
+    right: 0;
 }
