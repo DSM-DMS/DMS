@@ -192,8 +192,7 @@ body {
     /*padding: 0 20px 0 20px;*/
 }
 
-.meal-title,
-.meal-content {
+.meal-title, .meal-content {
     display: inline-block;
 }
 
@@ -259,33 +258,73 @@ body {
     transition: 0.3s ease;
 }
 
-#extension-apply-window table {
+#extension-apply-window .extension-class-select {
     margin-top: 14vh;
     height: 72vh;
     width: 36vh;
     margin-left: 15%;
     color: white;
     text-align: center;
+    float: left;
 }
 
-#extension-apply-window table td {
+#extension-apply-window .extension-class-select td {
     border-radius: 999px;
     width: 18vh;
     height: 18vh;
 }
 
-#extension-apply-window table td:hover {
+#extension-apply-window .extension-class-select td:hover {
     background-color: rgba(255, 255, 255, .2);
 }
 
-#extension-apply-window p {
+#extension-apply-window .extension-class-select p {
     font-size: 3rem;
     font-weight: 100;
     margin: 0;
 }
 
-td span {
+#extension-apply-window .extension-class-select span {
     font-size: 0.5rem;
+}
+
+.extension-seat-container {
+    margin-top: 14vh;
+    height: 72vh;
+    float: left;
+    margin-left: 8%;
+}
+
+.extension-seat-container td {
+    text-align: center;
+}
+
+.extension-board {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 8.5%;
+    border-radius: 999px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 2vh;
+}
+
+#extension-apply-window .extension-board p {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.extension-seat {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 9.5vh;
+    height: 9.5vh;
+    border-radius: 10vh;
+    display: inline-block;
+    margin: 0.5vw;
+
+    /*margin: 10px;*/
 }
 
 
