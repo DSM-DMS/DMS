@@ -100,6 +100,53 @@ body {
 
 .notice {
     height: 50%;
+    padding-left: 50px;
+    position: relative;
+}
+
+.notice-title-container {
+    padding-top: 10%;
+    border-bottom: 1px solid black;
+}
+
+#notice-title {
+    margin: 0;
+    font-size: 2.1rem;
+    font-weight: 200;
+    padding-bottom: 7px;
+}
+
+#notice-title::after {
+    font-size: 1.1rem;
+    content: "new";
+    background-color: yellow;
+    margin-left: 10px;
+    padding: 0 5px 0 5px;
+    border-radius: 1000000000px;
+}
+
+.notice-title-date {
+    position: absolute;
+    right: 0;
+    transform: translateY(-100%);
+    padding-bottom: 7px;
+}
+
+.notice-title-writer {
+    position: absolute;
+    right: 0;
+}
+
+.notice-content-container {
+    margin-top: 30px;
+}
+
+.notice-more {
+    float: right;
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    margin-top: 20px;
 }
 
 
@@ -129,8 +176,7 @@ body {
     /*padding: 0 20px 0 20px;*/
 }
 
-.meal-title,
-.meal-content {
+.meal-title, .meal-content {
     display: inline-block;
 }
 
