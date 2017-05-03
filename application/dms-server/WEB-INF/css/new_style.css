@@ -30,7 +30,7 @@ body {
 }
 
 #panel {
-    width: 75%;
+    width: 80%;
     background: white;
     display: flex;
     height: 100%;
@@ -45,21 +45,21 @@ body {
 }
 
 #left-panel {
-    width: 60%;
+    width: 65%;
     background: white;
     position: relative;
     z-index: 1;
 }
 
 #right-panel {
-    width: 40%;
+    width: 35%;
     background: #607D8B;
     position: relative;
 }
 
 #stay-apply-container {
     height: 50%;
-    transform: translateX(15%);
+    transform: translateX(13%);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -76,7 +76,7 @@ body {
 
 #extension-apply-container {
     height: 50%;
-    transform: translateX(15%);
+    transform: translateX(13%);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -181,7 +181,8 @@ body {
     /*padding: 0 20px 0 20px;*/
 }
 
-.meal-title, .meal-content {
+.meal-title,
+.meal-content {
     display: inline-block;
 }
 
