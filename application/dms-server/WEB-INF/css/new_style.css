@@ -34,6 +34,7 @@ body {
     background: white;
     display: flex;
     height: 100%;
+    transition: 0.3s ease;
 }
 
 .curved-image {
@@ -198,4 +199,15 @@ body {
     min-width: 90px;
     font-size: 2.1rem;
     font-weight: 200;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+/*animaion------------------------------------------------------------------------*/
+
+.left-move {
+    transform: translateX(-74%);
+}
+>>>>>>> origin/master
