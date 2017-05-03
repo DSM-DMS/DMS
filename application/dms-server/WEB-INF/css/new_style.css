@@ -3,6 +3,7 @@ body {
     background: black;
     margin: 0;
     height: 100vh;
+    overflow: hidden;
 }
 
 #background-image {
@@ -27,7 +28,7 @@ body {
 }
 
 #left-panel {
-    width: 50%;
+    width: 60%;
     background: white;
 }
 
@@ -37,7 +38,7 @@ body {
 }
 
 #right-panel {
-    width: 50%;
+    width: 40%;
     background: #607D8B;
 }
 
