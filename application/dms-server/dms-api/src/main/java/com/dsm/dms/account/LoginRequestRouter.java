@@ -9,9 +9,10 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
  * Created by boxfox on 2017-04-05.
  */
 @RouteRegistration(path = "/api/login/form", method = {HttpMethod.GET})
-public class LoginFormRouter implements Handler<RoutingContext> {
+public class LoginRequestRouter implements Handler<RoutingContext> {
 
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext context)
+    {
         context.response().end("");
     }
 
