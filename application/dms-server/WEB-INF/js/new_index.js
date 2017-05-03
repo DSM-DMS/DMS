@@ -1,11 +1,19 @@
 var $foldingButton = $("#extension-apply");
+var $closeButton = $("#close-extension-window");
 var $panel = $("#panel");
 var $extensionWindow = $("#extension-apply-window");
+var $menu = $("#menu");
 
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
-    console.log("asdf");
     $extensionWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+});
+
+$closeButton.on("click", function() {
+    $panel.toggleClass("left-move");
+    $extensionWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
 });
 
 var mapData = [
