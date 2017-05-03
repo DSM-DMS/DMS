@@ -11,9 +11,7 @@
     border: 8px solid white;
 }
 
-#sec,
-#min,
-#hour {
+#sec, #min, #hour {
     position: absolute;
     width: 30px;
     border-radius: 200px;
