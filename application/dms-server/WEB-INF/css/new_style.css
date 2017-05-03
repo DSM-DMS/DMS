@@ -66,6 +66,16 @@ body {
     flex-direction: column;
 }
 
+#stay-apply {
+    margin-left: 25%;
+    width: 50%;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 10000000000px;
+    color: white;
+    line-height: 5vh;
+}
+
 #stay-apply-container img {
     padding: 0;
     position: relative;
@@ -199,9 +209,6 @@ body {
     min-width: 90px;
     font-size: 2.1rem;
     font-weight: 200;
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -210,4 +217,3 @@ body {
 .left-move {
     transform: translateX(-74%);
 }
->>>>>>> origin/master
