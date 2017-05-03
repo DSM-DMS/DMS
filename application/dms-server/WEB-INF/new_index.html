@@ -9,10 +9,7 @@
 </head>
 
 <body>
-    <script 
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
+    <script src="./js/jquery.js"></script>
     <div id="background-image">
         <img src="./images/chayoung.jpg" />
     </div>
@@ -21,13 +18,22 @@
             <img src="./images/curved.png"/>
         </div>
         <div id="right-panel">
-            <script src="./js/clock.js"></script>
-            <ul id="clock-in">	
-                <li id="sec"></li>
-                <li id="hour"></li>
-                <li id="min"></li>
-            </ul>
             <img src="./images/curved2.png"/>
+            <div id="stay-apply-container">
+                
+            </div>
+            <div id="extension-apply-container">
+                <div id="current-status">
+                    <p>연장신청이 가능합니다</p>
+                </div>
+                <script src="./js/clock.js"></script>
+                <ul id="clock-in">	
+                    <li id="sec"></li>
+                    <li id="hour"></li>
+                    <li id="min"></li>
+                </ul>
+                <button id="extension-apply">연장학습 신청</button>
+            </div>
         </div>
     </div>
     <div id="menu"></div>

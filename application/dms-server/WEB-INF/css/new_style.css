@@ -56,3 +56,33 @@ body {
     top: 0;
     right: 0;
 }
+
+#stay-apply-container {
+    height: 50%;
+}
+
+#extension-apply-container {
+    height: 50%;
+    transform: translateX(15%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#current-status {}
+
+#current-status p {
+    color: white;
+    padding: 0px;
+    font-size: 2vh;
+}
+
+#extension-apply {
+    margin-left: 25%;
+    width: 50%;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 10000000000px;
+    color: white;
+    line-height: 5vh;
+}
