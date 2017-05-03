@@ -1,4 +1,5 @@
 var $foldingButton = $("#extension-apply");
+var $closeButton = $("#close-extension-window");
 var $panel = $("#panel");
 var $extensionWindow = $("#extension-apply-window");
 var $loginBtn = $(".login");
@@ -8,6 +9,13 @@ var $menu = $("#menu");
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+});
+
+$closeButton.on("click", function() {
+    $panel.toggleClass("left-move");
+    $extensionWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
 });
 
 $trigger.on("click", function() {
