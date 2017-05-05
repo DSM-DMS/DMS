@@ -720,6 +720,7 @@ a.btn {
 
 .fade-out {
     opacity: 0 !important;
+    display: none !important;
 }
 
 .select {
