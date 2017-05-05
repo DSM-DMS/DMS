@@ -235,6 +235,9 @@ function extensionDoCheck() {
 }
 
 $(document).ready(function() {
+
+    $("#backgroundWallpaper").attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 10) + 1) + ".jpg");
+
     stayTick = $('#stayTick');
     stayCircle = $('#stayCheckCircle');
     stayCross1 = $('#stayCross1');
@@ -307,7 +310,6 @@ $(document).ready(function() {
 });
 
 $(function() {
-
     $(".login-input input").focus(function() {
         $(this).parent(".login-input").each(function() {
             $("label", this).css({
@@ -378,13 +380,13 @@ $(function() {
             "height": "500px",
             "top": "-250px",
             "left": "-250px",
-        }, 600);
+        }, 200);
         $('.x-' + oX + '.y-' + oY + '').animate({
             "width": "0",
             "height": "0",
             "top": "-0",
             "left": "-0",
-        }, 1200, function() {
+        }, 600, function() {
             $(".click-efect").remove();
             console.log("remove")
         });
@@ -422,6 +424,7 @@ function setDay() {
 }
 
 setDay();
+
 function getMeal() {
     $.ajax({
         url: "http://dsm2015.cafe24.com/meal",
