@@ -120,6 +120,10 @@ body {
     margin-right: 1vh;
 }
 
+.current-status svg:hover {
+    cursor: pointer;
+}
+
 .current-status p {
     color: white;
     font-size: 3vh;
@@ -151,19 +155,22 @@ body {
 .notice {
     height: 50%;
     padding-left: 50px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .notice-title-container {
-    padding-top: 10%;
-    border-bottom: 1px solid black;
+    background: #eeeeee;
+    border-radius: 2vh 2vh 0 0;
+    padding: 2vh 2vh 1vh 2vh;
+    /*border-bottom: 1px solid black;*/
 }
 
 #notice-title {
-    margin: 0;
+    /*margin: 0;*/
     font-size: 2.1rem;
     font-weight: 200;
-    padding-bottom: 7px;
 }
 
 #notice-title::after {
@@ -171,32 +178,66 @@ body {
     content: "new";
     background-color: yellow;
     margin-left: 10px;
-    padding: 0 5px 0 5px;
+    padding: 0 10px 0 10px;
     border-radius: 1000000000px;
 }
 
 .notice-title-date {
+    text-align: right;
     position: absolute;
-    right: 0;
-    transform: translateY(-100%);
-    padding-bottom: 7px;
+    right: 2vh;
 }
 
 .notice-title-writer {
-    position: absolute;
-    right: 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: 80%;
+}
+
+.notice-title-writer>span {
+    width: 10vh;
+    height: 10vh;
+    background: #607D8B;
+    border-radius: 999px;
+    color: white;
+    font-size: 3vh;
+    line-height: 3vh;
+    text-align: center;
+    transform-origin: center;
+}
+
+#writer-content {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1vh;
+    margin-top: 4.5vh;
+    /*set line height back to normal*/
+}
+
+.speech-bubble-tail {
+    width: 4vh;
+    height: 4vh;
+    background: #eeeeee;
+    transform: rotate(45deg) translateY(3vh);
+    margin-left: 5vh;
 }
 
 .notice-content-container {
-    margin-top: 30px;
+    background: #eeeeee;
+    border-radius: 0 0 2vh 2vh;
+    padding: 2vh;
 }
 
 .notice-more {
-    float: right;
+    background: #607B8D;
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 1.5rem;
-    margin-top: 20px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    text-align: center;
+    width: 15vh;
+    border-radius: 2vh;
 }
 
 
@@ -220,6 +261,7 @@ body {
 
 .meal-date {
     margin: auto 2vh;
+    font-size: 1.5rem;
 }
 
 .meal-remote-control img {

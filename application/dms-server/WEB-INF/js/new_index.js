@@ -138,4 +138,11 @@ $(document).ready(function() {
     extensionCross1 = $('#extensionCross1');
     extensionCross2 = $('#extensionCross2');
     extensionDoCheck();
+
+    $('#Layer_1').click(function() {
+        stayDoCheck();
+    });
+    $('#Layer_2').click(function() {
+        extensionDoCheck();
+    });
 });
