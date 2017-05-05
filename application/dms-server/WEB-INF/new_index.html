@@ -138,8 +138,7 @@
             </div>
             <div id="extension-apply-container">
                 <div class="current-status">
-                    <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                        width="5vh" height="5vh" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                    <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="5vh" height="5vh" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
                         <g id="check">
                                 <circle id="extensionCheckcircle" fill="#FFF" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="63.638" cy="53.976" r="40.764"/>
                                 <line id="extensionCross2" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="81.642" y1="37.686" x2="47.952" y2="71.375"/>
@@ -203,8 +202,14 @@
                         <input type="password" name="pass" id="pass">
                         <span class="spin"></span>
                     </div>
-                    <div class="login-button modal-button login">
-                        <button><span>Login</span> <i class="fa fa-check"></i></button>
+
+                    <div class="modal-button-box">
+                        <div class="login-button modal-button login">
+                            <button><span>Login</span> <i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span><i class="fa fa-check"></i></button>
+                        </div>
                     </div>
                     <a href="" class="register">회원가입 하기</a>
                 </div>
@@ -212,7 +217,7 @@
         </div>
     </div>
 
-<!-- -------------------------------------  -->
+    <!-- -------------------------------------  -->
 
     <div class="modal-wrapper bug-modal-wrapper">
         <div class="modal bug-modal">
@@ -222,7 +227,8 @@
             </div> -->
             <div class="content">
                 <div class="login-box bug-box">
-                    <div class="login-title">버그신고</div>
+                    <div class="login-title">버그신고
+                    </div>
                     <div class="login-input">
                         <label for="name">Title</label>
                         <input type="text" name="name" id="name">
@@ -234,9 +240,15 @@
                         <textarea name="name" rows="8" cols="80"></textarea>
                         <span class="spin"></span>
                     </div>
-                    <div class="bug-button modal-button">
-                        <button><span>신고</span> <i class="fa fa-check"></i></button>
+                    <div class="modal-button-box">
+                        <div class="bug-button modal-button">
+                            <button><span>신고</span> <i class="fa fa-check"></i></button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span><i class="fa fa-check"></i></button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
