@@ -9,6 +9,14 @@ var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
 var $windows = $(".window");
 var $pointBtn = $(".point-btn");
+var $closeModal = $(".btn-close");
+
+$closeModal.on("click", function() {
+    $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
+    $panel.toggleClass('blur');
+    $menu.toggleClass('blur');
+    return false;
+});
 
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
