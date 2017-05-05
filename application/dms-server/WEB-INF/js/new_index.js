@@ -93,34 +93,88 @@ drawSeats(mapData);
 
 function stayDoCheck() {
 
-    TweenLite.set([stayCross1, stayCross2], { autoAlpha: 0 });
-    TweenLite.set(stayTick, { drawSVG: "0%" });
-    TweenLite.set(stayCircle, { drawSVG: "50% 50%", scale: ".01", transformOrigin: "50% 50%", fill: "#607D8B", autoAlpha: 0 });
+    TweenLite.set([stayCross1, stayCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(stayTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(stayCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
 
-    tl1 = new TimelineMax({ repeat: 0, repeatDelay: 1 });
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
     tl1
-        .to(stayCircle, 1, { scale: 1, ease: Elastic.easeOut })
-        .to([stayTick, stayCircle], .6, { autoAlpha: 1 }, .1)
-        .to(stayCircle, .8, { drawSVG: "100% 0%", ease: Power4.easeOut }, .2)
-        .to(stayTick, .8, { drawSVG: "0% 100%", ease: Expo.easeOut }, '-=.6')
-        .to(stayCircle, .6, { fill: "#607D8B", ease: Power1.easeInOut }, '-=.4');
+        .to(stayCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([stayTick, stayCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(stayCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(stayTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(stayCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
 
     tl1.timeScale(.8);
 
 }
 
 function extensionDoCheck() {
-    TweenLite.set([extensionCross1, extensionCross2], { autoAlpha: 0 });
-    TweenLite.set(extensionTick, { drawSVG: "0%" });
-    TweenLite.set(extensionCircle, { drawSVG: "50% 50%", scale: ".01", transformOrigin: "50% 50%", fill: "#607D8B", autoAlpha: 0 });
+    TweenLite.set([extensionCross1, extensionCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(extensionTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(extensionCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
 
-    tl1 = new TimelineMax({ repeat: 0, repeatDelay: 1 });
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
     tl1
-        .to(extensionCircle, 1, { scale: 1, ease: Elastic.easeOut })
-        .to([extensionTick, extensionCircle], .6, { autoAlpha: 1 }, .1)
-        .to(extensionCircle, .8, { drawSVG: "100% 0%", ease: Power4.easeOut }, .2)
-        .to(extensionTick, .8, { drawSVG: "0% 100%", ease: Expo.easeOut }, '-=.6')
-        .to(extensionCircle, .6, { fill: "#607D8B", ease: Power1.easeInOut }, '-=.4');
+        .to(extensionCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([extensionTick, extensionCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(extensionCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(extensionTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(extensionCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
 
     tl1.timeScale(.8);
 
@@ -138,4 +192,61 @@ $(document).ready(function() {
     extensionCross1 = $('#extensionCross1');
     extensionCross2 = $('#extensionCross2');
     extensionDoCheck();
+});
+
+$(function() {
+
+    $(".login-input input").focus(function() {
+        $(this).parent(".login-input").each(function() {
+            $("label", this).css({
+                "line-height": "18px",
+                "font-size": "18px",
+                "font-weight": "100",
+                "top": "0px"
+            })
+            $(".spin", this).css({
+                "width": "100%"
+            })
+        });
+    }).blur(function() {
+        $(".spin").css({
+            "width": "0px"
+        })
+        if ($(this).val() == "") {
+            $(this).parent(".login-input").each(function() {
+                $("label", this).css({
+                    "line-height": "60px",
+                    "font-size": "24px",
+                    "font-weight": "300",
+                    "top": "10px"
+                })
+            });
+
+        }
+    });
+
+    $(".login-button").click(function(e) {
+        var pX = e.pageX,
+            pY = e.pageY,
+            oX = parseInt($(this).offset().left),
+            oY = parseInt($(this).offset().top);
+
+        $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
+        $('.x-' + oX + '.y-' + oY + '').animate({
+            "width": "500px",
+            "height": "500px",
+            "top": "-250px",
+            "left": "-250px",
+        }, 600);
+        $('.x-' + oX + '.y-' + oY + '').animate({
+            "width": "0",
+            "height": "0",
+            "top": "-0",
+            "left": "-0",
+        }, 1200, function() {
+            $(".click-efect").remove();
+            console.log("remove")
+        });
+        $("button", this).addClass('active');
+    });
 });
