@@ -104,9 +104,9 @@ function drawSeats(mapData) {
     }
     $(".extension-seat-table-container").html(newTable);
     console.log($("#extension-seat-table").width());
-    $(".extension-board").css({
-        width: $("#extension-seat-table").width()
-    });
+    // $(".extension-board").css({
+    //     width: $("#extension-seat-table").width()
+    // });
 }
 
 drawSeats(mapData);
