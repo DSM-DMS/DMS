@@ -2,13 +2,13 @@ var $foldingButton = $("#extension-apply");
 var $closeButton = $("#close-extension-window");
 var $panel = $("#panel");
 var $extensionWindow = $("#extension-apply-window");
-var $loginBtn = $(".login");
-var $trigger = $(".trigger");
+var $loginBtn = $(".login-btn");
 var $menu = $("#menu");
 var $dormRule = $(".dorm-rule");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
 var $windows = $(".window");
+var $pointBtn = $(".point-btn");
 
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
@@ -46,16 +46,19 @@ $('#speech-bubble button').click(function() {
     speechBubble.toggleClass('fade-in');
 });
 
-$trigger.on("click", function() {
-    $('.modal-wrapper').toggleClass('open');
+$loginBtn.on("click", function() {
+    $('.login-modal-wrapper').toggleClass('open');
     $panel.toggleClass('blur');
     $menu.toggleClass('blur');
     return false;
 });
 
-
-
-
+$pointBtn.on("click", function() {
+    $('.bug-modal-wrapper').toggleClass('open');
+    $panel.toggleClass('blur');
+    $menu.toggleClass('blur');
+    return false;
+});
 
 var mapData = [
     [1, 2, 0, 3, 4],
@@ -249,7 +252,36 @@ $(function() {
         }
     });
 
-    $(".login-button").click(function(e) {
+    $(".bug-content textarea").focus(function() {
+        $(this).parent(".bug-content").each(function() {
+            $("label", this).css({
+                "line-height": "18px",
+                "font-size": "18px",
+                "font-weight": "100",
+                "top": "0px"
+            })
+            $(".spin", this).css({
+                "width": "100%"
+            })
+        });
+    }).blur(function() {
+        $(".spin").css({
+            "width": "0px"
+        })
+        if ($(this).val() == "") {
+            $(this).parent(".login-input").each(function() {
+                $("label", this).css({
+                    "line-height": "60px",
+                    "font-size": "24px",
+                    "font-weight": "300",
+                    "top": "10px"
+                })
+            });
+
+        }
+    });
+
+    $(".modal-button").click(function(e) {
         var pX = e.pageX,
             pY = e.pageY,
             oX = parseInt($(this).offset().left),

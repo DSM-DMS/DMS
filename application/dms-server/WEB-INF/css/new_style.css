@@ -633,6 +633,15 @@ a.btn {
 }
 
 .login-button {
+    /*position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+    width: 50%;
+    margin-left: 25%;
+    height: 10vh;*/
+}
+
+.modal-button {
     position: relative;
     overflow: hidden;
     margin-top: 20px;
@@ -775,7 +784,43 @@ a.btn {
     right: 10vh;
 }
 
-.window-close {
+
+/*bug----------------*/
+
+.bug-content {
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bug-content textarea {
+    width: 100%;
+    outline: none;
+    padding: 0;
+    border: 0;
+}
+
+.bug-button button {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    color: #607D8B;
+    outline: 0;
+}
+
+.bug-content .spin {
+    transition: 0.3s ease;
+    background-color: #607D8B;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+}
+
+.bug-button button:hover {
+    border: 3px solid #607D8B;
+    background-color: white;
 }
 
 
