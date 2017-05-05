@@ -170,7 +170,7 @@
             <img src=".\images\run.svg">
             <span>외출 신청</span>
         </div>
-        <div class="menu-item hvr-float">
+        <div class="menu-item hvr-float point-btn">
             <img src=".\images\coin.svg">
             <span>상점 신청</span>
         </div>
@@ -178,14 +178,13 @@
             <img src=".\images\question.svg">
             <span>자주하는 질문</span>
         </div>
-        <div class="menu-item hvr-float trigger">
-            <img src=".\images\login.svg">
+        <div class="menu-item hvr-float login-btn">
+            <img src=".\images\logout.svg">
             <span>로그아웃</span>
         </div>
     </div>
 
-    <div class="modal-wrapper">
-
+    <div class="modal-wrapper login-modal-wrapper">
         <div class="modal login-modal">
 
             <!-- <div class="head">
@@ -204,10 +203,40 @@
                         <input type="password" name="pass" id="pass">
                         <span class="spin"></span>
                     </div>
-                    <div class="login-button login">
+                    <div class="login-button modal-button login">
                         <button><span>Login</span> <i class="fa fa-check"></i></button>
                     </div>
                     <a href="" class="register">회원가입 하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- -------------------------------------  -->
+
+    <div class="modal-wrapper bug-modal-wrapper">
+        <div class="modal bug-modal">
+
+            <!-- <div class="head">
+                <a class="btn-close trigger" href=""></a>
+            </div> -->
+            <div class="content">
+                <div class="login-box bug-box">
+                    <div class="login-title">버그신고</div>
+                    <div class="login-input">
+                        <label for="name">Title</label>
+                        <input type="text" name="name" id="name">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="bug-content">
+                        <!-- <label for="pass">내용</label> -->
+                        <!-- <input type="password" name="pass" id="pass"> -->
+                        <textarea name="name" rows="8" cols="80"></textarea>
+                        <span class="spin"></span>
+                    </div>
+                    <div class="bug-button modal-button">
+                        <button><span>신고</span> <i class="fa fa-check"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
