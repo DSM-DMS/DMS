@@ -433,11 +433,14 @@ a.btn {
 
 .modal {
     width: 600px;
-    height: 400px;
+    /*height: 400px;*/
+    height: 100vh;
     display: block;
-    margin: 50% 0 0 -300px;
+    /*margin: 50% 0 0 -300px;*/
+    margin: 0 0 0 -300px;
     position: relative;
-    top: 50%;
+    /*top: 50%;*/
+    transform: translateY(100%);
     left: 50%;
     background: white;
     opacity: 0;
@@ -449,7 +452,8 @@ a.btn {
 }
 
 .modal-wrapper.open .modal {
-    margin-top: -200px;
+    /*margin-top: -200px;*/
+    transform: translateY(0%);
 }
 
 .modal-wrapper.open .modal .content {
@@ -458,10 +462,10 @@ a.btn {
 
 .head {
     width: 90%;
-    height: 32px;
+    height: 15%;
     padding: 1.5em 5%;
     overflow: hidden;
-    background: white;
+    background: aqua;
     opacity: 1;
 }
 
@@ -472,16 +476,17 @@ a.btn {
     float: right;
 }
 
-.btn-close::before,
-.btn-close::after {
+
+/*.btn-close::before, .btn-close::after {
     content: '';
     width: 32px;
     height: 6px;
     display: block;
     background: black;
-}
+}*/
 
-.btn-close::before {
+
+/*.btn-close::before {
     margin-top: 12px;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -495,10 +500,82 @@ a.btn {
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
-}
+}*/
 
 .content {
-    padding: 5%;
+    /*padding: 5%;*/
+    /*text-align: center;*/
+    height: 100%;
+    padding: 25% 10% 25% 10%;
+}
+
+
+/*login---------------------------------------------------------------------------*/
+
+.login-title {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 200;
+    color: #ED2553;
+    position: relative;
+}
+
+.login-title:before {
+    content: "";
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -12.5%;
+    background: #ED2553;
+}
+
+.login-input {
+    margin-top: 20px;
+    position: relative;
+    height: 60px;
+}
+
+.login-input input {
+    width: 100%;
+    height: 100%;
+    font-size: 1.6rem;
+    font-weight: 100;
+    border: 0;
+    outline: none;
+}
+
+.login-input::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 0;
+}
+
+.login-input label {
+    position: absolute;
+    font-size: 1.6rem;
+    font-weight: 100;
+    line-height: 60px;
+}
+
+.login-button button {
+    margin-top: 20px;
+    width: 50%;
+    margin-left: 25%;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    height: 10vh;
+    color: #607D8B;
+}
+
+.login-box a {
+    margin: 20px;
+    display: block;
+    text-align: center;
 }
 
 
