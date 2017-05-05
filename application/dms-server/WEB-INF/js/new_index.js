@@ -15,6 +15,17 @@ var $pointBtn = $(".point-btn");
 var $saturdayContainer = $(".saturday-container");
 var $sundayContainer = $(".sunday-container");
 
+var $closeModal = $(".btn-close");
+var $prevMenuBtn = $("#previous-menu");
+var $nextMenuBtn = $("#next-menu");
+var mealDate = new Date();
+
+$closeModal.on("click", function() {
+    $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
+    $panel.toggleClass('blur');
+    $menu.toggleClass('blur');
+    return false;
+});
 
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
@@ -374,4 +385,68 @@ $(function() {
         });
         $("button", this).addClass('active');
     });
+});
+
+function nextDay() {
+    mealDate.setDate(mealDate.getDate() + 1);
+    getMeal();
+}
+
+function prevDay() {
+    mealDate.setDate(mealDate.getDate() - 1);
+    getMeal();
+}
+
+function formatDate() {
+    return mealDate.toISOString().slice(0, 10);
+}
+
+function formatDate2() {
+    var days = ["일", "월", "화", "수", "목", "금", "토"];
+    var y = mealDate.getFullYear();
+    var m = mealDate.getMonth() + 1;
+    var d = mealDate.getDate();
+    var day = days[mealDate.getDay()];
+
+    return y + "." + m + "." + d + " " + day + "요일";
+}
+
+function setDay() {
+    $(".meal-date").text(formatDate2());
+    getMeal();
+}
+
+setDay();
+function getMeal() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/meal",
+        data: {
+            date: formatDate()
+        },
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data);
+                var domArr = $(".meal-content p");
+                $(domArr[0]).text(JSON.parse(parsedData.breakfast).toString());
+                $(domArr[1]).text(JSON.parse(parsedData.lunch).toString());
+                $(domArr[2]).text(JSON.parse(parsedData.dinner).toString());
+            },
+            error: function() {
+                var domArr = $(".meal-content p");
+                $(domArr[0]).text("급식이 없습니다.");
+                $(domArr[1]).text("급식이 없습니다.");
+                $(domArr[2]).text("급식이 없습니다.");
+            }
+        }
+    })
+}
+
+$prevMenuBtn.on("click", function() {
+    prevDay();
+    setDay();
+});
+
+$nextMenuBtn.on("click", function() {
+    nextDay();
+    setDay();
 });

@@ -551,24 +551,26 @@ a.btn {
     opacity: 1;
 }
 
-.btn-close {
+/*.btn-close {
     width: 32px;
-    height: 32px;
+    height: 100%;
     display: block;
     float: right;
+
+    margin: 0 !important;
 }
 
 
-/*.btn-close::before, .btn-close::after {
+.btn-close::before, .btn-close::after {
     content: '';
     width: 32px;
     height: 6px;
     display: block;
     background: black;
-}*/
+}
 
 
-/*.btn-close::before {
+.btn-close::before {
     margin-top: 12px;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -658,9 +660,14 @@ a.btn {
     position: relative;
     overflow: hidden;
     margin-top: 20px;
-    width: 50%;
-    margin-left: 25%;
+    width: 40%;
+    /*margin: 20px 5% 0 5%;*/
     height: 10vh;
+    display: inline-block;
+}
+
+.modal-button-box {
+    text-align: center;
 }
 
 .login-button button {
@@ -851,8 +858,6 @@ iframe {
     width: 100vw;
     height: 100vh;
 }
-
-
 /*going out*/
 
 #going-out-apply-window img {
