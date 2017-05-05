@@ -8,6 +8,7 @@ var $dormRule = $(".dorm-rule");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
 var $goingOutWindow = $("#going-out-apply-window");
+var $stayWindow = $(".stay-window");
 var $closeGoingOutWindow = $("#close-going-out-window");
 var $windows = $(".window");
 var $goingOutBtn = $(".goingOut-btn");
@@ -56,6 +57,10 @@ var speechBubble = $('#speech-bubble');
 $("#stay-apply").click(function() {
     speechBubble.toggleClass('fade-in');
     speechBubble.focus();
+    $stayWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+
 });
 
 $('#speech-bubble button').click(function() {
