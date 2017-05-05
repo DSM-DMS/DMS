@@ -2,7 +2,6 @@ package com.dms.beinone.application.facilityreport;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +13,13 @@ import android.widget.Toast;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-23.
@@ -44,7 +41,12 @@ public class FacilityReportArticleActivity extends AppCompatActivity {
         mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
         mFacilityReport = getIntent().getParcelableExtra(getString(R.string.EXTRA_FACILITYREPORT));
 
-        new LoadFacilityReportTask().execute(mFacilityReport.getNo());
+        try {
+            loadFacilityReport(mFacilityReport.getNo());
+        } catch (IOException e) {
+            System.out.println("IOException in FacilityReportArticleActivity: loadFacilityReport()");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -93,49 +95,50 @@ public class FacilityReportArticleActivity extends AppCompatActivity {
         contentTV.setText(facilityReport.getContent());
     }
 
-    private class LoadFacilityReportTask extends AsyncTask<Integer, Void, FacilityReport> {
+    private void loadFacilityReport(final int no) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("no", no);
 
-        @Override
-        protected FacilityReport doInBackground(Integer... params) {
-            FacilityReport facilityReport = null;
+            HttpBox.get(FacilityReportArticleActivity.this, "/post/report")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            try {
+                                FacilityReport facilityReport = JSONParser.parseFacilityReportJSON(response.getJsonObject(), no);
+                                switch (code) {
+                                    case HttpBox.HTTP_OK:
+                                        bind(facilityReport);
+                                        break;
+                                    case HttpBox.HTTP_NO_CONTENT:
+                                        Toast.makeText(FacilityReportArticleActivity.this, R.string.facilityreport_article_no_content, Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case HttpBox.HTTP_BAD_REQUEST:
+                                        Toast.makeText(FacilityReportArticleActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                        Toast.makeText(FacilityReportArticleActivity.this, R.string.facilityreport_article_internal_server_error, Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } catch (JSONException e) {
+                                System.out.println("JSONException in FacilityReportArticleActivity: GET /post/report");
+                                e.printStackTrace();
+                            }
+                        }
 
-            try {
-                facilityReport = loadFacilityReport(params[0]);
-            } catch (IOException e) {
-                return null;
-            } catch (JSONException e) {
-                return null;
-            }
-
-            return facilityReport;
-        }
-
-        @Override
-        protected void onPostExecute(FacilityReport facilityReport) {
-            super.onPostExecute(facilityReport);
-
-            if (facilityReport == null) {
-                // error
-                Toast.makeText(FacilityReportArticleActivity.this,
-                        R.string.facilityreport_article_error, Toast.LENGTH_SHORT).show();
-            } else {
-                bind(facilityReport);
-            }
-        }
-
-        private FacilityReport loadFacilityReport(int no) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("no", String.valueOf(no));
-
-            Response response =
-                    HttpBox.post(FacilityReportArticleActivity.this, "/post/report", Request.TYPE_GET)
-                    .putBodyData(requestParams)
-                    .push();
-
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            return JSONParser.parseFacilityReportJSON(responseJSONObject, no);
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in FacilityReportArticleActivity: GET /post/report");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in FacilityReportArticleActivity: GET /post/report");
+            e.printStackTrace();
         }
     }
-
 }

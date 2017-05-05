@@ -1,6 +1,5 @@
 package com.dms.beinone.application.appcontent;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,15 +13,14 @@ import android.widget.Toast;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-26.
@@ -41,10 +39,12 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Appcontent appcontent = getIntent().getParcelableExtra(getString(R.string.EXTRA_APPCONTENT));
-        bind(appcontent);
-
-        new LoadAppcontentTask(appcontent.getCategory())
-                .execute(appcontent.getCategory(), appcontent.getNumber());
+        try {
+            loadAppcontent(appcontent.getCategory(), appcontent.getNumber());
+        } catch (IOException e) {
+            System.out.println("IOException in AppcontentArticleActivity: GET /post/school/appcontent");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -94,69 +94,10 @@ public class AppcontentArticleActivity extends AppCompatActivity {
         }
     }
 
-    private class LoadAppcontentTask extends AsyncTask<Integer, Void, Object[]> {
-
-        private int mCategory;
-
-        public LoadAppcontentTask(int category) {
-            mCategory = category;
-        }
-
-        @Override
-        protected Object[] doInBackground(Integer... params) {
-            Object[] results = null;
-
-            try {
-                results = loadAppcontent(params[0], params[1]);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(Object[] results) {
-            super.onPostExecute(results);
-
-            int errorMsgResId = -1;
-            int emptyMsgResId = -1;
-
-            if (mCategory == Appcontent.NOTICE) {
-                errorMsgResId = R.string.appcontent_notice_error;
-                emptyMsgResId = R.string.appcontent_notice_empty;
-            } else if (mCategory == Appcontent.NEWSLETTER) {
-                errorMsgResId = R.string.appcontent_newsletter_error;
-                emptyMsgResId = R.string.appcontent_newsletter_empty;
-            } else {
-                errorMsgResId = R.string.appcontent_competition_error;
-                emptyMsgResId = R.string.appcontent_competition_empty;
-            }
-
-            int code = (int) results[0];
-            Appcontent appcontent = (Appcontent) results[1];
-
-            if (code == 200) {
-                // success
-                bind(appcontent);
-            } else if (code == 204) {
-                // failure
-                Toast.makeText(AppcontentArticleActivity.this, emptyMsgResId, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                // error
-                Toast.makeText(AppcontentArticleActivity.this, errorMsgResId, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private Object[] loadAppcontent(int category, int number) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("no", String.valueOf(number));
+    private void loadAppcontent(final int category, int number) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("no", number);
 
             String path = null;
             switch (category) {
@@ -169,20 +110,67 @@ public class AppcontentArticleActivity extends AppCompatActivity {
                 case Appcontent.COMPETITION:
                     path = "/post/school/competition";
                     break;
-                default: break;
-            }
-            Response response = HttpBox.post(AppcontentArticleActivity.this, path, Request.TYPE_GET)
-                    .putBodyData(requestParams)
-                    .push();
-
-            int code = response.getCode();
-            Appcontent appcontent = null;
-            if (code == 200) {
-                appcontent = JSONParser.parseAppcontentJSON(response.getJsonObject());
+                default:
+                    break;
             }
 
-            return new Object[]{code, appcontent};
+            HttpBox.get(AppcontentArticleActivity.this, path)
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int errorMsgResId = 0;
+                            int emptyMsgResId = 0;
+                            switch (category) {
+                                case Appcontent.NOTICE:
+                                    errorMsgResId = R.string.appcontent_notice_error;
+                                    emptyMsgResId = R.string.appcontent_notice_empty;
+                                    break;
+                                case Appcontent.NEWSLETTER:
+                                    errorMsgResId = R.string.appcontent_newsletter_error;
+                                    emptyMsgResId = R.string.appcontent_newsletter_empty;
+                                    break;
+                                case Appcontent.COMPETITION:
+                                    errorMsgResId = R.string.appcontent_competition_error;
+                                    emptyMsgResId = R.string.appcontent_competition_empty;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            switch (response.getCode()) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        Appcontent appcontent = JSONParser.parseAppcontentJSON(response.getJsonObject());
+                                        bind(appcontent);
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in AppcontentArticleActivity: GET /post/school/appcontent");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    Toast.makeText(AppcontentArticleActivity.this, emptyMsgResId, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(AppcontentArticleActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(AppcontentArticleActivity.this, errorMsgResId, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in AppcontentArticleActivity: GET /post/school/appcontent");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException AppcontentArticleActivity: GET /post/school/appcontent");
+            e.printStackTrace();
         }
     }
-
 }

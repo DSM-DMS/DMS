@@ -16,9 +16,15 @@ import java.util.Scanner;
 
 
 public class HttpBox {
-    public static final String SERVER_URL = "http://dsm2015.cafe24.com/";
 
+    private static final String SERVER_URL = "http://dsm2015.cafe24.com";
 
+    public static final int HTTP_OK = 200;
+    public static final int HTTP_CREATED = 201;
+    public static final int HTTP_NO_CONTENT = 204;
+    public static final int HTTP_BAD_REQUEST = 400;
+    public static final int HTTP_CONFLICT = 409;
+    public static final int HTTP_INTERNAL_SERVER_ERROR = 500;
 
     public static Request post(Context context, String path) {
         return init(context, SERVER_URL + path, Request.TYPE_POST);
@@ -41,13 +47,13 @@ public class HttpBox {
     }
 
     public static Request init(Context context, String path, String type) {
-        return new Request(context, SERVER_URL + path, type);
+        return new Request(context, path, type);
     }
 
     public static void push(final Request request, final HttpBoxCallback callback) {
-        new AsyncTask() {
+        new AsyncTask<Void, Void, Object>() {
             @Override
-            protected Object doInBackground(Object[] params) {
+            protected Object doInBackground(Void... params) {
                 try {
                     URL serverUrl = new URL(request.getUrl());
                     HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
@@ -79,11 +85,20 @@ public class HttpBox {
                     httpResponseScanner.close();
 
                     urlConnection.getHeaderFields();
-                    callback.done(response);
+                    return response;
                 } catch (HttpBoxException | IOException e) {
-                    callback.err(e);
+                    return e;
                 }
-                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                if (o instanceof Response) {
+                    callback.done((Response) o);
+                } else {
+                    callback.err((Exception) o);
+                }
             }
         }.execute();
     }

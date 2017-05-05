@@ -25,7 +25,7 @@
         android:textCursorDrawable="@drawable/dmset_cursor" />
 
     <TextView
-        android:id="@+id/tv_recommend_recommendee"
+        android:id="@+id/tv_recommend_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -37,10 +37,10 @@
         android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.dmsview.DMSEditText
-        android:id="@+id/et_recommend_recommendee"
+        android:id="@+id/et_recommend_target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_recommend_recommendee"
+        android:layout_below="@id/tv_recommend_target"
         android:textCursorDrawable="@drawable/dmset_cursor" />
 
     <!--<com.dms.beinone.application.dmsview.DMSButton-->

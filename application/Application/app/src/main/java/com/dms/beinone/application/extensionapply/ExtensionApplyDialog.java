@@ -3,7 +3,6 @@ package com.dms.beinone.application.extensionapply;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -12,14 +11,13 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-03-15.
@@ -51,7 +49,12 @@ public class ExtensionApplyDialog extends DialogFragment {
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        new ApplyExtensionTask().execute(extension);
+                        try {
+                            applyExtension(extension.getClazz(), extension.getSeat());
+                        } catch (IOException e) {
+                            System.out.println("IOException in ExtensionApplyDialog: PUT /apply/extension");
+                            e.printStackTrace();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
@@ -63,58 +66,45 @@ public class ExtensionApplyDialog extends DialogFragment {
                 .create();
     }
 
-    private class ApplyExtensionTask extends AsyncTask<Extension, Void, int[]> {
+    private void applyExtension(int clazz, int seat) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("class", clazz);
+            params.put("seat", seat);
 
-        @Override
-        protected int[] doInBackground(Extension... params) {
-            int[] results = null;
+            HttpBox.put(mContext, "/apply/extension")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    Toast.makeText(mContext, R.string.extensionapply_apply_created, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    Toast.makeText(mContext, R.string.extensionapply_apply_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(mContext, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(mContext, R.string.extensionapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            Extension extension = params[0];
-            int classId = extension.getClassId();
-            int seat = extension.getSeat();
-            try {
-                results = applyExtension(classId, seat);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return new int[]{-1, -1};
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return new int[]{-1, -1};
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(int[] results) {
-            super.onPostExecute(results);
-
-            int code = results[0];
-            int seat = results[1];
-
-            if (code == 200) {
-                Toast.makeText(mContext, R.string.extensionapply_apply_success,
-                        Toast.LENGTH_SHORT).show();
-            } else if (code == 204) {
-                Toast.makeText(mContext, R.string.extensionapply_apply_failure,
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(mContext, R.string.extensionapply_apply_error,
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        private int[] applyExtension(int classId, int seat) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("class", String.valueOf(classId));
-            requestParams.put("seat", String.valueOf(seat));
-
-            Response response = HttpBox.post(mContext, "/apply/extension", Request.TYPE_PUT)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return new int[]{response.getCode(), seat};
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in ExtensionApplyDialog: PUT /apply/extension");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in ExtensionApplyDialog: PUT /apply/extension");
+            e.printStackTrace();
         }
     }
-
 }

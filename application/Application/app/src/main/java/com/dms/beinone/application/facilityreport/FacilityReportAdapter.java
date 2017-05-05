@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dms.beinone.application.Listeners;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
 
 import java.util.List;
@@ -25,11 +26,12 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private Context mContext;
     private List<FacilityReport> mFacilityReportList;
-    private RecyclerView mRecyclerView;
+    private OnMoreBtnClickListener mOnMoreBtnClickListener;
 
-    public FacilityReportAdapter(Context context, List<FacilityReport> facilityReportList) {
+    public FacilityReportAdapter(Context context, List<FacilityReport> facilityReportList, OnMoreBtnClickListener onMoreBtnClickListener) {
         mContext = context;
         mFacilityReportList = facilityReportList;
+        mOnMoreBtnClickListener = onMoreBtnClickListener;
     }
 
     @Override
@@ -51,13 +53,6 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             FacilityReport facilityReport = mFacilityReportList.get(position);
             ((ItemViewHolder) holder).bind(facilityReport.getTitle(), facilityReport.getWriter(), facilityReport.getWriteDate());
         }
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-
-        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -125,10 +120,9 @@ public class FacilityReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             mMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new LoadFacilityReportListTask(mContext, mRecyclerView).execute();
+                    mOnMoreBtnClickListener.onMoreBtnClick();
                 }
             });
         }
     }
-
 }

@@ -51,7 +51,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
-                    android:text="@string/afterschoolapply_monday"
+                    android:text="@string/afterschool_monday"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 
@@ -62,7 +62,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
-                    android:text="@string/afterschoolapply_tuesday"
+                    android:text="@string/afterschool_tuesday"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 
@@ -73,7 +73,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="4dp"
-                    android:text="@string/afterschoolapply_wednesday"
+                    android:text="@string/afterschool_wednesday"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 
@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="@string/afterschoolapply_saturday"
+                    android:text="@string/afterschool_saturday"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 
@@ -93,32 +93,32 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_afterschool_firstgrade"
+                    android:id="@+id/tv_afterschool_grade1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:layout_marginEnd="4dp"
-                    android:text="@string/afterschoolapply_firstgrade"
+                    android:text="@string/afterschool_grade1"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 
                 <TextView
-                    android:id="@+id/tv_afterschool_secondgrade"
+                    android:id="@+id/tv_afterschool_grade2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:layout_marginEnd="4dp"
-                    android:text="@string/afterschoolapply_secondgrade"
+                    android:text="@string/afterschool_grade2"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 
                 <TextView
-                    android:id="@+id/tv_afterschool_thirdgrade"
+                    android:id="@+id/tv_afterschool_grade3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:layout_marginEnd="4dp"
-                    android:text="@string/afterschoolapply_thirdgrade"
+                    android:text="@string/afterschool_grade3"
                     android:textColor="@color/disabled"
                     android:textSize="@dimen/text_subtext" />
 

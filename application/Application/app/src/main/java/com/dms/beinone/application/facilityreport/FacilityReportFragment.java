@@ -8,16 +8,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.beinone.application.utils.RecyclerViewUtils;
+import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
+import com.dms.boxfox.networking.datamodel.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by BeINone on 2017-01-20.
  */
 
 public class FacilityReportFragment extends Fragment {
+
+    public static final int LIMIT = 10;
 
     public static int page = 1;
 
@@ -38,7 +52,12 @@ public class FacilityReportFragment extends Fragment {
         super.onStart();
         mFAB.setVisibility(View.VISIBLE);
 
-        new LoadFacilityReportListTask(getContext(), mRecyclerView).execute();
+        try {
+            loadFacilityReportList();
+        } catch (IOException e) {
+            System.out.println("IOException in FacilityReportFragment: loadFacilityReportList()");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -69,6 +88,64 @@ public class FacilityReportFragment extends Fragment {
 
         View emptyView = rootView.findViewById(R.id.view_facilityreport_empty);
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
+    }
+
+    private void loadFacilityReportList() throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("page", FacilityReportFragment.page);
+            params.put("limit", LIMIT);
+
+            HttpBox.get(getContext(), "/post/report/list")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        List<FacilityReport> facilityReports =
+                                                JSONParser.parseFacilityReportListJSON(response.getJsonObject());
+                                        mRecyclerView.setAdapter(new FacilityReportAdapter(getContext(), facilityReports, new OnMoreBtnClickListener() {
+                                            @Override
+                                            public void onMoreBtnClick() {
+                                                try {
+                                                    loadFacilityReportList();
+                                                } catch (IOException e) {
+                                                    System.out.println("IOException in FacilityReportFragment: loadFacilityReportList()");
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }));
+                                        // increase the page number if completed loading successfully
+                                        FacilityReportFragment.page++;
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in FacilityReportFragment: /post/report/list");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+//                                    Toast.makeText(getContext(), R.string.facilityreport_list_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.facilityreport_list_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in FacilityReportFragment: /post/report/list");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in FacilityReportFragment: /post/report/list");
+            e.printStackTrace();
+        }
     }
 
 }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.SlimDatePicker;
-import com.dms.beinone.application.meal.LoadMealTask;
-import com.dms.beinone.application.meal.Meal;
 
 import java.util.Date;
 
@@ -51,42 +48,41 @@ public class HomeFragment extends Fragment {
         mealSDP.setOnDateChangedListener(new SlimDatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(Date date) {
-                loadMeal(date);
+//                loadMeal(date);
             }
         });
 
-        loadMeal(new Date());
+//        loadMeal(new Date());
     }
 
-    private void loadMeal(Date date) {
-        new LoadMealTask(getContext(), new LoadMealTask.OnPostExecuteListener() {
-            @Override
-            public void onPostExecute(Meal meal) {
-                HomeMealFragment[] homeMealFragments = new HomeMealFragment[3];
-
-                PagerAdapter adapter = mMealViewPager.getAdapter();
-
-                if (adapter == null) {
-                    mMealViewPager.setAdapter(new HomeMealFragmentPagerAdapter(
-                            getFragmentManager(), getContext(), meal));
-                } else {
-                    // update meal info on fragments
-                    ((HomeMealFragmentPagerAdapter) mMealViewPager.getAdapter()).setData(meal);
-                }
-
-//                if (mMealViewPager.getAdapter() == null) {
+//    private void loadMeal(Date date) {
+//        new LoadMealTask(getContext(), new LoadMealTask.OnPostExecuteListener() {
+//            @Override
+//            public void onPostExecute(Meal meal) {
+//                HomeMealFragment[] homeMealFragments = new HomeMealFragment[3];
+//
+//                PagerAdapter adapter = mMealViewPager.getAdapter();
+//
+//                if (adapter == null) {
 //                    mMealViewPager.setAdapter(new HomeMealFragmentPagerAdapter(
-//                            getFragmentManager(), homeMealFragments));
-////                    mMealViewPager.setAdapter(new HomeMealFragmentStatePagerAdapter(
-////                            getFragmentManager(), homeMealFragments));
+//                            getFragmentManager(), getContext(), meal));
 //                } else {
-//                    ((HomeMealFragmentPagerAdapter) mMealViewPager.getAdapter())
-//                            .changeItems(homeMealFragments);
-////                    ((HomeMealFragmentStatePagerAdapter) mMealViewPager.getAdapter())
-////                            .changeItems(homeMealFragments);
+//                    // update meal info on fragments
+//                    ((HomeMealFragmentPagerAdapter) mMealViewPager.getAdapter()).setData(meal);
 //                }
-            }
-        }).execute(date);
-    }
-
+//
+////                if (mMealViewPager.getAdapter() == null) {
+////                    mMealViewPager.setAdapter(new HomeMealFragmentPagerAdapter(
+////                            getFragmentManager(), homeMealFragments));
+//////                    mMealViewPager.setAdapter(new HomeMealFragmentStatePagerAdapter(
+//////                            getFragmentManager(), homeMealFragments));
+////                } else {
+////                    ((HomeMealFragmentPagerAdapter) mMealViewPager.getAdapter())
+////                            .changeItems(homeMealFragments);
+//////                    ((HomeMealFragmentStatePagerAdapter) mMealViewPager.getAdapter())
+//////                            .changeItems(homeMealFragments);
+////                }
+//            }
+//        }).execute(date);
+//    }
 }

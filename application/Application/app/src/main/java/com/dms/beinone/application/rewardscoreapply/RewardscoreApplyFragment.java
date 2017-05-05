@@ -7,8 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dms.beinone.application.R;
+import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
+import com.dms.boxfox.networking.datamodel.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Created by BeINone on 2017-01-17.
@@ -39,8 +48,28 @@ public class RewardscoreApplyFragment extends Fragment {
     private void init(View rootView) {
         getActivity().setTitle(R.string.nav_rewardscoreapply);
 
-        mRewardscoreFragment = new RewardscoreFragment();
-        mRecommendFragment = new RecommendFragment();
+        mRewardscoreFragment = RewardscoreFragment.newInstance(new RewardscoreFragment.OnApplyBtnClickListener() {
+            @Override
+            public void onApplyBtnClick(String content) {
+                try {
+                    applyRewardscore(null, content);
+                } catch (IOException e) {
+                    System.out.println("IOException in RewardscoreApplyFragment: applyRewardscore()");
+                    e.printStackTrace();
+                }
+            }
+        });
+        mRecommendFragment = RecommendFragment.newInstance(new RecommendFragment.OnApplyBtnClickListener() {
+            @Override
+            public void onApplyBtnClick(String target, String content) {
+                try {
+                    applyRewardscore(target, content);
+                } catch (IOException e) {
+                    System.out.println("IOException in RewardscoreApplyFragment: applyRewardscore()");
+                    e.printStackTrace();
+                }
+            }
+        });
 
         // 초기 화면 설정
         replaceFragment(mRewardscoreFragment);
@@ -80,4 +109,44 @@ public class RewardscoreApplyFragment extends Fragment {
                 .commit();
     }
 
+    private void applyRewardscore(String target, String content) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            if (target != null) {
+                params.put("target", target);
+            }
+            params.put("content", content);
+
+            HttpBox.post(getContext(), "/apply/merit")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_CREATED:
+                                    Toast.makeText(getContext(), R.string.rewardscoreapply_created, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.rewardscoreapply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in RecommendFragment: POST /apply/merit");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in RecommendFragment: POST /apply/merit");
+            e.printStackTrace();
+        }
+    }
 }

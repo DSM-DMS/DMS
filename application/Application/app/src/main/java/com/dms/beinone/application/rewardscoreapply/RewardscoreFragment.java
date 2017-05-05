@@ -2,7 +2,6 @@ package com.dms.beinone.application.rewardscoreapply;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,15 +17,6 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSEditText;
 import com.dms.beinone.application.utils.EditTextUtils;
-import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
-import com.dms.boxfox.networking.datamodel.Response;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-17.
@@ -36,6 +26,13 @@ public class RewardscoreFragment extends Fragment {
 
     private EditText mContentET;
     private TextView mContentTV;
+    private OnApplyBtnClickListener mOnApplyBtnClickListener;
+
+    public static RewardscoreFragment newInstance(OnApplyBtnClickListener onApplyBtnClickListener) {
+        RewardscoreFragment fragment = new RewardscoreFragment();
+        fragment.mOnApplyBtnClickListener = onApplyBtnClickListener;
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -83,7 +80,7 @@ public class RewardscoreFragment extends Fragment {
                     Toast.makeText(getContext(), R.string.rewardscoreapply_nocontent, Toast.LENGTH_SHORT)
                             .show();
                 } else {
-                    new ApplyRewardscoreTask().execute(content);
+                    mOnApplyBtnClickListener.onApplyBtnClick(content);
                 }
             }
         });
@@ -93,57 +90,7 @@ public class RewardscoreFragment extends Fragment {
         mContentET.setText("");
     }
 
-    private class ApplyRewardscoreTask extends AsyncTask<String, Void, Integer> {
-
-        @Override
-        protected Integer doInBackground(String... params) {
-            int code = 0;
-
-            try {
-                code = applyRewardscore(params[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return -1;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return -1;
-            }
-
-            return code;
-        }
-
-        @Override
-        protected void onPostExecute(Integer code) {
-            super.onPostExecute(code);
-
-            if (code == 201) {
-                // succeed
-                Toast.makeText(getContext(), R.string.rewardscoreapply_success, Toast.LENGTH_SHORT)
-                        .show();
-                clearView();
-            } else if (code == 400) {
-                // failed
-                Toast.makeText(getContext(), R.string.rewardscoreapply_failure, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                // error
-                Toast.makeText(getContext(), R.string.rewardscoreapply_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private int applyRewardscore(String content)
-                throws IOException, JSONException {
-
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("content", content);
-
-            Response response = HttpBox.post(getContext(), "/apply/merit", Request.TYPE_POST)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return response.getCode();
-        }
+    public interface OnApplyBtnClickListener {
+        void onApplyBtnClick(String content);
     }
-
 }

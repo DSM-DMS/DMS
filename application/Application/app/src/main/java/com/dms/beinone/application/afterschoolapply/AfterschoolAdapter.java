@@ -19,15 +19,15 @@ import java.util.List;
 public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<Afterschool> mAfterschoolList;
+    private List<Afterschool> mAfterschools;
 
-    public AfterschoolAdapter(Context context, List<Afterschool> afterschoolList) {
+    public AfterschoolAdapter(Context context, List<Afterschool> afterschools) {
         mContext = context;
-        mAfterschoolList = afterschoolList;
+        mAfterschools = afterschools;
     }
 
     @Override
-    public AfterschoolAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.viewholder_afterschool, parent, false);
 
@@ -35,8 +35,8 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
     }
 
     @Override
-    public void onBindViewHolder(AfterschoolAdapter.ViewHolder holder, int position) {
-        final Afterschool afterschool = mAfterschoolList.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final Afterschool afterschool = mAfterschools.get(position);
 
         holder.bind(afterschool);
 
@@ -50,7 +50,7 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
 
     @Override
     public int getItemCount() {
-        return mAfterschoolList.size();
+        return mAfterschools.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,9 +76,9 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
             mTuesdayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_tuesday);
             mWednesdayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_wednesday);
             mSaturdayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_saturday);
-            mFirstGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_firstgrade);
-            mSecondGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_secondgrade);
-            mThridGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_thirdgrade);
+            mFirstGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_grade1);
+            mSecondGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_grade2);
+            mThridGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_grade3);
         }
 
         public void bind(final Afterschool afterschool) {
@@ -129,5 +129,4 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
 //            return afterschoolDayString;
 //        }
     }
-
 }

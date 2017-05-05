@@ -1,6 +1,5 @@
 package com.dms.beinone.application.qna;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -16,14 +15,13 @@ import android.widget.Toast;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.EditTextUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-13.
@@ -91,7 +89,12 @@ public class QnAUploadActivity extends AppCompatActivity {
                 String content = mContentET.getText().toString().trim();
                 boolean privacy = mPrivacySwitch.isChecked();
 
-                new UploadQnATask().execute(new QnA(title, content, privacy));
+                try {
+                    uploadQnA(new QnA(title, content, privacy));
+                } catch (IOException e) {
+                    System.out.println("IOException in FacilityReportUploadActivity: uploadQnA()");
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -105,56 +108,44 @@ public class QnAUploadActivity extends AppCompatActivity {
         return false;
     }
 
-    private class UploadQnATask extends AsyncTask<QnA, Void, Integer> {
+    private void uploadQnA(QnA qna) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("title", qna.getTitle());
+            params.put("content", qna.getQuestionContent());
+            params.put("privacy", String.valueOf(qna.isPrivacy()));
 
-        @Override
-        protected Integer doInBackground(QnA... params) {
-            int code = -1;
+            HttpBox.put(QnAUploadActivity.this, "/post/qna/answer")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_CREATED:
+                                    Toast.makeText(QnAUploadActivity.this, R.string.qna_write_created, Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(QnAUploadActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(QnAUploadActivity.this, R.string.qna_write_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                code = uploadQnA(params[0]);
-            } catch (IOException e) {
-                return -1;
-            } catch (JSONException e) {
-                return -1;
-            }
-
-            return code;
-        }
-
-        @Override
-        protected void onPostExecute(Integer code) {
-            super.onPostExecute(code);
-
-            if (code == 201) {
-                // success
-                Toast.makeText(QnAUploadActivity.this, R.string.qna_write_success, Toast.LENGTH_SHORT)
-                        .show();
-                finish();
-            } else if (code == 500) {
-                // failure
-                Toast.makeText(QnAUploadActivity.this, R.string.qna_write_failure, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                // error
-                Toast.makeText(QnAUploadActivity.this, R.string.qna_write_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private int uploadQnA(QnA qna) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("title", qna.getTitle());
-            requestParams.put("content", qna.getQuestionContent());
-            requestParams.put("privacy", String.valueOf(qna.isPrivacy()));
-
-            Response response =
-                    HttpBox.post(QnAUploadActivity.this, "/post/qna/answer", Request.TYPE_PUT)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return response.getCode();
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in FacilityReportUploadActivity: PUT /post/qna/answer");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in FacilityReportUploadActivity: PUT /post/qna/answer");
+            e.printStackTrace();
         }
     }
-
 }

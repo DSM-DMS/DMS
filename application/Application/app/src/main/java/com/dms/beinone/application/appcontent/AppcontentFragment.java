@@ -8,10 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.beinone.application.utils.RecyclerViewUtils;
+import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
+import com.dms.boxfox.networking.datamodel.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by BeINone on 2017-01-26.
@@ -88,11 +100,114 @@ public class AppcontentFragment extends Fragment {
             case Appcontent.COMPETITION:
                 ((TextView) emptyView).setText(R.string.appcontent_competition_empty);
                 break;
-            default: break;
+            default:
+                break;
         }
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
 
-        new LoadAppcontentListTask(getContext(), mCategory, mRecyclerView).execute();
+        try {
+            loadAppcontentList();
+        } catch (IOException e) {
+            System.out.println("IOException in AppcontentFragment: GET /post/school/appcontent/list");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAppcontentList() throws IOException {
+        String path = "";
+        switch (mCategory) {
+            case Appcontent.NOTICE:
+                path = "/post/school/notice/list";
+                break;
+            case Appcontent.NEWSLETTER:
+                path = "/post/school/newsletter/list";
+                break;
+            case Appcontent.COMPETITION:
+                path = "/post/school/competition/list";
+                break;
+            default:
+                break;
+        }
+
+        try {
+            JSONObject params = new JSONObject();
+            params.put("category", mCategory);
+            params.put("page", AppcontentFragment.page);
+
+            HttpBox.get(getContext(), path)
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int errorMsgResId = 0;
+                            int emptyMsgResId = 0;
+                            switch (mCategory) {
+                                case Appcontent.NOTICE:
+                                    errorMsgResId = R.string.appcontent_notice_error;
+                                    emptyMsgResId = R.string.appcontent_notice_empty;
+                                    break;
+                                case Appcontent.NEWSLETTER:
+                                    errorMsgResId = R.string.appcontent_newsletter_error;
+                                    emptyMsgResId = R.string.appcontent_newsletter_empty;
+                                    break;
+                                case Appcontent.COMPETITION:
+                                    errorMsgResId = R.string.appcontent_competition_error;
+                                    emptyMsgResId = R.string.appcontent_competition_empty;
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            switch (response.getCode()) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        List<Appcontent> appcontents = JSONParser.parseAppcontentListJSON(response.getJsonArray());
+                                        if (mRecyclerView.getAdapter() == null) {
+                                            // set a new adapter if there is no adapter on recycler view
+                                            mRecyclerView.setAdapter(new AppcontentAdapter(getContext(), mCategory, appcontents,
+                                                    new OnMoreBtnClickListener() {
+                                                        @Override
+                                                        public void onMoreBtnClick() {
+                                                            try {
+                                                                loadAppcontentList();
+                                                            } catch (IOException e) {
+                                                                System.out.println("IOException in AppcontentFragment: GET /post/school/appcontent/list");
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+                                                    }));
+                                        } else {
+                                            // if there is adapter on recycler view, add items
+                                            ((AppcontentAdapter) mRecyclerView.getAdapter()).addAll(appcontents);
+                                        }
+                                        // increase the page number if completed loading successfully
+                                        AppcontentFragment.page++;
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in AppcontentFragment: GET /post/school/appcontent/list");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    Toast.makeText(getContext(), emptyMsgResId, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), errorMsgResId, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in AppcontentFragment: GET /post/school/appcontent/list");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException AppcontentFragment: GET /post/school/appcontent/list");
+            e.printStackTrace();
+        }
     }
 
 }

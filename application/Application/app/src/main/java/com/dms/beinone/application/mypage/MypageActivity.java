@@ -27,11 +27,11 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.beinone.application.utils.MultipartUtility;
 import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -144,17 +144,22 @@ public class MypageActivity extends AppCompatActivity {
                     Account account = response.body();
                     bind(account);
                 } else {
-                    Toast.makeText(MypageActivity.this, R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MypageActivity.this, R.string.mypage_load_internal_server_error, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Account> call, Throwable t) {
-                Toast.makeText(MypageActivity.this, R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MypageActivity.this, R.string.mypage_load_internal_server_error, Toast.LENGTH_SHORT).show();
             }
         });
 
-//        new LoadMypageTask().execute();
+        try {
+            loadMypage();
+        } catch (IOException e) {
+            System.out.println("IOException in MypageActivity: loadMyPage()");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -191,8 +196,8 @@ public class MypageActivity extends AppCompatActivity {
                         Uri uri = data.getData();
                         InputStream iStream = getContentResolver().openInputStream(uri);
                         byte[] profileImageData = getBytes(iStream);
-                        new UploadProfileImageTask().execute(profileImageData);
-//                        Glide.with(this).load(uri).centerCrop().into(mProfileIV);
+//                        new UploadProfileImageTask().execute(profileImageData);
+//                        Glide.with(this).load(urSi).centerCrop().into(mProfileIV);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -258,35 +263,6 @@ public class MypageActivity extends AppCompatActivity {
         return byteBuffer.toByteArray();
     }
 
-    private class LoadMypageTask extends AsyncTask<Void, Void, Account> {
-
-        @Override
-        protected Account doInBackground(Void... params) {
-            Account account = null;
-
-            try {
-                account = loadMypage();
-            } catch (IOException e) {
-                return null;
-            } catch (JSONException e) {
-                return null;
-            }
-
-            return account;
-        }
-
-        @Override
-        protected void onPostExecute(Account account) {
-            super.onPostExecute(account);
-
-            if (account == null) {
-                Toast.makeText(MypageActivity.this, R.string.mypage_load_info_error, Toast.LENGTH_SHORT).show();
-            } else {
-//                mProfileImageString = account.getProfileImage();
-                bind(account);
-            }
-        }
-
 //        public Bitmap stringToBitmap(String encodedString){
 //            try{
 //                byte [] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
@@ -298,78 +274,98 @@ public class MypageActivity extends AppCompatActivity {
 //            }
 //        }
 
-        private Account loadMypage() throws IOException, JSONException {
-            Response response =
-                    HttpBox.post(MypageActivity.this, "/account/student", Request.TYPE_GET)
-                            .push();
+    private void loadMypage() throws IOException {
+        HttpBox.get(MypageActivity.this, "/account/student")
+                .push(new HttpBoxCallback() {
+                    @Override
+                    public void done(Response response) {
+                        int code = response.getCode();
+                        switch (code) {
+                            case HttpBox.HTTP_OK:
+                                try {
+                                    Account account = JSONParser.parseStudentJSON(response.getJsonObject());
+                                    bind(account);
+                                } catch (JSONException e) {
+                                    System.out.println("JSONException in MypageActivity: GET /account/student");
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case HttpBox.HTTP_NO_CONTENT:
+                                Toast.makeText(MypageActivity.this, R.string.mypage_load_no_content, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_BAD_REQUEST:
+                                Toast.makeText(MypageActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                Toast.makeText(MypageActivity.this, R.string.mypage_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            Account account = null;
-            int code = response.getCode();
-            if (code == 200) {
-                account = JSONParser.parseStudentJSON(responseJSONObject);
-            }
-
-            return account;
-        }
+                    @Override
+                    public void err(Exception e) {
+                        System.out.println("Error in LoginActivity: GET /account/student");
+                        e.printStackTrace();
+                    }
+                });
     }
 
-    private class UploadProfileImageTask extends AsyncTask<byte[], Void, Response> {
-
-        private static final String MSG_NOT_IMAGE_FILE = "It's Not Image File";
-        private static final String MSG_NEED_LOGIN = "Need Login";
-
-        @Override
-        protected Response doInBackground(byte[]... params) {
-            Response response = null;
-
-            byte[] profileImageData = params[0];
-            try {
-                response = uploadProfileImage(profileImageData);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(Response response) {
-            super.onPostExecute(response);
-
-            int code = response.getCode();
-            String message = response.getMessage();
-            if (code == 200) {
-                // success
-                Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_success,
-                        Toast.LENGTH_SHORT).show();
-            } else if (code == 400) {
-                // failure
-                if (message.equals(MSG_NOT_IMAGE_FILE)) {
-                    // not image file
-                    Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_message_notimagefile,
-                            Toast.LENGTH_SHORT).show();
-                } else if (message.equals(MSG_NEED_LOGIN)) {
-                    // need login
-                    Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_message_needlogin,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-
-        private Response uploadProfileImage(byte[] profileImageData) throws IOException {
-            MultipartUtility multipart = new MultipartUtility("UTF-8");
-            multipart.addFilePart("profile_image", profileImageData, "test.jpg");
-            String imageString = multipart.finish();
-
-            Response response = HttpBox.post(MypageActivity.this, "/upload/image/", Request.TYPE_POST)
-                    .putHeaderProperty(Request.CONTENT_TYPE, "multipart/form-data; boundary=" + multipart.getBoundary())
-                    .putBodyData(imageString)
-                    .push();
-
-            return response;
-        }
-    }
+//    private class UploadProfileImageTask extends AsyncTask<byte[], Void, Response> {
+//
+//        private static final String MSG_NOT_IMAGE_FILE = "It's Not Image File";
+//        private static final String MSG_NEED_LOGIN = "Need Login";
+//
+//        @Override
+//        protected Response doInBackground(byte[]... params) {
+//            Response response = null;
+//
+//            byte[] profileImageData = params[0];
+//            try {
+//                response = uploadProfileImage(profileImageData);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return response;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Response response) {
+//            super.onPostExecute(response);
+//
+//            int code = response.getCode();
+//            String message = response.getMessage();
+//            if (code == 200) {
+//                // success
+//                Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_success,
+//                        Toast.LENGTH_SHORT).show();
+//            } else if (code == 400) {
+//                // failure
+//                if (message.equals(MSG_NOT_IMAGE_FILE)) {
+//                    // not image file
+//                    Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_message_notimagefile,
+//                            Toast.LENGTH_SHORT).show();
+//                } else if (message.equals(MSG_NEED_LOGIN)) {
+//                    // need login
+//                    Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_message_needlogin,
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
+//
+//        private void uploadProfileImage(byte[] profileImageData) throws IOException {
+//            MultipartUtility multipart = new MultipartUtility("UTF-8");
+//            multipart.addFilePart("profile_image", profileImageData, "test.jpg");
+//            String imageString = multipart.finish();
+//
+////            HttpBox.post(MypageActivity.this, "/upload/image")
+////                    .putHeaderProperty(Request.CONTENT_TYPE, "multipart/form-data; boundary=" + multipart.getBoundary())
+////                    .putBodyData(imageString)
+////                    .push();
+////            HttpBox.post(MypageActivity.this, "/upload/image")
+//        }
+//    }
 
 }

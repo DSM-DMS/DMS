@@ -15,8 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
+import com.dms.boxfox.networking.datamodel.Response;
 import com.samsistemas.calendarview.widget.CalendarView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -52,6 +61,7 @@ public class MealFragment extends Fragment {
 
     /**
      * 초기화, 더보기 버튼 터치 이벤트 및 클릭 이벤트 설정, 달력 날짜 클릭 이벤트 설정
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -72,17 +82,12 @@ public class MealFragment extends Fragment {
                 ContextCompat.getColor(getContext(), R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
         // display meal information as today initially
-        new LoadMealTask(getContext(), new LoadMealTask.OnPostExecuteListener() {
-            @Override
-            public void onPostExecute(Meal meal) {
-                if (meal == null) {
-                    Toast.makeText(getContext(), R.string.meal_error, Toast.LENGTH_SHORT).show();
-                } else {
-                    bind(meal);
-                    mSelectedDayMeal = meal;
-                }
-            }
-        }).execute(new Date());
+        try {
+            loadMeal(new Date());
+        } catch (IOException e) {
+            System.out.println("IOException in MealFragment: loadMeal()");
+            e.printStackTrace();
+        }
 
         mBreakfastExpandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,24 +128,19 @@ public class MealFragment extends Fragment {
             public void onDateClick(@NonNull Date selectedDate) {
                 clear();
                 // load the meal information of selected date from server when select date
-                new LoadMealTask(getContext(), new LoadMealTask.OnPostExecuteListener() {
-                    @Override
-                    public void onPostExecute(Meal meal) {
-                        if (meal == null) {
-                            Toast.makeText(getContext(), R.string.meal_error, Toast.LENGTH_SHORT)
-                                    .show();
-                        } else {
-                            mSelectedDayMeal = meal;
-                            bind(meal);
-                        }
-                    }
-                }).execute(selectedDate);
+                try {
+                    loadMeal(selectedDate);
+                } catch (IOException e) {
+                    System.out.println("IOException in MealFragment: loadMeal()");
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     /**
      * display meal information
+     *
      * @param meal Meal object contains meal information to display
      */
     private void bind(Meal meal) {
@@ -151,6 +151,7 @@ public class MealFragment extends Fragment {
 
     /**
      * change to collapse image of button and display meal information
+     *
      * @param when Integer constant of meal time to collapse
      */
     private void collapse(int when) {
@@ -174,7 +175,8 @@ public class MealFragment extends Fragment {
                 button = mDinnerExpandBtn;
                 if (mSelectedDayMeal != null) mealMenu = mSelectedDayMeal.getDinner();
                 break;
-            default: break;
+            default:
+                break;
         }
 
         textView.setText(mealMenu);
@@ -189,6 +191,7 @@ public class MealFragment extends Fragment {
 
     /**
      * change to expand image of button and display allergy information
+     *
      * @param when Integer constant of meal time to expand
      */
     private void expand(int when) {
@@ -212,7 +215,8 @@ public class MealFragment extends Fragment {
                 button = mDinnerExpandBtn;
                 if (mSelectedDayMeal != null) mealAllergy = mSelectedDayMeal.getDinnerAllergy();
                 break;
-            default: break;
+            default:
+                break;
         }
 
         textView.setText(mealAllergy);
@@ -240,6 +244,59 @@ public class MealFragment extends Fragment {
         mBreakfastExpandBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, mMoreDrawable, null);
         mLunchExpandBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, mMoreDrawable, null);
         mDinnerExpandBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, mMoreDrawable, null);
+    }
+
+    /**
+     * load the meal information from server
+     *
+     * @return Meal object that contains the meal information of the date
+     * @throws IOException
+     * @throws JSONException
+     */
+    private void loadMeal(Date date) throws IOException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        try {
+            JSONObject params = new JSONObject();
+            params.put("year", calendar.get(Calendar.YEAR));
+            params.put("month", calendar.get(Calendar.MONTH) + 1);
+            params.put("day", calendar.get(Calendar.DAY_OF_MONTH));
+
+            HttpBox.get(getContext(), "/school/meal")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        Meal meal = JSONParser.parseMealJSON(response.getJsonObject());
+                                        mSelectedDayMeal = meal;
+                                        bind(meal);
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in MealFragment: GET /school/meal");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.meal_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in MealFragment: GET /school/meal");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in MealFragment: GET /school/meal");
+            e.printStackTrace();
+        }
     }
 
 }

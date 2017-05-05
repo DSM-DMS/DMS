@@ -14,6 +14,7 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
@@ -50,67 +51,43 @@ public class AfterschoolApplyFragment extends Fragment {
         getActivity().setTitle(R.string.nav_afterschoolapply);
 
         mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_afterschoolapply);
-
         View emptyView = rootView.findViewById(R.id.view_afterschoolapply_empty);
         RecyclerViewUtils.setupCardRecyclerView(mRecyclerView, getContext(), emptyView);
 
-        new LoadAfterschoolListTask().execute();
+        try {
+            loadAfterschoolItemList();
+        } catch (IOException e) {
+            System.out.println("IOException in AfterschoolApplyFragment: POST /apply/afterschool/item");
+            e.printStackTrace();
+        }
     }
 
-    private class LoadAfterschoolListTask extends AsyncTask<Void, Void, Object[]> {
+    private void loadAfterschoolItemList() throws IOException {
+        HttpBox.get(getContext(), "/apply/afterschool/item").push(new HttpBoxCallback() {
+            @Override
+            public void done(Response response) {
+                int code = response.getCode();
 
-        @Override
-        protected Object[] doInBackground(Void... params) {
-            Object[] results = null;
-
-            try {
-                results = loadAfterschoolList();
-            } catch (IOException e) {
-                return null;
-            } catch (JSONException e) {
-                return null;
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(Object[] results) {
-            super.onPostExecute(results);
-
-            if (results != null) {
-                int code = (int) results[0];
-                List<Afterschool> afterschoolList = (ArrayList<Afterschool>) results[1];
-
-                if (code == 200) {
-                    // success
-                    mRecyclerView.setAdapter(new AfterschoolAdapter(getContext(), afterschoolList));
-                } else if (code == 204) {
-                    // empty
-                    Toast.makeText(getContext(), R.string.afterschoolapply_list_empty, Toast.LENGTH_SHORT).show();
-                } else {
-                    // error
-                    Toast.makeText(getContext(), R.string.afterschoolapply_list_error, Toast.LENGTH_SHORT).show();
+                if (code == HttpBox.HTTP_OK) {
+                    try {
+                        List<Afterschool> afterschools = JSONParser.parseAfterschoolListJSON(response.getJsonObject());
+                        mRecyclerView.setAdapter(new AfterschoolAdapter(getContext(), afterschools));
+                    } catch (JSONException e) {
+                        System.out.println("JSONException in AfterschoolApplyFragment: POST /apply/afterschool/item");
+                        e.printStackTrace();
+                    }
+                } else if (code == HttpBox.HTTP_NO_CONTENT) {
+                    Toast.makeText(getContext(), R.string.afterschool_list_empty, Toast.LENGTH_SHORT).show();
+                } else if (code == HttpBox.HTTP_INTERNAL_SERVER_ERROR) {
+                    Toast.makeText(getContext(), R.string.afterschool_list_error, Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                // error
-                Toast.makeText(getContext(), R.string.afterschoolapply_list_error, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        private Object[] loadAfterschoolList() throws IOException, JSONException {
-            Response response = HttpBox.post(getContext(), "/apply/afterschool/item", Request.TYPE_GET).push();
-
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            int code = response.getCode();
-            List<Afterschool> afterschoolList = null;
-            if (code == 200) {
-                afterschoolList = JSONParser.parseAfterschoolListJSON(responseJSONObject);
             }
 
-            return new Object[] { code, afterschoolList };
-        }
+            @Override
+            public void err(Exception e) {
+                System.out.println("Error in AfterschoolApplyFragment: POST /apply/afterschool/item");
+                e.printStackTrace();
+            }
+        });
     }
-
 }

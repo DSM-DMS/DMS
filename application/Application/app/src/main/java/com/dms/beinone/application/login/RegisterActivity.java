@@ -1,6 +1,5 @@
 package com.dms.beinone.application.login;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,23 +11,19 @@ import android.widget.Toast;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.EditTextUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-02-24.
  */
 
 public class RegisterActivity extends AppCompatActivity {
-
-    private static final int POS_TAB_MAN = 0;
-    private static final int POS_TAB_WOMAN = 1;
 
     private EditText mUidET;
     private EditText mIdET;
@@ -72,78 +67,64 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = mPasswordET.getText().toString().trim();
 
                 if (uid.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, R.string.register_nouid,
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, R.string.register_nouid, Toast.LENGTH_SHORT).show();
                 } else if (id.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, R.string.register_id,
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, R.string.register_id, Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, R.string.register_password,
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, R.string.register_password, Toast.LENGTH_SHORT).show();
                 } else {
                     StudentAccount studentAccount = new StudentAccount(uid, id, password);
-                    new RegisterStudentAccountTask().execute(studentAccount);
+                    try {
+                        registerStudentAccount(studentAccount);
+                    } catch (IOException e) {
+                        System.out.println("IOException in LoginActivity: registerStudentAccount()");
+                        e.printStackTrace();
+                    }
                 }
-
             }
         });
     }
 
-    private class RegisterStudentAccountTask extends AsyncTask<StudentAccount, Void, Integer> {
+    private void registerStudentAccount(StudentAccount studentAccount) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("uid", studentAccount.getUid());
+            params.put("id", studentAccount.getId());
+            params.put("password", studentAccount.getPassword());
 
-        @Override
-        protected Integer doInBackground(StudentAccount... params) {
-            int code = -1;
+            HttpBox.post(RegisterActivity.this, "/account/register/student")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_CREATED:
+                                    Toast.makeText(RegisterActivity.this, R.string.register_created, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(RegisterActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_CONFLICT:
+                                    Toast.makeText(RegisterActivity.this, R.string.register_conflict, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(RegisterActivity.this, R.string.register_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                code = registerStudentAccount(params[0]);
-            } catch (IOException e) {
-                return -1;
-            } catch (JSONException e) {
-                return -1;
-            }
-
-            return code;
-        }
-
-        @Override
-        protected void onPostExecute(Integer code) {
-            super.onPostExecute(code);
-
-            if (code == 201) {
-                // success
-                Toast.makeText(RegisterActivity.this, R.string.register_success,
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            } else if (code == 409) {
-                // conflict
-                Toast.makeText(RegisterActivity.this, R.string.register_conflict,
-                        Toast.LENGTH_SHORT).show();
-            } else if (code == 404) {
-                // empty
-                Toast.makeText(RegisterActivity.this, R.string.register_failure,
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // error
-                Toast.makeText(RegisterActivity.this, R.string.register_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private int registerStudentAccount(StudentAccount studentAccount)
-                throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("uid", studentAccount.getUid());
-            requestParams.put("id", studentAccount.getId());
-            requestParams.put("password", studentAccount.getPassword());
-
-            Response response =
-                    HttpBox.post(RegisterActivity.this, "/account/register/student", Request.TYPE_POST)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return response.getCode();
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in LoginActivity: POST /account/register/student");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in LoginActivity: POST /account/register/student");
+            e.printStackTrace();
         }
     }
-
 }

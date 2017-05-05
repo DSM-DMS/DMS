@@ -17,8 +17,8 @@ public class RecyclerViewUtils {
     public static final int TYPE_ITEM = 1;
     public static final int TYPE_FOOTER = 2;
 
-    public static void setupRecyclerView(
-            EmptySupportedRecyclerView recyclerView, Context context, View emptyView) {
+    public static void setupRecyclerView(EmptySupportedRecyclerView recyclerView,
+                                         Context context, View emptyView) {
 
         // set view to display when there is any content
         recyclerView.setEmptyView(emptyView);
@@ -35,8 +35,8 @@ public class RecyclerViewUtils {
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    public static void setupCardRecyclerView(
-            EmptySupportedRecyclerView recyclerView, Context context, View emptyView) {
+    public static void setupCardRecyclerView(EmptySupportedRecyclerView recyclerView,
+                                             Context context, View emptyView) {
 
         // set view to display when there is any content
         recyclerView.setEmptyView(emptyView);

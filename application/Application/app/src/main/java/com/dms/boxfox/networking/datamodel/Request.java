@@ -140,21 +140,6 @@ public class Request {
         return this;
     }
 
-    public Request putBodyData(Map<String, String> map) {
-        String str = getPostString(map);
-        if (aes != null) {
-            str = aes.encrypt(str);
-        }
-
-        if (type != null && type.equals(TYPE_GET)) {
-            url += "?" + str;
-        } else {
-            bodyData = str;
-        }
-
-        return this;
-    }
-
     public Request putBodyData(String str) {
         if(aes!=null)
             str = aes.encrypt(str);
@@ -162,36 +147,49 @@ public class Request {
         return this;
     }
 
-    public Request putBodyData(JSONObject obj) {
-        String str = obj.toString();
-        return putBodyData(str);
+    public Request putBodyData(JSONObject data) {
+        try {
+            putBodyData(getFormString(data));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 
     public Request putBodyData(){
         return putBodyData(new JSONObject());
     }
 
+    public Request putQueryString(JSONObject data) {
+        try {
+            url += "?" + getFormString(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
     public String getBodyData() {
         return this.bodyData;
     }
 
-    public String getPostString(Map<String, String> map) {
+    public String getFormString(JSONObject params) throws JSONException {
         StringBuilder result = new StringBuilder();
-        boolean first = true; // 첫 번째 매개변수 여부
+        boolean isFirst = true; // 첫 번째 매개변수 여부
 
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (first)
-                first = false;
-            else // 첫 번째 매개변수가 아닌 경우엔 앞에 &를 붙임
-                result.append("&");
+        Iterator<String> keys = params.keys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            String value = params.getString(key);
+
+            if (isFirst) isFirst = false;
+            else result.append("&"); // 첫 번째 매개변수가 아닌 경우엔 앞에 &를 붙임
 
             try { // UTF-8로 주소에 키와 값을 붙임
-                result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                result.append(URLEncoder.encode(key, "UTF-8"));
                 result.append("=");
-                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+                result.append(URLEncoder.encode(value, "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

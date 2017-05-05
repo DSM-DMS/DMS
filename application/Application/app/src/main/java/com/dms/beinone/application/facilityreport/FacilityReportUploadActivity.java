@@ -1,7 +1,6 @@
 package com.dms.beinone.application.facilityreport;
 
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,14 +11,13 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-23.
@@ -66,10 +64,13 @@ public class FacilityReportUploadActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     // upload the facility report if there is no blank
-                    new UploadFacilityReportTask()
-                            .execute(new FacilityReport(title, content, Integer.valueOf(room), writer));
+                    try {
+                        uploadFacilityReport(new FacilityReport(title, content, Integer.valueOf(room), writer));
+                    } catch (IOException e) {
+                        System.out.println("IOException in FacilityReportUploadActivity: uploadFacilityReport()");
+                        e.printStackTrace();
+                    }
                 }
-
             }
         });
     }
@@ -83,59 +84,45 @@ public class FacilityReportUploadActivity extends AppCompatActivity {
         return false;
     }
 
-    private class UploadFacilityReportTask extends AsyncTask<FacilityReport, Void, Integer> {
+    private void uploadFacilityReport(FacilityReport facilityReport) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("title", facilityReport.getTitle());
+            params.put("content", facilityReport.getContent());
+            params.put("room", facilityReport.getRoom());
+            params.put("writer", facilityReport.getWriter());
 
-        @Override
-        protected Integer doInBackground(FacilityReport... params) {
-            int code = -1;
+            HttpBox.post(FacilityReportUploadActivity.this, "/post/report")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_CREATED:
+                                    Toast.makeText(FacilityReportUploadActivity.this, R.string.facilityreport_write_created, Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(FacilityReportUploadActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(FacilityReportUploadActivity.this, R.string.facilityreport_write_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                code = uploadFacilityReport(params[0]);
-            } catch (IOException ie) {
-                return -1;
-            } catch (JSONException je) {
-                return -1;
-            }
-
-            return code;
-        }
-
-        @Override
-        protected void onPostExecute(Integer code) {
-            super.onPostExecute(code);
-
-            if (code == 201) {
-                // success
-                Toast.makeText(FacilityReportUploadActivity.this,
-                        R.string.facilityreport_write_success, Toast.LENGTH_SHORT).show();
-                finish();
-            } else if (code == 500) {
-                // failure
-                Toast.makeText(FacilityReportUploadActivity.this,
-                        R.string.facilityreport_write_failure, Toast.LENGTH_SHORT).show();
-            } else {
-                // error
-                Toast.makeText(FacilityReportUploadActivity.this,
-                        R.string.facilityreport_write_error, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        private int uploadFacilityReport(FacilityReport facilityReport)
-                throws IOException, JSONException {
-
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("title", facilityReport.getTitle());
-            requestParams.put("content", facilityReport.getContent());
-            requestParams.put("room", String.valueOf(facilityReport.getRoom()));
-            requestParams.put("writer", String.valueOf(facilityReport.getWriter()));
-
-            Response response =
-                    HttpBox.post(FacilityReportUploadActivity.this, "/post/report", Request.TYPE_POST)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return response.getCode();
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in FacilityReportUploadActivity: POST /post/report");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in FacilityReportUploadActivity: POST /post/report");
+            e.printStackTrace();
         }
     }
-
 }

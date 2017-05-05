@@ -9,35 +9,38 @@ import android.os.Parcelable;
 
 public class Extension implements Parcelable {
 
+    public static final String OPTION_MAP = "map";
+    public static final String OPTION_STATUS = "status";
+
     public static final int CLASS_GA = 1;
     public static final int CLASS_NA = 2;
     public static final int CLASS_DA = 3;
     public static final int CLASS_RA = 4;
 
     private String option;
-    private int classId;
+    private int clazz;
     private int seat;
 
     public Extension(String option, int classId) {
         setOption(option);
-        setClassId(classId);
+        setClazz(classId);
     }
 
-    public Extension(int classId, int seat) {
-        setClassId(classId);
+    public Extension(int clazz, int seat) {
+        setClazz(clazz);
         setSeat(seat);
     }
 
     public Extension(Parcel in) {
         setOption(in.readString());
-        setClassId(in.readInt());
+        setClazz(in.readInt());
         setSeat(in.readInt());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(option);
-        dest.writeInt(classId);
+        dest.writeInt(clazz);
         dest.writeInt(seat);
     }
 
@@ -54,12 +57,12 @@ public class Extension implements Parcelable {
         this.option = option;
     }
 
-    public int getClassId() {
-        return classId;
+    public int getClazz() {
+        return clazz;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setClazz(int clazz) {
+        this.clazz = clazz;
     }
 
     public int getSeat() {

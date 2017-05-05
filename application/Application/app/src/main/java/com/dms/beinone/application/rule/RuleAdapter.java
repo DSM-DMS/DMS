@@ -25,8 +25,7 @@ import java.util.List;
  * Created by BeINone on 2017-01-20.
  */
 
-public class RuleAdapter extends ExpandableRecyclerAdapter<
-        Rule, RuleContent, RuleAdapter.RuleTitleVH, RuleAdapter.RuleContentVH> {
+public class RuleAdapter extends ExpandableRecyclerAdapter<Rule, RuleContent, RuleAdapter.RuleTitleVH, RuleAdapter.RuleContentVH> {
 
     private Context mContext;
 

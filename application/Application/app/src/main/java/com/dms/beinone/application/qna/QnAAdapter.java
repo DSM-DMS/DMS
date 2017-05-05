@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dms.beinone.application.Listeners;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
 
 import java.util.List;
@@ -28,11 +29,12 @@ public class QnAAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<QnA> mQnAList;
-    private RecyclerView mRecyclerView;
+    private OnMoreBtnClickListener mOnMoreBtnClickListener;
 
-    public QnAAdapter(Context context, List<QnA> qnaList) {
+    public QnAAdapter(Context context, List<QnA> qnaList, OnMoreBtnClickListener onMoreBtnClickListener) {
         mContext = context;
         mQnAList = qnaList;
+        mOnMoreBtnClickListener = onMoreBtnClickListener;
     }
 
     @Override
@@ -54,12 +56,6 @@ public class QnAAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             QnA qna = mQnAList.get(position);
             ((ItemViewHolder) holder).bind(qna.getTitle(), qna.getWriter(), qna.getQuestionDate(), qna.isPrivacy());
         }
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -144,7 +140,7 @@ public class QnAAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new LoadQnAListTask(mContext, mRecyclerView).execute();
+                    mOnMoreBtnClickListener.onMoreBtnClick();
                 }
             });
         }

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.dms.beinone.application.Listeners;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
 
 import java.util.List;
@@ -25,20 +26,14 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Context mContext;
     private int mCategory;
-    private List<Appcontent> mAppcontentList;
+    private List<Appcontent> mAppcontents;
+    private OnMoreBtnClickListener mOnMoreBtnClickListener;
 
-    private RecyclerView mRecyclerView;
-
-    public AppcontentAdapter(Context context, int category, List<Appcontent> appcontentList) {
+    public AppcontentAdapter(Context context, int category, List<Appcontent> appcontents, OnMoreBtnClickListener onMoreBtnClickListener) {
         mContext = context;
         mCategory = category;
-        mAppcontentList = appcontentList;
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
+        mAppcontents = appcontents;
+        mOnMoreBtnClickListener = onMoreBtnClickListener;
     }
 
     @Override
@@ -59,30 +54,28 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == TYPE_ITEM) {
-            Appcontent appcontent = mAppcontentList.get(position);
-
-            ((ItemViewHolder) holder)
-                    .bind(appcontent.getTitle(), appcontent.getWriter(), appcontent.getDate());
+            Appcontent appcontent = mAppcontents.get(position);
+            ((ItemViewHolder) holder).bind(appcontent.getTitle(), appcontent.getWriter(), appcontent.getDate());
         }
     }
 
     @Override
     public int getItemCount() {
         // + 1 is for bottom button
-        return mAppcontentList.size() + 1;
+        return mAppcontents.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mAppcontentList.size()) {
+        if (position == mAppcontents.size()) {
             return TYPE_FOOTER;
         } else {
             return TYPE_ITEM;
         }
     }
 
-    public void addAll(List<Appcontent> appcontentList) {
-        mAppcontentList.addAll(appcontentList);
+    public void addAll(List<Appcontent> appcontents) {
+        mAppcontents.addAll(appcontents);
         notifyDataSetChanged();
     }
 
@@ -103,7 +96,7 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewArticle(mAppcontentList.get(getAdapterPosition()));
+                    viewArticle(mAppcontents.get(getAdapterPosition()));
                 }
             });
         }
@@ -116,6 +109,7 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         /**
          * start a new activity to display article
+         *
          * @param appcontent Appcontent object that contains information of article
          */
         private void viewArticle(Appcontent appcontent) {
@@ -125,7 +119,7 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public class FooterViewHolder extends RecyclerView.ViewHolder {
+    private class FooterViewHolder extends RecyclerView.ViewHolder {
 
         private Button mMoreBtn;
 
@@ -136,10 +130,9 @@ public class AppcontentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             mMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new LoadAppcontentListTask(mContext, mCategory, mRecyclerView).execute();
+                    mOnMoreBtnClickListener.onMoreBtnClick();
                 }
             });
         }
     }
-
 }

@@ -32,6 +32,9 @@
     <string name="nav_mypage">마이페이지</string>
     <string name="nav_settings">설정</string>
 
+    <!-- HTTP -->
+    <string name="http_bad_request">잘못된 요청입니다.</string>
+
     <!-- Login Activity -->
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
@@ -56,18 +59,18 @@
     <string name="register_nouid">가입코드를 입력하세요.</string>
     <string name="register_noid">아이디를 입력하세요.</string>
     <string name="register_nopassword">비밀번호를 입력하세요.</string>
-    <string name="register_success">회원가입이 완료되었습니다.</string>
+    <string name="register_created">회원가입이 완료되었습니다.</string>
     <string name="register_conflict">아이디가 이미 존재합니다.</string>
     <string name="register_failure">회원가입에 실패했습니다.</string>
-    <string name="register_error">오류로 인해 회원가입에 실패했습니다.</string>
+    <string name="register_internal_server_error">오류로 인해 회원가입에 실패했습니다.</string>
 
     <!-- Extension Apply Fragment -->
     <string name="extensionapply_load_failure">자리를 불러오지 못했습니다.</string>
-    <string name="extensionapply_load_error">오류로 인해 자리를 불러오지 못했습니다.</string>
+    <string name="extensionapply_load_internal_server_error">오류로 인해 자리를 불러오지 못했습니다.</string>
     <string name="extensionapply_draw_error">자리를 그리지 못했습니다.</string>
-    <string name="extensionapply_apply_success">신청이 완료되었습니다.</string>
-    <string name="extensionapply_apply_failure">신청 가능한 시간이 아닙니다.</string>
-    <string name="extensionapply_apply_error">오류로 인해 신청에 실패했습니다.</string>
+    <string name="extensionapply_apply_created">신청이 완료되었습니다.</string>
+    <string name="extensionapply_apply_no_content">신청 가능한 시간이 아닙니다.</string>
+    <string name="extensionapply_apply_internal_server_error">오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Stay Apply Fragment -->
     <string name="stayapply_defaultstatus">기본값</string>
@@ -78,22 +81,22 @@
     <string name="stayapply_stay">잔류</string>
     <string name="stayapply_apply">신청하기</string>
     <string name="stayapply_nochecked">값을 선택해주세요.</string>
-    <string name="stayapply_error">오류로 인해 잔류상태 정보를 불러오지 못했습니다.</string>
-    <string name="stayapply_default_error">오류로 인해 잔류상태 기본값 정보를 불러오지 못했습니다.</string>
+    <string name="stayapply_internal_server_error">오류로 인해 잔류상태 정보를 불러오지 못했습니다.</string>
+    <string name="stayapply_default_no_content">오류로 인해 잔류상태 기본값 정보를 불러오지 못했습니다.</string>
+    <string name="stayapply_default_internal_server_error">오류로 인해 잔류상태 기본값 정보를 불러오지 못했습니다.</string>
     <string name="stayapply_dialog_title">기본값 변경</string>
     <string name="stayapply_dialog_negative">취소</string>
     <string name="stayapply_dialog_positive">변경</string>
-    <string name="stayapply_dialog_success">기본값을 변경하였습니다.</string>
-    <string name="stayapply_dialog_failure">기본값을 변경하지 못했습니다.</string>
-    <string name="stayapply_dialog_error">오류로 인해 기본값을 변경하지 못했습니다.</string>
-    <string name="stayapply_apply_success">잔류상태를 변경하였습니다.</string>
-    <string name="stayapply_apply_failure">잔류상태를 변경하지 못했습니다.</string>
-    <string name="stayapply_apply_error">오류로 인해 잔류상태를 변경하지 못했습니다.</string>
+    <string name="stayapply_default_load_ok">기본값을 변경하였습니다.</string>
+    <string name="stayapply_default_load_error">오류로 인해 기본값을 변경하지 못했습니다.</string>
+    <string name="stayapply_apply_ok">잔류상태를 변경하였습니다.</string>
+    <string name="stayapply_apply_no_content">잔류상태를 변경하지 못했습니다.</string>
+    <string name="stayapply_apply_internal_server_error">오류로 인해 잔류상태를 변경하지 못했습니다.</string>
 
     <!-- Goingout Apply Fragment -->
     <string name="goingoutapply_applystatus">신청한 요일</string>
-    <string name="goingoutapply_load_failure">신청 상태를 불러오지 못했습니다.</string>
-    <string name="goingoutapply_load_error">오류로 인해 신청 상태를 불러오지 못했습니다.</string>
+    <string name="goingoutapply_load_no_content">신청 정보가 없습니다.</string>
+    <string name="goingoutapply_load_internal_server_error">오류로 인해 신청 상태를 불러오지 못했습니다.</string>
     <string name="goingoutapply_saturday">토요일</string>
     <string name="goingoutapply_sunday">일요일</string>
     <string name="goingoutapply_reason">이유</string>
@@ -102,8 +105,8 @@
     <string name="goingoutapply_subdesc">(중복 선택 가능)</string>
     <string name="goingoutapply_apply">신청하기</string>
     <string name="goingoutapply_nochecked">값을 선택해주세요.</string>
-    <string name="goingoutapply_apply_success">신청이 완료되었습니다.</string>
-    <string name="goingoutapply_apply_error">오류로 인해 신청에 실패했습니다.</string>
+    <string name="goingoutapply_apply_ok">신청이 완료되었습니다.</string>
+    <string name="goingoutapply_apply_internal_server_error">오류로 인해 신청에 실패했습니다.</string>
     
     <!-- Rewardscore Apply Fragment -->
     <string name="rewardscoreapply_rewardscore">상점</string>
@@ -123,24 +126,24 @@
     <string name="rewardscoreapply_description_electronicequip_content">1점: 해당 월 전자기기 사용규정 위반사항이 없는 학생</string>
     <string name="rewardscoreapply_description_etc_title">기타</string>
     <string name="rewardscoreapply_description_etc_content">기숙사 생활 중 선행이나 모범행동으로 추천을 받은 경우 / 기숙사 이벤트에 모범적으로 참여하거나 수상한 경우</string>
-    <string name="rewardscoreapply_success">신청이 완료되었습니다.</string>
-    <string name="rewardscoreapply_failure">신청에 실패하였습니다.</string>
-    <string name="rewardscoreapply_error">오류로 인해 신청에 실패했습니다.</string>
+    <string name="rewardscoreapply_created">신청이 완료되었습니다.</string>
+    <string name="rewardscoreapply_internal_server_error">오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Afterschool Apply Fragment -->
-    <string name="afterschoolapply_monday">월</string>
-    <string name="afterschoolapply_tuesday">화</string>
-    <string name="afterschoolapply_wednesday">수</string>
-    <string name="afterschoolapply_saturday">토</string>
-    <string name="afterschoolapply_firstgrade">1학년</string>
-    <string name="afterschoolapply_secondgrade">2학년</string>
-    <string name="afterschoolapply_thirdgrade">3학년</string>
-    <string name="afterschoolapply_list_apply">신청</string>
-    <string name="afterschoolapply_list_empty">방과후신청 목록이 없습니다.</string>
-    <string name="afterschoolapply_list_error">오류로 인해 방과후신청 목록을 불러오지 못했습니다.</string>
-    <string name="afterschoolapply_apply_success">신청이 완료되었습니다.</string>
-    <string name="afterschoolapply_apply_failure">신청에 실패하였습니다.</string>
-    <string name="afterschoolapply_apply_error">오류로 인해 신청에 실패했습니다.</string>
+    <string name="afterschool_monday">월</string>
+    <string name="afterschool_tuesday">화</string>
+    <string name="afterschool_wednesday">수</string>
+    <string name="afterschool_saturday">토</string>
+    <string name="afterschool_grade1">1학년</string>
+    <string name="afterschool_grade2">2학년</string>
+    <string name="afterschool_grade3">3학년</string>
+    <string name="afterschool_list_apply">신청</string>
+    <string name="afterschool_list_empty">방과후신청 목록이 없습니다.</string>
+    <string name="afterschool_list_error">오류로 인해 방과후신청 목록을 불러오지 못했습니다.</string>
+    <string name="afterschool_apply_created">신청이 완료되었습니다.</string>
+    <string name="afterschool_apply_failure">신청에 실패하였습니다.</string>
+    <string name="afterschool_apply_conflict">이미 신청된 요일입니다.</string>
+    <string name="afterschool_apply_internal_server_error">오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Meal Fragment -->
     <string name="meal_breakfast">아침</string>
@@ -149,7 +152,7 @@
     <string name="meal_meal">급식</string>
     <string name="meal_allergy">알레르기</string>
     <string name="meal_failure">급식 정보를 불러오지 못했습니다.</string>
-    <string name="meal_error">오류로 인해 급식 정보를 불러오지 못했습니다.</string>
+    <string name="meal_internal_server_error">오류로 인해 급식 정보를 불러오지 못했습니다.</string>
 
     <!-- Appcontent -->
     <string name="appcontent_notice_empty">공지사항이 없습니다.</string>
@@ -168,6 +171,7 @@
 
     <!-- Facility Report Fragment -->
     <string name="facilityreport_empty">신고 내역이 없습니다.</string>
+    <string name="facilityreport_list_no_content">신고 내역이 없습니다.</string>
     <string name="facilityreport_title">제목</string>
     <string name="facilityreport_room">호실</string>
     <string name="facilityreport_content">고장 내용</string>
@@ -175,21 +179,22 @@
     <string name="facilityreport_notitle">제목을 입력해주세요.</string>
     <string name="facilityreport_noroom">호실을 입력해주세요.</string>
     <string name="facilityreport_nocontent">내용을 입력해주세요.</string>
-    <string name="facilityreport_error">오류로 인해 신고 내역을 불러오지 못했습니다.</string>
-    <string name="facilityreport_article_error">오류로 인해 글을 불러오지 못했습니다.</string>
-    <string name="facilityreport_write_error">오류로 인해 신고 사항을 제출하지 못했습니다.</string>
-    <string name="facilityreport_write_success">신고 사항을 제출하였습니다.</string>
+    <string name="facilityreport_article_no_content">글이 없습니다.</string>
+    <string name="facilityreport_list_internal_server_error">오류로 인해 신고 내역을 불러오지 못했습니다.</string>
+    <string name="facilityreport_article_internal_server_error">오류로 인해 글을 불러오지 못했습니다.</string>
+    <string name="facilityreport_write_internal_server_error">오류로 인해 신고 사항을 제출하지 못했습니다.</string>
+    <string name="facilityreport_write_created">신고 사항을 제출하였습니다.</string>
     <string name="facilityreport_write_failure">신고 사항을 제출하지 못했습니다.</string>
 
     <!-- Rule Fragment -->
     <string name="rule_empty">기숙사 규정이 없습니다.</string>
-    <string name="rule_nodata">기숙사 규정이 없습니다.</string>
-    <string name="rule_error">오류로 인해 기숙사 규정을 불러오지 못했습니다.</string>
+    <string name="rule_no_content">기숙사 규정이 없습니다.</string>
+    <string name="rule_internal_server_error">오류로 인해 기숙사 규정을 불러오지 못했습니다.</string>
 
     <!-- FAQ Fragment -->
     <string name="faq_empty">FAQ가 없습니다.</string>
-    <string name="faq_nodata">fAQ가 없습니다.</string>
-    <string name="faq_error">오류로 인해 FAQ를 불러오지 못했습니다.</string>
+    <string name="faq_no_content">FAQ가 없습니다.</string>
+    <string name="faq_internal_server_error">오류로 인해 FAQ를 불러오지 못했습니다.</string>
 
     <!-- QnA Fragment -->
     <string name="qna_empty">Q<![CDATA[&]]>A가 없습니다.</string>
@@ -199,15 +204,18 @@
     <string name="qna_content">문의 내용</string>
     <string name="qna_privacy">비공개</string>
     <string name="qna_submit">제출하기</string>
-    <string name="qna_error">오류로 인해 Q<![CDATA[&]]>A를 불러오지 못했습니다.</string>
-    <string name="qna_article_error">오류로 인해 글을 불러오지 못했습니다.</string>
-    <string name="qna_write_success">문의사항을 제출하였습니다.</string>
+    <string name="qna_list_no_content">Q<![CDATA[&]]>A가 없습니다.</string>
+    <string name="qna_list_internal_server_error">오류로 인해 Q<![CDATA[&]]>A를 불러오지 못했습니다.</string>
+    <string name="qna_article_no_content">글이 없습니다.</string>
+    <string name="qna_article_internal_server_error">오류로 인해 글을 불러오지 못했습니다.</string>
+    <string name="qna_write_created">문의사항을 제출하였습니다.</string>
     <string name="qna_write_failure">문의사항을 제출하지 못했습니다.</string>
-    <string name="qna_write_error">오류로 인해 문의사항을 제출하지 못했습니다.</string>
+    <string name="qna_write_internal_server_error">오류로 인해 문의사항을 제출하지 못했습니다.</string>
 
     <!-- Comment -->
-    <string name="comment_upload_failure">댓글을 작성하지 못했습니다.</string>
-    <string name="comment_upload_error">오류로 인해 댓글을 작성하지 못했습니다.</string>
+    <string name="comment_load_no_content">댓글이 없습니다.</string>
+    <string name="comment_load_internal_server_error">오류로 인해 댓글을 불러오지 못했습니다.</string>
+    <string name="comment_upload_internal_server_error">오류로 인해 댓글을 작성하지 못했습니다.</string>
 
     <!-- Mypage -->
     <string name="mypage_merit">상점</string>
@@ -216,7 +224,8 @@
     <string name="mypage_status">상태</string>
     <string name="mypage_applied">신청됨</string>
     <string name="mypage_notapplied">미신청</string>
-    <string name="mypage_load_info_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
+    <string name="mypage_load_no_content">회원 정보가 없습니다.</string>
+    <string name="mypage_load_internal_server_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
     <string name="mypage_upload_profile_success">프로필 사진을 변경하였습니다.</string>
     <string name="mypage_upload_profile_message_notimagefile">이미지 파일이 아닙니다.</string>
     <string name="mypage_upload_profile_message_needlogin">로그인이 필요합니다.</string>
@@ -230,9 +239,9 @@
     <string name="dialog_cancel">취소</string>
     <string name="deletedialog_article_title">글 삭제</string>
     <string name="deletedialog_article_message">글을 삭제하시겠습니까?</string>
-    <string name="deletedialog_article_success">글을 삭제하였습니다.</string>
+    <string name="deletedialog_article_ok">글을 삭제하였습니다.</string>
     <string name="deletedialog_article_failure">글을 삭제하지 못했습니다.</string>
-    <string name="deletedialog_article_error">오류로 인해 글을 삭제하지 못했습니다.</string>
+    <string name="deletedialog_article_internal_server_error">오류로 인해 글을 삭제하지 못했습니다.</string>
     <string name="editdialog_article_title">글 수정</string>
     <string name="editdialog_article_message">글을 수정하시겠습니까?</string>
     <string name="editdialog_article_success">글을 수정하였습니다.</string>

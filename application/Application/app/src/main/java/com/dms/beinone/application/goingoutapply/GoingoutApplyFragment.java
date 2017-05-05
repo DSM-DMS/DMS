@@ -1,6 +1,5 @@
 package com.dms.beinone.application.goingoutapply;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,15 +13,13 @@ import android.widget.ToggleButton;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-03-20.
@@ -63,11 +60,21 @@ public class GoingoutApplyFragment extends Fragment {
                 if (mSaturdayTB.isChecked()) sat = true;
                 if (mSundayTB.isChecked()) sun = true;
 
-                new ApplyGoingoutTask().execute(new Goingout(sat, sun));
+                try {
+                    applyGoingout(sat, sun);
+                } catch (IOException e) {
+                    System.out.println("IOException in GoingoutApplyFragment: applyGoingout()");
+                    e.printStackTrace();
+                }
             }
         });
 
-        new LoadGoingoutApplyStatusTask().execute();
+        try {
+            loadGoingoutApplyStatus();
+        } catch (IOException e) {
+            System.out.println("IOException in GoingoutApplyFragment: loadGoingoutApplyStatus()");
+            e.printStackTrace();
+        }
     }
 
     private void setApplyStatus(Goingout goingout) {
@@ -75,111 +82,81 @@ public class GoingoutApplyFragment extends Fragment {
         mSundayTB.setChecked(goingout.isSun());
     }
 
-    private class LoadGoingoutApplyStatusTask extends AsyncTask<Void, Void, Object[]> {
+    private void loadGoingoutApplyStatus() throws IOException {
+        HttpBox.get(getContext(), "/apply/goingout")
+                .push(new HttpBoxCallback() {
+                    @Override
+                    public void done(Response response) {
+                        int code = response.getCode();
+                        switch (code) {
+                            case HttpBox.HTTP_OK:
+                                try {
+                                    Goingout goingout = JSONParser.parseGoingoutApplyStatusJSON(response.getJsonObject());
+                                    setApplyStatus(goingout);
+                                } catch (JSONException e) {
+                                    System.out.println("JSONException in GoingoutApplyFragment: /apply/goingout");
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case HttpBox.HTTP_NO_CONTENT:
+                                Toast.makeText(getContext(), R.string.goingoutapply_load_no_content, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_BAD_REQUEST:
+                                Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                Toast.makeText(getContext(), R.string.goingoutapply_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
-        @Override
-        protected Object[] doInBackground(Void... params) {
-            Object[] results = null;
-
-            try {
-                results = loadGoingoutApplyStatus();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(Object[] results) {
-            super.onPostExecute(results);
-
-            if (results != null) {
-                int code = (int) results[0];
-                Goingout goingout = (Goingout) results[1];
-
-                if (code == 200) {
-                    // success
-                    setApplyStatus(goingout);
-                } else if (code == 204) {
-                    Toast.makeText(getContext(), R.string.goingoutapply_load_failure, Toast.LENGTH_SHORT)
-                            .show();
-                } else {
-                    Toast.makeText(getContext(), R.string.goingoutapply_load_error, Toast.LENGTH_SHORT)
-                            .show();
-                }
-            } else {
-                Toast.makeText(getContext(), R.string.goingoutapply_load_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private Object[] loadGoingoutApplyStatus() throws IOException, JSONException {
-            Response response = HttpBox.post(getContext(), "/apply/goingout", Request.TYPE_GET)
-                    .push();
-
-            JSONObject responseJSONObject = response.getJsonObject();
-            Goingout goingout = JSONParser.parseGoingoutApplyStatusJSON(responseJSONObject);
-
-            return new Object[]{response.getCode(), goingout};
-        }
+                    @Override
+                    public void err(Exception e) {
+                        System.out.println("Error in GoingoutApplyFragment: /apply/goingout");
+                        e.printStackTrace();
+                    }
+                });
     }
 
-    private class ApplyGoingoutTask extends AsyncTask<Goingout, Void, Object[]> {
+    private void applyGoingout(final boolean sat, final boolean sun) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("sat", sat);
+            params.put("sun", sun);
 
-        @Override
-        protected Object[] doInBackground(Goingout... params) {
-            Object[] results = null;
+            HttpBox.put(getContext(), "/apply/goingout")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    setApplyStatus(new Goingout(sat, sun));
+                                    Toast.makeText(getContext(), R.string.goingoutapply_apply_ok, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.goingoutapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                boolean sat = params[0].isSat();
-                boolean sun = params[0].isSun();
-                results = applyGoingout(sat, sun);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(Object[] results) {
-            super.onPostExecute(results);
-
-            int code = (int) results[0];
-            Goingout goingout = (Goingout) results[1];
-
-            if (code == 201) {
-                // succeed
-                setApplyStatus(goingout);
-                Toast.makeText(getContext(), R.string.goingoutapply_apply_success, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                // error
-                Toast.makeText(getContext(), R.string.goingoutapply_apply_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private Object[] applyGoingout(boolean sat, boolean sun) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("sat", String.valueOf(sat));
-            requestParams.put("sun", String.valueOf(sun));
-
-            Response response = HttpBox.post(getContext(), "/apply/goingout", Request.TYPE_PUT)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return new Object[]{response.getCode(), new Goingout(sat, sun)};
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in GoingoutApplyFragment: PUT /apply/goingout");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in GoingoutApplyFragment: PUT /apply/goingout");
+            e.printStackTrace();
         }
     }
-
 }

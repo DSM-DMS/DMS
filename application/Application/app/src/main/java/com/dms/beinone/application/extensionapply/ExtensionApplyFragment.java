@@ -1,6 +1,5 @@
 package com.dms.beinone.application.extensionapply;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.DensityConverter;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONArray;
@@ -25,8 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-03-02.
@@ -49,6 +46,7 @@ public class ExtensionApplyFragment extends Fragment {
 
     /**
      * 초기화, FloatingActionButton 나타내기, RecyclerView 세팅
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -66,14 +64,19 @@ public class ExtensionApplyFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String className = parent.getItemAtPosition(position).toString();
-                if (className.equals("가온실")) {
-                    new LoadExtensionClassTask().execute(new Extension("map", Extension.CLASS_GA));
-                } else if (className.equals("나온실")) {
-                    new LoadExtensionClassTask().execute(new Extension("map", Extension.CLASS_NA));
-                } else if (className.equals("다온실")) {
-                    new LoadExtensionClassTask().execute(new Extension("map", Extension.CLASS_DA));
-                } else if (className.equals("라온실")) {
-                    new LoadExtensionClassTask().execute(new Extension("map", Extension.CLASS_RA));
+                try {
+                    if (className.equals("가온실")) {
+                        loadExtensionClass(new Extension(Extension.OPTION_MAP, Extension.CLASS_GA));
+                    } else if (className.equals("나온실")) {
+                        loadExtensionClass(new Extension(Extension.OPTION_MAP, Extension.CLASS_NA));
+                    } else if (className.equals("다온실")) {
+                        loadExtensionClass(new Extension(Extension.OPTION_MAP, Extension.CLASS_DA));
+                    } else if (className.equals("라온실")) {
+                        loadExtensionClass(new Extension(Extension.OPTION_MAP, Extension.CLASS_RA));
+                    }
+                } catch (IOException e) {
+                    System.out.println("IOException in ExtensionApplyFragment: loadExtensionClass()");
+                    e.printStackTrace();
                 }
             }
 
@@ -83,7 +86,12 @@ public class ExtensionApplyFragment extends Fragment {
             }
         });
 
-        new LoadExtensionClassTask().execute(new Extension("map", Extension.CLASS_GA));
+        try {
+            loadExtensionClass(new Extension(Extension.OPTION_MAP, Extension.CLASS_GA));
+        } catch (IOException e) {
+            System.out.println("IOException in ExtensionApplyFragment: loadExtensionClass()");
+            e.printStackTrace();
+        }
     }
 
     private void drawSeat(JSONObject rootJSONObject) throws JSONException {
@@ -112,7 +120,7 @@ public class ExtensionApplyFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             mClickedSeatView = (Button) v;
-                            int selectedClass = getClassId(mSpinner.getSelectedItemPosition());
+                            int selectedClass = getClazz(mSpinner.getSelectedItemPosition());
                             ExtensionApplyDialog
                                     .newInstance(getContext(), new Extension(selectedClass, seat))
                                     .show(getFragmentManager(), null);
@@ -140,68 +148,51 @@ public class ExtensionApplyFragment extends Fragment {
         return s.matches("[-+]?\\d*\\.?\\d+");
     }
 
-    private int getClassId(int position) {
+    private int getClazz(int position) {
         return position + 1;
     }
 
-    private class LoadExtensionClassTask extends AsyncTask<Extension, Void, Object[]> {
+    private void loadExtensionClass(Extension extension) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("option", extension.getOption());
+            params.put("class", extension.getClazz());
 
-        @Override
-        protected Object[] doInBackground(Extension... params) {
-            Object[] results = null;
+            HttpBox.get(getContext(), "/apply/extension/class")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        drawSeat(response.getJsonObject());
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in ExtensionApplyFragment: drawSeat()");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.extensionapply_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                results = loadExtensionClass(params[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(Object[] results) {
-            super.onPostExecute(results);
-
-            if (results == null) {
-                Toast.makeText(getContext(), R.string.extensionapply_load_error, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                int code = (int) results[0];
-                JSONObject mapJSONObject = (JSONObject) results[1];
-
-                try {
-                    if (code == 200) {
-                        drawSeat(mapJSONObject);
-                    } else if (code == 204) {
-                        Toast.makeText(getContext(), R.string.extensionapply_load_failure,
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), R.string.extensionapply_load_error,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), R.string.extensionapply_draw_error,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-
-        private Object[] loadExtensionClass(Extension extension) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("option", extension.getOption());
-            requestParams.put("class", String.valueOf(extension.getClassId()));
-
-            Response response = HttpBox.post(getContext(), "/apply/extension/class", Request.TYPE_GET)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return new Object[]{response.getCode(), response.getJsonObject()};
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in ExtensionApplyFragment: GET /apply/extension/class");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in ExtensionApplyFragment: GET /apply/extension/class");
+            e.printStackTrace();
         }
     }
 

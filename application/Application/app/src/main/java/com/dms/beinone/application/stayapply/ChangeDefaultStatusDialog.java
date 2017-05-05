@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -14,14 +13,13 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BeINone on 2017-01-31.
@@ -74,77 +72,58 @@ public class ChangeDefaultStatusDialog extends DialogFragment {
                                 ListView listView = ((AlertDialog) dialog).getListView();
                                 int value = listView.getCheckedItemPosition() + 1;
 
-                                new ChangeDefaultStatusTask().execute(value);
+                                try {
+                                    changeDefaultStatus(value);
+                                } catch (IOException e) {
+                                    System.out.println("IOException in RecommendFragment: changeDefaultStatus()");
+                                    e.printStackTrace();
+                                }
                             }
                         })
                 .create();
     }
 
-    private class ChangeDefaultStatusTask extends AsyncTask<Object, Void, int[]> {
+    private void changeDefaultStatus(final int value) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("value", value);
 
-        @Override
-        protected int[] doInBackground(Object... params) {
-            int[] results = null;
+            HttpBox.patch(mContext, "/apply/stay/default")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    Toast.makeText(mContext, R.string.stayapply_default_load_ok, Toast.LENGTH_SHORT).show();
+                                    // notify the StayApplyFragment of changed default status
+                                    mListener.onChangeDefaultStatus(value);
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(mContext, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(mContext, R.string.stayapply_default_load_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                int value = (int) params[0];
-                results = changeDefaultStatus(value);
-            } catch (IOException e) {
-                return null;
-            } catch (JSONException e) {
-                return null;
-            }
-
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(int[] results) {
-            super.onPostExecute(results);
-
-            if (results != null) {
-                int code = results[0];
-                int value = results[1];
-
-                if (code == 200) {
-                    // success
-                    Toast.makeText(mContext, R.string.stayapply_dialog_success, Toast.LENGTH_SHORT)
-                            .show();
-
-                    // notify the StayApplyFragment of changed default status
-                    mListener.onChangeDefaultStatus(value);
-                } else if (code == 500) {
-                    // failure
-                    Toast.makeText(mContext, R.string.stayapply_dialog_failure, Toast.LENGTH_SHORT)
-                            .show();
-                } else {
-                    // error
-                    Toast.makeText(mContext, R.string.stayapply_dialog_error, Toast.LENGTH_SHORT)
-                            .show();
-                }
-            } else {
-                Toast.makeText(mContext, R.string.stayapply_dialog_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-
-            dismiss();
-        }
-
-        private int[] changeDefaultStatus(int value) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("value", String.valueOf(value));
-
-            Response response = HttpBox.post(mContext, "/apply/stay/default", Request.TYPE_PATCH)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return new int[]{response.getCode(), value};
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in RecommendFragment: PATCH /apply/stay/default");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in RecommendFragment: PATCH /apply/stay/default");
+            e.printStackTrace();
         }
     }
 
     public interface ChangeDefaultStatusListener {
-
         void onChangeDefaultStatus(int defaultStatus);
     }
-
 }

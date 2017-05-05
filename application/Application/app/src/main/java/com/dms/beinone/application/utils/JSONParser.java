@@ -88,6 +88,10 @@ public class JSONParser {
         return meal;
     }
 
+    public static int parseStayApplyStatusJSON(JSONObject rootJSONObject) throws JSONException {
+        return rootJSONObject.getInt("value");
+    }
+
     public static Goingout parseGoingoutApplyStatusJSON(JSONObject rootJSONObject)
             throws JSONException {
 
@@ -197,9 +201,7 @@ public class JSONParser {
         return facilityReportList;
     }
 
-    public static FacilityReport parseFacilityReportJSON(JSONObject rootJSONObject, int no)
-            throws JSONException {
-
+    public static FacilityReport parseFacilityReportJSON(JSONObject rootJSONObject, int no) throws JSONException {
         String title = rootJSONObject.getString("title");
         String content = rootJSONObject.getString("content");
         int room = rootJSONObject.getInt("room");

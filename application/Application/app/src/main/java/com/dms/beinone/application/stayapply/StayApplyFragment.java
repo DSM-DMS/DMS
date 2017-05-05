@@ -1,7 +1,6 @@
 package com.dms.beinone.application.stayapply;
 
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,8 +16,9 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.dmsview.DMSButton;
 import com.dms.beinone.application.dmsview.DMSRadioButton;
 import com.dms.beinone.application.utils.DateUtils;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Request;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 import com.samsistemas.calendarview.widget.CalendarView;
 
@@ -27,8 +27,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.dms.beinone.application.stayapply.StayApplyUtils.FRIDAY_GO;
@@ -78,7 +76,12 @@ public class StayApplyFragment extends Fragment {
         final CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_stayapply);
 
         // load and display default stay status of user
-        new LoadDefaultStayStatusTask().execute();
+        try {
+            loadDefaultStayStatus();
+        } catch (IOException e) {
+            System.out.println("IOException in StayApplyFragment: loadStayStatus()");
+            e.printStackTrace();
+        }
 
         Button changeDefaultStatusBtn = (Button) rootView.findViewById(R.id.btn_stayapply_changedefaultstatus);
         changeDefaultStatusBtn.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +108,12 @@ public class StayApplyFragment extends Fragment {
 
         // load and display stay status of selected week at initially
         mSelectedDate = new Date();
-        new LoadStayStatusTask().execute(DateUtils.dateToWeekDateString(mSelectedDate));
+        try {
+            loadStayStatus(DateUtils.dateToWeekDateString(mSelectedDate));
+        } catch (IOException e) {
+            System.out.println("IOException in StayApplyFragment: loadStayStatus()");
+            e.printStackTrace();
+        }
 
         calendarView.setOnDateClickListener(new CalendarView.OnDateClickListener() {
             @Override
@@ -116,7 +124,12 @@ public class StayApplyFragment extends Fragment {
                 setSelectedWeekStatusTV(null);
 
                 // load and display stay status of selected week
-                new LoadStayStatusTask().execute(DateUtils.dateToWeekDateString(mSelectedDate));
+                try {
+                    loadStayStatus(DateUtils.dateToWeekDateString(mSelectedDate));
+                } catch (IOException e) {
+                    System.out.println("IOException in StayApplyFragment: loadStayStatus()");
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -129,22 +142,38 @@ public class StayApplyFragment extends Fragment {
         final DMSRadioButton stayRB = (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_stay);
 
         // apply stay status when apply button is clicked
-        DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_stayapply_apply);
+        final DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_stayapply_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (fridayGoRB.isChecked()) {
-                    new ApplyStayStatusTask()
-                            .execute(FRIDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
+                    try {
+                        applyStayStatus(FRIDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
+                    } catch (IOException e) {
+                        System.out.println("IOException in StayApplyFragment: applyStayStatus");
+                        e.printStackTrace();
+                    }
                 } else if (saturdayGoRB.isChecked()) {
-                    new ApplyStayStatusTask()
-                            .execute(SATURDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
+                    try {
+                        applyStayStatus(SATURDAY_GO, DateUtils.dateToWeekDateString(mSelectedDate));
+                    } catch (IOException e) {
+                        System.out.println("IOException in StayApplyFragment: applyStayStatus");
+                        e.printStackTrace();
+                    }
                 } else if (saturdayComeRB.isChecked()) {
-                    new ApplyStayStatusTask()
-                            .execute(SATURDAY_COME, DateUtils.dateToWeekDateString(mSelectedDate));
+                    try {
+                        applyStayStatus(SATURDAY_COME, DateUtils.dateToWeekDateString(mSelectedDate));
+                    } catch (IOException e) {
+                        System.out.println("IOException in StayApplyFragment: applyStayStatus");
+                        e.printStackTrace();
+                    }
                 } else if (stayRB.isChecked()) {
-                    new ApplyStayStatusTask()
-                            .execute(STAY, DateUtils.dateToWeekDateString(mSelectedDate));
+                    try {
+                        applyStayStatus(STAY, DateUtils.dateToWeekDateString(mSelectedDate));
+                    } catch (IOException e) {
+                        System.out.println("IOException in StayApplyFragment: applyStayStatus");
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(getContext(), R.string.stayapply_nochecked, Toast.LENGTH_SHORT).show();
                 }
@@ -164,169 +193,134 @@ public class StayApplyFragment extends Fragment {
         mSelectedWeekStatusTV.setText(stayState);
     }
 
-    /**
-     * load stay status of the date from server and display it
-     */
-    private class LoadStayStatusTask extends AsyncTask<String, Void, int[]> {
+    private void loadStayStatus(String week) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("week", week);
 
-        @Override
-        protected int[] doInBackground(String... params) {
-            int[] values = null;
+            HttpBox.get(getContext(), "/apply/stay")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        int stayStatusValue = JSONParser.parseStayApplyStatusJSON(response.getJsonObject());
+                                        setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatusValue));
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in StayApplyFragment: GET /apply/stay");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    mDefaultStatusPrefs.getInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), 0);
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.stayapply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                values = loadStayStatus(params[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return new int[]{-1, -1};
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return new int[]{-1, -1};
-            }
-
-            return values;
-        }
-
-        @Override
-        protected void onPostExecute(int[] values) {
-            super.onPostExecute(values);
-
-            int code = values[0];
-            int stayStatus = values[1];
-
-            if (code == 200 || code == 204) {
-                // success
-                setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
-            } else {
-                // error
-                Toast.makeText(getContext(), R.string.stayapply_error, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        private int[] loadStayStatus(String week) throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("week", week);
-
-            Response response = HttpBox.post(getContext(), "/apply/stay", Request.TYPE_GET)
-                    .putBodyData(requestParams)
-                    .push();
-
-            int code = response.getCode();
-            int stayStatus = -1;
-            if (code == 200) {
-                stayStatus = response.getJsonObject().getInt("value");
-            } else if (code == 204) {
-                stayStatus = mDefaultStatusPrefs.getInt(
-                        getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), 0);
-            }
-
-            return new int[]{response.getCode(), stayStatus};
-        }
-
-    }
-
-    /**
-     * load default stay status of the user from server and display it
-     */
-    private class LoadDefaultStayStatusTask extends AsyncTask<Void, Void, Integer> {
-
-        @Override
-        protected Integer doInBackground(Void... params) {
-            int stayStatus = -1;
-
-            try {
-                stayStatus = loadDefaultStayStatus();
-            } catch (IOException e) {
-                return -1;
-            } catch (JSONException e) {
-                return -1;
-            }
-
-            return stayStatus;
-        }
-
-        @Override
-        protected void onPostExecute(Integer stayStatus) {
-            super.onPostExecute(stayStatus);
-
-            if (stayStatus == -1) {
-                Toast.makeText(getContext(), R.string.stayapply_default_error, Toast.LENGTH_SHORT).show();
-            }
-
-            setDefaultStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
-            mDefaultStatusPrefs.edit()
-                    .putInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), stayStatus)
-                    .apply();
-        }
-
-        private int loadDefaultStayStatus() throws IOException, JSONException {
-            Map<String, String> requestParams = new HashMap<>();
-
-            Response response = HttpBox.post(getContext(), "/apply/stay/default", Request.TYPE_GET)
-                    .putBodyData(requestParams)
-                    .push();
-            JSONObject stayStatusJSONObject = response.getJsonObject();
-
-            return stayStatusJSONObject.getInt("value");
-        }
-
-    }
-
-    private class ApplyStayStatusTask extends AsyncTask<Object, Void, int[]> {
-
-        @Override
-        protected int[] doInBackground(Object... params) {
-            int[] values = null;
-
-            try {
-                int value = (int) params[0];
-                String week = params[1].toString();
-                values = applyStayStatus(value, week);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return values;
-        }
-
-        @Override
-        protected void onPostExecute(int[] values) {
-            super.onPostExecute(values);
-
-            int code = values[0];
-            int stayStatus = values[1];
-
-            if (code == 200) {
-                /* succeed */
-                Toast.makeText(getContext(), R.string.stayapply_apply_success, Toast.LENGTH_SHORT)
-                        .show();
-                setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatus));
-            } else if (code == 204) {
-                /* failed */
-                Toast.makeText(getContext(), R.string.stayapply_apply_failure, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                /* error */
-                Toast.makeText(getContext(), R.string.stayapply_apply_error, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
-        private int[] applyStayStatus(int value, String week) throws IOException, JSONException {
-
-            Map<String, String> requestParams = new HashMap<>();
-            requestParams.put("value", String.valueOf(value));
-            requestParams.put("week", week);
-
-            Response response = HttpBox.post(getContext(), "/apply/stay", Request.TYPE_PUT)
-                    .putBodyData(requestParams)
-                    .push();
-
-            return new int[]{response.getCode(), value};
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in StayApplyFragment: GET /apply/stay");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in StayApplyFragment: GET /apply/stay");
+            e.printStackTrace();
         }
     }
 
+    private void loadDefaultStayStatus() throws IOException {
+        HttpBox.get(getContext(), "/apply/stay/default")
+                .push(new HttpBoxCallback() {
+                    @Override
+                    public void done(Response response) {
+                        int code = response.getCode();
+                        switch (code) {
+                            case HttpBox.HTTP_OK:
+                                try {
+                                    int stayStatusValue = JSONParser.parseStayApplyStatusJSON(response.getJsonObject());
+                                    setDefaultStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatusValue));
+                                    mDefaultStatusPrefs.edit()
+                                            .putInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), stayStatusValue)
+                                            .apply();
+                                } catch (JSONException e) {
+                                    System.out.println("JSONException in StayApplyFragment: GET /apply/stay/default");
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case HttpBox.HTTP_NO_CONTENT:
+                                Toast.makeText(getContext(), R.string.stayapply_default_no_content, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_BAD_REQUEST:
+                                Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                Toast.makeText(getContext(), R.string.stayapply_default_internal_server_error, Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void err(Exception e) {
+                        System.out.println("Error in StayApplyFragment: GET /apply/stay/default");
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    private void applyStayStatus(final int value, String week) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("value", String.valueOf(value));
+            params.put("week", week);
+
+            HttpBox.put(getContext(), "/apply/stay")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(value));
+                                    Toast.makeText(getContext(), R.string.stayapply_apply_ok, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    Toast.makeText(getContext(), R.string.stayapply_apply_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.stayapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in StayApplyFragment: PUT /apply/stay");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in StayApplyFragment: PUT /apply/stay");
+            e.printStackTrace();
+        }
+    }
 }
