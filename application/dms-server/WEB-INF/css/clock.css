@@ -4,14 +4,16 @@
     position: relative;
     width: 185px;
     height: 185px;
-    margin: auto;
+    margin: 1vh auto;
     list-style: none;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 200px;
     border: 8px solid white;
 }
 
-#sec, #min, #hour {
+#sec,
+#min,
+#hour {
     position: absolute;
     width: 30px;
     border-radius: 200px;

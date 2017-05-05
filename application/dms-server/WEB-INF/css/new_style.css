@@ -74,6 +74,9 @@ body {
     width: 35%;
     background: #607D8B;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #stay-apply-container {
@@ -82,6 +85,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 #stay-apply {
@@ -99,8 +103,27 @@ body {
     position: relative;
     width: 185px;
     height: 185px;
-    margin: auto;
+    margin: 1vh auto;
     list-style: none;
+}
+
+.current-status {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 4vh;
+}
+
+.current-status svg {
+    width: 5vh;
+    height: 5vh;
+    margin-right: 1vh;
+}
+
+.current-status p {
+    color: white;
+    font-size: 3vh;
+    margin: 0;
 }
 
 #extension-apply-container {
@@ -109,14 +132,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-}
-
-.current-status {}
-
-.current-status p {
-    color: white;
-    padding: 0px;
-    font-size: 3vh;
+    justify-content: center;
 }
 
 #extension-apply {
