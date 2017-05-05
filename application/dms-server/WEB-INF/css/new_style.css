@@ -296,8 +296,19 @@ body {
     /*padding: 0 20px 0 20px;*/
 }
 
-.meal-title, .meal-content {
+.meal-title,
+.meal-content {
     display: inline-block;
+}
+
+.meal-title::before {
+    font-size: 1.1rem;
+    content: '';
+    background-color: #607D8B;
+    padding: 0 5px 0 5px;
+    flex-direction: row;
+    height: 6vh;
+    margin-right: 1vh;
 }
 
 .meal-content {
@@ -312,6 +323,7 @@ body {
     min-width: 90px;
     font-size: 2.1rem;
     font-weight: 200;
+    display: flex;
 }
 
 
@@ -392,6 +404,7 @@ body {
 }
 
 #extension-apply-window .extension-class-select td:hover {
+    transition: 0.2s ease-in;
     background-color: rgba(255, 255, 255, .2);
     cursor: pointer;
 }
@@ -585,7 +598,7 @@ a.btn {
     width: 100%;
     font-size: 2rem;
     font-weight: 200;
-    color: #ED2553;
+    color: #607D8B;
     position: relative;
 }
 
@@ -596,7 +609,7 @@ a.btn {
     position: absolute;
     top: 0;
     left: -12.5%;
-    background: #ED2553;
+    background: #607D8B;
 }
 
 .login-input {
@@ -776,6 +789,7 @@ a.btn {
 }
 
 .window-close {
+    cursor: pointer;
 }
 
 

@@ -29,9 +29,8 @@ $dormRule.on("click", function() {
 });
 
 $closeMypageWindow.on("click", function() {
-    console.log("cuca");
-    $panel.toggleClass("left-move");
     $mypageWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
 });
 
