@@ -606,7 +606,6 @@ a.btn {
     background-color: white;
     color: #607D8B;
     outline: 0;
-
 }
 
 .login-input .spin {
@@ -645,6 +644,7 @@ a.btn {
 
 .fade-in {
     opacity: 1 !important;
+    display: block !important;
 }
 
 .fade-out {
@@ -707,4 +707,39 @@ a.btn {
 .speech-bubble button:hover {
     cursor: pointer;
     background: rgba(0, 0, 0, .2);
+}
+
+
+/*window------------------------*/
+
+.mypage-window {}
+
+.window {
+    width: 74%;
+    height: 100vh;
+    opacity: 0;
+    /*z-index: -1;*/
+    position: absolute;
+    right: 0;
+    transition: 0.3s ease;
+    display: none;
+}
+
+#close-mypage-window {
+    height: 8vh;
+    width: 4vh;
+    position: absolute;
+    top: 5vh;
+    right: 10vh;
+}
+
+.window-close {
+}
+
+
+/*iframe test------------*/
+
+iframe {
+    width: 100vw;
+    height: 100vh;
 }
