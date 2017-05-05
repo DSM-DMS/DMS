@@ -54,11 +54,13 @@ body {
 }
 
 .curved-image {
+    stroke-opacity: 0;
     float: right;
     transform: translateX(100%);
     position: absolute;
+    height: 100vh;
     top: 0;
-    right: 0;
+    right: 1px;
 }
 
 #left-panel {
@@ -72,14 +74,18 @@ body {
     width: 35%;
     background: #607D8B;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #stay-apply-container {
     height: 50%;
-    transform: translateX(13%);
+    transform: translateX(10%);
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 #stay-apply {
@@ -97,24 +103,36 @@ body {
     position: relative;
     width: 185px;
     height: 185px;
-    margin: auto;
+    margin: 1vh auto;
     list-style: none;
+}
+
+.current-status {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 4vh;
+}
+
+.current-status svg {
+    width: 5vh;
+    height: 5vh;
+    margin-right: 1vh;
+}
+
+.current-status p {
+    color: white;
+    font-size: 3vh;
+    margin: 0;
 }
 
 #extension-apply-container {
     height: 50%;
-    transform: translateX(13%);
+    transform: translateX(10%);
     text-align: center;
     display: flex;
     flex-direction: column;
-}
-
-.current-status {}
-
-.current-status p {
-    color: white;
-    padding: 0px;
-    font-size: 3vh;
+    justify-content: center;
 }
 
 #extension-apply {
@@ -573,4 +591,62 @@ a.btn {
 
 .fade-out {
     opacity: 0 !important;
+}
+
+
+/*말풍선*/
+
+.speech-bubble {
+    font-size: 3rem;
+    position: absolute;
+    display: inline-block;
+    padding: 1.5rem;
+    background: #00cc99;
+    color: #f6f6f6;
+    -webkit-transform-origin: left bottom;
+    transform-origin: left bottom;
+    border-radius: 999px 999px 0px 999px;
+    z-index: 10;
+    left: 30%;
+    top: 10%;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.speech-bubble:after {
+    top: 88%;
+    right: 0;
+    position: absolute;
+    content: "";
+    border: 1.5rem solid;
+    border-color: #00cc99 #00cc99 transparent transparent;
+}
+
+.opponent {
+    -webkit-transform-origin: right top;
+    transform-origin: right top;
+    background: #ff5154;
+}
+
+.opponent:after {
+    top: -35%;
+    left: auto;
+    right: 0;
+    border-color: transparent #ff5154 #ff5154 transparent;
+}
+
+.speech-bubble button {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 999px;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 4rem;
+    transition: 0.15s ease-in;
+    outline: 0;
+}
+
+.speech-bubble button:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, .2);
 }
