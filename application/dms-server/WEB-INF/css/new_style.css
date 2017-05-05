@@ -722,6 +722,10 @@ a.btn {
     opacity: 0 !important;
 }
 
+.select {
+    background: rgba(0, 255, 0, .4) !important;
+}
+
 
 /*말풍선*/
 
@@ -808,6 +812,7 @@ a.btn {
     cursor: pointer;
 }
 
+
 /*bug----------------*/
 
 .bug-content {
@@ -852,4 +857,89 @@ a.btn {
 iframe {
     width: 100vw;
     height: 100vh;
+}
+/*going out*/
+
+#going-out-apply-window img {
+    height: 8vh;
+    width: 4vh;
+    position: absolute;
+    top: 5vh;
+    right: 5vh;
+}
+
+#going-out-apply-window {}
+
+
+/*.going-out-container::before {
+    font-size: 1.1rem;
+    content: "주말 외출은 점심시간부터 오후 5시 30분까지입니다.";
+    margin-left: 10px;
+    padding: 0 10px 0 10px;
+    border-radius: 1000000000px;
+}*/
+
+.going-out-container {
+    width: 60%;
+    height: 60%;
+    background: rgba(255, 255, 255, .2);
+    margin: 20vh auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.saturday-container {
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, .2);
+    transition: 0.2s ease-in;
+}
+
+.saturday-container svg {
+    width: 35vh;
+    height: 35vh;
+    margin-top: 50%;
+    transform: translateX(-3vh);
+}
+
+.saturday-container path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-dasharray: none;
+    stroke-dashoffset: "";
+}
+
+.saturday-container:hover {
+    cursor: pointer;
+    background: rgba(0, 255, 0, .1);
+}
+
+.sunday-container {
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, .2);
+    transition: 0.2s ease-in;
+}
+
+.sunday-container:hover {
+    cursor: pointer;
+    background: rgba(0, 255, 0, .1);
+}
+
+.sunday-container svg {
+    width: 40vh;
+    height: 40vh;
+    margin-top: 50%;
+    margin-left: 3vh;
+}
+
+.sunday-container path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-dasharray: none;
+    stroke-dashoffset: "";
 }

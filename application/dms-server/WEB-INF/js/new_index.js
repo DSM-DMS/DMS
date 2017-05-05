@@ -7,8 +7,14 @@ var $menu = $("#menu");
 var $dormRule = $(".dorm-rule");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
+var $goingOutWindow = $("#going-out-apply-window");
+var $closeGoingOutWindow = $("#close-going-out-window");
 var $windows = $(".window");
+var $goingOutBtn = $(".goingOut-btn");
 var $pointBtn = $(".point-btn");
+var $saturdayContainer = $(".saturday-container");
+var $sundayContainer = $(".sunday-container");
+
 var $closeModal = $(".btn-close");
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
@@ -68,6 +74,19 @@ $pointBtn.on("click", function() {
     $panel.toggleClass('blur');
     $menu.toggleClass('blur');
     return false;
+});
+
+$goingOutBtn.on("click", function() {
+    $panel.toggleClass("left-move");
+    $goingOutWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+    return false;
+});
+
+$closeGoingOutWindow.on("click", function() {
+    $goingOutWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
 });
 
 var mapData = [
@@ -228,6 +247,57 @@ $(document).ready(function() {
     });
     $('#Layer_2').click(function() {
         extensionDoCheck();
+    });
+
+    var path = document.getElementsByTagName('path');
+
+    var ids = ["#letter-a", "#letter-s", "#letter-t", "#letter-t2", "#letter-n", "#letter-u", "#letter-s2"];
+
+    //test -> 위치 변경필요
+    $saturdayContainer.hover(function() {
+            path[0].style.strokeDasharray = path[0].getTotalLength();
+            path[0].style.strokeDashoffset = path[0].getTotalLength();
+            $(ids[0]).animate({ strokeDashoffset: '0' }, 600);
+
+            path[1].style.strokeDasharray = path[1].getTotalLength();
+            path[1].style.strokeDashoffset = path[1].getTotalLength();
+            $(ids[1]).animate({ strokeDashoffset: '0' }, 600);
+
+            path[2].style.strokeDasharray = path[2].getTotalLength();
+            path[2].style.strokeDashoffset = path[2].getTotalLength();
+            $(ids[2]).animate({ strokeDashoffset: '0' }, 600);
+
+            path[3].style.strokeDasharray = path[3].getTotalLength();
+            path[3].style.strokeDashoffset = path[3].getTotalLength();
+            $(ids[3]).animate({ strokeDashoffset: '0' }, 600);
+        },
+        function() {
+
+        });
+
+    $sundayContainer.hover(function() {
+            path[4].style.strokeDasharray = path[4].getTotalLength();
+            path[4].style.strokeDashoffset = path[4].getTotalLength();
+            $(ids[4]).animate({ strokeDashoffset: '0' }, 600);
+
+            path[5].style.strokeDasharray = path[5].getTotalLength();
+            path[5].style.strokeDashoffset = path[5].getTotalLength();
+            $(ids[6]).animate({ strokeDashoffset: '0' }, 600);
+
+            path[6].style.strokeDasharray = path[6].getTotalLength();
+            path[6].style.strokeDashoffset = path[6].getTotalLength();
+            $(ids[5]).animate({ strokeDashoffset: '0' }, 600);
+        },
+        function() {
+
+        });
+
+    $saturdayContainer.click(function() {
+        $saturdayContainer.toggleClass("select");
+    });
+
+    $sundayContainer.click(function() {
+        $sundayContainer.toggleClass("select");
     });
 });
 
