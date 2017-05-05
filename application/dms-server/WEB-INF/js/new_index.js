@@ -5,6 +5,10 @@ var $extensionWindow = $("#extension-apply-window");
 var $loginBtn = $(".login");
 var $trigger = $(".trigger");
 var $menu = $("#menu");
+var $dormRule = $(".dorm-rule");
+var $mypageWindow = $(".mypage-window");
+var $closeMypageWindow = $("#close-mypage-window");
+var $windows = $(".window");
 
 $foldingButton.on("click", function() {
     $panel.toggleClass("left-move");
@@ -15,6 +19,19 @@ $foldingButton.on("click", function() {
 $closeButton.on("click", function() {
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+});
+
+$dormRule.on("click", function() {
+    $panel.toggleClass("left-move");
+    $mypageWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+});
+
+$closeMypageWindow.on("click", function() {
+    console.log("cuca");
+    $panel.toggleClass("left-move");
+    $mypageWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
 });
 
