@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="./css/new_style.css">
     <link rel="stylesheet" href="./css/clock.css">
     <link rel="stylesheet" href="./css/hover.css">
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/743964/DrawSVGPlugin.min.js'></script>
 </head>
 
 <body>
@@ -108,6 +111,16 @@
         <div id="right-panel">
             <div id="stay-apply-container">
                 <div class="current-status">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        width="5vh" height="5vh" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                        <g id="check">
+                                <circle id="stayCheckCircle" fill="#FFF" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="63.638" cy="53.976" r="40.764"/>                            
+                                <line id="stayCross2" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="81.642" y1="37.686" x2="47.952" y2="71.375"/>                            
+                                <line id="stayCross1" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="47.952" y1="37.687" x2="81.642" y2="71.375"/>                            
+                                <polyline id="stayTick" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                                45.677,54.037 58.479,67.762 81.217,43.079 	"/>
+                        </g>
+                    </svg>
                     <p>금요귀가</p>
                 </div>
                 <img src="./images/return-fri.png" />
@@ -115,6 +128,16 @@
             </div>
             <div id="extension-apply-container">
                 <div class="current-status">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        width="5vh" height="5vh" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                        <g id="check">
+                                <circle id="extensionCheckcircle" fill="#FFF" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="63.638" cy="53.976" r="40.764"/>                            
+                                <line id="extensionCross2" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="81.642" y1="37.686" x2="47.952" y2="71.375"/>                            
+                                <line id="extensionCross1" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="47.952" y1="37.687" x2="81.642" y2="71.375"/>                            
+                                <polyline id="extensionTick" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                                45.677,54.037 58.479,67.762 81.217,43.079 	"/>
+                        </g>
+                    </svg>
                     <p>연장신청이 가능합니다</p>
                 </div>
                 <script src="./js/clock.js"></script>
