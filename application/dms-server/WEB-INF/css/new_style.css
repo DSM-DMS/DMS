@@ -810,6 +810,11 @@ a.btn {
 
 .window-close {
     cursor: pointer;
+    height: 8vh;
+    width: 4vh;
+    position: absolute;
+    top: 5vh;
+    right: 10vh;
 }
 
 
