@@ -15,10 +15,10 @@ var $goingOutBtn = $(".goingOut-btn");
 var $pointBtn = $(".point-btn");
 var $saturdayContainer = $(".saturday-container");
 var $sundayContainer = $(".sunday-container");
-
 var $closeModal = $(".btn-close");
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
+var $closeStayWindow = $("#close-stay-window");
 var mealDate = new Date();
 
 $closeModal.on("click", function() {
@@ -52,19 +52,16 @@ $closeMypageWindow.on("click", function() {
     $menu.toggleClass("fade-out");
 });
 
-var speechBubble = $('#speech-bubble');
-
 $("#stay-apply").click(function() {
-    speechBubble.toggleClass('fade-in');
-    speechBubble.focus();
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
-
 });
 
-$('#speech-bubble button').click(function() {
-    speechBubble.toggleClass('fade-in');
+$closeStayWindow.on("click", function() {
+    $panel.toggleClass("left-move");
+    $stayWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
 });
 
 $loginBtn.on("click", function() {
@@ -236,7 +233,7 @@ function extensionDoCheck() {
 
 $(document).ready(function() {
 
-    $("#backgroundWallpaper").attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 10) + 1) + ".jpg");
+    $("#backgroundWallpaper").attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     stayTick = $('#stayTick');
     stayCircle = $('#stayCheckCircle');
@@ -259,7 +256,7 @@ $(document).ready(function() {
 
     var path = document.getElementsByTagName('path');
 
-    var ids = ["#letter-a", "#letter-s", "#letter-t", "#letter-t2", "#letter-n", "#letter-u", "#letter-s2"];
+    var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
 
     //test -> 위치 변경필요
     $saturdayContainer.hover(function() {
@@ -290,11 +287,11 @@ $(document).ready(function() {
 
             path[5].style.strokeDasharray = path[5].getTotalLength();
             path[5].style.strokeDashoffset = path[5].getTotalLength();
-            $(ids[6]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[5]).animate({ strokeDashoffset: '0' }, 600);
 
             path[6].style.strokeDasharray = path[6].getTotalLength();
             path[6].style.strokeDashoffset = path[6].getTotalLength();
-            $(ids[5]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[6]).animate({ strokeDashoffset: '0' }, 600);
         },
         function() {
 
