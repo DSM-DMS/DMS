@@ -772,10 +772,12 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .extension-seat-container {
-    margin-top: 14vh;
-    height: 72vh;
+    margin-top: 10vh;
+    height: 85vh;
     float: left;
     margin-left: 8%;
+    max-width: 46vw;
+    overflow: auto;
 }
 
 .extension-seat-container td {
@@ -818,6 +820,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .none-selectalbe-seat {
     width: 4.75vh;
+    height: 4.75vh;
     opacity: 0;
 }
 
