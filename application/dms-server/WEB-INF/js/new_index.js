@@ -345,6 +345,32 @@ $(document).ready(function() {
 
     var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
 
+    $("#going-out-btn").on('click', function () {
+        var satVal = false;
+        var sunVal = false;
+
+        if($saturdayContainer.hasClass("select")) {
+            satVal = true;
+        }
+        if($sundayContainer.hasClass("select")) {
+            sunVal = true;
+        }
+
+        console.log(satVal,sunVal);
+
+        $.ajax({
+            url: "/apply/goingout",
+            type: "PUT",
+            data: {
+                "sat": satVal,
+                "sun": sunVal
+            },
+            success: function() {
+                alert('신청되었습니다.');
+            }
+        });
+    });
+
     //test -> 위치 변경필요
     $saturdayContainer.hover(function() {
             path[0].style.strokeDasharray = path[0].getTotalLength();
