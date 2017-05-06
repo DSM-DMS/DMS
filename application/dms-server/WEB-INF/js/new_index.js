@@ -19,7 +19,64 @@ var $closeModal = $(".btn-close");
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
 var $closeStayWindow = $("#close-stay-window");
+var $gaon = $("#extension-gaon");
+var $naon = $("#extension-naon");
+var $daon = $("#extension-daon");
+var $laon = $("#extension-laon");
+var $three = $("#extension-three");
+var $four = $("#extension-four");
+var $five = $("#extension-five");
+var $classSelect = $(".extension-class-select");
 var mealDate = new Date();
+var selectedClass = $("#extension-gaon");
+
+selectedClass.css({
+    transition: "0.2s ease-in",
+    backgroundColor: "rgba(255, 255, 255, .2)"
+});
+getClassData(1);
+
+
+$classSelect.on("click", "td", function(e) {
+    selectedClass.css({
+        transition: "0.2s ease-in",
+        backgroundColor: "rgba(0, 0, 0, 0)"
+    });
+    selectedClass = $(this);
+    $(this).css({
+        transition: "0.2s ease-in",
+        backgroundColor: "rgba(255, 255, 255, .2)"
+    });
+    if ($(this).attr('id') === "extension-gaon") {
+        getClassData(1);
+    } else if ($(this).attr('id') === "extension-naon") {
+        getClassData(2);
+    } else if ($(this).attr('id') === "extension-daon") {
+        getClassData(3);
+    } else if ($(this).attr('id') === "extension-laon") {
+        getClassData(4);
+    } else if ($(this).attr('id') === "extension-three") {
+        getClassData(5);
+    } else if ($(this).attr('id') === "extension-four") {
+        getClassData(6);
+    } else if ($(this).attr('id') === "extension-five") {
+        getClassData(7);
+    }
+});
+
+function getClassData(classId) {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/apply/extension/class",
+        type: "GET",
+        data: {
+            "option": "map",
+            "class": classId
+        },
+        success: function(data) {
+            drawSeats(JSON.parse(data).map, classId);
+        }
+    });
+}
 
 $closeModal.on("click", function() {
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
@@ -105,7 +162,7 @@ var mapData2 = [
     [13, 14, 15, 0, 16, 17, 18]
 ];
 
-function drawSeats(mapData) {
+function drawSeats(mapData, classId) {
     var newTable = $('<table/>', {
         "id": "extension-seat-table"
     });
@@ -116,31 +173,61 @@ function drawSeats(mapData) {
         });
 
         for (var innerLoop = 0; innerLoop < mapData[loop].length; innerLoop++) {
-            var tdOpacity = 1;
-            if (mapData[loop][innerLoop] === 0) {
-                tdOpacity = 0;
-            }
-            var newTd = $('<td/>', {
-                css: {
-                    opacity: tdOpacity
-                }
-            });
+            var newTd = $('<td/>');
             var newSeat = $('<div/>', {
+                text: mapData[loop][innerLoop],
                 "class": "extension-seat",
-            })
+            });
+            if (mapData[loop][innerLoop] === 0) {
+                // newTd.css({
+                //     opacity: "0"
+                // })
+                newSeat.addClass("none-selectalbe-seat");
+            }
+
+            if (typeof mapData[loop][innerLoop] === "number" && mapData[loop][innerLoop] !== 0) {
+                (function(id) {
+                    newSeat.on("click", function() {
+                        extentionApply(classId, id);
+                    })
+                })(mapData[loop][innerLoop]);
+                newSeat.addClass("selectalbe-seat");
+            }
+
             newSeat.appendTo(newTd);
             newTd.appendTo(newTr);
         }
         newTr.appendTo(newTable);
     }
     $(".extension-seat-table-container").html(newTable);
-    console.log($("#extension-seat-table").width());
-    // $(".extension-board").css({
-    //     width: $("#extension-seat-table").width()
-    // });
 }
 
-drawSeats(mapData);
+function extentionApply(classId, id) {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/apply/extension",
+        type: "PUT",
+        data: {
+            "class": classId,
+            "seat": id
+        },
+        statusCode: {
+            204: function() {
+                alert("신청가능한 시간이 아닙니다.");
+
+            },
+            500: function() {
+                alert("신청중에 오류가 발생하였습니다.");
+            }
+        },
+        success: function(data, xhr) {
+            getSeatData(classId);
+        },
+        error: function(request, status, error) {
+            console.log(status);
+        }
+    });
+}
+
 
 function stayDoCheck() {
 
@@ -288,19 +375,27 @@ $(document).ready(function() {
     $saturdayContainer.hover(function() {
             path[0].style.strokeDasharray = path[0].getTotalLength();
             path[0].style.strokeDashoffset = path[0].getTotalLength();
-            $(ids[0]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[0]).animate({
+                strokeDashoffset: '0'
+            }, 600);
 
             path[1].style.strokeDasharray = path[1].getTotalLength();
             path[1].style.strokeDashoffset = path[1].getTotalLength();
-            $(ids[1]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[1]).animate({
+                strokeDashoffset: '0'
+            }, 600);
 
             path[2].style.strokeDasharray = path[2].getTotalLength();
             path[2].style.strokeDashoffset = path[2].getTotalLength();
-            $(ids[2]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[2]).animate({
+                strokeDashoffset: '0'
+            }, 600);
 
             path[3].style.strokeDasharray = path[3].getTotalLength();
             path[3].style.strokeDashoffset = path[3].getTotalLength();
-            $(ids[3]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[3]).animate({
+                strokeDashoffset: '0'
+            }, 600);
         },
         function() {
 
@@ -309,15 +404,21 @@ $(document).ready(function() {
     $sundayContainer.hover(function() {
             path[4].style.strokeDasharray = path[4].getTotalLength();
             path[4].style.strokeDashoffset = path[4].getTotalLength();
-            $(ids[4]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[4]).animate({
+                strokeDashoffset: '0'
+            }, 600);
 
             path[5].style.strokeDasharray = path[5].getTotalLength();
             path[5].style.strokeDashoffset = path[5].getTotalLength();
-            $(ids[5]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[5]).animate({
+                strokeDashoffset: '0'
+            }, 600);
 
             path[6].style.strokeDasharray = path[6].getTotalLength();
             path[6].style.strokeDashoffset = path[6].getTotalLength();
-            $(ids[6]).animate({ strokeDashoffset: '0' }, 600);
+            $(ids[6]).animate({
+                strokeDashoffset: '0'
+            }, 600);
         },
         function() {
 
