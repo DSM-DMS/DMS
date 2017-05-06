@@ -888,7 +888,7 @@ iframe {
     right: 5vh;
 }
 
-#going-out-apply-window button {
+#going-out-apply-window #going-out-btn {
     position: absolute;
     bottom: 8vh;
     right: 25vh;
@@ -903,7 +903,7 @@ iframe {
     outline: 0;
 }
 
-#going-out-apply-window button:hover {
+#going-out-apply-window #going-out-btn:hover {
     cursor: pointer;
     background: rgba(255, 255, 255, .4);
 }
