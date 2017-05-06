@@ -23,7 +23,7 @@ body {
     overflow: hidden;
 }
 
-.line {
+.left-line {
     height: 100%;
     position: absolute;
     width: 12px;
@@ -150,6 +150,357 @@ body {
     line-height: 5vh;
 }
 
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+::selection {
+    background: none;
+}
+
+.continput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 270px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.continput ul {
+    list-style-type: none;
+    width: 220px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.continput li {
+    position: relative;
+    padding: 10px;
+    padding-left: 40px;
+    margin: 30px 0px;
+    height: 30px;
+}
+
+.continput label {
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+label:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    position: absolute;
+    left: 7px;
+    top: calc(50% - 13px);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+input[type="radio"] {
+    opacity: 0;
+    -webkit-appearance: none;
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    top: calc(50% - 15px);
+    cursor: pointer;
+}
+
+.bullet {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    left: -3px;
+    top: 2px;
+    border: 5px solid #fff;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked~.bullet {
+    position: absolute;
+    opacity: 1;
+    animation-name: explode;
+    animation-duration: 0.350s;
+}
+
+.line {
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background-color: #fff;
+    opacity: 0;
+}
+
+.line.zero {
+    left: 11px;
+    top: -21px;
+    transform: translateY(20px);
+    width: 2px;
+    height: 10px;
+}
+
+.line.one {
+    right: -7px;
+    top: -11px;
+    transform: rotate(-55deg) translate(-9px);
+}
+
+.line.two {
+    right: -20px;
+    top: 11px;
+    transform: translate(-9px);
+}
+
+.line.three {
+    right: -8px;
+    top: 35px;
+    transform: rotate(55deg) translate(-9px);
+}
+
+.line.four {
+    left: -8px;
+    top: -11px;
+    transform: rotate(55deg) translate(9px);
+}
+
+.line.five {
+    left: -20px;
+    top: 11px;
+    transform: translate(9px);
+}
+
+.line.six {
+    left: -8px;
+    top: 35px;
+    transform: rotate(-55deg) translate(9px);
+}
+
+.line.seven {
+    left: 11px;
+    bottom: -21px;
+    transform: translateY(-20px);
+    width: 2px;
+    height: 10px;
+}
+
+input[type="radio"]:checked~.bullet .line.zero {
+    animation-name: drop-zero;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.one {
+    animation-name: drop-one;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.two {
+    animation-name: drop-two;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.three {
+    animation-name: drop-three;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.four {
+    animation-name: drop-four;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.five {
+    animation-name: drop-five;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.six {
+    animation-name: drop-six;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+input[type="radio"]:checked~.bullet .line.seven {
+    animation-name: drop-seven;
+    animation-delay: 0.100s;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 0;
+        transform: scale(10);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes drop-zero {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        height: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-2px);
+        height: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-one {
+    0% {
+        opacity: 0;
+        transform: rotate(-55deg) translate(-20px);
+        width: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(-55deg) translate(9px);
+        width: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-two {
+    0% {
+        opacity: 0;
+        transform: translate(-20px);
+        width: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(9px);
+        width: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-three {
+    0% {
+        opacity: 0;
+        transform: rotate(55deg) translate(-20px);
+        width: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(55deg) translate(9px);
+        width: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-four {
+    0% {
+        opacity: 0;
+        transform: rotate(55deg) translate(20px);
+        width: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(55deg) translate(-9px);
+        width: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-five {
+    0% {
+        opacity: 0;
+        transform: translate(20px);
+        width: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-9px);
+        width: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-six {
+    0% {
+        opacity: 0;
+        transform: rotate(-55deg) translate(20px);
+        width: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(-55deg) translate(-9px);
+        width: 0px;
+        opacity: 0;
+    }
+}
+
+@keyframes drop-seven {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+        height: 10px;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(2px);
+        height: 0px;
+        opacity: 0;
+    }
+}
+
 
 /*notice ----------------------------------------------------------*/
 
@@ -158,7 +509,7 @@ body {
     padding-left: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .notice-title-container {
@@ -192,7 +543,7 @@ body {
 .notice-title-writer {
     display: flex;
     flex-direction: column;
-    margin-left: 80%;
+    margin-left: 10%;
 }
 
 .notice-title-writer>span {
@@ -748,63 +1099,6 @@ a.btn {
 
 .select {
     background: rgba(0, 255, 0, .3) !important;
-}
-
-
-/*말풍선*/
-
-.speech-bubble {
-    font-size: 3rem;
-    position: absolute;
-    display: inline-block;
-    padding: 1.5rem;
-    background: #00cc99;
-    color: #f6f6f6;
-    -webkit-transform-origin: left bottom;
-    transform-origin: left bottom;
-    border-radius: 999px 999px 0px 999px;
-    z-index: 10;
-    left: 30%;
-    top: 10%;
-    transition: 0.3s ease-in-out;
-}
-
-.speech-bubble:after {
-    top: 88%;
-    right: 0;
-    position: absolute;
-    content: "";
-    border: 1.5rem solid;
-    border-color: #00cc99 #00cc99 transparent transparent;
-}
-
-.opponent {
-    -webkit-transform-origin: right top;
-    transform-origin: right top;
-    background: #ff5154;
-}
-
-.opponent:after {
-    top: -35%;
-    left: auto;
-    right: 0;
-    border-color: transparent #ff5154 #ff5154 transparent;
-}
-
-.speech-bubble button {
-    background: transparent;
-    border: 2px solid white;
-    border-radius: 999px;
-    color: white;
-    font-size: 1.5rem;
-    line-height: 4rem;
-    transition: 0.15s ease-in;
-    outline: 0;
-}
-
-.speech-bubble button:hover {
-    cursor: pointer;
-    background: rgba(0, 0, 0, .2);
 }
 
 
