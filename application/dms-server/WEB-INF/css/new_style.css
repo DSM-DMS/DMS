@@ -510,6 +510,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 }
 
 .notice-title-container {
@@ -578,18 +579,47 @@ input[type="radio"]:checked~.bullet .line.seven {
     background: #eeeeee;
     border-radius: 0 0 2vh 2vh;
     padding: 2vh;
+    position: relative;
 }
 
 .notice-more {
     background: #607B8D;
-    text-decoration: none;
-    color: white;
-    font-size: 1.5rem;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    text-align: center;
-    width: 15vh;
-    border-radius: 2vh;
+    position: absolute;
+    right: -25px;
+    bottom: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    z-index: 50;
+    transition: 0.3s ease-in;
+}
+
+.notice-more:hover {
+    cursor: pointer;
+    transform: rotate(180deg);
+    background: #604FDD;
+}
+
+.notice-more:before {
+    content: " ";
+    background: white;
+    width: 25px;
+    height: 3px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.notice-more:after {
+    content: " ";
+    background: white;
+    width: 3px;
+    height: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
