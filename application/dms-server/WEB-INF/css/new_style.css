@@ -89,7 +89,7 @@ body {
     justify-content: center;
 }
 
-#stay-apply {
+#open-stay-apply {
     margin-left: 25%;
     width: 50%;
     background: transparent;
@@ -140,12 +140,12 @@ body {
     justify-content: center;
 }
 
-#extension-apply {
+#open-extension-apply {
     margin-left: 25%;
     width: 50%;
     background: transparent;
     border: 2px solid white;
-    border-radius: 10000000000px;
+    border-radius: 999;
     color: white;
     line-height: 5vh;
 }
