@@ -59,6 +59,7 @@ var $sundayContainer = $(".sunday-container");
  */
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
+var $mypageBtn = $(".mypage-btn");
 
 /**
  * Stay
@@ -209,9 +210,7 @@ $noticeMoreBtn.on("click", function() {
  * Dormitory rule
 ========================================================================================== */
 $dormRule.on("click", function() {
-    $panel.toggleClass("left-move");
-    $mypageWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
+
 });
 
 /** ======================================================================================
@@ -220,6 +219,12 @@ $dormRule.on("click", function() {
 $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+});
+
+$mypageBtn.on("click", function() {
+    $panel.toggleClass("left-move");
+    $mypageWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
 });
 
