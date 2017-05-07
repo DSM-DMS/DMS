@@ -17,6 +17,7 @@ import io.vertx.ext.web.RoutingContext;
 public class ModifyRule implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
+		if(!Guardian.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
