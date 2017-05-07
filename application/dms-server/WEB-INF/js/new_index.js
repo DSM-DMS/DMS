@@ -82,6 +82,11 @@ var $nextMenuBtn = $("#next-menu");
 var $dormRule = $(".dorm-rule");
 
 /**
+ * bug
+ */
+var $bugBtn = $(".bug-btn");
+
+/**
  * Login
  */
 var $openLoginButton = $(".login-btn");
@@ -319,13 +324,20 @@ $loginSendBtn.on("click", function() {
 });
 
 /** ======================================================================================
- * Point
+ * Bug modal
 ========================================================================================== */
-$openPointButton.on("click", function() {
+$bugBtn.on("click", function() {
     $('.bug-modal-wrapper').toggleClass('open');
     $panel.toggleClass('blur');
     $menu.toggleClass('blur');
     return false;
+});
+
+/** ======================================================================================
+ * Point
+========================================================================================== */
+$openPointButton.on("click", function() {
+
 });
 
 /** ======================================================================================
