@@ -84,6 +84,11 @@ var $nextMenuBtn = $("#next-menu");
 var $dormRule = $(".dorm-rule");
 
 /**
+ * Facility
+ */
+var $facilityBtn = $(".facility-btn");
+var $FacilityModal = $(".facility-modal-wrapper");
+/**
  * bug
  */
 var $bugBtn = $(".bug-btn");
@@ -340,6 +345,16 @@ $loginSendBtn.on("click", function() {
 ========================================================================================== */
 $bugBtn.on("click", function() {
     $('.bug-modal-wrapper').toggleClass('open');
+    $panel.toggleClass('blur');
+    $menu.toggleClass('blur');
+    return false;
+});
+
+/** ======================================================================================
+ * Facility modal
+========================================================================================== */
+$facilityBtn.on("click", function() {
+    $FacilityModal.toggleClass('open');
     $panel.toggleClass('blur');
     $menu.toggleClass('blur');
     return false;
