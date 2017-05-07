@@ -4,6 +4,7 @@ var $panel = $("#panel");
 var $extensionWindow = $("#extension-apply-window");
 var $loginBtn = $(".login-btn");
 var $menu = $("#menu");
+var $menu2 = $("#menu2");
 var $dormRule = $(".dorm-rule");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
@@ -33,6 +34,8 @@ var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
 var mealDate = new Date();
 var selectedClass = $("#extension-gaon");
+var $page1 = $("#page1");
+var $page2 = $("#page2");
 var $noticeMoreBtn = $(".notice-more");
 var $noticeListWindow = $(".notice-window");
 var $windowClose = $(".window-close");
@@ -167,7 +170,7 @@ $closeGoingOutWindow.on("click", function() {
     $menu.toggleClass("fade-out");
 });
 
-//여기 작업중
+// TODO : 신청완료 되면 클래스 초기화해주기
 $gointOutApplyButton.on("click", function() {
     $goingOutPaperplane.addClass("send-paperplane");
 });
@@ -344,50 +347,6 @@ function extensionDoCheck() {
     tl1.timeScale(.8);
 }
 
-function goingOutDoCheck() {
-    TweenLite.set([goingOutCross1, goingOutCross2], {
-        autoAlpha: 0
-    });
-    TweenLite.set(goingOutTick, {
-        drawSVG: "0%"
-    });
-    TweenLite.set(goingOutCircle, {
-        drawSVG: "50% 50%",
-        scale: ".01",
-        transformOrigin: "50% 50%",
-        fill: "#607D8B",
-        autoAlpha: 0
-    });
-
-    tl1 = new TimelineMax({
-        repeat: 0,
-        repeatDelay: 1
-    });
-    tl1
-        .to(goingOutCircle, 1, {
-            scale: 1,
-            ease: Elastic.easeOut
-        })
-        .to([goingOutTick, goingOutCircle], .6, {
-            autoAlpha: 1
-        }, .1)
-        .to(goingOutCircle, .8, {
-            drawSVG: "100% 0%",
-            ease: Power4.easeOut
-        }, .2)
-        .to(goingOutTick, .8, {
-            drawSVG: "0% 100%",
-            ease: Expo.easeOut
-        }, '-=.6')
-        .to(goingOutCircle, .6, {
-            fill: "#607D8B",
-            ease: Power1.easeInOut
-        }, '-=.4');
-
-    tl1.timeScale(.8);
-
-}
-
 $(document).ready(function() {
 
     $("#backgroundWallpaper").attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
@@ -501,6 +460,32 @@ $(document).ready(function() {
     $sundayContainer.click(function() {
         $sundayContainer.toggleClass("select");
     });
+});
+
+$page1.click(function() {
+    if ($page1.hasClass("current-index")) {} else {
+        $page2.removeClass("current-index");
+        $page1.addClass("current-index");
+
+        $menu2.removeClass("show-page");
+        $menu2.addClass("hide-page");
+
+        $menu.removeClass("hide-page");
+        $menu.addClass("show-page");
+    }
+});
+
+$page2.click(function() {
+    if ($page2.hasClass("current-index")) {} else {
+        $page1.removeClass("current-index");
+        $page2.addClass("current-index");
+
+        $menu.removeClass("show-page");
+        $menu.addClass("hide-page");
+
+        $menu2.removeClass("hide-page");
+        $menu2.addClass("show-page");
+    }
 });
 
 $(function() {
