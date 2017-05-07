@@ -1135,9 +1135,156 @@ a.btn {
 }
 
 
-/*window------------------------*/
+/*mypage*/
 
 .mypage-window {}
+
+.mypage-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    height: 80vh;
+    margin: auto;
+    margin-top: 10vh;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+}
+
+.profile-container img {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.profile-container span {
+    color: white;
+    margin: auto;
+}
+
+.profile-container .name {
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 15%;
+    margin: 1vh 0;
+}
+
+.point-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    border-right: 0.5px solid white;
+    transition: 0.2s ease-out;
+    border-top-left-radius: 20px;
+}
+
+.point-container:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, .2);
+}
+
+.point-container span {
+    color: white;
+    margin: 0 auto;
+}
+
+.edit-password-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    border-left: 0.5px solid white;
+    transition: 0.2s ease-out;
+    border-top-right-radius: 20px;
+}
+
+.edit-password-container:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, .2);
+}
+
+.edit-password-container a {
+    text-decoration: blink;
+    color: white;
+    margin: 0 auto;
+}
+
+.request-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 15%;
+    margin: 1vh 0;
+}
+
+.qna-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    border-right: 0.5px solid white;
+    transition: 0.2s ease-out;
+    border-bottom-left-radius: 20px;
+}
+
+.qna-container:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, .2);
+}
+
+.qna-container a {
+    text-decoration: blink;
+    color: white;
+    margin: 0 auto;
+}
+
+.facility-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    border-left: 0.5px solid white;
+    transition: 0.2s ease-out;
+    border-bottom-right-radius: 20px;
+}
+
+.facility-container:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, .2);
+}
+
+.facility-container a {
+    text-decoration: blink;
+    color: white;
+    margin: 0 auto;
+}
+
+#close-mypage-window {
+    height: 8vh;
+    width: 4vh;
+    position: absolute;
+    top: 5vh;
+    right: 10vh;
+}
+
+
+/*window------------------------*/
 
 .window {
     width: 74%;
@@ -1148,14 +1295,6 @@ a.btn {
     right: 0;
     transition: 0.3s ease;
     display: none;
-}
-
-#close-mypage-window {
-    height: 8vh;
-    width: 4vh;
-    position: absolute;
-    top: 5vh;
-    right: 10vh;
 }
 
 .window-close {
@@ -1266,6 +1405,7 @@ iframe {
     height: 75%;
     display: flex;
     flex-direction: row;
+    margin: auto;
 }
 
 #going-out-apply-btn {
@@ -1397,6 +1537,20 @@ iframe {
 
 .apply-btn:hover {
     cursor: pointer;
-    animation: jelly 1.2s ease-in 0s forwards;
     background: rgba(255, 255, 255, .3);
+    animation: jelly 1.2s ease-in 0s forwards;
+}
+
+.apply-btn i {
+    transition: 0.3s ease;
+}
+
+.apply-btn svg {
+    display: none;
+}
+
+.send-paperplane {
+    opacity: 0;
+    margin-left: 50%;
+    margin-bottom: 50%;
 }
