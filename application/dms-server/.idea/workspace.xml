@@ -26,16 +26,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DmsMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="988">
-              <caret line="63" column="65" lean-forward="false" selection-start-line="63" selection-start-column="65" selection-end-line="63" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LoginRequestRouter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-api/src/main/java/com/dsm/dms/account/LoginRequestRouter.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -90,15 +80,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadReportFacility.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UploadReportFacility.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/report_facility/UploadReportFacility.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="40" column="94" lean-forward="false" selection-start-line="40" selection-start-column="94" selection-end-line="40" selection-end-column="94" />
+            <state relative-caret-position="236">
+              <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
               <folding>
                 <element signature="e#768#769#0" expanded="true" />
                 <element signature="e#806#807#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeleteQnaQuestion.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/qna/DeleteQnaQuestion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UploadQnaQuestion.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/qna/UploadQnaQuestion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,16 +133,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DmsVerticle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/core/DmsVerticle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="27" column="59" lean-forward="false" selection-start-line="27" selection-start-column="59" selection-end-line="27" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -146,7 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/post/content</find>
       <find>class AdminPageRouter</find>
       <find>class DeleteQnaAnswer</find>
       <find>class UploadQnaAnswer</find>
@@ -176,6 +175,7 @@
       <find>options</find>
       <find>/post/report</find>
       <find>getUserInfo</find>
+      <find>/post/qna/question</find>
     </findStrings>
     <replaceStrings>
       <replace>database</replace>
@@ -190,7 +190,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/AdminManager.java" />
         <option value="$PROJECT_DIR$/dms-secure/src/main/java/org/boxfox/dms/util/SessionManager.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/faq/DeleteFaq.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/faq/FaqModifyRouter.java" />
@@ -241,6 +240,7 @@
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/log/Log.java" />
         <option value="$PROJECT_DIR$/dms-data-utilities/src/main/java/org/boxfox/dms/utilities/log/Logger.java" />
         <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/report_facility/UploadReportFacility.java" />
+        <option value="$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/qna/UploadQnaQuestion.java" />
       </list>
     </option>
   </component>
@@ -1019,20 +1019,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/template_routers/xlsx/GoingoutDownloadRouter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="33" column="38" lean-forward="true" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/notice/UploadNotice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="47" column="33" lean-forward="true" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/notice/ModifyNotice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-275">
@@ -1383,12 +1369,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/report_facility/UploadReportFacility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="40" column="94" lean-forward="false" selection-start-line="40" selection-start-column="94" selection-end-line="40" selection-end-column="94" />
+        <state relative-caret-position="236">
+          <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
           <folding>
             <element signature="e#768#769#0" expanded="true" />
             <element signature="e#806#807#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/qna/DeleteQnaQuestion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dms-core/src/main/java/com/dms/planb/action/post/qna/UploadQnaQuestion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="47" column="9" lean-forward="true" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
