@@ -19,6 +19,12 @@ public class UploadRule implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
+		if (!Guardian.isAdmin(context)) {
+			context.response().setStatusCode(400).end();
+			context.response().close();
+			return;
+		}
+		
 		DataBase database = DataBase.getInstance();
 		
 		String title = context.request().getParam("title");

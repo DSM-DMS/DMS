@@ -1,10 +1,10 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.notice;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -18,21 +18,22 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/report/modify", method={HttpMethod.GET})
-public class ReportModifyRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
+@RouteRegistration(path="/post/notice/modify", method={HttpMethod.GET})
+public class NoticeModifyRouter implements Handler<RoutingContext> {
+	private AdminManager adminManager;
 	
-	public ReportModifyRouter() {
-		userManager = new UserManager();
+	public NoticeModifyRouter() {
+		adminManager = new AdminManager();
 	}
 	
 	public void handle(RoutingContext context) {
+		if (!AdminManager.isAdmin(context)) return;
 		context = PrecedingWork.putHeaders(context);
 		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
-		boolean isLogin = userManager.isLogined(context);
+		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
 			
@@ -45,12 +46,11 @@ public class ReportModifyRouter implements Handler<RoutingContext> {
 			DmsTemplate templates = new DmsTemplate("editor");
 			
 			try {
-				resultSet = database.executeQuery("SELECT * FROM facility_report WHERE no=", no);
+				resultSet = database.executeQuery("SELECT * FROM notice WHERE no=", no);
 				resultSet.next();
 				
-				templates.put("category", "report");
+				templates.put("category", "notice");
 				templates.put("type", "modify");
-				templates.put("room", resultSet.getInt("room"));
 				templates.put("title", resultSet.getString("title"));
 				templates.put("content", resultSet.getString("content"));
 				
