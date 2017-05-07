@@ -39,6 +39,7 @@ var $page2 = $("#page2");
 var $noticeMoreBtn = $(".notice-more");
 var $noticeListWindow = $(".notice-window");
 var $windowClose = $(".window-close");
+var $loginSendBtn = $(".login-button");
 
 selectedClass.css({
     transition: "0.2s ease-in",
@@ -636,4 +637,23 @@ $prevMenuBtn.on("click", function() {
 $nextMenuBtn.on("click", function() {
     nextDay();
     setDay();
+});
+
+$loginSendBt.on("click", function() {
+    $.ajax({
+        url: "/account/login/student",
+        type: "POST",
+        data: {
+            id: $(".login-input #name").val(),
+            password: $(".login-input #pass").val(),
+            remember: $(".login-check input:checked").val(),
+            "g-recaptcha-response": grecaptcha.getResponse()
+        },
+        success: function(data, status) {
+            location.reload();
+        },
+        error: function(xhr) {
+            alert("로그인에 실패했습니다.");
+        },
+    });
 });
