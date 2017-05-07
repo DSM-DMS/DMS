@@ -27,6 +27,10 @@ var $three = $("#extension-three");
 var $four = $("#extension-four");
 var $five = $("#extension-five");
 var $classSelect = $(".extension-class-select");
+var $gointOutApplyButton = $("#going-out-apply-btn");
+var $goingOutPaperplane = $("#going-out-apply-btn i");
+var $stayApplyButton = $("#stay-apply-btn");
+var $stayPaperplane = $("#stay-apply-btn i");
 var mealDate = new Date();
 var selectedClass = $("#extension-gaon");
 
@@ -148,6 +152,15 @@ $closeGoingOutWindow.on("click", function() {
     $menu.toggleClass("fade-out");
 });
 
+//여기 작업중
+$gointOutApplyButton.on("click", function() {
+    $goingOutPaperplane.addClass("send-paperplane");
+});
+
+$stayApplyButton.on("click", function() {
+    $stayPaperplane.addClass("send-paperplane");
+});
+
 var mapData = [
     [1, 2, 0, 3, 4],
     [5, 6, 0, 7, 8],
@@ -230,7 +243,6 @@ function extentionApply(classId, id) {
 
 
 function stayDoCheck() {
-
     TweenLite.set([stayCross1, stayCross2], {
         autoAlpha: 0
     });
@@ -315,6 +327,49 @@ function extensionDoCheck() {
         }, '-=.4');
 
     tl1.timeScale(.8);
+}
+
+function goingOutDoCheck() {
+    TweenLite.set([goingOutCross1, goingOutCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(goingOutTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(goingOutCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(goingOutCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([goingOutTick, goingOutCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(goingOutCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(goingOutTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(goingOutCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
 
 }
 
@@ -343,8 +398,6 @@ $(document).ready(function() {
 
     var path = document.getElementsByTagName('path');
 
-    var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
-
     $("#going-out-btn").on('click', function() {
         var satVal = false;
         var sunVal = false;
@@ -370,6 +423,8 @@ $(document).ready(function() {
             }
         });
     });
+
+    var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
 
     //test -> 위치 변경필요
     $saturdayContainer.hover(function() {
