@@ -16,8 +16,13 @@ import io.vertx.ext.web.RoutingContext;
 public class DeleteQnaAnswer implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext context) {
-        if(!Guardian.isAdmin(context)) return;
-        context = PrecedingWork.putHeaders(context);
+    	context = PrecedingWork.putHeaders(context);
+		
+		if (!Guardian.isAdmin(context)) {
+			context.response().setStatusCode(400).end();
+			context.response().close();
+			return;
+		}
 
         DataBase database = DataBase.getInstance();
 

@@ -3,6 +3,7 @@ package com.dms.planb.action.post.report_facility;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
@@ -15,11 +16,16 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/report", method={HttpMethod.DELETE})
 public class DeleteReportFacility implements Handler<RoutingContext> {
+	private UserManager userManager;
+	
+	public DeleteReportFacility() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
 		DataBase database = DataBase.getInstance();
+		context = PrecedingWork.putHeaders(context);
 		
 		int no = Integer.parseInt(context.request().getParam("no"));
 		
@@ -28,6 +34,13 @@ public class DeleteReportFacility implements Handler<RoutingContext> {
             context.response().close();
         	return;
         }
+		
+		String uid = null;
+		try {
+			uid = userManager.getUid(userManager.getIdFromSession(context));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		try {
 			database.executeUpdate("DELETE FROM facility_report WHERE no=", no);
