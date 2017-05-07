@@ -1,13 +1,13 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.report;
 
 import java.io.IOException;
 
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -16,17 +16,17 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/result/write", method={HttpMethod.GET})
 public class ReportResultWriteRouter implements Handler<RoutingContext> {
-private UserManager userManager;
+private AdminManager adminManager;
 	
 	public ReportResultWriteRouter() {
-		userManager = new UserManager();
+		adminManager = new AdminManager();
 	}
 	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
-		boolean isLogin = userManager.isLogined(context);
+		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
 			try {

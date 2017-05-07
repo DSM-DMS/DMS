@@ -192,7 +192,6 @@ public class UserManager implements AccountManageable {
     @Override
     public String getIdFromSession(RoutingContext context) {
         String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
-        System.out.println(sessionKey);
         String result = null;
         if (sessionKey != null) {
             try {

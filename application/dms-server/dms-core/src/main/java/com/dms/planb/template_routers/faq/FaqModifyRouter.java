@@ -1,4 +1,4 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.faq;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,10 +20,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/faq/modify", method={HttpMethod.GET})
 public class FaqModifyRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
+	private AdminManager adminManager;
 	
 	public FaqModifyRouter() {
-		userManager = new UserManager();
+		adminManager = new AdminManager();
 	}
 	
 	public void handle(RoutingContext context) {
@@ -31,7 +31,7 @@ public class FaqModifyRouter implements Handler<RoutingContext> {
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		
-		boolean isLogin = userManager.isLogined(context);
+		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			int no = Integer.parseInt(context.request().getParam("no"));
 			if(!Guardian.checkParameters(no)) {

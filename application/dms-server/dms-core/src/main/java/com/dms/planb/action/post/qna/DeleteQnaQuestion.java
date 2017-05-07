@@ -3,11 +3,12 @@ package com.dms.planb.action.post.qna;
 import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.log.Log;
-
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
+import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -15,6 +16,12 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/qna/question", method={HttpMethod.DELETE})
 public class DeleteQnaQuestion implements Handler<RoutingContext> {
+	private UserManager userManager;
+
+	public DeleteQnaQuestion() {
+		userManager = new UserManager();
+	}
+	
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
@@ -29,7 +36,21 @@ public class DeleteQnaQuestion implements Handler<RoutingContext> {
         	return;
         }
 		
+		String uid = null;
 		try {
+			uid = userManager.getUid(userManager.getIdFromSession(context));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			SafeResultSet rs = database.executeQuery("SELECT * FROM qna WHERE no=", no);
+			if(uid == null || rs.getString("owner") != uid || !Guardian.isAdmin(context)) {
+				// 권한 없는 경우
+				context.response().setStatusCode(400).end();
+				context.response().close();
+				return;
+			}
 			database.executeUpdate("DELETE FROM qna WHERE no=", no);
 			
 			context.response().setStatusCode(200).end();

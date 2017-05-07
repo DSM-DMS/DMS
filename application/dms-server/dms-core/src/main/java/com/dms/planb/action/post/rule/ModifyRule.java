@@ -19,6 +19,12 @@ public class ModifyRule implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 		
+		if (!Guardian.isAdmin(context)) {
+			context.response().setStatusCode(400).end();
+			context.response().close();
+			return;
+		}
+		
 		DataBase database = DataBase.getInstance();
 		
 		int no = Integer.parseInt(context.request().getParam("no"));

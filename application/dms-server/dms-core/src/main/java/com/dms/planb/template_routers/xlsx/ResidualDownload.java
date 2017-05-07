@@ -1,4 +1,4 @@
-package com.dms.boxfox.templates.xlsx;
+package com.dms.planb.template_routers.xlsx;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.dms.planb.template_routers.xlsx.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -90,11 +91,11 @@ public class ResidualDownload {
     }
 
     private void initResidualMaps(String date, HashMap<String, String> map) {
-        List<ResidualData> list = new ArrayList<ResidualData>();
+        List<com.dms.planb.template_routers.xlsx.ResidualData> list = new ArrayList<com.dms.planb.template_routers.xlsx.ResidualData>();
         try {
             SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT student_data.uid, number, value FROM student_data right join stay_apply_default on student_data.uid = stay_apply_default.uid");
             while (rs.next()) {
-                ResidualData data = new ResidualData();
+                com.dms.planb.template_routers.xlsx.ResidualData data = new com.dms.planb.template_routers.xlsx.ResidualData();
                 data.setId(rs.getString("uid"));
                 String uid = UserManager.getAES().decrypt(rs.getString("number"));
                 if (uid == null || uid.length() == 0) continue;
@@ -106,7 +107,7 @@ public class ResidualDownload {
             e.printStackTrace();
         }
 
-        for (ResidualData user : list) {
+        for (com.dms.planb.template_routers.xlsx.ResidualData user : list) {
             try {
                 int type;
                 String query = QueryUtils.queryBuilder("SELECT value FROM stay_apply where uid = '", user.getId(), "' AND week = '", date, "'");

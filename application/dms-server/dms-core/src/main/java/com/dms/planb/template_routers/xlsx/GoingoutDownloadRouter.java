@@ -1,4 +1,4 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.xlsx;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.boxfox.dms.algorithm.AES256;
+import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
@@ -30,72 +31,84 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
 	private final String FILE_DIR = "files/";
 	private XSSFWorkbook wb;
+	private AdminManager adminManager;
+
+	public GoingoutDownloadRouter(){
+		adminManager = new AdminManager();
+	}
 
 	@Override
 	public void handle(RoutingContext context) {
 		context = PrecedingWork.putHeaders(context);
 
-		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
-		SafeResultSet stayStateResultSet;
-		SafeResultSet stayDefaultResultSet;
-		AES256 aes = UserManager.getAES();
-		
-		int year = Integer.parseInt(context.request().getParam("year"));
-		int month = Integer.parseInt(context.request().getParam("month"));
-		int week = Integer.parseInt(context.request().getParam("week"));
-		
-		String targetWeek = StringFormatter.format("%4d-%02d-%02d", year, month, week).getValue();
+		if(adminManager.isAdmin(context)) {
 
-		File file = getFile();
+			DataBase database = DataBase.getInstance();
+			SafeResultSet resultSet;
+			SafeResultSet stayStateResultSet;
+			SafeResultSet stayDefaultResultSet;
+			AES256 aes = UserManager.getAES();
 
-		try {
-			wb = new XSSFWorkbook(new FileInputStream(file));
+			int year = Integer.parseInt(context.request().getParam("year"));
+			int month = Integer.parseInt(context.request().getParam("month"));
+			int week = Integer.parseInt(context.request().getParam("week"));
 
-			XSSFSheet sheet = wb.getSheetAt(0);
+			String targetWeek = StringFormatter.format("%4d-%02d-%02d", year, month, week).getValue();
 
-			for (Row row : sheet) {
-				for (Cell cell : row) {
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_NUMERIC:
-						StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
+			File file = getFile();
 
-						String studentNumber = aes.encrypt(sb.toString().substring(0, 4));
+			try {
+				wb = new XSSFWorkbook(new FileInputStream(file));
 
-						resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");
+				XSSFSheet sheet = wb.getSheetAt(0);
 
-						if (resultSet.next()) {
-							String uid = resultSet.getString("uid");
-							stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", targetWeek, "'");
+				for (Row row : sheet) {
+					for (Cell cell : row) {
+						switch (cell.getCellType()) {
+							case Cell.CELL_TYPE_NUMERIC:
+								StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 
-							if (stayStateResultSet.next()) {
-								// 잔류신청을 한 경우
-								setCellValues(stayStateResultSet, database, sheet, cell, uid);
-							} else {
-								// 잔류신청 정보 없음
-								stayDefaultResultSet = database
-										.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
-								// default 값 조회
-								if (stayDefaultResultSet.next()) {
-									setCellValues(stayDefaultResultSet, database, sheet, cell, uid);
+								String studentNumber = aes.encrypt(sb.toString().substring(0, 4));
+
+								resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");
+
+								if (resultSet.next()) {
+									String uid = resultSet.getString("uid");
+									stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", targetWeek, "'");
+
+									if (stayStateResultSet.next()) {
+										// 잔류신청을 한 경우
+										setCellValues(stayStateResultSet, database, sheet, cell, uid);
+									} else {
+										// 잔류신청 정보 없음
+										stayDefaultResultSet = database
+												.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
+										// default 값 조회
+										if (stayDefaultResultSet.next()) {
+											setCellValues(stayDefaultResultSet, database, sheet, cell, uid);
+										}
+									}
 								}
-							}
-						}
 
-						break;
+								break;
+						}
 					}
 				}
+
+				FileOutputStream xlsToSave = new FileOutputStream(FILE_DIR + "외출신청.xlsx");
+				wb.write(xlsToSave);
+				xlsToSave.close();
+
+				context.response().setStatusCode(200);
+				context.response().sendFile(FILE_DIR + "외출신청.xlsx");
+				context.response().close();
+			} catch (IOException | SQLException e) {
+				context.response().setStatusCode(500).end();
+				context.response().close();
 			}
-
-			FileOutputStream xlsToSave = new FileOutputStream(FILE_DIR + "외출신청.xlsx");
-			wb.write(xlsToSave);
-			xlsToSave.close();
-
-			context.response().setStatusCode(200);
-			context.response().sendFile(FILE_DIR + "외출신청.xlsx");
-			context.response().close();
-		} catch (IOException | SQLException e) {
-			context.response().setStatusCode(500).end();
+		}else{
+			context.response().setStatusCode(400);
+			context.response().end("You are Not Admin");
 			context.response().close();
 		}
 	}

@@ -1,15 +1,14 @@
-package com.dms.planb.template_routers;
+package com.dms.planb.template_routers.qna;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
+import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;

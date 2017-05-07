@@ -36,6 +36,9 @@ var mealDate = new Date();
 var selectedClass = $("#extension-gaon");
 var $page1 = $("#page1");
 var $page2 = $("#page2");
+var $noticeMoreBtn = $(".notice-more");
+var $noticeListWindow = $(".notice-window");
+var $windowClose = $(".window-close");
 
 selectedClass.css({
     transition: "0.2s ease-in",
@@ -84,6 +87,18 @@ function getClassData(classId) {
         }
     });
 }
+
+$windowClose.on("click", function() {
+    $(this).parents(".window").toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+});
+
+$noticeMoreBtn.on("click", function() {
+    $noticeListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+});
 
 $closeModal.on("click", function() {
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
