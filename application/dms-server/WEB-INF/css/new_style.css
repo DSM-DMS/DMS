@@ -585,11 +585,11 @@ input[type="radio"]:checked~.bullet .line.seven {
 .notice-more {
     background: #607B8D;
     position: absolute;
-    right: -25px;
-    bottom: 0;
-    width: 70px;
-    height: 70px;
-    border-radius: 70px;
+    right: -5vh;
+    bottom: -5vh;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 10vh;
     z-index: 50;
     transition: 0.3s ease-in;
 }
