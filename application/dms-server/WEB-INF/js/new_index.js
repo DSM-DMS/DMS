@@ -1,25 +1,38 @@
-var $foldingButton = $("#extension-apply");
-var $closeButton = $("#close-extension-window");
+/***
+ * background
+ */
+var $backgroundImage = $("#backgroundWallpaper");
+
+/**
+ * Panel
+ */
 var $panel = $("#panel");
-var $extensionWindow = $("#extension-apply-window");
-var $loginBtn = $(".login-btn");
+
+/**
+ * Common window
+ */
+var $windowClose = $(".window-close");
+
+/**
+ * Common modal
+ */
+var $modalButton = $(".modal-button");
+var $closeModal = $(".btn-close");
+
+/**
+ * Menu
+ */
 var $menu = $("#menu");
 var $menu2 = $("#menu2");
-var $dormRule = $(".dorm-rule");
-var $mypageWindow = $(".mypage-window");
-var $closeMypageWindow = $("#close-mypage-window");
-var $goingOutWindow = $("#going-out-apply-window");
-var $stayWindow = $(".stay-window");
-var $closeGoingOutWindow = $("#close-going-out-window");
-var $windows = $(".window");
-var $goingOutBtn = $(".goingOut-btn");
-var $pointBtn = $(".point-btn");
-var $saturdayContainer = $(".saturday-container");
-var $sundayContainer = $(".sunday-container");
-var $closeModal = $(".btn-close");
-var $prevMenuBtn = $("#previous-menu");
-var $nextMenuBtn = $("#next-menu");
-var $closeStayWindow = $("#close-stay-window");
+var $page1 = $("#page1");
+var $page2 = $("#page2");
+
+/**
+ * Extension
+ */
+var $openExtensionButton = $("#open-extension-apply");
+var $closeExtensionButton = $("#close-extension-window");
+var $extensionWindow = $("#extension-apply-window");
 var $gaon = $("#extension-gaon");
 var $naon = $("#extension-naon");
 var $daon = $("#extension-daon");
@@ -27,26 +40,116 @@ var $laon = $("#extension-laon");
 var $three = $("#extension-three");
 var $four = $("#extension-four");
 var $five = $("#extension-five");
+var selectedClass = $("#extension-gaon");
 var $classSelect = $(".extension-class-select");
-var $gointOutApplyButton = $("#going-out-apply-btn");
+
+/**
+ * Going out
+ */
+var $openGoingOutButton = $(".goingOut-btn");
+var $goingOutWindow = $("#going-out-apply-window");
+var $closeGoingOutButton = $("#close-going-out-window");
+var $goingOutApplyButton = $("#going-out-apply-btn");
 var $goingOutPaperplane = $("#going-out-apply-btn i");
+var $saturdayContainer = $(".saturday-container");
+var $sundayContainer = $(".sunday-container");
+
+/**
+ * My page
+ */
+var $mypageWindow = $(".mypage-window");
+var $closeMypageWindow = $("#close-mypage-window");
+
+/**
+ * Stay
+ */
+var $openStayButton = $("#stay-apply")
+var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
+var $closeStayButton = $("#close-stay-window");
+
+/**
+ * Meal
+ */
 var mealDate = new Date();
-var selectedClass = $("#extension-gaon");
-var $page1 = $("#page1");
-var $page2 = $("#page2");
-var $noticeMoreBtn = $(".notice-more");
-var $noticeListWindow = $(".notice-window");
-var $windowClose = $(".window-close");
+var $prevMenuBtn = $("#previous-menu");
+var $nextMenuBtn = $("#next-menu");
+
+/**
+ * Domitory rule
+ */
+var $dormRule = $(".dorm-rule");
+
+/**
+ * Login
+ */
+var $openLoginButton = $(".login-btn");
 var $loginSendBtn = $(".login-button");
 
+/**
+ * Point
+ */
+var $openPointButton = $(".point-btn");
+
+/**
+ * Notice
+ */
+var $noticeMoreBtn = $(".notice-more");
+var $noticeListWindow = $(".notice-window");
+
+/**
+ * Current state(stay)
+ */
+var $stayCurrentState = $('#Layer_1');
+
+/**
+ * Current state(extension)
+ */
+var $extensionCurrentState = $('#Layer_2');
+
+/** ======================================================================================
+ * Common window
+========================================================================================== */
+$windowClose.on("click", function() {
+    $(this).parents(".window").toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+});
+
+/** ======================================================================================
+ * Common modal
+========================================================================================== */
+$closeModal.on("click", function() {
+    $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
+    $panel.toggleClass('blur');
+    $menu.toggleClass('blur');
+    return false;
+});
+
+/** ======================================================================================
+ * Extension
+========================================================================================== */
 selectedClass.css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
-getClassData(1);
 
+function getClassData(classId) {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/apply/extension/class",
+        type: "GET",
+        data: {
+            "option": "map",
+            "class": classId
+        },
+        success: function(data) {
+            drawSeats(JSON.parse(data).map, classId);
+        }
+    });
+}
+
+getClassData(1);
 
 $classSelect.on("click", "td", function(e) {
     selectedClass.css({
@@ -75,109 +178,212 @@ $classSelect.on("click", "td", function(e) {
     }
 });
 
-function getClassData(classId) {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/apply/extension/class",
-        type: "GET",
-        data: {
-            "option": "map",
-            "class": classId
-        },
-        success: function(data) {
-            drawSeats(JSON.parse(data).map, classId);
-        }
-    });
-}
-
-$windowClose.on("click", function() {
-    $(this).parents(".window").toggleClass("fade-in");
+$openExtensionButton.on("click", function() {
     $panel.toggleClass("left-move");
+    $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
 });
 
+$closeExtensionButton.on("click", function() {
+    $panel.toggleClass("left-move");
+    $extensionWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+});
+
+/** ======================================================================================
+ * Notice
+========================================================================================== */
 $noticeMoreBtn.on("click", function() {
     $noticeListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
 });
 
-$closeModal.on("click", function() {
-    $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
-    return false;
-});
 
-$foldingButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $extensionWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-});
-
-$closeButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $extensionWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-});
-
+/** ======================================================================================
+ * Dormitory rule
+========================================================================================== */
 $dormRule.on("click", function() {
     $panel.toggleClass("left-move");
     $mypageWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
 });
 
+/** ======================================================================================
+ * My page
+========================================================================================== */
 $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
 });
 
-$("#stay-apply").click(function() {
+/** ======================================================================================
+ * Stay
+========================================================================================== */
+$openStayButton.click(function() {
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
 });
 
-$closeStayWindow.on("click", function() {
+$closeStayButton.on("click", function() {
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
 });
 
-$loginBtn.on("click", function() {
+$saturdayContainer.click(function() {
+    $saturdayContainer.toggleClass("select");
+});
+
+$sundayContainer.click(function() {
+    $sundayContainer.toggleClass("select");
+});
+
+$stayApplyButton.on("click", function() {
+    $stayPaperplane.addClass("send-paperplane");
+});
+
+function stayDoCheck() {
+    TweenLite.set([stayCross1, stayCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(stayTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(stayCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(stayCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([stayTick, stayCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(stayCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(stayTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(stayCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
+
+}
+
+/** ======================================================================================
+ * Login
+========================================================================================== */
+$openLoginButton.on("click", function() {
     $('.login-modal-wrapper').toggleClass('open');
     $panel.toggleClass('blur');
     $menu.toggleClass('blur');
     return false;
 });
 
-$pointBtn.on("click", function() {
+$loginSendBtn.on("click", function() {
+    $.ajax({
+        url: "/account/login/student",
+        type: "POST",
+        data: {
+            id: $(".login-input #name").val(),
+            password: $(".login-input #pass").val(),
+            remember: $(".login-check input:checked").val(),
+            "g-recaptcha-response": grecaptcha.getResponse()
+        },
+        success: function(data, status) {
+            location.reload();
+        },
+        error: function(xhr) {
+            alert("로그인에 실패했습니다.");
+        },
+    });
+});
+
+/** ======================================================================================
+ * Point
+========================================================================================== */
+$openPointButton.on("click", function() {
     $('.bug-modal-wrapper').toggleClass('open');
     $panel.toggleClass('blur');
     $menu.toggleClass('blur');
     return false;
 });
 
-$goingOutBtn.on("click", function() {
+/** ======================================================================================
+ * Going out
+========================================================================================== */
+$openGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
     return false;
 });
 
-$closeGoingOutWindow.on("click", function() {
+$closeGoingOutButton.on("click", function() {
     $goingOutWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
 });
 
 // TODO : 신청완료 되면 클래스 초기화해주기
-$gointOutApplyButton.on("click", function() {
+$goingOutApplyButton.on('click', function() {
     $goingOutPaperplane.addClass("send-paperplane");
+    var satVal = false;
+    var sunVal = false;
+
+    if ($saturdayContainer.hasClass("select")) {
+        satVal = true;
+    }
+    if ($sundayContainer.hasClass("select")) {
+        sunVal = true;
+    }
+
+    console.log(satVal, sunVal);
+
+    $.ajax({
+        url: "/apply/goingout",
+        type: "PUT",
+        data: {
+            "sat": satVal,
+            "sun": sunVal
+        },
+        success: function() {
+            alert('신청되었습니다.');
+        }
+    });
 });
 
-$stayApplyButton.on("click", function() {
-    $stayPaperplane.addClass("send-paperplane");
+/** ======================================================================================
+ * Current state (stay)
+========================================================================================== */
+$stayCurrentState.click(function() {
+    stayDoCheck();
+});
+
+/** ======================================================================================
+ * Current state (extension)
+========================================================================================== */
+$extensionCurrentState.click(function() {
+    extensionDoCheck();
 });
 
 var mapData = [
@@ -260,51 +466,6 @@ function extentionApply(classId, id) {
     });
 }
 
-
-function stayDoCheck() {
-    TweenLite.set([stayCross1, stayCross2], {
-        autoAlpha: 0
-    });
-    TweenLite.set(stayTick, {
-        drawSVG: "0%"
-    });
-    TweenLite.set(stayCircle, {
-        drawSVG: "50% 50%",
-        scale: ".01",
-        transformOrigin: "50% 50%",
-        fill: "#607D8B",
-        autoAlpha: 0
-    });
-
-    tl1 = new TimelineMax({
-        repeat: 0,
-        repeatDelay: 1
-    });
-    tl1
-        .to(stayCircle, 1, {
-            scale: 1,
-            ease: Elastic.easeOut
-        })
-        .to([stayTick, stayCircle], .6, {
-            autoAlpha: 1
-        }, .1)
-        .to(stayCircle, .8, {
-            drawSVG: "100% 0%",
-            ease: Power4.easeOut
-        }, .2)
-        .to(stayTick, .8, {
-            drawSVG: "0% 100%",
-            ease: Expo.easeOut
-        }, '-=.6')
-        .to(stayCircle, .6, {
-            fill: "#607D8B",
-            ease: Power1.easeInOut
-        }, '-=.4');
-
-    tl1.timeScale(.8);
-
-}
-
 function extensionDoCheck() {
     TweenLite.set([extensionCross1, extensionCross2], {
         autoAlpha: 0
@@ -348,121 +509,9 @@ function extensionDoCheck() {
     tl1.timeScale(.8);
 }
 
-$(document).ready(function() {
-
-    $("#backgroundWallpaper").attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
-
-    stayTick = $('#stayTick');
-    stayCircle = $('#stayCheckCircle');
-    stayCross1 = $('#stayCross1');
-    stayCross2 = $('#stayCross2');
-    stayDoCheck();
-
-    extensionTick = $('#extensionTick');
-    extensionCircle = $('#extensionCheckcircle');
-    extensionCross1 = $('#extensionCross1');
-    extensionCross2 = $('#extensionCross2');
-    extensionDoCheck();
-
-    $('#Layer_1').click(function() {
-        stayDoCheck();
-    });
-    $('#Layer_2').click(function() {
-        extensionDoCheck();
-    });
-
-    var path = document.getElementsByTagName('path');
-
-    $("#going-out-btn").on('click', function() {
-        var satVal = false;
-        var sunVal = false;
-
-        if ($saturdayContainer.hasClass("select")) {
-            satVal = true;
-        }
-        if ($sundayContainer.hasClass("select")) {
-            sunVal = true;
-        }
-
-        console.log(satVal, sunVal);
-
-        $.ajax({
-            url: "/apply/goingout",
-            type: "PUT",
-            data: {
-                "sat": satVal,
-                "sun": sunVal
-            },
-            success: function() {
-                alert('신청되었습니다.');
-            }
-        });
-    });
-
-    var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
-
-    //test -> 위치 변경필요
-    $saturdayContainer.hover(function() {
-            path[0].style.strokeDasharray = path[0].getTotalLength();
-            path[0].style.strokeDashoffset = path[0].getTotalLength();
-            $(ids[0]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-
-            path[1].style.strokeDasharray = path[1].getTotalLength();
-            path[1].style.strokeDashoffset = path[1].getTotalLength();
-            $(ids[1]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-
-            path[2].style.strokeDasharray = path[2].getTotalLength();
-            path[2].style.strokeDashoffset = path[2].getTotalLength();
-            $(ids[2]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-
-            path[3].style.strokeDasharray = path[3].getTotalLength();
-            path[3].style.strokeDashoffset = path[3].getTotalLength();
-            $(ids[3]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-        },
-        function() {
-
-        });
-
-    $sundayContainer.hover(function() {
-            path[4].style.strokeDasharray = path[4].getTotalLength();
-            path[4].style.strokeDashoffset = path[4].getTotalLength();
-            $(ids[4]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-
-            path[5].style.strokeDasharray = path[5].getTotalLength();
-            path[5].style.strokeDashoffset = path[5].getTotalLength();
-            $(ids[5]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-
-            path[6].style.strokeDasharray = path[6].getTotalLength();
-            path[6].style.strokeDashoffset = path[6].getTotalLength();
-            $(ids[6]).animate({
-                strokeDashoffset: '0'
-            }, 600);
-        },
-        function() {
-
-        });
-
-    $saturdayContainer.click(function() {
-        $saturdayContainer.toggleClass("select");
-    });
-
-    $sundayContainer.click(function() {
-        $sundayContainer.toggleClass("select");
-    });
-});
-
+/** ======================================================================================
+ * menu
+========================================================================================== */
 $page1.click(function() {
     if ($page1.hasClass("current-index")) {} else {
         $page2.removeClass("current-index");
@@ -487,6 +536,34 @@ $page2.click(function() {
         $menu2.removeClass("hide-page");
         $menu2.addClass("show-page");
     }
+});
+
+/** ======================================================================================
+ * modal
+========================================================================================== */
+$modalButton.click(function(e) {
+    var pX = e.pageX,
+        pY = e.pageY,
+        oX = parseInt($(this).offset().left),
+        oY = parseInt($(this).offset().top);
+
+    $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
+    $('.x-' + oX + '.y-' + oY + '').animate({
+        "width": "500px",
+        "height": "500px",
+        "top": "-250px",
+        "left": "-250px",
+    }, 200);
+    $('.x-' + oX + '.y-' + oY + '').animate({
+        "width": "0",
+        "height": "0",
+        "top": "-0",
+        "left": "-0",
+    }, 600, function() {
+        $(".click-efect").remove();
+        console.log("remove")
+    });
+    $("button", this).addClass('active');
 });
 
 $(function() {
@@ -547,31 +624,18 @@ $(function() {
 
         }
     });
+});
+/** ======================================================================================
+ * meal
+========================================================================================== */
+$prevMenuBtn.on("click", function() {
+    prevDay();
+    setDay();
+});
 
-    $(".modal-button").click(function(e) {
-        var pX = e.pageX,
-            pY = e.pageY,
-            oX = parseInt($(this).offset().left),
-            oY = parseInt($(this).offset().top);
-
-        $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
-        $('.x-' + oX + '.y-' + oY + '').animate({
-            "width": "500px",
-            "height": "500px",
-            "top": "-250px",
-            "left": "-250px",
-        }, 200);
-        $('.x-' + oX + '.y-' + oY + '').animate({
-            "width": "0",
-            "height": "0",
-            "top": "-0",
-            "left": "-0",
-        }, 600, function() {
-            $(".click-efect").remove();
-            console.log("remove")
-        });
-        $("button", this).addClass('active');
-    });
+$nextMenuBtn.on("click", function() {
+    nextDay();
+    setDay();
 });
 
 function nextDay() {
@@ -603,8 +667,6 @@ function setDay() {
     getMeal();
 }
 
-setDay();
-
 function getMeal() {
     $.ajax({
         url: "http://dsm2015.cafe24.com/meal",
@@ -629,31 +691,81 @@ function getMeal() {
     })
 }
 
-$prevMenuBtn.on("click", function() {
-    prevDay();
-    setDay();
-});
+//Sets the document when it is loaded
+$(document).ready(function() {
+    //set random background image
+    $backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
-$nextMenuBtn.on("click", function() {
-    nextDay();
-    setDay();
-});
+    //show current stay state and extension state
+    stayTick = $('#stayTick');
+    stayCircle = $('#stayCheckCircle');
+    stayCross1 = $('#stayCross1');
+    stayCross2 = $('#stayCross2');
+    stayDoCheck();
 
-$loginSendBt.on("click", function() {
-    $.ajax({
-        url: "/account/login/student",
-        type: "POST",
-        data: {
-            id: $(".login-input #name").val(),
-            password: $(".login-input #pass").val(),
-            remember: $(".login-check input:checked").val(),
-            "g-recaptcha-response": grecaptcha.getResponse()
+    extensionTick = $('#extensionTick');
+    extensionCircle = $('#extensionCheckcircle');
+    extensionCross1 = $('#extensionCross1');
+    extensionCross2 = $('#extensionCross2');
+    extensionDoCheck();
+
+
+    //saturday, sunday svg animations
+    var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
+    var path = $("path");
+
+    $saturdayContainer.hover(function() {
+            path[0].style.strokeDasharray = path[0].getTotalLength();
+            path[0].style.strokeDashoffset = path[0].getTotalLength();
+            $(ids[0]).animate({
+                strokeDashoffset: '0'
+            }, 600);
+
+            path[1].style.strokeDasharray = path[1].getTotalLength();
+            path[1].style.strokeDashoffset = path[1].getTotalLength();
+            $(ids[1]).animate({
+                strokeDashoffset: '0'
+            }, 600);
+
+            path[2].style.strokeDasharray = path[2].getTotalLength();
+            path[2].style.strokeDashoffset = path[2].getTotalLength();
+            $(ids[2]).animate({
+                strokeDashoffset: '0'
+            }, 600);
+
+            path[3].style.strokeDasharray = path[3].getTotalLength();
+            path[3].style.strokeDashoffset = path[3].getTotalLength();
+            $(ids[3]).animate({
+                strokeDashoffset: '0'
+            }, 600);
         },
-        success: function(data, status) {
-            location.reload();
+        function() {
+
+        });
+
+    $sundayContainer.hover(function() {
+            path[4].style.strokeDasharray = path[4].getTotalLength();
+            path[4].style.strokeDashoffset = path[4].getTotalLength();
+            $(ids[4]).animate({
+                strokeDashoffset: '0'
+            }, 600);
+
+            path[5].style.strokeDasharray = path[5].getTotalLength();
+            path[5].style.strokeDashoffset = path[5].getTotalLength();
+            $(ids[5]).animate({
+                strokeDashoffset: '0'
+            }, 600);
+
+            path[6].style.strokeDasharray = path[6].getTotalLength();
+            path[6].style.strokeDashoffset = path[6].getTotalLength();
+            $(ids[6]).animate({
+                strokeDashoffset: '0'
+            }, 600);
         },
-        error: function(xhr) {
-            alert("로그인에 실패했습니다.");
-        },
-    });
+        function() {
+
+        });
+
+    //setting for show meal
+    setDay();
 });
