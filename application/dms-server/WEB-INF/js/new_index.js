@@ -82,12 +82,20 @@ var $nextMenuBtn = $("#next-menu");
  * Domitory rule
  */
 var $dormRule = $(".dorm-rule");
+var $dormListWindow = $(".rule-window");
+
+/**
+ * Domitory faq
+ */
+var $faqBtn = $(".faq-btn");
+var $faqListWindow = $(".faq-window");
 
 /**
  * Facility
  */
 var $facilityBtn = $(".facility-btn");
 var $FacilityModal = $(".facility-modal-wrapper");
+
 /**
  * bug
  */
@@ -128,6 +136,7 @@ var $extensionCurrentState = $('#Layer_2');
 //     $(this).parents(".window").toggleClass("fade-in");
 //     $panel.toggleClass("left-move");
 //     $menu.toggleClass("fade-out");
+//     $menuPagenation.toggleClass("fade-out");
 // });
 
 /** ======================================================================================
@@ -220,6 +229,20 @@ $noticeMoreBtn.on("click", function() {
  * Dormitory rule
 ========================================================================================== */
 $dormRule.on("click", function() {
+    $dormListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
+/** ======================================================================================
+ * Dormitory rule
+========================================================================================== */
+$faqBtn.on("click", function() {
+    $faqListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 /** ======================================================================================
@@ -368,7 +391,7 @@ $openPointButton.on("click", function() {
 });
 
 /** ======================================================================================
- 
+
  * Going out
 ========================================================================================== */
 $openGoingOutButton.on("click", function() {

@@ -622,7 +622,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     transform: translate(-50%, -50%);
 }
 
-.notice-box-container-container {
+.list-box-container-container {
     height: 80%;
     width: 80%;
     overflow: hidden;
@@ -630,7 +630,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     margin-left: 10%;
 }
 
-.notice-box-container {
+.list-box-container {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -640,7 +640,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     padding-right: 10%;
 }
 
-.notice-box {
+.list-box {
     margin: 20px;
     width: 20vh;
     height: 20vh;
