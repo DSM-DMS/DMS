@@ -345,18 +345,18 @@ $(document).ready(function() {
 
     var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
 
-    $("#going-out-btn").on('click', function () {
+    $("#going-out-btn").on('click', function() {
         var satVal = false;
         var sunVal = false;
 
-        if($saturdayContainer.hasClass("select")) {
+        if ($saturdayContainer.hasClass("select")) {
             satVal = true;
         }
-        if($sundayContainer.hasClass("select")) {
+        if ($sundayContainer.hasClass("select")) {
             sunVal = true;
         }
 
-        console.log(satVal,sunVal);
+        console.log(satVal, sunVal);
 
         $.ajax({
             url: "/apply/goingout",

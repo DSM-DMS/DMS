@@ -41,7 +41,7 @@ body {
 
 #background-image img {
     height: 100%;
-    transform: scale(1.1);
+    transform: scale(1.2);
     filter: blur(5px) brightness(50%);
     -webkit-filter: blur(5px) brightness(50%);
 }
@@ -196,7 +196,7 @@ body {
     padding: 10px;
 }
 
-label:before {
+.continput label:before {
     content: "";
     width: 15px;
     height: 15px;
@@ -841,6 +841,8 @@ input[type="radio"]:checked~.bullet .line.seven {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: white;
+    cursor: pointer;
 }
 
 .selectalbe-seat:hover {
@@ -947,7 +949,6 @@ a.btn {
     overflow: hidden;
     background: #607D8B;
     opacity: 1;
-    box-shadow: inset 0px 0px 20px 0px #111429;
 }
 
 .foot {
@@ -956,7 +957,6 @@ a.btn {
     width: 100%;
     height: 25%;
     background: #607D8B;
-    box-shadow: inset 0px 0px 20px 0px #111429;
 }
 
 .btn-close {
@@ -1247,34 +1247,34 @@ iframe {
     background: rgba(255, 255, 255, .4);
 }
 
-
-/*.going-out-container::before {
-    font-size: 1.1rem;
-    content: "주말 외출은 점심시간부터 오후 5시 30분까지입니다.";
-    margin-left: 10px;
-    padding: 0 10px 0 10px;
-    border-radius: 1000000000px;
-}*/
-
 .going-out-container {
     width: 60%;
-    height: 60%;
-    margin: 15vh auto;
+    height: 70%;
+    margin: 15vh auto 0vh auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.going-out-container span {
+    color: white;
+    font-size: 1rem;
+}
+
+.day-container-wrapper {
+    width: 100%;
+    height: 75%;
     display: flex;
     flex-direction: row;
 }
 
-.going-out-container span {
-    position: absolute;
-    transform: translateY(-2em);
-    color: white;
-    font-size: 1rem;
+#going-out-apply-btn {
+    margin: auto;
 }
 
 .saturday-container {
     width: 50%;
     height: 100%;
-    background: rgba(255, 255, 255, .2);
     transition: 0.2s ease-in;
     text-align: center;
     justify-content: center;
@@ -1285,6 +1285,7 @@ iframe {
 .saturday-container svg {
     width: 40vh;
     height: 40vh;
+    margin: 0 auto;
 }
 
 .saturday-container path {
@@ -1311,7 +1312,6 @@ iframe {
 .sunday-container {
     width: 50%;
     height: 100%;
-    background: rgba(255, 255, 255, .2);
     transition: 0.2s ease-in;
     text-align: center;
     justify-content: center;
@@ -1334,6 +1334,7 @@ iframe {
 .sunday-container svg {
     width: 40vh;
     height: 40vh;
+    margin: 0 auto;
 }
 
 .sunday-container path {
@@ -1343,4 +1344,59 @@ iframe {
     stroke-linejoin: round;
     stroke-dasharray: none;
     stroke-dashoffset: "";
+}
+
+
+/*apply button*/
+
+@keyframes jelly {
+    10% {
+        transform: none;
+    }
+    20% {
+        transform: skewX(-15deg) skewY(-15deg);
+    }
+    30% {
+        transform: skewX(5.51876deg) skewY(5.51876deg);
+    }
+    40% {
+        transform: skewX(-2.03045deg) skewY(-2.03045deg);
+    }
+    50% {
+        transform: skewX(0.74704deg) skewY(0.74704deg);
+    }
+    60% {
+        transform: skewX(-0.27485deg) skewY(-0.27485deg);
+    }
+    70% {
+        transform: skewX(0.10112deg) skewY(0.10112deg);
+    }
+    80% {
+        transform: skewX(-0.0372deg) skewY(-0.0372deg);
+    }
+    90% {
+        transform: skewX(-0.01369deg) skewY(-0.01369deg);
+    }
+    100% {
+        transform: none;
+    }
+}
+
+.apply-btn {
+    width: 10vh;
+    height: 10vh;
+    background: rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    border-width: 0;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 100;
+    outline: 0;
+    transition: 0.15s ease-in;
+}
+
+.apply-btn:hover {
+    cursor: pointer;
+    animation: jelly 1.2s ease-in 0s forwards;
+    background: rgba(255, 255, 255, .3);
 }
