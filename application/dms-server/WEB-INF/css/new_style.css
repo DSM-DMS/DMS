@@ -61,7 +61,7 @@ body {
     position: absolute;
     height: 100vh;
     top: 0;
-    right: 1px;
+    right: 0px;
 }
 
 #left-panel {
@@ -711,15 +711,39 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 /*기타 메뉴*/
 
-#menu {
+.menu-wrapper {
     position: absolute;
-    top: 0px;
-    right: 10vh;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    right: 0;
+}
+
+#menu {
     display: flex;
     flex-direction: column;
-    margin-top: 10vh;
-    height: 100vh;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80%;
     transition: 0.3s ease;
+}
+
+#menu2 {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80%;
+    transition: 0.3s ease;
+    opacity: 0;
 }
 
 .menu-item {
@@ -742,6 +766,38 @@ input[type="radio"]:checked~.bullet .line.seven {
 .menu-item span {
     font-size: 0.2rem;
     color: white;
+}
+
+#menu-pagenation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    width: 10vh;
+}
+
+#menu-pagenation .index {
+    width: 2vh;
+    height: 2vh;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .2);
+    margin: 0 0.5vh;
+    cursor: pointer;
+}
+
+.current-index {
+    transition: 0.15s ease-in;
+    background: rgba(255, 255, 255, .5)!important;
+}
+
+.hide-page {
+    opacity: 0!important;
+}
+
+.show-page {
+    opacity: 1!important;
 }
 
 
