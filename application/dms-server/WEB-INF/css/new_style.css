@@ -706,7 +706,8 @@ input[type="radio"]:checked~.bullet .line.seven {
     /*padding: 0 20px 0 20px;*/
 }
 
-.meal-title, .meal-content {
+.meal-title,
+.meal-content {
     display: inline-block;
 }
 
@@ -771,6 +772,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     height: 80%;
     transition: 0.3s ease;
     opacity: 0;
+    z-index: -1;
 }
 
 .menu-item {
@@ -821,10 +823,12 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .hide-page {
     opacity: 0!important;
+    z-index: -1!important;
 }
 
 .show-page {
     opacity: 1!important;
+    z-index: 0!important;
 }
 
 
