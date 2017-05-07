@@ -26,6 +26,7 @@ var $menu = $("#menu");
 var $menu2 = $("#menu2");
 var $page1 = $("#page1");
 var $page2 = $("#page2");
+var $menuPagenation = $("#menu-pagenation");
 
 /**
  * Extension
@@ -63,7 +64,7 @@ var $closeMypageWindow = $("#close-mypage-window");
 /**
  * Stay
  */
-var $openStayButton = $("#stay-apply")
+var $openStayButton = $("#open-stay-apply")
 var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
@@ -111,11 +112,11 @@ var $extensionCurrentState = $('#Layer_2');
 /** ======================================================================================
  * Common window
 ========================================================================================== */
-$windowClose.on("click", function() {
-    $(this).parents(".window").toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-});
+// $windowClose.on("click", function() {
+//     $(this).parents(".window").toggleClass("fade-in");
+//     $panel.toggleClass("left-move");
+//     $menu.toggleClass("fade-out");
+// });
 
 /** ======================================================================================
  * Common modal
@@ -182,12 +183,14 @@ $openExtensionButton.on("click", function() {
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 $closeExtensionButton.on("click", function() {
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 /** ======================================================================================
@@ -197,6 +200,7 @@ $noticeMoreBtn.on("click", function() {
     $noticeListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 
@@ -207,6 +211,7 @@ $dormRule.on("click", function() {
     $panel.toggleClass("left-move");
     $mypageWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 /** ======================================================================================
@@ -216,6 +221,7 @@ $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 /** ======================================================================================
@@ -225,12 +231,14 @@ $openStayButton.click(function() {
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 $closeStayButton.on("click", function() {
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 $saturdayContainer.click(function() {
@@ -335,13 +343,15 @@ $openGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
     return false;
 });
 
 $closeGoingOutButton.on("click", function() {
-    $goingOutWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
+    $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
 });
 
 // TODO : 신청완료 되면 클래스 초기화해주기

@@ -1368,6 +1368,7 @@ a.btn {
     position: absolute;
     top: 5vh;
     right: 10vh;
+    z-index: 1;
 }
 
 
@@ -1391,6 +1392,7 @@ a.btn {
     position: absolute;
     top: 5vh;
     right: 10vh;
+    z-index: 1;
 }
 
 
@@ -1451,6 +1453,7 @@ iframe {
     position: absolute;
     top: 5vh;
     right: 5vh;
+    z-index: 1;
 }
 
 #going-out-apply-window #going-out-btn {
