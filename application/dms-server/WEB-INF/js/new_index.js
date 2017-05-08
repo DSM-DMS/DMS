@@ -230,7 +230,9 @@ function getNoticeList() {
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
-            parsedData.forEach(fillNoticeCard);
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".notice-window .list-box-container"));
+            });
         },
         error: function() {
             console.log("error");
@@ -240,7 +242,7 @@ function getNoticeList() {
 setNoticePreview();
 getNoticeList();
 
-function fillNoticeCard(data) {
+function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
@@ -252,12 +254,12 @@ function fillNoticeCard(data) {
         "class": "list-box-no-title",
         text: data.title
     }));
-    newCard.append($('<p/>', {
-        "class": "list-box-writer",
-        text: "사감부"
-    }));
+    // newCard.append($('<p/>', {
+    //     "class": "list-box-writer",
+    //     text: "사감부"
+    // }));
 
-    $(".list-box-container").append(newCard);
+    target.append(newCard);
 }
 
 function setNoticePreview() {
@@ -289,9 +291,26 @@ $dormRule.on("click", function() {
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
+getRuleList();
+
+function getRuleList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".rule-window .list-box-container"));
+            });
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
 
 /** ======================================================================================
- * Dormitory rule
+ * faq rule
 ========================================================================================== */
 $faqBtn.on("click", function() {
     $faqListWindow.toggleClass("fade-in");
@@ -299,6 +318,23 @@ $faqBtn.on("click", function() {
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
+getFaqList();
+
+function getFaqList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".faq-window .list-box-container"));
+            });
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
 
 /** ======================================================================================
  * My page
@@ -429,21 +465,21 @@ $bugBtn.on("click", function() {
 });
 
 $(".report-bug").on("click", function() {
-  $.ajax({
-      url: "/post/bug",
-      type: "POST",
-      data: {
-          title: $("#bug-title").val(),
-          content: $("#bug-content").val()
-      },
-      success: function() {
-          alert("버그를 제보해 주셔서 고맙습니다!");
-          $("#bugModal button:nth-child(2)").click();
-      },
-      error: function() {
-          alert("버그신고에 실패했어요 TT");
-      }
-  });
+    $.ajax({
+        url: "/post/bug",
+        type: "POST",
+        data: {
+            title: $("#bug-title").val(),
+            content: $("#bug-content").val()
+        },
+        success: function() {
+            alert("버그를 제보해 주셔서 고맙습니다!");
+            $("#bugModal button:nth-child(2)").click();
+        },
+        error: function() {
+            alert("버그신고에 실패했어요 TT");
+        }
+    });
 });
 
 /** ======================================================================================
