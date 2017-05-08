@@ -428,6 +428,24 @@ $bugBtn.on("click", function() {
     return false;
 });
 
+$(".report-bug").on("click", function() {
+  $.ajax({
+      url: "/post/bug",
+      type: "POST",
+      data: {
+          title: $("#bug-title").val(),
+          content: $("#bug-content").val()
+      },
+      success: function() {
+          alert("버그를 제보해 주셔서 고맙습니다!");
+          $("#bugModal button:nth-child(2)").click();
+      },
+      error: function() {
+          alert("버그신고에 실패했어요 TT");
+      }
+  });
+});
+
 /** ======================================================================================
  * Facility modal
 ========================================================================================== */
