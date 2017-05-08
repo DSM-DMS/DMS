@@ -144,8 +144,8 @@ var $extensionCurrentState = $('#Layer_2');
 ========================================================================================== */
 $closeModal.on("click", function() {
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -339,8 +339,8 @@ function stayDoCheck() {
 ========================================================================================== */
 $openLoginButton.on("click", function() {
     $('.login-modal-wrapper').toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -368,8 +368,8 @@ $loginSendBtn.on("click", function() {
 ========================================================================================== */
 $bugBtn.on("click", function() {
     $('.bug-modal-wrapper').toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -378,8 +378,8 @@ $bugBtn.on("click", function() {
 ========================================================================================== */
 $facilityBtn.on("click", function() {
     $FacilityModal.toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
