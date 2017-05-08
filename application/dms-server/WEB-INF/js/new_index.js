@@ -625,17 +625,19 @@ function extentionApply(classId, id) {
         statusCode: {
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
-
+                getClassData(classId);
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
+                getClassData(classId);
             }
         },
         success: function(data, xhr) {
-            getSeatData(classId);
+            getClassData(classId);
         },
         error: function(request, status, error) {
-            console.log(status);
+            alert("신청중에 오류가 발생하였습니다.");
+            getClassData(classId);
         }
     });
 }
