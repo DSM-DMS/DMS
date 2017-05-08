@@ -224,6 +224,61 @@ $noticeMoreBtn.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
+function getNoticeList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/notice/list",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(fillNoticeCard);
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+setNoticePreview();
+getNoticeList();
+
+function fillNoticeCard(data) {
+    var newCard = $('<div/>', {
+        "class": "list-box",
+    });
+    newCard.append($('<p/>', {
+        "class": "list-box-no",
+        text: data.no
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-no-title",
+        text: data.title
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-writer",
+        text: "사감부"
+    }));
+
+    $(".list-box-container").append(newCard);
+}
+
+function setNoticePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/notice/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(parsedData[0].content);
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
 
 /** ======================================================================================
  * Dormitory rule

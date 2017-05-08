@@ -582,6 +582,11 @@ input[type="radio"]:checked~.bullet .line.seven {
     position: relative;
 }
 
+.notice-content-container p {
+    max-height: 7vh;
+    overflow: hidden;
+}
+
 .notice-more {
     background: #607B8D;
     position: absolute;
