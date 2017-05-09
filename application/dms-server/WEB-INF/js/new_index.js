@@ -61,7 +61,6 @@ var $sundayContainer = $(".sunday-container");
 var $openMyPageButton = $(".mypage-btn");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
-var $mypageBtn = $(".mypage-btn");
 
 /**
  * Stay
@@ -113,7 +112,7 @@ var $loginSendBtn = $(".login-button");
  */
 var $openPointButton = $(".point-btn");
 
-/**
+/** 
  * Notice
  */
 var $noticeMoreBtn = $(".notice-more");
@@ -222,6 +221,7 @@ $noticeMoreBtn.on("click", function() {
     $noticeListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -229,6 +229,7 @@ $closeNoticeButton.on("click", function() {
     $noticeListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -298,11 +299,20 @@ function setNoticePreview() {
  * My page
 ========================================================================================== */
 $openMyPageButton.on("click", function(){
-    $dormListWindow.toggleClass("fade-in");
+    $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
+
+$closeMypageWindow.on("click", function(){
+    $mypageWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
+
 $dormRule.on("click", function() {
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
@@ -353,20 +363,6 @@ function getFaqList() {
         }
     });
 }
-
-$closeMypageWindow.on("click", function() {
-    $mypageWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-
-$mypageBtn.on("click", function() {
-    $panel.toggleClass("left-move");
-    $mypageWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-});
-
 /** ======================================================================================
  * Stay
 ========================================================================================== */
