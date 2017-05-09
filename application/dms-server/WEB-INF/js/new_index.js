@@ -61,6 +61,7 @@ var $sundayContainer = $(".sunday-container");
 var $openMyPageButton = $(".mypage-btn");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
+var $mypageBtn = $(".mypage-btn");
 
 /**
  * Stay
@@ -70,7 +71,7 @@ var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
 var $closeStayButton = $("#close-stay-window");
-
+var stayDate = new Date();
 /**
  * Meal
  */
@@ -82,6 +83,19 @@ var $nextMenuBtn = $("#next-menu");
  * Domitory rule
  */
 var $dormRule = $(".dorm-rule");
+var $dormListWindow = $(".rule-window");
+
+/**
+ * Domitory faq
+ */
+var $faqBtn = $(".faq-btn");
+var $faqListWindow = $(".faq-window");
+
+/**
+ * Facility
+ */
+var $facilityBtn = $(".facility-btn");
+var $FacilityModal = $(".facility-modal-wrapper");
 
 /**
  * bug
@@ -123,6 +137,7 @@ var $extensionCurrentState = $('#Layer_2');
 //     $(this).parents(".window").toggleClass("fade-in");
 //     $panel.toggleClass("left-move");
 //     $menu.toggleClass("fade-out");
+//     $menuPagenation.toggleClass("fade-out");
 // });
 
 /** ======================================================================================
@@ -130,8 +145,8 @@ var $extensionCurrentState = $('#Layer_2');
 ========================================================================================== */
 $closeModal.on("click", function() {
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -217,6 +232,63 @@ $closeNoticeButton.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
+function getNoticeList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/notice/list",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".notice-window .list-box-container"));
+            });
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+setNoticePreview();
+getNoticeList();
+
+function fillListCard(data, target) {
+    var newCard = $('<div/>', {
+        "class": "list-box",
+    });
+    newCard.append($('<p/>', {
+        "class": "list-box-no",
+        text: data.no
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-no-title",
+        text: data.title
+    }));
+    // newCard.append($('<p/>', {
+    //     "class": "list-box-writer",
+    //     text: "사감부"
+    // }));
+
+    target.append(newCard);
+}
+
+function setNoticePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/notice/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(parsedData[0].content);
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
 
 /** ======================================================================================
  * Dormitory rule
@@ -226,11 +298,61 @@ $closeNoticeButton.on("click", function() {
  * My page
 ========================================================================================== */
 $openMyPageButton.on("click", function(){
+    $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
-    $mypageWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
+$dormRule.on("click", function() {
+    $dormListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+getRuleList();
+
+function getRuleList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".rule-window .list-box-container"));
+            });
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+/** ======================================================================================
+ * faq rule
+========================================================================================== */
+$faqBtn.on("click", function() {
+    $faqListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+getFaqList();
+
+function getFaqList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".faq-window .list-box-container"));
+            });
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
 
 $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
@@ -239,9 +361,119 @@ $closeMypageWindow.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
+$mypageBtn.on("click", function() {
+    $panel.toggleClass("left-move");
+    $mypageWindow.toggleClass("fade-in");
+    $menu.toggleClass("fade-out");
+});
+
 /** ======================================================================================
  * Stay
 ========================================================================================== */
+var numOfDays = function(year, month) {
+    var daysofmonth;
+    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+        daysofmonth = 30;
+    } else {
+        daysofmonth = 31;
+        if (month == 2) {
+            if (year / 4 - parseInt(year / 4) != 0) {
+                daysofmonth = 28;
+            } else {
+                if (year / 100 - parseInt(year / 100) != 0) {
+                    daysofmonth = 29;
+                } else {
+                    if (year / 400 - parseInt(year / 400) != 0) {
+                        daysofmonth = 28;
+                    } else {
+                        daysofmonth = 29;
+                    }
+                }
+            }
+        }
+    }
+    return daysofmonth;
+}
+
+var leadingZeros = function(data, num) {
+	 var zero = '';
+	 data = data.toString();
+
+	 if (data.length < num) {
+	  for (i = 0; i < num - data.length; i++)
+	   zero += '0';
+	 }
+	 return zero + data;
+};
+
+var getWeek = function(thisDate) {
+    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
+    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
+    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+
+    if(week == 5) {
+        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if(daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if(daysOfMonth == 29 && tempDate.getDay() == 6) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else {
+            return 0;
+        }
+    }
+    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+};
+
+var makeWeekFormat = function(thisDate) {
+    var week = getWeek(thisDate);
+    if(week == 0) {
+        thisDate.setMonth(thisDate.getMonth() + 1);
+        week = 1;
+    }
+    var year = thisDate.getFullYear();
+    var month = thisDate.getMonth() + 1;
+
+    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
+};
+
+var setStayValue = function(thisDate) {
+    var weekData = makeWeekFormat(thisDate)
+    
+    $.ajax({
+        url: "/apply/stay",
+        type: "GET",
+        data: {
+            "week": weekData
+        },
+        success: function(data) {
+            try {
+                switch (jQuery.parseJSON(data).value) {
+                    case 1:
+                        $('#stayValue').text('금요귀가');
+                        break;
+                    case 2:
+                        $('#stayValue').text('토요귀가');
+                        break;
+                    case 3:
+                        $('#stayValue').text('토요귀사');
+                        break;
+                    case 4:
+                        $('#stayValue').text('잔류');
+                        break;
+                }
+            } catch(err) {
+                $('#stayValue').text('신청안됨');
+            }
+        },
+        error: function(xhr){
+            console.log(xhr.status);
+        }
+    });
+};
+
+setStayValue(stayDate)
+
 $openStayButton.click(function() {
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
@@ -266,6 +498,29 @@ $sundayContainer.click(function() {
 
 $stayApplyButton.on("click", function() {
     $stayPaperplane.addClass("send-paperplane");
+    
+    var applySendDataWeek = makeWeekFormat(stayDate);
+    var applySendDataValue = $(':radio[name="1"]:checked').val();
+
+    console.log(applySendDataWeek);
+    console.log(applySendDataValue);
+
+    $.ajax({
+        url: "/apply/stay",
+        type: "PUT",
+        async: false,
+        data: {
+            "week": applySendDataWeek,
+            "value": applySendDataValue
+        },
+        success: function() {
+            alert('신청되었습니다.');
+            setThisWeek(new Date());
+        },
+        error: function(xhr, status, err) {
+            alert('신청 시간이 아닙니다.')
+        }
+    });
 });
 
 function stayDoCheck() {
@@ -317,8 +572,8 @@ function stayDoCheck() {
 ========================================================================================== */
 $openLoginButton.on("click", function() {
     $('.login-modal-wrapper').toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -346,8 +601,36 @@ $loginSendBtn.on("click", function() {
 ========================================================================================== */
 $bugBtn.on("click", function() {
     $('.bug-modal-wrapper').toggleClass('open');
-    $panel.toggleClass('blur');
-    $menu.toggleClass('blur');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
+    return false;
+});
+
+$(".report-bug").on("click", function() {
+    $.ajax({
+        url: "/post/bug",
+        type: "POST",
+        data: {
+            title: $("#bug-title").val(),
+            content: $("#bug-content").val()
+        },
+        success: function() {
+            alert("버그를 제보해 주셔서 고맙습니다!");
+            $("#bugModal button:nth-child(2)").click();
+        },
+        error: function() {
+            alert("버그신고에 실패했어요 TT");
+        }
+    });
+});
+
+/** ======================================================================================
+ * Facility modal
+========================================================================================== */
+$facilityBtn.on("click", function() {
+    $FacilityModal.toggleClass('open');
+    // $panel.toggleClass('blur');
+    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -359,7 +642,7 @@ $openPointButton.on("click", function() {
 });
 
 /** ======================================================================================
- 
+
  * Going out
 ========================================================================================== */
 $openGoingOutButton.on("click", function() {
@@ -484,17 +767,19 @@ function extentionApply(classId, id) {
         statusCode: {
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
-
+                getClassData(classId);
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
+                getClassData(classId);
             }
         },
         success: function(data, xhr) {
-            getSeatData(classId);
+            getClassData(classId);
         },
         error: function(request, status, error) {
-            console.log(status);
+            alert("신청중에 오류가 발생하였습니다.");
+            getClassData(classId);
         }
     });
 }
