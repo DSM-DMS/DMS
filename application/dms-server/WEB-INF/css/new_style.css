@@ -69,6 +69,7 @@ body {
     background: white;
     position: relative;
     z-index: 1;
+    border-right: 1px solid white;
 }
 
 #right-panel {
@@ -78,6 +79,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-right: 1px solid #607D8B;
 }
 
 #stay-apply-container {
@@ -97,6 +99,7 @@ body {
     border-radius: 10000000000px;
     color: white;
     line-height: 5vh;
+    font-size: 2vh;
 }
 
 #stay-apply-container img {
@@ -142,12 +145,13 @@ body {
 
 #open-extension-apply {
     margin-left: 25%;
-    width: 50%;
+    width: 50%; 
     background: transparent;
     border: 2px solid white;
-    border-radius: 999;
+    border-radius: 999px;
     color: white;
     line-height: 5vh;
+    font-size: 2vh;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
@@ -793,7 +797,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .menu-item span {
-    font-size: 0.2rem;
+    font-size: 1.3vh;
     color: white;
 }
 
