@@ -70,7 +70,7 @@ var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
 var $closeStayButton = $("#close-stay-window");
-
+var stayDate = new Date();
 /**
  * Meal
  */
@@ -355,6 +355,110 @@ $mypageBtn.on("click", function() {
 /** ======================================================================================
  * Stay
 ========================================================================================== */
+var numOfDays = function(year, month) {
+    var daysofmonth;
+    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+        daysofmonth = 30;
+    } else {
+        daysofmonth = 31;
+        if (month == 2) {
+            if (year / 4 - parseInt(year / 4) != 0) {
+                daysofmonth = 28;
+            } else {
+                if (year / 100 - parseInt(year / 100) != 0) {
+                    daysofmonth = 29;
+                } else {
+                    if (year / 400 - parseInt(year / 400) != 0) {
+                        daysofmonth = 28;
+                    } else {
+                        daysofmonth = 29;
+                    }
+                }
+            }
+        }
+    }
+    return daysofmonth;
+}
+
+var leadingZeros = function(data, num) {
+	 var zero = '';
+	 data = data.toString();
+
+	 if (data.length < num) {
+	  for (i = 0; i < num - data.length; i++)
+	   zero += '0';
+	 }
+	 return zero + data;
+};
+
+var getWeek = function(thisDate) {
+    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
+    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
+    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+
+    if(week == 5) {
+        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if(daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if(daysOfMonth == 29 && tempDate.getDay() == 6) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else {
+            return 0;
+        }
+    }
+    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+};
+
+var makeWeekFormat = function(thisDate) {
+    var week = getWeek(thisDate);
+    if(week == 0) {
+        thisDate.setMonth(thisDate.getMonth() + 1);
+        week = 1;
+    }
+    var year = thisDate.getFullYear();
+    var month = thisDate.getMonth() + 1;
+
+    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
+};
+
+var setStayValue = function(thisDate) {
+    var weekData = makeWeekFormat(thisDate)
+    
+    $.ajax({
+        url: "/apply/stay",
+        type: "GET",
+        data: {
+            "week": weekData
+        },
+        success: function(data) {
+            try {
+                switch (jQuery.parseJSON(data).value) {
+                    case 1:
+                        $('#stayValue').text('금요귀가');
+                        break;
+                    case 2:
+                        $('#stayValue').text('토요귀가');
+                        break;
+                    case 3:
+                        $('#stayValue').text('토요귀사');
+                        break;
+                    case 4:
+                        $('#stayValue').text('잔류');
+                        break;
+                }
+            } catch(err) {
+                $('#stayValue').text('신청안됨');
+            }
+        },
+        error: function(xhr){
+            console.log(xhr.status);
+        }
+    });
+};
+
+setStayValue(stayDate)
+
 $openStayButton.click(function() {
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
@@ -379,6 +483,29 @@ $sundayContainer.click(function() {
 
 $stayApplyButton.on("click", function() {
     $stayPaperplane.addClass("send-paperplane");
+    
+    var applySendDataWeek = makeWeekFormat(stayDate);
+    var applySendDataValue = $(':radio[name="1"]:checked').val();
+
+    console.log(applySendDataWeek);
+    console.log(applySendDataValue);
+
+    $.ajax({
+        url: "/apply/stay",
+        type: "PUT",
+        async: false,
+        data: {
+            "week": applySendDataWeek,
+            "value": applySendDataValue
+        },
+        success: function() {
+            alert('신청되었습니다.');
+            setThisWeek(new Date());
+        },
+        error: function(xhr, status, err) {
+            alert('신청 시간이 아닙니다.')
+        }
+    });
 });
 
 function stayDoCheck() {
