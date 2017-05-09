@@ -82,12 +82,14 @@ var $nextMenuBtn = $("#next-menu");
  * Domitory rule
  */
 var $dormRule = $(".dorm-rule");
+var $closeDormRuleButton = $("#close-rule-window");
 var $dormListWindow = $(".rule-window");
 
 /**
  * Domitory faq
  */
 var $faqBtn = $(".faq-btn");
+var $closeFaqButton = $("#faq-going-out-window");
 var $faqListWindow = $(".faq-window");
 
 /**
@@ -317,6 +319,15 @@ $dormRule.on("click", function() {
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
+$closeDormRuleButton.on("click", function() {
+    $dormListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 getRuleList();
@@ -340,12 +351,22 @@ function getRuleList() {
 /** ======================================================================================
  * faq rule
 ========================================================================================== */
+$closeFaqButton.on("click", function() {
+    $faqListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
 $faqBtn.on("click", function() {
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
+
 getFaqList();
 
 function getFaqList() {
@@ -1008,7 +1029,7 @@ function getMeal() {
 //Sets the document when it is loaded
 $(document).ready(function() {
     //set random background image
-    $backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
+    //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     //show current stay state and extension state
     stayTick = $('#stayTick');
