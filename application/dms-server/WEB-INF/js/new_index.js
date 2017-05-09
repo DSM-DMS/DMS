@@ -58,6 +58,7 @@ var $sundayContainer = $(".sunday-container");
 /**
  * My page
  */
+var $openMyPageButton = $(".mypage-btn");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
 var $mypageBtn = $(".mypage-btn");
@@ -224,6 +225,13 @@ $noticeMoreBtn.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
+$closeNoticeButton.on("click", function() {
+    $noticeListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
 function getNoticeList() {
     $.ajax({
         url: "http://dsm2015.cafe24.com/post/notice/list",
@@ -285,6 +293,16 @@ function setNoticePreview() {
 /** ======================================================================================
  * Dormitory rule
 ========================================================================================== */
+
+/** ======================================================================================
+ * My page
+========================================================================================== */
+$openMyPageButton.on("click", function(){
+    $dormListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
 $dormRule.on("click", function() {
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
@@ -336,9 +354,6 @@ function getFaqList() {
     });
 }
 
-/** ======================================================================================
- * My page
-========================================================================================== */
 $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
