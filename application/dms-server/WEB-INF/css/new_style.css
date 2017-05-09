@@ -557,7 +557,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     background: #607D8B;
     border-radius: 999px;
     color: white;
-    font-size: 3vh;
+    font-size: 2vh;
     line-height: 3vh;
     text-align: center;
     transform-origin: center;
