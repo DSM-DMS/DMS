@@ -1,4 +1,4 @@
-package com.dms.planb.action.account;
+package com.dms.planb.action.account.register;
 
 import java.sql.SQLException;
 

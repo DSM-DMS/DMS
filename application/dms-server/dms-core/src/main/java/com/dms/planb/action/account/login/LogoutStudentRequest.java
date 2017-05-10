@@ -1,4 +1,4 @@
-package com.dms.planb.action.account;
+package com.dms.planb.action.account.login;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
