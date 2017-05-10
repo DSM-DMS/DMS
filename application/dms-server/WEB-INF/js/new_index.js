@@ -565,7 +565,7 @@ $stayApplyButton.on("click", function() {
         },
         success: function() {
             alert('신청되었습니다.');
-            setThisWeek(new Date());
+            setStayValue(stayDate);
         },
         error: function(xhr, status, err) {
             alert('신청 시간이 아닙니다.')
