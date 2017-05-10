@@ -30,8 +30,8 @@ public class QueryUtils {
         for (Object arg : args) {
             if (arg == null) {
                 builder.append("null");
-            } else if (arg instanceof DataSaveAble) {
-                builder.append(((DataSaveAble) arg).toQuery());
+            } else if (arg instanceof DataSaveable) {
+                builder.append(((DataSaveable) arg).toQuery());
             }  else {
                 builder.append(arg.toString());
             }

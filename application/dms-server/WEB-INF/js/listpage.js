@@ -1,30 +1,3 @@
-$(".write-btn").click(function() {
-    // $.ajax({
-    //     url: "post/" + getAllUrlParams(document.URL).category + "write",
-    //     type: "GET",
-    //     data: {
-    //         category: getAllUrlParams(document.URL).category,
-    //         type: "write"
-    //     },
-    //     success: function (data) {
-    //         redirect(data);
-    //     },
-    //     error: function () {
-    //         alert("글을 작성할 수 없어요 TT");
-    //     }
-    // })
-    if (getAllUrlParams(document.URL).category == "qna") {
-        localStorage.setItem('category', getAllUrlParams(document.URL).category);
-        localStorage.setItem('type', 'write');
-        redirect("post/" + "question" + "/write");
-        return;
-    }
-    localStorage.setItem('category', getAllUrlParams(document.URL).category);
-    localStorage.setItem('type', 'write');
-    console.log("post/" + getAllUrlParams(document.URL).category + "/write");
-    redirect("post/" + getAllUrlParams(document.URL).category + "/write");
-});
-
 function redirect(page) {
     location.href = '/' + page;
 }
@@ -36,7 +9,6 @@ function setListEvent() {
     });
 }
 setListEvent();
-
 
 
 function getAllUrlParams(url) {

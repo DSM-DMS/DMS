@@ -46,13 +46,16 @@ public class PostChangeDetector {
 			public void run() {
 				int currentCategory = Post.CATEGORY_NOTICE;
 				while (run) {
-					postDataSave(currentCategory);
-					if (listener != null)
-						listener.update(currentCategory);
-					currentCategory++;
-					if (currentCategory > Post.CATEGORY_COMPETITION) {
-						currentCategory = Post.CATEGORY_NOTICE;
+					try {
+						postDataSave(currentCategory);
+					}catch(Exception e){
 					}
+						if (listener != null)
+							listener.update(currentCategory);
+						currentCategory++;
+						if (currentCategory > Post.CATEGORY_COMPETITION) {
+							currentCategory = Post.CATEGORY_NOTICE;
+						}
 				}
 				run = false;
 			}
@@ -65,7 +68,7 @@ public class PostChangeDetector {
 		run = false;
 	}
 
-	private void postDataSave(int category) {
+	private void postDataSave(int category) throws Exception{
 		String url = PostParser.getUrlFromCategory(category);
 		int page = 1;
 		int count = 0;

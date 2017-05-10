@@ -22,10 +22,6 @@ package com.dms.planb.core;
  * @see pom.xml
  */
 
-import java.io.File;
-import java.sql.SQLException;
-import java.util.Calendar;
-
 import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 
@@ -35,6 +31,9 @@ import com.dms.parser.dataio.post.PostUpdateListener;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import org.boxfox.dms.utilities.log.Log;
+
+import java.sql.SQLException;
+import java.util.Calendar;
 
 class DmsMain {
 	private static Vertx vertx;
@@ -56,38 +55,26 @@ class DmsMain {
 
 		options = new VertxOptions();
 		// System.setErr(new LogErrorOutputStream(System.err));
-		
+
 		PostChangeDetector.getInstance().start();
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
 			@Override
 			public void update(int currentCategory) {
-				while (true) {
-					Calendar currentTime = Calendar.getInstance();
-					int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
-					int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-					if (dayOfWeek == Calendar.MONDAY) {
-						try {
-							DataBase.getInstance().executeUpdate("delete from goingout_apply");
-							/*
-							 * Every Monday, refresh goingout_apply table
-							 */
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
-					if (hour >= 0 && hour <= 8) {
-						try {
-							DataBase.getInstance().executeUpdate("delete from extension_apply");
-							/*
-							 * Every day, refresh extension_apply table
-							 */
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
+				Calendar currentTime = Calendar.getInstance();
+				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
+				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+				Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
+				if (dayOfWeek == Calendar.MONDAY) {
 					try {
-						Thread.sleep(3600000);
-					} catch (InterruptedException e) {
+						DataBase.getInstance().executeUpdate("delete from goingout_apply");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (hour >= 0 && hour <= 8) {
+					try {
+						DataBase.getInstance().executeUpdate("delete from extension_apply");
+					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
