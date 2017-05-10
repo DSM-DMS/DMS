@@ -1,5 +1,7 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 * {
-    font-family: 'Malgun Gothic';
+    font-family: 'Nanum Gothic';
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -1223,7 +1225,6 @@ a.btn {
     color: #607D8B;
     text-decoration-line: none;
 }
-
 
 /*animaion------------------------------------------------------------------------*/
 
