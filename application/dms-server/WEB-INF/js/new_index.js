@@ -1031,6 +1031,18 @@ $(document).ready(function() {
     //set random background image
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
+    var agent = navigator.userAgent.toLowerCase();
+
+    // if (agent.indexOf("chrome") != -1) {
+    //     alert("크롬 브라우저입니다.");
+    // }
+    // if (agent.indexOf("safari") != -1) {
+    //     alert("사파리 브라우저입니다.");
+    // }
+    // if (agent.indexOf("firefox") != -1) {
+    //     alert("파이어폭스 브라우저입니다.");
+    // }
+
     //show current stay state and extension state
     stayTick = $('#stayTick');
     stayCircle = $('#stayCheckCircle');
