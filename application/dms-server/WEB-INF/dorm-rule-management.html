@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+      <link rel="stylesheet" href="css/management.css">
+</head>
+
+<body>
+  <div id="background-image"> 
+      <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="100%" height="100%">
+          <filter id="svgBlurFilter">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
+              <feComponentTransfer>
+                  <feFuncR type="linear" slope="0.2"></feFuncR>
+                  <feFuncG type="linear" slope="0.2"></feFuncG>
+                  <feFuncB type="linear" slope="0.2"></feFuncB>
+              </feComponentTransfer>
+          </filter>
+          <image class="blurred" preserveAspectRatio="xMinYMid meet" filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0" 
+          xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.2)"></image>
+      </svg>
+  </div>
+  <p class="admin-title">기숙사 규칙 관리</p>
+</body>
+</html>
