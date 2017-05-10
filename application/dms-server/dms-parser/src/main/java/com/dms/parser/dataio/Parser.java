@@ -1,6 +1,6 @@
 package com.dms.parser.dataio;
 
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 
 public abstract class Parser {
 	public static final String URL_MEAL = "http://stu.dje.go.kr/sts_sci_md00_001.do?schulCode=G100000170&schulCrseScCode=4&schulKndScCode=04&schYm=?";
@@ -13,7 +13,7 @@ public abstract class Parser {
 	public static final String URL_BOARD_PARAMATER = "?boardID=?&boardSeq=?&lev=?&searchType=?&statusYN=?&page=?&opType=?&s=dsmhs&m=0201";
 	protected String url;
 	
-	public abstract DataSaveAble parse();
-	public abstract DataSaveAble[] parseAll();
+	public abstract DataSaveable parse();
+	public abstract DataSaveable[] parseAll();
 	
 }
