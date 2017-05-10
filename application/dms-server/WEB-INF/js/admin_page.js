@@ -106,7 +106,7 @@ $("#create-admin-btn").click(function() {
     }
   }
     $.ajax({
-        url: "/account/admin/create",
+        url: "/account/register/admin",
         type: "POST",
         data: $("#create-admin-form").serialize(),
         statusCode: {
