@@ -17,7 +17,11 @@ function setCancleEvent() {
     $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
         // 신청취소 ajax
         $.ajax({
+<<<<<<< HEAD
+            url: "http://localhost:8089/apply/extension",
+=======
             url: mainUrl,
+>>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
             type: "DELETE",
             success: function(data) {
                 // alert("취소 완료.");
@@ -35,7 +39,7 @@ function setCancleEvent() {
 function setSelecterOptions() {
     var mapData;
     // $.ajax({
-    //     url: "http://dsm2015.cafe24.com:8088/apply/extension/class",
+    //     url: "http://localhost:8088/apply/extension/class",
     //     type: "GET",
     //     data: JSON.stringify({
     //         "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val()
@@ -126,7 +130,11 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
+<<<<<<< HEAD
+        url: "http://localhost:8089/apply/extension/class",
+=======
         url: mainUrl + "/class",
+>>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
         type: "GET",
         data: {
             "option": "map",
@@ -185,7 +193,11 @@ function drawSeat(seatArr, borderSize) {
                             // 신청 ajax
                             // console.log("value test = "+$(this).data("seat"))
                             $.ajax({
+<<<<<<< HEAD
+                                url: "http://localhost:8089/apply/extension",
+=======
                                 url: mainUrl,
+>>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
                                 type: "PUT",
                                 data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),
@@ -261,7 +273,7 @@ function drawSeat(seatArr, borderSize) {
 //     $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
 //         // 신청취소 ajax
 //         $.ajax({
-//             url: "http://dsm2015.cafe24.com:8089/apply/extension",
+//             url: "http://localhost:8089/apply/extension",
 //             type: "DELETE",
 //             data: JSON.stringify({
 //                 "id": id
@@ -282,7 +294,7 @@ function drawSeat(seatArr, borderSize) {
 // function setSelecterOptions() {
 //     var mapData;
 //     // $.ajax({
-//     //     url: "http://dsm2015.cafe24.com:8088/apply/extension/class",
+//     //     url: "http://localhost:8088/apply/extension/class",
 //     //     type: "GET",
 //     //     data: JSON.stringify({
 //     //         "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val()
@@ -373,7 +385,7 @@ function drawSeat(seatArr, borderSize) {
 // function getSeatData(callback) {
 //     // var result;
 //     $.ajax({
-//         url: "http://dsm2015.cafe24.com:8089/apply/extension/class",
+//         url: "http://localhost:8089/apply/extension/class",
 //         type: "PUT",
 //         data: JSON.stringify({
 //             "option": "map",
@@ -433,7 +445,7 @@ function drawSeat(seatArr, borderSize) {
 //                             selected = $(this);
 //                             // 신청하는 ajax
 //                             $.ajax({
-//                                 url: "http://dsm2015.cafe24.com:8089/apply/extension",
+//                                 url: "http://localhost:8089/apply/extension",
 //                                 type: "PUT",
 //                                 data: JSON.stringify({
 //                                     "id": id,

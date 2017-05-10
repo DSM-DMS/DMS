@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="32dp"
+            android:gravity="center"
+            android:text="@string/goingoutapply_desc"
+            android:textColor="@android:color/black" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <com.dms.beinone.application.dmsview.DMSToggleButton
+                    android:id="@+id/tb_goingoutapply_saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:textOff="@string/goingoutapply_saturday"
+                    android:textOn="@string/goingoutapply_saturday" />
+
+                <com.dms.beinone.application.dmsview.DMSToggleButton
+                    android:id="@+id/tb_goingoutapply_sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginStart="32dp"
+                    android:textOff="@string/goingoutapply_sunday"
+                    android:textOn="@string/goingoutapply_sunday" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:text="@string/goingoutapply_subdesc" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.dms.beinone.application.dmsview.DMSButton
+        android:id="@+id/btn_goingoutapply_apply"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/goingoutapply_apply"
+        dmsbtn:dmsbtn_style="rectangle"
+        dmsbtn:dmsbtn_backgroundColor="@android:color/black"
+        dmsbtn:dmsbtn_strokeColor="@android:color/black"
+        dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"
+        dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"
+        dmsbtn:dmsbtn_textColor="@android:color/white"
+        dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
+
+</RelativeLayout>
