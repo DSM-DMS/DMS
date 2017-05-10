@@ -27,7 +27,7 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
         context = PrecedingWork.putHeaders(context);
 
         DataBase database = DataBase.getInstance();
-        AES256 aes = userManager.getAES();
+        AES256 aes = UserManager.getAES();
 
         String title = context.request().getParam("title");
         String content = context.request().getParam("content");
