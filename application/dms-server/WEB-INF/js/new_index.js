@@ -790,18 +790,27 @@ function extentionApply(classId, id) {
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
+                $stayPaperplane.removeClass("send-paperplane");
+                $goingOutPaperplane.removeClass("send-paperplane");
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
                 getClassData(classId);
+                $stayPaperplane.removeClass("send-paperplane");
+                $goingOutPaperplane.removeClass("send-paperplane");
             }
         },
         success: function(data, xhr) {
+            alert("신청 완료되었습니다.");
             getClassData(classId);
+            $stayPaperplane.removeClass("send-paperplane");
+            $goingOutPaperplane.removeClass("send-paperplane");
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
             getClassData(classId);
+            $stayPaperplane.removeClass("send-paperplane");
+            $goingOutPaperplane.removeClass("send-paperplane");
         }
     });
 }
