@@ -3,7 +3,7 @@ package com.dms.parser.datamodel.plan;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 
 import com.dms.parser.dataio.Query;
 
-public class MonthPlan extends DataSaveAble {
+public class MonthPlan extends DataSaveable {
 	private ArrayList<Plan> dayPlans;
 	private int year, month;
 
@@ -71,7 +71,7 @@ public class MonthPlan extends DataSaveAble {
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
+	public DataSaveable fromResultSet(SafeResultSet rs) throws SQLException {
 		year = rs.getInt("year");
 		month = rs.getInt("month");
 		dayPlans = convertArrayList((JSONArray)((JSONObject)tryJsonParse(rs, "data")).get("Plans"));

@@ -1,11 +1,26 @@
+*{
+  font-family: "malgun gothic"!important;
+}
+
 body {
+  overflow: hidden;
 } 
+
+.admin-title{
+  color: white;
+  text-align: center;
+  padding: 5vh;
+  margin: 0 2vh;
+  font-size: 5vh;
+  border-bottom: 1px solid white;
+}
 
 /* End of container */
 .button {
   cursor: pointer;
   width: 200px;
   height: 173.20508px;
+  position: absolute;
 }
 .button:last-child {
   margin-right: 0;
@@ -88,39 +103,53 @@ body {
 }
 
 #stay-download{
-  transform: translate(33%, 33%);
+  top: 28%;
+  left: 20%;
 }
 
 #extension-download{
-  transform: translate(33%, 66%);
+  top: 64%;
+  left: 10%;
 }
 
 #going-out-download{
-  transform: translate(33%, 99%);
+  top: 40%;
+  left: 10%;
 }
 
 #facility-download{
-  transform: translate(336%, -267%);
+  top: 52%;
+  left: 20%;
 }
 
 #notice-management{
-  transform: translate(336%, -234%);
+  top: 28%;
+  left: 40%;
 }
 
 #dorm-rule-management{
-  transform: translate(336%, -201%);
+  top: 40%;
+  left: 50%;
 }
 
 #faq-management{
-  transform: translate(613%, -567%);
+  top: 52%;
+  left: 40%;
 }
 
 #qna-management{
-  transform: translate(613%, -534%);
+  top: 64%;
+  left: 50%;
 }
 
 #delete-account{
-  transform: translate(613%, -501%);
+  top: 30%;
+  left: 70%;
+}
+
+#create-admin-account{
+  top: 42%;
+  left: 80%;
 }
 
 #background-image{
@@ -128,9 +157,19 @@ body {
     height: 100vh;
     position: absolute;
     z-index: -2;
+    transform: scale(1.2);
 }
 
 .hex>div>p{
+    color: white;
+    font-size: 2vh; 
+    line-height: 3vh;
+    margin-top: 86.60254px;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.hex>div>a{
     color: white;
     font-size: 2vh; 
     line-height: 3vh;

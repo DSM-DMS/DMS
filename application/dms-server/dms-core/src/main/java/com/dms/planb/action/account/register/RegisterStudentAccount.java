@@ -1,4 +1,4 @@
-package com.dms.planb.action.account;
+package com.dms.planb.action.account.register;
 
 import java.sql.SQLException;
 
@@ -15,10 +15,10 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/register/student", method = {HttpMethod.POST})
-public class RegisterStudentAcc implements Handler<RoutingContext> {
+public class RegisterStudentAccount implements Handler<RoutingContext> {
     private UserManager userManager;
 
-    public RegisterStudentAcc() {
+    public RegisterStudentAccount() {
         userManager = new UserManager();
     }
 

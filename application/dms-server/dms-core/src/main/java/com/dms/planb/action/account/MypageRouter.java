@@ -18,10 +18,10 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/student", method = { HttpMethod.GET })
-public class LoadMypage implements Handler<RoutingContext> {
+public class MypageRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 
-	public LoadMypage() {
+	public MypageRouter() {
 		userManager = new UserManager();
 	}
 

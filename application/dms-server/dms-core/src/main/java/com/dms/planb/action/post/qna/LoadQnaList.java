@@ -46,6 +46,7 @@ public class LoadQnaList implements Handler<RoutingContext> {
 					tempObject.put("title", resultSet.getString("title"));
 					tempObject.put("question_date", resultSet.getString("question_date"));
 					tempObject.put("privacy", resultSet.getBoolean("privacy"));
+					tempObject.put("writer", resultSet.getString("writer"));
 					
 					tempArray.add(tempObject);
 					
