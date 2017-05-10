@@ -10,7 +10,7 @@ import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 
-@RouteRegistration(path = "/account/register/student", method = {HttpMethod.POST})
+@RouteRegistration(path = "/account/register/admin", method = {HttpMethod.POST})
 public class RegisterTeacherAccount implements Handler<RoutingContext> {
     private AdminManager adminManager;
 
