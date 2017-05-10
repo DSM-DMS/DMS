@@ -10,79 +10,80 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <div class="container">
-    <h1>DSM Dormitory System</h1>
-</div>
+        <h1>DSM Dormitory System</h1>
+    </div>
 
 
     <div class="row slider-menu-container hides">
-             <div class="menu-controller show">
-                    <img src="/images/arrow.png">
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="/images/megaphone.png"/>
-                 <div>공지사항</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="/images/writing.png"/>
-                 <div>연장신청</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="/images/settings.png"/>
-                 <div>수리신고</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="/images/chicken.png"/>
-                 <div>학교급식</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="/images/crown.png"/>
-                 <div>상점신청</div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <a href="#bugModal" data-toggle="modal"><img src="./images/bug.png" /></a>
-                 <div><a href="#bugModal" data-toggle="modal">버그신고</a><br>
-                 </div>
-             </div>
-             <div class="icon-menu-item text-center">
-                 <img src="/images/man.png"/>
-                 <div>내정보</div>
-             </div>
+        <div class="menu-controller show">
+            <img src="/images/arrow.png">
         </div>
+        <div class="icon-menu-item text-center">
+            <img src="/images/megaphone.png" />
+            <div>공지사항</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="/images/writing.png" />
+            <div>연장신청</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="/images/settings.png" />
+            <div>수리신고</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="/images/chicken.png" />
+            <div>학교급식</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="/images/crown.png" />
+            <div>상점신청</div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <a href="#bugModal" data-toggle="modal"><img src="./images/bug.png" /></a>
+            <div><a href="#bugModal" data-toggle="modal">버그신고</a><br>
+            </div>
+        </div>
+        <div class="icon-menu-item text-center">
+            <img src="/images/man.png" />
+            <div>내정보</div>
+        </div>
+    </div>
 
-  <div class="main">
-    <div class="card-wrapper">
-      <div class="card">
-        <div class="card-block">
-          <div class="underbar-title border-blue">${Title}<input class="btn btn-primary write-btn" type="button" name="" value="글 쓰기"></div>
-            <table class="table table-sm table-hover">
-                <thead>
-                  <tr>
-                    <#list Heads as head>
-                      <th>${head}</th>
-                    </#list>
-                  </tr>
-                </thead>
-              <tbody>
-                <#list List as list>
-                  <tr>
-                    <#list Columns as column>
-                      <td>${list[column]}</td>
-                    </#list>
-                    <td>
-                      <a class="btn btn-success" class="edit">수정</a>
-                    </td>
-                    <td>
-                      <a class="btn btn-success" class="delete">삭제</a>
-                    </td>
-                  </tr>
-                </#list>
-              </tbody>
-            </table>
-          </div>
+    <div class="main">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-block">
+                    <div class="underbar-title border-blue">${Title}<input class="btn btn-primary write-btn" type="button" name="" value="글 쓰기"></div>
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <#list Heads as head>
+                                    <th>${head}</th>
+                                </#list>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <#list List as list>
+                                <tr>
+                                    <#list Columns as column>
+                                        <td>${list[column]}</td>
+                                    </#list>
+                                    <td>
+                                        <a class="btn btn-success edit">수정</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success delete">삭제</a>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Bug report Modal -->
     <div class="modal fade" id="bugModal" role="dialog">
@@ -133,6 +134,6 @@
         </div>
     </div>
 </body>
-<script src="/js/script.js"></script>
-<script src="/js/listpage.js"></script>
+<script src="/js/admin_listpage.js"></script>
+
 </html>
