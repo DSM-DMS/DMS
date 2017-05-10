@@ -15,6 +15,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
+@Deprecated
 @RouteRegistration(path="/post/report", method={HttpMethod.GET})
 public class LoadReportFacility implements Handler<RoutingContext> {
 	@Override
