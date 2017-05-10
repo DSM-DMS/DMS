@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/nav_group_home"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_home"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/nav_home" />
+    </group>
+
+    <item android:title="@string/nav_apply" android:id="@+id/nav_item_apply">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_item_extensionapply"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="@string/nav_extensionapply" />
+                <item
+                    android:id="@+id/nav_item_stayapply"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="@string/nav_stayapply" />
+                <item
+                    android:id="@+id/nav_item_goingoutapply"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="@string/nav_goingoutapply" />
+                <item
+                    android:id="@+id/nav_item_rewardscoreapply"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="@string/nav_rewardscoreapply" />
+                <item
+                    android:id="@+id/nav_item_afterschoolapply"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="@string/nav_afterschoolapply" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_school">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_item_meal"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/nav_meal" />
+                <item
+                    android:id="@+id/nav_item_notice"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_notice" />
+                <item
+                    android:id="@+id/nav_item_newsletter"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_newsletter" />
+                <item
+                    android:id="@+id/nav_item_competition"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_competition" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_dormitory">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_item_facilityreport"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/nav_facilityreport" />
+                <item
+                    android:id="@+id/nav_item_rule"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_rule" />
+                <item
+                    android:id="@+id/nav_item_faq"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_faq" />
+                <item
+                    android:id="@+id/nav_item_qna"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/nav_qna" />
+            </group>
+        </menu>
+    </item>
+
+    <group
+        android:id="@+id/nav_group_etc"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_settings"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/nav_settings" />
+        <item
+            android:id="@+id/nav_item_mypage"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/nav_mypage" />
+    </group>
+
+</menu>
