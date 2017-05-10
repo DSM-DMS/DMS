@@ -43,7 +43,7 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
         }
 		
 		try {
-			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, ")");
+			database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, "')");
 			
 			context.response().setStatusCode(201).end();
 			context.response().close();
