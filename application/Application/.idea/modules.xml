@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Application.iml" filepath="$PROJECT_DIR$/Application.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/calendarview/calendarview.iml" filepath="$PROJECT_DIR$/calendarview/calendarview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libk-switchbutton/libk-switchbutton.iml" filepath="$PROJECT_DIR$/libk-switchbutton/libk-switchbutton.iml" />
     </modules>
   </component>
 </project>

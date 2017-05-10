@@ -25,7 +25,7 @@
         android:textCursorDrawable="@drawable/dmset_cursor" />
 
     <TextView
-        android:id="@+id/tv_recommend_recommendee"
+        android:id="@+id/tv_recommend_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -37,24 +37,24 @@
         android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.dmsview.DMSEditText
-        android:id="@+id/et_recommend_recommendee"
+        android:id="@+id/et_recommend_target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_recommend_recommendee"
+        android:layout_below="@id/tv_recommend_target"
         android:textCursorDrawable="@drawable/dmset_cursor" />
 
-    <com.dms.beinone.application.dmsview.DMSButton
-        android:id="@+id/btn_recommend_apply"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:text="@string/rewardscoreapply_apply"
-        dmsbtn:dmsbtn_style="rectangle"
-        dmsbtn:dmsbtn_backgroundColor="@android:color/black"
-        dmsbtn:dmsbtn_strokeColor="@android:color/black"
-        dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"
-        dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"
-        dmsbtn:dmsbtn_textColor="@android:color/white"
-        dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
+    <!--<com.dms.beinone.application.dmsview.DMSButton-->
+        <!--android:id="@+id/btn_recommend_apply"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:text="@string/rewardscoreapply_apply"-->
+        <!--dmsbtn:dmsbtn_style="rectangle"-->
+        <!--dmsbtn:dmsbtn_backgroundColor="@android:color/black"-->
+        <!--dmsbtn:dmsbtn_strokeColor="@android:color/black"-->
+        <!--dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"-->
+        <!--dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"-->
+        <!--dmsbtn:dmsbtn_textColor="@android:color/white"-->
+        <!--dmsbtn:dmsbtn_touchTextColor="@android:color/white" />-->
 
 </RelativeLayout>

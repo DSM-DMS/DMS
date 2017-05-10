@@ -6,21 +6,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.dmsview.DMSButton;
-import com.dms.beinone.application.dmsview.DMSToggleButton;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.boxfox.networking.HttpBox;
+import com.dms.boxfox.networking.HttpBoxCallback;
+import com.dms.boxfox.networking.datamodel.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
- * Created by BeINone on 2017-01-16.
+ * Created by BeINone on 2017-03-20.
  */
 
 public class GoingoutApplyFragment extends Fragment {
 
-    private static final int SATURDAY = 1;
-    private static final int SUNDAY = 2;
-    private static final int BOTH = 3;
+    private ToggleButton mSaturdayTB;
+    private ToggleButton mSundayTB;
+    private Button mApplyBtn;
 
     @Nullable
     @Override
@@ -32,53 +41,122 @@ public class GoingoutApplyFragment extends Fragment {
     }
 
     /**
-     * 초기화, 신청 버튼 클릭 이벤트 설정
+     * 초기화
      *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
         getActivity().setTitle(R.string.nav_goingoutapply);
 
-        final DMSToggleButton saturdayTB =
-                (DMSToggleButton) rootView.findViewById(R.id.tb_goingoutapply_saturday);
-        final DMSToggleButton sundayTB =
-                (DMSToggleButton) rootView.findViewById(R.id.tb_goingoutapply_sunday);
+        mSaturdayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingoutapply_saturday);
+        mSundayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingoutapply_sunday);
+        mApplyBtn = (Button) rootView.findViewById(R.id.btn_goingoutapply_apply);
 
-        DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_goingoutapply_apply);
-        applyBtn.setOnClickListener(new View.OnClickListener() {
+        mApplyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (saturdayTB.isChecked()) {
-                    apply(SATURDAY);
-                } else if (sundayTB.isChecked()) {
-                    apply(SUNDAY);
-                } else if (saturdayTB.isChecked() && sundayTB.isChecked()) {
-                    apply(BOTH);
-                } else {
-                    Toast.makeText(getContext(), R.string.goingoutapply_nochecked, Toast.LENGTH_SHORT)
-                            .show();
+            public void onClick(View v) {
+                boolean sat = false;
+                boolean sun = false;
+                if (mSaturdayTB.isChecked()) sat = true;
+                if (mSundayTB.isChecked()) sun = true;
+
+                try {
+                    applyGoingout(sat, sun);
+                } catch (IOException e) {
+                    System.out.println("IOException in GoingoutApplyFragment: applyGoingout()");
+                    e.printStackTrace();
                 }
             }
         });
+
+        try {
+            loadGoingoutApplyStatus();
+        } catch (IOException e) {
+            System.out.println("IOException in GoingoutApplyFragment: loadGoingoutApplyStatus()");
+            e.printStackTrace();
+        }
     }
 
-    private void apply(int day) {
-
+    private void setApplyStatus(Goingout goingout) {
+        mSaturdayTB.setChecked(goingout.isSat());
+        mSundayTB.setChecked(goingout.isSun());
     }
 
-//    private class ApplyGoingoutTask extends AsyncTask<String, Void, Void> {
-//
-//        @Override
-//        protected Void doInBackground(String... params) {
-//            String id = params[0];
-//            String d
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//        }
-//    }
+    private void loadGoingoutApplyStatus() throws IOException {
+        HttpBox.get(getContext(), "/apply/goingout")
+                .push(new HttpBoxCallback() {
+                    @Override
+                    public void done(Response response) {
+                        int code = response.getCode();
+                        switch (code) {
+                            case HttpBox.HTTP_OK:
+                                try {
+                                    Goingout goingout = JSONParser.parseGoingoutApplyStatusJSON(response.getJsonObject());
+                                    setApplyStatus(goingout);
+                                } catch (JSONException e) {
+                                    System.out.println("JSONException in GoingoutApplyFragment: /apply/goingout");
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case HttpBox.HTTP_NO_CONTENT:
+                                Toast.makeText(getContext(), R.string.goingoutapply_load_no_content, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_BAD_REQUEST:
+                                Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                Toast.makeText(getContext(), R.string.goingoutapply_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
+                    @Override
+                    public void err(Exception e) {
+                        System.out.println("Error in GoingoutApplyFragment: /apply/goingout");
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    private void applyGoingout(final boolean sat, final boolean sun) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("sat", sat);
+            params.put("sun", sun);
+
+            HttpBox.put(getContext(), "/apply/goingout")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    setApplyStatus(new Goingout(sat, sun));
+                                    Toast.makeText(getContext(), R.string.goingoutapply_apply_ok, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.goingoutapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in GoingoutApplyFragment: PUT /apply/goingout");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in GoingoutApplyFragment: PUT /apply/goingout");
+            e.printStackTrace();
+        }
+    }
 }
