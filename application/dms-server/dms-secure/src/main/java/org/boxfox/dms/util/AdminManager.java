@@ -144,7 +144,7 @@ public class AdminManager implements AccountManager {
         boolean check = false;
         String message = null;
         if (!checkIdExists(id)) {
-            int result = database.executeUpdate("insert into admin_account values('", aes.encrypt(id), "', '", SHA256.encrypt(password), "', '", aes.encrypt(name), "');");
+            int result = database.executeUpdate("insert into admin_account (id,password,name) values('", aes.encrypt(id), "', '", SHA256.encrypt(password), "', '", aes.encrypt(name), "');");
             if (result == 1) {
                 message = "회원가입에 성공했습니다.";
                 check = true;

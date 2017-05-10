@@ -20,12 +20,12 @@ public class RegisterTeacherAccount implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-
         if (!AdminManager.isAdmin(context)) {
             context.response().setStatusCode(404).end();
             context.response().close();
             return;
         }
+
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");
         String passwordConfirm = context.request().getParam("password-confirm");
