@@ -61,6 +61,8 @@ var $sundayContainer = $(".sunday-container");
 var $openMyPageButton = $(".mypage-btn");
 var $mypageWindow = $(".mypage-window");
 var $closeMypageWindow = $("#close-mypage-window");
+var $passwordChangeBtn = $(".edit-password-container");
+var $passwordChangeReq = $(".password-change button");
 
 /**
  * Stay
@@ -114,7 +116,7 @@ var $loginSendBtn = $(".login-button");
  */
 var $openPointButton = $(".point-btn");
 
-/** 
+/**
  * Notice
  */
 var $noticeMoreBtn = $(".notice-more");
@@ -300,14 +302,14 @@ function setNoticePreview() {
 /** ======================================================================================
  * My page
 ========================================================================================== */
-$openMyPageButton.on("click", function(){
+$openMyPageButton.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
-$closeMypageWindow.on("click", function(){
+$closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -347,6 +349,32 @@ function getRuleList() {
         }
     });
 }
+
+$passwordChangeBtn.on("click", function() {
+    $('.password-change-modal-wrapper').toggleClass('open');
+});
+
+$passwordChangeReq.on("click", function() {
+    if ($("#new-password").val() === $("#new-password2")) {
+        $.ajax({
+            url: "/account/password/student",
+            type: "PATCH",
+            data: {
+                password: $("#new-password").val()
+            },
+            success: function() {
+                alert("변경이 완료되었어요!");
+            },
+            error: function() {
+                alert("변경에 실패했어요. ㅠㅠ");
+            }
+        });
+    } else {
+        alert("비밀번호를 다시 확인하세요.")
+    }
+});
+
+
 
 /** ======================================================================================
  * faq rule
@@ -413,14 +441,14 @@ var numOfDays = function(year, month) {
 }
 
 var leadingZeros = function(data, num) {
-	 var zero = '';
-	 data = data.toString();
+    var zero = '';
+    data = data.toString();
 
-	 if (data.length < num) {
-	  for (i = 0; i < num - data.length; i++)
-	   zero += '0';
-	 }
-	 return zero + data;
+    if (data.length < num) {
+        for (i = 0; i < num - data.length; i++)
+            zero += '0';
+    }
+    return zero + data;
 };
 
 var getWeek = function(thisDate) {
@@ -428,12 +456,12 @@ var getWeek = function(thisDate) {
     var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
     var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
 
-    if(week == 5) {
+    if (week == 5) {
         if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
             return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if(daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
             return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if(daysOfMonth == 29 && tempDate.getDay() == 6) {
+        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
             return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
         } else {
             return 0;
@@ -444,7 +472,7 @@ var getWeek = function(thisDate) {
 
 var makeWeekFormat = function(thisDate) {
     var week = getWeek(thisDate);
-    if(week == 0) {
+    if (week == 0) {
         thisDate.setMonth(thisDate.getMonth() + 1);
         week = 1;
     }
@@ -456,7 +484,7 @@ var makeWeekFormat = function(thisDate) {
 
 var setStayValue = function(thisDate) {
     var weekData = makeWeekFormat(thisDate)
-    
+
     $.ajax({
         url: "/apply/stay",
         type: "GET",
@@ -472,7 +500,7 @@ var setStayValue = function(thisDate) {
                         break;
                     case 2:
                         $('#stayValue').text('토요귀가');
-                        $(":radio[name=1][value=2]").prop('checked', true);                        
+                        $(":radio[name=1][value=2]").prop('checked', true);
                         break;
                     case 3:
                         $('#stayValue').text('토요귀사');
@@ -483,11 +511,11 @@ var setStayValue = function(thisDate) {
                         $(":radio[name=1][value=4]").prop('checked', true);
                         break;
                 }
-            } catch(err) {
+            } catch (err) {
                 $('#stayValue').text('신청안됨');
             }
         },
-        error: function(xhr){
+        error: function(xhr) {
             console.log(xhr.status);
             $('#stayValue').text('불러오기 실패');
         }
@@ -520,7 +548,7 @@ $sundayContainer.click(function() {
 
 $stayApplyButton.on("click", function() {
     $stayPaperplane.addClass("send-paperplane");
-    
+
     var applySendDataWeek = makeWeekFormat(stayDate);
     var applySendDataValue = $(":radio[name=1]:checked").val();
 
@@ -906,7 +934,7 @@ $modalButton.click(function(e) {
     $("button", this).addClass('active');
 });
 
-$(function() {
+(function() {
     $(".login-input input").focus(function() {
         $(this).parent(".login-input").each(function() {
             $("label", this).css({
@@ -964,7 +992,7 @@ $(function() {
 
         }
     });
-});
+})();
 /** ======================================================================================
  * meal
 ========================================================================================== */
