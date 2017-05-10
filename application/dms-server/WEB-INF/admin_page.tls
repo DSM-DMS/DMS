@@ -14,41 +14,7 @@
     <div class="container">
       <h1>DSM Dormitory System</h1>
     </div>
-
-    <div class="row slider-menu-container hide">
-       <div class="menu-controller show">
-              <img src="image/arrow.png">
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/megaphone.png"/>
-           <div>공지사항</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/writing.png"/>
-           <div>연장신청</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/settings.png"/>
-           <div>수리신고</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/chicken.png"/>
-           <div>학교급식</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/crown.png"/>
-           <div>상점신청</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/bug.png"/>
-           <div>버그신고</div>
-       </div>
-       <div class="icon-menu-item text-center">
-           <img src"images/man.png"/>
-           <div>내정보</div>
-      </div>
-  </div>
-
+    
   <div class="main">
     <div class="card-wrapper">
       <div class="card">
