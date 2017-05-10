@@ -76,15 +76,49 @@ $('#extension_download').on('click', function () {
   location.href = 'http://dsm2015.cafe24.com/extension/download';
 })
 
-$(".delete-account-btn").click(function() {
+$("#account-refresh-btn").click(function() {
     $.ajax({
         url: "/account/initialize",
         type: "POST",
         data: {
-            uid: $(".uid-code").val()
+            number: $("#refresh-student-number").val()
         },
-        success: function() {
-            alert("삭제가 완료되었습니다.");
+        statusCode: {
+            204: function() {
+                alert('초기화에 실패했습니다. 학번을 확인해 주세요');
+            },
+            200: function() {
+                alert('초기화에 성공했습니다.');
+            }
+        },
+        error: function(e) {
+            alert('계정생성에 실패했습니다.');
+        }
+    })
+})
+
+$("#create-admin-btn").click(function() {
+  var lists = $('#create-admin-form').find($('input'));
+  for(var index=0;index<lists.length; index++){
+    if(lists[index].value.length==0){
+      alert('정보를 모두 입력해 주세요!');
+      return;
+    }
+  }
+    $.ajax({
+        url: "/account/admin/create",
+        type: "POST",
+        data: $("#create-admin-form").serialize(),
+        statusCode: {
+            204: function() {
+                alert('계정생성에 실패했습니다.');
+            },
+            200: function() {
+                alert('계정생성이 완료되었습니다.');
+            }
+        },
+        error: function(e) {
+            alert('계정생성에 실패했습니다.');
         }
     })
 })
