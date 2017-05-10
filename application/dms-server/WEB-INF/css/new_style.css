@@ -20,6 +20,7 @@ body {
     background: black;
     margin: 0;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
 }
 
@@ -521,7 +522,11 @@ input[type="radio"]:checked~.bullet .line.seven {
     background: #eeeeee;
     border-radius: 2vh 2vh 0 0;
     padding: 2vh 2vh 1vh 2vh;
-    /*border-bottom: 1px solid black;*/
+}
+
+.writer-container{
+    display: flex;
+    flex-direction: column;
 }
 
 #notice-title {
@@ -547,11 +552,11 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .notice-title-writer {
     display: flex;
-    flex-direction: column;
-    margin-left: 10%;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
-.notice-title-writer>span {
+.notice-title-writer span {
     width: 10vh;
     height: 10vh;
     background: #607D8B;
@@ -563,12 +568,19 @@ input[type="radio"]:checked~.bullet .line.seven {
     transform-origin: center;
 }
 
+
 #writer-content {
     display: inline-block;
     vertical-align: middle;
     line-height: 1vh;
     margin-top: 4.5vh;
     /*set line height back to normal*/
+}
+
+#writer-content-long{
+    font-size: 1.5vh;
+    margin-top: 50%;
+    transform: translateY(-50%);
 }
 
 .speech-bubble-tail {
@@ -589,6 +601,34 @@ input[type="radio"]:checked~.bullet .line.seven {
 .notice-content-container p {
     max-height: 7vh;
     overflow: hidden;
+}
+
+.contact-facebook{
+    width: 10vh;
+    height: 10vh;
+    border-radius: 999px;
+    background: #3b5998;
+    text-align: center;
+    color: white;
+}
+
+.contact-facebook i{
+    margin-top: 50%;
+    transform: translateY(-50%);
+}
+
+.contact-github{
+    width: 10vh;
+    height: 10vh;
+    border-radius: 999px;
+    background: black;
+    text-align: center;
+    color: white;
+}
+
+.contact-github i{
+    margin-top: 50%;
+    transform: translateY(-50%);
 }
 
 .notice-more {
