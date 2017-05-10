@@ -15,8 +15,18 @@
 
 <body>
     <script src="./js/jquery.js"></script>
-    <div id="background-image">
-        <img id="backgroundWallpaper" src=".\images\wallpaper10.jpg">
+    <div id="background-image"> 
+        <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%">
+            <filter id="svgBlurFilter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feComponentTransfer>
+                    <feFuncR type="linear" slope="0.2"/>
+                    <feFuncG type="linear" slope="0.2"/>
+                    <feFuncB type="linear" slope="0.2"/>
+                </feComponentTransfer>
+            </filter>
+            <image class="blurred" preserveAspectRatio='xMinYMid meet' filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0" xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="120%" height="120%"/>
+        </svg>
     </div>
     <div id="going-out-apply-window" class="window">
         <img id="close-going-out-window" class="window-close" src=".\images\close.svg">
