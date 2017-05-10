@@ -109,16 +109,13 @@ $("#create-admin-btn").click(function() {
         url: "/account/register/admin",
         type: "POST",
         data: $("#create-admin-form").serialize(),
-        statusCode: {
-            204: function() {
-                alert('계정생성에 실패했습니다.');
-            },
-            200: function() {
-                alert('계정생성이 완료되었습니다.');
-            }
-        },
-        error: function(e) {
-            alert('계정생성에 실패했습니다.');
+        complete: function(xhr, textStatus) {
+          var statusCode = xhr.status;
+          if(statusCode==200){
+              alert('계정생성이 완료되었습니다.');
+          }else{
+              alert('계정생성에 실패했습니다.');
+          }
         }
     })
 })
