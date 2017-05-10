@@ -468,15 +468,19 @@ var setStayValue = function(thisDate) {
                 switch (jQuery.parseJSON(data).value) {
                     case 1:
                         $('#stayValue').text('금요귀가');
+                        $(":radio[name=1][value=1]").prop('checked', true);
                         break;
                     case 2:
                         $('#stayValue').text('토요귀가');
+                        $(":radio[name=1][value=2]").prop('checked', true);                        
                         break;
                     case 3:
                         $('#stayValue').text('토요귀사');
+                        $(":radio[name=1][value=3]").prop('checked', true);
                         break;
                     case 4:
                         $('#stayValue').text('잔류');
+                        $(":radio[name=1][value=4]").prop('checked', true);
                         break;
                 }
             } catch(err) {
@@ -485,6 +489,7 @@ var setStayValue = function(thisDate) {
         },
         error: function(xhr){
             console.log(xhr.status);
+            $('#stayValue').text('불러오기 실패');
         }
     });
 };
@@ -517,7 +522,7 @@ $stayApplyButton.on("click", function() {
     $stayPaperplane.addClass("send-paperplane");
     
     var applySendDataWeek = makeWeekFormat(stayDate);
-    var applySendDataValue = $(':radio[name="1"]:checked').val();
+    var applySendDataValue = $(":radio[name=1]:checked").val();
 
     console.log(applySendDataWeek);
     console.log(applySendDataValue);
