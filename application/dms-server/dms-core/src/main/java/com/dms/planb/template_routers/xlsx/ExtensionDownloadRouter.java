@@ -16,7 +16,6 @@ import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
@@ -38,7 +37,6 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
 		if(adminManager.isAdmin(context)) {
 			DataBase database = DataBase.getInstance();
 			SafeResultSet resultSet;

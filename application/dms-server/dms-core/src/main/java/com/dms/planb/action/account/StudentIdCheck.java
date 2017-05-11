@@ -4,7 +4,6 @@ import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -20,8 +19,7 @@ public class StudentIdCheck implements Handler<RoutingContext> {
 
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeadersOnly(context);
-		
+
 		String id = context.request().getParam("id");
 		
 		if(!Guardian.checkParameters(id)) {

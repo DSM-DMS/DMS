@@ -8,7 +8,6 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.log.Log;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -24,8 +23,7 @@ public class RegisterStudentAccount implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeadersOnly(context);
-        
+
         String uid = context.request().getParam("uid");
         String id = context.request().getParam("id");
         String password = context.request().getParam("password");

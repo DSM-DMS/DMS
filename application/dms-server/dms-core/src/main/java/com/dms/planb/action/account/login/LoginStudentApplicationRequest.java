@@ -1,6 +1,5 @@
 package com.dms.planb.action.account.login;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -24,7 +23,6 @@ public class LoginStudentApplicationRequest implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeadersOnly(context);
 
         EasyJsonObject responseObject = new EasyJsonObject();
 

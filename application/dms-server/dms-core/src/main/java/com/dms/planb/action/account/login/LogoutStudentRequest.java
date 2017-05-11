@@ -2,7 +2,6 @@ package com.dms.planb.action.account.login;
 
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -18,8 +17,7 @@ public class LogoutStudentRequest implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeaders(context);
-        
+
         userManager.removeCookie(context);
         
         context.response().setStatusCode(201).end();

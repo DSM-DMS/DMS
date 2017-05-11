@@ -3,7 +3,6 @@ package com.dms.planb.action.post.parsed;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.parser.dataio.plan.PlanModel;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -13,8 +12,7 @@ import io.vertx.ext.web.RoutingContext;
 public class LoadPlan implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		int year = Integer.parseInt(context.request().getParam("year"));
 		int month = Integer.parseInt(context.request().getParam("month"));
 		
