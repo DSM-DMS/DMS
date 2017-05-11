@@ -120,5 +120,4 @@
 <#if isAdmin==true>
     <script src="../js/admin_article.js"></script>
 </#if>
-
 </html>
