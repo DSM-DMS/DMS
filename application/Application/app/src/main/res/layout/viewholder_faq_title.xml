@@ -33,7 +33,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout_faq_overlay"
+        android:id="@+id/layout_faq_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

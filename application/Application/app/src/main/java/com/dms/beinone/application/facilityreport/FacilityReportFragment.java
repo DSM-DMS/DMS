@@ -1,7 +1,6 @@
 package com.dms.beinone.application.facilityreport;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,18 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +30,10 @@ import java.util.List;
  */
 
 public class FacilityReportFragment extends Fragment {
+
+    public static final int LIMIT = 10;
+
+    public static int page = 1;
 
     private FloatingActionButton mFAB;
     private EmptySupportedRecyclerView mRecyclerView;
@@ -45,17 +48,24 @@ public class FacilityReportFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
+        mFAB.setVisibility(View.VISIBLE);
 
-        new LoadFacilityReportListTask().execute();
+        try {
+            loadFacilityReportList();
+        } catch (IOException e) {
+            System.out.println("IOException in FacilityReportFragment: loadFacilityReportList()");
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
+    public void onStop() {
+        super.onStop();
         mFAB.setVisibility(View.INVISIBLE);
+
+        page = 1;
     }
 
     /**
@@ -70,7 +80,7 @@ public class FacilityReportFragment extends Fragment {
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), FacilityReportWriteActivity.class));
+                startActivity(new Intent(getContext(), FacilityReportUploadActivity.class));
             }
         });
 
@@ -80,63 +90,61 @@ public class FacilityReportFragment extends Fragment {
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
     }
 
-    private class LoadFacilityReportListTask extends AsyncTask<Void, Void, List<FacilityReport>> {
+    private void loadFacilityReportList() throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("page", FacilityReportFragment.page);
+            params.put("limit", LIMIT);
 
-        @Override
-        protected List<FacilityReport> doInBackground(Void... params) {
-            List<FacilityReport> facilityReportList = null;
+            HttpBox.get(getContext(), "/post/report/list")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        List<FacilityReport> facilityReports =
+                                                JSONParser.parseFacilityReportListJSON(response.getJsonObject());
+                                        mRecyclerView.setAdapter(new FacilityReportAdapter(getContext(), facilityReports, new OnMoreBtnClickListener() {
+                                            @Override
+                                            public void onMoreBtnClick() {
+                                                try {
+                                                    loadFacilityReportList();
+                                                } catch (IOException e) {
+                                                    System.out.println("IOException in FacilityReportFragment: loadFacilityReportList()");
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }));
+                                        // increase the page number if completed loading successfully
+                                        FacilityReportFragment.page++;
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in FacilityReportFragment: /post/report/list");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+//                                    Toast.makeText(getContext(), R.string.facilityreport_list_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.facilityreport_list_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                facilityReportList = loadFacilityReportList();
-            } catch (IOException ie) {
-                return null;
-            } catch (JSONException je) {
-                return null;
-            }
-
-            return facilityReportList;
-        }
-
-        @Override
-        protected void onPostExecute(List<FacilityReport> facilityReportList) {
-            super.onPostExecute(facilityReportList);
-
-            if (facilityReportList == null) {
-                Toast.makeText(getContext(), R.string.facilityreport_error, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                mRecyclerView.setAdapter(
-                        new FacilityReportAdapter(getContext(), facilityReportList));
-            }
-        }
-
-        private List<FacilityReport> loadFacilityReportList() throws IOException, JSONException {
-            List<FacilityReport> facilityReportList = new ArrayList<>();
-
-            Response response =
-                    HttpBox.post().
-                            setCommand(Commands.LOAD_REPORT_FACILITY_LIST)
-                            .putBodyData()
-                            .push();
-
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            JSONArray resultJSONArray = responseJSONObject.getJSONArray("result");
-            for (int index = 0; index < resultJSONArray.length(); index++) {
-                JSONObject facilityReportJSONObject = resultJSONArray.getJSONObject(index);
-
-                int no = facilityReportJSONObject.getInt("no");
-                String title = facilityReportJSONObject.getString("title");
-                int room = facilityReportJSONObject.getInt("room");
-                String writeDate = facilityReportJSONObject.getString("write_date");
-                String writer = facilityReportJSONObject.getString("writer");
-                boolean hasResult = facilityReportJSONObject.getBoolean("has_result");
-
-                facilityReportList.add(
-                        new FacilityReport(no, title, room, writeDate, writer, hasResult));
-            }
-
-            return facilityReportList;
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in FacilityReportFragment: /post/report/list");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in FacilityReportFragment: /post/report/list");
+            e.printStackTrace();
         }
     }
 

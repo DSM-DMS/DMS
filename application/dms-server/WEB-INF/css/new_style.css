@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 * {
-    font-family: 'Nanum Gothic';
+    font-family: "malgun gothic"!important;
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -47,7 +47,6 @@ body {
 #background-image img {
     height: 100%;
     transform: scale(1.2);
-    filter: brightness(50%);
     /*-webkit-filter: blur(5px) brightness(50%);*/
 }
 
@@ -242,7 +241,7 @@ input[type="radio"] {
     width: 25px;
     height: 25px;
     left: -3px;
-    top: 2px;
+    top: 1px;
     border: 5px solid #fff;
     opacity: 0;
     border-radius: 50%;
@@ -576,6 +575,10 @@ input[type="radio"]:checked~.bullet .line.seven {
     transform-origin: center;
 }
 
+.notice-title-writer span:hover {
+    cursor: pointer;
+}
+
 
 #writer-content {
     display: inline-block;
@@ -602,7 +605,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 .notice-content-container {
     background: #eeeeee;
     border-radius: 0 0 2vh 2vh;
-    padding: 2vh;
+    padding: 0 2vh 0 2vh;;
     position: relative;
 }
 
@@ -945,7 +948,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .extension-seat-container {
-    margin-top: 10vh;
+    margin-top: 14vh;
     height: 85vh;
     float: left;
     margin-left: 8%;

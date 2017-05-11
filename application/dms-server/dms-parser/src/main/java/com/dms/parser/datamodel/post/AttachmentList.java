@@ -3,12 +3,12 @@ package com.dms.parser.datamodel.post;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class AttachmentList extends DataSaveAble{
+public class AttachmentList extends DataSaveable{
 	private ArrayList<Attachment> list;
 	
 	public AttachmentList(){
@@ -31,7 +31,7 @@ public class AttachmentList extends DataSaveAble{
 	public String toQuery() {
 		StringBuilder builder = new StringBuilder();
 		for(Attachment file : list){
-			builder.append(((DataSaveAble)file).toQuery());
+			builder.append(((DataSaveable)file).toQuery());
 		}
 		return builder.toString();
 	}
@@ -41,7 +41,7 @@ public class AttachmentList extends DataSaveAble{
 		JSONObject obj = new JSONObject();
 		JSONArray arr = new JSONArray();
 		for(Attachment file : list){
-			arr.add(((DataSaveAble)file).toJSONObject());
+			arr.add(((DataSaveable)file).toJSONObject());
 		}
 		obj.put("List", arr);
 		obj.put("Size", list.size());
@@ -49,7 +49,7 @@ public class AttachmentList extends DataSaveAble{
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
+	public DataSaveable fromResultSet(SafeResultSet rs) throws SQLException {
 		while(rs.next()){
 				list.add((Attachment) new Attachment().fromResultSet(rs));
 		}

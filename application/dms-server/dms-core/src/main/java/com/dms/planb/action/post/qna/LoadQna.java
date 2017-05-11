@@ -41,6 +41,7 @@ public class LoadQna implements Handler<RoutingContext> {
 				responseObject.put("question_content", resultSet.getString("question_content"));
 				responseObject.put("question_date", resultSet.getString("question_date"));
 				responseObject.put("privacy", resultSet.getBoolean("privacy"));
+				responseObject.put("writer", resultSet.getString("writer"));
 				if(resultSet.getString("answer_content") != null) {
 					responseObject.put("has_answer", true);
 					responseObject.put("answer_content", resultSet.getString("answer_content"));
