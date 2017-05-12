@@ -12,23 +12,45 @@ import java.util.Date;
 import java.util.List;
 
 public class SecureManager {
-    private static final int INVALID_REQUEST_MAX_COUNT = 20;
-    private static final int INVALID_REQUEST_DURATION_MINUTES = 5;
 
     private static AES256 aes;
     private static DataBase db;
 
-    private SecureManager() {
+    private final String NAME;
+    private final int INVALID_REQUEST_MAX_COUNT;
+    private final int INVALID_REQUEST_DURATION_MINUTES;
+
+    static {
         aes = new AES256(SecureConfig.get("AES"));
         db = DataBase.getInstance();
     }
 
-    private static class Singleton {
-        private static final SecureManager instance = new SecureManager();
+    private SecureManager(String name){
+        NAME = name;
+        INVALID_REQUEST_MAX_COUNT = 10;
+        INVALID_REQUEST_DURATION_MINUTES = 10;
     }
 
-    public static SecureManager getInstance() {
-        return Singleton.instance;
+    private SecureManager(String name, int count, int minute){
+        NAME = name;
+        INVALID_REQUEST_MAX_COUNT = count;
+        INVALID_REQUEST_DURATION_MINUTES = minute;
+    }
+
+    public static SecureManager create(Class<? extends Object> classz){
+        return new SecureManager(classz.getName());
+    }
+
+    public static SecureManager create(Class<? extends Object> classz, int time, int count){
+        return new SecureManager(classz.getName(), count, time);
+    }
+
+    public static SecureManager create(String name){
+        return new SecureManager(name);
+    }
+
+    public static SecureManager create(String name, int time, int count){
+        return new SecureManager(name, count, time);
     }
 
     public boolean isBanned(RoutingContext ctx) {
@@ -49,7 +71,7 @@ public class SecureManager {
         int count = 1;
         String ip = getHost(ctx);
         try {
-            SafeResultSet rs = db.executeQuery("select * from access_log where ip='", ip, "'");
+            SafeResultSet rs = db.executeQuery("select * from access_log where ip='", ip, "' AND type='",NAME,"'");
             if (rs.next()) {
                 Date date = rs.getDate("last_access_time");
                 if (calculateMinutes(date, new Date()) <= INVALID_REQUEST_DURATION_MINUTES) {
@@ -59,7 +81,7 @@ public class SecureManager {
             if (count >= INVALID_REQUEST_MAX_COUNT) {
                 ban(ctx, "INVALID ACCESS");
             } else {
-                db.executeUpdate("replace into access_log values(count, ip, last_access_time) values( '", ip, "', ", count, ", now())");
+                db.executeUpdate("replace into access_log values(count, ip, last_access_time, type) values( '", ip, "', ", count, ", now(), '",NAME,"')");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +107,7 @@ public class SecureManager {
             reason = "";
         try {
             db.executeUpdate("delete from access_log where ip='", ip, "'");
-            db.executeQuery("INSERT INTO blacklist values('", ip, "', '", reason, "')");
+            db.executeQuery("INSERT INTO blacklist values('", ip, "', '", reason+" : "+NAME, "')");
         } catch (SQLException e) {
             e.printStackTrace();
         }
