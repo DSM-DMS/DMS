@@ -18,7 +18,7 @@ public class DmsVerticle extends AbstractVerticle {
 
         router.route().handler(BodyHandler.create().setUploadsDirectory("upload-files"));
         router.route().handler(CookieHandler.create());
-        router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
+        router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setNagHttps(false));
         router.route().handler(RequestSecurePreprocessor.create());
         RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb", "com.dms.boxfox.templates");
         router.route().handler(StaticHandler.create());
