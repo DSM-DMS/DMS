@@ -692,6 +692,18 @@ $openLoginButton.on("click", function() {
     });
 });
 
+
+function setCookie(name, value, d) {
+    document.cookie = name + '=' + escape(value) + '; path=/' + (d ? '; expires=' + (function(t) {
+        t.setDate(t.getDate() + d);
+        return t
+    })(new Date).toGMTString() : '');
+}
+
+function deleteCookie(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
 /** ======================================================================================
  * Bug modal
 ========================================================================================== */
