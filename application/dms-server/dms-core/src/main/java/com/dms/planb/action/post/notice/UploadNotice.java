@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 
 import io.vertx.core.Handler;
@@ -19,16 +18,13 @@ public class UploadNotice implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		if (!Guardian.isAdmin(context)) {
 			context.response().setStatusCode(400).end();
 			context.response().close();
 			return;
 		}
-		
-		context = PrecedingWork.putHeaders(context);
-		
+
 		DataBase database = DataBase.getInstance();
 		
 		String title = context.request().getParam("title");

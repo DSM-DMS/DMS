@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
@@ -23,8 +22,6 @@ public class FaqWriteRouter implements Handler<RoutingContext> {
 	}
 	
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
 		if (!AdminManager.isAdmin(context)) {
 			return;
 		}

@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
@@ -25,7 +24,6 @@ public class QnaAnswerWriteRouter implements Handler<RoutingContext> {
 
     public void handle(RoutingContext context) {
         if (!Guardian.isAdmin(context)) return;
-        context = PrecedingWork.putHeaders(context);
 
         DmsTemplate templates = new DmsTemplate("editor");
 

@@ -11,7 +11,6 @@ import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -28,8 +27,6 @@ public class NoticeModifyRouter implements Handler<RoutingContext> {
 	
 	public void handle(RoutingContext context) {
 		if (!AdminManager.isAdmin(context)) return;
-		context = PrecedingWork.putHeaders(context);
-		
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		

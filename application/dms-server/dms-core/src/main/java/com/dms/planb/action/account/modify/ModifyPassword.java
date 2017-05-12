@@ -6,7 +6,6 @@ import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -24,8 +23,7 @@ public class ModifyPassword implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeadersOnly(context);
-		
+
 		DataBase database = DataBase.getInstance();
 		
 		String id = userManager.getIdFromSession(context);
