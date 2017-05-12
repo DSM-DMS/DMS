@@ -205,6 +205,7 @@ $classSelect.on("click", "td", function(e) {
 $openExtensionButton.on("click", function() {
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
+    $menu2.toggleClass("fade-out");
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -213,6 +214,7 @@ $closeExtensionButton.on("click", function() {
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -304,6 +306,7 @@ $openMyPageButton.on("click", function(){
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -311,6 +314,7 @@ $closeMypageWindow.on("click", function(){
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -500,6 +504,7 @@ $openStayButton.click(function() {
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -507,6 +512,7 @@ $closeStayButton.on("click", function() {
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -671,6 +677,7 @@ $openGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
     return false;
 });
@@ -679,6 +686,7 @@ $closeGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
