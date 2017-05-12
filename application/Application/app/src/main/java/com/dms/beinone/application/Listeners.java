@@ -39,6 +39,7 @@ public class Listeners {
                         }
                         break;
                     case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
                         textView.setTextColor(Color.BLACK);
                         break;
                     default: break;

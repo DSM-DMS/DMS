@@ -1,16 +1,20 @@
 package com.dms.beinone.application.comment;
 
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -26,6 +30,10 @@ import java.util.List;
 public class CommentActivity extends AppCompatActivity {
 
     private EmptySupportedRecyclerView mRecyclerView;
+    private EditText mCommentET;
+
+    private SharedPreferences mAccountPrefs;
+    private int mNo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,12 +43,34 @@ public class CommentActivity extends AppCompatActivity {
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
+
         mRecyclerView = (EmptySupportedRecyclerView) findViewById(R.id.rv_comment);
 
+        mCommentET = (EditText) findViewById(R.id.et_comment_comment);
+        ImageButton postIB = (ImageButton) findViewById(R.id.ib_comment_post);
+        postIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String comment = mCommentET.getText().toString().trim();
+                try {
+                    uploadComment(mNo, comment);
+                } catch (IOException e) {
+                    System.out.println("IOException in CommentActivity: POST /post/qna/comment");
+                    e.printStackTrace();
+                }
+            }
+        });
+
         // loads comments of the article
-        int no = getIntent().getIntExtra(getString(R.string.EXTRA_NO), 0);
-        if (no != 0) {
-            new LoadCommentTask().execute(no);
+        mNo = getIntent().getIntExtra(getString(R.string.EXTRA_NO), 0);
+        if (mNo != 0) {
+            try {
+                loadComment(mNo);
+            } catch (IOException e) {
+                System.out.println("IOException in CommentActivity: GET /post/qna/comment");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -53,41 +83,98 @@ public class CommentActivity extends AppCompatActivity {
         return true;
     }
 
-    private class LoadCommentTask extends AsyncTask<Integer, Void, List<Comment>> {
+    private void clearView() {
+        mCommentET.setText("");
+    }
 
-        @Override
-        protected List<Comment> doInBackground(Integer... nos) {
-            List<Comment> commentList = null;
+    private void loadComment(int no) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("no", String.valueOf(no));
 
-            try {
-                commentList = loadComment(nos[0]);
-            } catch (IOException ie) {
-                return null;
-            } catch (JSONException je) {
-                return null;
-            }
+            HttpBox.get(CommentActivity.this, "/post/qna/comment")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            switch (response.getCode()) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        List<Comment> comments = JSONParser.parseCommentJSON(response.getJsonObject());
+                                        mRecyclerView.setAdapter(new CommentAdapter(comments));
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in AppcontentFragment: GET /post/qna/comment");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    Toast.makeText(CommentActivity.this, R.string.comment_load_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(CommentActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(CommentActivity.this, R.string.comment_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            return commentList;
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in CommentActivity: GET /post/qna/comment");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in CommentActivity: GET /post/qna/comment");
+            e.printStackTrace();
         }
+    }
 
-        @Override
-        protected void onPostExecute(List<Comment> commentList) {
-            super.onPostExecute(commentList);
+    private void uploadComment(final int no, String content) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("no", no);
+            params.put("content", content);
 
-            mRecyclerView.setAdapter(new CommentAdapter(commentList));
-        }
+            HttpBox.post(CommentActivity.this, "/post/qna/comment")
+                    .putBodyData(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_CREATED:
+                                    clearView();
+                                    try {
+                                        loadComment(no);
+                                    } catch (IOException e) {
+                                        System.out.println("IOException in CommentActivity: GET /post/qna/comment");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(CommentActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(CommentActivity.this, R.string.comment_upload_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-        private List<Comment> loadComment(int no) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("no", no);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_QNA_COMMENT)
-                    .putBodyData(requestJSONObject)
-                    .push();
-
-            JSONObject responseJsonObject = response.getJsonObject();
-
-            return JSONParser.parseCommentJSON(responseJsonObject);
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in CommentActivity: POST /post/qna/comment");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in CommentActivity: POST /post/qna/comment");
+            e.printStackTrace();
         }
     }
 

@@ -18,10 +18,10 @@ $(".modify-btn").click(function() {
 $(".delete-btn").click(function() {
   $.ajax({
       url: "/post/"+localStorage.getItem('category'),
-      data: {no: Number(localStorage.getItem('no'))},
+      data: {no: Number(getAllUrlParams(document.URL).no)},
       type: 'DELETE',
       success: function(data) {
-          alert("삭제가 완료되었어요.");
+          redirect("post/admin?category=" + localStorage.getItem("category"))
       },
       error: function(data) {
           alert("삭제에 실패했어요. TT");

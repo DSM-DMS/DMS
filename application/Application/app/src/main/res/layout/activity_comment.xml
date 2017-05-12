@@ -17,7 +17,8 @@
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/ib_comment_post"
-        android:layout_toStartOf="@id/ib_comment_post" />
+        android:layout_toStartOf="@id/ib_comment_post"
+        android:textCursorDrawable="@drawable/dmset_cursor" />
 
     <com.dms.beinone.application.dmsview.DMSImageButton
         android:id="@+id/ib_comment_post"

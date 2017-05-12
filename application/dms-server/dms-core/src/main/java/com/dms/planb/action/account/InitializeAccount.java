@@ -16,10 +16,7 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/initialize", method = { HttpMethod.POST })
 public class InitializeAccount implements Handler<RoutingContext> {
-	public InitializeAccount() {
-		
-	}
-	
+
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();

@@ -4,7 +4,7 @@
     xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@android:color/background_light"
     android:clickable="true"
     android:focusableInTouchMode="true">
 
@@ -25,9 +25,11 @@
             android:inputType="text"
             android:maxLines="1"
             android:hint="@string/login_id"
-            android:textColorHint="@android:color/white"
-            android:textCursorDrawable="@drawable/dmset_cursor_login"
-            dmset:et_style="login" />
+            android:textCursorDrawable="@drawable/dmset_cursor"
+            dmset:dmset_backgroundColor="@android:color/transparent"
+            dmset:dmset_strokeColor="@color/colorPrimary"
+            dmset:dmset_focusStrokeColor="@color/colorPrimary"
+            dmset:dmset_textColor="@android:color/black" />
 
         <com.dms.beinone.application.dmsview.DMSEditText
             android:id="@+id/et_login_password"
@@ -37,22 +39,38 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:hint="@string/login_password"
-            android:textColorHint="@android:color/white"
-            android:textCursorDrawable="@drawable/dmset_cursor_login"
-            dmset:et_style="login" />
+            android:textCursorDrawable="@drawable/dmset_cursor"
+            dmset:dmset_backgroundColor="@android:color/transparent"
+            dmset:dmset_strokeColor="@color/colorPrimary"
+            dmset:dmset_focusStrokeColor="@color/colorPrimary"
+            dmset:dmset_textColor="@android:color/black" />
 
         <com.dms.beinone.application.dmsview.DMSButton
             android:id="@+id/btn_login_login"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="64dp"
             android:layout_marginTop="8dp"
             android:text="@string/login_login"
             dmsbtn:dmsbtn_style="rectangle"
-            dmsbtn:dmsbtn_backgroundColor="@color/colorAccent"
+            dmsbtn:dmsbtn_backgroundColor="@android:color/transparent"
             dmsbtn:dmsbtn_strokeColor="@color/colorAccent"
-            dmsbtn:dmsbtn_touchBackgroundColor="@android:color/white"
-            dmsbtn:dmsbtn_touchStrokeColor="@android:color/white"
-            dmsbtn:dmsbtn_textColor="@android:color/black"
+            dmsbtn:dmsbtn_touchBackgroundColor="@color/colorAccent"
+            dmsbtn:dmsbtn_touchStrokeColor="@color/colorAccent"
+            dmsbtn:dmsbtn_textColor="@color/colorAccent"
+            dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
+
+        <com.dms.beinone.application.dmsview.DMSButton
+            android:id="@+id/btn_login_register"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_register"
+            dmsbtn:dmsbtn_style="rectangle"
+            dmsbtn:dmsbtn_backgroundColor="@android:color/transparent"
+            dmsbtn:dmsbtn_strokeColor="@android:color/transparent"
+            dmsbtn:dmsbtn_touchBackgroundColor="@android:color/transparent"
+            dmsbtn:dmsbtn_touchStrokeColor="@android:color/transparent"
+            dmsbtn:dmsbtn_textColor="@android:color/darker_gray"
             dmsbtn:dmsbtn_touchTextColor="@android:color/black" />
 
     </LinearLayout>

@@ -2,7 +2,7 @@ package com.dms.parser.datamodel.post;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONObject;
@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 import com.dms.parser.dataio.Parser;
 import com.dms.parser.dataio.Query;
 
-public class Attachment extends DataSaveAble {
+public class Attachment extends DataSaveable {
 	private String name, link;
 	private int number;
 	
@@ -60,7 +60,7 @@ public class Attachment extends DataSaveAble {
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
+	public DataSaveable fromResultSet(SafeResultSet rs) throws SQLException {
 		this.number = rs.getInt("no");
 		this.name = rs.getString("name");
 		this.link = rs.getString("link");

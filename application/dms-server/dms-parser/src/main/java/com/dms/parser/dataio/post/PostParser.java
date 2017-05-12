@@ -1,16 +1,11 @@
 package com.dms.parser.dataio.post;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -52,12 +47,13 @@ public class PostParser<T> extends Parser {
 	}
 
 	@Override
-	public DataSaveAble[] parseAll() {
+	public DataSaveable[] parseAll() {
 		throw new RuntimeException("Is not Implemented method!");
 	};
 
 	@Override
-	public DataSaveAble parse() {
+	public DataSaveable parse() {
+		DataSaveable asd;
 		Document doc = ParserUtils.getDoc(url);
 		Element article = doc.getElementsByTag("article").get(0);
 		String title = article.getElementsByTag("h1").get(0).text().replaceAll("제목", "");

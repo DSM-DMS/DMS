@@ -7,17 +7,20 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import com.dms.beinone.application.DensityConverter;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.DensityConverter;
 
+import static android.R.attr.drawableRight;
+import static android.R.attr.paddingBottom;
+import static android.R.attr.paddingLeft;
+import static android.R.attr.paddingRight;
+import static android.R.attr.paddingTop;
 import static android.R.attr.textSize;
 
 /**
@@ -28,8 +31,6 @@ public class DMSButton extends Button {
 
     private static final int STYLE_RECTANGLE = 0;
     private static final int STYLE_ROUND = 1;
-
-    private GestureDetectorCompat mGestureDetector;
 
     private Drawable mNormalBackground;
     private Drawable mOnTouchBackground;
@@ -67,17 +68,37 @@ public class DMSButton extends Button {
         int textColor = a.getColor(R.styleable.DMSButton_dmsbtn_textColor, strokeColor);
         int touchTextColor = a.getColor(R.styleable.DMSButton_dmsbtn_touchTextColor, backgroundColor);
 
-        a = context.obtainStyledAttributes(attrs, new int[] { textSize, android.R.attr.drawableRight });
+        a = context.obtainStyledAttributes(attrs, new int[]{textSize});
 
         // get text size
         int textSize = a.getDimensionPixelSize(0, (int) DensityConverter.dpToPx(context, 14));
 
+        a = context.obtainStyledAttributes(attrs, new int[]{drawableRight});
+
         // get drawable on right
-        Drawable drawableRight = a.getDrawable(1);
+        Drawable drawableRight = a.getDrawable(0);
         if (drawableRight != null) hasImage = true;
 
+        int defPaddingHorizontal = 0;
+        int defPaddingVertical = 0;
+        if (style == STYLE_RECTANGLE) {
+            defPaddingHorizontal = (int) DensityConverter.dpToPx(context, 16);
+            defPaddingVertical = (int) DensityConverter.dpToPx(context, 10);
+        } else {
+            defPaddingHorizontal = (int) DensityConverter.dpToPx(context, 8);
+            defPaddingVertical = (int) DensityConverter.dpToPx(context, 4);
+        }
+
+        // get padding
+        a = context.obtainStyledAttributes(attrs, new int[]{paddingLeft, paddingTop, paddingRight, paddingBottom});
+        int paddingLeft = a.getDimensionPixelOffset(0, defPaddingHorizontal);
+        int paddingTop = a.getDimensionPixelOffset(1, defPaddingVertical);
+        int paddingRight = a.getDimensionPixelOffset(3, defPaddingHorizontal);
+        int paddingBottom = a.getDimensionPixelOffset(2, defPaddingVertical);
+
         init(context, style, backgroundColor, strokeColor, touchBackgroundColor,
-                touchStrokeColor, textColor, touchTextColor, textSize);
+                touchStrokeColor, textColor, touchTextColor, textSize,
+                new int[]{paddingLeft, paddingTop, paddingBottom, paddingRight});
     }
 
 //    @Override
@@ -87,7 +108,7 @@ public class DMSButton extends Button {
 
     private void init(Context context, int style, int backgroundColor, int strokeColor,
                       int touchBackgroundColor, int touchStrokeColor, int textColor,
-                      int touchTextColor, int textSize) {
+                      int touchTextColor, int textSize, int[] padding) {
 
         if (style == STYLE_RECTANGLE) {
             mNormalBackground = ContextCompat.getDrawable(context, R.drawable.dmsbtn);
@@ -99,11 +120,13 @@ public class DMSButton extends Button {
 
         // background color and stroke color
         ((GradientDrawable) mNormalBackground).setColor(backgroundColor);
-        ((GradientDrawable) mNormalBackground).setStroke(1, strokeColor);
+        ((GradientDrawable) mNormalBackground).setStroke(
+                (int) DensityConverter.dpToPx(context, 1), strokeColor);
 
         // background color and stroke color on button touch
         ((GradientDrawable) mOnTouchBackground).setColor(touchBackgroundColor);
-        ((GradientDrawable) mOnTouchBackground).setStroke(1, touchStrokeColor);
+        ((GradientDrawable) mOnTouchBackground).setStroke(
+                (int) DensityConverter.dpToPx(context, 1), touchStrokeColor);
 
         // text color
         mNormalTextColor = textColor;
@@ -119,69 +142,12 @@ public class DMSButton extends Button {
             getCompoundDrawables()[2].setColorFilter(mNormalTextColor, PorterDuff.Mode.MULTIPLY);
         }
 
+        setPadding(padding[0], padding[1], padding[2], padding[3]);
+
         setMinWidth(0);
         setMinimumWidth(0);
         setMinHeight(0);
         setMinimumHeight(0);
-
-        mGestureDetector = new GestureDetectorCompat(context, new GestureDetector.OnGestureListener() {
-            @Override
-            public boolean onDown(MotionEvent e) {
-                setBackground(mOnTouchBackground);
-                setTextColor(mOnTouchTextColor);
-
-                if (hasImage) {
-                    // get drawable having drawableRight attribute (drawableRight is in index 2)
-                    // and clear color filter
-                    getCompoundDrawables()[2].clearColorFilter();
-                }
-
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                setBackground(mNormalBackground);
-                setTextColor(mNormalTextColor);
-
-                if (hasImage) {
-                    getCompoundDrawables()[2].setColorFilter(
-                            mNormalTextColor, PorterDuff.Mode.MULTIPLY);
-                }
-
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-
-            }
-
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                setBackground(mNormalBackground);
-                setTextColor(mNormalTextColor);
-
-                if (hasImage) {
-                    getCompoundDrawables()[2].setColorFilter(
-                            mNormalTextColor, PorterDuff.Mode.MULTIPLY);
-                }
-
-                return true;
-            }
-        });
-
-
 
         setOnTouchListener(new OnTouchListener() {
             @Override
@@ -218,6 +184,7 @@ public class DMSButton extends Button {
                         break;
 
                     case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
                         setBackground(mNormalBackground);
                         setTextColor(mNormalTextColor);
 
@@ -228,7 +195,8 @@ public class DMSButton extends Button {
 
                         break;
 
-                    default: break;
+                    default:
+                        break;
                 }
 
                 return false;

@@ -1,10 +1,11 @@
 package com.dms.beinone.application.afterschoolapply;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
@@ -17,14 +18,16 @@ import java.util.List;
 
 public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.ViewHolder> {
 
-    private List<Afterschool> mAfterschoolList;
+    private Context mContext;
+    private List<Afterschool> mAfterschools;
 
-    public AfterschoolAdapter(List<Afterschool> afterschoolList) {
-        mAfterschoolList = afterschoolList;
+    public AfterschoolAdapter(Context context, List<Afterschool> afterschools) {
+        mContext = context;
+        mAfterschools = afterschools;
     }
 
     @Override
-    public AfterschoolAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.viewholder_afterschool, parent, false);
 
@@ -32,13 +35,22 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
     }
 
     @Override
-    public void onBindViewHolder(AfterschoolAdapter.ViewHolder holder, int position) {
-        holder.bind(mAfterschoolList.get(position));
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final Afterschool afterschool = mAfterschools.get(position);
+
+        holder.bind(afterschool);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApplyAfterschoolDialog.newInstance(mContext, afterschool.getNo());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mAfterschoolList.size();
+        return mAfterschools.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,9 +58,13 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
         private TextView mTitleTV;
         private TextView mInstructorTV;
         private TextView mPlaceTV;
-        private TextView mDayTV;
-        private TextView mTargetTV;
-        private Button mApplyBtn;
+        private TextView mMondayTV;
+        private TextView mTuesdayTV;
+        private TextView mWednesdayTV;
+        private TextView mSaturdayTV;
+        private TextView mFirstGradeTV;
+        private TextView mSecondGradeTV;
+        private TextView mThridGradeTV;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -56,63 +72,61 @@ public class AfterschoolAdapter extends RecyclerView.Adapter<AfterschoolAdapter.
             mTitleTV = (TextView) itemView.findViewById(R.id.tv_afterschool_title);
             mInstructorTV = (TextView) itemView.findViewById(R.id.tv_afterschool_instructor);
             mPlaceTV = (TextView) itemView.findViewById(R.id.tv_afterschool_place);
-            mDayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_day);
-            mTargetTV = (TextView) itemView.findViewById(R.id.tv_afterschool_target);
-            mApplyBtn = (Button) itemView.findViewById(R.id.btn_afterschoolapply_apply);
-
-            mApplyBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+            mMondayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_monday);
+            mTuesdayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_tuesday);
+            mWednesdayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_wednesday);
+            mSaturdayTV = (TextView) itemView.findViewById(R.id.tv_afterschool_saturday);
+            mFirstGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_grade1);
+            mSecondGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_grade2);
+            mThridGradeTV = (TextView) itemView.findViewById(R.id.tv_afterschool_grade3);
         }
 
-        public void bind(Afterschool afterschool) {
+        public void bind(final Afterschool afterschool) {
             mTitleTV.setText(afterschool.getTitle());
             mInstructorTV.setText(afterschool.getInstructor());
             mPlaceTV.setText(afterschool.getPlace());
-            mDayTV.setText(getAfterschoolDayString(afterschool));
-            mTargetTV.setText(String.valueOf(afterschool.getTarget()));
+            if (afterschool.isOnMonday()) mMondayTV.setTextColor(Color.BLACK);
+            if (afterschool.isOnTuesday()) mTuesdayTV.setTextColor(Color.BLACK);
+            if (afterschool.isOnWednesday()) mWednesdayTV.setTextColor(Color.BLACK);
+            if (afterschool.isOnSaturday()) mSaturdayTV.setTextColor(Color.BLACK);
         }
 
-        private String getAfterschoolDayString(Afterschool afterschool) {
-            boolean isFirstDay = true;
-            String afterschoolDayString = "";
-
-            if (afterschool.isOnMonday()) {
-                afterschoolDayString = "월";
-                isFirstDay = false;
-            }
-
-            if (afterschool.isOnTuesday()) {
-                if (isFirstDay) {
-                    afterschoolDayString = "화";
-                    isFirstDay = false;
-                } else {
-                    afterschoolDayString += ", 화";
-                }
-            }
-
-            if (afterschool.isOnWednesday()) {
-                if (isFirstDay) {
-                    afterschoolDayString = "수";
-                    isFirstDay = false;
-                } else {
-                    afterschoolDayString += ", 수";
-                }
-            }
-
-            if (afterschool.isOnSaturday()) {
-                if (isFirstDay) {
-                    afterschoolDayString = "토";
-                } else {
-                    afterschoolDayString += ", 토";
-                }
-            }
-
-            return afterschoolDayString;
-        }
+//        private String getAfterschoolDayString(Afterschool afterschool) {
+//            boolean isFirstDay = true;
+//            String afterschoolDayString = "";
+//
+//            if (afterschool.isOnMonday()) {
+//                afterschoolDayString = "월";
+//                isFirstDay = false;
+//            }
+//
+//            if (afterschool.isOnTuesday()) {
+//                if (isFirstDay) {
+//                    afterschoolDayString = "화";
+//                    isFirstDay = false;
+//                } else {
+//                    afterschoolDayString += ", 화";
+//                }
+//            }
+//
+//            if (afterschool.isOnWednesday()) {
+//                if (isFirstDay) {
+//                    afterschoolDayString = "수";
+//                    isFirstDay = false;
+//                } else {
+//                    afterschoolDayString += ", 수";
+//                }
+//            }
+//
+//            if (afterschool.isOnSaturday()) {
+//                if (isFirstDay) {
+//                    afterschoolDayString = "토";
+//                } else {
+//                    afterschoolDayString += ", 토";
+//                }
+//            }
+//
+//            return afterschoolDayString;
+//        }
     }
-
 }
