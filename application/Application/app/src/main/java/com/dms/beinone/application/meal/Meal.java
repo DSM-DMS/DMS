@@ -27,6 +27,15 @@ public class Meal {
         setDinner(dinnerAllergy);
     }
 
+    public String get(int index) {
+        switch (index) {
+            case 0: return breakfast;
+            case 1: return lunch;
+            case 2: return dinner;
+            default: return null;
+        }
+    }
+
     public String getBreakfast() {
         return breakfast;
     }

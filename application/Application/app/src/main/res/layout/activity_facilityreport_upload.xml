@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
+    <RelativeLayout
+        android:id="@+id/layout_facilityreport_upload_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_facilityreport_upload_submit" />
+
+    <com.dms.beinone.application.dmsview.DMSButton
+        android:id="@+id/btn_facilityreport_upload_submit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/facilityreport_submit"
+        dmsbtn:dmsbtn_style="rectangle"
+        dmsbtn:dmsbtn_backgroundColor="@android:color/black"
+        dmsbtn:dmsbtn_strokeColor="@android:color/black"
+        dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"
+        dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"
+        dmsbtn:dmsbtn_textColor="@android:color/white"
+        dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
+
+</RelativeLayout>

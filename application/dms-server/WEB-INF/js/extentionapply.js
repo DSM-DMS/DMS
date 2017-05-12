@@ -17,11 +17,7 @@ function setCancleEvent() {
     $(".extentionapply div.selecter-container input.apply-cancle").click(function() {
         // 신청취소 ajax
         $.ajax({
-<<<<<<< HEAD
-            url: "http://localhost:8089/apply/extension",
-=======
             url: mainUrl,
->>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
             type: "DELETE",
             success: function(data) {
                 // alert("취소 완료.");
@@ -38,17 +34,6 @@ function setCancleEvent() {
 
 function setSelecterOptions() {
     var mapData;
-    // $.ajax({
-    //     url: "http://localhost:8088/apply/extension/class",
-    //     type: "GET",
-    //     data: JSON.stringify({
-    //         "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val()
-    //     }),
-    //     success: function(data) {
-    //         setOptions(JSON.parse(data).result)
-    //         mapData = JSON.parse(data);
-    //     }
-    // });
     function setOptions(optionData) {
         // class 목록을 받아오는 코드
         for (var loop = 0; loop < optionData.length; loop++) {
@@ -130,11 +115,7 @@ console.log(borderSize);
 function getSeatData(callback) {
     // var result;
     $.ajax({
-<<<<<<< HEAD
-        url: "http://localhost:8089/apply/extension/class",
-=======
         url: mainUrl + "/class",
->>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
         type: "GET",
         data: {
             "option": "map",
@@ -193,11 +174,7 @@ function drawSeat(seatArr, borderSize) {
                             // 신청 ajax
                             // console.log("value test = "+$(this).data("seat"))
                             $.ajax({
-<<<<<<< HEAD
-                                url: "http://localhost:8089/apply/extension",
-=======
                                 url: mainUrl,
->>>>>>> 51598e4357087a6a3e1d5bbfb90b41c9784cb03a
                                 type: "PUT",
                                 data: {
                                     "class": $(".extentionapply div.class-selecter-div select#class-select").children("option:selected").val(),

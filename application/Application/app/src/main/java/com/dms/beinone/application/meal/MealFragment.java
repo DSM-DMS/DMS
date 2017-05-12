@@ -2,7 +2,6 @@ package com.dms.beinone.application.meal;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.DateUtils;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 import com.samsistemas.calendarview.widget.CalendarView;
 
@@ -27,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -62,6 +61,7 @@ public class MealFragment extends Fragment {
 
     /**
      * 초기화, 더보기 버튼 터치 이벤트 및 클릭 이벤트 설정, 달력 날짜 클릭 이벤트 설정
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -82,7 +82,12 @@ public class MealFragment extends Fragment {
                 ContextCompat.getColor(getContext(), R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
         // display meal information as today initially
-        new LoadMealTask().execute(new Date());
+        try {
+            loadMeal(new Date());
+        } catch (IOException e) {
+            System.out.println("IOException in MealFragment: loadMeal()");
+            e.printStackTrace();
+        }
 
         mBreakfastExpandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,13 +128,19 @@ public class MealFragment extends Fragment {
             public void onDateClick(@NonNull Date selectedDate) {
                 clear();
                 // load the meal information of selected date from server when select date
-                new LoadMealTask().execute(selectedDate);
+                try {
+                    loadMeal(selectedDate);
+                } catch (IOException e) {
+                    System.out.println("IOException in MealFragment: loadMeal()");
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     /**
      * display meal information
+     *
      * @param meal Meal object contains meal information to display
      */
     private void bind(Meal meal) {
@@ -140,6 +151,7 @@ public class MealFragment extends Fragment {
 
     /**
      * change to collapse image of button and display meal information
+     *
      * @param when Integer constant of meal time to collapse
      */
     private void collapse(int when) {
@@ -163,7 +175,8 @@ public class MealFragment extends Fragment {
                 button = mDinnerExpandBtn;
                 if (mSelectedDayMeal != null) mealMenu = mSelectedDayMeal.getDinner();
                 break;
-            default: break;
+            default:
+                break;
         }
 
         textView.setText(mealMenu);
@@ -178,6 +191,7 @@ public class MealFragment extends Fragment {
 
     /**
      * change to expand image of button and display allergy information
+     *
      * @param when Integer constant of meal time to expand
      */
     private void expand(int when) {
@@ -201,7 +215,8 @@ public class MealFragment extends Fragment {
                 button = mDinnerExpandBtn;
                 if (mSelectedDayMeal != null) mealAllergy = mSelectedDayMeal.getDinnerAllergy();
                 break;
-            default: break;
+            default:
+                break;
         }
 
         textView.setText(mealAllergy);
@@ -231,61 +246,57 @@ public class MealFragment extends Fragment {
         mDinnerExpandBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, mMoreDrawable, null);
     }
 
-    private class LoadMealTask extends AsyncTask<Date, Void, Boolean> {
+    /**
+     * load the meal information from server
+     *
+     * @return Meal object that contains the meal information of the date
+     * @throws IOException
+     * @throws JSONException
+     */
+    private void loadMeal(Date date) throws IOException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        try {
+            JSONObject params = new JSONObject();
+            params.put("year", calendar.get(Calendar.YEAR));
+            params.put("month", calendar.get(Calendar.MONTH) + 1);
+            params.put("day", calendar.get(Calendar.DAY_OF_MONTH));
 
-        @Override
-        protected Boolean doInBackground(Date... dates) {
-            int year = DateUtils.getYear(dates[0]);
-            int month = DateUtils.getMonth(dates[0]);
-            int date = DateUtils.getDate(dates[0]);
+            HttpBox.get(getContext(), "/school/meal")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        Meal meal = JSONParser.parseMealJSON(response.getJsonObject());
+                                        mSelectedDayMeal = meal;
+                                        bind(meal);
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in MealFragment: GET /school/meal");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.meal_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            try {
-                mSelectedDayMeal = loadMeal(year, month, date);
-            } catch (IOException ie) {
-                ie.printStackTrace();
-                return false;
-            } catch (JSONException je) {
-                je.printStackTrace();
-                return false;
-            }
-
-            return true;
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in MealFragment: GET /school/meal");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in MealFragment: GET /school/meal");
+            e.printStackTrace();
         }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-
-            if (result) {
-                bind(mSelectedDayMeal);
-            } else {
-                Toast.makeText(getContext(), R.string.meal_error, Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-
-        /**
-         * load the meal information from server
-         * @return Meal object that contains the meal information of the date
-         * @throws IOException
-         * @throws JSONException
-         */
-        private Meal loadMeal(int year, int month, int day) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("year", year);
-            requestJSONObject.put("month", month);
-            requestJSONObject.put("day", day);
-            Response response = HttpBox.post()
-                    .setCommand(Commands.LOAD_MEAL)
-                    .putBodyData(requestJSONObject)
-                    .push();
-
-            JSONObject mealJSONObject = response.getJsonObject();
-
-            return JSONParser.parseMealJSON(mealJSONObject);
-        }
-
     }
 
 }

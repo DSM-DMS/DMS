@@ -1,7 +1,6 @@
 package com.dms.beinone.application.qna;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,11 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
-import com.dms.beinone.application.JSONParser;
+import com.dms.beinone.application.OnMoreBtnClickListener;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -31,6 +31,10 @@ import java.util.List;
 
 public class QnAFragment extends Fragment {
 
+    public static final int LIMIT = 10;
+
+    public static int page = 1;
+
     private FloatingActionButton mFAB;
     private EmptySupportedRecyclerView mRecyclerView;
 
@@ -44,14 +48,30 @@ public class QnAFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
+        mFAB.setVisibility(View.VISIBLE);
 
-        new LoadQnAListTask().execute();
+        try {
+            loadQnAList();
+        } catch (IOException e) {
+            System.out.println("IOException in QnAFragment: loadQnAList()");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFAB.setVisibility(View.INVISIBLE);
+
+        // initialize the page on stop the fragment
+        page = 1;
     }
 
     /**
      * 초기화, RecyclerView 세팅
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -62,7 +82,7 @@ public class QnAFragment extends Fragment {
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), QnAWriteActivity.class));
+                startActivity(new Intent(getContext(), QnAUploadActivity.class));
             }
         });
 
@@ -72,47 +92,60 @@ public class QnAFragment extends Fragment {
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    private void loadQnAList() throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("page", QnAFragment.page);
+            params.put("limit", LIMIT);
 
-        mFAB.setVisibility(View.INVISIBLE);
-    }
+            HttpBox.get(getContext(), "/post/qna/list")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        List<QnA> qnas = JSONParser.parseQnAListJSON(response.getJsonObject());
+                                        mRecyclerView.setAdapter(new QnAAdapter(getContext(), qnas, new OnMoreBtnClickListener() {
+                                            @Override
+                                            public void onMoreBtnClick() {
+                                                try {
+                                                    loadQnAList();
+                                                } catch (IOException e) {
+                                                    System.out.println("IOException in QnAFragment: loadQnAList()");
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }));
+                                        // increase the page number if completed loading successfully
+                                        QnAFragment.page++;
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in QnAFragment: GET /post/qna/list");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+//                                    Toast.makeText(getContext(), R.string.qna_list_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(getContext(), R.string.qna_list_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-    private class LoadQnAListTask extends AsyncTask<Void, Void, List<QnA>> {
-
-        @Override
-        protected List<QnA> doInBackground(Void... params) {
-            List<QnA> qnaList = null;
-
-            try {
-                qnaList = loadQnAList();
-            } catch (IOException e) {
-                return null;
-            } catch (JSONException e) {
-                return null;
-            }
-
-            return qnaList;
-        }
-
-        @Override
-        protected void onPostExecute(List<QnA> qnaList) {
-            super.onPostExecute(qnaList);
-
-            if (qnaList == null) {
-                Toast.makeText(getContext(), R.string.qna_error, Toast.LENGTH_SHORT).show();
-            } else {
-                mRecyclerView.setAdapter(new QnAAdapter(getContext(), qnaList));
-            }
-        }
-
-        private List<QnA> loadQnAList() throws IOException, JSONException {
-            Response response =
-                    HttpBox.post().setCommand(Commands.LOAD_QNA_LIST).putBodyData().push();
-
-            JSONObject responseJSONObject = response.getJsonObject();
-            return JSONParser.parseQnAListJSON(responseJSONObject);
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in QnAFragment: GET /post/qna/list");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in QnAFragment: GET /post/qna/list");
+            e.printStackTrace();
         }
     }
 
