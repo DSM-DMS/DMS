@@ -284,16 +284,16 @@ function fillListCard(data, target) {
     // }));
     newCard.on('click', function(){
         if(!$(".list-box p").hasClass("list-box-no-content")){
-            $(this).css('width', '100%');  
-            $(this).css('height', '50%'); 
+            $(this).css('width', '100%');
+            $(this).css('height', '50%');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
                 html: data.content
             }));
             $(".list-box-no-content").css('opacity', '1');
         }else{
-            $(this).css('width', '20vh');  
-            $(this).css('height', '20vh'); 
+            $(this).css('width', '20vh');
+            $(this).css('height', '20vh');
             $(this).children(".list-box-no-content").detach();
         }
     });
@@ -399,6 +399,28 @@ $passwordChangeReq.on("click", function() {
         alert("비밀번호를 다시 확인하세요.")
     }
 });
+
+getStudentInfo();
+
+function getStudentInfo() {
+    $.ajax({
+        url: "/account/student",
+        method: "get",
+        success: function(data) {
+            fillStudentData(JSON.parse(data));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+function fillStudentData(data) {
+    $(".profile-container .name").text(data.name);
+    $(".profile-container .number").text(data.name);
+    $(".point-container .merit").text(data.merit);
+    $(".point-container .demerit").text(data.demerit);
+}
 
 
 

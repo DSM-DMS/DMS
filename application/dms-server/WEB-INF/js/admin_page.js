@@ -26,54 +26,54 @@ function numOfDays(year, month) {
 }
 
 function getWeek(date) {
-  var tempDate = new Date(date.getFullYear(), date.getMonth(), 1);
-  var daysOfMonth = numOfDays(tempDate.getFullYear(), date.getMonth());
-  var week = parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+    var tempDate = new Date(date.getFullYear(), date.getMonth(), 1);
+    var daysOfMonth = numOfDays(tempDate.getFullYear(), date.getMonth());
+    var week = parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
 
 
 
-  if(week == 5) {
-    if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-      return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-    } else if(daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-      return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-    } else if(daysOfMonth == 29 && tempDate.getDay() == 6) {
-      return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-    } else {
-      return 0;
+    if (week == 5) {
+        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
+            return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else {
+            return 0;
+        }
     }
-  }
-  return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+    return parseInt(((date.getDate() - 1) + tempDate.getDay()) / 7) + 1;
 }
 
-$('#stay_download').on('click', function () {
-  var today = new Date();
-  var week = getWeek(today);
-  if(week == 0) {
-    today.setMonth(today.getMonth() + 1);
-    week = 1;
-  }
-  var year = today.getFullYear();
-  var month = today.getMonth() + 1;
+$('#stay_download').on('click', function() {
+    var today = new Date();
+    var week = getWeek(today);
+    if (week == 0) {
+        today.setMonth(today.getMonth() + 1);
+        week = 1;
+    }
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
 
-  location.href = 'http://dsm2015.cafe24.com/stay/download?year=' + year + '&month=' + month + '&week=' + week;
+    location.href = 'http://dsm2015.cafe24.com/stay/download?year=' + year + '&month=' + month + '&week=' + week;
 });
 
-$('#goOut_download').on('click', function () {
-  var today = new Date();
-  var week = getWeek(today);
-  if(week == 0) {
-    today.setMonth(today.getMonth() + 1);
-    week = 1;
-  }
-  var year = today.getFullYear();
-  var month = today.getMonth() + 1;
+$('#goOut_download').on('click', function() {
+    var today = new Date();
+    var week = getWeek(today);
+    if (week == 0) {
+        today.setMonth(today.getMonth() + 1);
+        week = 1;
+    }
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
 
-  location.href = 'http://dsm2015.cafe24.com/goingout/download?year=' + year + '&month=' + month + '&week=' + week;
+    location.href = 'http://dsm2015.cafe24.com/goingout/download?year=' + year + '&month=' + month + '&week=' + week;
 })
 
-$('#extension_download').on('click', function () {
-  location.href = 'http://dsm2015.cafe24.com/extension/download';
+$('#extension_download').on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/extension/download';
 })
 
 $("#account-refresh-btn").click(function() {
@@ -98,24 +98,24 @@ $("#account-refresh-btn").click(function() {
 })
 
 $("#create-admin-btn").click(function() {
-  var lists = $('#create-admin-form').find($('input'));
-  for(var index=0;index<lists.length; index++){
-    if(lists[index].value.length==0){
-      alert('정보를 모두 입력해 주세요!');
-      return;
+    var lists = $('#create-admin-form').find($('input'));
+    for (var index = 0; index < lists.length; index++) {
+        if (lists[index].value.length == 0) {
+            alert('정보를 모두 입력해 주세요!');
+            return;
+        }
     }
-  }
     $.ajax({
         url: "/account/register/admin",
         type: "POST",
         data: $("#create-admin-form").serialize(),
         complete: function(xhr, textStatus) {
-          var statusCode = xhr.status;
-          if(statusCode==200){
-              alert('계정생성이 완료되었습니다.');
-          }else{
-              alert('계정생성에 실패했습니다.');
-          }
+            var statusCode = xhr.status;
+            if (statusCode == 200) {
+                alert('계정생성이 완료되었습니다.');
+            } else {
+                alert('계정생성에 실패했습니다.');
+            }
         }
     })
 })
