@@ -33,6 +33,7 @@ public class AdminManager implements AccountManager {
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
         try {
             SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
+            
             if (rs.next() && rs.getInt(1) > 0) {
                 check = true;
             }

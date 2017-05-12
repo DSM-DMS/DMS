@@ -122,6 +122,7 @@ var $openPointButton = $(".point-btn");
 var $noticeMoreBtn = $(".notice-more");
 var $closeNoticeButton = $("#close-notice-window");
 var $noticeListWindow = $(".notice-window");
+var $noticeBox = $(".list-box");
 
 /**
  * Current state(stay)
@@ -205,16 +206,22 @@ $classSelect.on("click", "td", function(e) {
 });
 
 $openExtensionButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
+    $menu2.toggleClass("fade-out");
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
 $closeExtensionButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -267,11 +274,29 @@ function fillListCard(data, target) {
         "class": "list-box-no-title",
         text: data.title
     }));
+    newCard.append($('<p/>', {
+        "class": "list-box-writer",
+        text: "사감부"
+    }));
     // newCard.append($('<p/>', {
-    //     "class": "list-box-writer",
-    //     text: "사감부"
+    //     "class": "list-box-no-content",
+    //     html: data.content
     // }));
-
+    newCard.on('click', function(){
+        if(!$(".list-box p").hasClass("list-box-no-content")){
+            $(this).css('width', '100%');  
+            $(this).css('height', '50%'); 
+            $(this).append($('<p/>', {
+                "class": "list-box-no-content",
+                html: data.content
+            }));
+            $(".list-box-no-content").css('opacity', '1');
+        }else{
+            $(this).css('width', '20vh');  
+            $(this).css('height', '20vh'); 
+            $(this).children(".list-box-no-content").detach();
+        }
+    });
     target.append(newCard);
 }
 
@@ -294,7 +319,6 @@ function setNoticePreview() {
     });
 }
 
-
 /** ======================================================================================
  * Dormitory rule
 ========================================================================================== */
@@ -306,6 +330,7 @@ $openMyPageButton.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -313,6 +338,7 @@ $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -525,16 +551,22 @@ var setStayValue = function(thisDate) {
 setStayValue(stayDate)
 
 $openStayButton.click(function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
 $closeStayButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -699,6 +731,7 @@ $openGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
     return false;
 });
@@ -707,6 +740,7 @@ $closeGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
