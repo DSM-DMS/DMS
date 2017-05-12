@@ -32,16 +32,13 @@ public class RequestSecurePreprocessor {
             if (secureManager.isBanned(context)) {
                 context.response().setStatusCode(400);
                 context.response().setStatusMessage("You are banned!");
-                context.response().end("사이트에서 차단되었습니다. 관리자에게 문의해 주세요 IP:"+context.request().remoteAddress().host());
+                context.response().putHeader("Content-Type", "text/html; charset=utf-8");
+                context.response().end("<h1>사이트에서 차단되었습니다.<br> 관리자에게 문의해 주세요 IP:"+context.request().remoteAddress().host()+"</h1>");
                 context.response().close();
                 return;
             }
 
-            Log.l("Requested : " + context.request().host());
-            Log.l("Method : " + context.request().method());
-            Log.l("Absolute URI : " + context.request().absoluteURI());
-            Log.l("Data : " + context.request().params());
-
+            Log.l("Requested : " + context.request().host()," Method : " ,context.request().method()," Absolute URI : " , context.request().absoluteURI()," Params size : " , context.request().params().size());
             context.next();
         }
     }

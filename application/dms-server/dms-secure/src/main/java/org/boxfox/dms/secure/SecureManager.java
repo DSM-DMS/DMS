@@ -5,6 +5,7 @@ import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.utilities.config.SecureConfig;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
+import org.boxfox.dms.utilities.log.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class SecureManager {
         boolean check = false;
         String ip = getHost(ctx);
         try {
-            int count = db.executeQuery("select count(*) from block_list where ip='", ip, "'").nextAndReturn().getInt(1);
+            int count = db.executeQuery("select count(*) from blacklist where ip='", ip, "'").nextAndReturn().getInt(1);
             if (count > 0) {
                 check = true;
             }
@@ -81,7 +82,8 @@ public class SecureManager {
             if (count >= INVALID_REQUEST_MAX_COUNT) {
                 ban(ctx, "INVALID ACCESS");
             } else {
-                db.executeUpdate("replace into access_log values(count, ip, last_access_time, type) values( '", ip, "', ", count, ", now(), '",NAME,"')");
+                db.executeUpdate("replace into access_log (ip, count, last_access_time, type) values( '", ip, "', ", count, ", NOW(), '",NAME,"')");
+                Log.l("Count Invalid request (user : ",ip,")");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,7 +109,8 @@ public class SecureManager {
             reason = "";
         try {
             db.executeUpdate("delete from access_log where ip='", ip, "'");
-            db.executeQuery("INSERT INTO blacklist values('", ip, "', '", reason+" : "+NAME, "')");
+            db.executeUpdate("INSERT INTO blacklist values('", ip, "', '", reason+" : "+NAME, "', NOW())");
+            Log.l("Ban user : ",ip," ",reason);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -124,6 +127,7 @@ public class SecureManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Log.l("Unan user : ",ip);
     }
 
     private String getHost(RoutingContext ctx) {
