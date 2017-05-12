@@ -19,6 +19,13 @@ public class FacilityReport implements Parcelable {
     private String result;
     private String resultDate;
 
+    public FacilityReport(String title, String content, int room, String writer) {
+        setTitle(title);
+        setContent(content);
+        setRoom(room);
+        setWriter(writer);
+    }
+
     public FacilityReport(int no, String title, int room, String writeDate, String writer,
                           boolean hasResult) {
         setNo(no);
@@ -27,14 +34,6 @@ public class FacilityReport implements Parcelable {
         setWriteDate(writeDate);
         setWriter(writer);
         setHasResult(hasResult);
-    }
-
-    public FacilityReport(String title, String content, int room, String writer) {
-        setTitle(title);
-        setContent(content);
-        setRoom(room);
-        setWriteDate(writeDate);
-        setWriter(writer);
     }
 
     public FacilityReport(int no, String title, String content, int room, String writeDate,

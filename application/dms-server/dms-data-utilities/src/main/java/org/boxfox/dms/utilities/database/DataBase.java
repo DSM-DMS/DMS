@@ -93,7 +93,7 @@ public class DataBase {
 		return new SafeResultSet(statement.getResultSet());
 	}
 
-	public int executeUpdate(DataSaveAble data) throws SQLException {
+	public int executeUpdate(DataSaveable data) throws SQLException {
 		return executeUpdate(data.toQuery());
 	}
 

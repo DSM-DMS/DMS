@@ -2,11 +2,13 @@ package com.dms.planb.action.post.qna;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -25,6 +27,7 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
         context = PrecedingWork.putHeaders(context);
 
         DataBase database = DataBase.getInstance();
+        AES256 aes = UserManager.getAES();
 
         String title = context.request().getParam("title");
         String content = context.request().getParam("content");
@@ -37,7 +40,10 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
         }
         if (Guardian.checkParameters(title, content, privacy, uid)) {
             try {
-                database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, ")");
+            	SafeResultSet rs = database.executeQuery("SELECT name FROM student_data WHERE uid='", uid, "'");
+            	rs.next();
+            	String name = aes.decrypt(rs.getString("name"));
+                database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner, writer) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, "', '", name, "')");
 
                 context.response().setStatusCode(201).end();
                 context.response().close();

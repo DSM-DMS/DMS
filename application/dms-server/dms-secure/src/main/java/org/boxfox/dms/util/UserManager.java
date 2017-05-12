@@ -18,7 +18,7 @@ import io.vertx.ext.web.RoutingContext;
 /**
  * Created by boxfox on 2017-03-04.
  */
-public class UserManager implements AccountManageable {
+public class UserManager implements AccountManager {
     private static AES256 aes;
     private static DataBase database;
 
@@ -33,7 +33,7 @@ public class UserManager implements AccountManageable {
     public UserManager() {
         database = DataBase.getInstance();
     }
-    
+
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
@@ -129,6 +129,7 @@ public class UserManager implements AccountManageable {
         return uid;
     }
 
+    @Override
     public boolean checkIdExists(String id) {
         boolean check = false;
         id = aes.encrypt(id);

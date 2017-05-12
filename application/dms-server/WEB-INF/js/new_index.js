@@ -355,7 +355,7 @@ $passwordChangeBtn.on("click", function() {
 });
 
 $passwordChangeReq.on("click", function() {
-    if ($("#new-password").val() === $("#new-password2")) {
+    if ($("#new-password").val() === $("#new-password2").val()) {
         $.ajax({
             url: "/account/password/student",
             type: "PATCH",

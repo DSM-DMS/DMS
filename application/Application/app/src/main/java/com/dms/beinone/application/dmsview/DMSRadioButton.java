@@ -10,7 +10,7 @@ import android.view.ViewParent;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
-import com.dms.beinone.application.DensityConverter;
+import com.dms.beinone.application.utils.DensityConverter;
 import com.dms.beinone.application.R;
 
 /**

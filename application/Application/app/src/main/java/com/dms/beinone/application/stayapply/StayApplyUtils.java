@@ -11,7 +11,7 @@ public class StayApplyUtils {
     public static final int SATURDAY_COME = 3;
     public static final int STAY = 4;
 
-    public static String getString(int stayStatus) {
+    public static String getStringFromStayStatus(int stayStatus) {
         String stayStatusString = null;
 
         if (stayStatus == FRIDAY_GO) stayStatusString = "금요귀가";

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -74,7 +76,7 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
             mExpandBtn = (ImageButton) itemView.findViewById(R.id.btn_faq_expand);
 
             // changes color of expand button on touch row
-            View overlayView = itemView.findViewById(R.id.relativeLayout_faq_overlay);
+            View overlayView = itemView.findViewById(R.id.layout_faq_overlay);
             overlayView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -150,15 +152,23 @@ public class FAQAdapter extends ExpandableRecyclerAdapter<
      */
     public class FAQContentVH extends ChildViewHolder<FAQContent> {
 
-        private TextView mContentTV;
+        private WebView mContentWV;
 
-        public FAQContentVH(@NonNull View itemView) {
+        public FAQContentVH(@NonNull final View itemView) {
             super(itemView);
-            mContentTV = (TextView) itemView.findViewById(R.id.tv_faq_content);
+            mContentWV = (WebView) itemView.findViewById(R.id.wv_faq_content);
+            mContentWV.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    itemView.getLayoutParams().height = view.getLayoutParams().height;
+                    itemView.requestLayout();
+                }
+            });
+            mContentWV.setBackgroundColor(Color.TRANSPARENT);
         }
 
         public void bind(String content) {
-            mContentTV.setText(content);
+            mContentWV.loadData(content, "text/html; charset=UTF-8", null);
         }
 
     }

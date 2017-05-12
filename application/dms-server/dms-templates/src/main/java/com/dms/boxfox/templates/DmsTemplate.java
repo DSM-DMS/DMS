@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Scanner;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -29,11 +30,24 @@ public class DmsTemplate {
     }
 
     public String process() throws IOException, TemplateException {
-        Template template = getConfiguration().getTemplate(name);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-        template.process(input, writer);
-        return out.toString();
+        try {
+            Template template = getConfiguration().getTemplate(name);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+            template.process(input, writer);
+            return out.toString();
+        } catch (IOException e) {
+        }
+        name = name.substring(0, name.lastIndexOf(".tls")) + ".html";
+        return readFile("WEB-INF/" + name);
+    }
+
+    private String readFile(String path) throws IOException{
+        File file = new File(path);
+        Scanner scanner = new Scanner(file);
+        String text = scanner.useDelimiter("\\A").next();
+        scanner.close();
+        return text;
     }
 
     private static Configuration getConfiguration() {
