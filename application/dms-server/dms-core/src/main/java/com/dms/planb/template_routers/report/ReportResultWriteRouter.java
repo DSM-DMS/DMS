@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
@@ -24,8 +23,7 @@ private AdminManager adminManager;
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");

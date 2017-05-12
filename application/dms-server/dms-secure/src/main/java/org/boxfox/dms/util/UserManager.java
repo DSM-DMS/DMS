@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
+import org.boxfox.dms.secure.SecureManager;
 import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.config.SecureConfig;
@@ -21,9 +22,11 @@ import io.vertx.ext.web.RoutingContext;
 public class UserManager implements AccountManager {
     private static AES256 aes;
     private static DataBase database;
+    private static SecureManager secureManager;
 
     static {
         aes = new AES256(SecureConfig.get("AES"));
+        secureManager = SecureManager.create(UserManager.class, 10, 8);
     }
 
     public static AES256 getAES() {
@@ -199,6 +202,9 @@ public class UserManager implements AccountManager {
                 SafeResultSet rs = DataBase.getInstance().executeQuery("select id from account where session_key='", sessionKey, "'");
                 if (rs.next()) {
                     result = rs.getString(1);
+                }else{
+                    //secureManager error session
+                    secureManager.invalidRequest(context);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

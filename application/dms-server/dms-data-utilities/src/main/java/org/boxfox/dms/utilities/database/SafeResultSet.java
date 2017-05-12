@@ -2,7 +2,10 @@ package org.boxfox.dms.utilities.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -80,6 +83,28 @@ public class SafeResultSet {
 		} catch(NumberFormatException e){
 			throw new SQLException(INVALID_TYPE);
 		}
+	}
+
+	public Date getDate(String label)  throws SQLException{
+		String datetime = getString(label);
+		Date date = null;
+		try {
+			date = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(datetime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+
+	public Date getDate(int index) throws SQLException{
+		String datetime = getString(index);
+		Date date = null;
+		try {
+			date = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(datetime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
 	}
 
 	public String getString(String label) throws SQLException {

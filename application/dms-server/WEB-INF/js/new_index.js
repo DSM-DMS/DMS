@@ -282,18 +282,18 @@ function fillListCard(data, target) {
     //     "class": "list-box-no-content",
     //     html: data.content
     // }));
-    newCard.on('click', function(){
-        if(!$(".list-box p").hasClass("list-box-no-content")){
-            $(this).css('width', '100%');  
-            $(this).css('height', '50%'); 
+    newCard.on('click', function() {
+        if (!$(".list-box p").hasClass("list-box-no-content")) {
+            $(this).css('width', '100%');
+            $(this).css('height', '50%');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
                 html: data.content
             }));
             $(".list-box-no-content").css('opacity', '1');
-        }else{
-            $(this).css('width', '20vh');  
-            $(this).css('height', '20vh'); 
+        } else {
+            $(this).css('width', '20vh');
+            $(this).css('height', '20vh');
             $(this).children(".list-box-no-content").detach();
         }
     });
@@ -399,6 +399,28 @@ $passwordChangeReq.on("click", function() {
         alert("비밀번호를 다시 확인하세요.")
     }
 });
+
+getStudentInfo();
+
+function getStudentInfo() {
+    $.ajax({
+        url: "/account/student",
+        method: "get",
+        success: function(data) {
+            fillStudentData(JSON.parse(data));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+function fillStudentData(data) {
+    $(".profile-container .name").text(data.name);
+    $(".profile-container .number").text(data.name);
+    $(".point-container .merit").text(data.merit);
+    $(".point-container .demerit").text(data.demerit);
+}
 
 
 
@@ -653,28 +675,20 @@ function stayDoCheck() {
  * Login
 ========================================================================================== */
 $openLoginButton.on("click", function() {
-    $('.login-modal-wrapper').toggleClass('open');
-    // $panel.toggleClass('blur');
-    // $menu.toggleClass('blur');
-    return false;
-});
-
-$loginSendBtn.on("click", function() {
     $.ajax({
-        url: "/account/login/student",
+        url: "/account/logout/student",
         type: "POST",
-        data: {
-            id: $(".login-input #name").val(),
-            password: $(".login-input #pass").val(),
-            remember: $(".login-check input:checked").val(),
-            "g-recaptcha-response": grecaptcha.getResponse()
+        success: function() {
+            console.log("logout");
+            setCookie('UserSession', '', '-1');
+            setCookie('vertx-web.session', '', '-1');
+            deleteCookie('UserSession');
+            deleteCookie('vertx-web.session');
+            window.location.reload();
         },
-        success: function(data, status) {
-            location.reload();
-        },
-        error: function(xhr) {
-            alert("로그인에 실패했습니다.");
-        },
+        error: function() {
+            alert("로그아웃에 실패했어요 TT");
+        }
     });
 });
 

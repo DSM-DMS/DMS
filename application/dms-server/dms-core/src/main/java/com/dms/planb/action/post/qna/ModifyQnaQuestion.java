@@ -9,7 +9,6 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -26,8 +25,7 @@ public class ModifyQnaQuestion implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
-		context = PrecedingWork.putHeaders(context);
-		
+
 		int no = Integer.parseInt(context.request().getParam("no"));
 		String title = context.request().getParam("title");
 		String content = context.request().getParam("content");
