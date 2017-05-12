@@ -20,7 +20,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 @RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
@@ -30,8 +29,7 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		EasyJson json = null;
 
 		String option = context.request().getParam("option");

@@ -10,7 +10,6 @@ import org.boxfox.dms.utilities.actions.support.JobResult;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 //import com.dms.planb.support.ProfileImage;
 
 import io.vertx.core.Handler;
@@ -27,8 +26,7 @@ public class MypageRouter implements Handler<RoutingContext> {
 
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		EasyJsonObject responseObject = new EasyJsonObject();
 
 		String id = userManager.getIdFromSession(context);

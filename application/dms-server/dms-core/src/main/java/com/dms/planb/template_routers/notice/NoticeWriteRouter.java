@@ -8,7 +8,6 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -25,8 +24,7 @@ public class NoticeWriteRouter implements Handler<RoutingContext> {
 	
 	public void handle(RoutingContext context) {
 		if (!Guardian.isAdmin(context)) return;
-		context = PrecedingWork.putHeaders(context);
-		
+
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");

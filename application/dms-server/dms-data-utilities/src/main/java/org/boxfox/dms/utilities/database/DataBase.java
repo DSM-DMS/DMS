@@ -15,7 +15,6 @@ public class DataBase {
 	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 	private static final String DB_ID = "root";
 
-	private static DataBase instance = new DataBase();
 	private Statement statement;
 	private Connection connection;
 
@@ -23,12 +22,16 @@ public class DataBase {
 		connect();
 	}
 
+	private static class DataBaseSinglethon{
+		private static final DataBase DB = new DataBase();
+	}
+
 	public static DataBase getInstance() {
 		/*
 		 * Problems occur when more than one object accesses the database at the
 		 * same time. So use singleton pattern.
 		 */
-		return instance;
+		return DataBaseSinglethon.DB;
 	}
 	
 	public Statement getStatement(){

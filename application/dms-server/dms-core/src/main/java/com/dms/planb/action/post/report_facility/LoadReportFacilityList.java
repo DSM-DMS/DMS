@@ -9,7 +9,6 @@ import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
 
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -20,8 +19,7 @@ import io.vertx.ext.web.RoutingContext;
 public class LoadReportFacilityList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();

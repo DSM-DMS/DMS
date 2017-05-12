@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -16,7 +15,6 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path = "/post/bug", method = {HttpMethod.POST})
 public class UploadBug implements Handler<RoutingContext> {
     public void handle(RoutingContext context) {
-        context = PrecedingWork.putHeaders(context);
 
         DataBase database = DataBase.getInstance();
 

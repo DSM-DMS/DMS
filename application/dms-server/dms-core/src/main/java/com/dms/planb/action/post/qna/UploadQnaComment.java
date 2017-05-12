@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
 
@@ -23,8 +22,7 @@ public class UploadQnaComment implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
-		
+
 		DataBase database = DataBase.getInstance();
 		
 		int targetQna = Integer.parseInt(context.request().getParam("no"));
