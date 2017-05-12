@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>   
     <link rel="stylesheet" href="./css/new_style.css">
     <link rel="stylesheet" href="./css/clock.css">
     <link rel="stylesheet" href="./css/hover.css">
@@ -15,9 +15,8 @@
 
 <body>
     <script src="./js/jquery.js"></script>
-    <div id="background-image">
+    <div id="background-image"> 
         <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%" transform="scale(1.3)">
-
             <filter id="svgBlurFilter">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComponentTransfer>
@@ -253,7 +252,7 @@
                         <span>
                             <p id="writer-content">사감부</p>
                         </span>
-
+                        
                     </div>
                     <div class="writer-container">
                         <span>
@@ -302,7 +301,7 @@
                     </div>
                     <div class="meal-block">
                         <span class="meal-title">저녁</span>
-                        <span class="meal-content"><p>옥수수스프, 수제오이피클, 스파게티, 크림치즈찰깨스틱30, 수제식혜, 키위, </p></span>
+                        <span class="meal-content"><p>옥수수스프, 수제오이피클, 스파게티, 크림치즈찰깨스틱30, 수제식혜, 키위</p></span>
                     </div>
                 </div>
             </div>
@@ -345,7 +344,7 @@
                     <li id="min"></li>
                 </ul>
                 <!--TODO : ID수정-->
-                <butto id="open-extension-apply" class="hvr-shutter-out-horizontal">연장학습 신청</button>
+                <button id="open-extension-apply" class="hvr-shutter-out-horizontal">연장학습 신청</button>
             </div>
             <img src="./images/curved2.svg" class="curved-image" />
         </div>
@@ -392,7 +391,42 @@
             <div id="page2" class="index"></div>
         </div>
     </div>
-
+    <div class="modal-wrapper login-modal-wrapper">
+        <div class="modal login-modal">
+            <!-- <div class="head">
+                    </div> -->
+            <div class="content">
+                <div class="login-box">
+                    <div class="login-title">LOGIN</div>
+                    <div class="login-input">
+                        <label for="name">Username</label>
+                        <input type="text" name="name" id="name">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="login-input">
+                        <label for="pass">Password</label>
+                        <input type="password" name="pass" id="pass">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="login-check">
+                        <label for=""><input type="checkbox" name="rememberme" value="1">Remember me</label>
+                    </div>
+                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LerpRgUAAAAAC5EctefxMtAtYj6XUKrm8fj_ZSX"></div>
+                    <div class="modal-button-box">
+                        <div class="login-button modal-button login">
+                            <button><span>Login</span></button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span></button>
+                        </div>
+                    </div>
+                    <a href="" class="register">회원가입 하기</a>
+                </div>
+            </div>
+            <!-- <div class="foot">
+                    </div> -->
+        </div>
+    </div>
 
     <div class="modal-wrapper bug-modal-wrapper">
         <div class="modal bug-modal">
@@ -408,7 +442,7 @@
                         <span class="spin"></span>
                     </div>
                     <div class="bug-content">
-                        <textarea id="bug-content" rows="8" cols="80"></textarea>
+                        <textarea id="bug-content" name="name" rows="8" cols="80"></textarea>
                         <span class="spin"></span>
                     </div>
                     <div class="modal-button-box">
@@ -457,73 +491,6 @@
                             <button class="btn-close"><span>Close</span></button>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- <div class="foot">
-                    </div> -->
-        </div>
-    </div>
-    <div class="modal-wrapper password-change-modal-wrapper">
-        <div class="modal password-change-modal">
-            <!-- <div class="head">
-                    </div> -->
-            <div class="content">
-                <div class="login-box">
-                    <div class="login-title">비밀번호 변경</div>
-                    <div class="login-input">
-                        <label for="name">새로운 비밀번호</label>
-                        <input type="text" name="name" id="new-password">
-                        <span class="spin"></span>
-                    </div>
-                    <div class="login-input">
-                        <label for="pass">재 확인</label>
-                        <input type="password" name="pass" id="new-password2">
-                        <span class="spin"></span>
-                    </div>
-                    <div class="modal-button-box">
-                        <div class="password-change modal-button login">
-                            <button><span>변경</span></button>
-                        </div>
-                        <div class="bug-button modal-button">
-                            <button class="btn-close"><span>Close</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="foot">
-                    </div> -->
-        </div>
-    </div>
-    <div class="modal-wrapper login-modal-wrapper">
-        <div class="modal login-modal">
-            <!-- <div class="head">
-                    </div> -->
-            <div class="content">
-                <div class="login-box">
-                    <div class="login-title">LOGIN</div>
-                    <div class="login-input">
-                        <label for="name">Username</label>
-                        <input type="text" name="name" id="name">
-                        <span class="spin"></span>
-                    </div>
-                    <div class="login-input">
-                        <label for="pass">Password</label>
-                        <input type="password" name="pass" id="pass">
-                        <span class="spin"></span>
-                    </div>
-                    <div class="login-check">
-                        <label for=""><input type="checkbox" name="rememberme" value="1">Remember me</label>
-                    </div>
-                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LerpRgUAAAAAC5EctefxMtAtYj6XUKrm8fj_ZSX"></div>
-                    <div class="modal-button-box">
-                        <div class="login-button modal-button login">
-                            <button><span>Login</span></button>
-                        </div>
-                        <div class="bug-button modal-button">
-                            <button class="btn-close"><span>Close</span></button>
-                        </div>
-                    </div>
-                    <a href="" class="register">회원가입 하기</a>
                 </div>
             </div>
             <!-- <div class="foot">
