@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/new_style.css">
+    <link rel="stylesheet" href="./css/clock.css">
+    <link rel="stylesheet" href="./css/hover.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='./js/DrawSVGPlugin.min.js'></script>
+</head>
+
+<body>
+    <script src="./js/jquery.js"></script>
+    <div id="background-image">
+        <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%">
+            <filter id="svgBlurFilter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feComponentTransfer>
+                    <feFuncR type="linear" slope="0.2"/>
+                    <feFuncG type="linear" slope="0.2"/>
+                    <feFuncB type="linear" slope="0.2"/>
+                </feComponentTransfer>
+            </filter>
+            <image class="blurred" preserveAspectRatio='xMinYMid meet' filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0"
+            xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.3)"/>
+        </svg>
+    </div>
+    <div class="left-line">
+    </div>
+    <div id="panel">
+        <div id="left-panel">
+            <div class="notice">
+                <div class="notice-title-writer">
+                    <div class="writer-container">
+                        <span>
+                            <p id="writer-content">사감부</p>
+                        </span>
+
+                    </div>
+                    <div class="writer-container">
+                        <span>
+                            <p id="writer-content-long">기숙사 규정</p>
+                        </span>
+                        <div class="speech-bubble-tail"></div>
+                    </div>
+                    <div class="writer-container">
+                        <span>
+                            <p id="writer-content">FAQ</p>
+                        </span>
+                    </div>
+                    <a class="contact-facebook" href="https://goo.gl/07Iwy3" target="_blank">
+                        <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+                    </a>
+                    <a class="contact-github" href="https://goo.gl/nHJJUb" target="_blank">
+                        <i class="fa fa-github fa-5x" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="notice-title-container">
+                    <span id="notice-title">Title</span>
+                    <span class="notice-title-date">2017.05.03</span>
+                </div>
+                <div class="notice-content-container">
+                    <p>한없이 끌어안고 있던 널 놔야 해 난 아무것도 해줄 수 있는 게 없는데 내가 없어야만 행복할 너라서 놓아 놓아 놓아</p>
+                    <div class="notice-more">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="meal">
+                <div class="meal-remote-control">
+                    <img src="./images/next.svg" id="previous-menu" />
+                    <span class="meal-date">2017. 05. 03 수요일</span>
+                    <img src="./images/next.svg" id="next-menu" />
+                </div>
+                <div class="meal-info">
+                    <div class="meal-block">
+                        <span class="meal-title">아침</span>
+                        <span class="meal-content"><p>현미밥, 버섯들깨수제비국, 해물콩나물찜, 불폭탄소스돈육구이, 배추김치, 화인쿨자두맛180</p></span>
+                    </div>
+                    <div class="meal-block">
+                        <span class="meal-title">점심</span>
+                        <span class="meal-content"><p>현미밥, 어묵김치국, 배추겉절이, 골파김가루볶음, 닭정육카레떡볶음, 감귤주스</p></span>
+                    </div>
+                    <div class="meal-block">
+                        <span class="meal-title">저녁</span>
+                        <span class="meal-content"><p>옥수수스프, 수제오이피클, 스파게티, 크림치즈찰깨스틱30, 수제식혜, 키위, </p></span>
+                    </div>
+                </div>
+            </div>
+            <img src="./images/curved.svg" class="curved-image" />
+        </div>
+        <div id="right-panel">
+            <div id="stay-apply-container">
+                <div class="current-status">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="5vh" height="5vh" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                        <g id="check">
+                                <circle id="stayCheckCircle" fill="#FFF" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="63.638" cy="53.976" r="40.764"/>
+                                <line id="stayCross2" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="81.642" y1="37.686" x2="47.952" y2="71.375"/>
+                                <line id="stayCross1" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="47.952" y1="37.687" x2="81.642" y2="71.375"/>
+                                <polyline id="stayTick" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                                45.677,54.037 58.479,67.762 81.217,43.079 	"/>
+                        </g>
+                    </svg>
+                    <p id="stayValue"></p>
+                </div>
+                <img src="./images/return-fri.png" />
+                <button id="open-stay-apply" class="hvr-shutter-out-horizontal">잔류 신청</button>
+            </div>
+            <div id="extension-apply-container">
+                <div class="current-status">
+                    <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="5vh" height="5vh" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                        <g id="check">
+                                <circle id="extensionCheckcircle" fill="#FFF" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="63.638" cy="53.976" r="40.764"/>
+                                <line id="extensionCross2" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="81.642" y1="37.686" x2="47.952" y2="71.375"/>
+                                <line id="extensionCross1" fill="#52D100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="47.952" y1="37.687" x2="81.642" y2="71.375"/>
+                                <polyline id="extensionTick" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                                45.677,54.037 58.479,67.762 81.217,43.079 	"/>
+                        </g>
+                    </svg>
+                    <p>연장신청이 가능합니다</p>
+                </div>
+                <script src="./js/clock.js"></script>
+                <ul id="clock-in">
+                    <li id="sec"></li>
+                    <li id="hour"></li>
+                    <li id="min"></li>
+                </ul>
+                <!--TODO : ID수정-->
+                <butto id="open-extension-apply" class="hvr-shutter-out-horizontal">연장학습 신청</button>
+            </div>
+            <img src="./images/curved2.svg" class="curved-image" />
+        </div>
+    </div>
+    <div class="menu-wrapper">
+        <div id="menu">
+            <div class="menu-item hvr-float login-btn">
+                <img src=".\images\login.svg">
+                <span>로그인</span>
+            </div>
+            <div class="menu-item hvr-float mypage-btn">
+                <img src=".\images\user.svg">
+                <span>내 정보</span>
+            </div>
+            <div class="menu-item hvr-float goingOut-btn">
+                <img src=".\images\run.svg">
+                <span>외출 신청</span>
+            </div>
+            <div class="menu-item hvr-float facility-btn">
+                <img src=".\images\repair.svg">
+                <span>시설고장 신고</span>
+            </div>
+            <div class="menu-item hvr-float bug-btn">
+                <img src=".\images\bug.svg">
+                <span>버그 신고</span>
+            </div>
+        </div>
+        <div id="menu2">
+            <div class="dorm-rule menu-item hvr-float">
+                <img src=".\images\notebook.svg">
+                <span>기숙사 규정</span>
+            </div>
+            <div class="menu-item hvr-float faq-btn">
+                <img src=".\images\question.svg">
+                <span>자주하는 질문</span>
+            </div>
+            <div class="menu-item hvr-float point-btn">
+                <img src=".\images\coin.svg">
+                <span>상점 신청</span>
+            </div>
+        </div>
+        <div id="menu-pagenation">
+            <div id="page1" class="index current-index"></div>
+            <div id="page2" class="index"></div>
+        </div>
+    </div>
+
+
+    <div class="modal-wrapper bug-modal-wrapper">
+        <div class="modal bug-modal">
+            <!-- <div class="head">
+                    </div> -->
+            <div class="content">
+                <div class="login-box bug-box">
+                    <div class="login-title">버그신고
+                    </div>
+                    <div class="login-input">
+                        <label for="name">Title</label>
+                        <input type="text" name="name" id="bug-title">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="bug-content">
+                        <textarea id="bug-content" rows="8" cols="80"></textarea>
+                        <span class="spin"></span>
+                    </div>
+                    <div class="modal-button-box">
+                        <div class="bug-button modal-button">
+                            <button class="report-bug">신고</button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="foot">
+                    </div> -->
+        </div>
+    </div>
+    <div class="modal-wrapper login-modal-wrapper">
+        <div class="modal login-modal">
+            <!-- <div class="head">
+                    </div> -->
+            <div class="content">
+                <div class="login-box">
+                    <div class="login-title">LOGIN</div>
+                    <div class="login-input">
+                        <label for="name">Username</label>
+                        <input type="text" name="name" id="name">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="login-input">
+                        <label for="pass">Password</label>
+                        <input type="password" name="pass" id="pass">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="login-check">
+                        <label for=""><input type="checkbox" name="rememberme" value="1">Remember me</label>
+                    </div>
+                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LerpRgUAAAAAC5EctefxMtAtYj6XUKrm8fj_ZSX"></div>
+                    <div class="modal-button-box">
+                        <div class="login-button modal-button login">
+                            <button><span>Login</span></button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span></button>
+                        </div>
+                    </div>
+                    <a href="" class="register">회원가입 하기</a>
+                </div>
+            </div>
+            <!-- <div class="foot">
+                    </div> -->
+        </div>
+    </div>
+    <script src="./js/nonLogin_new_index.js"></script>
+</body>
+
+</html>
