@@ -153,90 +153,24 @@ $closeModal.on("click", function() {
     return false;
 });
 
+function showLoginModal() {
+    $('.login-modal-wrapper').toggleClass('open');
+    return false;
+}
+
 /** ======================================================================================
  * Extension
 ========================================================================================== */
-selectedClass.css({
-    transition: "0.2s ease-in",
-    backgroundColor: "rgba(255, 255, 255, .2)"
-});
-
-function getClassData(classId) {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/apply/extension/class",
-        type: "GET",
-        data: {
-            "option": "map",
-            "class": classId
-        },
-        success: function(data) {
-            drawSeats(JSON.parse(data).map, classId);
-        }
-    });
-}
-
-getClassData(1);
-
-$classSelect.on("click", "td", function(e) {
-    selectedClass.css({
-        transition: "0.2s ease-in",
-        backgroundColor: "rgba(0, 0, 0, 0)"
-    });
-    selectedClass = $(this);
-    $(this).css({
-        transition: "0.2s ease-in",
-        backgroundColor: "rgba(255, 255, 255, .2)"
-    });
-    if ($(this).attr('id') === "extension-gaon") {
-        getClassData(1);
-    } else if ($(this).attr('id') === "extension-naon") {
-        getClassData(2);
-    } else if ($(this).attr('id') === "extension-daon") {
-        getClassData(3);
-    } else if ($(this).attr('id') === "extension-laon") {
-        getClassData(4);
-    } else if ($(this).attr('id') === "extension-three") {
-        getClassData(5);
-    } else if ($(this).attr('id') === "extension-four") {
-        getClassData(6);
-    } else if ($(this).attr('id') === "extension-five") {
-        getClassData(7);
-    }
-});
 
 $openExtensionButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $extensionWindow.toggleClass("fade-in");
-    $menu2.toggleClass("fade-out");
-    $menu.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-
-$closeExtensionButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $extensionWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    showLoginModal();
 });
 
 /** ======================================================================================
  * Notice
 ========================================================================================== */
 $noticeMoreBtn.on("click", function() {
-    $noticeListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-
-$closeNoticeButton.on("click", function() {
-    $noticeListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    showLoginModal();
 });
 
 function getNoticeList() {
@@ -305,323 +239,29 @@ function setNoticePreview() {
  * My page
 ========================================================================================== */
 $openMyPageButton.on("click", function() {
-    $mypageWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    showLoginModal();
 });
-
-$closeMypageWindow.on("click", function() {
-    $mypageWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-
 
 $dormRule.on("click", function() {
-    $dormListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    showLoginModal();
 });
-
-$closeDormRuleButton.on("click", function() {
-    $dormListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-getRuleList();
-
-function getRuleList() {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
-        type: "GET",
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            parsedData.forEach(function(data) {
-                fillListCard(data, $(".rule-window .list-box-container"));
-            });
-        },
-        error: function() {
-            console.log("error");
-        }
-    });
-}
-
-$passwordChangeBtn.on("click", function() {
-    $('.password-change-modal-wrapper').toggleClass('open');
-});
-
-$passwordChangeReq.on("click", function() {
-    if ($("#new-password").val() === $("#new-password2").val()) {
-        $.ajax({
-            url: "/account/password/student",
-            type: "PATCH",
-            data: {
-                password: $("#new-password").val()
-            },
-            success: function() {
-                alert("변경이 완료되었어요!");
-            },
-            error: function() {
-                alert("변경에 실패했어요. ㅠㅠ");
-            }
-        });
-    } else {
-        alert("비밀번호를 다시 확인하세요.")
-    }
-});
-
-
 
 /** ======================================================================================
  * faq rule
 ========================================================================================== */
-$closeFaqButton.on("click", function() {
-    $faqListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
 
 $faqBtn.on("click", function() {
-    $faqListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    showLoginModal();
 });
 
-getFaqList();
-
-function getFaqList() {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/post/faq/list",
-        type: "GET",
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            parsedData.forEach(function(data) {
-                fillListCard(data, $(".faq-window .list-box-container"));
-            });
-        },
-        error: function() {
-            console.log("error");
-        }
-    });
-}
 /** ======================================================================================
  * Stay
 ========================================================================================== */
-var numOfDays = function(year, month) {
-    var daysofmonth;
-    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
-        daysofmonth = 30;
-    } else {
-        daysofmonth = 31;
-        if (month == 2) {
-            if (year / 4 - parseInt(year / 4) != 0) {
-                daysofmonth = 28;
-            } else {
-                if (year / 100 - parseInt(year / 100) != 0) {
-                    daysofmonth = 29;
-                } else {
-                    if (year / 400 - parseInt(year / 400) != 0) {
-                        daysofmonth = 28;
-                    } else {
-                        daysofmonth = 29;
-                    }
-                }
-            }
-        }
-    }
-    return daysofmonth;
-}
-
-var leadingZeros = function(data, num) {
-    var zero = '';
-    data = data.toString();
-
-    if (data.length < num) {
-        for (i = 0; i < num - data.length; i++)
-            zero += '0';
-    }
-    return zero + data;
-};
-
-var getWeek = function(thisDate) {
-    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
-    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
-    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-
-    if (week == 5) {
-        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else {
-            return 0;
-        }
-    }
-    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-};
-
-var makeWeekFormat = function(thisDate) {
-    var week = getWeek(thisDate);
-    if (week == 0) {
-        thisDate.setMonth(thisDate.getMonth() + 1);
-        week = 1;
-    }
-    var year = thisDate.getFullYear();
-    var month = thisDate.getMonth() + 1;
-
-    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
-};
-
-var setStayValue = function(thisDate) {
-    var weekData = makeWeekFormat(thisDate)
-
-    $.ajax({
-        url: "/apply/stay",
-        type: "GET",
-        data: {
-            "week": weekData
-        },
-        success: function(data) {
-            try {
-                switch (jQuery.parseJSON(data).value) {
-                    case 1:
-                        $('#stayValue').text('금요귀가');
-                        $(":radio[name=1][value=1]").prop('checked', true);
-                        break;
-                    case 2:
-                        $('#stayValue').text('토요귀가');
-                        $(":radio[name=1][value=2]").prop('checked', true);
-                        break;
-                    case 3:
-                        $('#stayValue').text('토요귀사');
-                        $(":radio[name=1][value=3]").prop('checked', true);
-                        break;
-                    case 4:
-                        $('#stayValue').text('잔류');
-                        $(":radio[name=1][value=4]").prop('checked', true);
-                        break;
-                }
-            } catch (err) {
-                $('#stayValue').text('신청안됨');
-            }
-        },
-        error: function(xhr) {
-            console.log(xhr.status);
-            $('#stayValue').text('불러오기 실패');
-        }
-    });
-};
-
-setStayValue(stayDate)
 
 $openStayButton.click(function() {
-    $stayWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    showLoginModal();
 });
 
-$closeStayButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $stayWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-
-$saturdayContainer.click(function() {
-    $saturdayContainer.toggleClass("select");
-});
-
-$sundayContainer.click(function() {
-    $sundayContainer.toggleClass("select");
-});
-
-$stayApplyButton.on("click", function() {
-    $stayPaperplane.addClass("send-paperplane");
-
-    var applySendDataWeek = makeWeekFormat(stayDate);
-    var applySendDataValue = $(":radio[name=1]:checked").val();
-
-    console.log(applySendDataWeek);
-    console.log(applySendDataValue);
-
-    $.ajax({
-        url: "/apply/stay",
-        type: "PUT",
-        async: false,
-        data: {
-            "week": applySendDataWeek,
-            "value": applySendDataValue
-        },
-        success: function() {
-            alert('신청되었습니다.');
-            setStayValue(stayDate);
-        },
-        error: function(xhr, status, err) {
-            alert('신청 시간이 아닙니다.')
-        }
-    });
-});
-
-function stayDoCheck() {
-    TweenLite.set([stayCross1, stayCross2], {
-        autoAlpha: 0
-    });
-    TweenLite.set(stayTick, {
-        drawSVG: "0%"
-    });
-    TweenLite.set(stayCircle, {
-        drawSVG: "50% 50%",
-        scale: ".01",
-        transformOrigin: "50% 50%",
-        fill: "#607D8B",
-        autoAlpha: 0
-    });
-
-    tl1 = new TimelineMax({
-        repeat: 0,
-        repeatDelay: 1
-    });
-    tl1
-        .to(stayCircle, 1, {
-            scale: 1,
-            ease: Elastic.easeOut
-        })
-        .to([stayTick, stayCircle], .6, {
-            autoAlpha: 1
-        }, .1)
-        .to(stayCircle, .8, {
-            drawSVG: "100% 0%",
-            ease: Power4.easeOut
-        }, .2)
-        .to(stayTick, .8, {
-            drawSVG: "0% 100%",
-            ease: Expo.easeOut
-        }, '-=.6')
-        .to(stayCircle, .6, {
-            fill: "#607D8B",
-            ease: Power1.easeInOut
-        }, '-=.4');
-
-    tl1.timeScale(.8);
-
-}
 
 /** ======================================================================================
  * Login
@@ -684,10 +324,7 @@ $(".report-bug").on("click", function() {
  * Facility modal
 ========================================================================================== */
 $facilityBtn.on("click", function() {
-    $FacilityModal.toggleClass('open');
-    // $panel.toggleClass('blur');
-    // $menu.toggleClass('blur');
-    return false;
+    showLoginModal();
 });
 
 /** ======================================================================================
@@ -702,197 +339,16 @@ $openPointButton.on("click", function() {
  * Going out
 ========================================================================================== */
 $openGoingOutButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $goingOutWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-    return false;
-});
-
-$closeGoingOutButton.on("click", function() {
-    $panel.toggleClass("left-move");
-    $goingOutWindow.toggleClass("fade-in");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
-});
-
-// TODO : 신청완료 되면 클래스 초기화해주기
-$goingOutApplyButton.on('click', function() {
-    $goingOutPaperplane.addClass("send-paperplane");
-    var satVal = false;
-    var sunVal = false;
-
-    if ($saturdayContainer.hasClass("select")) {
-        satVal = true;
-    }
-    if ($sundayContainer.hasClass("select")) {
-        sunVal = true;
-    }
-
-    console.log(satVal, sunVal);
-
-    $.ajax({
-        url: "/apply/goingout",
-        type: "PUT",
-        data: {
-            "sat": satVal,
-            "sun": sunVal
-        },
-        success: function() {
-            alert('신청되었습니다.');
-        }
-    });
+    showLoginModal();
 });
 
 /** ======================================================================================
  * Current state (stay)
 ========================================================================================== */
-$stayCurrentState.click(function() {
-    stayDoCheck();
-});
 
 /** ======================================================================================
  * Current state (extension)
 ========================================================================================== */
-$extensionCurrentState.click(function() {
-    extensionDoCheck();
-});
-
-var mapData = [
-    [1, 2, 0, 3, 4],
-    [5, 6, 0, 7, 8],
-    [9, 10, 0, 11, 12],
-    [13, 14, 0, 15, 16],
-    [17, 18, 0, 19, 20]
-];
-
-var mapData2 = [
-    [1, 2, 3, 0, 4, 5, 6],
-    [7, 8, 9, 0, 10, 11, 12],
-    [13, 14, 15, 0, 16, 17, 18]
-];
-
-function drawSeats(mapData, classId) {
-    var newTable = $('<table/>', {
-        "id": "extension-seat-table"
-    });
-
-    for (var loop = 0; loop < mapData.length; loop++) {
-        var newTr = $('<tr/>', {
-            "class": "extension-seat-table-tr"
-        });
-
-        for (var innerLoop = 0; innerLoop < mapData[loop].length; innerLoop++) {
-            var newTd = $('<td/>');
-            var newSeat = $('<div/>', {
-                text: mapData[loop][innerLoop],
-                "class": "extension-seat",
-            });
-            if (mapData[loop][innerLoop] === 0) {
-                // newTd.css({
-                //     opacity: "0"
-                // })
-                newSeat.addClass("none-selectalbe-seat");
-            }
-
-            if (typeof mapData[loop][innerLoop] === "number" && mapData[loop][innerLoop] !== 0) {
-                (function(id) {
-                    newSeat.on("click", function() {
-                        extentionApply(classId, id);
-                    })
-                })(mapData[loop][innerLoop]);
-                newSeat.addClass("selectalbe-seat");
-            }
-
-            newSeat.appendTo(newTd);
-            newTd.appendTo(newTr);
-        }
-        newTr.appendTo(newTable);
-    }
-    $(".extension-seat-table-container").html(newTable);
-}
-
-function extentionApply(classId, id) {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/apply/extension",
-        type: "PUT",
-        data: {
-            "class": classId,
-            "seat": id
-        },
-        statusCode: {
-            204: function() {
-                alert("신청가능한 시간이 아닙니다.");
-                getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
-            },
-            500: function() {
-                alert("신청중에 오류가 발생하였습니다.");
-                getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
-            }
-        },
-        success: function(data, xhr) {
-            alert("신청 완료되었습니다.");
-            getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
-        },
-        error: function(request, status, error) {
-            alert("신청중에 오류가 발생하였습니다.");
-            getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
-        }
-    });
-}
-
-function extensionDoCheck() {
-    TweenLite.set([extensionCross1, extensionCross2], {
-        autoAlpha: 0
-    });
-    TweenLite.set(extensionTick, {
-        drawSVG: "0%"
-    });
-    TweenLite.set(extensionCircle, {
-        drawSVG: "50% 50%",
-        scale: ".01",
-        transformOrigin: "50% 50%",
-        fill: "#607D8B",
-        autoAlpha: 0
-    });
-
-    tl1 = new TimelineMax({
-        repeat: 0,
-        repeatDelay: 1
-    });
-    tl1
-        .to(extensionCircle, 1, {
-            scale: 1,
-            ease: Elastic.easeOut
-        })
-        .to([extensionTick, extensionCircle], .6, {
-            autoAlpha: 1
-        }, .1)
-        .to(extensionCircle, .8, {
-            drawSVG: "100% 0%",
-            ease: Power4.easeOut
-        }, .2)
-        .to(extensionTick, .8, {
-            drawSVG: "0% 100%",
-            ease: Expo.easeOut
-        }, '-=.6')
-        .to(extensionCircle, .6, {
-            fill: "#607D8B",
-            ease: Power1.easeInOut
-        }, '-=.4');
-
-    tl1.timeScale(.8);
-}
 
 /** ======================================================================================
  * menu

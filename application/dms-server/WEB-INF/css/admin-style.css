@@ -161,15 +161,7 @@ body {
 }
 
 .hex>div>p{
-    color: white;
-    font-size: 2vh; 
-    line-height: 3vh;
-    margin-top: 86.60254px;
-    transform: translateY(-50%);
-    text-align: center;
-}
-
-.hex>div>a{
+    cursor: pointer;
     color: white;
     font-size: 2vh; 
     line-height: 3vh;
