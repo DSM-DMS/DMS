@@ -32,7 +32,7 @@ public class RequestSecurePreprocessor {
             if (secureManager.isBanned(context)) {
                 context.response().setStatusCode(400);
                 context.response().setStatusMessage("You are banned!");
-                context.response().end();
+                context.response().end("사이트에서 차단되었습니다. 관리자에게 문의해 주세요 IP:"+context.request().remoteAddress().host());
                 context.response().close();
                 return;
             }
