@@ -400,6 +400,8 @@ $passwordChangeReq.on("click", function() {
     }
 });
 
+getStudentInfo();
+
 function getStudentInfo() {
     $.ajax({
         url: "/account/student",
