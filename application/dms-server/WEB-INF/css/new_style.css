@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 :not(i) {
-    font-family: "malgun gothic"!important;
+    font-family: "malgun gothic", "sans-serif"!important;
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -1680,4 +1680,17 @@ iframe {
     opacity: 0;
     margin-left: 50%;
     margin-bottom: 50%;
+}
+
+#easter-egg{
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    z-index: 999999999999999999999;
+}
+
+@media only screen and (max-width: 700px){
+    #easter-egg{
+        opacity: 1;
+    }
 }
