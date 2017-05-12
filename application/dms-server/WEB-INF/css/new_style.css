@@ -690,6 +690,13 @@ input[type="radio"]:checked~.bullet .line.seven {
     margin-left: 10%;
 }
 
+.list-box-no-content{
+    text-align: left;
+    margin-left: 20px;
+    opacity: 0;
+    transition: 1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
 .list-box-container {
     display: flex;
     justify-content: flex-start;
@@ -701,6 +708,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .list-box {
+    cursor: pointer;
     margin: 20px;
     width: 20vh;
     height: 20vh;
@@ -708,6 +716,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     color: white;
     font-weight: 100;
     text-align: center;
+    transition: 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 
