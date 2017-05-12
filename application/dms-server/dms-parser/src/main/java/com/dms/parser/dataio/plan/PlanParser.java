@@ -1,11 +1,9 @@
 package com.dms.parser.dataio.plan;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 import org.json.simple.JSONArray;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -26,12 +24,12 @@ public class PlanParser extends Parser {
 	}
 
 	@Override
-	public DataSaveAble parse() {
+	public DataSaveable parse() {
 		return doParse();
 	}
 
 	@Override
-	public DataSaveAble[] parseAll() {
+	public DataSaveable[] parseAll() {
 		MonthPlan[] plans = new MonthPlan[12];
 		for (int i = 1; i < 13; i++) {
 			plans[i - 1] = parse(year, i);

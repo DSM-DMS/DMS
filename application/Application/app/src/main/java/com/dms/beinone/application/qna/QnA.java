@@ -18,6 +18,12 @@ public class QnA implements Parcelable {
     private String answerDate;
     private boolean privacy;
 
+    public QnA(String title, String questionContent, boolean privacy) {
+        setTitle(title);
+        setQuestionContent(questionContent);
+        setPrivacy(privacy);
+    }
+
     public QnA(String title, String questionContent, String writer, boolean privacy) {
         setTitle(title);
         setQuestionContent(questionContent);

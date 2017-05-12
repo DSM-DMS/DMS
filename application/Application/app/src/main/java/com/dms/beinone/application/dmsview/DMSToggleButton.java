@@ -5,11 +5,11 @@ import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
-import com.dms.beinone.application.DensityConverter;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.DensityConverter;
 
 /**
  * Created by BeINone on 2017-01-16.
@@ -51,9 +51,9 @@ public class DMSToggleButton extends ToggleButton {
         mNormalTextColor = ContextCompat.getColor(context, R.color.colorPrimary);
         mCheckedTextColor = ContextCompat.getColor(context, android.R.color.white);
 
-        setOnClickListener(new OnClickListener() {
+        setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked()) {
                     setTextColor(mCheckedTextColor);
                 } else {

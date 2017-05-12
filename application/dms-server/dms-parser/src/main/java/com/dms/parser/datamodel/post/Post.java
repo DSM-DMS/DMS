@@ -3,14 +3,14 @@ package com.dms.parser.datamodel.post;
 import java.sql.SQLException;
 
 import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.DataSaveAble;
+import org.boxfox.dms.utilities.database.DataSaveable;
 import org.boxfox.dms.utilities.database.QueryUtils;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONObject;
 
 import com.dms.parser.dataio.Query;
 
-public class Post extends DataSaveAble {
+public class Post extends DataSaveable {
 	public static final int CATEGORY_NOTICE = 0;
 	public static final int CATEGORY_NEWSLETTER = 1;
 	public static final int CATEGORY_COMPETITION = 2;
@@ -75,7 +75,7 @@ public class Post extends DataSaveAble {
 	}
 
 	@Override
-	public DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException {
+	public DataSaveable fromResultSet(SafeResultSet rs) throws SQLException {
 		number = rs.getInt("no");
 		category = rs.getInt("category");
 		homePageNumber = rs.getInt("number");

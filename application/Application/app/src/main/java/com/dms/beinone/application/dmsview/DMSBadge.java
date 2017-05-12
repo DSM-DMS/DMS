@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-import com.dms.beinone.application.DensityConverter;
+import com.dms.beinone.application.utils.DensityConverter;
 import com.dms.beinone.application.R;
 
 /**
@@ -24,16 +24,6 @@ public class DMSBadge extends TextView {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, new int[] { android.R.attr.textSize });
-        int textSize = a.getDimensionPixelSize(0, (int) DensityConverter.dpToPx(context, 12));
-
-        init(context, textSize);
-    }
-
-    public DMSBadge(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-
-        TypedArray a = context.obtainStyledAttributes(
-                attrs, new int[] { android.R.attr.textSize }, defStyleAttr, 0);
         int textSize = a.getDimensionPixelSize(0, (int) DensityConverter.dpToPx(context, 12));
 
         init(context, textSize);

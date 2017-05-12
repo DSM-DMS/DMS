@@ -1,12 +1,11 @@
 package org.boxfox.dms.utilities.database;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-public abstract class DataSaveAble {
+public abstract class DataSaveable {
 	
 	protected boolean vaild;
 	{
@@ -17,7 +16,7 @@ public abstract class DataSaveAble {
 
 	public abstract JSONObject toJSONObject();
 
-	public abstract DataSaveAble fromResultSet(SafeResultSet rs) throws SQLException;
+	public abstract DataSaveable fromResultSet(SafeResultSet rs) throws SQLException;
 
 	public boolean isVaild() {
 		return vaild;

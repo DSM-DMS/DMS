@@ -6,4 +6,10 @@
         <item>토요귀사</item>
         <item>잔류</item>
     </string-array>
+    <string-array name="apply_extension">
+        <item>가온실</item>
+        <item>나온실</item>
+        <item>다온실</item>
+        <item>라온실</item>
+    </string-array>
 </resources>

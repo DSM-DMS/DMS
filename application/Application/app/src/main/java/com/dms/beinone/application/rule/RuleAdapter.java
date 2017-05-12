@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,8 +25,7 @@ import java.util.List;
  * Created by BeINone on 2017-01-20.
  */
 
-public class RuleAdapter extends ExpandableRecyclerAdapter<
-        Rule, RuleContent, RuleAdapter.RuleTitleVH, RuleAdapter.RuleContentVH> {
+public class RuleAdapter extends ExpandableRecyclerAdapter<Rule, RuleContent, RuleAdapter.RuleTitleVH, RuleAdapter.RuleContentVH> {
 
     private Context mContext;
 
@@ -74,7 +75,7 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
             mExpandBtn = (ImageButton) itemView.findViewById(R.id.btn_rule_expand);
 
             // changes color of expand button on touch row
-            View overlayView = itemView.findViewById(R.id.relativeLayout_rule_overlay);
+            View overlayView = itemView.findViewById(R.id.layout_rule_overlay);
             overlayView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -148,15 +149,31 @@ public class RuleAdapter extends ExpandableRecyclerAdapter<
      */
     public class RuleContentVH extends ChildViewHolder<RuleContent> {
 
-        private TextView mContentTV;
+        private WebView mContentWV;
 
-        public RuleContentVH(View itemView) {
+        public RuleContentVH(final View itemView) {
             super(itemView);
-            mContentTV = (TextView) itemView.findViewById(R.id.tv_rule_content);
+            mContentWV = (WebView) itemView.findViewById(R.id.wv_rule_content);
+            mContentWV.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    itemView.getLayoutParams().height = view.getLayoutParams().height;
+                    itemView.requestLayout();
+                }
+            });
+            mContentWV.setBackgroundColor(Color.TRANSPARENT);
         }
 
         public void bind(String content) {
-            mContentTV.setText(content);
+            String data = "<html>"
+                    + "<head>"
+                    + "<style type=\"text/css\">body{color: #fff;}</style>"
+                    + "</head>"
+                    + "<body>"
+                    + content
+                    + "</body>"
+                    + "</html>";
+            mContentWV.loadData(data, "text/html; charset=UTF-8", null);
         }
 
     }

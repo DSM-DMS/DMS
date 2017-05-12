@@ -19,13 +19,19 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="DMSEditText">
-        <attr name="et_style" format="string">
+        <attr name="dmset_style" format="string">
             <enum name="normal" value="0" />
-            <enum name="login" value="1" />
         </attr>
         <attr name="dmset_backgroundColor" format="color" />
+        <attr name="dmset_textColor" format="color" />
         <attr name="dmset_strokeColor" format="color" />
         <attr name="dmset_focusStrokeColor" format="color" />
         <attr name="dmset_cursorColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SlimDatePicker">
+        <attr name="sdp_textColor" format="color" />
+        <attr name="sdp_buttonColor" format="color" />
+        <attr name="sdp_backgroundColor" format="color" />
     </declare-styleable>
 </resources>

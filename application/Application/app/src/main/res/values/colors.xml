@@ -6,4 +6,9 @@
     
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorSecondary">#BDBDBD</color>
+    
+    <color name="disabled">#61000000</color>
+
+    <color name="positive">#66BB6A</color>
+    <color name="negative">#EF5350</color>
 </resources>
