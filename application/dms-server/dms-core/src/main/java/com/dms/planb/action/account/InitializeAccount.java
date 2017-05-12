@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.log.Log;
@@ -20,8 +19,6 @@ public class InitializeAccount implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 		DataBase database = DataBase.getInstance();
-
-		context = PrecedingWork.putHeaders(context);
 
 		if (!AdminManager.isAdmin(context)) {
 			context.response().setStatusCode(400).end();

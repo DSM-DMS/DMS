@@ -7,7 +7,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.PrecedingWork;
 import org.boxfox.dms.utilities.log.Log;
 
 import java.io.IOException;
@@ -21,7 +20,6 @@ private UserManager userManager;
 	}
 	
 	public void handle(RoutingContext context) {
-		context = PrecedingWork.putHeaders(context);
 
 		boolean isLogin = userManager.isLogined(context);
 		if(isLogin) {
