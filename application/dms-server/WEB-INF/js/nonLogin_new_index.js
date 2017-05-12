@@ -280,8 +280,7 @@ $loginSendBtn.on("click", function() {
         data: {
             id: $(".login-input #name").val(),
             password: $(".login-input #pass").val(),
-            remember: $(".login-check input:checked").val(),
-            "g-recaptcha-response": grecaptcha.getResponse()
+            remember: $(".login-check input:checked").val()
         },
         success: function(data, status) {
             location.reload();
