@@ -327,6 +327,8 @@ function setNoticePreview() {
  * My page
 ========================================================================================== */
 $openMyPageButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -335,6 +337,8 @@ $openMyPageButton.on("click", function() {
 });
 
 $closeMypageWindow.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -344,6 +348,8 @@ $closeMypageWindow.on("click", function() {
 
 
 $dormRule.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -352,6 +358,8 @@ $dormRule.on("click", function() {
 });
 
 $closeDormRuleButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -417,9 +425,8 @@ function getStudentInfo() {
 
 function fillStudentData(data) {
     $(".profile-container .name").text(data.name);
-    $(".profile-container .number").text(data.name);
-    $(".point-container .merit").text(data.merit);
-    $(".point-container .demerit").text(data.demerit);
+    $(".point-container .merit").text("상점 : " + data.merit);
+    $(".point-container .demerit").text("벌점 : " + data.demerit);
 }
 
 
@@ -428,6 +435,8 @@ function fillStudentData(data) {
  * faq rule
 ========================================================================================== */
 $closeFaqButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -436,6 +445,8 @@ $closeFaqButton.on("click", function() {
 });
 
 $faqBtn.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -754,6 +765,8 @@ $openPointButton.on("click", function() {
  * Going out
 ========================================================================================== */
 $openGoingOutButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
@@ -763,6 +776,8 @@ $openGoingOutButton.on("click", function() {
 });
 
 $closeGoingOutButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
