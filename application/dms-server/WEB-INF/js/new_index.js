@@ -319,7 +319,7 @@ function fillListCard(data, target) {
     newCard.on('click', function() {
         if (!$(".list-box p").hasClass("list-box-no-content")) {
             $(this).css('width', '100%');
-            $(this).css('height', '50%');
+            $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
                 html: data.content
