@@ -628,9 +628,19 @@ $stayApplyButton.on("click", function() {
             "week": applySendDataWeek,
             "value": applySendDataValue
         },
-        success: function() {
-            alert('신청되었습니다.');
-            setStayValue(stayDate);
+        statusCode: {
+            200: function() {
+                alert('신청되었습니다.');
+                setStayValue(stayDate);
+            },
+            204: function() {
+                alert('신청 시간이 아닙니다.')
+
+            },
+            500: function() {
+                alert('신청 시간이 아닙니다.')
+
+            }
         },
         error: function(xhr, status, err) {
             alert('신청 시간이 아닙니다.')
