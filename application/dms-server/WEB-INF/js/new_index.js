@@ -827,19 +827,6 @@ $extensionCurrentState.click(function() {
     extensionDoCheck();
 });
 
-var mapData = [
-    [1, 2, 0, 3, 4],
-    [5, 6, 0, 7, 8],
-    [9, 10, 0, 11, 12],
-    [13, 14, 0, 15, 16],
-    [17, 18, 0, 19, 20]
-];
-
-var mapData2 = [
-    [1, 2, 3, 0, 4, 5, 6],
-    [7, 8, 9, 0, 10, 11, 12],
-    [13, 14, 15, 0, 16, 17, 18]
-];
 
 function drawSeats(mapData, classId) {
     var newTable = $('<table/>', {
@@ -890,6 +877,12 @@ function extentionApply(classId, id) {
             "seat": id
         },
         statusCode: {
+            200: function() {
+                alert("신청 완료되었습니다.");
+                getClassData(classId);
+                $stayPaperplane.removeClass("send-paperplane");
+                $goingOutPaperplane.removeClass("send-paperplane");
+            },
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
@@ -902,12 +895,6 @@ function extentionApply(classId, id) {
                 $stayPaperplane.removeClass("send-paperplane");
                 $goingOutPaperplane.removeClass("send-paperplane");
             }
-        },
-        success: function(data, xhr) {
-            alert("신청 완료되었습니다.");
-            getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
