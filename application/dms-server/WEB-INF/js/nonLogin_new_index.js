@@ -142,6 +142,11 @@ var rulePreviewBtn = $(".rule-preview-btn");
 var faqPreviewBtn = $(".faq-preview-btn");
 
 /**
+ * register
+ */
+var registerBtn = $(".register-btn");
+
+/**
  * remove html tag
  */
 var protos = document.body.constructor === window.HTMLBodyElement;
@@ -684,4 +689,31 @@ faqPreviewBtn.on("click", function() {
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();
+});
+
+/** ======================================================================================
+ * register
+========================================================================================== */
+registerBtn.on("click", function() {
+    $(".login-content").toggle("slide");
+});
+
+$("#register-apply-btn").on("click", function() {
+    $.ajax({
+        url: "/account/register/student",
+        type: "POST",
+        data: {
+            id: $("#register-id").val(),
+            password: $("#register-pass").val(),
+            uid: $("#uid").val()
+        },
+        success: function(data, status) {
+            alert("회원가입에 성공했어요");
+            $(".login-content").toggle("slide");
+        },
+        error: function(xhr) {
+            alert("회원가입에 실패했어요");
+            $(".login-content").toggle("slide");
+        },
+    });
 });
