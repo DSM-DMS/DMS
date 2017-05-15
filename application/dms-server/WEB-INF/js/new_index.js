@@ -191,9 +191,9 @@ function sanitize(txt) {
  * Common modal
 ========================================================================================== */
 $closeModal.on("click", function() {
+    $(this).parents().parents().parents("div").children("input").val("");
+    $(this).parents().parents().parents("div").children("textarea").val("");
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
-    // $panel.toggleClass('blur');
-    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -765,7 +765,9 @@ $(".report-bug").on("click", function() {
         },
         success: function() {
             alert("버그를 제보해 주셔서 고맙습니다!");
-            $("#bugModal button:nth-child(2)").click();
+            $(".bug-modal input").val("");
+            $(".bug-modal textarea").val("");
+            $(".bug-modal .btn-close").click();
         },
         error: function() {
             alert("버그신고에 실패했어요 TT");
