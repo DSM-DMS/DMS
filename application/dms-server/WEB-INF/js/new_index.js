@@ -135,6 +135,14 @@ var $stayCurrentState = $('#Layer_1');
 var $extensionCurrentState = $('#Layer_2');
 
 /**
+ * Article preview
+ */
+
+var noticePreviewBtn = $(".notice-preview-btn");
+var rulePreviewBtn = $(".rule-preview-btn");
+var faqPreviewBtn = $(".faq-preview-btn");
+
+/**
  * remove html tag
  */
 var protos = document.body.constructor === window.HTMLBodyElement;
@@ -418,6 +426,29 @@ function getRuleList() {
     });
 }
 
+function setRulePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+/** ======================================================================================
+ * mypage
+========================================================================================== */
+
 $passwordChangeBtn.on("click", function() {
     $('.password-change-modal-wrapper').toggleClass('open');
 });
@@ -505,6 +536,26 @@ function getFaqList() {
         }
     });
 }
+
+function setFaqPreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
 /** ======================================================================================
  * Stay
 ========================================================================================== */
@@ -1263,4 +1314,26 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
+});
+
+/** ======================================================================================
+ * article preview
+========================================================================================== */
+
+noticePreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setNoticePreview();
+});
+
+rulePreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setRulePreview();
+});
+
+faqPreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setFaqPreview();
 });
