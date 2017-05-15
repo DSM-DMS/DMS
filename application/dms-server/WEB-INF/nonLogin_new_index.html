@@ -36,19 +36,19 @@
             <div class="notice">
                 <div class="notice-title-writer">
                     <div class="writer-container">
-                        <span>
+                        <span class="notice-preview-btn">
                             <p id="writer-content">사감부</p>
                         </span>
 
                     </div>
                     <div class="writer-container">
-                        <span>
+                        <span class="rule-preview-btn">
                             <p id="writer-content-long">기숙사 규정</p>
                         </span>
                         <div class="speech-bubble-tail"></div>
                     </div>
                     <div class="writer-container">
-                        <span>
+                        <span class="faq-preview-btn">
                             <p id="writer-content">FAQ</p>
                         </span>
                     </div>
@@ -215,7 +215,7 @@
         <div class="modal login-modal">
             <!-- <div class="head">
                     </div> -->
-            <div class="content">
+            <div class="content login-content">
                 <div class="login-box">
                     <div class="login-title">LOGIN</div>
                     <div class="login-input">
@@ -239,7 +239,35 @@
                             <button class="btn-close"><span>Close</span></button>
                         </div>
                     </div>
-                    <a href="" class="register">회원가입 하기</a>
+                    <a href="javascript:void(0)" class="register-btn">회원가입 하기</a>
+                </div>
+            </div>
+            <div class="content register-content">
+                <div class="login-box">
+                    <div class="login-title">LOGIN</div>
+                    <div class="login-input">
+                        <label for="name">Id</label>
+                        <input type="text" name="register-id" id="register-id">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="login-input">
+                        <label for="pass">Password</label>
+                        <input type="password" name="register-pass" id="register-pass">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="login-input">
+                        <label for="pass">Code</label>
+                        <input type="text" name="register-code" id="register-code">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="modal-button-box">
+                        <div class="modal-button login">
+                            <button id="register-apply-btn"><span>Register</span></button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- <div class="foot">
