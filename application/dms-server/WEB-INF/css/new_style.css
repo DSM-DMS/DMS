@@ -100,14 +100,16 @@ body {
 }
 
 #open-stay-apply {
+    cursor: pointer;
     margin-left: 25%;
     width: 50%;
-    background: transparent;
-    border: 2px solid white;
     border-radius: 10000000000px;
+    border-width: 0;
     color: white;
     line-height: 5vh;
     font-size: 2vh;
+    background: #48CFAD ;          
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 #stay-apply-container img {
@@ -115,7 +117,7 @@ body {
     position: relative;
     width: 185px;
     height: 185px;
-    margin: 1vh auto;
+    margin: 2vh auto;
     list-style: none;
 }
 
@@ -152,14 +154,16 @@ body {
 }
 
 #open-extension-apply {
+    cursor: pointer;
     margin-left: 25%;
     width: 50%;
-    background: transparent;
-    border: 2px solid white;
+    border-width: 0;
     border-radius: 999px;
     color: white;
     line-height: 5vh;
     font-size: 2vh;
+    background: #48CFAD ;          
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);

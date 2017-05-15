@@ -9,6 +9,11 @@ var $backgroundImage = $("#backgroundWallpaper");
 var $panel = $("#panel");
 
 /**
+ * Common button
+ */
+var $materialButton = $(".material-button");
+
+/**
  * Common window
  */
 var $windowClose = $(".window-close");
@@ -1372,4 +1377,9 @@ faqPreviewBtn.on("click", function() {
     $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();
 });
+
+/** ======================================================================================
+ * common button
+========================================================================================== */
+
 
