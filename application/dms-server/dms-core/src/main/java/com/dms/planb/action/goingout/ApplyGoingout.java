@@ -23,19 +23,15 @@ public class ApplyGoingout implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext context) {
-
         DataBase database = DataBase.getInstance();
-        
+
         String sat = context.request().getParam("sat");
         String sun = context.request().getParam("sun");
-        
+
         if (Guardian.checkParameters(sat, sun) && userManager.isLogined(context)) {
             try {
                 String uid = userManager.getUid(userManager.getIdFromSession(context));
-                
-                database.executeUpdate("DELETE FROM goingout_apply WHERE uid='", uid, "'");
-                database.executeUpdate("INSERT INTO goingout_apply(uid, sat, sun) VALUES('", uid, "', ", sat, ", ", sun, ")");
-                
+                database.executeUpdate("REPLACE INTO goingout_apply(uid, sat, sun) VALUES('", uid, "', ", sat, ", ", sun, ")");
                 context.response().setStatusCode(200).end();
                 context.response().close();
             } catch (SQLException e) {

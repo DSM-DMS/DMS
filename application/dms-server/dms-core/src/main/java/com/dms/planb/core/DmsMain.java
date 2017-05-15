@@ -64,7 +64,7 @@ class DmsMain {
 				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
 				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
 				Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
-				if (dayOfWeek == Calendar.MONDAY) {
+				if (dayOfWeek == Calendar.MONDAY&& hour<5) {
 					try {
 						DataBase.getInstance().executeUpdate("delete from goingout_apply");
 					} catch (SQLException e) {

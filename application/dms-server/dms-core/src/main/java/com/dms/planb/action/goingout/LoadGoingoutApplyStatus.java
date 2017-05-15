@@ -43,8 +43,8 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 			try {
 				userManager.getUserInfo(userManager.getIdFromSession(context));
 				boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(context));
-				responseObject.put("sat", !status[0]);
-				responseObject.put("sun", !status[1]);
+				responseObject.put("sat", status[0]);
+				responseObject.put("sun", status[1]);
 				context.response().setStatusCode(200).end(responseObject.toString());
 				context.response().close();
 			} catch (SQLException e) {
