@@ -309,17 +309,20 @@ function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
+    newCard.append($('<div/>', {
+        "class": "list-box-no-container"
+    }))
     newCard.append($('<p/>', {
         "class": "list-box-no",
         text: data.no
     }));
     newCard.append($('<p/>', {
-        "class": "list-box-no-title",
-        text: data.title
-    }));
-    newCard.append($('<p/>', {
         "class": "list-box-writer",
         text: "사감부"
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-title",
+        text: data.title
     }));
     // newCard.append($('<p/>', {
     //     "class": "list-box-no-content",
@@ -331,7 +334,7 @@ function fillListCard(data, target) {
             $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
-                html: data.content
+                html: sanitize(data.content)
             }));
             $(".list-box-no-content").css('opacity', '1');
         } else {

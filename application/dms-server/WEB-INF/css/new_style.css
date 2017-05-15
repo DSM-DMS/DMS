@@ -690,11 +690,35 @@ input[type="radio"]:checked~.bullet .line.seven {
     margin-left: 10%;
 }
 
+.list-box-no-container{
+    position: absolute;
+    width: 0;
+	height: 0;
+	border-top: 8vh solid rgba(255, 255, 255, .2);;
+	border-right: 8vh solid transparent;
+}
+
+.list-box-no{
+    position: absolute;
+    margin: 1vh 0 0 1vh;
+}
+
 .list-box-no-content{
     text-align: left;
     margin-left: 20px;
     opacity: 0;
     transition: 1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.list-box-writer{
+    margin: 0 auto;
+    font-size: 3vh;
+    margin-top: 8vh;
+    transform: translateY(-50%);
+}
+
+.list-box-title{
+    margin: 0 auto;
 }
 
 .list-box-container {
