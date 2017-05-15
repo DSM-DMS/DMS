@@ -47,7 +47,7 @@ public class ReportDownloadRouter implements Handler<RoutingContext> {
 					row.createCell(1).setCellValue(reportFacilityResultSet.getString("writer"));
 					row.createCell(2).setCellValue(reportFacilityResultSet.getString("title"));
 					row.createCell(3).setCellValue(reportFacilityResultSet.getString("content"));
-					row.createCell(4).setCellValue(reportFacilityResultSet.getString("write_date"));
+					row.createCell(4).setCellValue(reportFacilityResultSet.getString("write_date").split(" ")[0]);
 				}
 				
 				FileOutputStream xlsToSave = new FileOutputStream(FILE_DIR + "시설고장신고.xlsx");
