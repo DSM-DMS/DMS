@@ -1339,3 +1339,14 @@ faqPreviewBtn.on("click", function() {
     $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();
 });
+
+/** ======================================================================================
+ * alert
+========================================================================================== */
+
+function showAlert(message) {
+    $("body").append('<div class="infoAlert">message</div>');
+    setTimeout(function() {
+        $(".infoAlert").remove();
+    }, 2000);
+}
