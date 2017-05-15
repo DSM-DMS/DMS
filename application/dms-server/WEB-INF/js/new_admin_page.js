@@ -118,11 +118,14 @@ $qnaManagement.on('click', function() {
     location.href = 'http://dsm2015.cafe24.com/post/admin?category=qna';
 })
 
+$faqManagement.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/post/admin?category=faq'
+})
+
 $deleteAccount.on('click', function() {
     $('.delete-account-modal-wrapper').toggleClass('open');
     console.log("click")
 });
-
 $(".account-reset").on("click", function() {
     $.ajax({
         url: "/account/initialize",
