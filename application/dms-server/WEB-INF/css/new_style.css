@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 :not(i) {
     font-family: "malgun gothic", "sans-serif"!important;
     -webkit-touch-callout: none;
@@ -530,7 +531,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     padding: 2vh 2vh 1vh 2vh;
 }
 
-.writer-container {
+.writer-container{
     display: flex;
     flex-direction: column;
 }
@@ -578,6 +579,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     cursor: pointer;
 }
 
+
 #writer-content {
     display: inline-block;
     vertical-align: middle;
@@ -586,7 +588,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     /*set line height back to normal*/
 }
 
-#writer-content-long {
+#writer-content-long{
     font-size: 1.5vh;
     margin-top: 50%;
     transform: translateY(-50%);
@@ -603,8 +605,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 .notice-content-container {
     background: #eeeeee;
     border-radius: 0 0 2vh 2vh;
-    padding: 0 2vh 0 2vh;
-    ;
+    padding: 0 2vh 0 2vh;;
     position: relative;
 }
 
@@ -614,7 +615,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     overflow: hidden;
 }
 
-.contact-facebook {
+.contact-facebook{
     width: 10vh;
     height: 10vh;
     border-radius: 999px;
@@ -623,12 +624,12 @@ input[type="radio"]:checked~.bullet .line.seven {
     color: white;
 }
 
-.contact-facebook i {
+.contact-facebook i{
     margin-top: 50%;
     transform: translateY(-50%);
 }
 
-.contact-github {
+.contact-github{
     width: 10vh;
     height: 10vh;
     border-radius: 999px;
@@ -636,7 +637,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     color: black;
 }
 
-.contact-github i {
+.contact-github i{
     margin-top: 50%;
     transform: translateY(-50%);
 }
@@ -689,7 +690,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     margin-left: 10%;
 }
 
-.list-box-no-content {
+.list-box-no-content{
     text-align: left;
     margin-left: 20px;
     opacity: 0;
@@ -1198,13 +1199,13 @@ a.btn {
 }
 
 .modal-button button {
-    width: 100%;
-    height: 100%;
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    background-color: white;
-    color: #607D8B;
-    outline: 0;
-    font-size: 1.5rem;
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: #607D8B;
+  outline: 0;
+  font-size: 1.5rem;
 }
 
 .login-button button {
@@ -1246,7 +1247,6 @@ a.btn {
     color: #607D8B;
     text-decoration-line: none;
 }
-
 
 /*animaion------------------------------------------------------------------------*/
 
@@ -1692,20 +1692,20 @@ iframe {
     margin-bottom: 50%;
 }
 
-#easter-egg {
+#easter-egg{
     position: absolute;
     top: 0;
     opacity: 0;
 }
 
-@media only screen and (max-width: 1000px) {
-    #easter-egg {
+@media only screen and (max-width: 1000px){
+    #easter-egg{
         opacity: 1;
         z-index: 999999999999999999999;
         width: 100vw;
         height: 100vh;
     }
-    #easter-egg img {
+    #easter-egg img{
         width: auto;
         height: 100vh;
     }
