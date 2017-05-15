@@ -54,6 +54,7 @@ var $goingOutApplyButton = $("#going-out-apply-btn");
 var $goingOutPaperplane = $("#going-out-apply-btn i");
 var $saturdayContainer = $(".saturday-container");
 var $sundayContainer = $(".sunday-container");
+var goingOutDate = new Date();
 
 /**
  * My page
@@ -463,73 +464,6 @@ function getFaqList() {
 /** ======================================================================================
  * Stay
 ========================================================================================== */
-var numOfDays = function(year, month) {
-    var daysofmonth;
-    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
-        daysofmonth = 30;
-    } else {
-        daysofmonth = 31;
-        if (month == 2) {
-            if (year / 4 - parseInt(year / 4) != 0) {
-                daysofmonth = 28;
-            } else {
-                if (year / 100 - parseInt(year / 100) != 0) {
-                    daysofmonth = 29;
-                } else {
-                    if (year / 400 - parseInt(year / 400) != 0) {
-                        daysofmonth = 28;
-                    } else {
-                        daysofmonth = 29;
-                    }
-                }
-            }
-        }
-    }
-    return daysofmonth;
-}
-
-var leadingZeros = function(data, num) {
-    var zero = '';
-    data = data.toString();
-
-    if (data.length < num) {
-        for (i = 0; i < num - data.length; i++)
-            zero += '0';
-    }
-    return zero + data;
-};
-
-var getWeek = function(thisDate) {
-    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
-    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
-    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-
-    if (week == 5) {
-        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else {
-            return 0;
-        }
-    }
-    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-};
-
-var makeWeekFormat = function(thisDate) {
-    var week = getWeek(thisDate);
-    if (week == 0) {
-        thisDate.setMonth(thisDate.getMonth() + 1);
-        week = 1;
-    }
-    var year = thisDate.getFullYear();
-    var month = thisDate.getMonth() + 1;
-
-    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
-};
-
 var setStayValue = function(thisDate) {
     var weekData = makeWeekFormat(thisDate)
 
@@ -580,6 +514,7 @@ $openStayButton.click(function() {
     $menu.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+    setStayValue(stayDate);
 });
 
 $closeStayButton.on("click", function() {
@@ -750,15 +685,39 @@ $openPointButton.on("click", function() {
 });
 
 /** ======================================================================================
-
  * Going out
 ========================================================================================== */
+var setGoingOutValue = function(thisDate) {
+    var weekData = makeWeekFormat(thisDate)
+
+    $.ajax({
+        url: "/apply/goingout",
+        type: "GET",
+        data: {
+            "week": weekData
+        },
+        success: function(data) {
+            try {
+                $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
+                $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
+            } catch (err) {
+            }
+        },
+        error: function(xhr) {
+            console.log(xhr.status);
+        }
+    });
+};
+
+setGoingOutValue(goingOutDate);
+
 $openGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+    setGoingOutValue(goingOutDate);
     return false;
 });
 
@@ -770,7 +729,6 @@ $closeGoingOutButton.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
-// TODO : 신청완료 되면 클래스 초기화해주기
 $goingOutApplyButton.on('click', function() {
     $goingOutPaperplane.addClass("send-paperplane");
     var satVal = false;
@@ -782,8 +740,6 @@ $goingOutApplyButton.on('click', function() {
     if ($sundayContainer.hasClass("select")) {
         sunVal = true;
     }
-
-    console.log(satVal, sunVal);
 
     $.ajax({
         url: "/apply/goingout",
@@ -1218,3 +1174,73 @@ $(document).ready(function() {
     //setting for show meal
     setDay();
 });
+
+/** ======================================================================================
+ * Week Format fuction
+========================================================================================== */
+function numOfDays(year, month) {
+    var daysofmonth;
+    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+        daysofmonth = 30;
+    } else {
+        daysofmonth = 31;
+        if (month == 2) {
+            if (year / 4 - parseInt(year / 4) != 0) {
+                daysofmonth = 28;
+            } else {
+                if (year / 100 - parseInt(year / 100) != 0) {
+                    daysofmonth = 29;
+                } else {
+                    if (year / 400 - parseInt(year / 400) != 0) {
+                        daysofmonth = 28;
+                    } else {
+                        daysofmonth = 29;
+                    }
+                }
+            }
+        }
+    }
+    return daysofmonth;
+}
+
+function leadingZeros(data, num) {
+    var zero = '';
+    data = data.toString();
+
+    if (data.length < num) {
+        for (i = 0; i < num - data.length; i++)
+            zero += '0';
+    }
+    return zero + data;
+};
+
+function getWeek(thisDate) {
+    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
+    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
+    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+
+    if (week == 5) {
+        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else {
+            return 0;
+        }
+    }
+    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+};
+
+function makeWeekFormat(thisDate) {
+    var week = getWeek(thisDate);
+    if (week == 0) {
+        thisDate.setMonth(thisDate.getMonth() + 1);
+        week = 1;
+    }
+    var year = thisDate.getFullYear();
+    var month = thisDate.getMonth() + 1;
+
+    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
+};
