@@ -9,6 +9,11 @@ var $backgroundImage = $("#backgroundWallpaper");
 var $panel = $("#panel");
 
 /**
+ * Common button
+ */
+var $materialButton = $(".material-button");
+
+/**
  * Common window
  */
 var $windowClose = $(".window-close");
@@ -309,17 +314,20 @@ function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
+    newCard.append($('<div/>', {
+        "class": "list-box-no-container"
+    }))
     newCard.append($('<p/>', {
         "class": "list-box-no",
         text: data.no
     }));
     newCard.append($('<p/>', {
-        "class": "list-box-no-title",
-        text: data.title
-    }));
-    newCard.append($('<p/>', {
         "class": "list-box-writer",
         text: "사감부"
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-title",
+        text: data.title
     }));
     // newCard.append($('<p/>', {
     //     "class": "list-box-no-content",
@@ -331,7 +339,7 @@ function fillListCard(data, target) {
             $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
-                html: data.content
+                html: sanitize(data.content)
             }));
             $(".list-box-no-content").css('opacity', '1');
         } else {
@@ -575,18 +583,22 @@ var setStayValue = function(thisDate) {
                     case 1:
                         $('#stayValue').text('금요귀가');
                         $(":radio[name=1][value=1]").prop('checked', true);
+                        $('#stayIcon').attr('src', '.\images\fri-out.svg');
                         break;
                     case 2:
                         $('#stayValue').text('토요귀가');
                         $(":radio[name=1][value=2]").prop('checked', true);
+                        $('#stayIcon').attr('src', '.\images\sat-out.svg');
                         break;
                     case 3:
                         $('#stayValue').text('토요귀사');
                         $(":radio[name=1][value=3]").prop('checked', true);
+                        $('#stayIcon').attr('src', '.\images\sat-in.svg');
                         break;
                     case 4:
                         $('#stayValue').text('잔류');
                         $(":radio[name=1][value=4]").prop('checked', true);
+                        $('#stayIcon').attr('src', '.\images\stay.svg');
                         break;
                 }
             } catch (err) {
@@ -1376,3 +1388,6 @@ function showAlert(message) {
         $(".infoAlert").remove();
     }, 2000);
 }
+/** =======
+ * common button
+========================================================================================== */
