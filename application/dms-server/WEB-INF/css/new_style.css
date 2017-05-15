@@ -633,9 +633,8 @@ input[type="radio"]:checked~.bullet .line.seven {
     width: 10vh;
     height: 10vh;
     border-radius: 999px;
-    background: black;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .contact-github i{
