@@ -102,10 +102,25 @@ $goingOutDownload.on('click', function() {
     location.href = 'http://dsm2015.cafe24.com/goingout/download?year=' + year + '&month=' + month + '&week=' + week;
 });
 
+$facilityDownload.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/report/download';
+});
+
+$noticeManagement.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/post/admin?category=notice';
+});
+
+$dormRuleManagement.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/post/admin?category=rule';
+})
+
+$qnaManagement.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/post/admin?category=qna';
+})
+
 $deleteAccount.on('click', function() {
     $('.delete-account-modal-wrapper').toggleClass('open');
     console.log("click")
-
 });
 
 $(".account-reset").on("click", function() {
@@ -143,23 +158,6 @@ $(".new-admin-button").on("click", function() {
         }
     })
 });
-
-$noticeManagement.on('click', function() {
-    location.href = "\notice-management.html";
-});
-
-$faqManagement.on('click', function() {
-    location.href = "\faq-management.html";
-});
-
-$qnaManagement.on('click', function() {
-    location.href = "\qna-management.html";
-});
-
-$dormRuleManagement.on('click', function() {
-    location.href = "\dorm-rule-management.html";
-});
-
 
 // modal common ----------------------
 $modalButton.click(function(e) {
