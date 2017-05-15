@@ -3,6 +3,7 @@ package com.dms.beinone.application.dmsview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ import com.dms.beinone.application.R;
  * Created by BeINone on 2017-01-18.
  */
 
-public class DMSBadge extends TextView {
+public class DMSBadge extends AppCompatTextView {
 
     public DMSBadge(Context context) {
         super(context);

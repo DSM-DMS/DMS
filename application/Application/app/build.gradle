@@ -34,11 +34,6 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'commons-codec:commons-codec:1.9'
-    compile 'com.loopj.android:android-async-http:1.4.9'
-    // https://mvnrepository.com/artifact/com.googlecode.android-query/android-query
-    compile group: 'com.googlecode.android-query', name: 'android-query', version: '0.25.9'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     testCompile 'junit:junit:4.12'
     compile project(':calendarview')
     compile project(':libk-switchbutton')

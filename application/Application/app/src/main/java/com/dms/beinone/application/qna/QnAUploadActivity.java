@@ -92,7 +92,7 @@ public class QnAUploadActivity extends AppCompatActivity {
                 try {
                     uploadQnA(new QnA(title, content, privacy));
                 } catch (IOException e) {
-                    System.out.println("IOException in FacilityReportUploadActivity: uploadQnA()");
+                    System.out.println("IOException in QnAUploadActivity: uploadQnA()");
                     e.printStackTrace();
                 }
             }
@@ -113,9 +113,9 @@ public class QnAUploadActivity extends AppCompatActivity {
             JSONObject params = new JSONObject();
             params.put("title", qna.getTitle());
             params.put("content", qna.getQuestionContent());
-            params.put("privacy", String.valueOf(qna.isPrivacy()));
+            params.put("privacy", qna.isPrivacy());
 
-            HttpBox.put(QnAUploadActivity.this, "/post/qna/answer")
+            HttpBox.post(QnAUploadActivity.this, "/post/qna/question")
                     .putBodyData(params)
                     .push(new HttpBoxCallback() {
                         @Override
@@ -139,12 +139,12 @@ public class QnAUploadActivity extends AppCompatActivity {
 
                         @Override
                         public void err(Exception e) {
-                            System.out.println("Error in FacilityReportUploadActivity: PUT /post/qna/answer");
+                            System.out.println("Error in QnAUploadActivity: POST /post/qna/question");
                             e.printStackTrace();
                         }
                     });
         } catch (JSONException e) {
-            System.out.println("JSONException in FacilityReportUploadActivity: PUT /post/qna/answer");
+            System.out.println("JSONException in QnAUploadActivity: POST /post/qna/question");
             e.printStackTrace();
         }
     }

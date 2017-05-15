@@ -34,11 +34,25 @@ public class AppcontentArticleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appcontent_article);
-
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Appcontent appcontent = getIntent().getParcelableExtra(getString(R.string.EXTRA_APPCONTENT));
+
+        switch (appcontent.getCategory()) {
+            case Appcontent.NOTICE:
+                setTitle(R.string.nav_notice);
+                break;
+            case Appcontent.NEWSLETTER:
+                setTitle(R.string.nav_newsletter);
+                break;
+            case Appcontent.COMPETITION:
+                setTitle(R.string.nav_competition);
+                break;
+            default:
+                break;
+        }
+
         try {
             loadAppcontent(appcontent.getCategory(), appcontent.getNumber());
         } catch (IOException e) {

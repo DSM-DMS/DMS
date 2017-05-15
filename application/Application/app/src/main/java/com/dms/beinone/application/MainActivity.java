@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
-//        mAccountPrefs.edit().putString("id", "test").apply();
-//        mAccountPrefs.edit().putString("password", "1234").apply();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
@@ -126,12 +124,12 @@ public class MainActivity extends AppCompatActivity
 
         if (mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "").equals("")) {
             if (mNavigationView.getHeaderView(0) != mLoginNavHeaderView) {
-//                hideMemberMenuItems();
+                hideMemberMenuItems();
                 setLoginHeaderView();
             }
         } else {
             if (mNavigationView.getHeaderView(0) != mLogoutNavHeaderView) {
-//                showMemberMenuItems();
+                showMemberMenuItems();
                 setLogoutHeaderView();
             }
         }

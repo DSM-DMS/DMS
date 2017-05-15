@@ -2,8 +2,10 @@ package com.dms.beinone.application.qna;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +29,14 @@ import static com.dms.beinone.application.utils.RecyclerViewUtils.TYPE_ITEM;
 
 public class QnAAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private SharedPreferences mPrefs;
+
     private Context mContext;
     private List<QnA> mQnAList;
     private OnMoreBtnClickListener mOnMoreBtnClickListener;
 
     public QnAAdapter(Context context, List<QnA> qnaList, OnMoreBtnClickListener onMoreBtnClickListener) {
+        mPrefs = context.getSharedPreferences(context.getString(R.string.PREFS_ACCOUNT), Context.MODE_PRIVATE);
         mContext = context;
         mQnAList = qnaList;
         mOnMoreBtnClickListener = onMoreBtnClickListener;
@@ -93,11 +98,16 @@ public class QnAAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View v) {
                     QnA qna = mQnAList.get(getAdapterPosition());
 
-                    if (qna.isPrivacy()) {
-                        Toast.makeText(mContext, R.string.qna_private, Toast.LENGTH_SHORT).show();
-                    } else {
+//                    if (qna.isPrivacy()) {
+//                        String name = mPrefs.getString(mContext.getString(R.string.PREFS_ACCOUNT_NAME), null);
+//                        if (name != null && qna.getWriter().equals(name)) {
+//                            viewArticle(qna.getNo(), qna.getWriter());
+//                        } else {
+//                            Toast.makeText(mContext, R.string.qna_private, Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
                         viewArticle(qna.getNo(), qna.getWriter());
-                    }
+//                    }
                 }
             });
         }

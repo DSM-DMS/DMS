@@ -59,6 +59,26 @@ public class CookieManager {
         mCookieEditor.putString(cookie.getName(), cookie.getValue()).apply();
     }
 
+    public String getCookies() {
+        StringBuilder builder = new StringBuilder();
+
+        String cookieNames = mCookiePrefs.getString(KEY_PREFS_COOKIE_NAMES, null);
+        if (cookieNames != null) {
+            String[] parsedCookieNames = cookieNames.split(",");
+            for (String key : parsedCookieNames) {
+                String value = mCookiePrefs.getString(key, null);
+                if (!builder.toString().equals("")) {
+                    builder.append("; ");
+                }
+                builder.append(key);
+                builder.append("=");
+                builder.append(value);
+            }
+        }
+
+        return builder.toString();
+    }
+
     public List<Cookie> getAllCookies() {
         List<Cookie> cookieList = new ArrayList<>();
 
@@ -72,6 +92,10 @@ public class CookieManager {
         }
 
         return cookieList;
+    }
+
+    public void removeAllCookies() {
+        mCookieEditor.clear().commit();
     }
 
 }

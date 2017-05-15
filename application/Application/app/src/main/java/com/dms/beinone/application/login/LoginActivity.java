@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mIdET;
     private EditText mPasswordET;
+    private CheckBox mRememberCB;
 
     private SharedPreferences mPrefs;
     private CookieManager mCookieManager;
@@ -46,14 +48,15 @@ public class LoginActivity extends AppCompatActivity {
         mCookieManager = new CookieManager(this);
 
         mIdET = (EditText) findViewById(R.id.et_login_id);
+        mPasswordET = (EditText) findViewById(R.id.et_login_password);
+        mRememberCB = (CheckBox) findViewById(R.id.cb_login_remember);
+
         mIdET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 EditTextUtils.hideKeyboard(LoginActivity.this, (EditText) v);
             }
         });
-
-        mPasswordET = (EditText) findViewById(R.id.et_login_password);
         mPasswordET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -67,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String id = mIdET.getText().toString();
                 String password = mPasswordET.getText().toString();
+                boolean remember = mRememberCB.isChecked();
                 if (id.equals("")) {
                     Toast.makeText(LoginActivity.this, R.string.login_noid, Toast.LENGTH_SHORT)
                             .show();
@@ -75,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                             .show();
                 } else {
                     try {
-                        login(id, password);
+                        login(id, password, remember);
                     } catch (IOException e) {
                         System.out.println("IOException in LoginActivity: login()");
                         e.printStackTrace();
@@ -84,22 +88,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button registerBtn = (Button) findViewById(R.id.btn_login_register);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+//        Button registerBtn = (Button) findViewById(R.id.btn_login_register);
+//        registerBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+//            }
+//        });
     }
 
-    private void login(String id, String password) throws IOException {
+    private void login(final String id, final String password, boolean remember) throws IOException {
         try {
             JSONObject params = new JSONObject();
             params.put("id", id);
             params.put("password", password);
+            params.put("remember", remember);
 
-            HttpBox.post(LoginActivity.this, "/app/account/login/student")
+            HttpBox.post(LoginActivity.this, "/account/login/student")
                     .putBodyData(params)
                     .push(new HttpBoxCallback() {
                         @Override
@@ -108,7 +113,21 @@ public class LoginActivity extends AppCompatActivity {
                             switch (code) {
                                 case HttpBox.HTTP_CREATED:
                                     Map<String, List<String>> headers = response.getHeaders();
-                                    addLoginInfoCookies(headers);
+                                    setLoginInfoCookies(headers);
+                                    SharedPreferences.Editor editor = mPrefs.edit();
+                                    editor.putString(getString(R.string.PREFS_ACCOUNT_ID), id).apply();
+                                    editor.putString(getString(R.string.PREFS_ACCOUNT_PASSWORD), password).apply();
+                                    Toast.makeText(LoginActivity.this, id + getString(R.string.login_created), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(LoginActivity.this, R.string.login_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(LoginActivity.this, R.string.login_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
                             }
                         }
 
@@ -124,7 +143,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void addLoginInfoCookies(Map<String, List<String>> headers) {
+    private void setLoginInfoCookies(Map<String, List<String>> headers) {
+        mCookieManager.removeAllCookies();
+
         String[] cookieValue = mCookieManager.findCookieValue(headers, "vertx-web.session");
         if (cookieValue != null) {
             String key = cookieValue[0];

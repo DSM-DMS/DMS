@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.dms.beinone.application.R;
  * Created by BeINone on 2017-01-20.
  */
 
-public class DMSImageButton extends ImageButton {
+public class DMSImageButton extends AppCompatImageButton {
 
     private static final int STYLE_RECTANGLE = 0;
     private static final int STYLE_OVAL = 1;
@@ -88,8 +89,10 @@ public class DMSImageButton extends ImageButton {
                         break;
 
                     case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
                         setBackground(mNormalBackground);
                         setColorFilter(mNormalImageColor);
+
                         break;
 
                     default: break;

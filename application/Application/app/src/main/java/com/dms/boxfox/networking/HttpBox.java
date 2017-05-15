@@ -2,6 +2,7 @@ package com.dms.boxfox.networking;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.dms.boxfox.networking.datamodel.HeaderProperty;
 import com.dms.boxfox.networking.datamodel.Request;
@@ -17,7 +18,7 @@ import java.util.Scanner;
 
 public class HttpBox {
 
-    private static final String SERVER_URL = "http://dsm2015.cafe24.com";
+    public static final String SERVER_URL = "http://dsm2015.cafe24.com";
 
     public static final int HTTP_OK = 200;
     public static final int HTTP_CREATED = 201;

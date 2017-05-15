@@ -65,7 +65,7 @@ public class FacilityReportUploadActivity extends AppCompatActivity {
                 } else {
                     // upload the facility report if there is no blank
                     try {
-                        uploadFacilityReport(new FacilityReport(title, content, Integer.valueOf(room), writer));
+                        uploadFacilityReport(new FacilityReport(title, content, Integer.valueOf(room)));
                     } catch (IOException e) {
                         System.out.println("IOException in FacilityReportUploadActivity: uploadFacilityReport()");
                         e.printStackTrace();
@@ -90,7 +90,6 @@ public class FacilityReportUploadActivity extends AppCompatActivity {
             params.put("title", facilityReport.getTitle());
             params.put("content", facilityReport.getContent());
             params.put("room", facilityReport.getRoom());
-            params.put("writer", facilityReport.getWriter());
 
             HttpBox.post(FacilityReportUploadActivity.this, "/post/report")
                     .putBodyData(params)

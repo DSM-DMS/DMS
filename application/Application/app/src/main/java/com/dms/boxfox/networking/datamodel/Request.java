@@ -1,6 +1,7 @@
 package com.dms.boxfox.networking.datamodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.dms.beinone.application.utils.Cookie;
 import com.dms.beinone.application.utils.CookieManager;
@@ -12,8 +13,11 @@ import com.dms.boxfox.networking.secure.AES256;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,11 +51,11 @@ public class Request {
         this.url = url;
         this.type = type;
         setUserAgent();
+        putHeaderProperty(KEY_HEADER_COOKIE, new CookieManager(context).getCookies());
+        Log.d("testLog", new CookieManager(context).getCookies());
         putHeaderProperty(CONTENT_TYPE, CONTENT_TYPE_POST);
         putHeaderProperty(ACCEPT_TYPE, "*/*");
         aes = AES256.getDefault();
-        List<Cookie> cookieList = new CookieManager(context).getAllCookies();
-        setCookies(cookieList);
     }
 
     private Request setUserAgent() {
@@ -74,19 +78,6 @@ public class Request {
 
     public Request setCommand(int cmd) {
         putHeaderProperty(COMMAND, cmd + "");
-        return this;
-    }
-
-    private Request setCookie(Cookie cookie) {
-        String cookieValue = cookie.getName() + "=" + cookie.getValue();
-        putHeaderProperty(KEY_HEADER_COOKIE, cookieValue);
-        return this;
-    }
-
-    private Request setCookies(List<Cookie> cookies) {
-        for (Cookie cookie : cookies) {
-            setCookie(cookie);
-        }
         return this;
     }
 

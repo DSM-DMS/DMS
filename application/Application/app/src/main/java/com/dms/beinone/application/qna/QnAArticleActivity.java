@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +38,7 @@ public class QnAArticleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna_article);
-
+        setTitle(R.string.nav_qna);
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -93,11 +95,16 @@ public class QnAArticleActivity extends AppCompatActivity {
         TextView writerTV = (TextView) findViewById(R.id.tv_qna_article_writer);
         TextView questionDateTV = (TextView) findViewById(R.id.tv_qna_article_questiondate);
         TextView questionContentTV = (TextView) findViewById(R.id.tv_qna_article_questioncontent);
+        Button answerBtn = (Button) findViewById(R.id.btn_qna_article_answer);
 
         titleTV.setText(qna.getTitle());
         writerTV.setText(qna.getWriter());
         questionDateTV.setText(qna.getQuestionDate());
         questionContentTV.setText(qna.getQuestionContent());
+        if (qna.getAnswerContent() == null) {
+            answerBtn.setEnabled(false);
+            answerBtn.setText("답변이 없습니다!");
+        }
     }
 
     /**

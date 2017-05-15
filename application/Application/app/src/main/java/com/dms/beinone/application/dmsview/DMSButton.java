@@ -2,11 +2,13 @@ package com.dms.beinone.application.dmsview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -27,7 +29,7 @@ import static android.R.attr.textSize;
  * Created by BeINone on 2017-01-11.
  */
 
-public class DMSButton extends Button {
+public class DMSButton extends AppCompatButton {
 
     private static final int STYLE_RECTANGLE = 0;
     private static final int STYLE_ROUND = 1;
@@ -204,4 +206,11 @@ public class DMSButton extends Button {
         });
     }
 
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        if (!enabled) {
+            setBackgroundColor(Color.GRAY);
+        }
+    }
 }

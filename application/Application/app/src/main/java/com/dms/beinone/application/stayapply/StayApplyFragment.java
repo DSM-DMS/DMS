@@ -215,7 +215,8 @@ public class StayApplyFragment extends Fragment {
                                     }
                                     break;
                                 case HttpBox.HTTP_NO_CONTENT:
-                                    mDefaultStatusPrefs.getInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), 0);
+                                    int stayStatusValue = mDefaultStatusPrefs.getInt(getString(R.string.PREFS_DEFAULTSTATUS_DEFAULTSTATUS), 0);
+                                    setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(stayStatusValue));
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();

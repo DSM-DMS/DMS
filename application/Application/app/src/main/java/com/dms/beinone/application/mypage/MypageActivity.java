@@ -1,11 +1,16 @@
 package com.dms.beinone.application.mypage;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -15,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,26 +28,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
 import com.dms.beinone.application.utils.MultipartUtility;
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.HttpBoxCallback;
-import com.dms.boxfox.networking.datamodel.Request;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by BeINone on 2017-02-20.
@@ -61,7 +59,7 @@ public class MypageActivity extends AppCompatActivity {
     private TextView mTotalTV;
     private TextView mExtensionApplyStatusTV;
 
-    private String mProfileImageString;
+    private File mProfileImageFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,44 +127,11 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://dsm2015.cafe24.com:80")
-                .build();
-
-        DMSService dmsService = retrofit.create(DMSService.class);
-        Call<Account> call = dmsService.loadMyPage();
-
-        call.enqueue(new Callback<Account>() {
-            @Override
-            public void onResponse(Call<Account> call, retrofit2.Response<Account> response) {
-                if (response.code() == 200) {
-                    Account account = response.body();
-                    bind(account);
-                } else {
-                    Toast.makeText(MypageActivity.this, R.string.mypage_load_internal_server_error, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Account> call, Throwable t) {
-                Toast.makeText(MypageActivity.this, R.string.mypage_load_internal_server_error, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         try {
             loadMypage();
         } catch (IOException e) {
             System.out.println("IOException in MypageActivity: loadMyPage()");
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mProfileImageString != null) {
-            Glide.with(this).load(mProfileImageString).centerCrop().into(mProfileIV);
         }
     }
 
@@ -180,30 +145,27 @@ public class MypageActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        Glide.clear(mProfileIV);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
             case ACTIVITY_REQUEST_PICK_IMAGE:
                 if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+//                    uploadImage(new File(getRealPathFromURI(uri)));
                     try {
-                        Uri uri = data.getData();
-                        InputStream iStream = getContentResolver().openInputStream(uri);
-                        byte[] profileImageData = getBytes(iStream);
-//                        new UploadProfileImageTask().execute(profileImageData);
-//                        Glide.with(this).load(urSi).centerCrop().into(mProfileIV);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                        Uri tempUri = getImageUri(getApplicationContext(), image_bitmap);
+                        File imageFile = new File(getRealPathFromURI(tempUri));
+                        uploadImage(imageFile);
                     } catch (IOException e) {
+                        System.out.println("IOException in MypageActivity");
                         e.printStackTrace();
                     }
                 }
+                break;
+            default:
+                break;
         }
     }
 
@@ -221,6 +183,27 @@ public class MypageActivity extends AppCompatActivity {
                     // functionality that depends on this permission.
                 }
         }
+    }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     private void selectProfileImage() {
@@ -250,29 +233,6 @@ public class MypageActivity extends AppCompatActivity {
 //            Glide.with(this).load(account.getProfileImage()).centerCrop().into(mProfileIV);
 //        }
     }
-
-    private byte[] getBytes(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
-        int bufferSize = 1024;
-        byte[] buffer = new byte[bufferSize];
-
-        int len = 0;
-        while ((len = inputStream.read(buffer)) != -1) {
-            byteBuffer.write(buffer, 0, len);
-        }
-        return byteBuffer.toByteArray();
-    }
-
-//        public Bitmap stringToBitmap(String encodedString){
-//            try{
-//                byte [] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-//                Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-//                return bitmap;
-//            }catch(Exception e){
-//                e.getMessage();
-//                return null;
-//            }
-//        }
 
     private void loadMypage() throws IOException {
         HttpBox.get(MypageActivity.this, "/account/student")
@@ -310,62 +270,53 @@ public class MypageActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 });
+        loadImage();
     }
 
-//    private class UploadProfileImageTask extends AsyncTask<byte[], Void, Response> {
-//
-//        private static final String MSG_NOT_IMAGE_FILE = "It's Not Image File";
-//        private static final String MSG_NEED_LOGIN = "Need Login";
-//
-//        @Override
-//        protected Response doInBackground(byte[]... params) {
-//            Response response = null;
-//
-//            byte[] profileImageData = params[0];
-//            try {
-//                response = uploadProfileImage(profileImageData);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return response;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Response response) {
-//            super.onPostExecute(response);
-//
-//            int code = response.getCode();
-//            String message = response.getMessage();
-//            if (code == 200) {
-//                // success
-//                Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_success,
-//                        Toast.LENGTH_SHORT).show();
-//            } else if (code == 400) {
-//                // failure
-//                if (message.equals(MSG_NOT_IMAGE_FILE)) {
-//                    // not image file
-//                    Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_message_notimagefile,
-//                            Toast.LENGTH_SHORT).show();
-//                } else if (message.equals(MSG_NEED_LOGIN)) {
-//                    // need login
-//                    Toast.makeText(MypageActivity.this, R.string.mypage_upload_profile_message_needlogin,
-//                            Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//
-//        private void uploadProfileImage(byte[] profileImageData) throws IOException {
-//            MultipartUtility multipart = new MultipartUtility("UTF-8");
-//            multipart.addFilePart("profile_image", profileImageData, "test.jpg");
-//            String imageString = multipart.finish();
-//
-////            HttpBox.post(MypageActivity.this, "/upload/image")
-////                    .putHeaderProperty(Request.CONTENT_TYPE, "multipart/form-data; boundary=" + multipart.getBoundary())
-////                    .putBodyData(imageString)
-////                    .push();
-////            HttpBox.post(MypageActivity.this, "/upload/image")
-//        }
-//    }
+    private void loadImage() throws IOException {
+        SharedPreferences accountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
+        String id = accountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), null);
+        if (id != null) {
+            Glide.with(this).load(HttpBox.SERVER_URL + "/lookup/image/" + id).centerCrop().into(mProfileIV);
+        }
+    }
+
+    private void uploadImage(final File uploadFile) {
+        new AsyncTask<Void, Void, Object>() {
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+
+                if (o instanceof Exception) {
+                    Log.d("testLog", "failed");
+                    ((Exception) o).printStackTrace();
+                } else {
+                    setProfileImage(uploadFile);
+                }
+            }
+
+            @Override
+            protected Object doInBackground(Void... params) {
+                try {
+                    MultipartUtility multipart = new MultipartUtility(MypageActivity.this, HttpBox.SERVER_URL + "/upload/image", "UTF-8");
+                    multipart.addFilePart("profile_image", uploadFile);
+                    return multipart.finish();
+                } catch (IOException e) {
+                    System.out.println("IOException in MypageActivity: POST /upload/image");
+                    e.printStackTrace();
+                    return e;
+                }
+            }
+        }.execute();
+    }
+
+    private void updateProfileImage() {
+        Glide.with(this).load(mProfileImageFile).centerCrop().into(mProfileIV);
+    }
+
+    private void setProfileImage(File imageFile) {
+        mProfileImageFile = imageFile;
+        updateProfileImage();
+    }
 
 }

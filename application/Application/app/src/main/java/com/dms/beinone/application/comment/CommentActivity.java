@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.dms.beinone.application.EmptySupportedRecyclerView;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.JSONParser;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
@@ -46,6 +47,9 @@ public class CommentActivity extends AppCompatActivity {
         mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
 
         mRecyclerView = (EmptySupportedRecyclerView) findViewById(R.id.rv_comment);
+
+        View emptyView = findViewById(R.id.view_comment_empty);
+        RecyclerViewUtils.setupRecyclerView(mRecyclerView, this, emptyView);
 
         mCommentET = (EditText) findViewById(R.id.et_comment_comment);
         ImageButton postIB = (ImageButton) findViewById(R.id.ib_comment_post);
@@ -108,7 +112,7 @@ public class CommentActivity extends AppCompatActivity {
                                     }
                                     break;
                                 case HttpBox.HTTP_NO_CONTENT:
-                                    Toast.makeText(CommentActivity.this, R.string.comment_load_no_content, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(CommentActivity.this, R.string.comment_load_no_content, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(CommentActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
@@ -151,7 +155,7 @@ public class CommentActivity extends AppCompatActivity {
                                     try {
                                         loadComment(no);
                                     } catch (IOException e) {
-                                        System.out.println("IOException in CommentActivity: GET /post/qna/comment");
+                                        System.out.println("IOException in CommentActivity: POST /post/qna/comment");
                                         e.printStackTrace();
                                     }
                                     break;

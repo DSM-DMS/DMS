@@ -8,34 +8,30 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.widget.EditText;
 
-import com.dms.beinone.application.utils.DensityConverter;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.utils.DensityConverter;
 
 import static android.R.attr.textSize;
 
 /**
- * Created by BeINone on 2017-01-17.
+ * Created by BeINone on 2017-05-15.
  */
 
-public class DMSEditText extends AppCompatEditText {
-
-    private static final int STYLE_NORMAL = 0;
+public class LoginEditText extends AppCompatEditText {
 
     private Drawable mNormalBackground;
     private Drawable mOnFocusBackground;
     private int mTextColor;
 
-    public DMSEditText(Context context) {
+    public LoginEditText(Context context) {
         super(context);
     }
 
-    public DMSEditText(Context context, AttributeSet attrs) {
+    public LoginEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DMSEditText);
-        int style = a.getInt(R.styleable.DMSEditText_dmset_style, STYLE_NORMAL);
 
         int defBackgroundColor = ContextCompat.getColor(context, android.R.color.white);
         int defStrokeColor = ContextCompat.getColor(context, R.color.colorPrimary);
@@ -52,24 +48,22 @@ public class DMSEditText extends AppCompatEditText {
         // get text color
         int textColor = a.getColor(R.styleable.DMSEditText_dmset_textColor, defTextColor);
 
-        a = context.obtainStyledAttributes(attrs, new int[] { textSize, android.R.attr.drawableRight });
+        a = context.obtainStyledAttributes(attrs, new int[]{textSize, android.R.attr.drawableRight});
 
         // get text size
         int textSize = a.getDimensionPixelSize(0, (int) DensityConverter.dpToPx(context, 14));
 
-        init(context, style, backgroundColor, strokeColor, focusStrokeColor, textColor, textSize);
+        init(context, backgroundColor, strokeColor, focusStrokeColor, textColor, textSize);
     }
 
     /**
      * 속성 초기화
      */
-    private void init(Context context, int style, int backgroundColor, int strokeColor,
+    private void init(Context context, int backgroundColor, int strokeColor,
                       int focusStrokeColor, int textColor, int textSize) {
 
-        if (style == STYLE_NORMAL) {
-            mNormalBackground = ContextCompat.getDrawable(context, R.drawable.dmset);
-            mOnFocusBackground = ContextCompat.getDrawable(context, R.drawable.dmset);
-        }
+        mNormalBackground = ContextCompat.getDrawable(context, R.drawable.dmset);
+        mOnFocusBackground = ContextCompat.getDrawable(context, R.drawable.dmset);
 
         int padding = (int) DensityConverter.dpToPx(context, 8);
         setPadding(padding, padding, padding, padding);
@@ -91,5 +85,4 @@ public class DMSEditText extends AppCompatEditText {
         setTextColor(mTextColor);
         setTextSize(TypedValue.COMPLEX_UNIT_SP, DensityConverter.pxTodp(context, textSize));
     }
-
 }

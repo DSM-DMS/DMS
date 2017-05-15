@@ -38,13 +38,14 @@
     <!-- Login Activity -->
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
+    <string name="login_remember">Remember me</string>
     <string name="login_login">로그인</string>
     <string name="login_register">아이디가 없으신가요? 지금 회원가입하세요.</string>
     <string name="login_noid">아이디를 입력하세요.</string>
     <string name="login_nopassword">비밀번호를 입력하세요.</string>
-    <string name="login_success">님, 환영합니다.</string>
-    <string name="login_failure">아이디 또는 비밀번호를 잘못 입력하셨습니다.</string>
-    <string name="login_error">오류로 인해 로그인에 실패하였습니다.</string>
+    <string name="login_created">님, 환영합니다.</string>
+    <string name="login_bad_request">아이디 또는 비밀번호를 잘못 입력하셨습니다.</string>
+    <string name="login_internal_server_error">오류로 인해 로그인에 실패하였습니다.</string>
 
     <string name="logout_success">로그아웃하였습니다.</string>
     
@@ -200,6 +201,7 @@
     <string name="qna_empty">Q<![CDATA[&]]>A가 없습니다.</string>
     <string name="qna_private">비공개 글입니다.</string>
     <string name="qna_comment">댓글</string>
+    <string name="qna_answer">답변</string>
     <string name="qna_title">제목</string>
     <string name="qna_content">문의 내용</string>
     <string name="qna_privacy">비공개</string>
@@ -209,10 +211,10 @@
     <string name="qna_article_no_content">글이 없습니다.</string>
     <string name="qna_article_internal_server_error">오류로 인해 글을 불러오지 못했습니다.</string>
     <string name="qna_write_created">문의사항을 제출하였습니다.</string>
-    <string name="qna_write_failure">문의사항을 제출하지 못했습니다.</string>
     <string name="qna_write_internal_server_error">오류로 인해 문의사항을 제출하지 못했습니다.</string>
 
     <!-- Comment -->
+    <string name="comment_empty">댓글이 없습니다.</string>
     <string name="comment_load_no_content">댓글이 없습니다.</string>
     <string name="comment_load_internal_server_error">오류로 인해 댓글을 불러오지 못했습니다.</string>
     <string name="comment_upload_internal_server_error">오류로 인해 댓글을 작성하지 못했습니다.</string>

@@ -34,7 +34,7 @@ public class FacilityReportArticleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facilityreport_article);
-
+        setTitle(R.string.nav_facilityreport);
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

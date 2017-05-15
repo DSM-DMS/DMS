@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dmsib="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:background="@android:color/background_light"
+    android:orientation="vertical">
 
-    <com.dms.beinone.application.EmptySupportedRecyclerView
-        android:id="@+id/rv_comment"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/et_comment_comment" />
-    
+        android:layout_above="@+id/et_comment_comment">
+
+        <com.dms.beinone.application.EmptySupportedRecyclerView
+            android:id="@+id/rv_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/view_comment_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/comment_empty"
+            android:textSize="@dimen/text_emptyview" />
+    </RelativeLayout>
+
     <com.dms.beinone.application.dmsview.DMSEditText
         android:id="@+id/et_comment_comment"
         android:layout_width="match_parent"
@@ -25,8 +39,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:src="@drawable/ic_send_white_24dp"
         dmsib:ib_style="rectangle" />
 
