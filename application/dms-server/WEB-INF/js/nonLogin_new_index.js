@@ -735,6 +735,10 @@ registerBtn.on("click", function() {
     $(".login-content").toggle("slide");
 });
 
+$(".register-close").on("click", function() {
+    $(".login-content").toggle("slide");
+});
+
 $("#register-apply-btn").on("click", function() {
     $.ajax({
         url: "/account/register/student",
