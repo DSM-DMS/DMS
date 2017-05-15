@@ -32,12 +32,8 @@ public class SessionUtil {
     }
     
     public static void removeCookie(RoutingContext context, String key) {
-    	if(context.getCookie(key) != null) {
+    	if(context.getCookie(key) != null)
     		context.getCookie(key).setMaxAge(0);
-    	}
-    	
-    	if(context.session().get(key) != null) {
-    		context.session().remove(key);
-    	}
+        context.session().remove(key);
     }
 }

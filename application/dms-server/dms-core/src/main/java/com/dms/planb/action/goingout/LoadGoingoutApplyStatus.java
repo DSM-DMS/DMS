@@ -26,13 +26,11 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
 
-		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		
+
 		String id = userManager.getIdFromSession(context);
         String uid = null;
-        
+
         try {
             if (id != null) {
                 uid = userManager.getUid(id);
@@ -40,32 +38,23 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        if(!Guardian.checkParameters(id, uid)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
-        	return;
-        }
-		
-		try {
-			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
-			
-			if(resultSet.next()) {
-				responseObject.put("sat", resultSet.getBoolean("sat"));
-				responseObject.put("sun", resultSet.getBoolean("sun"));
-				
-				context.response().setStatusCode(200);
-				context.response().end(responseObject.toString());
+
+        if(userManager.isLogined(context)) {
+			try {
+				userManager.getUserInfo(userManager.getIdFromSession(context));
+				boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(context));
+				responseObject.put("sat", !status[0]);
+				responseObject.put("sun", !status[1]);
+			} catch (SQLException e) {
+				context.response().setStatusCode(500).end();
 				context.response().close();
-			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
+
+				Log.l("SQLException");
 			}
-		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
+		}else{
+			context.response().setStatusCode(400).end();
 			context.response().close();
-			
-			Log.l("SQLException");
+			return;
 		}
 	}
 }

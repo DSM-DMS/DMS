@@ -26,9 +26,13 @@ public class MypageRouter implements Handler<RoutingContext> {
 
 	@Override
 	public void handle(RoutingContext context) {
+		if(!userManager.isLogined(context)){
+			context.response().setStatusCode(400).end();
+			context.response().close();
+			return;
+		}
 
 		EasyJsonObject responseObject = new EasyJsonObject();
-
 		String id = userManager.getIdFromSession(context);
         String uid = null;
         try {

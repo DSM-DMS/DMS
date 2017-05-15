@@ -38,7 +38,7 @@ public class RequestSecurePreprocessor {
                 return;
             }
 
-            Log.l("Requested : " + context.request().host()," Method : " ,context.request().method()," Absolute URI : " , context.request().absoluteURI()," Params size : " , context.request().params().size());
+            Log.l(" Method : " ,context.request().method()," Absolute URI : " , context.request().absoluteURI()," Params size : " , context.request().params().size());
             context.next();
         }
     }
