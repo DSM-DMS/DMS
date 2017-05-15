@@ -24,7 +24,7 @@ public class AdminPageRouter implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		boolean isLogin = adminManager.isLogined(context);
 		if (isLogin) {
-			DmsTemplate templates = new DmsTemplate("admin_page");
+			DmsTemplate templates = new DmsTemplate("new_admin_page");
 			try {
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());
