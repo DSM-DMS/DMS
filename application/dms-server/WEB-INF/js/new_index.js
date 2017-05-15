@@ -134,6 +134,48 @@ var $stayCurrentState = $('#Layer_1');
  */
 var $extensionCurrentState = $('#Layer_2');
 
+/**
+ * Article preview
+ */
+
+var noticePreviewBtn = $(".notice-preview-btn");
+var rulePreviewBtn = $(".rule-preview-btn");
+var faqPreviewBtn = $(".faq-preview-btn");
+
+/**
+ * remove html tag
+ */
+var protos = document.body.constructor === window.HTMLBodyElement;
+validHTMLTags = /^(?:a|abbr|acronym|address|applet|area|article|aside|audio|b|base|basefont|bdi|bdo|bgsound|big|blink|blockquote|body|br|button|canvas|caption|center|cite|code|col|colgroup|data|datalist|dd|del|details|dfn|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hgroup|hr|html|i|iframe|img|input|ins|isindex|kbd|keygen|label|legend|li|link|listing|main|map|mark|marquee|menu|menuitem|meta|meter|nav|nobr|noframes|noscript|object|ol|optgroup|option|output|p|param|plaintext|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|source|spacer|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video|wbr|xmp)$/i;
+
+function sanitize(txt) {
+    var // This regex normalises anything between quotes
+        normaliseQuotes = /=(["'])(?=[^\1]*[<>])[^\1]*\1/g,
+        normaliseFn = function($0, q, sym) {
+            return $0.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        },
+        replaceInvalid = function($0, tag, off, txt) {
+            var
+            // Is it a valid tag?
+                invalidTag = protos &&
+                document.createElement(tag) instanceof HTMLUnknownElement ||
+                !validHTMLTags.test(tag),
+
+                // Is the tag complete?
+                isComplete = txt.slice(off + 1).search(/^[^<]+>/) > -1;
+
+            return invalidTag || !isComplete ? '&lt;' + tag : $0;
+        };
+
+    txt = txt.replace(normaliseQuotes, normaliseFn)
+        .replace(/<(\w+)/g, replaceInvalid);
+
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = txt;
+
+    return "textContent" in tmp ? tmp.textContent : tmp.innerHTML;
+}
+
 /** ======================================================================================
  * Common window
 ========================================================================================== */
@@ -285,7 +327,7 @@ function fillListCard(data, target) {
     newCard.on('click', function() {
         if (!$(".list-box p").hasClass("list-box-no-content")) {
             $(this).css('width', '100%');
-            $(this).css('height', '50%');
+            $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
                 html: data.content
@@ -311,7 +353,7 @@ function setNoticePreview() {
         success: function(data) {
             var parsedData = JSON.parse(data).result;
             $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(parsedData[0].content);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
         },
         error: function() {
             console.log("error");
@@ -327,6 +369,8 @@ function setNoticePreview() {
  * My page
 ========================================================================================== */
 $openMyPageButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -335,6 +379,8 @@ $openMyPageButton.on("click", function() {
 });
 
 $closeMypageWindow.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -344,6 +390,8 @@ $closeMypageWindow.on("click", function() {
 
 
 $dormRule.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -352,6 +400,8 @@ $dormRule.on("click", function() {
 });
 
 $closeDormRuleButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -375,6 +425,29 @@ function getRuleList() {
         }
     });
 }
+
+function setRulePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+/** ======================================================================================
+ * mypage
+========================================================================================== */
 
 $passwordChangeBtn.on("click", function() {
     $('.password-change-modal-wrapper').toggleClass('open');
@@ -417,9 +490,8 @@ function getStudentInfo() {
 
 function fillStudentData(data) {
     $(".profile-container .name").text(data.name);
-    $(".profile-container .number").text(data.name);
-    $(".point-container .merit").text(data.merit);
-    $(".point-container .demerit").text(data.demerit);
+    $(".point-container .merit").text("상점 : " + data.merit);
+    $(".point-container .demerit").text("벌점 : " + data.demerit);
 }
 
 
@@ -428,6 +500,8 @@ function fillStudentData(data) {
  * faq rule
 ========================================================================================== */
 $closeFaqButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -436,6 +510,8 @@ $closeFaqButton.on("click", function() {
 });
 
 $faqBtn.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -460,6 +536,26 @@ function getFaqList() {
         }
     });
 }
+
+function setFaqPreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
 /** ======================================================================================
  * Stay
 ========================================================================================== */
@@ -617,9 +713,19 @@ $stayApplyButton.on("click", function() {
             "week": applySendDataWeek,
             "value": applySendDataValue
         },
-        success: function() {
-            alert('신청되었습니다.');
-            setStayValue(stayDate);
+        statusCode: {
+            200: function() {
+                alert('신청되었습니다.');
+                setStayValue(stayDate);
+            },
+            204: function() {
+                alert('신청 시간이 아닙니다.')
+
+            },
+            500: function() {
+                alert('신청 시간이 아닙니다.')
+
+            }
         },
         error: function(xhr, status, err) {
             alert('신청 시간이 아닙니다.')
@@ -754,6 +860,8 @@ $openPointButton.on("click", function() {
  * Going out
 ========================================================================================== */
 $openGoingOutButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
@@ -763,6 +871,8 @@ $openGoingOutButton.on("click", function() {
 });
 
 $closeGoingOutButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
@@ -812,19 +922,6 @@ $extensionCurrentState.click(function() {
     extensionDoCheck();
 });
 
-var mapData = [
-    [1, 2, 0, 3, 4],
-    [5, 6, 0, 7, 8],
-    [9, 10, 0, 11, 12],
-    [13, 14, 0, 15, 16],
-    [17, 18, 0, 19, 20]
-];
-
-var mapData2 = [
-    [1, 2, 3, 0, 4, 5, 6],
-    [7, 8, 9, 0, 10, 11, 12],
-    [13, 14, 15, 0, 16, 17, 18]
-];
 
 function drawSeats(mapData, classId) {
     var newTable = $('<table/>', {
@@ -875,6 +972,12 @@ function extentionApply(classId, id) {
             "seat": id
         },
         statusCode: {
+            200: function() {
+                alert("신청 완료되었습니다.");
+                getClassData(classId);
+                $stayPaperplane.removeClass("send-paperplane");
+                $goingOutPaperplane.removeClass("send-paperplane");
+            },
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
@@ -887,12 +990,6 @@ function extentionApply(classId, id) {
                 $stayPaperplane.removeClass("send-paperplane");
                 $goingOutPaperplane.removeClass("send-paperplane");
             }
-        },
-        success: function(data, xhr) {
-            alert("신청 완료되었습니다.");
-            getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
@@ -1217,4 +1314,26 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
+});
+
+/** ======================================================================================
+ * article preview
+========================================================================================== */
+
+noticePreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setNoticePreview();
+});
+
+rulePreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setRulePreview();
+});
+
+faqPreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setFaqPreview();
 });

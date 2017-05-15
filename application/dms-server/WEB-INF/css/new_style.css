@@ -611,6 +611,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .notice-content-container p {
     max-height: 7vh;
+    min-height: 7vh;
     overflow: hidden;
 }
 
@@ -632,9 +633,8 @@ input[type="radio"]:checked~.bullet .line.seven {
     width: 10vh;
     height: 10vh;
     border-radius: 999px;
-    background: black;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .contact-github i{
@@ -1118,7 +1118,7 @@ a.btn {
     /*padding: 5%;*/
     /*text-align: center;*/
     height: 100%;
-    padding: 15% 10% 15% 10%;
+    padding: 10% 10% 10% 10%;
 }
 
 
@@ -1196,6 +1196,16 @@ a.btn {
 
 .modal-button-box {
     text-align: center;
+}
+
+.modal-button button {
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: #607D8B;
+  outline: 0;
+  font-size: 1.5rem;
 }
 
 .login-button button {
@@ -1686,11 +1696,17 @@ iframe {
     position: absolute;
     top: 0;
     opacity: 0;
-    z-index: 999999999999999999999;
 }
 
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 1000px){
     #easter-egg{
         opacity: 1;
+        z-index: 999999999999999999999;
+        width: 100vw;
+        height: 100vh;
+    }
+    #easter-egg img{
+        width: auto;
+        height: 100vh;
     }
 }
