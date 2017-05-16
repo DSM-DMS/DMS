@@ -38,15 +38,13 @@ body {
     position: absolute;
     float: right;
     right: 0;
-    height: 120%;
-    width: 80%;
+    height: 100vh;
     z-index: -2;
-    bottom: 20%;
 }
 
 #background-image img {
     height: 100%;
-    transform: scale(1.2);
+    transform: scale(1);
     /*-webkit-filter: blur(5px) brightness(50%);*/
 }
 
