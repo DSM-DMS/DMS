@@ -19,6 +19,8 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
+import com.google.common.net.HttpHeaders;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -82,8 +84,10 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 				wb.write(xlsToSave);
 				xlsToSave.close();
 
-				context.response().setStatusCode(200);
-				context.response().sendFile(FILE_DIR + "연장신청.xlsx");
+				String fileName = new String("연장신청.xlsx".getBytes("UTF-8"), "ISO-8859-1");
+				context.response()
+					.putHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=" + fileName)
+					.sendFile(FILE_DIR + "연장신청.xlsx");
 				context.response().close();
 			} catch (IOException | SQLException e) {
 				context.response().setStatusCode(500).end();

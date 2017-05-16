@@ -17,6 +17,8 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
+import com.google.common.net.HttpHeaders;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
@@ -28,8 +30,8 @@ public class ReportDownloadRouter implements Handler<RoutingContext> {
     private XSSFWorkbook wb;
 	
 	@Override
-	public void handle(RoutingContext ctx) {
-		if(AdminManager.isAdmin(ctx)) {
+	public void handle(RoutingContext context) {
+		if(AdminManager.isAdmin(context)) {
 			DataBase database = DataBase.getInstance();
 			SafeResultSet reportFacilityResultSet;
 			
@@ -39,8 +41,15 @@ public class ReportDownloadRouter implements Handler<RoutingContext> {
 				wb = new XSSFWorkbook(new FileInputStream(file));
 				
 				XSSFSheet sheet = wb.getSheetAt(0);
-				reportFacilityResultSet = database.executeQuery("SELECT * FROM facility_report");
 				int rowCount = 0;
+				XSSFRow titleRow = sheet.createRow(rowCount++);
+				titleRow.createCell(0).setCellValue("호실");
+				titleRow.createCell(1).setCellValue("작성자");
+				titleRow.createCell(2).setCellValue("제목");
+				titleRow.createCell(3).setCellValue("신고 내용");
+				titleRow.createCell(4).setCellValue("신고 날짜");
+				
+				reportFacilityResultSet = database.executeQuery("SELECT * FROM facility_report");
 				while(reportFacilityResultSet.next()) {
 					XSSFRow row = sheet.createRow(rowCount++);
 					row.createCell(0).setCellValue(reportFacilityResultSet.getString("room") + "호");
@@ -54,12 +63,14 @@ public class ReportDownloadRouter implements Handler<RoutingContext> {
 				wb.write(xlsToSave);
 				xlsToSave.close();
 				
-				ctx.response().setStatusCode(200);
-				ctx.response().sendFile(FILE_DIR + "시설고장신고.xlsx");
-				ctx.response().close();
+				String fileName = new String("시설고장신고.xls".getBytes("UTF-8"), "ISO-8859-1");
+				context.response()
+					.putHeader(HttpHeaders.CONTENT_DISPOSITION, "filename=" + fileName)
+					.sendFile(FILE_DIR + "시설고장신고.xlsx");
+				context.response().close();
 			} catch (IOException | SQLException e) {
-				ctx.response().setStatusCode(500).end();
-				ctx.response().close();
+				context.response().setStatusCode(500).end();
+				context.response().close();
 			}
 		}
 	}
