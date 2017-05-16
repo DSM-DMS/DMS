@@ -9,6 +9,11 @@ var $backgroundImage = $("#backgroundWallpaper");
 var $panel = $("#panel");
 
 /**
+ * Common button
+ */
+var $materialButton = $(".material-button");
+
+/**
  * Common window
  */
 var $windowClose = $(".window-close");
@@ -54,6 +59,7 @@ var $goingOutApplyButton = $("#going-out-apply-btn");
 var $goingOutPaperplane = $("#going-out-apply-btn i");
 var $saturdayContainer = $(".saturday-container");
 var $sundayContainer = $(".sunday-container");
+var goingOutDate = new Date();
 
 /**
  * My page
@@ -190,9 +196,9 @@ function sanitize(txt) {
  * Common modal
 ========================================================================================== */
 $closeModal.on("click", function() {
+    $(this).parents().parents().parents("div").children("input").val("");
+    $(this).parents().parents().parents("div").children("textarea").val("");
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
-    // $panel.toggleClass('blur');
-    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -308,17 +314,20 @@ function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
+    newCard.append($('<div/>', {
+        "class": "list-box-no-container"
+    }))
     newCard.append($('<p/>', {
         "class": "list-box-no",
         text: data.no
     }));
     newCard.append($('<p/>', {
-        "class": "list-box-no-title",
-        text: data.title
-    }));
-    newCard.append($('<p/>', {
         "class": "list-box-writer",
         text: "사감부"
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-title",
+        text: data.title
     }));
     // newCard.append($('<p/>', {
     //     "class": "list-box-no-content",
@@ -330,7 +339,7 @@ function fillListCard(data, target) {
             $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
-                html: data.content
+                html: sanitize(data.content)
             }));
             $(".list-box-no-content").css('opacity', '1');
         } else {
@@ -559,73 +568,6 @@ function setFaqPreview() {
 /** ======================================================================================
  * Stay
 ========================================================================================== */
-var numOfDays = function(year, month) {
-    var daysofmonth;
-    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
-        daysofmonth = 30;
-    } else {
-        daysofmonth = 31;
-        if (month == 2) {
-            if (year / 4 - parseInt(year / 4) != 0) {
-                daysofmonth = 28;
-            } else {
-                if (year / 100 - parseInt(year / 100) != 0) {
-                    daysofmonth = 29;
-                } else {
-                    if (year / 400 - parseInt(year / 400) != 0) {
-                        daysofmonth = 28;
-                    } else {
-                        daysofmonth = 29;
-                    }
-                }
-            }
-        }
-    }
-    return daysofmonth;
-}
-
-var leadingZeros = function(data, num) {
-    var zero = '';
-    data = data.toString();
-
-    if (data.length < num) {
-        for (i = 0; i < num - data.length; i++)
-            zero += '0';
-    }
-    return zero + data;
-};
-
-var getWeek = function(thisDate) {
-    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
-    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
-    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-
-    if (week == 5) {
-        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else {
-            return 0;
-        }
-    }
-    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-};
-
-var makeWeekFormat = function(thisDate) {
-    var week = getWeek(thisDate);
-    if (week == 0) {
-        thisDate.setMonth(thisDate.getMonth() + 1);
-        week = 1;
-    }
-    var year = thisDate.getFullYear();
-    var month = thisDate.getMonth() + 1;
-
-    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
-};
-
 var setStayValue = function(thisDate) {
     var weekData = makeWeekFormat(thisDate)
 
@@ -641,18 +583,22 @@ var setStayValue = function(thisDate) {
                     case 1:
                         $('#stayValue').text('금요귀가');
                         $(":radio[name=1][value=1]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/fri-out.svg');
                         break;
                     case 2:
                         $('#stayValue').text('토요귀가');
                         $(":radio[name=1][value=2]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/sat-out.svg');
                         break;
                     case 3:
                         $('#stayValue').text('토요귀사');
                         $(":radio[name=1][value=3]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/sat-in.svg');
                         break;
                     case 4:
                         $('#stayValue').text('잔류');
                         $(":radio[name=1][value=4]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/stay.svg');
                         break;
                 }
             } catch (err) {
@@ -676,6 +622,7 @@ $openStayButton.click(function() {
     $menu.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+    setStayValue(stayDate);
 });
 
 $closeStayButton.on("click", function() {
@@ -830,7 +777,9 @@ $(".report-bug").on("click", function() {
         },
         success: function() {
             alert("버그를 제보해 주셔서 고맙습니다!");
-            $("#bugModal button:nth-child(2)").click();
+            $(".bug-modal input").val("");
+            $(".bug-modal textarea").val("");
+            $(".bug-modal .btn-close").click();
         },
         error: function() {
             alert("버그신고에 실패했어요 TT");
@@ -856,9 +805,32 @@ $openPointButton.on("click", function() {
 });
 
 /** ======================================================================================
-
  * Going out
 ========================================================================================== */
+var setGoingOutValue = function(thisDate) {
+    var weekData = makeWeekFormat(thisDate)
+
+    $.ajax({
+        url: "/apply/goingout",
+        type: "GET",
+        data: {
+            "week": weekData
+        },
+        success: function(data) {
+            try {
+                $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
+                $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
+            } catch (err) {
+            }
+        },
+        error: function(xhr) {
+            console.log(xhr.status);
+        }
+    });
+};
+
+setGoingOutValue(goingOutDate);
+
 $openGoingOutButton.on("click", function() {
     $openStayButton.prop("disabled", true);
     $openExtensionButton.prop("disabled", true);
@@ -867,6 +839,7 @@ $openGoingOutButton.on("click", function() {
     $menu.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+    setGoingOutValue(goingOutDate);
     return false;
 });
 
@@ -880,7 +853,6 @@ $closeGoingOutButton.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
-// TODO : 신청완료 되면 클래스 초기화해주기
 $goingOutApplyButton.on('click', function() {
     $goingOutPaperplane.addClass("send-paperplane");
     var satVal = false;
@@ -892,8 +864,6 @@ $goingOutApplyButton.on('click', function() {
     if ($sundayContainer.hasClass("select")) {
         sunVal = true;
     }
-
-    console.log(satVal, sunVal);
 
     $.ajax({
         url: "/apply/goingout",
@@ -1230,17 +1200,36 @@ $(document).ready(function() {
     //set random background image
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
-    var agent = navigator.userAgent.toLowerCase();
+    //연장신청 시간 보여줌
+    var startTime = '5:30 PM' ;
+    var endTime  =  '8:30 PM' ;
 
-    // if (agent.indexOf("chrome") != -1) {
-    //     alert("크롬 브라우저입니다.");
-    // }
-    // if (agent.indexOf("safari") != -1) {
-    //     alert("사파리 브라우저입니다.");
-    // }
-    // if (agent.indexOf("firefox") != -1) {
-    //     alert("파이어폭스 브라우저입니다.");
-    // }
+    var formatTime = (function () {
+        function addZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
+        return function (dt) {
+            var formatted = '';
+
+            if (dt) {
+                var hours24 = dt.getHours();
+                var hours = ((hours24 + 11) % 12) + 1;
+                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"),hours24>11?"pm" :"am"].join(" ");            
+            }
+            return formatted;
+        }
+    })();
+
+    var currentTime = formatTime(new Date());
+
+    if(currentTime >= startTime && currentTime <= endTime) 
+    {
+        $('#extensionValue').html("연장신청이 가능합니다.");
+    }
+    else
+    {
+        $('#extensionValue').html("연장신청이 불가능합니다");
+    }
 
     //show current stay state and extension state
     stayTick = $('#stayTick');
@@ -1254,7 +1243,6 @@ $(document).ready(function() {
     extensionCross1 = $('#extensionCross1');
     extensionCross2 = $('#extensionCross2');
     extensionDoCheck();
-
 
     //saturday, sunday svg animations
     var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
@@ -1317,9 +1305,79 @@ $(document).ready(function() {
 });
 
 /** ======================================================================================
+ * Week Format fuction
+========================================================================================== */
+function numOfDays(year, month) {
+    var daysofmonth;
+    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+        daysofmonth = 30;
+    } else {
+        daysofmonth = 31;
+        if (month == 2) {
+            if (year / 4 - parseInt(year / 4) != 0) {
+                daysofmonth = 28;
+            } else {
+                if (year / 100 - parseInt(year / 100) != 0) {
+                    daysofmonth = 29;
+                } else {
+                    if (year / 400 - parseInt(year / 400) != 0) {
+                        daysofmonth = 28;
+                    } else {
+                        daysofmonth = 29;
+                    }
+                }
+            }
+        }
+    }
+    return daysofmonth;
+}
+
+function leadingZeros(data, num) {
+    var zero = '';
+    data = data.toString();
+
+    if (data.length < num) {
+        for (i = 0; i < num - data.length; i++)
+            zero += '0';
+    }
+    return zero + data;
+};
+
+function getWeek(thisDate) {
+    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
+    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
+    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+
+    if (week == 5) {
+        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else {
+            return 0;
+        }
+    }
+    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+};
+
+function makeWeekFormat(thisDate) {
+    var week = getWeek(thisDate);
+    if (week == 0) {
+        thisDate.setMonth(thisDate.getMonth() + 1);
+        week = 1;
+    }
+    var year = thisDate.getFullYear();
+    var month = thisDate.getMonth() + 1;
+
+    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
+};
+
+
+/** ======================================================================================
  * article preview
 ========================================================================================== */
-
 noticePreviewBtn.on("click", function() {
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
@@ -1337,3 +1395,9 @@ faqPreviewBtn.on("click", function() {
     $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();
 });
+
+/** ======================================================================================
+ * common button
+========================================================================================== */
+
+
