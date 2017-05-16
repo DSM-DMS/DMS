@@ -12,6 +12,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.utilities.log.Log;
 
 public class AdminManager implements AccountManager {
     private static AES256 aes;
@@ -34,19 +35,20 @@ public class AdminManager implements AccountManager {
     public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
-        if(sessionKey!=null)
-        try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
-            if (rs.next() && rs.getInt(1) > 0) {
-                check = true;
-            } else {
-                SessionUtil.removeCookie(ctx, "AdminSession");
+        if (sessionKey != null)
+            try {
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
+                if (rs.next() && rs.getInt(1) > 0) {
+                    check = true;
+                } else {
+                    SessionUtil.removeCookie(ctx, "AdminSession");
+                    Log.l(sessionKey);
+                    secureManager.invalidRequest(ctx);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
                 secureManager.invalidRequest(ctx);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            secureManager.invalidRequest(ctx);
-        }
         return check;
     }
 

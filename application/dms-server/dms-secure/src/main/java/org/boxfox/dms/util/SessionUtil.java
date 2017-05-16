@@ -16,6 +16,8 @@ public class SessionUtil {
         if (sessionKey == null && context.getCookie(key) != null) {
             sessionKey = context.getCookie(key).getValue();
         }
+        if (sessionKey != null && sessionKey.equals("null"))
+            sessionKey = null;
         return sessionKey;
     }
 
@@ -30,10 +32,12 @@ public class SessionUtil {
         cookie.setMaxAge(356 * 24 * 60 * 60);
         context.addCookie(cookie);
     }
-    
+
     public static void removeCookie(RoutingContext context, String key) {
-    	if(context.getCookie(key) != null)
-    		context.getCookie(key).setMaxAge(0);
+        if (context.getCookie(key) != null) {
+            context.getCookie(key).setValue("null");
+            registerCookie(context, key, "null");
+        }
         context.session().remove(key);
     }
 }
