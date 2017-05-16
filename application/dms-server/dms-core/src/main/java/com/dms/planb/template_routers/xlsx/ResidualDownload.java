@@ -112,10 +112,8 @@ public class ResidualDownload {
                 int type;
                 String query = QueryUtils.queryBuilder("SELECT value FROM stay_apply where uid = '", user.getId(), "' AND week = '", date, "'");
                 SafeResultSet rs = DataBase.getInstance().executeQuery(query);
-                System.out.println(query);
                 if (rs.next()) type = rs.getInt(1);
                 else type = user.getResidualDefault();
-                System.out.println(type);
                 map.put(user.getNumber() + "", RESIDUAL_TYPE[type - 1]);
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -34,6 +34,7 @@ public class AdminManager implements AccountManager {
     public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
+        if(sessionKey!=null)
         try {
             SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
             if (rs.next() && rs.getInt(1) > 0) {
