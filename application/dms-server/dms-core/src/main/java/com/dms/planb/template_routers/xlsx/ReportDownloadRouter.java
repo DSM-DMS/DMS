@@ -39,8 +39,15 @@ public class ReportDownloadRouter implements Handler<RoutingContext> {
 				wb = new XSSFWorkbook(new FileInputStream(file));
 				
 				XSSFSheet sheet = wb.getSheetAt(0);
-				reportFacilityResultSet = database.executeQuery("SELECT * FROM facility_report");
 				int rowCount = 0;
+				XSSFRow titleRow = sheet.createRow(rowCount++);
+				titleRow.createCell(0).setCellValue("호실");
+				titleRow.createCell(1).setCellValue("작성자");
+				titleRow.createCell(2).setCellValue("제목");
+				titleRow.createCell(3).setCellValue("신고 내용");
+				titleRow.createCell(4).setCellValue("신고 날짜");
+				
+				reportFacilityResultSet = database.executeQuery("SELECT * FROM facility_report");
 				while(reportFacilityResultSet.next()) {
 					XSSFRow row = sheet.createRow(rowCount++);
 					row.createCell(0).setCellValue(reportFacilityResultSet.getString("room") + "호");
