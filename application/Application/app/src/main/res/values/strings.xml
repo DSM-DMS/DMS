@@ -38,7 +38,7 @@
     <!-- Login Activity -->
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
-    <string name="login_remember">Remember me</string>
+    <string name="login_remember">로그인 유지</string>
     <string name="login_login">로그인</string>
     <string name="login_register">아이디가 없으신가요? 지금 회원가입하세요.</string>
     <string name="login_noid">아이디를 입력하세요.</string>

@@ -52,7 +52,6 @@ public class Request {
         this.type = type;
         setUserAgent();
         putHeaderProperty(KEY_HEADER_COOKIE, new CookieManager(context).getCookies());
-        Log.d("testLog", new CookieManager(context).getCookies());
         putHeaderProperty(CONTENT_TYPE, CONTENT_TYPE_POST);
         putHeaderProperty(ACCEPT_TYPE, "*/*");
         aes = AES256.getDefault();

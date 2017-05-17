@@ -17,6 +17,12 @@ public class Meal {
 
     }
 
+    public Meal(String breakfast, String lunch, String dinner) {
+        setBreakfast(breakfast);
+        setLunch(lunch);
+        setDinner(dinner);
+    }
+
     public Meal(String breakfast, String lunch, String dinner,
                 String breakfastAllergy, String lunchAllergy, String dinnerAllergy) {
         setBreakfast(breakfast);
