@@ -44,6 +44,7 @@ public class MealFragment extends Fragment {
         mNextBtn = (ImageButton) rootView.findViewById(R.id.ib_meal_next);
 
         mViewPager.setPageMargin((int) DensityConverter.dpToPx(getContext(), 16));
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new MealPagerAdapter(getChildFragmentManager()));
         mViewPager.setCurrentItem(MealPagerAdapter.MIDDLE_INDEX);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -83,7 +84,6 @@ public class MealFragment extends Fragment {
                 }
             }
         });
-
         mPrevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
