@@ -44,34 +44,35 @@ public class MealFragment extends Fragment {
         mNextBtn = (ImageButton) rootView.findViewById(R.id.ib_meal_next);
 
         mViewPager.setPageMargin((int) DensityConverter.dpToPx(getContext(), 16));
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new MealPagerAdapter(getChildFragmentManager()));
-        mViewPager.setCurrentItem(MealPagerAdapter.MIDDLE_INDEX);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            private int mCurrPageIndex = MealPagerAdapter.MIDDLE_INDEX;
-            private int mPrevPageIndex = MealPagerAdapter.MIDDLE_INDEX;
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mCurrPageIndex = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    if (mCurrPageIndex < mPrevPageIndex) {
-                        ((MealPagerAdapter) mViewPager.getAdapter()).onPrev(mCurrPageIndex);
-                    } else if (mCurrPageIndex > mPrevPageIndex) {
-                        ((MealPagerAdapter) mViewPager.getAdapter()).onNext(mCurrPageIndex);
-                    }
-                    mPrevPageIndex = mCurrPageIndex;
-                }
-            }
-        });
+        mViewPager.setCurrentItem(MealPagerAdapter.START_POSITION);
+//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            private int mCurrPageIndex = MealPagerAdapter.MIDDLE_INDEX;
+//            private int mPrevPageIndex = MealPagerAdapter.MIDDLE_INDEX;
+//
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                mCurrPageIndex = position;
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                if (state == ViewPager.SCROLL_STATE_IDLE) {
+//                    if (mCurrPageIndex < mPrevPageIndex) {
+//                        ((MealPagerAdapter) mViewPager.getAdapter()).onPrev(mCurrPageIndex);
+//                    } else if (mCurrPageIndex > mPrevPageIndex) {
+//                        ((MealPagerAdapter) mViewPager.getAdapter()).onNext(mCurrPageIndex);
+//                    }
+//                    mPrevPageIndex = mCurrPageIndex;
+//                }
+//            }
+//        });
 
         mPrevBtn.setOnClickListener(new View.OnClickListener() {
             @Override

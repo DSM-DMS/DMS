@@ -39,6 +39,8 @@ public class MealCardFragment extends Fragment {
     private TextView mLunchTV;
     private TextView mDinnerTV;
 
+    private Meal mMeal;
+
     public static MealCardFragment newInstance(Date date) {
         Bundle args = new Bundle();
         args.putLong(ARGS_KEY_DATE, date.getTime());
@@ -59,16 +61,6 @@ public class MealCardFragment extends Fragment {
         return view;
     }
 
-//    public void update(Date date) {
-//        setDate(date);
-//        try {
-//            loadMeal(date);
-//        } catch (IOException e) {
-//            System.out.println("IOException in MealCardFragment: loadMeal()");
-//            e.printStackTrace();
-//        }
-//    }
-
     private void init(View rootView, Date date) {
         mDateTV = (TextView) rootView.findViewById(R.id.tv_meal_date);
         mMonthTV = (TextView) rootView.findViewById(R.id.tv_meal_month);
@@ -78,11 +70,15 @@ public class MealCardFragment extends Fragment {
         mDinnerTV = (TextView) rootView.findViewById(R.id.tv_meal_dinner_content);
 
         setDate(date);
-        try {
-            loadMeal(date);
-        } catch (IOException e) {
-            System.out.println("IOException in MealCardFragment: loadMeal()");
-            e.printStackTrace();
+        if (mMeal != null) {
+            bind();
+        } else {
+            try {
+                loadMeal(date);
+            } catch (IOException e) {
+                System.out.println("IOException in MealCardFragment: loadMeal()");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -96,9 +92,16 @@ public class MealCardFragment extends Fragment {
     }
 
     private void setMeal(Meal meal) {
-        mBreakfastTV.setText(meal.getBreakfast());
-        mLunchTV.setText(meal.getLunch());
-        mDinnerTV.setText(meal.getDinner());
+        mMeal = meal;
+        bind();
+    }
+
+    private void bind() {
+        if (mMeal != null) {
+            mBreakfastTV.setText(mMeal.getBreakfast());
+            mLunchTV.setText(mMeal.getLunch());
+            mDinnerTV.setText(mMeal.getDinner());
+        }
     }
 
     private void loadMeal(Date date) throws IOException {
