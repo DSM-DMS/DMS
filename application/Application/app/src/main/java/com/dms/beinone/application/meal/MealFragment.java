@@ -69,6 +69,17 @@ public class MealFragment extends Fragment {
                         ((MealPagerAdapter) mViewPager.getAdapter()).onNext(mCurrPageIndex);
                     }
                     mPrevPageIndex = mCurrPageIndex;
+
+                    int curr = mViewPager.getCurrentItem();
+                    int lastReal = mViewPager.getAdapter().getCount() - 2;
+                    if (curr == 0) {
+                        mViewPager.setCurrentItem(lastReal, false);
+                        mPrevPageIndex = lastReal;
+                    } else if (curr > lastReal) {
+                        mViewPager.setCurrentItem(1, false);
+                        mPrevPageIndex = 1;
+                    }
+
                 }
             }
         });

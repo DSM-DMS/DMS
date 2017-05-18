@@ -13,71 +13,52 @@ import java.util.Calendar;
 
 public class MealPagerAdapter extends FragmentStatePagerAdapter {
 
-    public static final int MAX_PAGE = 1000;
+    public static final int MAX_PAGE = 5;
     public static final int MIDDLE_INDEX = MAX_PAGE / 2;
-    public static final int NUM_READY_PAGE = 3;
 
-    private MealCardFragment[] mFragments;
+    private MealCardFragment currentFragment;
+    private MealCardFragment prevFragment, nextFragment;
     private Calendar mCalendar;
 
     public MealPagerAdapter(FragmentManager fm) {
         super(fm);
-        mFragments = new MealCardFragment[MAX_PAGE];
         init();
+    }
+
+    public void onPrev(int currentItemPosition) {
+        mCalendar.add(Calendar.DATE, -1);
+        currentFragment = prevFragment;
+        Calendar cal = (Calendar) mCalendar.clone();
+        cal.add(Calendar.DATE, -1);
+        prevFragment = MealCardFragment.newInstance(cal.getTime());
+
+    }
+
+    public void onNext(int currentItemPosition) {
+        mCalendar.add(Calendar.DATE, 1);
+        currentFragment = nextFragment;
+        Calendar cal = (Calendar) mCalendar.clone();
+        cal.add(Calendar.DATE, 1);
+        nextFragment = MealCardFragment.newInstance(cal.getTime());
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragments[position];
+        return currentFragment;
     }
 
     @Override
     public int getCount() {
-        return mFragments.length;
-    }
-
-    public void onPrev(int currentItemPosition) {
-        if (mFragments[currentItemPosition - NUM_READY_PAGE] == null) {
-            if (currentItemPosition >= NUM_READY_PAGE) {
-                Calendar cal = (Calendar) mCalendar.clone();
-                cal.add(Calendar.DATE, -NUM_READY_PAGE);
-                Log.d("testLog", "mCalendar: " + mCalendar.get(Calendar.DATE) + ", cal: " + cal.get(Calendar.DATE));
-                mFragments[currentItemPosition - NUM_READY_PAGE] = MealCardFragment.newInstance(cal.getTime());
-            }
-        }
-
-        mCalendar.add(Calendar.DATE, -1);
-    }
-
-    public void onNext(int currentItemPosition) {
-        if (mFragments[currentItemPosition + NUM_READY_PAGE] == null) {
-            if (currentItemPosition <= MAX_PAGE - NUM_READY_PAGE) {
-                Calendar cal = (Calendar) mCalendar.clone();
-                cal.add(Calendar.DATE, NUM_READY_PAGE);
-                Log.d("testLog", "mCalendar: " + mCalendar.get(Calendar.DATE) + ", cal: " + cal.get(Calendar.DATE));
-                mFragments[currentItemPosition + NUM_READY_PAGE] = MealCardFragment.newInstance(cal.getTime());
-            }
-        }
-
-        mCalendar.add(Calendar.DATE, 1);
+        return MAX_PAGE;
     }
 
     private void init() {
         Calendar cal = Calendar.getInstance();
-        mFragments[MIDDLE_INDEX] = MealCardFragment.newInstance(cal.getTime());
+        currentFragment = MealCardFragment.newInstance(cal.getTime());
         cal.add(Calendar.DATE, -1);
-        mFragments[MIDDLE_INDEX - 1] = MealCardFragment.newInstance(cal.getTime());
-        cal.add(Calendar.DATE, -1);
-        mFragments[MIDDLE_INDEX - 2] = MealCardFragment.newInstance(cal.getTime());
-        cal.add(Calendar.DATE, -1);
-        mFragments[MIDDLE_INDEX - 3] = MealCardFragment.newInstance(cal.getTime());
-        cal.add(Calendar.DATE, NUM_READY_PAGE + 1);
-        mFragments[MIDDLE_INDEX + 1] = MealCardFragment.newInstance(cal.getTime());
-        cal.add(Calendar.DATE, 1);
-        mFragments[MIDDLE_INDEX + 2] = MealCardFragment.newInstance(cal.getTime());
-        cal.add(Calendar.DATE, 1);
-        mFragments[MIDDLE_INDEX + 3] = MealCardFragment.newInstance(cal.getTime());
-
+        prevFragment = MealCardFragment.newInstance(cal.getTime());
+        cal.add(Calendar.DATE, 2);
+        nextFragment = MealCardFragment.newInstance(cal.getTime());
         mCalendar = Calendar.getInstance();
     }
 }
