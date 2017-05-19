@@ -664,18 +664,21 @@ $stayApplyButton.on("click", function() {
             200: function() {
                 alert('신청되었습니다.');
                 setStayValue(stayDate);
+                $stayPaperplane.removeClass("send-paperplane");
             },
             204: function() {
-                alert('신청 시간이 아닙니다.')
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
 
             },
             500: function() {
-                alert('신청 시간이 아닙니다.')
-
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
             }
         },
         error: function(xhr, status, err) {
-            alert('신청 시간이 아닙니다.')
+            alert('신청 시간이 아닙니다.');
+            $stayPaperplane.removeClass("send-paperplane");
         }
     });
 });
@@ -945,27 +948,19 @@ function extentionApply(classId, id) {
             200: function() {
                 alert("신청 완료되었습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             }
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
             getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         }
     });
 }
