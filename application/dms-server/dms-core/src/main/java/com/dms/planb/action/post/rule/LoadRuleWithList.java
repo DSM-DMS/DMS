@@ -14,7 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/rule", method={HttpMethod.GET})
+@RouteRegistration(path="/post/rule/list", method={HttpMethod.GET})
 public class LoadRuleWithList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {
