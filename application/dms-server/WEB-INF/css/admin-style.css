@@ -488,7 +488,7 @@ a.btn {
 }
 
 #notice-table tr{
-    border-bottom: 10px solid transparent; 
+    border-bottom: 10px solid transparent;
     border-top: 10px solid transparent;
 }
 
@@ -551,4 +551,47 @@ a.btn {
 
 #writer-column{
     width: 25%;
+}
+
+/*modify-page ------------*/
+
+.main {
+    margin: 50px;
+    color: white;
+}
+
+.border-blue {
+    border-color: rgba(255, 255, 255, .3);
+}
+
+.underbar-title {
+    position: relative;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    /*font-weight: bold;*/
+    padding-bottom: 3px;
+    font-size: 2.2em;
+    margin-bottom: 3px;
+}
+
+.subinfo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.5em;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.article-content {
+    margin-top: 10px;
+}
+
+.clear-input {
+    border: 0;
+    margin-left: 20px;
+    width: 90%;
+    color: white;
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, 0);
 }
