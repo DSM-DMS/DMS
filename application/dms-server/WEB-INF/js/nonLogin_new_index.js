@@ -672,6 +672,43 @@ $(document).ready(function() {
 /** ======================================================================================
  * article preview
 ========================================================================================== */
+function setRulePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+function setFaqPreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
 
 noticePreviewBtn.on("click", function() {
     $(".speech-bubble-tail").remove();
@@ -695,6 +732,10 @@ faqPreviewBtn.on("click", function() {
  * register
 ========================================================================================== */
 registerBtn.on("click", function() {
+    $(".login-content").toggle("slide");
+});
+
+$(".register-close").on("click", function() {
     $(".login-content").toggle("slide");
 });
 
