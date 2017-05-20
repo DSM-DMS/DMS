@@ -72,6 +72,15 @@ $.ajax({
     }
 });
 
+$("#notice-table").on("click", "tr", function() {
+    redirect("post/content?category=" + getAllUrlParams(document.URL).category + "&no=" + $(this).find("input").attr("id").slice(10));
+});
+
+function redirect(page) {
+    location.href = '/' + page;
+}
+
+
 function getAllUrlParams(url) {
 
     // get query string from url (optional) or window
