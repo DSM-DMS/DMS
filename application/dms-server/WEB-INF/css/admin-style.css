@@ -492,6 +492,11 @@ a.btn {
     border-top: 10px solid transparent;
 }
 
+#notice-table a{
+    color: white;
+    text-decoration: none;
+}
+
 .md-checkbox {
   position: fixed;
   margin-left: 20px;
