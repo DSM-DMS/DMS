@@ -3,24 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-      <link rel="stylesheet" href="css/management.css">
+  <link rel="stylesheet" href="./css/admin-style.css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
 </head>
 
 <body>
   <div id="background-image"> 
-      <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="100%" height="100%">
-          <filter id="svgBlurFilter">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
-              <feComponentTransfer>
-                  <feFuncR type="linear" slope="0.2"></feFuncR>
-                  <feFuncG type="linear" slope="0.2"></feFuncG>
-                  <feFuncB type="linear" slope="0.2"></feFuncB>
-              </feComponentTransfer>
-          </filter>
-          <image class="blurred" preserveAspectRatio="xMinYMid meet" filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0" 
-          xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.2)"></image>
-      </svg>
+      <img src=".\images\wallpaper10.jpg">
   </div>
   <p class="admin-title">공지사항 관리</p>
+  <button id="going-out-apply-btn" class="apply-btn">
+      <span>글쓰기</span>
+  </button>
+  <button id="going-out-apply-btn" class="apply-btn">
+      <span>삭제</span>
+  </button>
+  <table id="notice-table">
+      <col id="delete-column">
+      <col id="number-column">
+      <col id="title-column">
+      <col id="writer-column">
+      <tbody>
+      </tbody>
+  </table>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/notice-management.js"></script>
 </body>
 </html>

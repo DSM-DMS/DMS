@@ -6,6 +6,12 @@ body {
   overflow: hidden;
 }
 
+#background-image img {
+    height: 100%;
+    transform: scale(1);
+    /*-webkit-filter: blur(5px) brightness(50%);*/
+}
+
 .admin-title{
   color: white;
   text-align: center;
@@ -418,4 +424,131 @@ a.btn {
     color: #607D8B;
     outline: 0;
     font-size: 1.5rem;
+}
+
+@keyframes jelly {
+    10% {
+        transform: none;
+    }
+    20% {
+        transform: skewX(-15deg) skewY(-15deg);
+    }
+    30% {
+        transform: skewX(5.51876deg) skewY(5.51876deg);
+    }
+    40% {
+        transform: skewX(-2.03045deg) skewY(-2.03045deg);
+    }
+    50% {
+        transform: skewX(0.74704deg) skewY(0.74704deg);
+    }
+    60% {
+        transform: skewX(-0.27485deg) skewY(-0.27485deg);
+    }
+    70% {
+        transform: skewX(0.10112deg) skewY(0.10112deg);
+    }
+    80% {
+        transform: skewX(-0.0372deg) skewY(-0.0372deg);
+    }
+    90% {
+        transform: skewX(-0.01369deg) skewY(-0.01369deg);
+    }
+    100% {
+        transform: none;
+    }
+}
+
+.apply-btn {
+    width: 10vh;
+    height: 3vh;
+    background: rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    border-width: 0;
+    color: white;
+    font-size: 1rem;
+    font-weight: 100;
+    outline: 0;
+    float: right;
+    margin: 20px 20px 20px 0px;
+    transition: 0.15s ease-in;
+}
+
+.apply-btn:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, .3);
+    animation: jelly 1.2s ease-in 0s forwards;
+}
+
+#notice-table{
+    width: 100%;
+    margin: 0 20px;
+    color: white;
+    text-align: center;
+}
+
+#notice-table tr{
+    border-bottom: 10px solid transparent; 
+    border-top: 10px solid transparent;
+}
+
+#notice-table a{
+    color: white;
+    text-decoration: none;
+}
+
+.md-checkbox {
+  position: fixed;
+  margin-left: 20px;
+}
+.md-checkbox label {
+  cursor: pointer;
+}
+.md-checkbox label:before, .md-checkbox label:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.md-checkbox label:before {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.md-checkbox input[type="checkbox"] {
+  outline: 0;
+  margin-right: 10px;
+}
+.md-checkbox input[type="checkbox"]:checked + label:before {
+  background: #337ab7;
+  border: none;
+}
+.md-checkbox input[type="checkbox"]:checked + label:after {
+  transform: rotate(-45deg);
+  top: 5px;
+  left: 4px;
+  width: 12px;
+  height: 6px;
+  border: 2px solid #fff;
+  border-top-style: none;
+  border-right-style: none;
+}
+
+#delete-column{
+    width: 5%;
+}
+
+#number-column{
+    width: 10%;
+}
+
+#title-column{
+    width: 60%;
+}
+
+#writer-column{
+    width: 25%;
 }

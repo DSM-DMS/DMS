@@ -583,22 +583,22 @@ var setStayValue = function(thisDate) {
                     case 1:
                         $('#stayValue').text('금요귀가');
                         $(":radio[name=1][value=1]").prop('checked', true);
-                        $('#stayIcon').attr('src', '.\images\fri-out.svg');
+                        $('#stayIcon').attr('src', './images/fri-out.svg');
                         break;
                     case 2:
                         $('#stayValue').text('토요귀가');
                         $(":radio[name=1][value=2]").prop('checked', true);
-                        $('#stayIcon').attr('src', '.\images\sat-out.svg');
+                        $('#stayIcon').attr('src', './images/sat-out.svg');
                         break;
                     case 3:
                         $('#stayValue').text('토요귀사');
                         $(":radio[name=1][value=3]").prop('checked', true);
-                        $('#stayIcon').attr('src', '.\images\sat-in.svg');
+                        $('#stayIcon').attr('src', './images/sat-in.svg');
                         break;
                     case 4:
                         $('#stayValue').text('잔류');
                         $(":radio[name=1][value=4]").prop('checked', true);
-                        $('#stayIcon').attr('src', '.\images\stay.svg');
+                        $('#stayIcon').attr('src', './images/stay.svg');
                         break;
                 }
             } catch (err) {
@@ -664,18 +664,21 @@ $stayApplyButton.on("click", function() {
             200: function() {
                 alert('신청되었습니다.');
                 setStayValue(stayDate);
+                $stayPaperplane.removeClass("send-paperplane");
             },
             204: function() {
-                alert('신청 시간이 아닙니다.')
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
 
             },
             500: function() {
-                alert('신청 시간이 아닙니다.')
-
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
             }
         },
         error: function(xhr, status, err) {
-            alert('신청 시간이 아닙니다.')
+            alert('신청 시간이 아닙니다.');
+            $stayPaperplane.removeClass("send-paperplane");
         }
     });
 });
@@ -945,27 +948,19 @@ function extentionApply(classId, id) {
             200: function() {
                 alert("신청 완료되었습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             }
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
             getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         }
     });
 }
@@ -1200,17 +1195,36 @@ $(document).ready(function() {
     //set random background image
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
-    var agent = navigator.userAgent.toLowerCase();
+    //연장신청 시간 보여줌
+    var startTime = '5:30 PM' ;
+    var endTime  =  '8:30 PM' ;
 
-    // if (agent.indexOf("chrome") != -1) {
-    //     alert("크롬 브라우저입니다.");
-    // }
-    // if (agent.indexOf("safari") != -1) {
-    //     alert("사파리 브라우저입니다.");
-    // }
-    // if (agent.indexOf("firefox") != -1) {
-    //     alert("파이어폭스 브라우저입니다.");
-    // }
+    var formatTime = (function () {
+        function addZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
+        return function (dt) {
+            var formatted = '';
+
+            if (dt) {
+                var hours24 = dt.getHours();
+                var hours = ((hours24 + 11) % 12) + 1;
+                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"),hours24>11?"pm" :"am"].join(" ");            
+            }
+            return formatted;
+        }
+    })();
+
+    var currentTime = formatTime(new Date());
+
+    if(currentTime >= startTime && currentTime <= endTime) 
+    {
+        $('#extensionValue').html("연장신청이 가능합니다.");
+    }
+    else
+    {
+        $('#extensionValue').html("연장신청이 불가능합니다");
+    }
 
     //show current stay state and extension state
     stayTick = $('#stayTick');
@@ -1224,7 +1238,6 @@ $(document).ready(function() {
     extensionCross1 = $('#extensionCross1');
     extensionCross2 = $('#extensionCross2');
     extensionDoCheck();
-
 
     //saturday, sunday svg animations
     var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
