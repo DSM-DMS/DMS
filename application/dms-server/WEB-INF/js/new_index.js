@@ -162,7 +162,7 @@ function sanitize(txt) {
         },
         replaceInvalid = function($0, tag, off, txt) {
             var
-            // Is it a valid tag?
+                // Is it a valid tag?
                 invalidTag = protos &&
                 document.createElement(tag) instanceof HTMLUnknownElement ||
                 !validHTMLTags.test(tag),
@@ -181,6 +181,58 @@ function sanitize(txt) {
 
     return "textContent" in tmp ? tmp.textContent : tmp.innerHTML;
 }
+
+/** ======================================================================================
+ * browser size
+========================================================================================== */
+
+var width = screen.width;
+var height = window.innerHeight + window.screenTop;
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (window.innerWidth == width && window.innerHeight == height) {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "hidden"
+    });
+} else {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "auto"
+    });
+}
+
+if (isMobile) {
+    $("body").css({
+        minWidth: "1707px",
+        minHeight: "855px",
+        overflow: "auto"
+    });
+} else {
+    $(window).resize(function() {
+        if (window.innerWidth == width && window.innerHeight == height) {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "hidden"
+            });
+        } else {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "auto"
+            });
+        }
+
+    });
+}
+
+
+
+
+
 
 /** ======================================================================================
  * Common window
@@ -823,8 +875,7 @@ var setGoingOutValue = function(thisDate) {
             try {
                 $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
                 $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
-            } catch (err) {
-            }
+            } catch (err) {}
         },
         error: function(xhr) {
             console.log(xhr.status);
@@ -1196,20 +1247,20 @@ $(document).ready(function() {
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     //연장신청 시간 보여줌
-    var startTime = '5:30 PM' ;
-    var endTime  =  '8:30 PM' ;
+    var startTime = '5:30 PM';
+    var endTime = '8:30 PM';
 
-    var formatTime = (function () {
+    var formatTime = (function() {
         function addZero(num) {
             return (num >= 0 && num < 10) ? "0" + num : num + "";
         }
-        return function (dt) {
+        return function(dt) {
             var formatted = '';
 
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"),hours24>11?"pm" :"am"].join(" ");            
+                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "pm" : "am"].join(" ");
             }
             return formatted;
         }
@@ -1217,12 +1268,9 @@ $(document).ready(function() {
 
     var currentTime = formatTime(new Date());
 
-    if(currentTime >= startTime && currentTime <= endTime) 
-    {
+    if (currentTime >= startTime && currentTime <= endTime) {
         $('#extensionValue').html("연장신청이 가능합니다.");
-    }
-    else
-    {
+    } else {
         $('#extensionValue').html("연장신청이 불가능합니다");
     }
 
