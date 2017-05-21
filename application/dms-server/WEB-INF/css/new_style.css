@@ -23,7 +23,7 @@ body {
     margin: 0;
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .left-line {
@@ -38,7 +38,7 @@ body {
     position: absolute;
     float: right;
     right: 0;
-    height: 100vh;
+    height: 100%;
     z-index: -2;
 }
 
@@ -65,7 +65,7 @@ body {
     float: right;
     transform: translateX(100%);
     position: absolute;
-    height: 100vh;
+    height: 100%;
     top: 0;
     right: 0px;
 }
@@ -106,7 +106,7 @@ body {
     color: white;
     line-height: 5vh;
     font-size: 2vh;
-    background: #48CFAD ;          
+    background: #48CFAD ;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
@@ -160,7 +160,7 @@ body {
     color: white;
     line-height: 5vh;
     font-size: 2vh;
-    background: #48CFAD ;          
+    background: #48CFAD ;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
@@ -870,10 +870,10 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .menu-item {
-    height: 8vh;
-    margin-bottom: 4vh;
-    margin-top: 4vh;
-    width: 10vh;
+    height: 10%;
+    margin-bottom: 16%;
+    margin-top: 16%;
+    width: 50%;
     text-align: center;
 }
 
@@ -898,7 +898,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     position: absolute;
     top: 95%;
     left: 50%;
-    width: 10vh;
+    width: 27%;
 }
 
 #menu-pagenation .index {
@@ -1073,8 +1073,8 @@ a.btn {
 }
 
 .modal-wrapper {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
@@ -1099,12 +1099,12 @@ a.btn {
 }
 
 .modal {
-    width: 40vw;
-    height: 80vh;
+    width: 40%;
+    height: 80%;
     display: block;
     position: absolute;
-    transform: translateY(20vh);
-    left: 30vw;
+    /*transform: translateY(20%);*/
+    left: 30%;
     background: white;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
