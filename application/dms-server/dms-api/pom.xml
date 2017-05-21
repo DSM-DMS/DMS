@@ -11,6 +11,7 @@
 
     <artifactId>dms-api</artifactId>
     <dependencies>
+        <!-- dms dependency -->
         <dependency>
             <groupId>com.dsm.dms</groupId>
             <artifactId>dms-data-utilities</artifactId>
