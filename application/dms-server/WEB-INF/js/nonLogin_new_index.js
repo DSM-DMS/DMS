@@ -391,10 +391,95 @@ $openGoingOutButton.on("click", function() {
 /** ======================================================================================
  * Current state (stay)
 ========================================================================================== */
+function stayDoCheck() {
+    TweenLite.set([stayCross1, stayCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(stayTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(stayCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(stayCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([stayTick, stayCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(stayCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(stayTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(stayCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
+
+}
 
 /** ======================================================================================
  * Current state (extension)
 ========================================================================================== */
+function extensionDoCheck() {
+    TweenLite.set([extensionCross1, extensionCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(extensionTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(extensionCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(extensionCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([extensionTick, extensionCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(extensionCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(extensionTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(extensionCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
+}
 
 /** ======================================================================================
  * menu
