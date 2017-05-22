@@ -21,9 +21,9 @@ body {
     position: relative;
     background: black;
     margin: 0;
-    height: 100%;
+    height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .left-line {
@@ -852,6 +852,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     margin-right: auto;
     height: 80%;
     transition: 0.3s ease;
+    justify-content: space-between;
 }
 
 #menu2 {
@@ -867,13 +868,14 @@ input[type="radio"]:checked~.bullet .line.seven {
     transition: 0.3s ease;
     opacity: 0;
     z-index: -1;
+    justify-content: space-between;
 }
 
 .menu-item {
-    height: 8vh;
-    margin-bottom: 4vh;
-    margin-top: 4vh;
-    width: 10vh;
+    height: 10%;
+    margin-bottom: 16%;
+    margin-top: 16%;
+    width: 50%;
     text-align: center;
 }
 
@@ -891,6 +893,10 @@ input[type="radio"]:checked~.bullet .line.seven {
     color: white;
 }
 
+.blank-btn{
+    display: none;
+}
+
 #menu-pagenation {
     display: flex;
     flex-direction: row;
@@ -898,7 +904,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     position: absolute;
     top: 95%;
     left: 50%;
-    width: 10vh;
+    width: 27%;
 }
 
 #menu-pagenation .index {
@@ -930,7 +936,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 #extension-apply-window {
     width: 74%;
-    height: 100%;
+    height: 100vh;
     opacity: 0;
     /*z-index: -1;*/
     position: absolute;
@@ -951,8 +957,8 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 #extension-apply-window .extension-class-select {
-    margin-top: 10%;
-    height: 72%;
+    margin-top: 14vh;
+    height: 72vh;
     width: 36vh;
     margin-left: 5%;
     color: white;
@@ -983,8 +989,8 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .extension-seat-container {
-    margin-top: 10%;
-    height: 85%   ;
+    margin-top: 14vh;
+    height: 85vh;
     float: left;
     margin-left: 8%;
     max-width: 46vw;
@@ -1073,7 +1079,7 @@ a.btn {
 }
 
 .modal-wrapper {
-    width: 100vw;
+    width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
@@ -1103,8 +1109,8 @@ a.btn {
     height: 80%;
     display: block;
     position: absolute;
-    transform: translateY(0vh);
-    left: 30vw;
+    /*transform: translateY(20%);*/
+    left: 30%;
     background: white;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
@@ -1141,6 +1147,8 @@ a.btn {
 }
 
 .content {
+    /*padding: 5%;*/
+    /*text-align: center;*/
     height: 100%;
     padding: 10% 10% 10% 10%;
 }
@@ -1302,9 +1310,8 @@ a.btn {
     flex-direction: column;
     justify-content: center;
     width: 50%;
-    height: 80%;
+    height: 80vh;
     margin: auto;
-    margin-bottom: 1px;
     margin-top: 10vh;
 }
 
@@ -1448,7 +1455,7 @@ a.btn {
 
 .window {
     width: 74%;
-    height: 100%;
+    height: 100vh;
     opacity: 0;
     /*z-index: -1;*/
     position: absolute;
@@ -1513,7 +1520,7 @@ a.btn {
 
 iframe {
     width: 100vw;
-    height: 100%;
+    height: 100vh;
 }
 
 
@@ -1728,11 +1735,11 @@ iframe {
         opacity: 1;
         z-index: 999999999999999999999;
         width: 100vw;
-        height: 100%;
+        height: 100vh;
     }
     #easter-egg img{
         width: auto;
-        height: 100%;
+        height: 100vh;
     }
 }
 
