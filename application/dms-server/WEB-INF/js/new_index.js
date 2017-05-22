@@ -820,8 +820,7 @@ var setGoingOutValue = function(thisDate) {
             try {
                 $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
                 $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
-            } catch (err) {
-            }
+            } catch (err) {}
         },
         error: function(xhr) {
             console.log(xhr.status);
@@ -1201,20 +1200,20 @@ $(document).ready(function() {
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     //연장신청 시간 보여줌
-    var startTime = '5:30 PM' ;
-    var endTime  =  '8:30 PM' ;
+    var startTime = '5:30 PM';
+    var endTime = '8:30 PM';
 
-    var formatTime = (function () {
+    var formatTime = (function() {
         function addZero(num) {
             return (num >= 0 && num < 10) ? "0" + num : num + "";
         }
-        return function (dt) {
+        return function(dt) {
             var formatted = '';
 
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"),hours24>11?"pm" :"am"].join(" ");            
+                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "pm" : "am"].join(" ");
             }
             return formatted;
         }
@@ -1222,12 +1221,9 @@ $(document).ready(function() {
 
     var currentTime = formatTime(new Date());
 
-    if(currentTime >= startTime && currentTime <= endTime) 
-    {
+    if (currentTime >= startTime && currentTime <= endTime) {
         $('#extensionValue').html("연장신청이 가능합니다.");
-    }
-    else
-    {
+    } else {
         $('#extensionValue').html("연장신청이 불가능합니다");
     }
 
