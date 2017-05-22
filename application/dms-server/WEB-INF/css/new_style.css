@@ -852,6 +852,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     margin-right: auto;
     height: 80%;
     transition: 0.3s ease;
+    justify-content: space-between;
 }
 
 #menu2 {
@@ -867,6 +868,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     transition: 0.3s ease;
     opacity: 0;
     z-index: -1;
+    justify-content: space-between;
 }
 
 .menu-item {
@@ -889,6 +891,10 @@ input[type="radio"]:checked~.bullet .line.seven {
 .menu-item span {
     font-size: 1.3vh;
     color: white;
+}
+
+.blank-btn{
+    display: none;
 }
 
 #menu-pagenation {
