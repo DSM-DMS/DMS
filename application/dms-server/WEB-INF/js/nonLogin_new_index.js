@@ -184,14 +184,17 @@ function sanitize(txt) {
  * browser size
 ========================================================================================== */
 
+
 var width = screen.width;
-var height = window.innerHeight + window.screenTop;
+var fullHeight = window.innerHeight + window.screenTop;
+var height = screen.height - (window.outerHeight -  window.innerHeight);
+
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-if (window.innerWidth == width && window.innerHeight == height) {
+if (window.innerWidth == width && window.innerHeight == fullHeight) {
     $("body").css({
         minWidth: width + "px",
-        minHeight: height + "px",
+        minHeight: fullHeight + "px",
         overflow: "hidden"
     });
 } else {
@@ -210,10 +213,10 @@ if (isMobile) {
     });
 } else {
     $(window).resize(function() {
-        if (window.innerWidth == width && window.innerHeight == height) {
+        if (window.innerWidth == width && window.innerHeight == fullHeight) {
             $("body").css({
                 minWidth: width + "px",
-                minHeight: height + "px",
+                minHeight: fullHeight + "px",
                 overflow: "hidden"
             });
         } else {
@@ -226,6 +229,7 @@ if (isMobile) {
 
     });
 }
+
 
 /** ======================================================================================
  * Common window
