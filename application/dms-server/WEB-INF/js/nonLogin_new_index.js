@@ -187,7 +187,7 @@ function sanitize(txt) {
 
 var width = screen.width;
 var fullHeight = window.innerHeight + window.screenTop;
-var height = screen.height - (window.outerHeight -  window.innerHeight);
+var height = screen.height - (window.outerHeight -  window.innerHeight - window.screenTop || window.screenY);
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
