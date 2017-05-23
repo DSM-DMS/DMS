@@ -1149,7 +1149,7 @@ a.btn {
 .content {
     /*padding: 5%;*/
     /*text-align: center;*/
-    height: 100%;
+    /*height: 100%;*/
     padding: 10% 10% 10% 10%;
 }
 
@@ -1214,6 +1214,10 @@ a.btn {
     width: 50%;
     margin-left: 25%;
     height: 10vh;*/
+}
+
+.register-content {
+    display: none;
 }
 
 .modal-button {
