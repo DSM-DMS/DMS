@@ -187,13 +187,15 @@ function sanitize(txt) {
 ========================================================================================== */
 
 var width = screen.width;
-var height = window.innerHeight + window.screenTop;
+var fullHeight = window.innerHeight + window.screenTop;
+var height = screen.height - (window.outerHeight -  window.innerHeight);
+
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-if (window.innerWidth == width && window.innerHeight == height) {
+if (window.innerWidth == width && window.innerHeight == fullHeight) {
     $("body").css({
         minWidth: width + "px",
-        minHeight: height + "px",
+        minHeight: fullHeight + "px",
         overflow: "hidden"
     });
 } else {
@@ -212,10 +214,10 @@ if (isMobile) {
     });
 } else {
     $(window).resize(function() {
-        if (window.innerWidth == width && window.innerHeight == height) {
+        if (window.innerWidth == width && window.innerHeight == fullHeight) {
             $("body").css({
                 minWidth: width + "px",
-                minHeight: height + "px",
+                minHeight: fullHeight + "px",
                 overflow: "hidden"
             });
         } else {
@@ -620,50 +622,6 @@ function setFaqPreview() {
 /** ======================================================================================
  * Stay
 ========================================================================================== */
-function stayDoCheck() {
-    TweenLite.set([stayCross1, stayCross2], {
-        autoAlpha: 0
-    });
-    TweenLite.set(stayTick, {
-        drawSVG: "0%"
-    });
-    TweenLite.set(stayCircle, {
-        drawSVG: "50% 50%",
-        scale: ".01",
-        transformOrigin: "50% 50%",
-        fill: "#607D8B",
-        autoAlpha: 0
-    });
-
-    tl1 = new TimelineMax({
-        repeat: 0,
-        repeatDelay: 1
-    });
-    tl1
-        .to(stayCircle, 1, {
-            scale: 1,
-            ease: Elastic.easeOut
-        })
-        .to([stayTick, stayCircle], .6, {
-            autoAlpha: 1
-        }, .1)
-        .to(stayCircle, .8, {
-            drawSVG: "100% 0%",
-            ease: Power4.easeOut
-        }, .2)
-        .to(stayTick, .8, {
-            drawSVG: "0% 100%",
-            ease: Expo.easeOut
-        }, '-=.6')
-        .to(stayCircle, .6, {
-            fill: "#607D8B",
-            ease: Power1.easeInOut
-        }, '-=.4');
-
-    tl1.timeScale(.8);
-
-}
-
 var setStayValue = function(thisDate) {
     var weekData = makeWeekFormat(thisDate)
 
@@ -778,6 +736,50 @@ $stayApplyButton.on("click", function() {
         }
     });
 });
+
+function stayDoCheck() {
+    TweenLite.set([stayCross1, stayCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(stayTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(stayCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(stayCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([stayTick, stayCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(stayCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(stayTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(stayCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
+
+}
 
 /** ======================================================================================
  * Login
