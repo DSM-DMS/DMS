@@ -25,10 +25,24 @@ public class ApiRequestManager {
         return buffer.toString();
     }
 
-    public JobResult getApiKeys(String uid){
+    public boolean addHost(String uid, String key, String host) {
+        boolean result = false;
+        if (checkApiValid(uid, key)) {
+            try {
+                if (database.executeUpdate("insert into api_host (api_key, host_name) values('", key, "', '", host, "')") == 1) {
+                    result = true;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public JobResult getApiKeys(String uid) {
         JobResult jobResult = null;
         try {
-            SafeResultSet rs = database.executeQuery("select * from api_account where uid='",uid,"'");
+            SafeResultSet rs = database.executeQuery("select * from api_account where uid='", uid, "'");
             //need join to api_key
             jobResult = new JobResult(true, null, rs);
         } catch (SQLException e) {
@@ -48,6 +62,19 @@ public class ApiRequestManager {
                     check = checkRequestValid(result, null);
                 } while (check);
                 database.executeUpdate("insert into api_account (uid, api_key) values('", uid, "', '", result, "')");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean checkApiValid(String uid, String apiKey) {
+        boolean result = false;
+        try {
+            String query = QueryUtils.queryBuilder("select count(*) from api_account where api_key='", apiKey, "' AND uid='", uid, "'");
+            if (database.executeQuery(query).nextAndReturn().getInt(1) == 1) {
+                result = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
