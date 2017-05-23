@@ -181,6 +181,53 @@ function sanitize(txt) {
 }
 
 /** ======================================================================================
+ * browser size
+========================================================================================== */
+
+var width = screen.width;
+var height = window.innerHeight + window.screenTop;
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (window.innerWidth == width && window.innerHeight == height) {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "hidden"
+    });
+} else {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "auto"
+    });
+}
+
+if (isMobile) {
+    $("body").css({
+        minWidth: "1707px",
+        minHeight: "855px",
+        overflow: "auto"
+    });
+} else {
+    $(window).resize(function() {
+        if (window.innerWidth == width && window.innerHeight == height) {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "hidden"
+            });
+        } else {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "auto"
+            });
+        }
+
+    });
+}
+
+/** ======================================================================================
  * Common window
 ========================================================================================== */
 // $windowClose.on("click", function() {
@@ -818,10 +865,12 @@ faqPreviewBtn.on("click", function() {
 ========================================================================================== */
 registerBtn.on("click", function() {
     $(".login-content").toggle("slide");
+    $(".register-content").toggle("slide");
 });
 
 $(".register-close").on("click", function() {
     $(".login-content").toggle("slide");
+    $(".register-content").toggle("slide");
 });
 
 $("#register-apply-btn").on("click", function() {
