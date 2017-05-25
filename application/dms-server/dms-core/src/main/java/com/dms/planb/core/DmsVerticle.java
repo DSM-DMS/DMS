@@ -21,7 +21,7 @@ public class DmsVerticle extends AbstractVerticle {
         router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setNagHttps(false));
         router.route().handler(RequestSecurePreprocessor.create());
         RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb", "com.dms.boxfox.templates");
-        router.route().handler(StaticHandler.create());
+        router.route("/js/*").handler(StaticHandler.create().setCachingEnabled(false).setWebRoot("WEB-INF/js/"));
         
         /*
          * @see com.dms.planb.support .TableDropper

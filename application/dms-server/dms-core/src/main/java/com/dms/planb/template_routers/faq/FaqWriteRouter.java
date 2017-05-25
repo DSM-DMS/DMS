@@ -27,10 +27,11 @@ public class FaqWriteRouter implements Handler<RoutingContext> {
 		}
 		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("new_admin_article_write");
 			try {
 				templates.put("category", "faq");
 				templates.put("type", "write");
+				templates.put("content", "");
 				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

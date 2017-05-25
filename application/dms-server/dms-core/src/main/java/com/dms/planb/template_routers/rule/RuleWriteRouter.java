@@ -25,10 +25,11 @@ public class RuleWriteRouter implements Handler<RoutingContext> {
 		if (!AdminManager.isAdmin(context)) return;
 		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
-			DmsTemplate templates = new DmsTemplate("editor");
+			DmsTemplate templates = new DmsTemplate("new_admin_article_write");
 			try {
 				templates.put("category", "rule");
 				templates.put("type", "write");
+				templates.put("content", "");
 				
 				context.response().setStatusCode(200);
 				context.response().end(templates.process());

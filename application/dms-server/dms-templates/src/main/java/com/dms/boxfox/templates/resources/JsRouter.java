@@ -1,3 +1,4 @@
+/*
 package com.dms.boxfox.templates.resources;
 
 import io.vertx.core.Handler;
@@ -9,6 +10,7 @@ import org.boxfox.dms.utilities.actions.RouteRegistration;
 public class JsRouter implements Handler<RoutingContext> {
 
     public void handle(RoutingContext context) {
+        System.out.println(context.request().getParam("filename"));
         if (context.request().path().contains("..")){
             context.response().end();
         } else {
@@ -18,3 +20,4 @@ public class JsRouter implements Handler<RoutingContext> {
         }
     }
 }
+*/

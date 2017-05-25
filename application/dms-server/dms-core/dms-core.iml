@@ -17,7 +17,7 @@
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.11" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: com.dsm.dms:dms-templates:0.0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.dsm.dms:dms-templates:0.0.2-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="dms-parser" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.2" level="project" />
     <orderEntry type="module" module-name="dms-secure" />
