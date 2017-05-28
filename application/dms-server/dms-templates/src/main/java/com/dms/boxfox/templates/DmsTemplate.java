@@ -30,19 +30,21 @@ public class DmsTemplate {
     }
 
     public String process() throws IOException, TemplateException {
-        try {
-            Template template = getConfiguration().getTemplate(name);
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-            template.process(input, writer);
-            return out.toString();
-        } catch (IOException e) {
-        }
+        if (new File("WEB-INF/" + name).exists())
+            try {
+                Template template = getConfiguration().getTemplate(name);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+                template.process(input, writer);
+                return out.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         name = name.substring(0, name.lastIndexOf(".tls")) + ".html";
         return readFile("WEB-INF/" + name);
     }
 
-    private String readFile(String path) throws IOException{
+    private String readFile(String path) throws IOException {
         File file = new File(path);
         Scanner scanner = new Scanner(file);
         String text = scanner.useDelimiter("\\A").next();
