@@ -42,7 +42,12 @@
                                           <div class="underbar-title border-blue"><input class="clear-input title" type="text" name="title" value="${value}"><input class="room" type="text" name="room" value="${room}"></div>
                                           <textarea name="editor1" id="editor1" rows="10" cols="80">${content}</textarea>
                                           <input type="button" name="" value="작성" class="editor-button btn btn-default">
-                                          <#/if>
+                                    <#/if>
+                              <#/if>
+                        <#/if>
+                  <#/if>
+            <#/if>
+      <#/if>
                     <button id="article-write" class="apply-btn">
                         <span>확인</span></span>
                     </button>
