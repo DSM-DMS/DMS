@@ -44,7 +44,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
                 if (check) {
                     userManager.registerSession(context, Boolean.valueOf(remember), id);
 
-                    context.response().setStatusCode(201).end();
+                    context.response().setStatusCode(201).end("<script>window.location.href=document.referrer;</script>");
                     context.response().close();
                 } else {
                     loginRequestSecureManager.invalidRequest(context);
