@@ -19,7 +19,7 @@
         android:text="@string/qna_title"
         android:textColor="@android:color/black" />
 
-    <com.dms.beinone.application.dmsview.DMSEditText
+    <com.dms.beinone.application.views.custom.DMSEditText
         android:id="@+id/et_qna_write_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         android:text="@string/qna_content"
         android:textColor="@android:color/black" />
 
-    <com.dms.beinone.application.dmsview.DMSEditText
+    <com.dms.beinone.application.views.custom.DMSEditText
         android:id="@+id/et_qna_write_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         android:text="@string/qna_privacy"
         app:switchMinWidth="56dp" />
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_qna_write_submit"
         android:layout_width="match_parent"
         android:layout_height="48dp"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dms.beinone.application.dmsview.DMSButton xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dms.beinone.application.views.custom.DMSButton xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
     android:id="@+id/btn_footer_more"
     android:layout_width="match_parent"

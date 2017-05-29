@@ -1,18 +1,18 @@
 package com.dms.beinone.application.utils;
 
-import com.dms.beinone.application.afterschoolapply.Afterschool;
-import com.dms.beinone.application.appcontent.Appcontent;
-import com.dms.beinone.application.appcontent.Attachment;
-import com.dms.beinone.application.comment.Comment;
-import com.dms.beinone.application.facilityreport.FacilityReport;
-import com.dms.beinone.application.faq.FAQ;
-import com.dms.beinone.application.faq.FAQContent;
-import com.dms.beinone.application.goingoutapply.Goingout;
-import com.dms.beinone.application.meal.Meal;
-import com.dms.beinone.application.mypage.Account;
-import com.dms.beinone.application.qna.QnA;
-import com.dms.beinone.application.rule.Rule;
-import com.dms.beinone.application.rule.RuleContent;
+import com.dms.beinone.application.models.Afterschool;
+import com.dms.beinone.application.models.Appcontent;
+import com.dms.beinone.application.models.Attachment;
+import com.dms.beinone.application.models.Comment;
+import com.dms.beinone.application.models.FacilityReport;
+import com.dms.beinone.application.models.FAQ;
+import com.dms.beinone.application.models.FAQContent;
+import com.dms.beinone.application.models.Goingout;
+import com.dms.beinone.application.models.Meal;
+import com.dms.beinone.application.models.Account;
+import com.dms.beinone.application.models.QnA;
+import com.dms.beinone.application.models.Rule;
+import com.dms.beinone.application.models.RuleContent;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -168,7 +168,7 @@
 
     </RelativeLayout>
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_rewardscoreapply_apply"
         android:layout_width="match_parent"
         android:layout_height="48dp"

@@ -72,7 +72,7 @@
 
     </LinearLayout>
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_qna_article_answer"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -85,7 +85,7 @@
         android:text="@string/qna_answer"
         dmsbtn:dmsbtn_style="rectangle" />
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_qna_article_comment"
         android:layout_width="match_parent"
         android:layout_height="48dp"

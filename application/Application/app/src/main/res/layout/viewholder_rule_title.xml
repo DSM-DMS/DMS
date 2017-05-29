@@ -20,7 +20,7 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_title" />
 
-        <com.dms.beinone.application.dmsview.DMSImageButton
+        <com.dms.beinone.application.views.custom.DMSImageButton
             android:id="@+id/btn_rule_expand"
             android:layout_width="wrap_content"
             android:layout_height="18dp"

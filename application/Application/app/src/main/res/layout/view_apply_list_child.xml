@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+    <View
+        android:id="@+id/bar_apply_list_child"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="@color/activatedBar" />
+
+    <RelativeLayout
+        android:id="@+id/layout_apply_list_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iv_apply_list_child_whale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/whale" />
+
+        <TextView
+            android:id="@+id/tv_apply_list_child_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_alignTop="@id/iv_apply_list_child_whale"
+            android:layout_toLeftOf="@id/iv_apply_list_child_whale"
+            android:layout_toStartOf="@id/iv_apply_list_child_whale"
+            android:background="@drawable/speech_bubble"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/ib_apply_list_child_enter"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/iv_apply_list_child_whale"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/btn_login"
+            android:src="@drawable/ic_chevron_right_white_24dp" />
+    </RelativeLayout>
+</LinearLayout>

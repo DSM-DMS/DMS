@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,17 +24,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.LoginActivity"
+        <activity android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".login.RegisterActivity"
+        <activity android:name=".activities.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".appcontent.AppcontentArticleActivity" />
-        <activity android:name=".facilityreport.FacilityReportArticleActivity" />
-        <activity android:name=".facilityreport.FacilityReportUploadActivity" />
-        <activity android:name=".qna.QnAArticleActivity" />
-        <activity android:name=".qna.QnAUploadActivity" />
-        <activity android:name=".comment.CommentActivity" />
-        <activity android:name=".mypage.MypageActivity"
+        <activity android:name=".activities.AppcontentArticleActivity" />
+        <activity android:name=".activities.FacilityReportArticleActivity" />
+        <activity android:name=".activities.FacilityReportUploadActivity" />
+        <activity android:name=".activities.QnAArticleActivity" />
+        <activity android:name=".activities.QnAUploadActivity" />
+        <activity android:name=".activities.CommentActivity" />
+        <activity android:name=".activities.MypageActivity"
             android:label="@string/nav_mypage"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

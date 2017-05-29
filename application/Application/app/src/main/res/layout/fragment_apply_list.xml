@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom">
+
+    <com.dms.beinone.application.views.custom.ExpandableLayout
+        android:id="@+id/expandablelayout_apply_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_apply_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/layout_itemlist"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<View-->
+            <!--android:id="@+id/bar_itemlist_extension"-->
+            <!--android:layout_width="4dp"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_itemlist_title_extension"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:text="연장신청"-->
+            <!--android:textSize="24sp"-->
+            <!--android:textColor="@android:color/white" />-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/layout_itemlist_content"-->
+        <!--android:visibility="gone"-->
+        <!--android:animateLayoutChanges="true">-->
+
+        <!--<View-->
+            <!--android:id="@+id/bar_itemlist_content"-->
+            <!--android:layout_width="4dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/activatedBar" />-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="16dp"-->
+            <!--android:background="@color/colorPrimary">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_itemlist_content_whale"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:src="@drawable/whale" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_itemlist_content_status"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignTop="@id/iv_itemlist_content_whale"-->
+                <!--android:layout_toLeftOf="@id/iv_itemlist_content_whale"-->
+                <!--android:layout_toStartOf="@id/iv_itemlist_content_whale"-->
+                <!--android:layout_marginTop="32dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--android:textSize="24sp"-->
+                <!--android:background="@drawable/speech_bubble" />-->
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/ib_itemlist_content_enter"-->
+                <!--android:layout_width="72dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/iv_itemlist_content_whale"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_marginTop="36dp"-->
+                <!--android:src="@drawable/ic_chevron_right_white_24dp"-->
+                <!--android:background="@drawable/btn_login" />-->
+        <!--</RelativeLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<View-->
+            <!--android:id="@+id/bar_itemlist_stay"-->
+            <!--android:layout_width="4dp"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_itemlist_title_stay"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:text="연장신청"-->
+            <!--android:textSize="24sp"-->
+            <!--android:textColor="@android:color/white" />-->
+    <!--</LinearLayout>-->
+    <!--<include layout="@layout/viewholder_itemlist_content"-->
+        <!--android:visibility="gone" />-->
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<View-->
+            <!--android:id="@+id/bar_itemlist_goingout"-->
+            <!--android:layout_width="4dp"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_itemlist_title_goingout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:text="연장신청"-->
+            <!--android:textSize="24sp"-->
+            <!--android:textColor="@android:color/white" />-->
+    <!--</LinearLayout>-->
+    <!--<include layout="@layout/viewholder_itemlist_content"-->
+        <!--android:visibility="gone" />-->
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<View-->
+            <!--android:id="@+id/bar_itemlist_rewardscore"-->
+            <!--android:layout_width="4dp"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_itemlist_title_rewardscore"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:text="연장신청"-->
+            <!--android:textSize="24sp"-->
+            <!--android:textColor="@android:color/white" />-->
+    <!--</LinearLayout>-->
+    <!--<include layout="@layout/viewholder_itemlist_content"-->
+        <!--android:visibility="gone" />-->
+</LinearLayout>

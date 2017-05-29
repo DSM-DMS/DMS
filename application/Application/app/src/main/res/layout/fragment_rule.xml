@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dms.beinone.application.EmptySupportedRecyclerView
+    <com.dms.beinone.application.views.custom.EmptySupportedRecyclerView
         android:id="@+id/rv_rule"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -15,7 +15,7 @@
         android:padding="16dp"
         android:layout_above="@+id/btn_register_register">
 
-        <com.dms.beinone.application.dmsview.DMSEditText
+        <com.dms.beinone.application.views.custom.DMSEditText
             android:id="@+id/et_register_uid"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -28,7 +28,7 @@
             dmset:dmset_strokeColor="@color/colorPrimary"
             dmset:dmset_textColor="@android:color/black" />
 
-        <com.dms.beinone.application.dmsview.DMSEditText
+        <com.dms.beinone.application.views.custom.DMSEditText
             android:id="@+id/et_register_id"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -41,7 +41,7 @@
             dmset:dmset_strokeColor="@color/colorPrimary"
             dmset:dmset_textColor="@android:color/black" />
 
-        <com.dms.beinone.application.dmsview.DMSEditText
+        <com.dms.beinone.application.views.custom.DMSEditText
             android:id="@+id/et_register_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -57,7 +57,7 @@
 
     </LinearLayout>
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_register_register"
         android:layout_width="match_parent"
         android:layout_height="48dp"

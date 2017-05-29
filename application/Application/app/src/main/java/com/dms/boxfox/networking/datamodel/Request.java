@@ -1,10 +1,8 @@
 package com.dms.boxfox.networking.datamodel;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.dms.beinone.application.utils.Cookie;
-import com.dms.beinone.application.utils.CookieManager;
+import com.dms.beinone.application.managers.CookieManager;
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.HttpBoxException;
@@ -13,16 +11,11 @@ import com.dms.boxfox.networking.secure.AES256;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 public class Request {
     public static final String CONTENT_TYPE = "Content-Type";

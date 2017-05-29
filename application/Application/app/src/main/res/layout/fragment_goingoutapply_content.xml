@@ -15,7 +15,7 @@
         android:text="@string/goingoutapply_reason"
         android:textColor="@android:color/black" />
 
-    <com.dms.beinone.application.dmsview.DMSEditText
+    <com.dms.beinone.application.views.custom.DMSEditText
         android:id="@+id/et_goingoutcontent_reason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:inputType="textMultiLine"
         android:textCursorDrawable="@drawable/dmset_cursor" />
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_goingoutcontent_apply"
         android:layout_width="match_parent"
         android:layout_height="48dp"

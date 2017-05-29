@@ -70,7 +70,7 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_nav_header_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

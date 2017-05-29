@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/btn_facilityreport_edit_submit" />
 
-    <com.dms.beinone.application.dmsview.DMSButton
+    <com.dms.beinone.application.views.custom.DMSButton
         android:id="@+id/btn_facilityreport_edit_submit"
         android:layout_width="match_parent"
         android:layout_height="48dp"

@@ -6,6 +6,13 @@
     
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorSecondary">#BDBDBD</color>
+
+    <color name="activatedBar">#DBF3FF</color>
+
+    <color name="applyList1">#A0C4D5</color>
+    <color name="applyList2">#89B9D1</color>
+    <color name="applyList3">#75B1D0</color>
+    <color name="applyList4">#63A0BF</color>
     
     <color name="disabled">#61000000</color>
 
