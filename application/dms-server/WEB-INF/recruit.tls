@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Recruit for DMS</title>
-  <link rel="stylesheet" href="./css/recruit-style.css">
+  <link rel="stylesheet" href="/css/recruit-style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="./js/recruit-script.js"></script>
+  <script src="/js/recruit-script.js"></script>
   <script type="text/javascript">
   $(function(){
     $('.message a').click(function(){
@@ -21,12 +21,16 @@
     <h3>DMS에서는 당신을 기다립니다!</h3>
   </div>
   <div class="form">
+    <#if isLogin==true>
+        <#if isApply==true>
+        <h3>Team DMS 에 지원을 완료하였습니다!</h3>
+        <#else>
     <h3>Team DMS 지원하기</h3>
-    <form class="login-form">
+    <form id="recruit-form" action="/recruit/apply" method="POST" class="login-form">
       <input name="language" type="text" placeholder="사용해본 언어(컴마로 구분)"/>
         <input name="project" type="text" placeholder="진행해본 프로젝트(컴마로 구분)"/>
           <input name="content" type="text" placeholder="DSM 기숙사시스템 개발팀으로써의 다짐!"/>
-            <select id="font-selection">
+            <select name="area" form="recruit-form">
               <option value="web-front">Web front(HTML, Css, Javascript)</option>
               <option value="server">Server(Java, Python)</option>
               <option value="c#">C#</option>
@@ -35,8 +39,21 @@
               <option value="designer">Designer</option>
               <option value="project-manager">Tester / PM</option>
             </select>
-          <input type="submit" value="지원하기"/>
+              <#if canApply==true>
+            <input type="submit" value="지원하기"/>
+              <#else>
+            <input type="submit" value="지원하기" disabled=""/>
+              </#if>
     </form>
+      </#if>
+    <#else>
+    <h3>로그인 후 지원가능합니다.</h3>
+    <form action="/account/login/student/" method="POST" class="login-form">
+      <input name="id" type="text" placeholder="아이디"/>
+        <input name="password" type="password" placeholder="비밀번호"/>
+      <input type="submit" value="로그인"/>
+    </form>
+    </#if>
   </div>
 </div>
 </body>
