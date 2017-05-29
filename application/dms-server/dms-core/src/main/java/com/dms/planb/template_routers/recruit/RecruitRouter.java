@@ -27,7 +27,7 @@ public class RecruitRouter implements Handler<RoutingContext> {
     public void handle(RoutingContext context) {
         boolean isLogin = userManager.isLogined(context);
         boolean canApply = canApply();
-        boolean isApply = isApply();
+        boolean isApply = isApply(context);
 
         DmsTemplate template = new DmsTemplate("recruit");
         template.put("isLogin", isLogin);
@@ -45,10 +45,10 @@ public class RecruitRouter implements Handler<RoutingContext> {
     }
 
     private boolean isApply(RoutingContext ctx){
-        boolean result = true;
+        boolean result = false;
         try {
             if(DataBase.getInstance().executeQuery("select count(*) from recruit where uid='",userManager.getUid(userManager.getIdFromSession(ctx)),"'").nextAndReturn().getInt(1)>0){
-                result = false;
+                result = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
