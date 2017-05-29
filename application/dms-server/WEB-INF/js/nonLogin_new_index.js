@@ -181,6 +181,57 @@ function sanitize(txt) {
 }
 
 /** ======================================================================================
+ * browser size
+========================================================================================== */
+
+
+var width = screen.width;
+var fullHeight = window.innerHeight + window.screenTop;
+var height = screen.height - (window.outerHeight -  window.innerHeight - window.screenTop || window.screenY);
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (window.innerWidth == width && window.innerHeight == fullHeight) {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: fullHeight + "px",
+        overflow: "hidden"
+    });
+} else {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "auto"
+    });
+}
+
+if (isMobile) {
+    $("body").css({
+        minWidth: "1707px",
+        minHeight: "855px",
+        overflow: "auto"
+    });
+} else {
+    $(window).resize(function() {
+        if (window.innerWidth == width && window.innerHeight == fullHeight) {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: fullHeight + "px",
+                overflow: "hidden"
+            });
+        } else {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "auto"
+            });
+        }
+
+    });
+}
+
+
+/** ======================================================================================
  * Common window
 ========================================================================================== */
 // $windowClose.on("click", function() {
@@ -391,10 +442,95 @@ $openGoingOutButton.on("click", function() {
 /** ======================================================================================
  * Current state (stay)
 ========================================================================================== */
+function stayDoCheck() {
+    TweenLite.set([stayCross1, stayCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(stayTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(stayCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(stayCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([stayTick, stayCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(stayCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(stayTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(stayCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
+
+}
 
 /** ======================================================================================
  * Current state (extension)
 ========================================================================================== */
+function extensionDoCheck() {
+    TweenLite.set([extensionCross1, extensionCross2], {
+        autoAlpha: 0
+    });
+    TweenLite.set(extensionTick, {
+        drawSVG: "0%"
+    });
+    TweenLite.set(extensionCircle, {
+        drawSVG: "50% 50%",
+        scale: ".01",
+        transformOrigin: "50% 50%",
+        fill: "#607D8B",
+        autoAlpha: 0
+    });
+
+    tl1 = new TimelineMax({
+        repeat: 0,
+        repeatDelay: 1
+    });
+    tl1
+        .to(extensionCircle, 1, {
+            scale: 1,
+            ease: Elastic.easeOut
+        })
+        .to([extensionTick, extensionCircle], .6, {
+            autoAlpha: 1
+        }, .1)
+        .to(extensionCircle, .8, {
+            drawSVG: "100% 0%",
+            ease: Power4.easeOut
+        }, .2)
+        .to(extensionTick, .8, {
+            drawSVG: "0% 100%",
+            ease: Expo.easeOut
+        }, '-=.6')
+        .to(extensionCircle, .6, {
+            fill: "#607D8B",
+            ease: Power1.easeInOut
+        }, '-=.4');
+
+    tl1.timeScale(.8);
+}
 
 /** ======================================================================================
  * menu
@@ -672,6 +808,43 @@ $(document).ready(function() {
 /** ======================================================================================
  * article preview
 ========================================================================================== */
+function setRulePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+function setFaqPreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
 
 noticePreviewBtn.on("click", function() {
     $(".speech-bubble-tail").remove();
@@ -696,6 +869,12 @@ faqPreviewBtn.on("click", function() {
 ========================================================================================== */
 registerBtn.on("click", function() {
     $(".login-content").toggle("slide");
+    $(".register-content").toggle("slide");
+});
+
+$(".register-close").on("click", function() {
+    $(".login-content").toggle("slide");
+    $(".register-content").toggle("slide");
 });
 
 $("#register-apply-btn").on("click", function() {

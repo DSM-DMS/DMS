@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html manifest="appcache.manifest">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
     <link rel="stylesheet" href="./css/new_style.css">
     <link rel="stylesheet" href="./css/clock.css">
     <link rel="stylesheet" href="./css/hover.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -15,9 +15,9 @@
 
 <body>
     <script src="./js/jquery.js"></script>
-    <div id="easter-egg">
+    <!-- <div id="easter-egg">
         <img src="./images/sana2.jpg">
-    </div>
+    </div>  -->
     <div id="background-image">
         <img src=".\images\wallpaper10.jpg">
         <!--<svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%" transform="scale(1.3)">
@@ -232,7 +232,7 @@
         <img id="close-rule-window" class="window-close" src=".\images\close.svg">
         <div class="list-box-container-container">
             <div class="list-box-container">
-                
+
             </div>
         </div>
     </div>
@@ -258,13 +258,12 @@
                         <span class="notice-preview-btn">
                             <p id="writer-content">공지</p>
                         </span>
-
+                        <div class="speech-bubble-tail"></div>
                     </div>
                     <div class="writer-container">
                         <span class="rule-preview-btn">
                             <p id="writer-content-long">기숙사 규정</p>
                         </span>
-                        <div class="speech-bubble-tail"></div>
                     </div>
                     <div class="writer-container">
                         <span class="faq-preview-btn">
@@ -275,7 +274,7 @@
                         <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
                     </a>
                     <a class="contact-github" href="https://goo.gl/nHJJUb" target="_blank">
-                        <i class="fa fa-github fa-5x" aria-hidden="true"></i>
+                        <i class="fa fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="notice-title-container">
@@ -390,6 +389,14 @@
             <div class="menu-item hvr-float point-btn">
                 <img src=".\images\coin.svg">
                 <span>상점 신청</span>
+            </div>
+            <div class="menu-item hvr-float" style="opacity:0">
+                <img src=".\images\question.svg">
+                <span>빈 공간 유지</span>
+            </div>
+            <div class="menu-item hvr-float" style="opacity:0">
+                <img src=".\images\coin.svg">
+                <span>빈 공간 유지</span>
             </div>
         </div>
         <div id="menu-pagenation">

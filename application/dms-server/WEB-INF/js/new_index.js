@@ -162,7 +162,7 @@ function sanitize(txt) {
         },
         replaceInvalid = function($0, tag, off, txt) {
             var
-            // Is it a valid tag?
+                // Is it a valid tag?
                 invalidTag = protos &&
                 document.createElement(tag) instanceof HTMLUnknownElement ||
                 !validHTMLTags.test(tag),
@@ -181,6 +181,60 @@ function sanitize(txt) {
 
     return "textContent" in tmp ? tmp.textContent : tmp.innerHTML;
 }
+
+/** ======================================================================================
+ * browser size
+========================================================================================== */
+
+var width = screen.width;
+var fullHeight = window.innerHeight + window.screenTop;
+var height = screen.height - (window.outerHeight -  window.innerHeight);
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (window.innerWidth == width && window.innerHeight == fullHeight) {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: fullHeight + "px",
+        overflow: "hidden"
+    });
+} else {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "auto"
+    });
+}
+
+if (isMobile) {
+    $("body").css({
+        minWidth: "1707px",
+        minHeight: "855px",
+        overflow: "auto"
+    });
+} else {
+    $(window).resize(function() {
+        if (window.innerWidth == width && window.innerHeight == fullHeight) {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: fullHeight + "px",
+                overflow: "hidden"
+            });
+        } else {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "auto"
+            });
+        }
+
+    });
+}
+
+
+
+
+
 
 /** ======================================================================================
  * Common window
@@ -664,18 +718,21 @@ $stayApplyButton.on("click", function() {
             200: function() {
                 alert('신청되었습니다.');
                 setStayValue(stayDate);
+                $stayPaperplane.removeClass("send-paperplane");
             },
             204: function() {
-                alert('신청 시간이 아닙니다.')
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
 
             },
             500: function() {
-                alert('신청 시간이 아닙니다.')
-
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
             }
         },
         error: function(xhr, status, err) {
-            alert('신청 시간이 아닙니다.')
+            alert('신청 시간이 아닙니다.');
+            $stayPaperplane.removeClass("send-paperplane");
         }
     });
 });
@@ -820,8 +877,7 @@ var setGoingOutValue = function(thisDate) {
             try {
                 $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
                 $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
-            } catch (err) {
-            }
+            } catch (err) {}
         },
         error: function(xhr) {
             console.log(xhr.status);
@@ -945,27 +1001,19 @@ function extentionApply(classId, id) {
             200: function() {
                 alert("신청 완료되었습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             }
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
             getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         }
     });
 }
@@ -1201,20 +1249,20 @@ $(document).ready(function() {
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     //연장신청 시간 보여줌
-    var startTime = '5:30 PM' ;
-    var endTime  =  '8:30 PM' ;
+    var startTime = '5:30 PM';
+    var endTime = '8:30 PM';
 
-    var formatTime = (function () {
+    var formatTime = (function() {
         function addZero(num) {
             return (num >= 0 && num < 10) ? "0" + num : num + "";
         }
-        return function (dt) {
+        return function(dt) {
             var formatted = '';
 
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"),hours24>11?"pm" :"am"].join(" ");            
+                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "pm" : "am"].join(" ");
             }
             return formatted;
         }
@@ -1222,12 +1270,9 @@ $(document).ready(function() {
 
     var currentTime = formatTime(new Date());
 
-    if(currentTime >= startTime && currentTime <= endTime) 
-    {
+    if (currentTime >= startTime && currentTime <= endTime) {
         $('#extensionValue').html("연장신청이 가능합니다.");
-    }
-    else
-    {
+    } else {
         $('#extensionValue').html("연장신청이 불가능합니다");
     }
 
@@ -1397,7 +1442,15 @@ faqPreviewBtn.on("click", function() {
 });
 
 /** ======================================================================================
- * common button
+ * alert
 ========================================================================================== */
 
-
+function showAlert(message) {
+    $("body").append('<div class="infoAlert">message</div>');
+    setTimeout(function() {
+        $(".infoAlert").remove();
+    }, 2000);
+}
+/** =======
+ * common button
+========================================================================================== */
