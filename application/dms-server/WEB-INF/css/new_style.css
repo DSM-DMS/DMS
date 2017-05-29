@@ -38,12 +38,15 @@ body {
     float: right;
     right: 0;
     height: 100%;
+    width: 100%;
     z-index: -2;
 }
 
 #background-image img {
     height: 100%;
+    width: 100%;
     transform: scale(1);
+    right: 0;
     /*-webkit-filter: blur(5px) brightness(50%);*/
 }
 
@@ -103,8 +106,9 @@ body {
     border-radius: 10000000000px;
     border-width: 0;
     color: white;
-    line-height: 5vh;
-    font-size: 2vh;
+    /*line-height: 5vh;*/
+    height: 10%;
+    font-size: 0.8rem;
     background: #48CFAD;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -137,7 +141,7 @@ body {
 
 .current-status p {
     color: white;
-    font-size: 3vh;
+    font-size: 21px;
     margin: 0;
 }
 
@@ -157,8 +161,9 @@ body {
     border-width: 0;
     border-radius: 999px;
     color: white;
-    line-height: 5vh;
-    font-size: 2vh;
+    /*line-height: 5vh;*/
+    height: 10%;
+    font-size: 0.8rem;
     background: #48CFAD;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -529,7 +534,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 .notice-title-container {
     background: #eeeeee;
     border-radius: 2vh 2vh 0 0;
-    padding: 2vh 2vh 1vh 2vh;
+    padding: 2% 2% 1% 2%;
 }
 
 .writer-container {
@@ -596,24 +601,29 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .speech-bubble-tail {
-    width: 4vh;
+    /*width: 4vh;
     height: 4vh;
     background: #eeeeee;
     transform: rotate(45deg) translateY(3vh);
-    margin-left: 5vh;
+    margin-left: 5vh;*/
+    width: 26px;
+    height: 26px;
+    background: #eeeeee;
+    transform: rotate(45deg) translateY(18px);
+    margin-left: 37px;
 }
 
 .notice-content-container {
     background: #eeeeee;
     border-radius: 0 0 2vh 2vh;
-    padding: 0 2vh 0 2vh;
+    padding: 0 2% 0 2%;
     ;
     position: relative;
 }
 
 .notice-content-container p {
-    max-height: 7vh;
-    min-height: 7vh;
+    max-height: 7%;
+    min-height: 7%;
     overflow: hidden;
 }
 
@@ -632,26 +642,38 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .contact-github {
-    width: 10vh;
-    height: 10vh;
+    /*width: 10vh;
+    height: 10vh;*/
+    width: 75px;
+    height: 75px;
     border-radius: 999px;
     text-align: center;
     color: black;
 }
 
 .contact-github i {
-    margin-top: 50%;
-    transform: translateY(-50%);
+    width: 75px;
+    height: 75px;
+    font-size: 90px;
+    line-height: 75px;
+    /*margin: 0;*/
+}
+
+.contact-github i:before {
+    /*margin-top: 50%;
+    transform: translateY(-50%);*/
+    width: 75px;
+    height: 75px;
 }
 
 .notice-more {
     background: #607B8D;
     position: absolute;
-    right: -5vh;
-    bottom: -5vh;
-    width: 10vh;
-    height: 10vh;
-    border-radius: 10vh;
+    right: -35px;
+    bottom: -35px;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
     z-index: 50;
     transition: 0.3s ease-in;
 }
@@ -766,14 +788,14 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .meal-date {
-    margin: auto 2vh;
+    margin: auto 2%;
     font-size: 1.5rem;
 }
 
 .meal-remote-control img {
-    width: 3vh;
-    height: 3vh;
-    padding: 1vh;
+    width: 3%;
+    height: 3%;
+    padding: 1%;
 }
 
 .meal-remote-control img:hover {
@@ -812,8 +834,8 @@ input[type="radio"]:checked~.bullet .line.seven {
     background-color: #607D8B;
     padding: 0 5px 0 5px;
     flex-direction: row;
-    height: 6vh;
-    margin-right: 1vh;
+    height: 50%;
+    margin-right: 5%;
 }
 
 .meal-content {
@@ -937,7 +959,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 #extension-apply-window {
     width: 74%;
-    height: 100vh;
+    height: 100%;
     opacity: 0;
     /*z-index: -1;*/
     position: absolute;
@@ -946,11 +968,16 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 #extension-apply-window img {
-    height: 8vh;
+    /*height: 8vh;
     width: 4vh;
     position: absolute;
     top: 5vh;
-    right: 5vh;
+    right: 5vh;*/
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
 }
 
 #extension-apply-window img:hover {
@@ -958,9 +985,12 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 #extension-apply-window .extension-class-select {
-    margin-top: 14vh;
+    /*margin-top: 14vh;
     height: 72vh;
-    width: 36vh;
+    width: 36vh;*/
+    margin-top: 14%;
+    height: 72%;
+    width: 25%;
     margin-left: 5%;
     color: white;
     text-align: center;
@@ -969,8 +999,8 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 #extension-apply-window .extension-class-select td {
     border-radius: 999px;
-    width: 18vh;
-    height: 18vh;
+    width: 120px;
+    height: 120px;
 }
 
 #extension-apply-window .extension-class-select td:hover {
@@ -990,11 +1020,14 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .extension-seat-container {
-    margin-top: 14vh;
-    height: 85vh;
+    /*margin-top: 14vh;
+    height: 85vh;*/
+    margin-top: 14%;
+    height: 79%;
     float: left;
     margin-left: 8%;
-    max-width: 46vw;
+    /*max-width: 46vw;*/
+    max-width: 46%;
     overflow: auto;
 }
 
@@ -1021,11 +1054,16 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .extension-seat {
     background-color: rgba(255, 255, 255, 0.2);
-    width: 9.5vh;
+    /*width: 9.5vh;
     height: 9.5vh;
     border-radius: 10vh;
+    display: inline-block;*/
+    /*margin: 0.5vw;*/
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
     display: inline-block;
-    margin: 0.5vw;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1461,7 +1499,7 @@ a.btn {
 
 .window {
     width: 74%;
-    height: 100vh;
+    height: 100%;
     opacity: 0;
     /*z-index: -1;*/
     position: absolute;
