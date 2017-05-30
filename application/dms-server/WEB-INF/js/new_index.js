@@ -657,6 +657,7 @@ var setStayValue = function(thisDate) {
                 }
             } catch (err) {
                 $('#stayValue').text('신청안됨');
+                $('#stayIcon').attr('src', './images/stay-not-applied.svg');
             }
         },
         error: function(xhr) {
