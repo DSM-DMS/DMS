@@ -1031,6 +1031,19 @@ input[type="radio"]:checked~.bullet .line.seven {
     overflow: auto;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666;
+}
+
 .extension-seat-container td {
     text-align: center;
 }
