@@ -78,7 +78,7 @@ var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
 var $closeStayButton = $("#close-stay-window");
-var stasyDate = new Date();
+var stayDate = new Date();
 /**
  * Meal
  */
