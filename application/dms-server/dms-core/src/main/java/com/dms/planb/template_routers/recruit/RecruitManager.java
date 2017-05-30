@@ -37,7 +37,7 @@ public class RecruitManager {
     public boolean canApply(RoutingContext ctx){
         boolean result = false;
         Calendar c = Calendar.getInstance();
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH) + 1;
         int day = c.get(Calendar.DAY_OF_MONTH);
         if((month==5&&day>29)||(month==6&&day <2)) {
             try {

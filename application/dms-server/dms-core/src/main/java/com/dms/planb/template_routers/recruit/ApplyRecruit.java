@@ -13,12 +13,12 @@ import io.vertx.ext.web.RoutingContext;
 /**
  * Created by boxfox on 2017-05-29.
  */
-@RouteRegistration(path = "/recruit/apply", method = {HttpMethod.GET})
-public class RecruitApplyRouter implements Handler<RoutingContext> {
+@RouteRegistration(path = "/recruit/apply", method = {HttpMethod.POST})
+public class ApplyRecruit implements Handler<RoutingContext> {
     private UserManager userManager;
     private RecruitManager recruitManager;
 
-    public RecruitApplyRouter() {
+    public ApplyRecruit() {
         userManager = new UserManager();
         recruitManager = new RecruitManager(userManager);
     }
