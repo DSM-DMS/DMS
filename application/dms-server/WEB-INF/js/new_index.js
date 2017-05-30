@@ -1271,7 +1271,7 @@ $(document).ready(function() {
 
     var currentTime = formatTime(new Date());
 
-    if (currentTime >= startTime && currentTime <= endTime) {
+    if (currentTime <= startTime && currentTime >= endTime) {
         $('#extensionValue').html("연장신청이 가능합니다.");
     } else {
         $('#extensionValue').html("연장신청이 불가능합니다");
