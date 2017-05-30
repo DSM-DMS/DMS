@@ -32,6 +32,7 @@ public class ApplyRecruit implements Handler<RoutingContext> {
             String area = context.request().getParam("area");
             try {
                 String uid = userManager.getUid(userManager.getIdFromSession(context));
+                DataBase.getInstance().executeUpdate("DELETE FROM recruit WHERE uid='", uid, "'");
                 DataBase.getInstance().executeUpdate("insert into recruit values('", uid, "', '", language, "', '", project, "', '", content, "', '", area, "')");
                 code = 200;
             } catch (SQLException e) {
