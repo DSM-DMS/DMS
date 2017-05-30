@@ -657,6 +657,7 @@ var setStayValue = function(thisDate) {
                 }
             } catch (err) {
                 $('#stayValue').text('신청안됨');
+                $('#stayIcon').attr('src', './images/stay-not-applied.svg');
             }
         },
         error: function(xhr) {
@@ -666,7 +667,7 @@ var setStayValue = function(thisDate) {
     });
 };
 
-setStayValue(stayDate)
+setStayValue(stayDate);
 
 $openStayButton.click(function() {
     $openStayButton.prop("disabled", true);
@@ -1408,15 +1409,20 @@ function getWeek(thisDate) {
 };
 
 function makeWeekFormat(thisDate) {
+    var year = thisDate.getFullYear();
     var week = getWeek(thisDate);
+    var month = thisDate.getMonth();
     if (week == 0) {
-        thisDate.setMonth(thisDate.getMonth() + 1);
+        if(month == 12) {
+            year = year + 1;
+            month = 1;
+        } else {
+            month = month + 1;
+        }
         week = 1;
     }
-    var year = thisDate.getFullYear();
-    var month = thisDate.getMonth() + 1;
 
-    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
+    return year + "-" + leadingZeros(month + 1, 2) + "-" + leadingZeros(week, 2);
 };
 
 
