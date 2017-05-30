@@ -188,7 +188,7 @@ function sanitize(txt) {
 
 var width = screen.width;
 var fullHeight = window.innerHeight + window.screenTop;
-var height = screen.height - (window.outerHeight -  window.innerHeight);
+var height = screen.height - (window.outerHeight - window.innerHeight);
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -1202,7 +1202,11 @@ function prevDay() {
 }
 
 function formatDate() {
-    return mealDate.toISOString().slice(0, 10);
+    return [
+        mealDate.getFullYear(),
+        ('0' + (mealDate.getMonth() + 1)).slice(-2),
+        ('0' + mealDate.getDate()).slice(-2)
+    ].join('-');
 }
 
 function formatDate2() {
@@ -1413,7 +1417,7 @@ function makeWeekFormat(thisDate) {
     var week = getWeek(thisDate);
     var month = thisDate.getMonth();
     if (week == 0) {
-        if(month == 12) {
+        if (month == 12) {
             year = year + 1;
             month = 1;
         } else {
