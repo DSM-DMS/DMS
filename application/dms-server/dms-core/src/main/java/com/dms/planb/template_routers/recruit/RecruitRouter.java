@@ -8,6 +8,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
+import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,15 +20,17 @@ import java.util.Calendar;
 @RouteRegistration(path = "/recruit", method = {HttpMethod.GET})
 public class RecruitRouter implements Handler<RoutingContext> {
     private UserManager userManager;
+    private RecruitManager recruitManager;
 
     public RecruitRouter(){
         userManager = new UserManager();
+        recruitManager = new RecruitManager(userManager);
     }
 
     public void handle(RoutingContext context) {
         boolean isLogin = userManager.isLogined(context);
-        boolean canApply = canApply();
-        boolean isApply = isApply(context);
+        boolean canApply = recruitManager.canApply(context);
+        boolean isApply = recruitManager.isApply(context);
 
         DmsTemplate template = new DmsTemplate("recruit");
         template.put("isLogin", isLogin);
@@ -42,29 +45,6 @@ public class RecruitRouter implements Handler<RoutingContext> {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean isApply(RoutingContext ctx){
-        boolean result = false;
-        try {
-            if(DataBase.getInstance().executeQuery("select count(*) from recruit where uid='",userManager.getUid(userManager.getIdFromSession(ctx)),"'").nextAndReturn().getInt(1)>0){
-                result = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private boolean canApply(){
-        boolean result = false;
-        Calendar c = Calendar.getInstance();
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        if((month==5&&day>29)||(month==6&&day <2)){
-            result = true;
-        }
-        return result;
     }
 
 }

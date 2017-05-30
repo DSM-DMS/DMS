@@ -19,14 +19,16 @@ import java.util.Calendar;
 @RouteRegistration(path = "/recruit/apply", method = {HttpMethod.GET})
 public class RecruitApplyRouter implements Handler<RoutingContext> {
     private UserManager userManager;
+    private RecruitManager recruitManager;
 
     public RecruitApplyRouter() {
         userManager = new UserManager();
+        recruitManager = new RecruitManager(userManager);
     }
 
     public void handle(RoutingContext context) {
         int code = 400;
-        if (userManager.isLogined(context) && !isApply(context)) {
+        if (userManager.isLogined(context) && recruitManager.canApply(context) && !recruitManager.isApply(context)) {
             String language = context.request().getParam("language");
             String project = context.request().getParam("project");
             String content = context.request().getParam("content");
@@ -41,17 +43,5 @@ public class RecruitApplyRouter implements Handler<RoutingContext> {
         }
         context.response().setStatusCode(code).end("<script>window.location.href=document.referrer;</script>");
         context.response().close();
-    }
-
-    private boolean isApply(RoutingContext ctx) {
-        boolean result = false;
-        try {
-            if (DataBase.getInstance().executeQuery("select count(*) from recruit where uid='", userManager.getUid(userManager.getIdFromSession(ctx)), "'").nextAndReturn().getInt(1) > 0) {
-                result = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
     }
 }
