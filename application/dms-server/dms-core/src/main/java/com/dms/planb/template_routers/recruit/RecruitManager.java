@@ -1,12 +1,13 @@
 package com.dms.planb.template_routers.recruit;
 
-import io.vertx.ext.web.RoutingContext;
+import java.sql.SQLException;
+import java.util.Calendar;
+
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
-import java.sql.SQLException;
-import java.util.Calendar;
+import io.vertx.ext.web.RoutingContext;
 
 /**
  * Created by boxfox on 2017-05-30.

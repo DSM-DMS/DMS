@@ -1,17 +1,14 @@
 package com.dms.planb.template_routers.recruit;
 
-import com.dms.boxfox.templates.DmsTemplate;
-import freemarker.template.TemplateException;
-import io.vertx.core.Handler;
-import io.vertx.core.http.HttpMethod;
-import io.vertx.ext.web.RoutingContext;
+import java.sql.SQLException;
+
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Calendar;
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
 /**
  * Created by boxfox on 2017-05-29.
