@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="./css/admin-style.css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
+</head>
+
+<body>
+  <div id="background-image">
+      <img src=".\images\wallpaper10.jpg">
+  </div>
+  <p class="admin-title">공지사항 관리</p>
+  <button id="article-write" class="apply-btn">
+      <span>글쓰기</span>
+  </button>
+  <button id="article-delete" class="apply-btn">
+      <span>삭제</span>
+  </button>
+  <table id="notice-table">
+      <col id="delete-column">
+      <col id="number-column">
+      <col id="title-column">
+      <col id="writer-column">
+      <tbody>
+      </tbody>
+  </table>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/article-management.js"></script>
+</body>
+</html>

@@ -1,50 +1,22 @@
-$('.edit').on('click', function() {
-    var postNum = $(this).parent().first().text().split(' ')[0];
-    redirect("post/notice/modify?no=" + postNum);
-});
+(function() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com" + "/post/" + "notice",
+        data: {
+            no: 37
+        },
+        type: 'GET',
+        success: function(data) {
+            var parsedData = JSON.parse(data);
+            $(".underbar-title").text(parsedData.title);
+            $(".article-content").html(parsedData.content);
+        },
+        error: function(data) {
+            alert("글을 불러오지 못했어요.");
+        }
+    })
+})();
 
-$('.delete').on('click', function() {
-    var postNum = $(this).parent().first().text().split(' ')[0];
-})
-
-$(".write-btn").click(function() {
-    // $.ajax({
-    //     url: "post/" + getAllUrlParams(document.URL).category + "write",
-    //     type: "GET",
-    //     data: {
-    //         category: getAllUrlParams(document.URL).category,
-    //         type: "write"
-    //     },
-    //     success: function (data) {
-    //         redirect(data);
-    //     },
-    //     error: function () {
-    //         alert("글을 작성할 수 없어요 TT");
-    //     }
-    // })
-    if (getAllUrlParams(document.URL).category == "qna") {
-        localStorage.setItem('category', getAllUrlParams(document.URL).category);
-        localStorage.setItem('type', 'write');
-        redirect("post/" + "question" + "/write");
-        return;
-    }
-    localStorage.setItem('category', getAllUrlParams(document.URL).category);
-    localStorage.setItem('type', 'write');
-    console.log("post/" + getAllUrlParams(document.URL).category + "/write");
-    redirect("post/" + getAllUrlParams(document.URL).category + "/write");
-});
-
-function setListEvent() {
-    $("table tr").click(function() {
-        console.log($(this).children("td").eq(0).text());
-        redirect("post/content?category=" + getAllUrlParams(document.URL).category + "&no=" + $(this).children("td").eq(0).text());
-    });
-}
-setListEvent();
-
-$(".edit").on('click', function(e) {
-    e.stopPropagation();
-    var no = $(this).parent().prev().prev().text();
+$("#article-modify").click(function() {
     if (getAllUrlParams(document.URL).category == "qna") {
         localStorage.setItem('category', getAllUrlParams(document.URL).category);
         localStorage.setItem('type', 'modify');
@@ -54,29 +26,29 @@ $(".edit").on('click', function(e) {
     }
     localStorage.setItem('category', getAllUrlParams(document.URL).category);
     localStorage.setItem('type', 'modify');
-    localStorage.setItem('no', no);
-
-    console.log("post/" + getAllUrlParams(document.URL).category + "/modify");
-    redirect("post/" + getAllUrlParams(document.URL).category + "/modify?no=" + no);
+    redirect("post/" + getAllUrlParams(document.URL).category + "/modify?no=" + getAllUrlParams(document.URL).no);
 });
 
-$(".delete").on('click', function(e) {
-    e.stopPropagation();
-    var no = $(this).parent().parent().children().first().text();
+$("#article-delete").on("click", function() {
     $.ajax({
-        url: "/post/" + getAllUrlParams(document.URL).category,
+        url: "/post/" + localStorage.getItem('category'),
         data: {
-            no: Number(no)
+            no: Number(getAllUrlParams(document.URL).no)
         },
         type: 'DELETE',
         success: function(data) {
-            redirect("post/admin?category=" + getAllUrlParams(document.URL).category);
+            redirect("post/admin?category=" + localStorage.getItem("category"))
         },
         error: function(data) {
             alert("삭제에 실패했어요. TT");
         }
     });
 });
+
+function redirect(page) {
+    location.href = '/' + page;
+}
+
 
 function getAllUrlParams(url) {
 
@@ -138,8 +110,4 @@ function getAllUrlParams(url) {
     }
 
     return obj;
-}
-
-function redirect(page) {
-    location.href = '/' + page;
 }

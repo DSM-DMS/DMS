@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html manifest="appcache.manifest">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
     <link rel="stylesheet" href="./css/new_style.css">
     <link rel="stylesheet" href="./css/clock.css">
     <link rel="stylesheet" href="./css/hover.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -15,11 +15,12 @@
 
 <body>
     <script src="./js/jquery.js"></script>
-    <div id="easter-egg">
+    <!-- <div id="easter-egg">
         <img src="./images/sana2.jpg">
-    </div>
+    </div>  -->
     <div id="background-image">
-        <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%" transform="scale(1.3)">
+        <img src=".\images\wallpaper10.jpg">
+        <!--<svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%" transform="scale(1.3)">
             <filter id="svgBlurFilter">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComponentTransfer>
@@ -29,8 +30,8 @@
                 </feComponentTransfer>
             </filter>
             <image class="blurred" preserveAspectRatio='xMinYMid meet' filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0"
-            xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.3)"/>
-        </svg>
+            xmlns:xlink=".\images\wallpaper10.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.3)"/>
+        </svg>-->
     </div>
     <div id="going-out-apply-window" class="window">
         <img id="close-going-out-window" class="window-close" src=".\images\close.svg">
@@ -217,7 +218,13 @@
         <img id="close-notice-window" class="window-close" src=".\images\close.svg">
         <div class="list-box-container-container">
             <div class="list-box-container">
-
+                <!--<div class="list-box">
+                    <div class="list-box-no-container">
+                    </div>
+                    <p class="list-box-no">37</p>
+                    <p class="list-box-writer">사감부</p>
+                    <p class="list-box-title">음식물 반입 관련</p>
+                </div>-->
             </div>
         </div>
     </div>
@@ -225,11 +232,7 @@
         <img id="close-rule-window" class="window-close" src=".\images\close.svg">
         <div class="list-box-container-container">
             <div class="list-box-container">
-                <!-- <div class="list-box">
-                    <p class="list-box-no">#37</p>
-                    <p class="list-box-title">음식물 반입 관련</p>
-                    <p class="list-box-writer">-사감부</p>
-                </div> -->
+
             </div>
         </div>
     </div>
@@ -255,13 +258,12 @@
                         <span class="notice-preview-btn">
                             <p id="writer-content">공지</p>
                         </span>
-
+                        <div class="speech-bubble-tail"></div>
                     </div>
                     <div class="writer-container">
                         <span class="rule-preview-btn">
                             <p id="writer-content-long">기숙사 규정</p>
                         </span>
-                        <div class="speech-bubble-tail"></div>
                     </div>
                     <div class="writer-container">
                         <span class="faq-preview-btn">
@@ -272,7 +274,7 @@
                         <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
                     </a>
                     <a class="contact-github" href="https://goo.gl/nHJJUb" target="_blank">
-                        <i class="fa fa-github fa-5x" aria-hidden="true"></i>
+                        <i class="fa fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="notice-title-container">
@@ -324,8 +326,8 @@
                     </svg>
                     <p id="stayValue"></p>
                 </div>
-                <img src="./images/return-fri.png" />
-                <button id="open-stay-apply" class="hvr-shutter-out-horizontal">잔류 신청</button>
+                <img id="stayIcon" src="C:\디자인\벡터이미지\잔류 아이콘\fri-out.svg" />
+                <button id="open-stay-apply" class="hvr-shrink">잔류 신청</button>
             </div>
             <div id="extension-apply-container">
                 <div class="current-status">
@@ -338,7 +340,7 @@
                                 45.677,54.037 58.479,67.762 81.217,43.079 	"/>
                         </g>
                     </svg>
-                    <p>연장신청이 가능합니다</p>
+                    <p id="extensionValue">연장신청이 가능합니다</p>
                 </div>
                 <script src="./js/clock.js"></script>
                 <ul id="clock-in">
@@ -347,7 +349,7 @@
                     <li id="min"></li>
                 </ul>
                 <!--TODO : ID수정-->
-                <button id="open-extension-apply" class="hvr-shutter-out-horizontal">연장학습 신청</button>
+                <button id="open-extension-apply" class="hvr-shrink">연장학습 신청</button>
             </div>
             <img src="./images/curved2.svg" class="curved-image" />
         </div>
@@ -387,6 +389,14 @@
             <div class="menu-item hvr-float point-btn">
                 <img src=".\images\coin.svg">
                 <span>상점 신청</span>
+            </div>
+            <div class="menu-item hvr-float" style="opacity:0">
+                <img src=".\images\question.svg">
+                <span>빈 공간 유지</span>
+            </div>
+            <div class="menu-item hvr-float" style="opacity:0">
+                <img src=".\images\coin.svg">
+                <span>빈 공간 유지</span>
             </div>
         </div>
         <div id="menu-pagenation">
