@@ -1254,8 +1254,8 @@ $(document).ready(function() {
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     //연장신청 시간 보여줌
-    var startTime = '5:30 PM';
-    var endTime = '8:30 PM';
+    var startTime = '05:30 PM';
+    var endTime = '08:30 PM';
 
     var formatTime = (function() {
         function addZero(num) {
@@ -1267,7 +1267,7 @@ $(document).ready(function() {
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "pm" : "am"].join(" ");
+                formatted = [[addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"].join(" ");
             }
             return formatted;
         }
