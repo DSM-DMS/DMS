@@ -23,7 +23,8 @@
   <div class="form">
     <#if isLogin==true>
         <#if isApply==true>
-        <h3>Team DMS 에 지원을 완료하였습니다!</h3>
+        <h3>Team DMS 에 지원해주셔서 감사합니다.</h3>
+        <h3>6월 4일 심사 결과가 발표됩니다!</h3>
         <#else>
     <h3>Team DMS 지원하기</h3>
     <form id="recruit-form" action="/recruit/apply" method="POST" class="login-form">
@@ -42,7 +43,7 @@
               <#if canApply==true>
             <input type="submit" value="지원하기"/>
               <#else>
-            <input type="submit" value="지원하기" disabled=""/>
+            <input type="submit" style="background-color: #3B5998 !important;" value="지원이 불가능합니다." disabled=""/>
               </#if>
     </form>
       </#if>
