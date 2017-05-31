@@ -22,5 +22,9 @@
             <flag name="friday" value="32"/>
             <flag name="saturday" value="64"/>
         </attr>
+        <attr name="mode">
+            <enum name="day" value="1" />
+            <enum name="week" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

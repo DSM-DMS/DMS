@@ -1,7 +1,11 @@
 package com.dms.boxfox.networking.datamodel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by boxfox on 2017-01-22.
@@ -13,9 +17,12 @@ public class Response {
     private int code;
     private String message;
     private StringBuffer buffer;
-    public Response(int code, String msg){
+    private Map<String, List<String>> headers;
+
+    public Response(int code, String msg, Map<String, List<String>> headers){
         this.code = code;
         this.message = msg;
+        this.headers = headers;
         buffer = new StringBuffer();
     }
 
@@ -32,7 +39,16 @@ public class Response {
         return message;
     }
 
+    public Map<String, List<String>> getHeaders() {
+        return headers;
+    }
+
     public JSONObject getJsonObject() throws JSONException {
         return new JSONObject(buffer.toString());
     }
+
+    public JSONArray getJsonArray() throws JSONException {
+        return new JSONArray(buffer.toString());
+    }
+
 }

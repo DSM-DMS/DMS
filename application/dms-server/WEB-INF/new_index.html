@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="appcache.manifest">
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +15,12 @@
 
 <body>
     <script src="./js/jquery.js"></script>
+    <!-- <div id="easter-egg">
+        <img src="./images/sana2.jpg">
+    </div>  -->
     <div id="background-image">
-        <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%">
+        <img src=".\images\wallpaper10.jpg">
+        <!--<svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%" transform="scale(1.3)">
             <filter id="svgBlurFilter">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComponentTransfer>
@@ -26,8 +30,8 @@
                 </feComponentTransfer>
             </filter>
             <image class="blurred" preserveAspectRatio='xMinYMid meet' filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0"
-            xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.3)"/>
-        </svg>
+            xmlns:xlink=".\images\wallpaper10.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.3)"/>
+        </svg>-->
     </div>
     <div id="going-out-apply-window" class="window">
         <img id="close-going-out-window" class="window-close" src=".\images\close.svg">
@@ -72,13 +76,13 @@
         <div class="mypage-container">
             <div class="profile-container">
                 <img src=".\images\user.svg">
-                <span class="name">윤여환</span>
-                <span>30212</span>
+                <span class="name"></span>
+                <span class- "number"></span>
             </div>
             <div class="info-container">
                 <div class="point-container">
-                    <span>상점 : 0</span>
-                    <span>벌점 : 0</span>
+                    <span class="merit">상점 : 0</span>
+                    <span class="demerit">벌점 : 0</span>
                 </div>
                 <div class="edit-password-container">
                     <a href="#"><i class="fa fa-unlock-alt" aria-hidden="true"></i> 비밀번호 변경</a>
@@ -214,7 +218,13 @@
         <img id="close-notice-window" class="window-close" src=".\images\close.svg">
         <div class="list-box-container-container">
             <div class="list-box-container">
-
+                <!--<div class="list-box">
+                    <div class="list-box-no-container">
+                    </div>
+                    <p class="list-box-no">37</p>
+                    <p class="list-box-writer">사감부</p>
+                    <p class="list-box-title">음식물 반입 관련</p>
+                </div>-->
             </div>
         </div>
     </div>
@@ -222,11 +232,7 @@
         <img id="close-rule-window" class="window-close" src=".\images\close.svg">
         <div class="list-box-container-container">
             <div class="list-box-container">
-                <!-- <div class="list-box">
-                    <p class="list-box-no">#37</p>
-                    <p class="list-box-title">음식물 반입 관련</p>
-                    <p class="list-box-writer">-사감부</p>
-                </div> -->
+
             </div>
         </div>
     </div>
@@ -249,19 +255,18 @@
             <div class="notice">
                 <div class="notice-title-writer">
                     <div class="writer-container">
-                        <span>
-                            <p id="writer-content">사감부</p>
-                        </span>
-
-                    </div>
-                    <div class="writer-container">
-                        <span>
-                            <p id="writer-content-long">기숙사 규정</p>
+                        <span class="notice-preview-btn">
+                            <p id="writer-content">공지</p>
                         </span>
                         <div class="speech-bubble-tail"></div>
                     </div>
                     <div class="writer-container">
-                        <span>
+                        <span class="rule-preview-btn">
+                            <p id="writer-content-long">기숙사 규정</p>
+                        </span>
+                    </div>
+                    <div class="writer-container">
+                        <span class="faq-preview-btn">
                             <p id="writer-content">FAQ</p>
                         </span>
                     </div>
@@ -269,7 +274,7 @@
                         <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
                     </a>
                     <a class="contact-github" href="https://goo.gl/nHJJUb" target="_blank">
-                        <i class="fa fa-github fa-5x" aria-hidden="true"></i>
+                        <i class="fa fa-github" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="notice-title-container">
@@ -301,7 +306,7 @@
                     </div>
                     <div class="meal-block">
                         <span class="meal-title">저녁</span>
-                        <span class="meal-content"><p>옥수수스프, 수제오이피클, 스파게티, 크림치즈찰깨스틱30, 수제식혜, 키위, </p></span>
+                        <span class="meal-content"><p>옥수수스프, 수제오이피클, 스파게티, 크림치즈찰깨스틱30, 수제식혜, 키위</p></span>
                     </div>
                 </div>
             </div>
@@ -321,8 +326,8 @@
                     </svg>
                     <p id="stayValue"></p>
                 </div>
-                <img src="./images/return-fri.png" />
-                <button id="open-stay-apply" class="hvr-shutter-out-horizontal">잔류 신청</button>
+                <img id="stayIcon" src="C:\디자인\벡터이미지\잔류 아이콘\fri-out.svg" />
+                <button id="open-stay-apply" class="hvr-shrink">잔류 신청</button>
             </div>
             <div id="extension-apply-container">
                 <div class="current-status">
@@ -335,7 +340,7 @@
                                 45.677,54.037 58.479,67.762 81.217,43.079 	"/>
                         </g>
                     </svg>
-                    <p>연장신청이 가능합니다</p>
+                    <p id="extensionValue">연장신청이 가능합니다</p>
                 </div>
                 <script src="./js/clock.js"></script>
                 <ul id="clock-in">
@@ -344,7 +349,7 @@
                     <li id="min"></li>
                 </ul>
                 <!--TODO : ID수정-->
-                <butto id="open-extension-apply" class="hvr-shutter-out-horizontal">연장학습 신청</button>
+                <button id="open-extension-apply" class="hvr-shrink">연장학습 신청</button>
             </div>
             <img src="./images/curved2.svg" class="curved-image" />
         </div>
@@ -352,8 +357,8 @@
     <div class="menu-wrapper">
         <div id="menu">
             <div class="menu-item hvr-float login-btn">
-                <img src=".\images\login.svg">
-                <span>로그인</span>
+                <img src=".\images\logout.svg">
+                <span>로그아웃</span>
             </div>
             <div class="menu-item hvr-float mypage-btn">
                 <img src=".\images\user.svg">
@@ -385,13 +390,20 @@
                 <img src=".\images\coin.svg">
                 <span>상점 신청</span>
             </div>
+            <div class="menu-item hvr-float" style="opacity:0">
+                <img src=".\images\question.svg">
+                <span>빈 공간 유지</span>
+            </div>
+            <div class="menu-item hvr-float" style="opacity:0">
+                <img src=".\images\coin.svg">
+                <span>빈 공간 유지</span>
+            </div>
         </div>
         <div id="menu-pagenation">
             <div id="page1" class="index current-index"></div>
             <div id="page2" class="index"></div>
         </div>
     </div>
-
 
     <div class="modal-wrapper bug-modal-wrapper">
         <div class="modal bug-modal">
@@ -407,7 +419,7 @@
                         <span class="spin"></span>
                     </div>
                     <div class="bug-content">
-                        <textarea id="bug-content" rows="8" cols="80"></textarea>
+                        <textarea id="bug-content" name="name" rows="8" cols="80"></textarea>
                         <span class="spin"></span>
                     </div>
                     <div class="modal-button-box">
@@ -465,7 +477,7 @@
     <div class="modal-wrapper password-change-modal-wrapper">
         <div class="modal password-change-modal">
             <!-- <div class="head">
-                    </div> -->
+                </div> -->
             <div class="content">
                 <div class="login-box">
                     <div class="login-title">비밀번호 변경</div>
@@ -490,43 +502,7 @@
                 </div>
             </div>
             <!-- <div class="foot">
-                    </div> -->
-        </div>
-    </div>
-    <div class="modal-wrapper login-modal-wrapper">
-        <div class="modal login-modal">
-            <!-- <div class="head">
-                    </div> -->
-            <div class="content">
-                <div class="login-box">
-                    <div class="login-title">LOGIN</div>
-                    <div class="login-input">
-                        <label for="name">Username</label>
-                        <input type="text" name="name" id="name">
-                        <span class="spin"></span>
-                    </div>
-                    <div class="login-input">
-                        <label for="pass">Password</label>
-                        <input type="password" name="pass" id="pass">
-                        <span class="spin"></span>
-                    </div>
-                    <div class="login-check">
-                        <label for=""><input type="checkbox" name="rememberme" value="1">Remember me</label>
-                    </div>
-                    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LerpRgUAAAAAC5EctefxMtAtYj6XUKrm8fj_ZSX"></div>
-                    <div class="modal-button-box">
-                        <div class="login-button modal-button login">
-                            <button><span>Login</span></button>
-                        </div>
-                        <div class="bug-button modal-button">
-                            <button class="btn-close"><span>Close</span></button>
-                        </div>
-                    </div>
-                    <a href="" class="register">회원가입 하기</a>
-                </div>
-            </div>
-            <!-- <div class="foot">
-                    </div> -->
+                </div> -->
         </div>
     </div>
     <script src="./js/new_index.js"></script>

@@ -1,21 +1,22 @@
 package com.dms.beinone.application.qna;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.comment.CommentActivity;
 import com.dms.beinone.application.dmsview.DMSButton;
+import com.dms.beinone.application.utils.JSONParser;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
@@ -29,6 +30,8 @@ import java.io.IOException;
 
 public class QnAArticleActivity extends AppCompatActivity {
 
+    private SharedPreferences mAccountPrefs;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,8 @@ public class QnAArticleActivity extends AppCompatActivity {
 
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mAccountPrefs = getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
 
         final int no = getIntent().getIntExtra(getString(R.string.EXTRA_NO), 0);
 
@@ -47,7 +52,26 @@ public class QnAArticleActivity extends AppCompatActivity {
             }
         });
 
-        new LoadQnATask().execute(no);
+        try {
+            loadQnA(no);
+        } catch (IOException e) {
+            System.out.println("IOException in QnAArticleActivity: GET /post/qna");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        String id = mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
+        String writer = getIntent().getStringExtra(getString(R.string.EXTRA_WRITER));
+
+        if (id.equals(writer)) {
+            // show delete menu if writer's id and the user's id are same
+            getMenuInflater().inflate(R.menu.activity_article, menu);
+            return true;
+        } else {
+            return super.onCreateOptionsMenu(menu);
+        }
     }
 
     @Override
@@ -61,6 +85,7 @@ public class QnAArticleActivity extends AppCompatActivity {
 
     /**
      * sets text of article
+     *
      * @param qna QnA object that contains information of article
      */
     private void bind(QnA qna) {
@@ -77,6 +102,7 @@ public class QnAArticleActivity extends AppCompatActivity {
 
     /**
      * start a new activity to display comments
+     *
      * @param no index of the article
      */
     private void viewComment(int no) {
@@ -85,46 +111,54 @@ public class QnAArticleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private class LoadQnATask extends AsyncTask<Integer, Void, QnA> {
+    private void loadQnA(final int no) throws IOException {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("no", no);
 
-        @Override
-        protected QnA doInBackground(Integer... params) {
-            QnA qna = null;
+            HttpBox.get(QnAArticleActivity.this, "/post/qna")
+                    .putQueryString(params)
+                    .push(new HttpBoxCallback() {
+                        @Override
+                        public void done(Response response) {
+                            int code = response.getCode();
+                            switch (code) {
+                                case HttpBox.HTTP_OK:
+                                    try {
+                                        QnA qna = JSONParser.parseQnAJSON(response.getJsonObject(), no);
+                                        String id = mAccountPrefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
+                                        if (qna.getWriter().equals(id)) {
 
-            try {
-                qna = loadQnA(params[0]);
-            } catch (IOException ie) {
-                return null;
-            } catch (JSONException je) {
-                return null;
-            }
+                                        }
+                                        bind(qna);
+                                    } catch (JSONException e) {
+                                        System.out.println("JSONException in QnAArticleActivity: GET /post/qna");
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case HttpBox.HTTP_NO_CONTENT:
+                                    Toast.makeText(QnAArticleActivity.this, R.string.qna_article_no_content, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_BAD_REQUEST:
+                                    Toast.makeText(QnAArticleActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                                    break;
+                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                    Toast.makeText(QnAArticleActivity.this, R.string.qna_article_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
 
-            return qna;
-        }
-
-        @Override
-        protected void onPostExecute(QnA qna) {
-            super.onPostExecute(qna);
-
-            if (qna == null) {
-                Toast.makeText(
-                        QnAArticleActivity.this, R.string.qna_article_error, Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                bind(qna);
-            }
-        }
-
-        private QnA loadQnA(int no) throws IOException, JSONException {
-            JSONObject requestJSONObject = new JSONObject();
-            requestJSONObject.put("no", no);
-            Response response =
-                    HttpBox.post().setCommand(Commands.LOAD_QNA).putBodyData(requestJSONObject).push();
-
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            return JSONParser.parseQnAJSON(responseJSONObject, no);
+                        @Override
+                        public void err(Exception e) {
+                            System.out.println("Error in QnAArticleActivity: GET /post/qna");
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (JSONException e) {
+            System.out.println("JSONException in QnAArticleActivity: GET /post/qna");
+            e.printStackTrace();
         }
     }
-
 }

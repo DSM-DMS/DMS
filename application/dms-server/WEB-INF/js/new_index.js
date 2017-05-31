@@ -9,6 +9,11 @@ var $backgroundImage = $("#backgroundWallpaper");
 var $panel = $("#panel");
 
 /**
+ * Common button
+ */
+var $materialButton = $(".material-button");
+
+/**
  * Common window
  */
 var $windowClose = $(".window-close");
@@ -54,6 +59,7 @@ var $goingOutApplyButton = $("#going-out-apply-btn");
 var $goingOutPaperplane = $("#going-out-apply-btn i");
 var $saturdayContainer = $(".saturday-container");
 var $sundayContainer = $(".sunday-container");
+var goingOutDate = new Date();
 
 /**
  * My page
@@ -122,6 +128,7 @@ var $openPointButton = $(".point-btn");
 var $noticeMoreBtn = $(".notice-more");
 var $closeNoticeButton = $("#close-notice-window");
 var $noticeListWindow = $(".notice-window");
+var $noticeBox = $(".list-box");
 
 /**
  * Current state(stay)
@@ -132,6 +139,102 @@ var $stayCurrentState = $('#Layer_1');
  * Current state(extension)
  */
 var $extensionCurrentState = $('#Layer_2');
+
+/**
+ * Article preview
+ */
+
+var noticePreviewBtn = $(".notice-preview-btn");
+var rulePreviewBtn = $(".rule-preview-btn");
+var faqPreviewBtn = $(".faq-preview-btn");
+
+/**
+ * remove html tag
+ */
+var protos = document.body.constructor === window.HTMLBodyElement;
+validHTMLTags = /^(?:a|abbr|acronym|address|applet|area|article|aside|audio|b|base|basefont|bdi|bdo|bgsound|big|blink|blockquote|body|br|button|canvas|caption|center|cite|code|col|colgroup|data|datalist|dd|del|details|dfn|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frame|frameset|h1|h2|h3|h4|h5|h6|head|header|hgroup|hr|html|i|iframe|img|input|ins|isindex|kbd|keygen|label|legend|li|link|listing|main|map|mark|marquee|menu|menuitem|meta|meter|nav|nobr|noframes|noscript|object|ol|optgroup|option|output|p|param|plaintext|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|source|spacer|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video|wbr|xmp)$/i;
+
+function sanitize(txt) {
+    var // This regex normalises anything between quotes
+        normaliseQuotes = /=(["'])(?=[^\1]*[<>])[^\1]*\1/g,
+        normaliseFn = function($0, q, sym) {
+            return $0.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        },
+        replaceInvalid = function($0, tag, off, txt) {
+            var
+                // Is it a valid tag?
+                invalidTag = protos &&
+                document.createElement(tag) instanceof HTMLUnknownElement ||
+                !validHTMLTags.test(tag),
+
+                // Is the tag complete?
+                isComplete = txt.slice(off + 1).search(/^[^<]+>/) > -1;
+
+            return invalidTag || !isComplete ? '&lt;' + tag : $0;
+        };
+
+    txt = txt.replace(normaliseQuotes, normaliseFn)
+        .replace(/<(\w+)/g, replaceInvalid);
+
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = txt;
+
+    return "textContent" in tmp ? tmp.textContent : tmp.innerHTML;
+}
+
+/** ======================================================================================
+ * browser size
+========================================================================================== */
+
+var width = screen.width;
+var fullHeight = window.innerHeight + window.screenTop;
+var height = screen.height - (window.outerHeight - window.innerHeight);
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (window.innerWidth == width && window.innerHeight == fullHeight) {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: fullHeight + "px",
+        overflow: "hidden"
+    });
+} else {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "auto"
+    });
+}
+
+if (isMobile) {
+    $("body").css({
+        minWidth: "1707px",
+        minHeight: "855px",
+        overflow: "auto"
+    });
+} else {
+    $(window).resize(function() {
+        if (window.innerWidth == width && window.innerHeight == fullHeight) {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: fullHeight + "px",
+                overflow: "hidden"
+            });
+        } else {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "auto"
+            });
+        }
+
+    });
+}
+
+
+
+
+
 
 /** ======================================================================================
  * Common window
@@ -147,9 +250,9 @@ var $extensionCurrentState = $('#Layer_2');
  * Common modal
 ========================================================================================== */
 $closeModal.on("click", function() {
+    $(this).parents().parents().parents("div").children("input").val("");
+    $(this).parents().parents().parents("div").children("textarea").val("");
     $(this).parents().parents().parents().parents(".modal-wrapper").toggleClass('open');
-    // $panel.toggleClass('blur');
-    // $menu.toggleClass('blur');
     return false;
 });
 
@@ -205,16 +308,22 @@ $classSelect.on("click", "td", function(e) {
 });
 
 $openExtensionButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
+    $menu2.toggleClass("fade-out");
     $menu.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
 $closeExtensionButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -259,19 +368,40 @@ function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
+    newCard.append($('<div/>', {
+        "class": "list-box-no-container"
+    }))
     newCard.append($('<p/>', {
         "class": "list-box-no",
         text: data.no
     }));
     newCard.append($('<p/>', {
-        "class": "list-box-no-title",
+        "class": "list-box-writer",
+        text: "사감부"
+    }));
+    newCard.append($('<p/>', {
+        "class": "list-box-title",
         text: data.title
     }));
     // newCard.append($('<p/>', {
-    //     "class": "list-box-writer",
-    //     text: "사감부"
+    //     "class": "list-box-no-content",
+    //     html: data.content
     // }));
-
+    newCard.on('click', function() {
+        if (!$(".list-box p").hasClass("list-box-no-content")) {
+            $(this).css('width', '100%');
+            $(this).css('height', 'auto');
+            $(this).append($('<p/>', {
+                "class": "list-box-no-content",
+                html: sanitize(data.content)
+            }));
+            $(".list-box-no-content").css('opacity', '1');
+        } else {
+            $(this).css('width', '20vh');
+            $(this).css('height', '20vh');
+            $(this).children(".list-box-no-content").detach();
+        }
+    });
     target.append(newCard);
 }
 
@@ -286,14 +416,13 @@ function setNoticePreview() {
         success: function(data) {
             var parsedData = JSON.parse(data).result;
             $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(parsedData[0].content);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
         },
         error: function() {
             console.log("error");
         }
     });
 }
-
 
 /** ======================================================================================
  * Dormitory rule
@@ -303,21 +432,29 @@ function setNoticePreview() {
  * My page
 ========================================================================================== */
 $openMyPageButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
 $closeMypageWindow.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
 
 $dormRule.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -326,6 +463,8 @@ $dormRule.on("click", function() {
 });
 
 $closeDormRuleButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -350,12 +489,35 @@ function getRuleList() {
     });
 }
 
+function setRulePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/rule",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+/** ======================================================================================
+ * mypage
+========================================================================================== */
+
 $passwordChangeBtn.on("click", function() {
     $('.password-change-modal-wrapper').toggleClass('open');
 });
 
 $passwordChangeReq.on("click", function() {
-    if ($("#new-password").val() === $("#new-password2")) {
+    if ($("#new-password").val() === $("#new-password2").val()) {
         $.ajax({
             url: "/account/password/student",
             type: "PATCH",
@@ -374,12 +536,35 @@ $passwordChangeReq.on("click", function() {
     }
 });
 
+getStudentInfo();
+
+function getStudentInfo() {
+    $.ajax({
+        url: "/account/student",
+        method: "get",
+        success: function(data) {
+            fillStudentData(JSON.parse(data));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+function fillStudentData(data) {
+    $(".profile-container .name").text(data.name);
+    $(".point-container .merit").text("상점 : " + data.merit);
+    $(".point-container .demerit").text("벌점 : " + data.demerit);
+}
+
 
 
 /** ======================================================================================
  * faq rule
 ========================================================================================== */
 $closeFaqButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -388,6 +573,8 @@ $closeFaqButton.on("click", function() {
 });
 
 $faqBtn.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -412,76 +599,29 @@ function getFaqList() {
         }
     });
 }
+
+function setFaqPreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/faq/list",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
 /** ======================================================================================
  * Stay
 ========================================================================================== */
-var numOfDays = function(year, month) {
-    var daysofmonth;
-    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
-        daysofmonth = 30;
-    } else {
-        daysofmonth = 31;
-        if (month == 2) {
-            if (year / 4 - parseInt(year / 4) != 0) {
-                daysofmonth = 28;
-            } else {
-                if (year / 100 - parseInt(year / 100) != 0) {
-                    daysofmonth = 29;
-                } else {
-                    if (year / 400 - parseInt(year / 400) != 0) {
-                        daysofmonth = 28;
-                    } else {
-                        daysofmonth = 29;
-                    }
-                }
-            }
-        }
-    }
-    return daysofmonth;
-}
-
-var leadingZeros = function(data, num) {
-    var zero = '';
-    data = data.toString();
-
-    if (data.length < num) {
-        for (i = 0; i < num - data.length; i++)
-            zero += '0';
-    }
-    return zero + data;
-};
-
-var getWeek = function(thisDate) {
-    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
-    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
-    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-
-    if (week == 5) {
-        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
-            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-        } else {
-            return 0;
-        }
-    }
-    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
-};
-
-var makeWeekFormat = function(thisDate) {
-    var week = getWeek(thisDate);
-    if (week == 0) {
-        thisDate.setMonth(thisDate.getMonth() + 1);
-        week = 1;
-    }
-    var year = thisDate.getFullYear();
-    var month = thisDate.getMonth() + 1;
-
-    return year + "-" + leadingZeros(month, 2) + "-" + leadingZeros(week, 2);
-};
-
 var setStayValue = function(thisDate) {
     var weekData = makeWeekFormat(thisDate)
 
@@ -497,22 +637,27 @@ var setStayValue = function(thisDate) {
                     case 1:
                         $('#stayValue').text('금요귀가');
                         $(":radio[name=1][value=1]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/fri-out.svg');
                         break;
                     case 2:
                         $('#stayValue').text('토요귀가');
                         $(":radio[name=1][value=2]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/sat-out.svg');
                         break;
                     case 3:
                         $('#stayValue').text('토요귀사');
                         $(":radio[name=1][value=3]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/sat-in.svg');
                         break;
                     case 4:
                         $('#stayValue').text('잔류');
                         $(":radio[name=1][value=4]").prop('checked', true);
+                        $('#stayIcon').attr('src', './images/stay.svg');
                         break;
                 }
             } catch (err) {
                 $('#stayValue').text('신청안됨');
+                $('#stayIcon').attr('src', './images/stay-not-applied.svg');
             }
         },
         error: function(xhr) {
@@ -522,19 +667,26 @@ var setStayValue = function(thisDate) {
     });
 };
 
-setStayValue(stayDate)
+setStayValue(stayDate);
 
 $openStayButton.click(function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+    setStayValue(stayDate);
 });
 
 $closeStayButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -563,12 +715,25 @@ $stayApplyButton.on("click", function() {
             "week": applySendDataWeek,
             "value": applySendDataValue
         },
-        success: function() {
-            alert('신청되었습니다.');
-            setStayValue(stayDate);
+        statusCode: {
+            200: function() {
+                alert('신청되었습니다.');
+                setStayValue(stayDate);
+                $stayPaperplane.removeClass("send-paperplane");
+            },
+            204: function() {
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
+
+            },
+            500: function() {
+                alert('신청 시간이 아닙니다.');
+                $stayPaperplane.removeClass("send-paperplane");
+            }
         },
         error: function(xhr, status, err) {
-            alert('신청 시간이 아닙니다.')
+            alert('신청 시간이 아닙니다.');
+            $stayPaperplane.removeClass("send-paperplane");
         }
     });
 });
@@ -621,30 +786,34 @@ function stayDoCheck() {
  * Login
 ========================================================================================== */
 $openLoginButton.on("click", function() {
-    $('.login-modal-wrapper').toggleClass('open');
-    // $panel.toggleClass('blur');
-    // $menu.toggleClass('blur');
-    return false;
-});
-
-$loginSendBtn.on("click", function() {
     $.ajax({
-        url: "/account/login/student",
+        url: "/account/logout/student",
         type: "POST",
-        data: {
-            id: $(".login-input #name").val(),
-            password: $(".login-input #pass").val(),
-            remember: $(".login-check input:checked").val(),
-            "g-recaptcha-response": grecaptcha.getResponse()
+        success: function() {
+            console.log("logout");
+            setCookie('UserSession', '', '-1');
+            setCookie('vertx-web.session', '', '-1');
+            deleteCookie('UserSession');
+            deleteCookie('vertx-web.session');
+            window.location.reload();
         },
-        success: function(data, status) {
-            location.reload();
-        },
-        error: function(xhr) {
-            alert("로그인에 실패했습니다.");
-        },
+        error: function() {
+            alert("로그아웃에 실패했어요 TT");
+        }
     });
 });
+
+
+function setCookie(name, value, d) {
+    document.cookie = name + '=' + escape(value) + '; path=/' + (d ? '; expires=' + (function(t) {
+        t.setDate(t.getDate() + d);
+        return t
+    })(new Date).toGMTString() : '');
+}
+
+function deleteCookie(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
 
 /** ======================================================================================
  * Bug modal
@@ -666,7 +835,9 @@ $(".report-bug").on("click", function() {
         },
         success: function() {
             alert("버그를 제보해 주셔서 고맙습니다!");
-            $("#bugModal button:nth-child(2)").click();
+            $(".bug-modal input").val("");
+            $(".bug-modal textarea").val("");
+            $(".bug-modal .btn-close").click();
         },
         error: function() {
             alert("버그신고에 실패했어요 TT");
@@ -692,25 +863,53 @@ $openPointButton.on("click", function() {
 });
 
 /** ======================================================================================
-
  * Going out
 ========================================================================================== */
+var setGoingOutValue = function(thisDate) {
+    var weekData = makeWeekFormat(thisDate)
+
+    $.ajax({
+        url: "/apply/goingout",
+        type: "GET",
+        data: {
+            "week": weekData
+        },
+        success: function(data) {
+            try {
+                $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
+                $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
+            } catch (err) {}
+        },
+        error: function(xhr) {
+            console.log(xhr.status);
+        }
+    });
+};
+
+setGoingOutValue(goingOutDate);
+
 $openGoingOutButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+    setGoingOutValue(goingOutDate);
     return false;
 });
 
 $closeGoingOutButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
-// TODO : 신청완료 되면 클래스 초기화해주기
 $goingOutApplyButton.on('click', function() {
     $goingOutPaperplane.addClass("send-paperplane");
     var satVal = false;
@@ -722,8 +921,6 @@ $goingOutApplyButton.on('click', function() {
     if ($sundayContainer.hasClass("select")) {
         sunVal = true;
     }
-
-    console.log(satVal, sunVal);
 
     $.ajax({
         url: "/apply/goingout",
@@ -752,19 +949,6 @@ $extensionCurrentState.click(function() {
     extensionDoCheck();
 });
 
-var mapData = [
-    [1, 2, 0, 3, 4],
-    [5, 6, 0, 7, 8],
-    [9, 10, 0, 11, 12],
-    [13, 14, 0, 15, 16],
-    [17, 18, 0, 19, 20]
-];
-
-var mapData2 = [
-    [1, 2, 3, 0, 4, 5, 6],
-    [7, 8, 9, 0, 10, 11, 12],
-    [13, 14, 15, 0, 16, 17, 18]
-];
 
 function drawSeats(mapData, classId) {
     var newTable = $('<table/>', {
@@ -815,30 +999,22 @@ function extentionApply(classId, id) {
             "seat": id
         },
         statusCode: {
+            200: function() {
+                alert("신청 완료되었습니다.");
+                getClassData(classId);
+            },
             204: function() {
                 alert("신청가능한 시간이 아닙니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             },
             500: function() {
                 alert("신청중에 오류가 발생하였습니다.");
                 getClassData(classId);
-                $stayPaperplane.removeClass("send-paperplane");
-                $goingOutPaperplane.removeClass("send-paperplane");
             }
-        },
-        success: function(data, xhr) {
-            alert("신청 완료되었습니다.");
-            getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         },
         error: function(request, status, error) {
             alert("신청중에 오류가 발생하였습니다.");
             getClassData(classId);
-            $stayPaperplane.removeClass("send-paperplane");
-            $goingOutPaperplane.removeClass("send-paperplane");
         }
     });
 }
@@ -1026,7 +1202,11 @@ function prevDay() {
 }
 
 function formatDate() {
-    return mealDate.toISOString().slice(0, 10);
+    return [
+        mealDate.getFullYear(),
+        ('0' + (mealDate.getMonth() + 1)).slice(-2),
+        ('0' + mealDate.getDate()).slice(-2)
+    ].join('-');
 }
 
 function formatDate2() {
@@ -1073,17 +1253,33 @@ $(document).ready(function() {
     //set random background image
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
-    var agent = navigator.userAgent.toLowerCase();
+    //연장신청 시간 보여줌
+    var startTime = '05:30 PM';
+    var endTime = '08:30 PM';
 
-    // if (agent.indexOf("chrome") != -1) {
-    //     alert("크롬 브라우저입니다.");
-    // }
-    // if (agent.indexOf("safari") != -1) {
-    //     alert("사파리 브라우저입니다.");
-    // }
-    // if (agent.indexOf("firefox") != -1) {
-    //     alert("파이어폭스 브라우저입니다.");
-    // }
+    var formatTime = (function() {
+        function addZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
+        return function(dt) {
+            var formatted = '';
+
+            if (dt) {
+                var hours24 = dt.getHours();
+                var hours = ((hours24 + 11) % 12) + 1;
+                formatted = [[addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"].join(" ");
+            }
+            return formatted;
+        }
+    })();
+
+    var currentTime = formatTime(new Date());
+
+    if (currentTime >= startTime && currentTime <= endTime) {
+        $('#extensionValue').html("연장신청이 가능합니다.");
+    } else {
+        $('#extensionValue').html("연장신청이 불가능합니다");
+    }
 
     //show current stay state and extension state
     stayTick = $('#stayTick');
@@ -1097,7 +1293,6 @@ $(document).ready(function() {
     extensionCross1 = $('#extensionCross1');
     extensionCross2 = $('#extensionCross2');
     extensionDoCheck();
-
 
     //saturday, sunday svg animations
     var ids = ["#letter-s", "#letter-a", "#letter-t", "#letter-t2", "#letter-s2", "#letter-u", "#letter-n"];
@@ -1158,3 +1353,114 @@ $(document).ready(function() {
     //setting for show meal
     setDay();
 });
+
+/** ======================================================================================
+ * Week Format fuction
+========================================================================================== */
+function numOfDays(year, month) {
+    var daysofmonth;
+    if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+        daysofmonth = 30;
+    } else {
+        daysofmonth = 31;
+        if (month == 2) {
+            if (year / 4 - parseInt(year / 4) != 0) {
+                daysofmonth = 28;
+            } else {
+                if (year / 100 - parseInt(year / 100) != 0) {
+                    daysofmonth = 29;
+                } else {
+                    if (year / 400 - parseInt(year / 400) != 0) {
+                        daysofmonth = 28;
+                    } else {
+                        daysofmonth = 29;
+                    }
+                }
+            }
+        }
+    }
+    return daysofmonth;
+}
+
+function leadingZeros(data, num) {
+    var zero = '';
+    data = data.toString();
+
+    if (data.length < num) {
+        for (i = 0; i < num - data.length; i++)
+            zero += '0';
+    }
+    return zero + data;
+};
+
+function getWeek(thisDate) {
+    var tempDate = new Date(thisDate.getFullYear(), thisDate.getMonth(), 1);
+    var daysOfMonth = numOfDays(tempDate.getFullYear(), thisDate.getMonth());
+    var week = parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+
+    if (week == 5) {
+        if (daysOfMonth == 31 && (tempDate.getDay() == 4 || tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 30 && (tempDate.getDay() == 5 || tempDate.getDay() == 6)) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else if (daysOfMonth == 29 && tempDate.getDay() == 6) {
+            return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+        } else {
+            return 0;
+        }
+    }
+    return parseInt(((thisDate.getDate() - 1) + tempDate.getDay()) / 7) + 1;
+};
+
+function makeWeekFormat(thisDate) {
+    var year = thisDate.getFullYear();
+    var week = getWeek(thisDate);
+    var month = thisDate.getMonth();
+    if (week == 0) {
+        if (month == 12) {
+            year = year + 1;
+            month = 1;
+        } else {
+            month = month + 1;
+        }
+        week = 1;
+    }
+
+    return year + "-" + leadingZeros(month + 1, 2) + "-" + leadingZeros(week, 2);
+};
+
+
+/** ======================================================================================
+ * article preview
+========================================================================================== */
+noticePreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setNoticePreview();
+});
+
+rulePreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setRulePreview();
+});
+
+faqPreviewBtn.on("click", function() {
+    $(".speech-bubble-tail").remove();
+    $(this).after('<div class="speech-bubble-tail"></div>');
+    setFaqPreview();
+});
+
+/** ======================================================================================
+ * alert
+========================================================================================== */
+
+function showAlert(message) {
+    $("body").append('<div class="infoAlert">message</div>');
+    setTimeout(function() {
+        $(".infoAlert").remove();
+    }, 2000);
+}
+/** =======
+ * common button
+========================================================================================== */

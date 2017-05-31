@@ -1,6 +1,5 @@
 package com.dms.beinone.application.faq;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,15 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dms.beinone.application.EmptySupportedRecyclerView;
-import com.dms.beinone.application.JSONParser;
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.RecyclerViewUtils;
+import com.dms.beinone.application.utils.JSONParser;
+import com.dms.beinone.application.utils.RecyclerViewUtils;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.datamodel.Commands;
+import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,6 +40,7 @@ public class FAQFragment extends Fragment {
 
     /**
      * 초기화, RecyclerView 세팅
+     *
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
@@ -52,43 +51,46 @@ public class FAQFragment extends Fragment {
         View emptyView = rootView.findViewById(R.id.view_faq_empty);
         RecyclerViewUtils.setupRecyclerView(mRecyclerView, getContext(), emptyView);
 
-        new LoadFAQListTask().execute();
-    }
-
-    private class LoadFAQListTask extends AsyncTask<Void, Void, List<FAQ>> {
-
-        @Override
-        protected List<FAQ> doInBackground(Void... params) {
-            List<FAQ> faqList = null;
-
-            try {
-                faqList = loadFAQList();
-            } catch (IOException ie) {
-                return null;
-            } catch (JSONException je) {
-                return null;
-            }
-
-            return faqList;
-        }
-
-        @Override
-        protected void onPostExecute(List<FAQ> faqList) {
-            super.onPostExecute(faqList);
-
-            if (faqList == null) {
-                Toast.makeText(getContext(), R.string.faq_error, Toast.LENGTH_SHORT).show();
-            } else {
-                mRecyclerView.setAdapter(new FAQAdapter(getContext(), faqList));
-            }
-        }
-
-        private List<FAQ> loadFAQList() throws IOException, JSONException {
-            Response response = HttpBox.post().setCommand(Commands.LOAD_FAQ).putBodyData().push();
-            JSONObject responseJSONObject = response.getJsonObject();
-
-            return JSONParser.parseFAQJSON(responseJSONObject);
+        try {
+            loadFAQList();
+        } catch (IOException e) {
+            System.out.println("IOException in FAQFragment: loadFAQList()");
+            e.printStackTrace();
         }
     }
 
+    private void loadFAQList() throws IOException {
+        HttpBox.get(getContext(), "/post/faq/list")
+                .push(new HttpBoxCallback() {
+                    @Override
+                    public void done(Response response) {
+                        int code = response.getCode();
+                        switch (code) {
+                            case HttpBox.HTTP_OK:
+                                try {
+                                    List<FAQ> faqs = JSONParser.parseFAQJSON(response.getJsonObject());
+                                    mRecyclerView.setAdapter(new FAQAdapter(getContext(), faqs));
+                                } catch (JSONException e) {
+                                    System.out.println("JSONException in FAQFragment: /post/faq/list");
+                                    e.printStackTrace();
+                                }
+                                break;
+                            case HttpBox.HTTP_NO_CONTENT:
+//                                Toast.makeText(getContext(), R.string.faq_no_content, Toast.LENGTH_SHORT).show();
+                                break;
+                            case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                                Toast.makeText(getContext(), R.string.faq_internal_server_error, Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void err(Exception e) {
+                        System.out.println("Error in FAQFragment: /post/faq/list");
+                        e.printStackTrace();
+                    }
+                });
+    }
 }

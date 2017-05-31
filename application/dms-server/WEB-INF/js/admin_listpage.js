@@ -62,7 +62,7 @@ $(".edit").on('click', function(e) {
 
 $(".delete").on('click', function(e) {
     e.stopPropagation();
-    var no = $(this).parent().prev().prev().prev().text();
+    var no = $(this).parent().parent().children().first().text();
     $.ajax({
         url: "/post/" + getAllUrlParams(document.URL).category,
         data: {

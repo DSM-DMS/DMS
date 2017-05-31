@@ -1,166 +1,226 @@
 <!DOCTYPE html>
-<html >
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-      <link rel="stylesheet" href="css/admin-style.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="css/admin-style.css">
 </head>
 
 <body>
-  <div id="background-image"> 
-      <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="100%" height="100%">
-          <filter id="svgBlurFilter">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
-              <feComponentTransfer>
-                  <feFuncR type="linear" slope="0.2"></feFuncR>
-                  <feFuncG type="linear" slope="0.2"></feFuncG>
-                  <feFuncB type="linear" slope="0.2"></feFuncB>
-              </feComponentTransfer>
-          </filter>
-          <image class="blurred" preserveAspectRatio="xMinYMid meet" filter="url(&quot;#svgBlurFilter&quot;)" x="0" y="0" 
-          xmlns:xlink=".\images\wallpaper11.jpg" xlink:href=".\images\wallpaper11.jpg" width="100%" height="100%" transform="scale(1.2)"></image>
-      </svg>
-  </div>
-  <p class="admin-title">관리자 페이지</p>
-  <div id="stay-download" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="background-image">
+        <img src=".\images\wallpaper10.jpg">
     </div>
-    <div class="hex">
-      <div>
-        <p>잔류신청<br>다운로드</p>
-      </div>
-      <div></div>
-      <div></div>
+    <p class="admin-title">관리자 페이지</p>
+    <div id="stay-download" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>잔류신청<br>다운로드</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-  </div>
-  <div id="extension-download" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="extension-download" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>연장신청<br>다운로드</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-    <div class="hex">
-      <div>
-        <p>연장신청<br>다운로드</p>
-      </div>
-      <div></div>
-      <div></div>
+    <div id="going-out-download" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>외출신청<br>다운로드</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-  </div>
-  <div id="going-out-download" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="facility-download" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>시설고장목록<br>다운로드</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-    <div class="hex">
-      <div>
-        <p>외출신청<br>다운로드</p>
-      </div>
-      <div></div>
-      <div></div>
+    <div id="notice-management" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>공지사항<br>관리</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-  </div>
-  <div id="facility-download" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="dorm-rule-management" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>기숙사규칙<br>관리</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-    <div class="hex">
-      <div>
-        <p>시설고장목록<br>다운로드</p>
-      </div>
-      <div></div>
-      <div></div>
+    <div id="faq-management" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>자주하는질문<br>관리</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-  </div>
-  <div id="notice-management" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="qna-management" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>Q&amp;A<br>관리</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-    <div class="hex">
-      <div>
-        <p>공지사항<br>관리</p>
-      </div>
-      <div></div>
-      <div></div>
+    <div id="delete-account" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>계정 초기화</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-  </div>
-  <div id="dorm-rule-management" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="create-admin-account" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>관리자계정<br>만들기</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-    <div class="hex">
-      <div>
-        <p>기숙사규칙<br>관리</p>
-      </div>
-      <div></div>
-      <div></div>
+    <div class="modal-wrapper delete-account-modal-wrapper">
+        <div class="modal bug-modal">
+            <!-- <div class="head">
+                  </div> -->
+            <div class="content">
+                <div class="login-box bug-box">
+                    <div class="login-title">계정 초기화
+                    </div>
+                    <div class="login-input">
+                        <label for="name">학번</label>
+                        <input type="text" name="name" id="uid">
+                        <span class="spin"></span>
+                    </div>
+                    <div class="modal-button-box">
+                        <div class="bug-button modal-button">
+                            <button class="account-reset">초기화</button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="foot">
+                  </div> -->
+        </div>
     </div>
-  </div>
-  <div id="faq-management" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="modal-wrapper new-admin-modal-wrapper">
+        <div class="modal bug-modal">
+            <div class="content">
+                <div class="login-box bug-box">
+                    <div class="login-title">어드민 계정 생성
+                    </div>
+                    <form id="create-admin-form">
+                        <div class="login-input">
+                            <label for="name">아이디</label>
+                            <input type="text" name="id" id="admin-id">
+                            <span class="spin"></span>
+                        </div>
+                        <div class="login-input">
+                            <label for="name">비밀번호</label>
+                            <input type="password" name="password" id="admin-password">
+                            <span class="spin"></span>
+                        </div>
+                        <div class="login-input">
+                            <label for="name">비밀번호 확인</label>
+                            <input type="password" name="password-confirm" id="admin-password2">
+                            <span class="spin"></span>
+                        </div>
+                        <div class="login-input">
+                            <label for="name">계정 이름(ex:사감부장, 사감실)</label>
+                            <input type="text" name="name" id="admin-name">
+                            <span class="spin"></span>
+                        </div>
+                    </form>
+                    <div class="modal-button-box">
+                        <div class="bug-button modal-button">
+                            <button class="new-admin-button">생성</button>
+                        </div>
+                        <div class="bug-button modal-button">
+                            <button class="btn-close"><span>Close</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="hex">
-      <div>
-        <p>자주하는질문<br>관리</p>
-      </div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <div id="qna-management" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="hex">
-      <div>
-        <p>Q&amp;A<br>관리</p>
-      </div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <div id="delete-account" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="hex">
-      <div>
-        <p>계정 초기화</p>
-      </div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <div id="create-admin-account" class="button">
-    <div class="hex">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="hex">
-      <div>
-        <p>관리자계정<br>만들기</p>
-      </div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/new_admin_page.js"></script>
 </body>
+
 </html>
