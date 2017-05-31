@@ -37,7 +37,7 @@ public class QnAArticleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna_article);
-        setTitle(R.string.nav_qna);
+        setTitle(R.string.qna);
         // display back button on action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

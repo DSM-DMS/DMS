@@ -46,7 +46,7 @@ public class AfterschoolApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_afterschoolapply);
+        getActivity().setTitle(R.string.afterschool_apply);
 
         mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_afterschoolapply);
         View emptyView = rootView.findViewById(R.id.view_afterschoolapply_empty);

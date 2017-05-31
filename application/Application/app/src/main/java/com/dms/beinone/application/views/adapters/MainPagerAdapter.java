@@ -1,18 +1,15 @@
 package com.dms.beinone.application.views.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.fragments.ApplyListFragment;
+import com.dms.beinone.application.fragments.DormitoryListFragment;
 import com.dms.beinone.application.fragments.MealFragment;
+import com.dms.beinone.application.fragments.MyPageeFragment;
 
 /**
  * Created by BeINone on 2017-05-16.
@@ -23,7 +20,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     private static final int COUNT = 4;
     private static final int POS_MEAL = 0;
     private static final int POS_APPLY = 1;
-    private static final int POS_NOTICE = 2;
+    private static final int POS_DORMITORY = 2;
     private static final int POS_MYPAGE = 3;
 
     public static final int[] mIconResIds =
@@ -43,6 +40,10 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
                 return new MealFragment();
             case POS_APPLY:
                 return new ApplyListFragment();
+            case POS_DORMITORY:
+                return new DormitoryListFragment();
+            case POS_MYPAGE:
+                return new MyPageeFragment();
             default:
                 return new ApplyListFragment();
         }

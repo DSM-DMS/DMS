@@ -47,7 +47,7 @@ public class GoingoutApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_goingoutapply);
+        getActivity().setTitle(R.string.goingout_apply);
 
         mSaturdayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingoutapply_saturday);
         mSundayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingoutapply_sunday);

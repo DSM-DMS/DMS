@@ -9,28 +9,24 @@
     <string name="title_write">작성하기</string>
 
     <!-- Navigation Drawer -->
-    <string name="nav_desclogin">로그인을 하시면 더 많은 기능을 사용하실 수 있습니다.</string>
-    <string name="nav_login">로그인</string>
-    <string name="nav_logout">로그아웃</string>
-    <string name="nav_home">홈</string>
-    <string name="nav_apply">신청</string>
-    <string name="nav_extensionapply">연장신청</string>
-    <string name="nav_stayapply">잔류신청</string>
-    <string name="nav_goingoutapply">외출신청</string>
-    <string name="nav_rewardscoreapply">상점신청</string>
-    <string name="nav_afterschoolapply">방과후신청</string>
-    <string name="nav_school">학교 소식</string>
-    <string name="nav_meal">급식</string>
-    <string name="nav_notice">공지사항</string>
-    <string name="nav_newsletter">가정통신문</string>
-    <string name="nav_competition">대회정보</string>
-    <string name="nav_dormitory">기숙사</string>
-    <string name="nav_facilityreport">시설고장신고</string>
-    <string name="nav_rule">기숙사규정</string>
-    <string name="nav_faq">FAQ</string>
-    <string name="nav_qna">문의하기</string>
-    <string name="nav_mypage">마이페이지</string>
-    <string name="nav_settings">설정</string>
+    <string name="login_desc">로그인을 하시면 더 많은 기능을 사용하실 수 있습니다.</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="extension_apply">연장신청</string>
+    <string name="stay_apply">잔류신청</string>
+    <string name="goingout_apply">외출신청</string>
+    <string name="rewardscore_apply">상점신청</string>
+    <string name="afterschool_apply">방과후신청</string>
+    <string name="meal">급식</string>
+    <string name="notice">공지사항</string>
+    <string name="newsletter">가정통신문</string>
+    <string name="competition">대회정보</string>
+    <string name="facility_report">시설고장 신고</string>
+    <string name="rule">기숙사규정</string>
+    <string name="faq">자주하는 질문</string>
+    <string name="qna">문의하기</string>
+    <string name="my_page">마이페이지</string>
+    <string name="settings">설정</string>
 
     <!-- HTTP -->
     <string name="http_bad_request">잘못된 요청입니다.</string>

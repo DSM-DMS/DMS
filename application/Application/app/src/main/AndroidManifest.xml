@@ -34,9 +34,6 @@
         <activity android:name=".activities.QnAArticleActivity" />
         <activity android:name=".activities.QnAUploadActivity" />
         <activity android:name=".activities.CommentActivity" />
-        <activity android:name=".activities.MypageActivity"
-            android:label="@string/nav_mypage"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

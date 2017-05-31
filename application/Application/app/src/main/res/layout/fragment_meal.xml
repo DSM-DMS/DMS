@@ -22,7 +22,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="80dp"
         android:layout_marginStart="80dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="46dp"
+        android:elevation="4dp"
         android:background="@drawable/btn_login"
         android:src="@drawable/ic_chevron_left_white_24dp" />
 
@@ -33,9 +34,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
+        android:layout_marginBottom="46dp"
+        android:elevation="4dp"
         android:background="@drawable/btn_login"
         android:src="@drawable/ic_chevron_right_white_24dp" />
 </RelativeLayout>

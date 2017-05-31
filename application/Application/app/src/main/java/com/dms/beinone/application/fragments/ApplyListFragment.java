@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
@@ -101,13 +102,13 @@ public class ApplyListFragment extends Fragment {
         ExpandableLayout expandableLayout = (ExpandableLayout) rootView.findViewById(R.id.expandablelayout_apply_list);
 
         expandableLayout.addView(createParentView("연장신청", ContextCompat.getColor(getContext(), R.color.applyList1)),
-                createChildView(ContextCompat.getColor(getContext(), R.color.applyList1)));
+                createChildView(ContextCompat.getColor(getContext(), R.color.applyList1), R.drawable.fish));
         expandableLayout.addView(createParentView("잔류신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
-                createChildView(ContextCompat.getColor(getContext(), R.color.applyList2)));
+                createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale));
         expandableLayout.addView(createParentView("외출신청", ContextCompat.getColor(getContext(), R.color.applyList3)),
-                createChildView(ContextCompat.getColor(getContext(), R.color.applyList3)));
+                createChildView(ContextCompat.getColor(getContext(), R.color.applyList3), R.drawable.fish2));
         expandableLayout.addView(createParentView("상점신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
-                createChildView(ContextCompat.getColor(getContext(), R.color.applyList4)));
+                createChildView(ContextCompat.getColor(getContext(), R.color.applyList4), R.drawable.seahorse));
     }
 
     private View createParentView(String text, int backgroundColor) {
@@ -117,14 +118,19 @@ public class ApplyListFragment extends Fragment {
         TextView titleTV = (TextView) view.findViewById(R.id.tv_apply_list_parent_title);
         titleTV.setText(text);
         titleTV.setBackgroundColor(backgroundColor);
+
         return view;
     }
 
-    private View createChildView(int backgroundColor) {
+    private View createChildView(int backgroundColor, int image) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_apply_list_child, null);
 
         View layout = view.findViewById(R.id.layout_apply_list_child);
         layout.setBackgroundColor(backgroundColor);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv_apply_list_child);
+        imageView.setImageResource(image);
+
         return view;
     }
 

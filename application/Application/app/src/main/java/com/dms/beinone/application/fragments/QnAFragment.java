@@ -78,7 +78,7 @@ public class QnAFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_qna);
+        getActivity().setTitle(R.string.qna);
 
         mFAB = (FloatingActionButton) getActivity().findViewById(R.id.fab_main);
         mFAB.setVisibility(View.VISIBLE);

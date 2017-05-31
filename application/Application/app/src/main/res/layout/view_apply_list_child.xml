@@ -17,23 +17,22 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/iv_apply_list_child_whale"
+            android:id="@+id/iv_apply_list_child"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/whale" />
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/tv_apply_list_child_status"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="32dp"
-            android:layout_alignTop="@id/iv_apply_list_child_whale"
-            android:layout_toLeftOf="@id/iv_apply_list_child_whale"
-            android:layout_toStartOf="@id/iv_apply_list_child_whale"
+            android:layout_alignTop="@id/iv_apply_list_child"
+            android:layout_toLeftOf="@id/iv_apply_list_child"
+            android:layout_toStartOf="@id/iv_apply_list_child"
             android:background="@drawable/speech_bubble"
             android:textSize="24sp" />
 
@@ -43,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/iv_apply_list_child_whale"
+            android:layout_below="@id/iv_apply_list_child"
             android:layout_marginTop="36dp"
             android:background="@drawable/btn_login"
             android:src="@drawable/ic_chevron_right_white_24dp" />

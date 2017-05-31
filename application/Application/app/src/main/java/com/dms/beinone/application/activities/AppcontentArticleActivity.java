@@ -44,13 +44,13 @@ public class AppcontentArticleActivity extends AppCompatActivity {
 
         switch (appcontent.getCategory()) {
             case Appcontent.NOTICE:
-                setTitle(R.string.nav_notice);
+                setTitle(R.string.notice);
                 break;
             case Appcontent.NEWSLETTER:
-                setTitle(R.string.nav_newsletter);
+                setTitle(R.string.newsletter);
                 break;
             case Appcontent.COMPETITION:
-                setTitle(R.string.nav_competition);
+                setTitle(R.string.competition);
                 break;
             default:
                 break;

@@ -52,7 +52,7 @@ public class ExtensionApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_extensionapply);
+        getActivity().setTitle(R.string.extension_apply);
 
         mContainer = (LinearLayout) rootView.findViewById(R.id.container_extensionapply);
 

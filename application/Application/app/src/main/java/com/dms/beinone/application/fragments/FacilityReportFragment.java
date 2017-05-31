@@ -76,7 +76,7 @@ public class FacilityReportFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_facilityreport);
+        getActivity().setTitle(R.string.facility_report);
 
         mFAB = (FloatingActionButton) getActivity().findViewById(R.id.fab_main);
         mFAB.setVisibility(View.VISIBLE);

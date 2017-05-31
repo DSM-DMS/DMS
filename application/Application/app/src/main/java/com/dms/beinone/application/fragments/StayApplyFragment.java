@@ -66,7 +66,7 @@ public class StayApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_stayapply);
+        getActivity().setTitle(R.string.stay_apply);
         mAccountPrefs = getActivity()
                 .getSharedPreferences(getString(R.string.PREFS_ACCOUNT), MODE_PRIVATE);
         mDefaultStatusPrefs = getActivity()

@@ -40,7 +40,7 @@ public class MealFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_meal);
+        getActivity().setTitle(R.string.meal);
 
         mViewPager = (ViewPager) rootView.findViewById(R.id.viewpager_meal);
         mPrevBtn = (ImageButton) rootView.findViewById(R.id.ib_meal_prev);

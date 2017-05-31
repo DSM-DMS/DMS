@@ -76,13 +76,13 @@ public class AppcontentFragment extends Fragment {
         String title = null;
         switch (mCategory) {
             case Appcontent.NOTICE:
-                title = getString(R.string.nav_notice);
+                title = getString(R.string.notice);
                 break;
             case Appcontent.NEWSLETTER:
-                title = getString(R.string.nav_newsletter);
+                title = getString(R.string.newsletter);
                 break;
             case Appcontent.COMPETITION:
-                title = getString(R.string.nav_competition);
+                title = getString(R.string.competition);
                 break;
             default:
                 break;

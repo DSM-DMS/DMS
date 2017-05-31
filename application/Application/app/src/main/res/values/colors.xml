@@ -13,6 +13,8 @@
     <color name="applyList2">#89B9D1</color>
     <color name="applyList3">#75B1D0</color>
     <color name="applyList4">#63A0BF</color>
+
+    <color name="dormitoryListBackground">#DBEAF2</color>
     
     <color name="disabled">#61000000</color>
 

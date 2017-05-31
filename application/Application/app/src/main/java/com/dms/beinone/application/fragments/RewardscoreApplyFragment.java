@@ -46,7 +46,7 @@ public class RewardscoreApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.nav_rewardscoreapply);
+        getActivity().setTitle(R.string.rewardscore_apply);
 
         mRewardscoreFragment = RewardscoreFragment.newInstance(new RewardscoreFragment.OnApplyBtnClickListener() {
             @Override

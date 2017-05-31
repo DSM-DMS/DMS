@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="bottom">
+    android:gravity="bottom"
+    android:background="@drawable/bg_apply_list">
 
     <com.dms.beinone.application.views.custom.ExpandableLayout
         android:id="@+id/expandablelayout_apply_list"
