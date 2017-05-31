@@ -306,13 +306,18 @@ $classSelect.on("click", "td", function(e) {
 });
 
 $openExtensionButton.on("click", function() {
-    $openStayButton.prop("disabled", true);
-    $openExtensionButton.prop("disabled", true);
-    $panel.toggleClass("left-move");
-    $extensionWindow.toggleClass("fade-in");
-    $menu2.toggleClass("fade-out");
-    $menu.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    // $openStayButton.prop("disabled", true);
+    // $openExtensionButton.prop("disabled", true);
+    // $panel.toggleClass("left-move");
+    // $extensionWindow.toggleClass("fade-in");
+    // $menu2.toggleClass("fade-out");
+    // $menu.toggleClass("fade-out");
+    // $menuPagenation.toggleClass("fade-out");
+    $(".left-line").css({width:'80%'});
+    setTimeout( function() {
+        $panel.toggleClass("left-move");
+        $(".left-line").css({width:'80%'});
+    }, 500);
 });
 
 $closeExtensionButton.on("click", function() {
