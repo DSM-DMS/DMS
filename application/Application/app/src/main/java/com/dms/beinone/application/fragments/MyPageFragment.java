@@ -16,7 +16,7 @@ import com.dms.beinone.application.activities.LoginActivity;
  * Created by BeINone on 2017-05-31.
  */
 
-public class MyPageeFragment extends Fragment {
+public class MyPageFragment extends Fragment {
 
     @Nullable
     @Override
