@@ -131,7 +131,7 @@ $(".account-reset").on("click", function() {
         url: "/account/initialize",
         type: "POST",
         data: {
-            uid: $("#code").val()
+            uid: $("#refresh-student-number").val()
         },
         success: function() {
             alert("삭제가 완료되었습니다.");
