@@ -131,10 +131,15 @@ $(".account-reset").on("click", function() {
         url: "/account/initialize",
         type: "POST",
         data: {
-            uid: $("#refresh-student-number").val()
+            number: $("#uid").val()
         },
-        success: function() {
-            alert("삭제가 완료되었습니다.");
+        statusCode: {
+            200: function() {
+                alert("삭제가 완료되었습니다.");
+            }
+        },
+        error: function(xhr, status, err) {
+            alert('삭제에 실패했습니다.');
         }
     })
 });
