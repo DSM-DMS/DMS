@@ -188,7 +188,8 @@ function setWriteBtnEvent() {
 }
 
 function redirect(page) {
-      location.href = '/' + page;
+  alert("http://"+window.location.hostname+page);
+      location.href = "http://"+window.location.hostname+page;
 }
 
 setWriteBtnEvent();

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Recruit for DMS</title>
+  <link rel="stylesheet" href="./css/recruit-style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="./js/recruit-script.js"></script>
+
+  <script type="text/javascript">
+function newPopup(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=700,width=720,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+}
+newPopup('http://dsm2015.cafe24.com/recruit');
+</script>
+</head>
+<body>
+  <div id="gradient" />
+<div class="login-page">
+  <div class="form">
+    <h3>DMS에서는 당신을 기다립니다!</h3>
+    <div style="font-size: 12px;">
+      면접만으로는 지원자를 판단하기 어려워 DMS에서는 그 어디에도 없던 인턴과정을 도입했습니다! 6월 5일부터 6월 23일까지 3주간의 인턴과정을 통해 지원자를 평가하고, 정식 팀원으로 모시고자 합니다.<br/><br/>
+      DMS에서는 실력보다 노력, 열정을 우선시로 평가합니다. 자신의 실력이 부족하다고 망설이거나 두려워말고 지금바로 2017 DMS 인턴과정에 지원하세요!
+    </div>
+  </div>
+  <div class="form">
+    <h3>지원하기</h3>
+    <form class="login-form">
+      <input name="language" type="text" placeholder="사용해본 언어(컴마로 구분)"/>
+        <input name="project" type="text" placeholder="진행해본 프로젝트(컴마로 구분)"/>
+          <input name="content" type="text" placeholder="DSM 기숙사시스템 개발팀으로써의 다짐!"/>
+            <select id="font-selection">
+              <option value="web-front">Web front(HTML, Css, Javascript)</option>
+              <option value="server">Server(Java, Python)</option>
+              <option value="c#">C#</option>
+              <option value="android">Android</option>
+              <option value="ios">IOS</option>
+              <option value="designer">Designer</option>
+              <option value="project-manager">Tester / PM</option>
+            </select>
+          <input type="submit" value="지원하기"/>
+    </form>
+  </div>
+</div>
+</body>
+</html>

@@ -188,7 +188,7 @@ function setWriteBtnEvent() {
 }
 
 function redirect(page) {
-      location.href = '/' + page;
+    location.href = page;
 }
 
 setWriteBtnEvent();

@@ -181,6 +181,57 @@ function sanitize(txt) {
 }
 
 /** ======================================================================================
+ * browser size
+========================================================================================== */
+
+
+var width = screen.width;
+var fullHeight = window.innerHeight + window.screenTop;
+var height = screen.height - (window.outerHeight -  window.innerHeight - window.screenTop || window.screenY);
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (window.innerWidth == width && window.innerHeight == fullHeight) {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: fullHeight + "px",
+        overflow: "hidden"
+    });
+} else {
+    $("body").css({
+        minWidth: width + "px",
+        minHeight: height + "px",
+        overflow: "auto"
+    });
+}
+
+if (isMobile) {
+    $("body").css({
+        minWidth: "1707px",
+        minHeight: "855px",
+        overflow: "auto"
+    });
+} else {
+    $(window).resize(function() {
+        if (window.innerWidth == width && window.innerHeight == fullHeight) {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: fullHeight + "px",
+                overflow: "hidden"
+            });
+        } else {
+            $("body").css({
+                minWidth: width + "px",
+                minHeight: height + "px",
+                overflow: "auto"
+            });
+        }
+
+    });
+}
+
+
+/** ======================================================================================
  * Common window
 ========================================================================================== */
 // $windowClose.on("click", function() {
@@ -621,7 +672,11 @@ function prevDay() {
 }
 
 function formatDate() {
-    return mealDate.toISOString().slice(0, 10);
+    return [
+        mealDate.getFullYear(),
+        ('0' + (mealDate.getMonth() + 1)).slice(-2),
+        ('0' + mealDate.getDate()).slice(-2)
+    ].join('-');
 }
 
 function formatDate2() {
@@ -818,10 +873,12 @@ faqPreviewBtn.on("click", function() {
 ========================================================================================== */
 registerBtn.on("click", function() {
     $(".login-content").toggle("slide");
+    $(".register-content").toggle("slide");
 });
 
 $(".register-close").on("click", function() {
     $(".login-content").toggle("slide");
+    $(".register-content").toggle("slide");
 });
 
 $("#register-apply-btn").on("click", function() {
