@@ -188,7 +188,7 @@ function sanitize(txt) {
 
 var width = screen.width;
 var fullHeight = window.innerHeight + window.screenTop;
-var height = screen.height - (window.outerHeight -  window.innerHeight);
+var height = screen.height - (window.outerHeight - window.innerHeight);
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -1202,7 +1202,11 @@ function prevDay() {
 }
 
 function formatDate() {
-    return mealDate.toISOString().slice(0, 10);
+    return [
+        mealDate.getFullYear(),
+        ('0' + (mealDate.getMonth() + 1)).slice(-2),
+        ('0' + mealDate.getDate()).slice(-2)
+    ].join('-');
 }
 
 function formatDate2() {
@@ -1250,8 +1254,8 @@ $(document).ready(function() {
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
     //연장신청 시간 보여줌
-    var startTime = '5:30 PM';
-    var endTime = '8:30 PM';
+    var startTime = '05:30 PM';
+    var endTime = '08:30 PM';
 
     var formatTime = (function() {
         function addZero(num) {
@@ -1263,7 +1267,7 @@ $(document).ready(function() {
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [formatted, [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "pm" : "am"].join(" ");
+                formatted = [[addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"].join(" ");
             }
             return formatted;
         }
@@ -1413,7 +1417,7 @@ function makeWeekFormat(thisDate) {
     var week = getWeek(thisDate);
     var month = thisDate.getMonth();
     if (week == 0) {
-        if(month == 12) {
+        if (month == 12) {
             year = year + 1;
             month = 1;
         } else {

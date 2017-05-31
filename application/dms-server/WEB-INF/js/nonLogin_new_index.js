@@ -672,7 +672,11 @@ function prevDay() {
 }
 
 function formatDate() {
-    return mealDate.toISOString().slice(0, 10);
+    return [
+        mealDate.getFullYear(),
+        ('0' + (mealDate.getMonth() + 1)).slice(-2),
+        ('0' + mealDate.getDate()).slice(-2)
+    ].join('-');
 }
 
 function formatDate2() {
