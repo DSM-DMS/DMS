@@ -64,7 +64,7 @@ public class AllApplyStatus implements Handler<RoutingContext> {
 				responseObject.put("stay_applied", false);
 			}
 			
-			ctx.response().setStatusCode(201);
+			ctx.response().setStatusCode(200);
 			ctx.response().end(responseObject.toString());
 			ctx.response().close();
 		} catch(SQLException e) {
