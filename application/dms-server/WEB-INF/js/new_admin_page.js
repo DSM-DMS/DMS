@@ -133,16 +133,13 @@ $(".account-reset").on("click", function() {
         data: {
             number: $("#uid").val()
         },
-        statusCode: {
-            200: function() {
+        complete: function(e, xhr, settings) {
+            if (e.status === 200) {
                 alert("삭제가 완료되었습니다.");
-            },
-            204: function() {
+            } else {
                 alert("삭제에 실패했습니다.");
+
             }
-        },
-        error: function(xhr, status, err) {
-            alert('삭제에 실패했습니다.');
         }
     })
 });
