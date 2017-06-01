@@ -2,14 +2,10 @@ package com.dms.planb.action.goingout;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
-
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -27,17 +23,6 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 
 		EasyJsonObject responseObject = new EasyJsonObject();
-
-		String id = userManager.getIdFromSession(context);
-        String uid = null;
-
-        try {
-            if (id != null) {
-                uid = userManager.getUid(id);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         if(userManager.isLogined(context)) {
 			try {
