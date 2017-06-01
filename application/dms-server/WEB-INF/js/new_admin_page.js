@@ -136,6 +136,9 @@ $(".account-reset").on("click", function() {
         statusCode: {
             200: function() {
                 alert("삭제가 완료되었습니다.");
+            },
+            204: function() {
+                alert("삭제에 실패했습니다.");
             }
         },
         error: function(xhr, status, err) {
