@@ -39,7 +39,7 @@ public class RecommendFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rewardscoreapply_recommend, container, false);
+        View view = inflater.inflate(R.layout.fragment_rewardscore_recommend, container, false);
         init(view);
 
         return view;
@@ -89,17 +89,17 @@ public class RecommendFragment extends Fragment {
                 .getSharedPreferences(getString(R.string.PREFS_ACCOUNT), Context.MODE_PRIVATE);
         final String id = prefs.getString(getString(R.string.PREFS_ACCOUNT_ID), "");
 
-        DMSButton applyBtn = (DMSButton) getActivity().findViewById(R.id.btn_rewardscoreapply_apply);
+        DMSButton applyBtn = (DMSButton) getActivity().findViewById(R.id.btn_rewardscore_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = mContentET.getText().toString().trim();
                 String target = mTargetET.getText().toString().trim();
                 if (content.length() == 0) {
-                    Toast.makeText(getContext(), R.string.rewardscoreapply_nocontent, Toast.LENGTH_SHORT)
+                    Toast.makeText(getContext(), R.string.rewardscore_nocontent, Toast.LENGTH_SHORT)
                             .show();
                 } else if (target.length() == 0) {
-                    Toast.makeText(getContext(), R.string.rewardscoreapply_norecommendee, Toast.LENGTH_SHORT)
+                    Toast.makeText(getContext(), R.string.rewardscore_norecommendee, Toast.LENGTH_SHORT)
                             .show();
                 } else {
                     mOnApplyBtnClickListener.onApplyBtnClick(target, content);

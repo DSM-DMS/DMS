@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 //        setSupportActionBar(toolbar);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager_main);
-        viewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), this));
+        viewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
         tabLayout.setupWithViewPager(viewPager);
@@ -142,16 +142,16 @@ public class MainActivity extends AppCompatActivity
 //
 //        if (id == R.id.nav_item_home) {
 //            replaceFragmentWithBackStack(new HomeFragment());
-//        } else if (id == R.id.nav_item_extensionapply) {
+//        } else if (id == R.id.nav_item_extension) {
 //            replaceFragmentWithBackStack(new ExtensionApplyFragment());
-//        } else if (id == R.id.nav_item_stayapply) {
+//        } else if (id == R.id.nav_item_stay) {
 //            replaceFragmentWithBackStack(new StayApplyFragment());
-//        } else if (id == R.id.nav_item_goingoutapply) {
+//        } else if (id == R.id.nav_item_goingout) {
 ////            replaceFragmentWithBackStack(new NewGoingoutApplyFragment());
 //            replaceFragmentWithBackStack(new GoingoutApplyFragment());
-//        } else if (id == R.id.nav_item_rewardscoreapply) {
+//        } else if (id == R.id.nav_item_rewardscore) {
 //            replaceFragmentWithBackStack(new RewardscoreApplyFragment());
-//        } else if (id == R.id.nav_item_afterschoolapply) {
+//        } else if (id == R.id.nav_item_afterschool) {
 //            replaceFragmentWithBackStack(new AfterschoolApplyFragment());
 //        } else if (id == R.id.nav_item_meal) {
 //            replaceFragmentWithBackStack(new MealFragment());

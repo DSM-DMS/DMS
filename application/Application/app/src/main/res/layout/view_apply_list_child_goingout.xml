@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+    <View
+        android:id="@+id/bar_apply_list_child_goingout"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="@color/activatedBar" />
+
+    <RelativeLayout
+        android:id="@+id/layout_apply_list_child_goingout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/applyList3">
+
+        <ImageView
+            android:id="@+id/iv_apply_list_child_goingout"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/fish2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignTop="@id/iv_apply_list_child_goingout"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_toLeftOf="@id/iv_apply_list_child_goingout"
+            android:layout_toStartOf="@id/iv_apply_list_child_goingout"
+            android:padding="16dp"
+            android:background="@drawable/speech_bubble"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/goingout_saturday"
+                    android:textSize="24sp" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <Switch
+                    android:id="@+id/switch_apply_list_child_goingout_saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:switchMinWidth="56dp" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/goingout_sunday"
+                    android:textSize="24sp" />
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <Switch
+                    android:id="@+id/switch_apply_list_child_goingout_sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:switchMinWidth="56dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_apply_list_child_goingout_apply"
+            android:layout_width="72dp"
+            android:layout_height="24dp"
+            android:minHeight="0dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/iv_apply_list_child_goingout"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/btn_login"
+            android:text="@string/apply"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</LinearLayout>

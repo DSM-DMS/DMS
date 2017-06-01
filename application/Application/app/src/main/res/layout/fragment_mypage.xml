@@ -206,7 +206,7 @@
                         android:textColor="@android:color/black" />
 
                     <TextView
-                        android:id="@+id/tv_mypage_extensionapply_status"
+                        android:id="@+id/tv_mypage_extension_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

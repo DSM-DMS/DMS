@@ -15,7 +15,7 @@
             android:layout_weight="1"
             android:padding="32dp"
             android:gravity="center"
-            android:text="@string/goingoutapply_desc"
+            android:text="@string/goingout_desc"
             android:textColor="@android:color/black" />
 
         <LinearLayout
@@ -30,22 +30,22 @@
                 android:gravity="center">
 
                 <com.dms.beinone.application.views.custom.DMSToggleButton
-                    android:id="@+id/tb_goingoutapply_saturday"
+                    android:id="@+id/tb_goingout_saturday"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_marginRight="32dp"
                     android:layout_marginEnd="32dp"
-                    android:textOff="@string/goingoutapply_saturday"
-                    android:textOn="@string/goingoutapply_saturday" />
+                    android:textOff="@string/goingout_saturday"
+                    android:textOn="@string/goingout_saturday" />
 
                 <com.dms.beinone.application.views.custom.DMSToggleButton
-                    android:id="@+id/tb_goingoutapply_sunday"
+                    android:id="@+id/tb_goingout_sunday"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_marginLeft="32dp"
                     android:layout_marginStart="32dp"
-                    android:textOff="@string/goingoutapply_sunday"
-                    android:textOn="@string/goingoutapply_sunday" />
+                    android:textOff="@string/goingout_sunday"
+                    android:textOn="@string/goingout_sunday" />
 
             </LinearLayout>
 
@@ -54,18 +54,18 @@
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"
-                android:text="@string/goingoutapply_subdesc" />
+                android:text="@string/goingout_subdesc" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <com.dms.beinone.application.views.custom.DMSButton
-        android:id="@+id/btn_goingoutapply_apply"
+        android:id="@+id/btn_goingout_apply"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/goingoutapply_apply"
+        android:text="@string/goingout_apply"
         dmsbtn:dmsbtn_style="rectangle"
         dmsbtn:dmsbtn_backgroundColor="@android:color/black"
         dmsbtn:dmsbtn_strokeColor="@android:color/black"

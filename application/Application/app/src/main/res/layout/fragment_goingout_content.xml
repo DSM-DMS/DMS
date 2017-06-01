@@ -12,7 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/goingoutapply_reason"
+        android:text="@string/goingout_reason"
         android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.views.custom.DMSEditText
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/goingoutapply_apply"
+        android:text="@string/goingout_apply"
         dmsbtn:dmsbtn_style="rectangle"
         dmsbtn:dmsbtn_backgroundColor="@android:color/black"
         dmsbtn:dmsbtn_strokeColor="@android:color/black"

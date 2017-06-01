@@ -35,7 +35,7 @@ public class GoingoutApplyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_goingoutapply, container, false);
+        View view = inflater.inflate(R.layout.fragment_goingout, container, false);
         init(view);
 
         return view;
@@ -49,9 +49,9 @@ public class GoingoutApplyFragment extends Fragment {
     private void init(View rootView) {
         getActivity().setTitle(R.string.goingout_apply);
 
-        mSaturdayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingoutapply_saturday);
-        mSundayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingoutapply_sunday);
-        mApplyBtn = (Button) rootView.findViewById(R.id.btn_goingoutapply_apply);
+        mSaturdayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingout_saturday);
+        mSundayTB = (ToggleButton) rootView.findViewById(R.id.tb_goingout_sunday);
+        mApplyBtn = (Button) rootView.findViewById(R.id.btn_goingout_apply);
 
         mApplyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +100,13 @@ public class GoingoutApplyFragment extends Fragment {
                                 }
                                 break;
                             case HttpBox.HTTP_NO_CONTENT:
-                                Toast.makeText(getContext(), R.string.goingoutapply_load_no_content, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.goingout_load_no_content, Toast.LENGTH_SHORT).show();
                                 break;
                             case HttpBox.HTTP_BAD_REQUEST:
                                 Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                 break;
                             case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                Toast.makeText(getContext(), R.string.goingoutapply_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.goingout_load_internal_server_error, Toast.LENGTH_SHORT).show();
                                 break;
                             default:
                                 break;
@@ -136,13 +136,13 @@ public class GoingoutApplyFragment extends Fragment {
                             switch (code) {
                                 case HttpBox.HTTP_OK:
                                     setApplyStatus(new Goingout(sat, sun));
-                                    Toast.makeText(getContext(), R.string.goingoutapply_apply_ok, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.goingout_apply_ok, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.goingoutapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.goingout_apply_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

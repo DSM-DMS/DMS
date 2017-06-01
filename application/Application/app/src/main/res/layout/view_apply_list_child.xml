@@ -33,13 +33,15 @@
             android:layout_alignTop="@id/iv_apply_list_child"
             android:layout_toLeftOf="@id/iv_apply_list_child"
             android:layout_toStartOf="@id/iv_apply_list_child"
+            android:padding="16dp"
             android:background="@drawable/speech_bubble"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textAlignment="center" />
 
         <ImageButton
             android:id="@+id/ib_apply_list_child_enter"
             android:layout_width="72dp"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/iv_apply_list_child"

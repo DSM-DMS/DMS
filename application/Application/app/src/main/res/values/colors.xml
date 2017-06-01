@@ -16,6 +16,9 @@
 
     <color name="dormitoryListBackground">#DBEAF2</color>
     
+    <color name="unapplied">#CBCBCB</color>
+    <color name="applied">#B8E8D7</color>
+    
     <color name="disabled">#61000000</color>
 
     <color name="positive">#66BB6A</color>

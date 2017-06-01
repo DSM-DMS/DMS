@@ -9,10 +9,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_rewardscoreapply_apply">
+        android:layout_above="@+id/btn_rewardscore_apply">
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout_rewardscoreapply"
+            android:id="@+id/tablayout_rewardscore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/colorPrimary">
@@ -20,34 +20,34 @@
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rewardscoreapply_rewardscore" />
+                android:text="@string/rewardscore_rewardscore" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rewardscoreapply_recommend" />
+                android:text="@string/rewardscore_recommend" />
 
         </android.support.design.widget.TabLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tablayout_rewardscoreapply">
+            android:layout_below="@id/tablayout_rewardscore">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
-                    android:id="@+id/layout_rewardscoreapply_container"
+                    android:id="@+id/layout_rewardscore_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:id="@+id/layout_rewardscoreapply_description"
+                    android:id="@+id/layout_rewardscore_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layout_rewardscoreapply_container"
+                    android:layout_below="@id/layout_rewardscore_container"
                     android:orientation="vertical"
                     android:paddingBottom="32dp"
                     android:paddingEnd="16dp"
@@ -67,13 +67,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:text="@string/rewardscoreapply_description_morningexercise_title"
+                            android:text="@string/rewardscore_description_morningexercise_title"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rewardscoreapply_description_morningexercise_content" />
+                            android:text="@string/rewardscore_description_morningexercise_content" />
 
                     </LinearLayout>
 
@@ -88,13 +88,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:text="@string/rewardscoreapply_description_cleanroom_title"
+                            android:text="@string/rewardscore_description_cleanroom_title"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rewardscoreapply_description_cleanroom_content" />
+                            android:text="@string/rewardscore_description_cleanroom_content" />
 
                     </LinearLayout>
 
@@ -109,13 +109,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:text="@string/rewardscoreapply_description_modelstudent_title"
+                            android:text="@string/rewardscore_description_modelstudent_title"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rewardscoreapply_description_modelstudent_content" />
+                            android:text="@string/rewardscore_description_modelstudent_content" />
 
                     </LinearLayout>
 
@@ -130,13 +130,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:text="@string/rewardscoreapply_description_electronicequip_title"
+                            android:text="@string/rewardscore_description_electronicequip_title"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rewardscoreapply_description_electronicequip_content" />
+                            android:text="@string/rewardscore_description_electronicequip_content" />
 
                     </LinearLayout>
 
@@ -150,13 +150,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             android:layout_marginRight="4dp"
-                            android:text="@string/rewardscoreapply_description_etc_title"
+                            android:text="@string/rewardscore_description_etc_title"
                             android:textColor="@android:color/black" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rewardscoreapply_description_etc_content" />
+                            android:text="@string/rewardscore_description_etc_content" />
 
                     </LinearLayout>
 
@@ -169,11 +169,11 @@
     </RelativeLayout>
 
     <com.dms.beinone.application.views.custom.DMSButton
-        android:id="@+id/btn_rewardscoreapply_apply"
+        android:id="@+id/btn_rewardscore_apply"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/rewardscoreapply_apply"
+        android:text="@string/rewardscore_apply"
         dmsbtn:dmsbtn_backgroundColor="@android:color/black"
         dmsbtn:dmsbtn_strokeColor="@android:color/black"
         dmsbtn:dmsbtn_style="rectangle"

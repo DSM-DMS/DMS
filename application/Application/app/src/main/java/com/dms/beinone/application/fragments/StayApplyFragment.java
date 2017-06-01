@@ -54,7 +54,7 @@ public class StayApplyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stayapply, container, false);
+        View view = inflater.inflate(R.layout.fragment_stay, container, false);
         init(view);
 
         return view;
@@ -72,10 +72,10 @@ public class StayApplyFragment extends Fragment {
         mDefaultStatusPrefs = getActivity()
                 .getSharedPreferences(getString(R.string.PREFS_DEFAULTSTATUS), MODE_PRIVATE);
 
-        mDefaultStatusTV = (TextView) rootView.findViewById(R.id.tv_stayapply_defaultstatus);
-        mSelectedWeekTV = (TextView) rootView.findViewById(R.id.tv_stayapply_selectedweek);
-        mSelectedWeekStatusTV = (TextView) rootView.findViewById(R.id.tv_stayapply_selectedweekstatus);
-        final CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_stayapply);
+        mDefaultStatusTV = (TextView) rootView.findViewById(R.id.tv_stay_defaultstatus);
+        mSelectedWeekTV = (TextView) rootView.findViewById(R.id.tv_stay_selectedweek);
+        mSelectedWeekStatusTV = (TextView) rootView.findViewById(R.id.tv_stay_selectedweekstatus);
+        final CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendar_stay);
 
         // load and display default stay status of ic_user
         try {
@@ -85,7 +85,7 @@ public class StayApplyFragment extends Fragment {
             e.printStackTrace();
         }
 
-        Button changeDefaultStatusBtn = (Button) rootView.findViewById(R.id.btn_stayapply_changedefaultstatus);
+        Button changeDefaultStatusBtn = (Button) rootView.findViewById(R.id.btn_stay_changedefaultstatus);
         changeDefaultStatusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,15 +136,15 @@ public class StayApplyFragment extends Fragment {
         });
 
         final DMSRadioButton fridayGoRB =
-                (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_fridaygo);
+                (DMSRadioButton) rootView.findViewById(R.id.rb_stay_fridaygo);
         final DMSRadioButton saturdayGoRB =
-                (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_saturdaygo);
+                (DMSRadioButton) rootView.findViewById(R.id.rb_stay_saturdaygo);
         final DMSRadioButton saturdayComeRB =
-                (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_saturdaycome);
-        final DMSRadioButton stayRB = (DMSRadioButton) rootView.findViewById(R.id.rb_stayapply_stay);
+                (DMSRadioButton) rootView.findViewById(R.id.rb_stay_saturdaycome);
+        final DMSRadioButton stayRB = (DMSRadioButton) rootView.findViewById(R.id.rb_stay_stay);
 
         // apply stay status when apply button is clicked
-        final DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_stayapply_apply);
+        final DMSButton applyBtn = (DMSButton) rootView.findViewById(R.id.btn_stay_apply);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,7 +177,7 @@ public class StayApplyFragment extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(getContext(), R.string.stayapply_nochecked, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.stay_nochecked, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -224,7 +224,7 @@ public class StayApplyFragment extends Fragment {
                                     Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.stayapply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.stay_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;
@@ -263,13 +263,13 @@ public class StayApplyFragment extends Fragment {
                                 }
                                 break;
                             case HttpBox.HTTP_NO_CONTENT:
-                                Toast.makeText(getContext(), R.string.stayapply_default_no_content, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.stay_default_no_content, Toast.LENGTH_SHORT).show();
                                 break;
                             case HttpBox.HTTP_BAD_REQUEST:
                                 Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                 break;
                             case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                Toast.makeText(getContext(), R.string.stayapply_default_internal_server_error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.stay_default_internal_server_error, Toast.LENGTH_SHORT).show();
                                 break;
                             default:
                                 break;
@@ -299,16 +299,16 @@ public class StayApplyFragment extends Fragment {
                             switch (code) {
                                 case HttpBox.HTTP_OK:
                                     setSelectedWeekStatusTV(StayApplyUtils.getStringFromStayStatus(value));
-                                    Toast.makeText(getContext(), R.string.stayapply_apply_ok, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.stay_apply_ok, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_NO_CONTENT:
-                                    Toast.makeText(getContext(), R.string.stayapply_apply_no_content, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.stay_apply_no_content, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.stayapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.stay_apply_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

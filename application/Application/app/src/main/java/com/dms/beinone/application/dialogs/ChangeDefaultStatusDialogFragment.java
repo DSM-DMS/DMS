@@ -56,16 +56,16 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
         final int defStatus = getArguments().getInt(getString(R.string.ARGS_DEFAULTSTATUS), -1);
 
         return new AlertDialog.Builder(getContext())
-                .setTitle(R.string.stayapply_dialog_title)
+                .setTitle(R.string.stay_dialog_title)
                 .setSingleChoiceItems(R.array.change_default_status, defStatus - 1, null)
-                .setNegativeButton(R.string.stayapply_dialog_negative,
+                .setNegativeButton(R.string.stay_dialog_negative,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         })
-                .setPositiveButton(R.string.stayapply_dialog_positive,
+                .setPositiveButton(R.string.stay_dialog_positive,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -96,7 +96,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                             int code = response.getCode();
                             switch (code) {
                                 case HttpBox.HTTP_OK:
-                                    Toast.makeText(mContext, R.string.stayapply_default_load_ok, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, R.string.stay_default_load_ok, Toast.LENGTH_SHORT).show();
                                     // notify the StayApplyFragment of changed default status
                                     mListener.onChangeDefaultStatus(value);
                                     break;
@@ -104,7 +104,7 @@ public class ChangeDefaultStatusDialogFragment extends DialogFragment {
                                     Toast.makeText(mContext, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(mContext, R.string.stayapply_default_load_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, R.string.stay_default_load_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

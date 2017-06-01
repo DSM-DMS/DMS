@@ -12,7 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/rewardscoreapply_content"
+        android:text="@string/rewardscore_content"
         android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.views.custom.DMSEditText

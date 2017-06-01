@@ -51,6 +51,7 @@ public class MealFragment extends Fragment {
         mViewPager.setPageTransformer(false, new ZoomOutPageTransformer());
         mViewPager.setAdapter(new MealPagerAdapter(getChildFragmentManager()));
         mViewPager.setCurrentItem(MealPagerAdapter.START_POSITION);
+
 //        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 //            private int mCurrPageIndex = MealPagerAdapter.MIDDLE_INDEX;
 //            private int mPrevPageIndex = MealPagerAdapter.MIDDLE_INDEX;

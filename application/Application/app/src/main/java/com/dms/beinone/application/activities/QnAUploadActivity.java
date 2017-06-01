@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class QnAUploadActivity extends AppCompatActivity {
     private EditText mTitleET;
     private TextView mContentTV;
     private EditText mContentET;
-    private SwitchCompat mPrivacySwitch;
+    private Switch mPrivacySwitch;
     private Button mSubmitBtn;
 
     @Override
@@ -80,7 +81,7 @@ public class QnAUploadActivity extends AppCompatActivity {
             }
         });
 
-        mPrivacySwitch = (SwitchCompat) findViewById(R.id.switch_qna_write_privacy);
+        mPrivacySwitch = (Switch) findViewById(R.id.switch_qna_write_privacy);
 
         mSubmitBtn = (Button) findViewById(R.id.btn_qna_write_submit);
         mSubmitBtn.setOnClickListener(new View.OnClickListener() {

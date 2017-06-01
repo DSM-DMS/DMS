@@ -81,16 +81,16 @@ public class ExtensionApplyDialogFragment extends DialogFragment {
                             int code = response.getCode();
                             switch (code) {
                                 case HttpBox.HTTP_OK:
-                                    Toast.makeText(mContext, R.string.extensionapply_apply_created, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, R.string.extension_apply_created, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_NO_CONTENT:
-                                    Toast.makeText(mContext, R.string.extensionapply_apply_no_content, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, R.string.extension_apply_no_content, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(mContext, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(mContext, R.string.extensionapply_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, R.string.extension_apply_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

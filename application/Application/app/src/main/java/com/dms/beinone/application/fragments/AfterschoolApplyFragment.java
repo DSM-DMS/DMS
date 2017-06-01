@@ -34,7 +34,7 @@ public class AfterschoolApplyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_afterschoolapply, container, false);
+        View view = inflater.inflate(R.layout.fragment_afterschool, container, false);
         init(view);
 
         return view;
@@ -46,10 +46,10 @@ public class AfterschoolApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.afterschool_apply);
+        getActivity().setTitle(R.string.afterschool);
 
-        mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_afterschoolapply);
-        View emptyView = rootView.findViewById(R.id.view_afterschoolapply_empty);
+        mRecyclerView = (EmptySupportedRecyclerView) rootView.findViewById(R.id.rv_afterschool);
+        View emptyView = rootView.findViewById(R.id.view_afterschool_empty);
         RecyclerViewManager.setupCardRecyclerView(mRecyclerView, getContext(), emptyView);
 
         try {

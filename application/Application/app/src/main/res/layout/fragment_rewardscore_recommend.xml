@@ -12,7 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/rewardscoreapply_content"
+        android:text="@string/rewardscore_content"
         android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.views.custom.DMSEditText
@@ -33,7 +33,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:layout_below="@id/et_recommend_content"
-        android:text="@string/rewardscoreapply_recommendee"
+        android:text="@string/rewardscore_recommendee"
         android:textColor="@android:color/black" />
 
     <com.dms.beinone.application.views.custom.DMSEditText
@@ -48,7 +48,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="48dp"-->
         <!--android:layout_alignParentBottom="true"-->
-        <!--android:text="@string/rewardscoreapply_apply"-->
+        <!--android:text="@string/rewardscore_apply"-->
         <!--dmsbtn:dmsbtn_style="rectangle"-->
         <!--dmsbtn:dmsbtn_backgroundColor="@android:color/black"-->
         <!--dmsbtn:dmsbtn_strokeColor="@android:color/black"-->

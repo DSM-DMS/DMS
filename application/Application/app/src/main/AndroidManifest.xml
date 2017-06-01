@@ -34,6 +34,13 @@
         <activity android:name=".activities.QnAArticleActivity" />
         <activity android:name=".activities.QnAUploadActivity" />
         <activity android:name=".activities.CommentActivity" />
+
+        <activity android:name=".activities.ExtensionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.StayActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.MeritActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

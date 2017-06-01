@@ -40,7 +40,7 @@ public class ExtensionApplyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_extensionapply, container, false);
+        View view = inflater.inflate(R.layout.fragment_extension, container, false);
         init(view);
 
         return view;
@@ -52,11 +52,11 @@ public class ExtensionApplyFragment extends Fragment {
      * @param rootView 필요한 뷰를 찾을 최상위 뷰
      */
     private void init(View rootView) {
-        getActivity().setTitle(R.string.extension_apply);
+        getActivity().setTitle(R.string.extension);
 
-        mContainer = (LinearLayout) rootView.findViewById(R.id.container_extensionapply);
+        mContainer = (LinearLayout) rootView.findViewById(R.id.container_extension);
 
-        mSpinner = (Spinner) rootView.findViewById(R.id.spinner_extensionapply);
+        mSpinner = (Spinner) rootView.findViewById(R.id.spinner_extension);
         ArrayAdapter<CharSequence> spinnerAdapter =
                 ArrayAdapter.createFromResource(getContext(), R.array.apply_extension,
                         android.R.layout.simple_spinner_item);
@@ -111,11 +111,11 @@ public class ExtensionApplyFragment extends Fragment {
                 if (seatStatus.equals("0")) {
                     // wall
                     seatView = (Button) LayoutInflater.from(getContext())
-                            .inflate(R.layout.view_extensionapply_seat_wall, null);
+                            .inflate(R.layout.view_extension_seat_wall, null);
                 } else if (isNumeric(seatStatus)) {
                     // available seat
                     seatView = (Button) LayoutInflater.from(getContext())
-                            .inflate(R.layout.view_extensionapply_seat_available, null);
+                            .inflate(R.layout.view_extension_seat_available, null);
                     seatView.setText(seatStatus);
                     final int seat = Integer.valueOf(seatView.getText().toString().trim());
                     seatView.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +131,7 @@ public class ExtensionApplyFragment extends Fragment {
                 } else {
                     // unavailable seat
                     seatView = (Button) LayoutInflater.from(getContext())
-                            .inflate(R.layout.view_extensionapply_seat_unavailable, null);
+                            .inflate(R.layout.view_extension_seat_unavailable, null);
                     seatView.setText(seatStatus);
                 }
                 seatView.setLayoutParams(new LinearLayout.LayoutParams(
@@ -179,7 +179,7 @@ public class ExtensionApplyFragment extends Fragment {
                                     Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.extensionapply_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.extension_load_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

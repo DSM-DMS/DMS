@@ -34,7 +34,7 @@ public class RewardscoreApplyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rewardscoreapply, container, false);
+        View view = inflater.inflate(R.layout.fragment_rewardscore, container, false);
         init(view);
 
         return view;
@@ -74,7 +74,7 @@ public class RewardscoreApplyFragment extends Fragment {
         // 초기 화면 설정
         replaceFragment(mRewardscoreFragment);
 
-        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tablayout_rewardscoreapply);
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tablayout_rewardscore);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -105,7 +105,7 @@ public class RewardscoreApplyFragment extends Fragment {
     private void replaceFragment(Fragment fragment) {
         getChildFragmentManager()
                 .beginTransaction()
-                .replace(R.id.layout_rewardscoreapply_container, fragment)
+                .replace(R.id.layout_rewardscore_container, fragment)
                 .commit();
     }
 
@@ -125,13 +125,13 @@ public class RewardscoreApplyFragment extends Fragment {
                             int code = response.getCode();
                             switch (code) {
                                 case HttpBox.HTTP_CREATED:
-                                    Toast.makeText(getContext(), R.string.rewardscoreapply_created, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.rewardscore_created, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.rewardscoreapply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.rewardscore_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;
