@@ -57,8 +57,16 @@ public class AllApplyStatus implements Handler<RoutingContext> {
 			}
 			
 			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", getCurrentWeek(), "'");
-			resultSet.next();
-			responseObject.put("stay", resultSet.getInt("value"));
+			if(resultSet.next()) {
+				responseObject.put("stay_applied", true);
+				responseObject.put("value", resultSet.getInt("value"));
+			} else {
+				responseObject.put("stay_applied", false);
+			}
+			
+			ctx.response().setStatusCode(201);
+			ctx.response().end(responseObject.toString());
+			ctx.response().close();
 		} catch(SQLException e) {
 			ctx.response().setStatusCode(500).end();
 			ctx.response().close();
