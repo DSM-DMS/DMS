@@ -897,6 +897,6 @@ $("#register-apply-btn").on("click", function() {
         error: function(xhr) {
             alert("회원가입에 실패했어요");
             $(".login-content").toggle("slide");
-        },
+            $(".register-content").toggle("slide");        },
     });
 });
