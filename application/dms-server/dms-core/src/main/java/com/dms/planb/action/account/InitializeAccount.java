@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.AdminManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -27,7 +28,7 @@ public class InitializeAccount implements Handler<RoutingContext> {
 		}
 
 		String number = context.request().getParam("number");
-		String encryptedNumber = SHA256.encrypt(number);
+		String encryptedNumber = UserManager.getAES().encrypt(number);
 
 		try {
 			SafeResultSet studentData = database.executeQuery("SELECT uid FROM student_data WHERE number='", encryptedNumber, "'");
