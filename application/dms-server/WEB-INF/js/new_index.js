@@ -701,10 +701,8 @@ $sundayContainer.click(function() {
 $stayApplyButton.on("click", function() {
     $stayPaperplane.addClass("send-paperplane");
 
-    var applySendDataWeek = makeWeekFormat(stayDate);
     var applySendDataValue = $(":radio[name=1]:checked").val();
 
-    console.log(applySendDataWeek);
     console.log(applySendDataValue);
 
     $.ajax({
@@ -712,7 +710,6 @@ $stayApplyButton.on("click", function() {
         type: "PUT",
         async: false,
         data: {
-            "week": applySendDataWeek,
             "value": applySendDataValue
         },
         statusCode: {
