@@ -25,11 +25,11 @@ public class APIKeyManageRouter implements Handler<RoutingContext> {
         userManager = new UserManager();
     }
 
-    public void handle(RoutingContext context) {
-        HttpServerResponse response = context.response();
-        if (userManager.isLogined(context)) {
+    public void handle(RoutingContext ctx) {
+        HttpServerResponse response = ctx.response();
+        if (userManager.isLogined(ctx)) {
             try {
-                String uid = userManager.getUid(userManager.getIdFromSession(context));
+                String uid = userManager.getUid(userManager.getIdFromSession(ctx));
                 JobResult result = requestManager.getApiKeys(uid);
                 if (result.isSuccess()) {
                     SafeResultSet rs = (SafeResultSet) result.getArgs()[0];

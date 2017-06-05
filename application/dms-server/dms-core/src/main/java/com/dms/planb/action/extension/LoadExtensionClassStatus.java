@@ -28,15 +28,15 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		EasyJson json = null;
 
-		String option = context.request().getParam("option");
+		String option = ctx.request().getParam("option");
 		
 		if(!Guardian.checkParameters(option)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 
@@ -45,8 +45,8 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 			
 			switch (option) {
 			case "map":
-				if (context.request().params().contains("class")) {
-					classId = Integer.parseInt(context.request().getParam("class"));
+				if (ctx.request().params().contains("class")) {
+					classId = Integer.parseInt(ctx.request().getParam("class"));
 					json = new EasyJsonObject(getMapdata(classId));
 				} else {
 					json = new EasyJsonArray(getMapdataAll());
@@ -54,16 +54,16 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 				
 				break;
 			case "status":
-				classId = Integer.parseInt(context.request().getParam("class"));
+				classId = Integer.parseInt(ctx.request().getParam("class"));
 				break;
 			}
 			
-			context.response().setStatusCode(200);
-			context.response().end(json.toString());
-			context.response().close();
+			ctx.response().setStatusCode(200);
+			ctx.response().end(json.toString());
+			ctx.response().close();
 		} catch (SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 
 			Log.l("SQLException");
 		}

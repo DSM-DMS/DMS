@@ -25,37 +25,37 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
-        String id = context.request().getParam("id");
-        String password = context.request().getParam("password");
-        String remember = context.request().getParam("remember");
+    public void handle(RoutingContext ctx) {
+        String id = ctx.request().getParam("id");
+        String password = ctx.request().getParam("password");
+        String remember = ctx.request().getParam("remember");
         remember = (remember == null) ? "false" : "true";
         
         if(!Guardian.checkParameters(id, password)) {
-        	context.response().setStatusCode(400).end();
-        	context.response().close();
-            secureManager.invalidRequest(context);
+        	ctx.response().setStatusCode(400).end();
+        	ctx.response().close();
+            secureManager.invalidRequest(ctx);
         	return;
         }
         
         try {
             boolean check = adminManager.login(id, password);
             if (check) {
-            	adminManager.registerSession(context, Boolean.valueOf(remember), id);
+            	adminManager.registerSession(ctx, Boolean.valueOf(remember), id);
             	
-            	context.response().setStatusCode(201).end();
-                context.response().close();
+            	ctx.response().setStatusCode(201).end();
+                ctx.response().close();
             } else {
-                context.response().setStatusCode(400).end();
-                context.response().close();
-                loginRequestSecureManager.invalidRequest(context);
+                ctx.response().setStatusCode(400).end();
+                ctx.response().close();
+                loginRequestSecureManager.invalidRequest(ctx);
             }
         } catch (SQLException e) {
-            context.response().setStatusCode(500).end();
-            context.response().close();
-            secureManager.invalidRequest(context);
+            ctx.response().setStatusCode(500).end();
+            ctx.response().close();
+            secureManager.invalidRequest(ctx);
             Log.l("SQLException");
         }
-        Log.l("Login Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+        Log.l("Login Request (", id, ", ", ctx.request().remoteAddress(), ") status : " + ctx.response().getStatusCode());
     }
 }

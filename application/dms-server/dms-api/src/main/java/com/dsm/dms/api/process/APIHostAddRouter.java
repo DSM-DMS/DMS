@@ -25,14 +25,14 @@ public class APIHostAddRouter implements Handler<RoutingContext> {
         userManager = new UserManager();
     }
 
-    public void handle(RoutingContext context) {
-        HttpServerResponse response = context.response();
-        HttpServerRequest request = context.request();
+    public void handle(RoutingContext ctx) {
+        HttpServerResponse response = ctx.response();
+        HttpServerRequest request = ctx.request();
         String apiKey = request.getParam("api_key");
         String host = request.getParam("host_name");
-        if (Guardian.checkParameters(apiKey, host) && userManager.isLogined(context)) {
+        if (Guardian.checkParameters(apiKey, host) && userManager.isLogined(ctx)) {
             try {
-                String uid = userManager.getUid(userManager.getIdFromSession(context));
+                String uid = userManager.getUid(userManager.getIdFromSession(ctx));
                 if(requestManager.addHost(uid, apiKey, host)){
                     response.setStatusCode(200);
                 }else{

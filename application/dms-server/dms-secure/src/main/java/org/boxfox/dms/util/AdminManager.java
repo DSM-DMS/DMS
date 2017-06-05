@@ -81,13 +81,13 @@ public class AdminManager implements AccountManager {
     }
 
     @Override
-    public boolean isLogined(RoutingContext context) {
-        return ((getIdFromSession(context) == null) ? false : true);
+    public boolean isLogined(RoutingContext ctx) {
+        return ((getIdFromSession(ctx) == null) ? false : true);
     }
 
     @Override
-    public String getIdFromSession(RoutingContext context) {
-        String sessionKey = SessionUtil.getRegistredSessionKey(context, "AdminSession");
+    public String getIdFromSession(RoutingContext ctx) {
+        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
         String result = null;
         if (sessionKey != null) {
             try {
@@ -113,7 +113,7 @@ public class AdminManager implements AccountManager {
     }
 
     @Override
-    public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
+    public boolean registerSession(RoutingContext ctx, boolean keepLogin, String id) {
         String idEncrypt = aes.encrypt(id);
         try {
             String sessionKey = getSessionKey(id);
@@ -121,9 +121,9 @@ public class AdminManager implements AccountManager {
                 sessionKey = SHA256.encrypt(createSession());
             }
             if (keepLogin) {
-                SessionUtil.registerCookie(context, "AdminSession", sessionKey);
+                SessionUtil.registerCookie(ctx, "AdminSession", sessionKey);
             } else {
-                SessionUtil.registerSession(context, "AdminSession", sessionKey);
+                SessionUtil.registerSession(ctx, "AdminSession", sessionKey);
             }
             if (sessionKey != null) {
                 DataBase.getInstance().executeUpdate("update admin_account set session_key='", sessionKey, "' where id='", idEncrypt, "'");

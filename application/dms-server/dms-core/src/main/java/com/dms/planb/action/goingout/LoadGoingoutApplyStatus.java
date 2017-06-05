@@ -20,27 +20,27 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		EasyJsonObject responseObject = new EasyJsonObject();
 
-        if(userManager.isLogined(context)) {
+        if(userManager.isLogined(ctx)) {
 			try {
-				userManager.getUserInfo(userManager.getIdFromSession(context));
-				boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(context));
+				userManager.getUserInfo(userManager.getIdFromSession(ctx));
+				boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(ctx));
 				responseObject.put("sat", status[0]);
 				responseObject.put("sun", status[1]);
-				context.response().setStatusCode(200).end(responseObject.toString());
-				context.response().close();
+				ctx.response().setStatusCode(200).end(responseObject.toString());
+				ctx.response().close();
 			} catch (SQLException e) {
-				context.response().setStatusCode(500).end();
-				context.response().close();
+				ctx.response().setStatusCode(500).end();
+				ctx.response().close();
 
 				Log.l("SQLException");
 			}
 		}else{
-			context.response().setStatusCode(400).end();
-			context.response().close();
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
 			return;
 		}
 	}

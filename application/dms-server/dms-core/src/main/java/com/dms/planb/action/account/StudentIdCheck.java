@@ -18,22 +18,22 @@ public class StudentIdCheck implements Handler<RoutingContext> {
 	}
 
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
-		String id = context.request().getParam("id");
+		String id = ctx.request().getParam("id");
 		
 		if(!Guardian.checkParameters(id)) {
-        	context.response().setStatusCode(400).end();
-        	context.response().close();
+        	ctx.response().setStatusCode(400).end();
+        	ctx.response().close();
         	return;
         }
 
 		if (userManager.checkIdExists(id)) {
-			context.response().setStatusCode(409).end();
-			context.response().close();
+			ctx.response().setStatusCode(409).end();
+			ctx.response().close();
 		} else {
-			context.response().setStatusCode(201).end();
-			context.response().close();
+			ctx.response().setStatusCode(201).end();
+			ctx.response().close();
 		}
 	}
 }
