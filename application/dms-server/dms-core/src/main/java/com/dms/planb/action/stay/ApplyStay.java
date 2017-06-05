@@ -38,25 +38,18 @@ public class ApplyStay implements Handler<RoutingContext> {
         }
         
 		int value = Integer.parseInt(context.request().getParam("value"));
-		String week = context.request().getParam("week");
 		
-		if(!Guardian.checkParameters(id, uid, value, week)) {
+		if(!Guardian.checkParameters(id, uid, value)) {
             context.response().setStatusCode(400).end();
             context.response().close();
         	return;
         }
-		
 		try {
-			if(ApplyDataUtil.canApplyStay(week)) {
-				database.executeUpdate("DELETE FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
-				database.executeUpdate("INSERT INTO stay_apply(uid, value, week) VALUES('", uid, "', ", value, ", '", week, "')");
+			database.executeUpdate("DELETE FROM stay_apply WHERE uid='", uid, "'");
+			database.executeUpdate("INSERT INTO stay_apply(uid, value) VALUES('", uid, "', ", value, ")");
 			
-				context.response().setStatusCode(200).end();
-				context.response().close();
-			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
-			}
+			context.response().setStatusCode(200).end();
+			context.response().close();
 		} catch(SQLException e) {
 			context.response().setStatusCode(500).end();
 			context.response().close();
