@@ -186,7 +186,7 @@ function sanitize(txt) {
 
 
 var width = screen.width;
-var fullHeight = window.innerHeight + window.screenTop;
+  var fullHeight = window.innerHeight + window.screenTop;
 var height = screen.height - (window.outerHeight -  window.innerHeight - window.screenTop || window.screenY);
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -888,7 +888,7 @@ $("#register-apply-btn").on("click", function() {
         data: {
             id: $("#register-id").val(),
             password: $("#register-pass").val(),
-            uid: $("#uid").val()
+            uid: $("#register-code").val()
         },
         success: function(data, status) {
             alert("회원가입에 성공했어요");
@@ -897,6 +897,6 @@ $("#register-apply-btn").on("click", function() {
         error: function(xhr) {
             alert("회원가입에 실패했어요");
             $(".login-content").toggle("slide");
-        },
+            $(".register-content").toggle("slide");        },
     });
 });

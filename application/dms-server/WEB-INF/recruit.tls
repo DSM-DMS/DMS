@@ -6,19 +6,16 @@
   <link rel="stylesheet" href="/css/recruit-style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="/js/recruit-script.js"></script>
-  <script type="text/javascript">
-  $(function(){
-    $('.message a').click(function(){
-      $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-    });
-  });
-  </script>
 </head>
 <body>
   <div id="gradient" />
 <div class="login-page">
   <div class="form">
     <h3>DMS에서는 당신을 기다립니다!</h3>
+    <div style="font-size: 12px;">
+      면접만으로 지원자를 판단하기 어려워 DMS에서는 인턴과정을 도입했습니다! 6월 5일부터 6월 23일까지 3주간의 인턴과정을 통해 지원자를 평가하고, 정식 팀원으로 모시고자 합니다.<br/><br/>
+      DMS에서는 실력보다 노력, 열정을 우선시로 평가합니다. 자신의 실력이 부족하다고 망설이거나 두려워말고 지금바로 2017 DMS 인턴과정에 지원하세요!
+    </div>
   </div>
   <div class="form">
     <#if isLogin==true>
@@ -26,7 +23,7 @@
         <h3>Team DMS 에 지원해주셔서 감사합니다.</h3>
         <h3>6월 4일 심사 결과가 발표됩니다!</h3>
         <#else>
-    <h3>Team DMS 지원하기</h3>
+    <h3>지원하기</h3>
     <form id="recruit-form" action="/recruit/apply" method="POST" class="login-form">
       <input name="language" type="text" placeholder="사용해본 언어(컴마로 구분)"/>
         <input name="project" type="text" placeholder="진행해본 프로젝트(컴마로 구분)"/>
