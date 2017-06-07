@@ -14,18 +14,19 @@ import io.vertx.ext.web.RoutingContext;
  */
 public class RecruitManager {
     private UserManager userManager;
-    public RecruitManager(){
+
+    public RecruitManager() {
         userManager = new UserManager();
     }
 
-    public RecruitManager(UserManager userManager){
+    public RecruitManager(UserManager userManager) {
         this.userManager = userManager;
     }
 
-    public boolean isApply(RoutingContext ctx){
+    public boolean isApply(RoutingContext ctx) {
         boolean result = false;
         try {
-            if(DataBase.getInstance().executeQuery("select count(*) from recruit where uid='",userManager.getUid(userManager.getIdFromSession(ctx)),"'").nextAndReturn().getInt(1)>0){
+            if (DataBase.getInstance().executeQuery("select count(*) from recruit where uid='", userManager.getUid(userManager.getIdFromSession(ctx)), "'").nextAndReturn().getInt(1) > 0) {
                 result = true;
             }
         } catch (SQLException e) {
@@ -34,15 +35,15 @@ public class RecruitManager {
         return result;
     }
 
-    public boolean canApply(RoutingContext ctx){
+    public boolean canApply(RoutingContext ctx) {
         boolean result = false;
         Calendar c = Calendar.getInstance();
         int month = c.get(Calendar.MONTH) + 1;
         int day = c.get(Calendar.DAY_OF_MONTH);
-        if((month==5&&day>29)||(month==6&&day <2)) {
+        if ((month == 5 && day > 29) || (month == 6 && day <= 2)) {
             try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select number from student_data where uid='",userManager.getUid(userManager.getIdFromSession(ctx)),"'");
-                if(rs.next()&&!UserManager.getAES().decrypt(rs.getString(1)).startsWith("3")){
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select number from student_data where uid='", userManager.getUid(userManager.getIdFromSession(ctx)), "'");
+                if (rs.next() && !UserManager.getAES().decrypt(rs.getString(1)).startsWith("3")) {
                     result = true;
                 }
             } catch (SQLException e) {
