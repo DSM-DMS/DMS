@@ -1,12 +1,16 @@
 package com.dms.planb.template_routers.xlsx;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.dms.planb.template_routers.xlsx.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -110,7 +114,7 @@ public class ResidualDownload {
         for (com.dms.planb.template_routers.xlsx.ResidualData user : list) {
             try {
                 int type;
-                String query = QueryUtils.queryBuilder("SELECT value FROM stay_apply where uid = '", user.getId(), "' AND week = '", date, "'");
+                String query = QueryUtils.queryBuilder("SELECT value FROM stay_apply where uid='", user.getId(), "'");
                 SafeResultSet rs = DataBase.getInstance().executeQuery(query);
                 if (rs.next()) type = rs.getInt(1);
                 else type = user.getResidualDefault();

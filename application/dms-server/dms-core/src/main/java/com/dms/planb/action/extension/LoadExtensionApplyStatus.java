@@ -24,13 +24,13 @@ public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
@@ -42,8 +42,8 @@ public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
         }
         
         if(!Guardian.checkParameters(id, uid)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 		
@@ -55,16 +55,16 @@ public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
 				responseObject.put("seat", resultSet.getInt("seat"));
 				responseObject.put("name", resultSet.getString("name"));
 				
-				context.response().setStatusCode(200);
-				context.response().end(responseObject.toString());
-				context.response().close();
+				ctx.response().setStatusCode(200);
+				ctx.response().end(responseObject.toString());
+				ctx.response().close();
 			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
+				ctx.response().setStatusCode(204).end();
+				ctx.response().close();
 			}
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

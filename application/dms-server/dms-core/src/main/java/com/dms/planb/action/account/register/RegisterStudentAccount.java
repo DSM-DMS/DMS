@@ -27,37 +27,37 @@ public class RegisterStudentAccount implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext ctx) {
 
-        String uid = context.request().getParam("uid");
-        String id = context.request().getParam("id");
-        String password = context.request().getParam("password");
+        String uid = ctx.request().getParam("uid");
+        String id = ctx.request().getParam("id");
+        String password = ctx.request().getParam("password");
         
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
                 JobResult result = userManager.register(uid, id, password);
                 if (result.isSuccess()) {
-                    context.response().setStatusCode(201);
-                    context.response().setStatusMessage(result.getMessage()).end();
+                    ctx.response().setStatusCode(201);
+                    ctx.response().setStatusMessage(result.getMessage()).end();
                 } else {
                     // Conflict
-                    context.response().setStatusCode(409);
-                    context.response().setStatusMessage(result.getMessage()).end();
-                    registerRequestSecureManager.invalidRequest(context);
+                    ctx.response().setStatusCode(409);
+                    ctx.response().setStatusMessage(result.getMessage()).end();
+                    registerRequestSecureManager.invalidRequest(ctx);
                 }
             } else {
                 // Any null in parameters
-                context.response().setStatusCode(400).end();
-                context.response().close();
-                secureManager.invalidRequest(context);
+                ctx.response().setStatusCode(400).end();
+                ctx.response().close();
+                secureManager.invalidRequest(ctx);
             }
         } catch (SQLException e) {
-            context.response().setStatusCode(500).end();
-            context.response().close();
-            secureManager.invalidRequest(context);
+            ctx.response().setStatusCode(500).end();
+            ctx.response().close();
+            secureManager.invalidRequest(ctx);
             Log.l("SQLException");
         }
-        Log.l("Register Request (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+        Log.l("Register Request (", id, ", ", ctx.request().remoteAddress(), ") status : " + ctx.response().getStatusCode());
     }
 
 }

@@ -17,7 +17,7 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path="/post/rule/list", method={HttpMethod.GET})
 public class LoadRuleWithList implements Handler<RoutingContext> {
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
@@ -26,11 +26,11 @@ public class LoadRuleWithList implements Handler<RoutingContext> {
 		EasyJsonArray tempArray = new EasyJsonArray();
 		
 		try {
-			if(!context.request().params().contains("page") && !context.request().params().contains("limit")) {
+			if(!ctx.request().params().contains("page") && !ctx.request().params().contains("limit")) {
 				resultSet = database.executeQuery("SELECT * FROM rule");
 			} else {
-				int page = Integer.parseInt(context.request().getParam("page"));
-				int limit = Integer.parseInt(context.request().getParam("limit"));
+				int page = Integer.parseInt(ctx.request().getParam("page"));
+				int limit = Integer.parseInt(ctx.request().getParam("limit"));
 				resultSet = database.executeQuery("SELECT * FROM rule limit ", ((page - 1) * limit), ", ", limit);
 			}
 			
@@ -51,16 +51,16 @@ public class LoadRuleWithList implements Handler<RoutingContext> {
 				responseObject.put("num_of_post", postCount);
 				responseObject.put("result", tempArray);
 				
-				context.response().setStatusCode(200);
-				context.response().end(responseObject.toString());
-				context.response().close();
+				ctx.response().setStatusCode(200);
+				ctx.response().end(responseObject.toString());
+				ctx.response().close();
 			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
+				ctx.response().setStatusCode(204).end();
+				ctx.response().close();
 			}
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

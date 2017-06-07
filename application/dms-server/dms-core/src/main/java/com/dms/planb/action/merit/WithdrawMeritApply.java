@@ -21,11 +21,11 @@ public class WithdrawMeritApply implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
@@ -37,19 +37,19 @@ public class WithdrawMeritApply implements Handler<RoutingContext> {
         }
         
         if(!Guardian.checkParameters(id, uid)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 		
 		try {
 			database.executeUpdate("DELETE FROM merit_apply WHERE uid='", uid, "'");
 			
-			context.response().setStatusCode(200).end();
-			context.response().close();
+			ctx.response().setStatusCode(200).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

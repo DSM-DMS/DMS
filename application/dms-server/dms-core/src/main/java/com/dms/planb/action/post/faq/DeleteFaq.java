@@ -19,34 +19,34 @@ public class DeleteFaq implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
-		if (!Guardian.isAdmin(context)) {
-			context.response().setStatusCode(400).end();
-			context.response().close();
+		if (!Guardian.isAdmin(ctx)) {
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
 			return;
 		}
 		
 		DataBase database = DataBase.getInstance();
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
+		int no = Integer.parseInt(ctx.request().getParam("no"));
 		
 		if(!Guardian.checkParameters(no)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 		
 		try {
 			database.executeUpdate("DELETE FROM faq WHERE no=", no);
 			
-			context.response().setStatusCode(200);
-			context.response().end(responseObject.toString());
-			context.response().close();
+			ctx.response().setStatusCode(200);
+			ctx.response().end(responseObject.toString());
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

@@ -11,12 +11,12 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path="/post/school/notice", method={HttpMethod.GET})
 public class LoadNotice implements Handler<RoutingContext> {
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
-		int no = Integer.parseInt(context.request().getParam("no"));
+		int no = Integer.parseInt(ctx.request().getParam("no"));
 		
-		context.response().setStatusCode(200);
-		context.response().end(PostModel.getPost(0, no).toString());
-		context.response().close();
+		ctx.response().setStatusCode(200);
+		ctx.response().end(PostModel.getPost(0, no).toString());
+		ctx.response().close();
 	}
 }

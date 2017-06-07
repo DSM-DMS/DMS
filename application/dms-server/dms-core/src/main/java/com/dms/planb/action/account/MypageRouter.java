@@ -25,15 +25,15 @@ public class MypageRouter implements Handler<RoutingContext> {
 	}
 
 	@Override
-	public void handle(RoutingContext context) {
-		if(!userManager.isLogined(context)){
-			context.response().setStatusCode(400).end();
-			context.response().close();
+	public void handle(RoutingContext ctx) {
+		if(!userManager.isLogined(ctx)){
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
 			return;
 		}
 
 		EasyJsonObject responseObject = new EasyJsonObject();
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         try {
             if (id != null) {
@@ -44,13 +44,13 @@ public class MypageRouter implements Handler<RoutingContext> {
         }
         
         if(!Guardian.checkParameters(id, uid)) {
-        	context.response().setStatusCode(400).end();
-        	context.response().close();
+        	ctx.response().setStatusCode(400).end();
+        	ctx.response().close();
         	return;
         }
 
 		try {
-			JobResult result = userManager.getUserInfo(userManager.getIdFromSession(context));
+			JobResult result = userManager.getUserInfo(userManager.getIdFromSession(ctx));
 			if (result.isSuccess()) {
 				Map<String, Object> datas = (Map) result.getArgs()[0];
 				responseObject.put("number", datas.get("number"));
@@ -60,16 +60,16 @@ public class MypageRouter implements Handler<RoutingContext> {
 				responseObject.put("room", datas.get("room"));
 				responseObject.put("seat", datas.get("seat"));
 
-				context.response().setStatusCode(200);
-				context.response().end(responseObject.toString());
-				context.response().close();
+				ctx.response().setStatusCode(200);
+				ctx.response().end(responseObject.toString());
+				ctx.response().close();
 			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
+				ctx.response().setStatusCode(204).end();
+				ctx.response().close();
 			}
 		} catch (SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 
 			Log.l("SQLException");
 		}

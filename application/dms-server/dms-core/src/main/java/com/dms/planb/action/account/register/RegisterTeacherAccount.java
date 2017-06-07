@@ -19,37 +19,37 @@ public class RegisterTeacherAccount implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
-        if (!AdminManager.isAdmin(context)) {
-            context.response().setStatusCode(404).end();
-            context.response().close();
+    public void handle(RoutingContext ctx) {
+        if (!AdminManager.isAdmin(ctx)) {
+            ctx.response().setStatusCode(404).end();
+            ctx.response().close();
             return;
         }
 
-        String id = context.request().getParam("id");
-        String password = context.request().getParam("password");
-        String passwordConfirm = context.request().getParam("password-confirm");
-        String name = context.request().getParam("name");
+        String id = ctx.request().getParam("id");
+        String password = ctx.request().getParam("password");
+        String passwordConfirm = ctx.request().getParam("password-confirm");
+        String name = ctx.request().getParam("name");
         if (!Guardian.checkParameters(id, password, passwordConfirm, name)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         } else {
             if (!password.equals(passwordConfirm) || adminManager.checkIdExists(id)) {
-                context.response().setStatusCode(204).end();
-                context.response().close();
+                ctx.response().setStatusCode(204).end();
+                ctx.response().close();
             }else{
                 try {
                     JobResult result = adminManager.register(id, password, name);
                     if(result.isSuccess()){
-                        context.response().setStatusCode(200).end();
-                        context.response().close();
+                        ctx.response().setStatusCode(200).end();
+                        ctx.response().close();
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                if(!context.response().closed()){
-                    context.response().setStatusCode(500).end();
-                    context.response().close();
+                if(!ctx.response().closed()){
+                    ctx.response().setStatusCode(500).end();
+                    ctx.response().close();
                 }
             }
         }

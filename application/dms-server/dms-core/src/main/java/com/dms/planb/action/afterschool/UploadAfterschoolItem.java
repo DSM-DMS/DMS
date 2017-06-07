@@ -19,36 +19,36 @@ public class UploadAfterschoolItem implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
-		String title = context.request().getParam("title");
+		int no = Integer.parseInt(ctx.request().getParam("no"));
+		String title = ctx.request().getParam("title");
 		
-		int target = Integer.parseInt(context.request().getParam("target"));
-		String place = context.request().getParam("place");
-		boolean onMonday = Boolean.parseBoolean(context.request().getParam("on_monday"));
-		boolean onTuesday = Boolean.parseBoolean(context.request().getParam("on_tuesday"));
-		boolean onWednesday = Boolean.parseBoolean(context.request().getParam("on_wednesday"));
-		boolean onSaturday = Boolean.parseBoolean(context.request().getParam("on_saturday"));
-		String instructor = context.request().getParam("instructor");
-		int personnel = Integer.parseInt(context.request().getParam("personnel"));
+		int target = Integer.parseInt(ctx.request().getParam("target"));
+		String place = ctx.request().getParam("place");
+		boolean onMonday = Boolean.parseBoolean(ctx.request().getParam("on_monday"));
+		boolean onTuesday = Boolean.parseBoolean(ctx.request().getParam("on_tuesday"));
+		boolean onWednesday = Boolean.parseBoolean(ctx.request().getParam("on_wednesday"));
+		boolean onSaturday = Boolean.parseBoolean(ctx.request().getParam("on_saturday"));
+		String instructor = ctx.request().getParam("instructor");
+		int personnel = Integer.parseInt(ctx.request().getParam("personnel"));
 		
 		if(!Guardian.checkParameters(no, title, target, place, onMonday, onTuesday, onWednesday, onSaturday, instructor, personnel)) {
-        	context.response().setStatusCode(400).end();
-        	context.response().close();
+        	ctx.response().setStatusCode(400).end();
+        	ctx.response().close();
         	return;
         }
 		
 		try {
 			database.executeUpdate("INSERT INTO afterschool_list(no, title, target, place, on_monday, on_tuesday, on_wednesday, on_saturday, instructor, personnel) VALUES(", no, ", '", title, "', ", target, ", '", place, "', ", onMonday, ", ", onTuesday, ", ", onWednesday, ", ", onSaturday, ", '", instructor, "', ", personnel, ")");
 			
-			context.response().setStatusCode(201).end();
-			context.response().close();
+			ctx.response().setStatusCode(201).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}
