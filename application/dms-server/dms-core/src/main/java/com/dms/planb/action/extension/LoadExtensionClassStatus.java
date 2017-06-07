@@ -74,7 +74,6 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 		SafeResultSet resultSet = DataBase.getInstance().executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
 
 		while (resultSet.next()) {
-			System.out.println(resultSet.getString("name"));
 			map.put(resultSet.getInt("seat"), UserManager.getAES().decrypt(resultSet.getString("name")));
 		}
 		

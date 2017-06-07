@@ -18,7 +18,7 @@ public class LogErrorOutputStream extends PrintStream{
     
     @Override
     public void println(String str){
-        Log.e(str);
+        Log.e(str+"\n");
         super.println(str);
     }
     

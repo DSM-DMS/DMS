@@ -23,7 +23,6 @@ public class Log {
 		if (logFile == null || fw == null || !logFile.getName().equals(currentFileName)) {
 			logFile = new File(path + currentFileName);
 			try {
-				System.out.println(logFile.getPath());
 				if (logFile.getParentFile() != null)
 					logFile.getParentFile().mkdirs();
 				if (!logFile.exists())
@@ -99,7 +98,6 @@ public class Log {
 		getLogFile();
 		String str = cleanStringBuilder(args);
 		str = setFormat(str, LOG_ERROR);
-		System.err.println(str);
 		try {
 			fw.write(str);
 			fw.flush();
