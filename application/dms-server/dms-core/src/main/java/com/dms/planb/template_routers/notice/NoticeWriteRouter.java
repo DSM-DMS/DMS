@@ -23,8 +23,8 @@ public class NoticeWriteRouter implements Handler<RoutingContext> {
 		adminManager = new AdminManager();
 	}
 	
-	public void handle(RoutingContext context) {
-		if (!Guardian.isAdmin(context)) return;
+	public void handle(RoutingContext ctx) {
+		if (!Guardian.isAdmin(ctx)) return;
 
 		boolean isLogin = adminManager.isLogined(context);
 		if(isLogin) {
@@ -34,19 +34,19 @@ public class NoticeWriteRouter implements Handler<RoutingContext> {
 				templates.put("type", "write");
 				templates.put("content", "");
 				
-				context.response().setStatusCode(200);
-				context.response().end(templates.process());
-				context.response().close();
+				ctx.response().setStatusCode(200);
+				ctx.response().end(templates.process());
+				ctx.response().close();
 			} catch(IOException e) {
 				Log.l("IOException");
 			} catch(TemplateException e) {
 				Log.l("TemplateException");
 			}
 		} else {
-			context.response().setStatusCode(200);
-            context.response().putHeader("Content-type", "text/html; utf-8");
-            context.response().end("<script>window.location.href='/'</script>");
-            context.response().close();
+			ctx.response().setStatusCode(200);
+            ctx.response().putHeader("Content-type", "text/html; utf-8");
+            ctx.response().end("<script>window.location.href='/'</script>");
+            ctx.response().close();
 		}
 	}
 }

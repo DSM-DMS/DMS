@@ -22,24 +22,24 @@ public class RequestSecurePreprocessor {
         }
 
         @Override
-        public void handle(RoutingContext context) {
-            context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Cookie, Origin, X-Requested-With, Content-Type");
-            context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST, PUT, PATCH, GET, DELETE, OPTIONS, HEAD, CONNECT");
-            context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com/*");
-            context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com/");
-            context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com");
-            context.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-            if (secureManager.isBanned(context)) {
-                context.response().setStatusCode(400);
-                context.response().setStatusMessage("You are banned!");
-                context.response().putHeader("Content-Type", "text/html; charset=utf-8");
-                context.response().end("<h1>사이트에서 차단되었습니다.<br> 관리자에게 문의해 주세요 IP:"+context.request().remoteAddress().host()+"</h1>");
-                context.response().close();
+        public void handle(RoutingContext ctx) {
+            ctx.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Cookie, Origin, X-Requested-With, Content-Type");
+            ctx.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST, PUT, PATCH, GET, DELETE, OPTIONS, HEAD, CONNECT");
+            ctx.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com/*");
+            ctx.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com/");
+            ctx.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "http://dsm2015.cafe24.com");
+            ctx.response().putHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+            if (secureManager.isBanned(ctx)) {
+                ctx.response().setStatusCode(400);
+                ctx.response().setStatusMessage("You are banned!");
+                ctx.response().putHeader("Content-Type", "text/html; charset=utf-8");
+                ctx.response().end("<h1>사이트에서 차단되었습니다.<br> 관리자에게 문의해 주세요 IP:"+ctx.request().remoteAddress().host()+"</h1>");
+                ctx.response().close();
                 return;
             }
 
-            Log.l(" Method : " ,context.request().method()," Absolute URI : " , context.request().absoluteURI()," Params size : " , context.request().params().size());
-            context.next();
+            Log.l(" Method : " ,ctx.request().method()," Absolute URI : " , ctx.request().absoluteURI()," Params size : " , ctx.request().params().size());
+            ctx.next();
         }
     }
 }

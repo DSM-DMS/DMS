@@ -10,10 +10,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+=======
+>>>>>>> 6c4d43aba7045f562d3bb909b06293494fbb0c6f
     <orderEntry type="module" module-name="dms-data-utilities" />
     <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.10" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:15.0" level="project" />
@@ -23,15 +26,15 @@
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk16:1.45" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.3.3" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.5.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.8.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.8.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-web:3.3.3" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.3.3" level="project" />
-    <orderEntry type="library" name="Maven: io.vertx:vertx-lang-groovy:3.3.3" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-web:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-lang-groovy:3.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.4.7" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.5.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.5.Final" level="project" />

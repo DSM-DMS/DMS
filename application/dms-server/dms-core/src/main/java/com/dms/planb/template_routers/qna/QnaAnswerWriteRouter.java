@@ -22,8 +22,8 @@ public class QnaAnswerWriteRouter implements Handler<RoutingContext> {
         userManager = new UserManager();
     }
 
-    public void handle(RoutingContext context) {
-        if (!Guardian.isAdmin(context)) return;
+    public void handle(RoutingContext ctx) {
+        if (!Guardian.isAdmin(ctx)) return;
 
         DmsTemplate templates = new DmsTemplate("editor");
 
@@ -31,9 +31,9 @@ public class QnaAnswerWriteRouter implements Handler<RoutingContext> {
             templates.put("category", "qnaAnswer");
             templates.put("type", "write");
 
-            context.response().setStatusCode(200);
-            context.response().end(templates.process());
-            context.response().close();
+            ctx.response().setStatusCode(200);
+            ctx.response().end(templates.process());
+            ctx.response().close();
         } catch (IOException e) {
             Log.l("IOException");
         } catch (TemplateException e) {

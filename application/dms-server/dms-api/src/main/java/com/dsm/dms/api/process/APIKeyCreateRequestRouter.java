@@ -23,12 +23,12 @@ public class APIKeyCreateRequestRouter implements Handler<RoutingContext> {
         userManager = new UserManager();
     }
 
-    public void handle(RoutingContext context)
+    public void handle(RoutingContext ctx)
     {
-        HttpServerResponse response = context.response();
-        if(userManager.isLogined(context)){
+        HttpServerResponse response = ctx.response();
+        if(userManager.isLogined(ctx)){
             try {
-                String uid = userManager.getUid(userManager.getIdFromSession(context));
+                String uid = userManager.getUid(userManager.getIdFromSession(ctx));
                 String result = requestManager.createApiKey(uid);
                 if(result != null){
                     response.setStatusCode(200);

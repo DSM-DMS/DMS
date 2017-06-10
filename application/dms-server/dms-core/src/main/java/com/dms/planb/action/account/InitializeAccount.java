@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.AdminManager;
+import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
@@ -17,17 +18,17 @@ import io.vertx.ext.web.RoutingContext;
 public class InitializeAccount implements Handler<RoutingContext> {
 
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 		DataBase database = DataBase.getInstance();
 
-		if (!AdminManager.isAdmin(context)) {
-			context.response().setStatusCode(400).end();
-			context.response().close();
+		if (!AdminManager.isAdmin(ctx)) {
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
 			return;
 		}
 
-		String number = context.request().getParam("number");
-		String encryptedNumber = SHA256.encrypt(number);
+		String number = ctx.request().getParam("number");
+		String encryptedNumber = UserManager.getAES().encrypt(number);
 
 		try {
 			SafeResultSet studentData = database.executeQuery("SELECT uid FROM student_data WHERE number='", encryptedNumber, "'");
@@ -35,15 +36,15 @@ public class InitializeAccount implements Handler<RoutingContext> {
 				String uid = studentData.getString("uid");
 				database.executeUpdate("UPDATE account SET id=null, password=null, session_key=null WHERE uid='", uid, "'");
 				
-				context.response().setStatusCode(200).end();
-				context.response().close();
+				ctx.response().setStatusCode(200).end();
+				ctx.response().close();
 			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
+				ctx.response().setStatusCode(204).end();
+				ctx.response().close();
 			}
 		} catch (SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 
 			Log.l("SQLException");
 		}

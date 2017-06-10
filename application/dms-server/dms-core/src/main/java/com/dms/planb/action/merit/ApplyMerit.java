@@ -22,11 +22,11 @@ public class ApplyMerit implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
@@ -37,28 +37,28 @@ public class ApplyMerit implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-		String content = context.request().getParam("content");
+		String content = ctx.request().getParam("content");
 		
 		if(!Guardian.checkParameters(id, uid, content)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 		
 		try {
-			if(context.request().params().contains("target")) {
-				String target = context.request().getParam("target");
+			if(ctx.request().params().contains("target")) {
+				String target = ctx.request().getParam("target");
 				
 				database.executeUpdate("INSERT INTO merit_apply(uid, target, content) VALUES('", uid, "', '", target, "', '", content, "')");
 			} else {
 				database.executeUpdate("INSERT INTO merit_apply(uid, content) VALUES('", uid, "', '", content, "')");
 			}
 			
-			context.response().setStatusCode(201).end();
-			context.response().close();
+			ctx.response().setStatusCode(201).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

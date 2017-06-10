@@ -23,15 +23,15 @@ public class ApplyRecruit implements Handler<RoutingContext> {
         recruitManager = new RecruitManager(userManager);
     }
 
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext ctx) {
         int code = 400;
-        if (userManager.isLogined(context) && recruitManager.canApply(context) && !recruitManager.isApply(context)) {
-            String language = context.request().getParam("language");
-            String project = context.request().getParam("project");
-            String content = context.request().getParam("content");
-            String area = context.request().getParam("area");
+        if (userManager.isLogined(ctx) && recruitManager.canApply(ctx) && !recruitManager.isApply(ctx)) {
+            String language = ctx.request().getParam("language");
+            String project = ctx.request().getParam("project");
+            String content = ctx.request().getParam("content");
+            String area = ctx.request().getParam("area");
             try {
-                String uid = userManager.getUid(userManager.getIdFromSession(context));
+                String uid = userManager.getUid(userManager.getIdFromSession(ctx));
                 DataBase.getInstance().executeUpdate("DELETE FROM recruit WHERE uid='", uid, "'");
                 DataBase.getInstance().executeUpdate("insert into recruit values('", uid, "', '", language, "', '", project, "', '", content, "', '", area, "')");
                 code = 200;
@@ -39,7 +39,7 @@ public class ApplyRecruit implements Handler<RoutingContext> {
                 e.printStackTrace();
             }
         }
-        context.response().setStatusCode(code).end("<script>window.location.href=document.referrer;</script>");
-        context.response().close();
+        ctx.response().setStatusCode(code).end("<script>window.location.href=document.referrer;</script>");
+        ctx.response().close();
     }
 }

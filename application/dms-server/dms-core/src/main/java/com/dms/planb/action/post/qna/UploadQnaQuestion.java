@@ -22,17 +22,17 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext ctx) {
 
         DataBase database = DataBase.getInstance();
         AES256 aes = UserManager.getAES();
 
-        String title = context.request().getParam("title");
-        String content = context.request().getParam("content");
-        boolean privacy = Boolean.parseBoolean(context.request().getParam("privacy"));
+        String title = ctx.request().getParam("title");
+        String content = ctx.request().getParam("content");
+        boolean privacy = Boolean.parseBoolean(ctx.request().getParam("privacy"));
         String uid = null;
         try {
-            uid = userManager.getUid(userManager.getIdFromSession(context));
+            uid = userManager.getUid(userManager.getIdFromSession(ctx));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,16 +43,16 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
             	String name = aes.decrypt(rs.getString("name"));
                 database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner, writer) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, "', '", name, "')");
 
-                context.response().setStatusCode(201).end();
-                context.response().close();
+                ctx.response().setStatusCode(201).end();
+                ctx.response().close();
             } catch (SQLException e) {
-                context.response().setStatusCode(500).end();
-                context.response().close();
+                ctx.response().setStatusCode(500).end();
+                ctx.response().close();
             }
         }
-        if (!context.response().closed()) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+        if (!ctx.response().closed()) {
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         }
     }
 }

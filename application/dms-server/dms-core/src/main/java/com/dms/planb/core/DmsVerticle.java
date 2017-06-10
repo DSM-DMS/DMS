@@ -11,6 +11,7 @@ import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
+import org.boxfox.dms.utilities.config.SecureConfig;
 
 public class DmsVerticle extends AbstractVerticle {
     public void start() throws Exception {
@@ -33,6 +34,6 @@ public class DmsVerticle extends AbstractVerticle {
                 .setKeyStoreOptions(new JksOptions().setPath(SecureConfig.get("SSL_PATH")).setPassword(SecureConfig.get("SSL")))
                 .setTrustStoreOptions(new JksOptions().setPath(SecureConfig.get("SSL_PATH")).setPassword(SecureConfig.get("SSL")));
         */
-        vertx.createHttpServer(httpOpts).requestHandler(router::accept).listen(8080);
+        vertx.createHttpServer(httpOpts).requestHandler(router::accept).listen(Integer.parseInt(SecureConfig.get("SERVER_PORT")));
     }
 }

@@ -24,12 +24,12 @@
 //	}
 //
 //	@Override
-//	public void handle(RoutingContext context) {
-//		context = PrecedingWork.putHeaders(context);
+//	public void handle(RoutingContext ctx) {
+//		ctx = PrecedingWork.putHeaders(ctx);
 //
 //		DataBase database = DataBase.getInstance();
 //
-//		String id = userManager.getIdFromSession(context);
+//		String id = userManager.getIdFromSession(ctx);
 //        String uid = null;
 //        try {
 //            if (id != null) {
@@ -40,18 +40,18 @@
 //        }
 //
 //        if(!Guardian.checkParameters(id, uid)) {
-//        	context.response().setStatusCode(400).end();
-//        	context.response().close();
+//        	ctx.response().setStatusCode(400).end();
+//        	ctx.response().close();
 //        	return;
 //        }
 //
 //		try {
 //			database.executeUpdate("DELETE FROM account WHERE uid=", uid);
-//			context.response().setStatusCode(200).end();
-//			context.response().close();
+//			ctx.response().setStatusCode(200).end();
+//			ctx.response().close();
 //		} catch(SQLException e) {
-//			context.response().setStatusCode(500).end();
-//			context.response().close();
+//			ctx.response().setStatusCode(500).end();
+//			ctx.response().close();
 //
 //			Log.l("SQLException");
 //		}
