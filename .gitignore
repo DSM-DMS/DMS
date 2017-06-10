@@ -3,5 +3,3 @@ log/
 *.log
 *.cnf
 .idea/
-.idea/*
-/.idea/
