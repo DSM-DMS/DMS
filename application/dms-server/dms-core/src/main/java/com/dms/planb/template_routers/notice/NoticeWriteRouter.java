@@ -26,7 +26,7 @@ public class NoticeWriteRouter implements Handler<RoutingContext> {
 	public void handle(RoutingContext ctx) {
 		if (!Guardian.isAdmin(ctx)) return;
 
-		boolean isLogin = adminManager.isLogined(context);
+		boolean isLogin = adminManager.isLogined(ctx);
 		if(isLogin) {
 			DmsTemplate templates = new DmsTemplate("editor");
 			try {

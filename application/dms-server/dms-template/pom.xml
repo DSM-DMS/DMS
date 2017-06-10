@@ -21,8 +21,8 @@
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>dms-templates</artifactId>
-	<name>dms-templates</name>
+	<artifactId>dms-template</artifactId>
+	<name>dms-template</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
