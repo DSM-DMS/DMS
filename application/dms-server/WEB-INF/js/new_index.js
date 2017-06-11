@@ -480,7 +480,7 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/rule/list",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -496,7 +496,7 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/rule/list",
         type: "GET",
         data: {
             page: 1,
