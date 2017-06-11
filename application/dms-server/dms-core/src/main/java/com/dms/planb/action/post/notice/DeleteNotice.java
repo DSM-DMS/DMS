@@ -16,27 +16,20 @@ public class DeleteNotice implements Handler<RoutingContext> {
 	
 	@Override
 	public void handle(RoutingContext ctx) {
-		if (!Guardian.isAdmin(ctx)) {
+
+		int no = Integer.parseInt(ctx.request().getParam("no"));
+		if (!Guardian.isAdmin(ctx)&&Guardian.checkParameters(no)) {
 			ctx.response().setStatusCode(400).end();
 			ctx.response().close();
 			return;
 		}
 		
 		DataBase database = DataBase.getInstance();
-
-		int no = Integer.parseInt(ctx.request().getParam("no"));
-
-		if(!Guardian.checkParameters(no)) {
-            ctx.response().setStatusCode(400).end();
-            ctx.response().close();
-        	return;
-        }
-		
 		try {
 			database.executeUpdate("DELETE FROM notice WHERE no=", no);
 			
 			ctx.response().setStatusCode(200).end();
-			ctx.response().end();
+			ctx.response().close();
 		} catch(SQLException e) {
 			ctx.response().setStatusCode(500).end();
 			ctx.response().close();
