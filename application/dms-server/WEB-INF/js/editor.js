@@ -25,7 +25,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=notice");
+            redirect("/post/admin/?category=notice");
         };
     } else if (localStorage.category == "notice" && localStorage.type == "modify") {
         // 공지 수정
@@ -38,7 +38,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=notice");
+            redirect("/post/admin/?category=notice");
         };
     } else if (localStorage.category == "faq" && localStorage.type == "write") {
         // faq 작성
@@ -50,7 +50,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=faq");
+            redirect("/post/admin/?category=faq");
         };
     } else if (localStorage.category == "faq" && localStorage.type == "modify") {
         // faq 수정
@@ -63,7 +63,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=faq");
+            redirect("/post/admin/?category=faq");
         };
     } else if (localStorage.category == "report" && localStorage.type == "write") {
         // 시설고장 작성
@@ -76,7 +76,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=report");
+            redirect("/post/admin/?category=report");
         };
     } else if (localStorage.category == "report" && localStorage.type == "modify") {
         // 시설고장 수정
@@ -90,7 +90,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=report");
+            redirect("/post/admin/?category=report");
         };
     } else if (localStorage.category == "reportResult" && localStorage.type == "write") {
         // 시설고장답 작성
@@ -101,7 +101,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=report");
+            redirect("/post/admin/?category=report");
         };
     } else if (localStorage.category == "rule" && localStorage.type == "write") {
         // 규칙 작성
@@ -113,7 +113,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=rule");
+            redirect("/post/admin/?category=rule");
         };
     } else if (localStorage.category == "rule" && localStorage.type == "modify") {
         // 규칙 수정
@@ -126,7 +126,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=rule");
+            redirect("/post/admin/?category=rule");
         };
     } else if (localStorage.category == "qna" && localStorage.type == "write") {
         // qna질문 작성
@@ -139,7 +139,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=qna");
+            redirect("/post/admin/?category=qna");
         };
     } else if (localStorage.category == "qna" && localStorage.type == "modify") {
         // qna질문 수정
@@ -152,7 +152,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=qna");
+            redirect("/post/admin/?category=qna");
         };
     } else if (localStorage.category == "qnaAnswer" && localStorage.type == "write") {
         // qna답 작성
@@ -164,7 +164,7 @@ function checkCategotyAndType() {
         };
         callback = function() {
             // /post/?category=notice
-            redirect("/post/?category=qna");
+            redirect("/post/admin/?category=qna");
         };
     }
 }

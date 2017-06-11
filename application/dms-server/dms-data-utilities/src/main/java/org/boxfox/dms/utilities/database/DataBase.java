@@ -11,12 +11,19 @@ import org.boxfox.dms.utilities.log.Log;
 import static org.boxfox.dms.utilities.database.QueryUtils.queryBuilder;
 
 public class DataBase {
-	private static final String DB_TARGET = "localhost:3306/dsm_dms";
+	private static final String DB_TARGET;
 	private static final String DB_ATTRIBUTE = "?allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
-	private static final String DB_ID = "root";
+	private static final String DB_ID;
+	private static final String DB_PW;
 
 	private Statement statement;
 	private Connection connection;
+
+	static{
+		DB_TARGET = SecureConfig.get("DB_HOST")+":"+SecureConfig.get("DB_PORT")+"/"+SecureConfig.get("DB_NAME");
+		DB_ID = SecureConfig.get("DB_ID");
+		DB_PW = SecureConfig.get("DB_PW");
+	}
 
 	private DataBase() {
 		connect();
@@ -53,8 +60,7 @@ public class DataBase {
 	private boolean connect() {
 		try {
 			if (connection == null || connection.isClosed()) {
-				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET + DB_ATTRIBUTE, DB_ID,
-						SecureConfig.get("database"));
+				connection = DriverManager.getConnection("jdbc:mysql://" + DB_TARGET + DB_ATTRIBUTE, DB_ID, DB_PW);
 				statement = connection.createStatement();
 				Log.l("Database connected successfully!");
 			}

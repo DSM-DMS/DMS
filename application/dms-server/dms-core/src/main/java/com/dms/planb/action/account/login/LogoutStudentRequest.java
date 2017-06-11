@@ -16,11 +16,11 @@ public class LogoutStudentRequest implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext ctx) {
 
-        userManager.removeCookie(context);
+        userManager.removeCookie(ctx);
         
-        context.response().setStatusCode(201).end();
-        context.response().close();
+        ctx.response().setStatusCode(201).end();
+        ctx.response().close();
     }
 }

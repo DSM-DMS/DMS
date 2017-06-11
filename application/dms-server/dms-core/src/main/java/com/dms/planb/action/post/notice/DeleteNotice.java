@@ -13,37 +13,26 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/notice", method={HttpMethod.DELETE})
 public class DeleteNotice implements Handler<RoutingContext> {
-	public DeleteNotice() {
-		
-	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
-		if (!Guardian.isAdmin(context)) {
-			context.response().setStatusCode(400).end();
-			context.response().close();
+		int no = Integer.parseInt(ctx.request().getParam("no"));
+		if (!Guardian.isAdmin(ctx)&&Guardian.checkParameters(no)) {
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
 			return;
 		}
 		
 		DataBase database = DataBase.getInstance();
-		
-		int no = Integer.parseInt(context.request().getParam("no"));
-		
-		if(!Guardian.checkParameters(no)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
-        	return;
-        }
-		
 		try {
 			database.executeUpdate("DELETE FROM notice WHERE no=", no);
 			
-			context.response().setStatusCode(200).end();
-			context.response().end();
+			ctx.response().setStatusCode(200).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

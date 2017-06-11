@@ -21,24 +21,24 @@ public class AdminPageRouter implements Handler<RoutingContext> {
 		adminManager = new AdminManager();
 	}
 
-	public void handle(RoutingContext context) {
-		boolean isLogin = adminManager.isLogined(context);
+	public void handle(RoutingContext ctx) {
+		boolean isLogin = adminManager.isLogined(ctx);
 		if (isLogin) {
-			DmsTemplate templates = new DmsTemplate("admin_page");
+			DmsTemplate templates = new DmsTemplate("new_admin_page");
 			try {
-				context.response().setStatusCode(200);
-				context.response().end(templates.process());
-				context.response().close();
+				ctx.response().setStatusCode(200);
+				ctx.response().end(templates.process());
+				ctx.response().close();
 			} catch (TemplateException e) {
 				Log.l("TemplateException");
 			} catch (IOException e) {
 				Log.l("IOException");
 			}
 		} else {
-			context.response().setStatusCode(200);
-            context.response().putHeader("Content-type", "text/html; utf-8");
-            context.response().end("<script>window.location.href='/'</script>");
-            context.response().close();
+			ctx.response().setStatusCode(200);
+            ctx.response().putHeader("Content-type", "text/html; utf-8");
+            ctx.response().end("<script>window.location.href='/'</script>");
+            ctx.response().close();
 		}
 	}
 }

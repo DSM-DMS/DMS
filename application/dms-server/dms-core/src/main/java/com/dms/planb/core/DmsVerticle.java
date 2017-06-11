@@ -11,6 +11,7 @@ import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
+import org.boxfox.dms.utilities.config.SecureConfig;
 
 public class DmsVerticle extends AbstractVerticle {
     public void start() throws Exception {
@@ -18,10 +19,10 @@ public class DmsVerticle extends AbstractVerticle {
 
         router.route().handler(BodyHandler.create().setUploadsDirectory("upload-files"));
         router.route().handler(CookieHandler.create());
-        router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
+        router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setNagHttps(false));
         router.route().handler(RequestSecurePreprocessor.create());
         RouteRegister.registerRouters(router, "org.boxfox.dms.secure", "com.dms.planb", "com.dms.boxfox.templates");
-        router.route().handler(StaticHandler.create());
+        router.route("/js/*").handler(StaticHandler.create().setCachingEnabled(false).setWebRoot("WEB-INF/js/"));
         
         /*
          * @see com.dms.planb.support .TableDropper
@@ -33,6 +34,6 @@ public class DmsVerticle extends AbstractVerticle {
                 .setKeyStoreOptions(new JksOptions().setPath(SecureConfig.get("SSL_PATH")).setPassword(SecureConfig.get("SSL")))
                 .setTrustStoreOptions(new JksOptions().setPath(SecureConfig.get("SSL_PATH")).setPassword(SecureConfig.get("SSL")));
         */
-        vertx.createHttpServer(httpOpts).requestHandler(router::accept).listen(8080);
+        vertx.createHttpServer(httpOpts).requestHandler(router::accept).listen(Integer.parseInt(SecureConfig.get("SERVER_PORT")));
     }
 }

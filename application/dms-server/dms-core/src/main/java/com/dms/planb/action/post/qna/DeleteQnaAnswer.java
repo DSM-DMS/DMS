@@ -14,32 +14,32 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path = "/post/qna/answer", method = {HttpMethod.DELETE})
 public class DeleteQnaAnswer implements Handler<RoutingContext> {
     @Override
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext ctx) {
 
-		if (!Guardian.isAdmin(context)) {
-			context.response().setStatusCode(400).end();
-			context.response().close();
+		if (!Guardian.isAdmin(ctx)) {
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
 			return;
 		}
 
         DataBase database = DataBase.getInstance();
 
-        int no = Integer.parseInt(context.request().getParam("no"));
+        int no = Integer.parseInt(ctx.request().getParam("no"));
 
         if (!Guardian.checkParameters(no)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
             return;
         }
 
         try {
             database.executeUpdate("UPDATE qna SET answer_content=NULL, answer_date=NULL WHERE no=", no);
 
-            context.response().setStatusCode(200).end();
-            context.response().close();
+            ctx.response().setStatusCode(200).end();
+            ctx.response().close();
         } catch (SQLException e) {
-            context.response().setStatusCode(500).end();
-            context.response().close();
+            ctx.response().setStatusCode(500).end();
+            ctx.response().close();
 
             Log.l("SQLException");
         }

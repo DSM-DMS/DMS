@@ -31,6 +31,7 @@ body {
     width: 12px;
     background-color: #607D8B;
     z-index: 3;
+    transition: 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035);
 }
 
 #background-image {
@@ -56,10 +57,10 @@ body {
 
 #panel {
     width: 80%;
-    background: white;
+    background: #607D8B;
     display: flex;
     height: 100%;
-    transition: 0.3s ease;
+    transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .curved-image {
@@ -78,6 +79,7 @@ body {
     position: relative;
     z-index: 1;
     border-right: 1px solid white;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #right-panel {
@@ -88,6 +90,7 @@ body {
     flex-direction: column;
     justify-content: center;
     border-right: 1px solid #607D8B;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #stay-apply-container {

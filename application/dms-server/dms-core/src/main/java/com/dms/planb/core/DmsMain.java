@@ -31,6 +31,7 @@ import com.dms.parser.dataio.post.PostUpdateListener;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import org.boxfox.dms.utilities.log.Log;
+import org.boxfox.dms.utilities.log.LogErrorOutputStream;
 
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -54,7 +55,7 @@ class DmsMain {
 		 */
 
 		options = new VertxOptions();
-		// System.setErr(new LogErrorOutputStream(System.err));
+		System.setErr(new LogErrorOutputStream(System.err));
 
 		PostChangeDetector.getInstance().start();
 		PostChangeDetector.getInstance().setOnCategoryUpdateListener(new PostUpdateListener() {
@@ -64,7 +65,7 @@ class DmsMain {
 				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
 				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
 				Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
-				if (dayOfWeek == Calendar.MONDAY) {
+				if (dayOfWeek == Calendar.MONDAY&& hour<5) {
 					try {
 						DataBase.getInstance().executeUpdate("delete from goingout_apply");
 					} catch (SQLException e) {
@@ -83,7 +84,7 @@ class DmsMain {
 	}
 
 	public static void main(String[] args) {
-		if(SecureConfig.get("database")==null||SecureConfig.get("AES")==null){
+		if(SecureConfig.get("DB_PW")==null||SecureConfig.get("AES")==null){
 			System.err.println("Key Config is not defined!");
 			return;
 		}

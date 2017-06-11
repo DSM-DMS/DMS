@@ -25,7 +25,7 @@
 //	
 //
 //	@Override
-//	public boolean handleMessage(RoutingContext context) {
+//	public boolean handleMessage(RoutingContext ctx) {
 //		String aesKey = RSA.decrypt(requestObject.getString("AESKey"));
 //		manager.registerKey(sender, new AES256(aesKey));
 //		EasyJsonObject response = new EasyJsonObject();

@@ -65,7 +65,7 @@
 	<parent>
 		<groupId>com.dsm.dms</groupId>
 		<artifactId>dms-server</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>dms-core</artifactId>
@@ -108,7 +108,7 @@
 		<!-- dms dependency -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>dms-templates</artifactId>
+			<artifactId>dms-template</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		

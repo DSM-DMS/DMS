@@ -2,14 +2,10 @@ package com.dms.planb.action.goingout;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
-
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -24,48 +20,28 @@ public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
-		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		
-		String id = userManager.getIdFromSession(context);
-        String uid = null;
-        
-        try {
-            if (id != null) {
-                uid = userManager.getUid(id);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-        if(!Guardian.checkParameters(id, uid)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
-        	return;
-        }
-		
-		try {
-			resultSet = database.executeQuery("SELECT * FROM goingout_apply WHERE uid='", uid, "'");
-			
-			if(resultSet.next()) {
-				responseObject.put("sat", resultSet.getBoolean("sat"));
-				responseObject.put("sun", resultSet.getBoolean("sun"));
-				
-				context.response().setStatusCode(200);
-				context.response().end(responseObject.toString());
-				context.response().close();
-			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
+
+        if(userManager.isLogined(ctx)) {
+			try {
+				userManager.getUserInfo(userManager.getIdFromSession(ctx));
+				boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(ctx));
+				responseObject.put("sat", status[0]);
+				responseObject.put("sun", status[1]);
+				ctx.response().setStatusCode(200).end(responseObject.toString());
+				ctx.response().close();
+			} catch (SQLException e) {
+				ctx.response().setStatusCode(500).end();
+				ctx.response().close();
+
+				Log.l("SQLException");
 			}
-		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
-			
-			Log.l("SQLException");
+		}else{
+			ctx.response().setStatusCode(400).end();
+			ctx.response().close();
+			return;
 		}
 	}
 }
