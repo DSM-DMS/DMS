@@ -16,19 +16,19 @@ import io.vertx.ext.web.RoutingContext;
 @RouteRegistration(path="/post/report", method={HttpMethod.PATCH})
 public class ModifyReportFacility implements Handler<RoutingContext> {
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		
-		int no = Integer.parseInt(context.request().getParam("no"));
-		String title = context.request().getParam("title");
-		String content = context.request().getParam("content");
-		int room = Integer.parseInt(context.request().getParam("room"));
-		String writer = context.request().getParam("writer");
+		int no = Integer.parseInt(ctx.request().getParam("no"));
+		String title = ctx.request().getParam("title");
+		String content = ctx.request().getParam("content");
+		int room = Integer.parseInt(ctx.request().getParam("room"));
+		String writer = ctx.request().getParam("writer");
 		
 		if(!Guardian.checkParameters(no, title, content, room, writer)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 		
@@ -38,11 +38,11 @@ public class ModifyReportFacility implements Handler<RoutingContext> {
 			database.executeUpdate("UPDATE facility_report SET room=", room, " WHERE no=", no);
 			database.executeUpdate("UPDATE facility_report SET writer='", writer, "' WHERE no=", no);
 			
-			context.response().setStatusCode(200).end();
-			context.response().close();
+			ctx.response().setStatusCode(200).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

@@ -24,11 +24,11 @@ public class ApplyExtension implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
+    public void handle(RoutingContext ctx) {
 
         DataBase database = DataBase.getInstance();
 
-        String id = userManager.getIdFromSession(context);
+        String id = userManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
@@ -39,13 +39,13 @@ public class ApplyExtension implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-        String classId = context.request().getParam("class");
-        String seatId = context.request().getParam("seat");
+        String classId = ctx.request().getParam("class");
+        String seatId = ctx.request().getParam("seat");
         
         if(!Guardian.checkParameters(classId, seatId, id, uid)) {
-        	context.response().setStatusMessage("Check parameter or after than login");
-            context.response().setStatusCode(400).end();
-            context.response().close();
+        	ctx.response().setStatusMessage("Check parameter or after than login");
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
         try {
@@ -55,23 +55,23 @@ public class ApplyExtension implements Handler<RoutingContext> {
                 name = rs.getString(1);
             }
             if (!ApplyDataUtil.canApplyExtension()) {
-                context.response().setStatusCode(204).end();
-                context.response().close();
+                ctx.response().setStatusCode(204).end();
+                ctx.response().close();
 //            } else if(database.executeQuery("SELECT FROM extension_apply WHERE class=", classId, " AND seat=", seatId).next()) {
-//            	context.response().setStatusCode(409).end();
-//            	context.response().close();
+//            	ctx.response().setStatusCode(409).end();
+//            	ctx.response().close();
             } else {
                 database.executeUpdate("DELETE FROM extension_apply WHERE uid='", uid, "'");
                 database.executeUpdate("INSERT INTO extension_apply(class, seat, name, uid) VALUES(", classId, ", ", seatId, ", '", name, "', '", uid, "')");
-                context.response().setStatusCode(200).end();
-                context.response().close();
+                ctx.response().setStatusCode(200).end();
+                ctx.response().close();
             }
         } catch (SQLException e) {
-            context.response().setStatusCode(500).end();
-            context.response().close();
+            ctx.response().setStatusCode(500).end();
+            ctx.response().close();
             e.printStackTrace();
             Log.l("SQLException");
         }
-        Log.l("Extension Apply (", id, ", ", context.request().remoteAddress(), ") status : " + context.response().getStatusCode());
+        Log.l("Extension Apply (", id, ", ", ctx.request().remoteAddress(), ") status : " + ctx.response().getStatusCode());
     }
 }

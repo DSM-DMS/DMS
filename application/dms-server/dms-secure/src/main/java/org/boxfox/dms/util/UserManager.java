@@ -234,7 +234,6 @@ public class UserManager implements AccountManager {
             String sessionKey = getSessionKey(id);
             if (sessionKey == null) {
                 sessionKey = SHA256.encrypt(createSession());
-                System.out.println(sessionKey);
             }
             if (keepLogin) {
                 SessionUtil.registerCookie(context, "UserSession", sessionKey);

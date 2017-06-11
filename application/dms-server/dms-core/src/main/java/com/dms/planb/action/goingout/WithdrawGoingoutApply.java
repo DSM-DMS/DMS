@@ -22,11 +22,11 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
@@ -37,11 +37,11 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-        String target = context.request().getParam("date");
+        String target = ctx.request().getParam("date");
         
         if(!Guardian.checkParameters(id, uid, target)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
 		
@@ -52,11 +52,11 @@ public class WithdrawGoingoutApply implements Handler<RoutingContext> {
 				database.executeUpdate("UPDATE goingout_apply SET sun=false WHERE uid='", uid, "'");
 			}
 			
-			context.response().setStatusCode(200).end();
-			context.response().close();
+			ctx.response().setStatusCode(200).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

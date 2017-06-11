@@ -12,6 +12,7 @@ import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import io.vertx.ext.web.RoutingContext;
+import org.boxfox.dms.utilities.log.Log;
 
 public class AdminManager implements AccountManager {
     private static AES256 aes;
@@ -34,19 +35,20 @@ public class AdminManager implements AccountManager {
     public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
-        try {
-            SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
-            
-            if (rs.next() && rs.getInt(1) > 0) {
-                check = true;
-            } else {
-                SessionUtil.removeCookie(ctx, "AdminSession");
+        if (sessionKey != null)
+            try {
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select count(*) from admin_account where session_key='", sessionKey, "'");
+                if (rs.next() && rs.getInt(1) > 0) {
+                    check = true;
+                } else {
+                    SessionUtil.removeCookie(ctx, "AdminSession");
+                    Log.l(sessionKey);
+                    secureManager.invalidRequest(ctx);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
                 secureManager.invalidRequest(ctx);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            secureManager.invalidRequest(ctx);
-        }
         return check;
     }
 
@@ -79,13 +81,13 @@ public class AdminManager implements AccountManager {
     }
 
     @Override
-    public boolean isLogined(RoutingContext context) {
-        return ((getIdFromSession(context) == null) ? false : true);
+    public boolean isLogined(RoutingContext ctx) {
+        return ((getIdFromSession(ctx) == null) ? false : true);
     }
 
     @Override
-    public String getIdFromSession(RoutingContext context) {
-        String sessionKey = SessionUtil.getRegistredSessionKey(context, "AdminSession");
+    public String getIdFromSession(RoutingContext ctx) {
+        String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
         String result = null;
         if (sessionKey != null) {
             try {
@@ -111,7 +113,7 @@ public class AdminManager implements AccountManager {
     }
 
     @Override
-    public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
+    public boolean registerSession(RoutingContext ctx, boolean keepLogin, String id) {
         String idEncrypt = aes.encrypt(id);
         try {
             String sessionKey = getSessionKey(id);
@@ -119,9 +121,9 @@ public class AdminManager implements AccountManager {
                 sessionKey = SHA256.encrypt(createSession());
             }
             if (keepLogin) {
-                SessionUtil.registerCookie(context, "AdminSession", sessionKey);
+                SessionUtil.registerCookie(ctx, "AdminSession", sessionKey);
             } else {
-                SessionUtil.registerSession(context, "AdminSession", sessionKey);
+                SessionUtil.registerSession(ctx, "AdminSession", sessionKey);
             }
             if (sessionKey != null) {
                 DataBase.getInstance().executeUpdate("update admin_account set session_key='", sessionKey, "' where id='", idEncrypt, "'");

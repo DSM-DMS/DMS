@@ -1,14 +1,13 @@
 package com.dms.planb.action.stay;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.ApplyDataUtil;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.log.Log;
-
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -23,11 +22,21 @@ public class ApplyStay implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
-
+	public void handle(RoutingContext ctx) {
+		Calendar c = Calendar.getInstance();
+		
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		int hour = c.get(Calendar.HOUR);
+		int minute = c.get(Calendar.MINUTE);
+		
+		if(dayOfWeek >= 6 /* 금요일 이상 */ || dayOfWeek == 5 && hour > 20 /* 금요일이고 9시 이후 */ || dayOfWeek == 5 && hour == 20 && minute > 30 /* 금요일이고 8시 30분 이후 */) {
+			ctx.response().setStatusCode(204).end();
+			ctx.response().close();
+		}
+		
 		DataBase database = DataBase.getInstance();
 		
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         try {
             if (id != null) {
@@ -37,29 +46,22 @@ public class ApplyStay implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-		int value = Integer.parseInt(context.request().getParam("value"));
-		String week = context.request().getParam("week");
+		int value = Integer.parseInt(ctx.request().getParam("value"));
 		
-		if(!Guardian.checkParameters(id, uid, value, week)) {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+		if(!Guardian.checkParameters(id, uid, value)) {
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         	return;
         }
-		
 		try {
-			if(ApplyDataUtil.canApplyStay(week)) {
-				database.executeUpdate("DELETE FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
-				database.executeUpdate("INSERT INTO stay_apply(uid, value, week) VALUES('", uid, "', ", value, ", '", week, "')");
+			database.executeUpdate("DELETE FROM stay_apply WHERE uid='", uid, "'");
+			database.executeUpdate("INSERT INTO stay_apply(uid, value) VALUES('", uid, "', ", value, ")");
 			
-				context.response().setStatusCode(200).end();
-				context.response().close();
-			} else {
-				context.response().setStatusCode(204).end();
-				context.response().close();
-			}
+			ctx.response().setStatusCode(200).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 
 			Log.l("SQLException");
 		}

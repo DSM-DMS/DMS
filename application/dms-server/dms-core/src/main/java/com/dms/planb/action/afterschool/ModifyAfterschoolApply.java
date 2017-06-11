@@ -22,12 +22,12 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 	}
 	
 	@Override
-	public void handle(RoutingContext context) {
+	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		
 		
-		String id = userManager.getIdFromSession(context);
+		String id = userManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
@@ -38,23 +38,23 @@ public class ModifyAfterschoolApply implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-        int no = Integer.parseInt(context.request().getParam("no"));
-		int targetNo = Integer.parseInt(context.request().getParam("target_no"));
+        int no = Integer.parseInt(ctx.request().getParam("no"));
+		int targetNo = Integer.parseInt(ctx.request().getParam("target_no"));
 		
 		if(!Guardian.checkParameters(no, id, uid, targetNo)) {
-        	context.response().setStatusCode(400).end();
-        	context.response().close();
+        	ctx.response().setStatusCode(400).end();
+        	ctx.response().close();
         	return;
         }
 		
 		try {
 			database.executeUpdate("UPDATE afterschool_apply SET no=", no, " WHERE no=", targetNo, " AND uid='", uid, "'");
 		
-			context.response().setStatusCode(200).end();
-			context.response().close();
+			ctx.response().setStatusCode(200).end();
+			ctx.response().close();
 		} catch(SQLException e) {
-			context.response().setStatusCode(500).end();
-			context.response().close();
+			ctx.response().setStatusCode(500).end();
+			ctx.response().close();
 			
 			Log.l("SQLException");
 		}

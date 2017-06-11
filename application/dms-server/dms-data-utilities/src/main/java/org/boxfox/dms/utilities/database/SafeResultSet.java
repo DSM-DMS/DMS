@@ -72,6 +72,7 @@ public class SafeResultSet {
 	public int getColumnSize() {
 		return columns.size();
 	}
+	public List<String> getColumns(){return columns;}
 
 	public int getInt(String label) throws SQLException {
 		return getInt(getIndexByLabel(label));

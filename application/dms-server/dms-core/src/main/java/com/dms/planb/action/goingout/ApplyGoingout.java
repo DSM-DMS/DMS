@@ -22,31 +22,27 @@ public class ApplyGoingout implements Handler<RoutingContext> {
     }
 
     @Override
-    public void handle(RoutingContext context) {
-
+    public void handle(RoutingContext ctx) {
         DataBase database = DataBase.getInstance();
-        
-        String sat = context.request().getParam("sat");
-        String sun = context.request().getParam("sun");
-        
-        if (Guardian.checkParameters(sat, sun) && userManager.isLogined(context)) {
+
+        String sat = ctx.request().getParam("sat");
+        String sun = ctx.request().getParam("sun");
+
+        if (Guardian.checkParameters(sat, sun) && userManager.isLogined(ctx)) {
             try {
-                String uid = userManager.getUid(userManager.getIdFromSession(context));
-                
-                database.executeUpdate("DELETE FROM goingout_apply WHERE uid='", uid, "'");
-                database.executeUpdate("INSERT INTO goingout_apply(uid, sat, sun) VALUES('", uid, "', ", sat, ", ", sun, ")");
-                
-                context.response().setStatusCode(200).end();
-                context.response().close();
+                String uid = userManager.getUid(userManager.getIdFromSession(ctx));
+                database.executeUpdate("REPLACE INTO goingout_apply(uid, sat, sun) VALUES('", uid, "', ", sat, ", ", sun, ")");
+                ctx.response().setStatusCode(200).end();
+                ctx.response().close();
             } catch (SQLException e) {
             	e.printStackTrace();
-                context.response().setStatusCode(500).end();
-                context.response().close();
+                ctx.response().setStatusCode(500).end();
+                ctx.response().close();
                 Log.l("SQLException");
             }
         } else {
-            context.response().setStatusCode(400).end();
-            context.response().close();
+            ctx.response().setStatusCode(400).end();
+            ctx.response().close();
         }
     }
 }
