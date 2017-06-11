@@ -2,4 +2,3 @@ target/
 log/
 *.log
 *.cnf
-.idea/

@@ -8,6 +8,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.8.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.8.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-web:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.vertx:vertx-lang-groovy:3.4.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-core:3.4.1" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.8.Final" level="project" />
