@@ -44,7 +44,7 @@ setListEvent();
 
 $(".edit").on('click', function(e) {
     e.stopPropagation();
-    var no = $(this).parent().prev().prev().text();
+    var no = $(this).parent().parent().children(0).first().text();
     if (getAllUrlParams(document.URL).category == "qna") {
         localStorage.setItem('category', getAllUrlParams(document.URL).category);
         localStorage.setItem('type', 'modify');

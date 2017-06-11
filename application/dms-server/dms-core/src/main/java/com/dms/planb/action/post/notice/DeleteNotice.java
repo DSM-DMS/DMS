@@ -13,13 +13,9 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/notice", method={HttpMethod.DELETE})
 public class DeleteNotice implements Handler<RoutingContext> {
-	public DeleteNotice() {
-		
-	}
 	
 	@Override
 	public void handle(RoutingContext ctx) {
-
 		if (!Guardian.isAdmin(ctx)) {
 			ctx.response().setStatusCode(400).end();
 			ctx.response().close();
@@ -27,9 +23,9 @@ public class DeleteNotice implements Handler<RoutingContext> {
 		}
 		
 		DataBase database = DataBase.getInstance();
-		
+
 		int no = Integer.parseInt(ctx.request().getParam("no"));
-		
+
 		if(!Guardian.checkParameters(no)) {
             ctx.response().setStatusCode(400).end();
             ctx.response().close();
