@@ -475,7 +475,7 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/rule/list",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -491,7 +491,7 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/rule/list",
         type: "GET",
         data: {
             page: 1,
@@ -1247,6 +1247,14 @@ function getMeal() {
 
 //Sets the document when it is loaded
 $(document).ready(function() {
+    //check user agent
+    if(navigator.userAgent.toLowerCase().indexOf("android") > -1){
+        window.location.href = 'http://play.google.com/store/apps/details?id=com.truecaller&hl=en';
+    }
+    else if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
+        window.location.href = 'http://itunes.apple.com/lb/app/truecaller-caller-id-number/id448142450?mt=8';
+    }
+
     //set random background image
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
