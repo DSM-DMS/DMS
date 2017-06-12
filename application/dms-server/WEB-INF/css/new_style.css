@@ -620,8 +620,9 @@ input[type="radio"]:checked~.bullet .line.seven {
     background: #eeeeee;
     border-radius: 0 0 2vh 2vh;
     padding: 0 2% 0 2%;
-    ;
     position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .notice-content-container p {
