@@ -434,10 +434,16 @@ function setNoticePreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function() {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function() {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -518,10 +524,17 @@ function setRulePreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        ,
+        statusCode: {
+            200: function() {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function() {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -629,10 +642,16 @@ function setFaqPreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function() {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function() {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
