@@ -73,6 +73,7 @@ var $passwordChangeReq = $(".password-change button");
 /**
  * Stay
  */
+
 var $openStayButton = $("#open-stay-apply")
 var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
@@ -82,6 +83,7 @@ var stayDate = new Date();
 /**
  * Meal
  */
+
 var mealDate = new Date();
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
@@ -147,6 +149,7 @@ var $extensionCurrentState = $('#Layer_2');
 var noticePreviewBtn = $(".notice-preview-btn");
 var rulePreviewBtn = $(".rule-preview-btn");
 var faqPreviewBtn = $(".faq-preview-btn");
+var selectedCategory = "notice";
 
 /**
  * remove html tag
@@ -331,11 +334,29 @@ $closeExtensionButton.on("click", function() {
  * Notice
 ========================================================================================== */
 $noticeMoreBtn.on("click", function() {
-    $noticeListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    if (selectedCategory == "notice") {
+        $noticeListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    } else if (selectedCategory == "rule") {
+        $openStayButton.prop("disabled", true);
+        $openExtensionButton.prop("disabled", true);
+        $dormListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    } else if (selectedCategory == "faq") {
+        $openStayButton.prop("disabled", false);
+        $openExtensionButton.prop("disabled", false);
+        $faqListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
 });
 
 $closeNoticeButton.on("click", function() {
@@ -414,14 +435,9 @@ function setNoticePreview() {
             limit: 1
         },
         success: function(data) {
-            try {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(sanitize(parsedData[0].content));
-            } catch(err) {
-                $("#notice-title").text("게시글이 없습니다.");
-                $(".notice-content-container p").html(sanitize("게시글이 없습니다."));
-            }
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
         },
         error: function() {
             console.log("error");
@@ -480,7 +496,7 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule/list",
+        url: "http://dsm2015.cafe24.com/post/rule",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -496,21 +512,16 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule/list",
+        url: "http://dsm2015.cafe24.com/post/rule",
         type: "GET",
         data: {
             page: 1,
             limit: 1
         },
         success: function(data) {
-            try {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(sanitize(parsedData[0].content));
-            } catch(err) {
-                $("#notice-title").text("게시글이 없습니다.");
-                $(".notice-content-container p").html(sanitize("게시글이 없습니다."));
-            }
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
         },
         error: function() {
             console.log("error");
@@ -619,14 +630,9 @@ function setFaqPreview() {
             limit: 1
         },
         success: function(data) {
-            try {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(sanitize(parsedData[0].content));
-            } catch(err) {
-                $("#notice-title").text("게시글이 없습니다.");
-                $(".notice-content-container p").html(sanitize("게시글이 없습니다."));
-            }
+            var parsedData = JSON.parse(data).result;
+            $("#notice-title").text(parsedData[0].title);
+            $(".notice-content-container p").html(sanitize(parsedData[0].content));
         },
         error: function() {
             console.log("error");
@@ -1262,14 +1268,6 @@ function getMeal() {
 
 //Sets the document when it is loaded
 $(document).ready(function() {
-    //check user agent
-    if(navigator.userAgent.toLowerCase().indexOf("android") > -1){
-        window.location.href = 'http://play.google.com/store/apps/details?id=com.truecaller&hl=en';
-    }
-    else if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
-        window.location.href = 'http://itunes.apple.com/lb/app/truecaller-caller-id-number/id448142450?mt=8';
-    }
-
     //set random background image
     //$backgroundImage.attr("src", ".\\images\\wallpaper" + (Math.floor(Math.random() * 9) + 1) + ".jpg");
 
@@ -1287,7 +1285,9 @@ $(document).ready(function() {
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [[addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"].join(" ");
+                formatted = [
+                    [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"
+                ].join(" ");
             }
             return formatted;
         }
@@ -1454,18 +1454,21 @@ function makeWeekFormat(thisDate) {
  * article preview
 ========================================================================================== */
 noticePreviewBtn.on("click", function() {
+    selectedCategory = "notice";
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setNoticePreview();
 });
 
 rulePreviewBtn.on("click", function() {
+    selectedCategory = "rule";
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setRulePreview();
 });
 
 faqPreviewBtn.on("click", function() {
+    selectedCategory = "faq";
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();
