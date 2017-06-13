@@ -414,9 +414,14 @@ function setNoticePreview() {
             limit: 1
         },
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+            try {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").html(sanitize(parsedData[0].content));
+            } catch(err) {
+                $("#notice-title").text("게시글이 없습니다.");
+                $(".notice-content-container p").html(sanitize("게시글이 없습니다."));
+            }
         },
         error: function() {
             console.log("error");
@@ -498,9 +503,14 @@ function setRulePreview() {
             limit: 1
         },
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+            try {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").html(sanitize(parsedData[0].content));
+            } catch(err) {
+                $("#notice-title").text("게시글이 없습니다.");
+                $(".notice-content-container p").html(sanitize("게시글이 없습니다."));
+            }
         },
         error: function() {
             console.log("error");
@@ -609,9 +619,14 @@ function setFaqPreview() {
             limit: 1
         },
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+            try {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").html(sanitize(parsedData[0].content));
+            } catch(err) {
+                $("#notice-title").text("게시글이 없습니다.");
+                $(".notice-content-container p").html(sanitize("게시글이 없습니다."));
+            }
         },
         error: function() {
             console.log("error");
