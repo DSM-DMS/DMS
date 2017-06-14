@@ -43,6 +43,15 @@ public class Guardian {
         return true;
     }
 
+    public static boolean checkParameters(RoutingContext ctx, String ... keys) {
+        for (String key: keys) {
+            if (ctx.request().getParam(key) == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
