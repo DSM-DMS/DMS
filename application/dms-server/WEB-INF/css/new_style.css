@@ -549,6 +549,11 @@ input[type="radio"]:checked~.bullet .line.seven {
     /*margin: 0;*/
     font-size: 2.1rem;
     font-weight: 200;
+    display: inline-block;
+    width: 79%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #notice-title::after {
