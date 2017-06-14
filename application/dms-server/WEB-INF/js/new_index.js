@@ -73,6 +73,7 @@ var $passwordChangeReq = $(".password-change button");
 /**
  * Stay
  */
+
 var $openStayButton = $("#open-stay-apply")
 var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
@@ -82,6 +83,7 @@ var stayDate = new Date();
 /**
  * Meal
  */
+
 var mealDate = new Date();
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
@@ -147,6 +149,7 @@ var $extensionCurrentState = $('#Layer_2');
 var noticePreviewBtn = $(".notice-preview-btn");
 var rulePreviewBtn = $(".rule-preview-btn");
 var faqPreviewBtn = $(".faq-preview-btn");
+var selectedCategory = "notice";
 
 /**
  * remove html tag
@@ -331,11 +334,29 @@ $closeExtensionButton.on("click", function() {
  * Notice
 ========================================================================================== */
 $noticeMoreBtn.on("click", function() {
-    $noticeListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    if (selectedCategory == "notice") {
+        $noticeListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    } else if (selectedCategory == "rule") {
+        $openStayButton.prop("disabled", true);
+        $openExtensionButton.prop("disabled", true);
+        $dormListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    } else if (selectedCategory == "faq") {
+        $openStayButton.prop("disabled", false);
+        $openExtensionButton.prop("disabled", false);
+        $faqListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
 });
 
 $closeNoticeButton.on("click", function() {
@@ -413,10 +434,16 @@ function setNoticePreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -475,7 +502,7 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule/list",
+        url: "http://dsm2015.cafe24.com/post/rule",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -491,16 +518,22 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule/list",
+        url: "http://dsm2015.cafe24.com/post/rule",
         type: "GET",
         data: {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -608,10 +641,16 @@ function setFaqPreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -1284,7 +1323,9 @@ $(document).ready(function() {
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [[addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"].join(" ");
+                formatted = [
+                    [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"
+                ].join(" ");
             }
             return formatted;
         }
@@ -1451,18 +1492,21 @@ function makeWeekFormat(thisDate) {
  * article preview
 ========================================================================================== */
 noticePreviewBtn.on("click", function() {
+    selectedCategory = "notice";
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setNoticePreview();
 });
 
 rulePreviewBtn.on("click", function() {
+    selectedCategory = "rule";
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setRulePreview();
 });
 
 faqPreviewBtn.on("click", function() {
+    selectedCategory = "faq";
     $(".speech-bubble-tail").remove();
     $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();

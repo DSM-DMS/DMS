@@ -140,6 +140,8 @@ var $extensionCurrentState = $('#Layer_2');
 var noticePreviewBtn = $(".notice-preview-btn");
 var rulePreviewBtn = $(".rule-preview-btn");
 var faqPreviewBtn = $(".faq-preview-btn");
+var selectedCategory = "notice";
+
 
 /**
  * register
@@ -317,10 +319,16 @@ function setNoticePreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -820,10 +828,16 @@ function setRulePreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -839,10 +853,16 @@ function setFaqPreview() {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
