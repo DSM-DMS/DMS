@@ -414,7 +414,7 @@ function fillListCard(data, target) {
             $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
-                html: sanitize(data.content)
+                html: data.content
             }));
             $(".list-box-no-content").css('opacity', '1');
         } else {
@@ -428,7 +428,7 @@ function fillListCard(data, target) {
 
 function setNoticePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/notice/list",
+        url: "http://dsm2015.cafe24.com/post/list/notice",
         type: "GET",
         data: {
             page: 1,
@@ -518,7 +518,7 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/list/rule",
         type: "GET",
         data: {
             page: 1,
@@ -635,7 +635,7 @@ function getFaqList() {
 
 function setFaqPreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/faq/list",
+        url: "http://dsm2015.cafe24.com/post/list/faq",
         type: "GET",
         data: {
             page: 1,
@@ -1300,7 +1300,7 @@ $(document).ready(function() {
             url += loadMobileApp[element];
         }
 
-        window.location.href = url; 
+        window.location.href = url;
     }
     else if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
         window.location.href = 'https://itunes.apple.com/kr/app/apple-store/id375380948?mt=8';
