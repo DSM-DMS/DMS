@@ -1,59 +1,43 @@
-package com.dms.planb.action.post.notice;
+package com.dms.planb.action.post;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.utilities.actions.RouteRegistration;
 import org.boxfox.dms.utilities.database.DataBase;
 import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.json.EasyJsonArray;
 import org.boxfox.dms.utilities.json.EasyJsonObject;
 import org.boxfox.dms.utilities.log.Log;
-
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
+import org.json.simple.JSONArray;
 
-@RouteRegistration(path="/post/notice/list", method={HttpMethod.GET})
-public class LoadNoticeWithList implements Handler<RoutingContext> {
-	public LoadNoticeWithList() {
-		
-	}
-	
+@RouteRegistration(path="/post/list/:category", method={HttpMethod.GET})
+public class LoadPostsToList implements Handler<RoutingContext> {
+
 	@Override
 	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
-		EasyJsonObject tempObject = new EasyJsonObject();
-		EasyJsonArray tempArray = new EasyJsonArray();
-		
+
 		try {
-			if(!ctx.request().params().contains("page") && !ctx.request().params().contains("limit")) {
-				resultSet = database.executeQuery("SELECT * FROM notice");
+			String category = ctx.request().getParam("category");
+			if(!Guardian.checkParameters(ctx, "page", "limit")) {
+				resultSet = database.executeQuery("SELECT * FROM "+category+" order by no desc");
 			} else {
 				int page = Integer.parseInt(ctx.request().getParam("page"));
 				int limit = Integer.parseInt(ctx.request().getParam("limit"));
-				resultSet = database.executeQuery("SELECT * FROM notice limit " + ((page - 1) * limit), ", ", limit);
+				resultSet = database.executeQuery("SELECT * FROM "+category+" order by no desc limit ", ((page - 1) * limit), ", ", limit);
 			}
 			
-			int postCount = 0;
 			if(resultSet.next()) {
-				do {
-					tempObject = new EasyJsonObject();
-					
-					tempObject.put("no", resultSet.getInt("no"));
-					tempObject.put("title", resultSet.getString("title"));
-					tempObject.put("content", resultSet.getString("content"));
-					
-					tempArray.add(tempObject);
-					
-					postCount++;
-				} while(resultSet.next());
-				
-				responseObject.put("num_of_post", postCount);
-				responseObject.put("result", tempArray);
+				JSONArray arr = resultSet.convertToJSONArray();
+				responseObject.put("num_of_post", arr.size());
+				responseObject.put("result", arr);
 				
 				ctx.response().setStatusCode(200);
 				ctx.response().end(responseObject.toString());
@@ -65,7 +49,7 @@ public class LoadNoticeWithList implements Handler<RoutingContext> {
 		} catch(SQLException e) {
 			ctx.response().setStatusCode(500).end();
 			ctx.response().close();
-			
+			e.printStackTrace();
 			Log.l("SQLException");
 		}
 	}
