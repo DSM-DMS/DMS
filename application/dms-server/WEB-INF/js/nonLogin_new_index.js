@@ -313,7 +313,7 @@ function fillListCard(data, target) {
 
 function setNoticePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/notice/list",
+        url: "http://dsm2015.cafe24.com/post/list/notice",
         type: "GET",
         data: {
             page: 1,
@@ -822,7 +822,7 @@ $(document).ready(function() {
 ========================================================================================== */
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/list/rule",
         type: "GET",
         data: {
             page: 1,
@@ -847,7 +847,7 @@ function setRulePreview() {
 
 function setFaqPreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/faq/list",
+        url: "http://dsm2015.cafe24.com/post/list/faq",
         type: "GET",
         data: {
             page: 1,
