@@ -16,16 +16,19 @@ import org.json.simple.JSONArray;
 
 @RouteRegistration(path="/post/list/:category", method={HttpMethod.GET})
 public class LoadPostsToList implements Handler<RoutingContext> {
+	private static final String []CATEGORY_LIST = {"faq", "rule", "notice"};
 
 	@Override
 	public void handle(RoutingContext ctx) {
 
 		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
-		EasyJsonObject responseObject = new EasyJsonObject();
+		int statusCode = 400;
 
+		String category = ctx.request().getParam("category");
+		if(Guardian.matchParameters(category, CATEGORY_LIST))
 		try {
-			String category = ctx.request().getParam("category");
+			SafeResultSet resultSet;
+			EasyJsonObject responseObject = new EasyJsonObject();
 			if(!Guardian.checkParameters(ctx, "page", "limit")) {
 				resultSet = database.executeQuery("SELECT * FROM "+category+" order by no desc");
 			} else {
@@ -38,19 +41,17 @@ public class LoadPostsToList implements Handler<RoutingContext> {
 				JSONArray arr = resultSet.convertToJSONArray();
 				responseObject.put("num_of_post", arr.size());
 				responseObject.put("result", arr);
-				
-				ctx.response().setStatusCode(200);
-				ctx.response().end(responseObject.toString());
-				ctx.response().close();
+
+				ctx.response().write(responseObject.toString());
+				statusCode = 200;
 			} else {
-				ctx.response().setStatusCode(204).end();
-				ctx.response().close();
+				statusCode = 204;
 			}
 		} catch(SQLException e) {
-			ctx.response().setStatusCode(500).end();
-			ctx.response().close();
+			statusCode = 500;
 			e.printStackTrace();
-			Log.l("SQLException");
 		}
+		ctx.response().setStatusCode(statusCode);
+		ctx.response().close();
 	}
 }
