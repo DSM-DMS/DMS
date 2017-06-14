@@ -435,12 +435,12 @@ function setNoticePreview() {
             limit: 1
         },
         statusCode: {
-            200: function() {
+            200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
                 $(".notice-content-container p").text(sanitize(parsedData[0].content));
             },
-            204: function() {
+            204: function(data) {
                 $("#notice-title").text("");
                 $(".notice-content-container p").text("글이 없습니다.");
             }
@@ -524,14 +524,13 @@ function setRulePreview() {
             page: 1,
             limit: 1
         },
-        ,
         statusCode: {
-            200: function() {
+            200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
                 $(".notice-content-container p").text(sanitize(parsedData[0].content));
             },
-            204: function() {
+            204: function(data) {
                 $("#notice-title").text("");
                 $(".notice-content-container p").text("글이 없습니다.");
             }
@@ -643,12 +642,12 @@ function setFaqPreview() {
             limit: 1
         },
         statusCode: {
-            200: function() {
+            200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
                 $(".notice-content-container p").text(sanitize(parsedData[0].content));
             },
-            204: function() {
+            204: function(data) {
                 $("#notice-title").text("");
                 $(".notice-content-container p").text("글이 없습니다.");
             }
