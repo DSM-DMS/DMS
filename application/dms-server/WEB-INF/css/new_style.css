@@ -27,11 +27,36 @@ body {
 
 .left-line {
     height: 100%;
-    position: absolute;
-    width: 12px;
+    /*position: absolute;*/
+    width: 70px;
     background-color: #607D8B;
     z-index: 3;
     transition: 0.5s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.left-menu {
+    width: 54px;
+    height: 54px;
+    background: #99e9f2;
+    border-radius: 54px;
+    color: white;
+    font-size: 0.8rem;
+    line-height: 54px;
+    text-align: center;
+    transform-origin: center;
+    margin: 7px;
+}
+
+.dorm-rule-preview-btn {
+    line-height: 27px;
+}
+
+.left-selected-meneBar {
+    height: 54px;
+    width: 4px;
+    background: white;
+    position: absolute;
+    border-radius: 0 4px 4px 0;
 }
 
 #background-image {
@@ -1819,32 +1844,38 @@ iframe {
   border-radius: 4vh 4vh 0 0;
   left: 70px;
 }
+
 .container {
     display: flex;
     justify-content: space-around;
 }
+
 .eye {
-  position: relative;
-  display: inline-block;
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  background: white;
-  top: 2vh;
-}
-.eye:after { /*pupil*/
-  position: absolute;
-  bottom: 17px;
-  right: 4px;
-  width: 10px;
-  height: 10px;
-  background: #000;
-  border-radius: 50%;
-  content: " ";
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background: white;
+    top: 2vh;
 }
 
+.eye:after {
+    /*pupil*/
+    position: absolute;
+    bottom: 17px;
+    right: 4px;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    content: " ";
+}
+
+
 /*new meal*/
-.meal-card{
+
+.meal-card {
     width: 25%;
     height: 80%;
     background: black;
