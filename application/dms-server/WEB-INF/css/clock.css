@@ -21,6 +21,7 @@
 
 #sec {
     background-color: transparent;
+    cursor: pointer;
     width: 3px;
     height: 160px;
     top: 12px;
