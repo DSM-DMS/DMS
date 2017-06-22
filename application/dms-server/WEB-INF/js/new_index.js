@@ -118,6 +118,7 @@ var $bugBtn = $(".bug-btn");
  */
 var $openLoginButton = $(".login-btn");
 var $loginSendBtn = $(".login-button");
+var $password = $("#pass");
 
 /**
  * Point
