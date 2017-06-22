@@ -775,6 +775,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     font-weight: 100;
     text-align: center;
     transition: 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    margin: 0 auto;
 }
 
 
