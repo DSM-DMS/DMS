@@ -807,9 +807,9 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .meal {
     height: 50%;
-    padding-left: 50px;
+    padding-left: 70px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -822,8 +822,8 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .meal-date {
-    margin: auto 2%;
     font-size: 1.5rem;
+    margin: auto;
 }
 
 .meal-remote-control img {
@@ -1834,16 +1834,15 @@ iframe {
     }
 }
 
-.move-area {
-    /*normally use body*/
-    width: 5vw;
-    height: 10vh;
-    background: #a5c0cd;
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-    border-radius: 4vh 4vh 0 0;
-    left: 12px;
+.move-area{/*normally use body*/
+  width: 5vw;
+  height: 10vh;
+  background: #a5c0cd;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  border-radius: 4vh 4vh 0 0;
+  left: 70px;
 }
 
 .container {
@@ -1882,4 +1881,20 @@ iframe {
     background: black;
     border-radius: 10px;
     margin: auto;
+}
+
+.meal-navigation-button{
+    width: 5vh;
+    height: 5vh;
+    margin: auto;
+    border: 0px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.meal-content-container{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
