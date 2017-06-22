@@ -1,5 +1,9 @@
  $(document).ready(function() {
 
+    $("#sec").on('click', function(){
+        $("body").css({ "-moz-transform": 'rotate(10deg)', "-webkit-transform": 'rotate(10deg)' });
+    });
+
      setInterval(function() {
          var seconds = new Date().getSeconds();
          var sdegree = seconds * 6;
