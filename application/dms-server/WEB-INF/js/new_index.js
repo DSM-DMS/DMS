@@ -118,6 +118,7 @@ var $bugBtn = $(".bug-btn");
  */
 var $openLoginButton = $(".login-btn");
 var $loginSendBtn = $(".login-button");
+var $password = $("#pass");
 
 /**
  * Point
@@ -389,13 +390,6 @@ function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
-    newCard.append($('<div/>', {
-        "class": "list-box-no-container"
-    }))
-    newCard.append($('<p/>', {
-        "class": "list-box-no",
-        text: data.no
-    }));
     newCard.append($('<p/>', {
         "class": "list-box-writer",
         text: "사감부"
@@ -502,7 +496,7 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule",
+        url: "http://dsm2015.cafe24.com/post/rule/list",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -1525,3 +1519,18 @@ function showAlert(message) {
 /** =======
  * common button
 ========================================================================================== */
+//This is a pen based off of Codewoofy's eyes follow mouse. It is just cleaned up, face removed, and then made to be a little more cartoony. https://codepen.io/Codewoofy/pen/VeBJEP
+
+$("body").mousemove(function(event) {
+  var eye = $(".eye");
+  var x = (eye.offset().left) + (eye.width() / 2);
+  var y = (eye.offset().top) + (eye.height() / 2);
+  var rad = Math.atan2(event.pageX - x, event.pageY - y);
+  var rot = (rad * (180 / Math.PI) * -1) + 180;
+  eye.css({
+    '-webkit-transform': 'rotate(' + rot + 'deg)',
+    '-moz-transform': 'rotate(' + rot + 'deg)',
+    '-ms-transform': 'rotate(' + rot + 'deg)',
+    'transform': 'rotate(' + rot + 'deg)'
+  });
+});

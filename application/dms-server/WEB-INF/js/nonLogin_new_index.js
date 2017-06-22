@@ -110,6 +110,7 @@ var $bugBtn = $(".bug-btn");
  */
 var $openLoginButton = $(".login-btn");
 var $loginSendBtn = $(".login-button");
+var $password = $("#pass");
 
 /**
  * Point
@@ -379,7 +380,7 @@ $openLoginButton.on("click", function() {
     return false;
 });
 
-$loginSendBtn.on("click", function() {
+function doLogin(){
     $.ajax({
         url: "/account/login/student",
         type: "POST",
@@ -395,6 +396,16 @@ $loginSendBtn.on("click", function() {
             alert("로그인에 실패했습니다.");
         },
     });
+}
+
+$password.keydown(function (key) {
+    if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+        doLogin();
+    }
+});
+
+$loginSendBtn.on("click", function() {
+    doLogin();
 });
 
 /** ======================================================================================
