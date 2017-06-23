@@ -613,7 +613,7 @@ getFaqList();
 
 function getFaqList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/faq/list",
+        url: "http://dsm2015.cafe24.com/post/list/faq",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -1526,7 +1526,7 @@ $("body").mousemove(function(event) {
   var x = (eye.offset().left) + (eye.width() / 2);
   var y = (eye.offset().top) + (eye.height() / 2);
   var rad = Math.atan2(event.pageX - x, event.pageY - y);
-  var rot = (rad * (180 / Math.PI) * -1) + 180;
+  var rot = (rad * (180 / Math.PI) * -1) + 150;
   eye.css({
     '-webkit-transform': 'rotate(' + rot + 'deg)',
     '-moz-transform': 'rotate(' + rot + 'deg)',
