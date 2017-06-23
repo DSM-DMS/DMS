@@ -1551,3 +1551,10 @@ $("body").mousemove(function(event) {
     'transform': 'rotate(' + rot + 'deg)'
   });
 });
+
+$(".left-menu").on("click", function() {
+    $(".left-selected-meneBar").offset({
+        top: $(this).offset().top,
+        left: 0
+    });
+});
