@@ -65,6 +65,11 @@ body {
     border-radius: 0 4px 4px 0;
 }
 
+.left-menu-contact {
+    position: absolute;
+    bottom: 0;
+}
+
 #background-image {
     position: absolute;
     float: right;
