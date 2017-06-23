@@ -88,6 +88,9 @@ var mealDate = new Date();
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
 
+var $mealNavigationButton = $(".meal-navigation-button");
+var $mealCardContainer = $(".meal-card-container");
+
 /**
  * Domitory rule
  */
@@ -1277,6 +1280,20 @@ function getMeal() {
         }
     })
 }
+
+$mealNavigationButton.on('click', function(event){
+    $(".meal-card-container>.meal-card").css({"transform":"translateX(-"
+    +$mealCardContainer.css("width")+")"});
+    
+    setTimeout( function() {
+        $mealCardContainer.empty();
+        for(var i = 0; i < 3; i++){
+            $mealCardContainer.append($('<div/>', {
+                "class": "meal-card"
+            }));
+        }
+    }, 600);
+});
 
 //Sets the document when it is loaded
 $(document).ready(function() {
