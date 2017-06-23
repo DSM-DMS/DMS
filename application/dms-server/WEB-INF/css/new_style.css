@@ -45,6 +45,7 @@ body {
     text-align: center;
     transform-origin: center;
     margin: 7px;
+    cursor: pointer;
 }
 
 .left-menu img{
@@ -63,6 +64,9 @@ body {
     background: white;
     position: absolute;
     border-radius: 0 4px 4px 0;
+    transition: 0.3s ease;
+    top: 7px;
+    left: 0;
 }
 
 .left-menu-contact {
@@ -571,9 +575,16 @@ input[type="radio"]:checked~.bullet .line.seven {
 }
 
 .notice-title-container {
+    /*background: #eeeeee;*/
+    /*border-radius: 2vh 2vh 0 0;*/
+    /*padding: 2% 2% 1% 2%;*/
+}
+
+.article-container {
+    border-radius: 15px;
     background: #eeeeee;
-    border-radius: 2vh 2vh 0 0;
-    padding: 2% 2% 1% 2%;
+    padding: 20px;
+    height: 50%;
 }
 
 .writer-container {
@@ -659,11 +670,11 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .notice-content-container {
     background: #eeeeee;
-    border-radius: 0 0 2vh 2vh;
-    padding: 0 2% 0 2%;
+    /*border-radius: 0 0 2vh 2vh;*/
+    /*padding: 0 2% 0 2%;*/
     position: relative;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /*text-overflow: ellipsis;
+    white-space: nowrap;*/
 }
 
 .notice-content-container p {
@@ -715,7 +726,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     background: #607B8D;
     position: absolute;
     right: -35px;
-    bottom: -35px;
+    bottom: 70px;
     width: 70px;
     height: 70px;
     border-radius: 70px;
