@@ -434,8 +434,8 @@ function setNoticePreview() {
         statusCode: {
             200: function(data) {
                 var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+                $("#notice-title").html(parsedData[0].title);
+                $(".notice-content-container p").html((parsedData[0].content));
             },
             204: function(data) {
                 $("#notice-title").text("");
@@ -1282,17 +1282,7 @@ function getMeal() {
 }
 
 $mealNavigationButton.on('click', function(event){
-    $(".meal-card-container>.meal-card").css({"transform":"translateX(-"
-    +$mealCardContainer.css("width")+")"});
     
-    setTimeout( function() {
-        $mealCardContainer.empty();
-        for(var i = 0; i < 3; i++){
-            $mealCardContainer.append($('<div/>', {
-                "class": "meal-card"
-            }));
-        }
-    }, 600);
 });
 
 //Sets the document when it is loaded
@@ -1421,6 +1411,11 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
+
+    $('.flexslider').flexslider({
+        animation: "slide",
+        touch: "true"
+    });
 });
 
 /** ======================================================================================

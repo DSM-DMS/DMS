@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 :not(i) {
-    font-family: "malgun gothic", "sans-serif"!important;
+    font-family: "nanum gothic", "sans-serif"!important;
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -585,6 +585,8 @@ input[type="radio"]:checked~.bullet .line.seven {
     background: #eeeeee;
     padding: 20px;
     height: 50%;
+    overflow: auto;
+    padding-right: 20px;
 }
 
 .writer-container {
@@ -1897,15 +1899,6 @@ iframe {
 
 /*new meal*/
 
-.meal-card {
-    width: 26%;
-    height: 80%;
-    background: #48CFAD;
-    border-radius: 10px;
-    margin: auto;
-    transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
 .meal-navigation-button{
     width: 5vh;
     height: 5vh;
@@ -1922,11 +1915,24 @@ iframe {
     justify-content: space-between;
 }
 
-.meal-card-container{
+.meal-container{
+    width: 80%;
+    height: 100%;
+}
+
+.meal-container .meal-contents{
+    list-style-type: none;
+    display: inline;
+}
+
+.meal-container .meal-contents li{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    overflow: hidden;
+    height: 100%;
+    display: inline;
+}
+
+.meal-card{
+    width: 30%;
+    height: 100%;
+    background: red;
 }
