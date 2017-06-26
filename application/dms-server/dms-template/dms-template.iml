@@ -14,7 +14,7 @@
     <orderEntry type="library" name="Maven: io.vertx:vertx-web:3.3.3" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.3.3" level="project" />
     <orderEntry type="module" module-name="dms-parser" />
-    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.3" level="project" />
     <orderEntry type="module" module-name="dms-secure" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk16:1.45" level="project" />

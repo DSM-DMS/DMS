@@ -17,6 +17,7 @@ import org.json.simple.JSONArray;
 @RouteRegistration(path="/post/list/:category", method={HttpMethod.GET})
 public class LoadPostsToList implements Handler<RoutingContext> {
 	private static final String []CATEGORY_LIST = {"faq", "rule", "notice"};
+	//faq, facility report는 보안고려
 
 	@Override
 	public void handle(RoutingContext ctx) {
