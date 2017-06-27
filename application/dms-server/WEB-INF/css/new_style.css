@@ -605,15 +605,6 @@ input[type="radio"]:checked~.bullet .line.seven {
     text-overflow: ellipsis;
 }
 
-#notice-title::after {
-    font-size: 1.1rem;
-    content: "new";
-    background-color: yellow;
-    margin-left: 10px;
-    padding: 0 10px 0 10px;
-    border-radius: 1000000000px;
-}
-
 .notice-title-date {
     text-align: right;
     position: absolute;
@@ -834,7 +825,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     padding-left: 70px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .meal-remote-control {
@@ -847,7 +838,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .meal-date {
     font-size: 1.5rem;
-    margin: auto;
+    margin: 2% auto;
 }
 
 .meal-remote-control img {
@@ -1898,41 +1889,91 @@ iframe {
 
 
 /*new meal*/
-
-.meal-navigation-button{
-    width: 5vh;
-    height: 5vh;
-    margin: auto;
-    border: 0px solid transparent;
-    cursor: pointer;
-    outline: 0;
+#slider {
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto 0 auto;
+  border-radius: 4px;
 }
 
-.meal-content-container{
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#slider ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
 }
 
-.meal-container{
-    width: 80%;
-    height: 100%;
+#slider ul li {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 300px;
+  background: transparent;
+  text-align: center;
+  line-height: 300px;
 }
 
-.meal-container .meal-contents{
-    list-style-type: none;
-    display: inline;
+a.control_prev, a.control_next {
+  position: absolute;
+  bottom: 20%;
+  z-index: 999;
+  display: block;
+  padding: 4% 3%;
+  width: 4vh;
+  height: 4vh;
+  background: #2a2a2a;
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
-.meal-container .meal-contents li{
-    width: 100%;
-    height: 100%;
-    display: inline;
+a.control_prev img, a.control_next img{
+  width: 4vh;
+  height: 4vh;
+}
+
+a.control_prev:hover, a.control_next:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+a.control_prev {
+  border-radius: 0 2px 2px 0;
+}
+
+a.control_next {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.slider_option {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  font-size: 18px;
 }
 
 .meal-card{
-    width: 30%;
-    height: 100%;
-    background: red;
+  width: 30%;
+  height: 100%;
+  background: #555;
+  border-radius: 4px;
+}
+
+.meal-content-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.meal-content-container img{
+    width: 5vh;
+    height: 5vh;
+    margin: auto;
+    cursor: pointer;
 }
