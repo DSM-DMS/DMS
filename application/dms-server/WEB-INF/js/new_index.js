@@ -525,7 +525,7 @@ function setRulePreview() {
             200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+                $(".notice-content-container p").html(parsedData[0].content);
             },
             204: function(data) {
                 $("#notice-title").text("");
@@ -642,7 +642,7 @@ function setFaqPreview() {
             200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+                $(".notice-content-container p").html(parsedData[0].content);
             },
             204: function(data) {
                 $("#notice-title").text("");
@@ -1411,10 +1411,41 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
+    var slideCount = $('#slider ul li').length;
+	var slideWidth = $('#slider ul li').width();
+	var slideHeight = $('#slider ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+	
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+	
+	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	
+    $('#slider ul li:last-child').prependTo('#slider ul');
 
-    $('.flexslider').flexslider({
-        animation: "slide",
-        touch: "true"
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('.control_next').click(function () {
+        moveRight();
     });
 });
 
@@ -1499,22 +1530,16 @@ function makeWeekFormat(thisDate) {
 ========================================================================================== */
 noticePreviewBtn.on("click", function() {
     selectedCategory = "notice";
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
     setNoticePreview();
 });
 
 rulePreviewBtn.on("click", function() {
     selectedCategory = "rule";
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
     setRulePreview();
 });
 
 faqPreviewBtn.on("click", function() {
     selectedCategory = "faq";
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
     setFaqPreview();
 });
 
