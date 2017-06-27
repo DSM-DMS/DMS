@@ -1932,7 +1932,6 @@ a.control_prev, a.control_next {
   opacity: 0.8;
   cursor: pointer;
 }
-
 a.control_prev img, a.control_next img{
   width: 4vh;
   height: 4vh;

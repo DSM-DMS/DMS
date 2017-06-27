@@ -1411,7 +1411,6 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
-
     var slideCount = $('#slider ul li').length;
 	var slideWidth = $('#slider ul li').width();
 	var slideHeight = $('#slider ul li').height();
