@@ -1224,21 +1224,22 @@ $nextMenuBtn.on("click", function() {
     setDay();
 });
 
-function nextDay() {
+function getNextDay(date) {
     mealDate.setDate(mealDate.getDate() + 1);
-    getMeal();
+    return mealDate;
 }
 
-function prevDay() {
+function getPrevDay(date) {
     mealDate.setDate(mealDate.getDate() - 1);
-    getMeal();
+    return mealDate;
 }
 
-function formatDate() {
+function formatDate(date) {
+    date = new Date(date);
     return [
-        mealDate.getFullYear(),
-        ('0' + (mealDate.getMonth() + 1)).slice(-2),
-        ('0' + mealDate.getDate()).slice(-2)
+        date.getFullYear(),
+        ('0' + (date.getMonth() + 1)).slice(-2),
+        ('0' + date.getDate()).slice(-2)
     ].join('-');
 }
 
@@ -1249,27 +1250,28 @@ function formatDate2() {
     var d = mealDate.getDate();
     var day = days[mealDate.getDay()];
 
-    return y + "." + m + "." + d + " " + day + "요일";
+    return y + "년 " + m + "월 " + d + "일 " + day + "요일";
 }
 
 function setDay() {
     $(".meal-date").text(formatDate2());
-    getMeal();
 }
 
-function getMeal() {
-    $.ajax({
+getSomedayMeal(mealDate, $(".today-meal"));
+
+function getSomedayMeal(day, target) {
+        $.ajax({
         url: "http://dsm2015.cafe24.com/meal",
         data: {
-            date: formatDate()
+            date: formatDate(day)
         },
         statusCode: {
             200: function(data) {
                 var parsedData = JSON.parse(data);
-                var domArr = $(".meal-content p");
-                $(domArr[0]).text(JSON.parse(parsedData.breakfast).toString());
-                $(domArr[1]).text(JSON.parse(parsedData.lunch).toString());
-                $(domArr[2]).text(JSON.parse(parsedData.dinner).toString());
+                var domArr = target.find(".meal-card p");
+                $(domArr[0]).html(JSON.parse(parsedData.breakfast).toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(JSON.parse(parsedData.lunch).toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(JSON.parse(parsedData.dinner).toString().replace(/,/gi, "<br>"));
             },
             error: function() {
                 var domArr = $(".meal-content p");
@@ -1278,12 +1280,8 @@ function getMeal() {
                 $(domArr[2]).text("급식이 없습니다.");
             }
         }
-    })
+    });
 }
-
-$mealNavigationButton.on('click', function(event){
-    
-});
 
 //Sets the document when it is loaded
 $(document).ready(function() {
@@ -1337,7 +1335,7 @@ $(document).ready(function() {
     if (currentTime >= startTime && currentTime <= endTime) {
         $('#extensionValue').html("연장신청이 가능합니다.");
     } else {
-        $('#extensionValue').html("연장신청이 불가능합니다");
+        $('#extensionValue').html("연장신청시간이 아닙니다.");
     }
 
     //show current stay state and extension state
@@ -1411,6 +1409,7 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
+
     var slideCount = $('#slider ul li').length;
 	var slideWidth = $('#slider ul li').width();
 	var slideHeight = $('#slider ul li').height();
@@ -1426,6 +1425,8 @@ $(document).ready(function() {
         $('#slider ul').animate({
             left: + slideWidth
         }, 200, function () {
+            getSomedayMeal(getPrevDay(mealDate), $('#slider ul li:first-child'));
+            $(".meal-date").text(formatDate2());
             $('#slider ul li:last-child').prependTo('#slider ul');
             $('#slider ul').css('left', '');
         });
@@ -1435,6 +1436,8 @@ $(document).ready(function() {
         $('#slider ul').animate({
             left: - slideWidth
         }, 200, function () {
+            getSomedayMeal(getNextDay(mealDate), $('#slider ul li:last-child'));
+            $(".meal-date").text(formatDate2());
             $('#slider ul li:first-child').appendTo('#slider ul');
             $('#slider ul').css('left', '');
         });
@@ -1553,10 +1556,6 @@ function showAlert(message) {
         $(".infoAlert").remove();
     }, 2000);
 }
-/** =======
- * common button
-========================================================================================== */
-//This is a pen based off of Codewoofy's eyes follow mouse. It is just cleaned up, face removed, and then made to be a little more cartoony. https://codepen.io/Codewoofy/pen/VeBJEP
 
 $("body").mousemove(function(event) {
   var eye = $(".eye");

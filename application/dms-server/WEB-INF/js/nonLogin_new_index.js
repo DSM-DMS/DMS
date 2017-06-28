@@ -324,7 +324,7 @@ function setNoticePreview() {
             200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+                $(".notice-content-container p").html(parsedData[0].content)
             },
             204: function(data) {
                 $("#notice-title").text("");
@@ -670,31 +670,48 @@ $modalButton.click(function(e) {
 /** ======================================================================================
  * meal
 ========================================================================================== */
-$prevMenuBtn.on("click", function() {
-    prevDay();
-    setDay();
-});
+getSomedayMeal(mealDate, $(".today-meal"));
 
-$nextMenuBtn.on("click", function() {
-    nextDay();
-    setDay();
-});
+function getSomedayMeal(day, target) {
+        $.ajax({
+        url: "http://dsm2015.cafe24.com/meal",
+        data: {
+            date: formatDate(day)
+        },
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data);
+                var domArr = target.find(".meal-card p");
+                $(domArr[0]).html(JSON.parse(parsedData.breakfast).toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(JSON.parse(parsedData.lunch).toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(JSON.parse(parsedData.dinner).toString().replace(/,/gi, "<br>"));
+            },
+            error: function() {
+                var domArr = $(".meal-content p");
+                $(domArr[0]).text("급식이 없습니다.");
+                $(domArr[1]).text("급식이 없습니다.");
+                $(domArr[2]).text("급식이 없습니다.");
+            }
+        }
+    });
+}
 
-function nextDay() {
+function getNextDay(date) {
     mealDate.setDate(mealDate.getDate() + 1);
-    getMeal();
+    return mealDate;
 }
 
-function prevDay() {
+function getPrevDay(date) {
     mealDate.setDate(mealDate.getDate() - 1);
-    getMeal();
+    return mealDate;
 }
 
-function formatDate() {
+function formatDate(date) {
+    date = new Date(date);
     return [
-        mealDate.getFullYear(),
-        ('0' + (mealDate.getMonth() + 1)).slice(-2),
-        ('0' + mealDate.getDate()).slice(-2)
+        date.getFullYear(),
+        ('0' + (date.getMonth() + 1)).slice(-2),
+        ('0' + date.getDate()).slice(-2)
     ].join('-');
 }
 
@@ -705,37 +722,9 @@ function formatDate2() {
     var d = mealDate.getDate();
     var day = days[mealDate.getDay()];
 
-    return y + "." + m + "." + d + " " + day + "요일";
+    return y + "년 " + m + "월 " + d + "일 " + day + "요일";
 }
 
-function setDay() {
-    $(".meal-date").text(formatDate2());
-    getMeal();
-}
-
-function getMeal() {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/meal",
-        data: {
-            date: formatDate()
-        },
-        statusCode: {
-            200: function(data) {
-                var parsedData = JSON.parse(data);
-                var domArr = $(".meal-content p");
-                $(domArr[0]).text(JSON.parse(parsedData.breakfast).toString());
-                $(domArr[1]).text(JSON.parse(parsedData.lunch).toString());
-                $(domArr[2]).text(JSON.parse(parsedData.dinner).toString());
-            },
-            error: function() {
-                var domArr = $(".meal-content p");
-                $(domArr[0]).text("급식이 없습니다.");
-                $(domArr[1]).text("급식이 없습니다.");
-                $(domArr[2]).text("급식이 없습니다.");
-            }
-        }
-    })
-}
 
 //Sets the document when it is loaded
 $(document).ready(function() {
@@ -825,7 +814,48 @@ $(document).ready(function() {
         });
 
     //setting for show meal
-    setDay();
+    $(".meal-date").text(formatDate2());
+
+    var slideCount = $('#slider ul li').length;
+	var slideWidth = $('#slider ul li').width();
+	var slideHeight = $('#slider ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+	
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+	
+	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            getSomedayMeal(getPrevDay(mealDate), $('#slider ul li:first-child'));
+            $(".meal-date").text(formatDate2());
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            getSomedayMeal(getNextDay(mealDate), $('#slider ul li:last-child'));
+            $(".meal-date").text(formatDate2());
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('.control_next').click(function () {
+        moveRight();
+    });
 });
 
 /** ======================================================================================
@@ -843,7 +873,7 @@ function setRulePreview() {
             200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+                $(".notice-content-container p").html(parsedData[0].content);
             },
             204: function(data) {
                 $("#notice-title").text("");
@@ -868,7 +898,7 @@ function setFaqPreview() {
             200: function(data) {
                 var parsedData = JSON.parse(data).result;
                 $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").text(sanitize(parsedData[0].content));
+                $(".notice-content-container p").html(parsedData[0].content);
             },
             204: function(data) {
                 $("#notice-title").text("");
@@ -881,23 +911,27 @@ function setFaqPreview() {
     });
 }
 
+$(".left-menu").on("click", function() {
+    $(".left-selected-meneBar").offset({
+        top: $(this).offset().top,
+        left: 0
+    });
+});
+
 noticePreviewBtn.on("click", function() {
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
+    selectedCategory = "notice";
     setNoticePreview();
 });
 
 rulePreviewBtn.on("click", function() {
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
+    selectedCategory = "rule";
     setRulePreview();
 });
 
 faqPreviewBtn.on("click", function() {
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
+    selectedCategory = "faq";
     setFaqPreview();
-});
+})
 
 /** ======================================================================================
  * register
