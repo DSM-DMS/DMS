@@ -838,7 +838,12 @@ input[type="radio"]:checked~.bullet .line.seven {
 
 .meal-date {
     font-size: 1.5rem;
-    margin: 2% auto;
+    margin: 0 auto;
+    background: #607d8b;
+    padding: 2% 5%;
+    border-radius: 999px;
+    color: white;
+    font-weight: 600;
 }
 
 .meal-remote-control img {
@@ -1961,8 +1966,23 @@ a.control_next {
 .meal-card{
   width: 30%;
   height: 100%;
-  background: #555;
+  background: #e6edf2;
   border-radius: 4px;
+  line-height: 1.5em;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.meal-card>span{
+    font-weight: bold;
+}
+
+.meal-card>img{
+    width: 5vh;
+    height: 5vh;
+    margin: 15% auto 0 auto
 }
 
 .meal-content-container{
@@ -1970,7 +1990,7 @@ a.control_next {
     flex-direction: row;
 }
 
-.meal-content-container img{
+.meal-content-container>img{
     width: 5vh;
     height: 5vh;
     margin: auto;
