@@ -73,6 +73,7 @@ var $passwordChangeReq = $(".password-change button");
 /**
  * Stay
  */
+
 var $openStayButton = $("#open-stay-apply")
 var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
@@ -82,9 +83,13 @@ var stayDate = new Date();
 /**
  * Meal
  */
+
 var mealDate = new Date();
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
+
+var $mealNavigationButton = $(".meal-navigation-button");
+var $mealCardContainer = $(".meal-card-container");
 
 /**
  * Domitory rule
@@ -116,6 +121,7 @@ var $bugBtn = $(".bug-btn");
  */
 var $openLoginButton = $(".login-btn");
 var $loginSendBtn = $(".login-button");
+var $password = $("#pass");
 
 /**
  * Point
@@ -147,6 +153,7 @@ var $extensionCurrentState = $('#Layer_2');
 var noticePreviewBtn = $(".notice-preview-btn");
 var rulePreviewBtn = $(".rule-preview-btn");
 var faqPreviewBtn = $(".faq-preview-btn");
+var selectedCategory = "notice";
 
 /**
  * remove html tag
@@ -331,11 +338,29 @@ $closeExtensionButton.on("click", function() {
  * Notice
 ========================================================================================== */
 $noticeMoreBtn.on("click", function() {
-    $noticeListWindow.toggleClass("fade-in");
-    $panel.toggleClass("left-move");
-    $menu.toggleClass("fade-out");
-    $menu2.toggleClass("fade-out");
-    $menuPagenation.toggleClass("fade-out");
+    if (selectedCategory == "notice") {
+        $noticeListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    } else if (selectedCategory == "rule") {
+        $openStayButton.prop("disabled", true);
+        $openExtensionButton.prop("disabled", true);
+        $dormListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    } else if (selectedCategory == "faq") {
+        $openStayButton.prop("disabled", false);
+        $openExtensionButton.prop("disabled", false);
+        $faqListWindow.toggleClass("fade-in");
+        $panel.toggleClass("left-move");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
 });
 
 $closeNoticeButton.on("click", function() {
@@ -368,13 +393,6 @@ function fillListCard(data, target) {
     var newCard = $('<div/>', {
         "class": "list-box",
     });
-    newCard.append($('<div/>', {
-        "class": "list-box-no-container"
-    }))
-    newCard.append($('<p/>', {
-        "class": "list-box-no",
-        text: data.no
-    }));
     newCard.append($('<p/>', {
         "class": "list-box-writer",
         text: "사감부"
@@ -393,7 +411,7 @@ function fillListCard(data, target) {
             $(this).css('height', 'auto');
             $(this).append($('<p/>', {
                 "class": "list-box-no-content",
-                html: sanitize(data.content)
+                html: data.content
             }));
             $(".list-box-no-content").css('opacity', '1');
         } else {
@@ -407,16 +425,22 @@ function fillListCard(data, target) {
 
 function setNoticePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/notice/list",
+        url: "http://dsm2015.cafe24.com/post/list/notice",
         type: "GET",
         data: {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").html(parsedData[0].title);
+                $(".notice-content-container p").html((parsedData[0].content));
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -491,16 +515,22 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule/list",
+        url: "http://dsm2015.cafe24.com/post/list/rule",
         type: "GET",
         data: {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").html(parsedData[0].content);
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -586,7 +616,7 @@ getFaqList();
 
 function getFaqList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/faq/list",
+        url: "http://dsm2015.cafe24.com/post/list/faq",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -602,16 +632,22 @@ function getFaqList() {
 
 function setFaqPreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/faq/list",
+        url: "http://dsm2015.cafe24.com/post/list/faq",
         type: "GET",
         data: {
             page: 1,
             limit: 1
         },
-        success: function(data) {
-            var parsedData = JSON.parse(data).result;
-            $("#notice-title").text(parsedData[0].title);
-            $(".notice-content-container p").html(sanitize(parsedData[0].content));
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").html(parsedData[0].content);
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -1188,21 +1224,22 @@ $nextMenuBtn.on("click", function() {
     setDay();
 });
 
-function nextDay() {
+function getNextDay(date) {
     mealDate.setDate(mealDate.getDate() + 1);
-    getMeal();
+    return mealDate;
 }
 
-function prevDay() {
+function getPrevDay(date) {
     mealDate.setDate(mealDate.getDate() - 1);
-    getMeal();
+    return mealDate;
 }
 
-function formatDate() {
+function formatDate(date) {
+    date = new Date(date);
     return [
-        mealDate.getFullYear(),
-        ('0' + (mealDate.getMonth() + 1)).slice(-2),
-        ('0' + mealDate.getDate()).slice(-2)
+        date.getFullYear(),
+        ('0' + (date.getMonth() + 1)).slice(-2),
+        ('0' + date.getDate()).slice(-2)
     ].join('-');
 }
 
@@ -1213,27 +1250,28 @@ function formatDate2() {
     var d = mealDate.getDate();
     var day = days[mealDate.getDay()];
 
-    return y + "." + m + "." + d + " " + day + "요일";
+    return y + "년 " + m + "월 " + d + "일 " + day + "요일";
 }
 
 function setDay() {
     $(".meal-date").text(formatDate2());
-    getMeal();
 }
 
-function getMeal() {
-    $.ajax({
+getSomedayMeal(mealDate, $(".today-meal"));
+
+function getSomedayMeal(day, target) {
+        $.ajax({
         url: "http://dsm2015.cafe24.com/meal",
         data: {
-            date: formatDate()
+            date: formatDate(day)
         },
         statusCode: {
             200: function(data) {
                 var parsedData = JSON.parse(data);
-                var domArr = $(".meal-content p");
-                $(domArr[0]).text(JSON.parse(parsedData.breakfast).toString());
-                $(domArr[1]).text(JSON.parse(parsedData.lunch).toString());
-                $(domArr[2]).text(JSON.parse(parsedData.dinner).toString());
+                var domArr = target.find(".meal-card p");
+                $(domArr[0]).html(JSON.parse(parsedData.breakfast).toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(JSON.parse(parsedData.lunch).toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(JSON.parse(parsedData.dinner).toString().replace(/,/gi, "<br>"));
             },
             error: function() {
                 var domArr = $(".meal-content p");
@@ -1242,17 +1280,29 @@ function getMeal() {
                 $(domArr[2]).text("급식이 없습니다.");
             }
         }
-    })
+    });
 }
 
 //Sets the document when it is loaded
 $(document).ready(function() {
     //check user agent
     if(navigator.userAgent.toLowerCase().indexOf("android") > -1){
-        window.location.href = 'http://play.google.com/store/apps/details?id=com.truecaller&hl=en';
+        var loadMobileApp = {
+            host:"intent://default?version=1#Intent;",
+            action:"action=android.intent.action.VIEW;",
+            category:"category=android.intent.category.BROWSABLE;",
+            package:"package=com.nhn.android.search;end"
+        }
+
+        var url;
+        for(var element in loadMobileApp){
+            url += loadMobileApp[element];
+        }
+
+        window.location.href = url;
     }
     else if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
-        window.location.href = 'http://itunes.apple.com/lb/app/truecaller-caller-id-number/id448142450?mt=8';
+        window.location.href = 'https://itunes.apple.com/kr/app/apple-store/id375380948?mt=8';
     }
 
     //set random background image
@@ -1272,7 +1322,9 @@ $(document).ready(function() {
             if (dt) {
                 var hours24 = dt.getHours();
                 var hours = ((hours24 + 11) % 12) + 1;
-                formatted = [[addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"].join(" ");
+                formatted = [
+                    [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"
+                ].join(" ");
             }
             return formatted;
         }
@@ -1283,7 +1335,7 @@ $(document).ready(function() {
     if (currentTime >= startTime && currentTime <= endTime) {
         $('#extensionValue').html("연장신청이 가능합니다.");
     } else {
-        $('#extensionValue').html("연장신청이 불가능합니다");
+        $('#extensionValue').html("연장신청시간이 아닙니다.");
     }
 
     //show current stay state and extension state
@@ -1357,6 +1409,47 @@ $(document).ready(function() {
 
     //setting for show meal
     setDay();
+
+    var slideCount = $('#slider ul li').length;
+	var slideWidth = $('#slider ul li').width();
+	var slideHeight = $('#slider ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+	
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+	
+	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            getSomedayMeal(getPrevDay(mealDate), $('#slider ul li:first-child'));
+            $(".meal-date").text(formatDate2());
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            getSomedayMeal(getNextDay(mealDate), $('#slider ul li:last-child'));
+            $(".meal-date").text(formatDate2());
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('.control_next').click(function () {
+        moveRight();
+    });
 });
 
 /** ======================================================================================
@@ -1439,20 +1532,17 @@ function makeWeekFormat(thisDate) {
  * article preview
 ========================================================================================== */
 noticePreviewBtn.on("click", function() {
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
+    selectedCategory = "notice";
     setNoticePreview();
 });
 
 rulePreviewBtn.on("click", function() {
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
+    selectedCategory = "rule";
     setRulePreview();
 });
 
 faqPreviewBtn.on("click", function() {
-    $(".speech-bubble-tail").remove();
-    $(this).after('<div class="speech-bubble-tail"></div>');
+    selectedCategory = "faq";
     setFaqPreview();
 });
 
@@ -1466,6 +1556,24 @@ function showAlert(message) {
         $(".infoAlert").remove();
     }, 2000);
 }
-/** =======
- * common button
-========================================================================================== */
+
+$("body").mousemove(function(event) {
+  var eye = $(".eye");
+  var x = (eye.offset().left) + (eye.width() / 2);
+  var y = (eye.offset().top) + (eye.height() / 2);
+  var rad = Math.atan2(event.pageX - x, event.pageY - y);
+  var rot = (rad * (180 / Math.PI) * -1) + 150;
+  eye.css({
+    '-webkit-transform': 'rotate(' + rot + 'deg)',
+    '-moz-transform': 'rotate(' + rot + 'deg)',
+    '-ms-transform': 'rotate(' + rot + 'deg)',
+    'transform': 'rotate(' + rot + 'deg)'
+  });
+});
+
+$(".left-menu").on("click", function() {
+    $(".left-selected-meneBar").offset({
+        top: $(this).offset().top,
+        left: 0
+    });
+});
