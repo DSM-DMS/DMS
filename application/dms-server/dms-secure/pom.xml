@@ -34,12 +34,6 @@
 			<artifactId>dms-data-utilities</artifactId>
 			<version>${version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-		</dependency>
 
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -52,7 +46,6 @@
 			<artifactId>bcprov-jdk16</artifactId>
 			<version>1.45</version>
 		</dependency>
-		
 
 	</dependencies>
 </project>

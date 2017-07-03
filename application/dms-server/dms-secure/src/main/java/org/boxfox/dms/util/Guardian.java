@@ -54,8 +54,8 @@ public class Guardian {
 
     public static boolean matchParameters(String param, String [] cases){
         boolean check = false;
-        for(String str :  cases){
-            if(cases.equals(str)){
+        for(String str : cases){
+            if(param.equals(str)){
                 check = true;
                 break;
             }

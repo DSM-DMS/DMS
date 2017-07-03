@@ -64,6 +64,7 @@ class DmsMain {
 				Calendar currentTime = Calendar.getInstance();
 				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
 				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+				int minute = currentTime.get(Calendar.MINUTE);
 				Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
 				if (dayOfWeek == Calendar.MONDAY&& hour<5) {
 					try {
