@@ -373,7 +373,7 @@ $closeNoticeButton.on("click", function() {
 
 function getNoticeList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/notice/list",
+        url: "http://dsm2015.cafe24.com/post/list/notice",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -499,7 +499,7 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/rule/list",
+        url: "http://dsm2015.cafe24.com/post/list/rule",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
@@ -1414,11 +1414,11 @@ $(document).ready(function() {
 	var slideWidth = $('#slider ul li').width();
 	var slideHeight = $('#slider ul li').height();
 	var sliderUlWidth = slideCount * slideWidth;
-	
+
 	$('#slider').css({ width: slideWidth, height: slideHeight });
-	
+
 	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-	
+
     $('#slider ul li:last-child').prependTo('#slider ul');
 
     function moveLeft() {
