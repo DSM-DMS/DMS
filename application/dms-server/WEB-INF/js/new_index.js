@@ -209,7 +209,7 @@ if (window.innerWidth == width && window.innerHeight == fullHeight) {
     $("body").css({
         minWidth: width + "px",
         minHeight: height + "px",
-        overflow: "auto"
+        overflow: "hidden"
     });
 }
 

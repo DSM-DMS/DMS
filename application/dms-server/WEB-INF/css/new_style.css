@@ -78,8 +78,9 @@ body {
     position: absolute;
     float: right;
     right: 0;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vh;
+    transform: scale(1.1);
     z-index: -2;
 }
 
@@ -151,7 +152,7 @@ body {
     color: white;
     /*line-height: 5vh;*/
     height: 10%;
-    font-size: 0.8rem;
+    font-size: 2vh;
     background: #48CFAD;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -175,7 +176,7 @@ body {
 .current-status svg {
     width: 5vh;
     height: 5vh;
-    margin-right: 1vh;
+    margin: auto 1vh auto 0;
 }
 
 .current-status svg:hover {
@@ -185,7 +186,7 @@ body {
 .current-status p {
     color: white;
     font-size: 21px;
-    margin: 0;
+    margin: auto 0;
 }
 
 #extension-apply-container {
@@ -206,7 +207,7 @@ body {
     color: white;
     /*line-height: 5vh;*/
     height: 10%;
-    font-size: 0.8rem;
+    font-size: 2vh;
     background: #48CFAD;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -290,7 +291,7 @@ input[type="radio"] {
     width: 25px;
     height: 25px;
     left: -3px;
-    top: 2px;
+    top: 1px;
     border: 5px solid #fff;
     opacity: 0;
     border-radius: 50%;
@@ -1969,7 +1970,7 @@ a.control_next {
   background: #e6edf2;
   border-radius: 4px;
   line-height: 1.5em;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1995,4 +1996,48 @@ a.control_next {
     height: 5vh;
     margin: auto;
     cursor: pointer;
+}
+
+/* Shrink */
+
+.hvr-shrink {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.hvr-shrink:hover,
+.hvr-shrink:focus,
+.hvr-shrink:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+/* Float */
+
+.hvr-float {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-float:hover,
+.hvr-float:focus,
+.hvr-float:active {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
 }
