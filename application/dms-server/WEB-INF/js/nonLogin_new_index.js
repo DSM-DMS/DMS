@@ -820,11 +820,11 @@ $(document).ready(function() {
 	var slideWidth = $('#slider ul li').width();
 	var slideHeight = $('#slider ul li').height();
 	var sliderUlWidth = slideCount * slideWidth;
-	
+
 	$('#slider').css({ width: slideWidth, height: slideHeight });
-	
+
 	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-	
+
     $('#slider ul li:last-child').prependTo('#slider ul');
 
     function moveLeft() {
@@ -964,4 +964,18 @@ $("#register-apply-btn").on("click", function() {
             $(".login-content").toggle("slide");
             $(".register-content").toggle("slide");        },
     });
+});
+
+$("body").mousemove(function(event) {
+  var eye = $(".eye");
+  var x = (eye.offset().left) + (eye.width() / 2);
+  var y = (eye.offset().top) + (eye.height() / 2);
+  var rad = Math.atan2(event.pageX - x, event.pageY - y);
+  var rot = (rad * (180 / Math.PI) * -1) + 150;
+  eye.css({
+    '-webkit-transform': 'rotate(' + rot + 'deg)',
+    '-moz-transform': 'rotate(' + rot + 'deg)',
+    '-ms-transform': 'rotate(' + rot + 'deg)',
+    'transform': 'rotate(' + rot + 'deg)'
+  });
 });
