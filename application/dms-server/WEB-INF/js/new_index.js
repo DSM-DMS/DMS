@@ -1287,19 +1287,21 @@ function getSomedayMeal(day, target) {
 $(document).ready(function() {
     //check user agent
     if(navigator.userAgent.toLowerCase().indexOf("android") > -1){
-        var loadMobileApp = {
-            host:"intent://default?version=1#Intent;",
-            action:"action=android.intent.action.VIEW;",
-            category:"category=android.intent.category.BROWSABLE;",
-            package:"package=com.nhn.android.search;end"
-        }
+        // var loadMobileApp = {
+        //     host:"intent://default?version=1#Intent;",
+        //     action:"action=android.intent.action.VIEW;",
+        //     category:"category=android.intent.category.BROWSABLE;",
+        //     package:"package=com.nhn.android.search;end"
+        // }
 
-        var url;
-        for(var element in loadMobileApp){
-            url += loadMobileApp[element];
-        }
+        // var url;
+        // for(var element in loadMobileApp){
+        //     url += loadMobileApp[element];
+        // }
 
-        window.location.href = url;
+        // window.location.href = url;
+        alert("this is mobile");
+        $("body").css({"transform":"rotate(90deg);"});
     }
     else if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1){
         window.location.href = 'https://itunes.apple.com/kr/app/apple-store/id375380948?mt=8';
