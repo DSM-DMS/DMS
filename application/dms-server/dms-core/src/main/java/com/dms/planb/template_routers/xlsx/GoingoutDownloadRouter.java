@@ -73,22 +73,20 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 
 								if (resultSet.next()) {
 									String uid = resultSet.getString("uid");
-									stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", targetWeek, "'");
+									stayStateResultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "'");
 
 									if (stayStateResultSet.next()) {
 										// 잔류신청을 한 경우
 										setCellValues(stayStateResultSet, database, sheet, cell, uid);
 									} else {
 										// 잔류신청 정보 없음
-										stayDefaultResultSet = database
-												.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
+										stayDefaultResultSet = database.executeQuery("SELECT * FROM stay_apply_default WHERE uid='", uid, "'");
 										// default 값 조회
 										if (stayDefaultResultSet.next()) {
 											setCellValues(stayDefaultResultSet, database, sheet, cell, uid);
 										}
 									}
 								}
-
 								break;
 						}
 					}
@@ -104,6 +102,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 					.sendFile(FILE_DIR + "외출신청.xlsx");
 				context.response().close();
 			} catch (IOException | SQLException e) {
+				e.printStackTrace();
 				context.response().setStatusCode(500).end();
 				context.response().close();
 			}
