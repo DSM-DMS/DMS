@@ -193,55 +193,63 @@ function sanitize(txt) {
  * browser size
 ========================================================================================== */
 
-var width = screen.width;
-var fullHeight = window.innerHeight + window.screenTop;
-var height = screen.height - (window.outerHeight - window.innerHeight);
+    var width = screen.width;
+    var fullHeight = window.innerHeight + window.screenTop;
+    var height = screen.height - (window.outerHeight - window.innerHeight);
+    
+function setBrowserSize() {
 
-var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-if (window.innerWidth == width && window.innerHeight == fullHeight) {
-    $("body").css({
-        minWidth: width + "px",
-        minHeight: fullHeight + "px",
-        overflow: "hidden"
-    });
-} else {
-    $("body").css({
-        minWidth: width + "px",
-        minHeight: height + "px",
-        overflow: "hidden"
-    });
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (window.innerWidth == width && window.innerHeight == fullHeight) {
+        $("body").css({
+            minWidth: width + "px",
+            minHeight: fullHeight + "px",
+            overflow: "hidden"
+        });
+    } else {
+        $("body").css({
+            minWidth: width + "px",
+            minHeight: height + "px",
+            overflow: "auto"
+        });
+    }
+
+    if (isMobile) {
+        $("body").css({
+            minWidth: "1707px",
+            minHeight: "855px",
+            overflow: "auto"
+        });
+    } else {
+        $(window).resize(function() {
+            if (window.innerWidth == width && window.innerHeight == fullHeight) {
+                $("body").css({
+                    minWidth: width + "px",
+                    minHeight: fullHeight + "px",
+                    overflow: "hidden"
+                });
+            } else {
+                $("body").css({
+                    minWidth: width + "px",
+                    minHeight: height + "px",
+                    overflow: "auto"
+                });
+            }
+
+        });
+    }
+    window.scrollTo(0,0); 
+
 }
 
-if (isMobile) {
-    $("body").css({
-        minWidth: "1707px",
-        minHeight: "855px",
-        overflow: "auto"
-    });
-} else {
-    $(window).resize(function() {
-        if (window.innerWidth == width && window.innerHeight == fullHeight) {
-            $("body").css({
-                minWidth: width + "px",
-                minHeight: fullHeight + "px",
-                overflow: "hidden"
-            });
-        } else {
-            $("body").css({
-                minWidth: width + "px",
-                minHeight: height + "px",
-                overflow: "auto"
-            });
-        }
 
-    });
-}
-
-//  scroll lock (작업표시줄 유무에 따른 화면 크기문제 해결)
-  $(document).bind('scroll',function () { 
-       window.scrollTo(0,0); 
-  });
+ // scroll lock (작업표시줄 유무에 따른 화면 크기문제 해결)
+setBrowserSize();
+$(window).on('resize', function() {
+    setBrowserSize();
+})
 
 
 /** ======================================================================================
