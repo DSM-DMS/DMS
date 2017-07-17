@@ -1,93 +1,46 @@
 package com.dms.beinone.application.models;
 
+import com.google.gson.JsonDeserializer;
+
+import java.util.List;
+
 /**
  * Created by BeINone on 2017-01-24.
  */
 
 public class Meal {
 
-    private String breakfast;
-    private String lunch;
-    private String dinner;
-    private String breakfastAllergy;
-    private String lunchAllergy;
-    private String dinnerAllergy;
+    private List<String> breakfast;
+    private List<String> lunch;
+    private List<String> dinner;
 
-    public Meal() {
-
-    }
-
-    public Meal(String breakfast, String lunch, String dinner) {
-        setBreakfast(breakfast);
-        setLunch(lunch);
-        setDinner(dinner);
-    }
-
-    public Meal(String breakfast, String lunch, String dinner,
-                String breakfastAllergy, String lunchAllergy, String dinnerAllergy) {
-        setBreakfast(breakfast);
-        setLunch(lunch);
-        setDinner(dinner);
-        setBreakfast(breakfastAllergy);
-        setLunch(lunchAllergy);
-        setDinner(dinnerAllergy);
-    }
-
-    public String get(int index) {
-        switch (index) {
-            case 0: return breakfast;
-            case 1: return lunch;
-            case 2: return dinner;
-            default: return null;
-        }
-    }
-
-    public String getBreakfast() {
-        return breakfast;
-    }
-
-    public void setBreakfast(String breakfast) {
+    public Meal(List<String> breakfast, List<String> lunch, List<String> dinner) {
         this.breakfast = breakfast;
-    }
-
-    public String getLunch() {
-        return lunch;
-    }
-
-    public void setLunch(String lunch) {
         this.lunch = lunch;
-    }
-
-    public String getDinner() {
-        return dinner;
-    }
-
-    public void setDinner(String dinner) {
         this.dinner = dinner;
     }
 
-    public String getBreakfastAllergy() {
-        return breakfastAllergy;
+    public List<String> getBreakfast() {
+        return breakfast;
     }
 
-    public void setBreakfastAllergy(String breakfastAllergy) {
-        this.breakfastAllergy = breakfastAllergy;
+    public void setBreakfast(List<String> breakfast) {
+        this.breakfast = breakfast;
     }
 
-    public String getLunchAllergy() {
-        return lunchAllergy;
+    public List<String> getLunch() {
+        return lunch;
     }
 
-    public void setLunchAllergy(String lunchAllergy) {
-        this.lunchAllergy = lunchAllergy;
+    public void setLunch(List<String> lunch) {
+        this.lunch = lunch;
     }
 
-    public String getDinnerAllergy() {
-        return dinnerAllergy;
+    public List<String> getDinner() {
+        return dinner;
     }
 
-    public void setDinnerAllergy(String dinnerAllergy) {
-        this.dinnerAllergy = dinnerAllergy;
+    public void setDinner(List<String> dinner) {
+        this.dinner = dinner;
     }
-
 }

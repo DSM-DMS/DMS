@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.utils.DateUtils;
-import com.dms.beinone.application.utils.StayApplyUtils;
 import com.dms.boxfox.networking.HttpBox;
 import com.dms.boxfox.networking.HttpBoxCallback;
 import com.dms.boxfox.networking.datamodel.Response;
@@ -101,16 +100,16 @@ public class StayActivity extends AppCompatActivity {
                             int code = response.getCode();
                             switch (code) {
                                 case HttpBox.HTTP_OK:
-                                    Toast.makeText(StayActivity.this, R.string.stay_apply_ok, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(StayActivity.this, R.string.apply_ok, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_NO_CONTENT:
-                                    Toast.makeText(StayActivity.this, R.string.stay_apply_no_content, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(StayActivity.this, R.string.apply_no_content, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_BAD_REQUEST:
                                     Toast.makeText(StayActivity.this, R.string.http_bad_request, Toast.LENGTH_SHORT).show();
                                     break;
                                 case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(StayActivity.this, R.string.stay_apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(StayActivity.this, R.string.apply_internal_server_error, Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

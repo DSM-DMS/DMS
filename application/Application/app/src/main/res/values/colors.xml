@@ -7,9 +7,9 @@
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorSecondary">#BDBDBD</color>
 
-    <color name="activatedBar">#DBF3FF</color>
+    <color name="activatedBar">#b8e8ff</color>
 
-    <color name="applyList1">#A0C4D5</color>
+    <color name="applyList1">#A7C9DA</color>
     <color name="applyList2">#89B9D1</color>
     <color name="applyList3">#75B1D0</color>
     <color name="applyList4">#63A0BF</color>
@@ -17,7 +17,15 @@
     <color name="dormitoryListBackground">#DBEAF2</color>
     
     <color name="unapplied">#CBCBCB</color>
+    <color name="unapplied_stroke">#FFEE1A</color>
     <color name="applied">#B8E8D7</color>
+
+    <color name="extensionBackground">#F4FAFD</color>
+
+    <color name="extension1">#63A0BF</color>
+    <color name="extension2">#FF6B6B</color>
+    <color name="extension3">#FFED6B</color>
+    <color name="extension4">#6CE23B</color>
     
     <color name="disabled">#61000000</color>
 

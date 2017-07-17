@@ -3,26 +3,38 @@ package com.dms.beinone.application.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.Meal;
-import com.dms.beinone.application.utils.JSONParser;
-import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.HttpBoxCallback;
-import com.dms.boxfox.networking.datamodel.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.dms.beinone.application.DMSService.HTTP_INTERNAL_SERVER_ERROR;
+import static com.dms.beinone.application.DMSService.HTTP_OK;
 
 /**
  * Created by BeINone on 2017-05-16.
@@ -70,15 +82,15 @@ public class MealCardFragment extends Fragment {
         mDinnerTV = (TextView) rootView.findViewById(R.id.tv_meal_dinner_content);
 
         setDate(date);
-        if (mMeal != null) {
-            bind();
-        } else {
+        if (mMeal == null) {
             try {
-                loadMeal(date);
+                loadMeal(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date));
             } catch (IOException e) {
                 System.out.println("IOException in MealCardFragment: loadMeal()");
                 e.printStackTrace();
             }
+        } else {
+            bind();
         }
     }
 
@@ -98,54 +110,52 @@ public class MealCardFragment extends Fragment {
 
     private void bind() {
         if (mMeal != null) {
-            mBreakfastTV.setText(mMeal.getBreakfast());
-            mLunchTV.setText(mMeal.getLunch());
-            mDinnerTV.setText(mMeal.getDinner());
+            String breakfast = TextUtils.join(", ", mMeal.getBreakfast());
+            mBreakfastTV.setText(breakfast);
+            String lunch = TextUtils.join(", ", mMeal.getLunch());
+            mLunchTV.setText(lunch);
+            String dinner = TextUtils.join(", ", mMeal.getLunch());
+            mDinnerTV.setText(dinner);
         }
     }
 
-    private void loadMeal(Date date) throws IOException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        try {
-            JSONObject params = new JSONObject();
-            params.put("year", calendar.get(Calendar.YEAR));
-            params.put("month", calendar.get(Calendar.MONTH) + 1);
-            params.put("day", calendar.get(Calendar.DAY_OF_MONTH));
+    private Meal parseMealJson(JsonObject mealJson) {
+        String breakfastArrStr = mealJson.get("breakfast").getAsString();
+        JsonArray breakfastJsonArr = new JsonParser().parse(breakfastArrStr).getAsJsonArray();
+        List<String> breakfast = new Gson().fromJson(breakfastJsonArr, new TypeToken<List<String>>(){}.getType());
 
-            HttpBox.get(getContext(), "/school/meal")
-                    .putQueryString(params)
-                    .push(new HttpBoxCallback() {
-                        @Override
-                        public void done(Response response) {
-                            int code = response.getCode();
-                            switch (code) {
-                                case HttpBox.HTTP_OK:
-                                    try {
-                                        Meal meal = JSONParser.parseMealJSON(response.getJsonObject());
-                                        setMeal(meal);
-                                    } catch (JSONException e) {
-                                        System.out.println("JSONException in MealCardFragment: GET /school/meal");
-                                        e.printStackTrace();
-                                    }
-                                    break;
-                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.meal_internal_server_error, Toast.LENGTH_SHORT).show();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
+        String lunchArrStr = mealJson.get("lunch").getAsString();
+        JsonArray lunchJsonArr = new JsonParser().parse(lunchArrStr).getAsJsonArray();
+        List<String> lunch = new Gson().fromJson(lunchJsonArr, new TypeToken<List<String>>(){}.getType());
 
-                        @Override
-                        public void err(Exception e) {
-                            System.out.println("Error in MealCardFragment: GET /school/meal");
-                            e.printStackTrace();
-                        }
-                    });
-        } catch (JSONException e) {
-            System.out.println("JSONException in MealCardFragment: GET /school/meal");
-            e.printStackTrace();
-        }
+        String dinnerArrStr = mealJson.get("dinner").getAsString();
+        JsonArray dinnerJsonArr = new JsonParser().parse(dinnerArrStr).getAsJsonArray();
+        List<String> dinner = new Gson().fromJson(dinnerJsonArr, new TypeToken<List<String>>(){}.getType());
+
+        return new Meal(breakfast, lunch, dinner);
+    }
+
+    private void loadMeal(String date) throws IOException {
+        DMSService dmsService = HttpManager.createDMSService(getContext());
+        Call<JsonObject> call = dmsService.loadMeal(date);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                switch (response.code()) {
+                    case HTTP_OK:
+                        Meal meal = parseMealJson(response.body());
+                        setMeal(meal);
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR:
+                        Toast.makeText(getContext(), R.string.meal_internal_server_error, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

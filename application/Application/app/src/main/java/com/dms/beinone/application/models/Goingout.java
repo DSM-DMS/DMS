@@ -1,7 +1,7 @@
 package com.dms.beinone.application.models;
 
 /**
- * Created by BeINone on 2017-03-01.
+ * Created by BeINone on 2017-07-15.
  */
 
 public class Goingout {
@@ -10,8 +10,8 @@ public class Goingout {
     private boolean sun;
 
     public Goingout(boolean sat, boolean sun) {
-        setSat(sat);
-        setSun(sun);
+        this.sat = sat;
+        this.sun = sun;
     }
 
     public boolean isSat() {
@@ -29,5 +29,4 @@ public class Goingout {
     public void setSun(boolean sun) {
         this.sun = sun;
     }
-
 }

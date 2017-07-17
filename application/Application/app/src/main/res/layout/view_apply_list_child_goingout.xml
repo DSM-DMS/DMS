@@ -20,14 +20,14 @@
         <ImageView
             android:id="@+id/iv_apply_list_child_goingout"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/fish2" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="128dp"
             android:gravity="center"
             android:layout_alignTop="@id/iv_apply_list_child_goingout"
             android:layout_marginEnd="16dp"
@@ -35,8 +35,13 @@
             android:layout_marginTop="32dp"
             android:layout_toLeftOf="@id/iv_apply_list_child_goingout"
             android:layout_toStartOf="@id/iv_apply_list_child_goingout"
-            android:padding="16dp"
-            android:background="@drawable/speech_bubble"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/speech_bubble_lg"
             android:orientation="vertical">
 
             <LinearLayout
@@ -47,12 +52,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/goingout_saturday"
                     android:textSize="24sp" />
-
-                <Space
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content" />
 
                 <Switch
                     android:id="@+id/switch_apply_list_child_goingout_saturday"
@@ -74,12 +77,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/goingout_sunday"
                     android:textSize="24sp" />
-
-                <Space
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content" />
 
                 <Switch
                     android:id="@+id/switch_apply_list_child_goingout_sunday"

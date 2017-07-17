@@ -16,6 +16,9 @@ public class Extension implements Parcelable {
     public static final int CLASS_NA = 2;
     public static final int CLASS_DA = 3;
     public static final int CLASS_RA = 4;
+    public static final int CLASS_3 = 5;
+    public static final int CLASS_4 = 6;
+    public static final int CLASS_5 = 7;
 
     private String option;
     private int clazz;
@@ -24,6 +27,10 @@ public class Extension implements Parcelable {
     public Extension(String option, int classId) {
         setOption(option);
         setClazz(classId);
+    }
+
+    public Extension(int clazz) {
+        setClazz(clazz);
     }
 
     public Extension(int clazz, int seat) {

@@ -1,7 +1,6 @@
 package com.dms.beinone.application.fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,31 +15,36 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.ExtensionActivity;
-import com.dms.beinone.application.activities.LoginActivity;
-import com.dms.beinone.application.activities.MeritActivity;
 import com.dms.beinone.application.activities.StayActivity;
-import com.dms.beinone.application.models.ItemList;
-import com.dms.beinone.application.models.ItemListContent;
+import com.dms.beinone.application.managers.HttpManager;
+import com.dms.beinone.application.models.ApplyStatus;
+import com.dms.beinone.application.models.Class;
+import com.dms.beinone.application.models.Goingout;
+import com.dms.beinone.application.utils.ExtensionUtils;
+import com.dms.beinone.application.utils.StayUtils;
 import com.dms.beinone.application.views.custom.ExpandableLayout;
 import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.HttpBoxCallback;
-import com.dms.boxfox.networking.datamodel.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.dms.beinone.application.DMSService.HTTP_BAD_REQUEST;
+import static com.dms.beinone.application.DMSService.HTTP_INTERNAL_SERVER_ERROR;
+import static com.dms.beinone.application.DMSService.HTTP_OK;
 
 /**
  * Created by BeINone on 2017-05-18.
  */
 
 public class ApplyListFragment extends Fragment {
+
+    private ExpandableLayout mExpandableLayout;
 
     @Nullable
     @Override
@@ -52,96 +56,38 @@ public class ApplyListFragment extends Fragment {
     }
 
     private void init(View rootView) {
-//        LinearLayout itemlist = (LinearLayout) rootView.findViewById(R.id.layout_itemlist);
-//        final LinearLayout content = (LinearLayout) rootView.findViewById(R.id.layout_itemlist_content);
+        mExpandableLayout = (ExpandableLayout) rootView.findViewById(R.id.expandablelayout_apply_list);
 
-//        itemlist.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                content.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                final int targetHeight = content.getMeasuredHeight();
-//
-//                // Older versions of android (pre API 21) cancel animations for views with a height of 0.
-//                content.getLayoutParams().height = 1;
-//                content.setVisibility(View.VISIBLE);
-//                Animation a = new Animation() {
-//                    @Override
-//                    protected void applyTransformation(float interpolatedTime, Transformation t) {
-//                        content.getLayoutParams().height = (int)(targetHeight * interpolatedTime);
-//                        Log.d("testLog", "" + interpolatedTime);
-//                        content.requestLayout();
-//                    }
-//
-//                    @Override
-//                    public boolean willChangeBounds() {
-//                        return true;
-//                    }
-//                };
-//
-//                // 1dp/ms
-//                a.setDuration(500);
-//                content.startAnimation(a);
-
-
-//                ScaleAnimation animation = new ScaleAnimation();
-//                content.animate().scaleY(content.getHeight()).setDuration(2000)
-//                .setListener(new Animator.AnimatorListener() {
-//                    @Override
-//                    public void onAnimationStart(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        content.setVisibility(View.VISIBLE);
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animation) {
-//
-//                    }
-//                });
-//            }
-//        });
-
-
-//        List<ItemList> itemLists = createItemLists();
-//
-//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_apply_list);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        recyclerView.setAdapter(new ItemListAdapter(getContext(), itemLists));
-
-
-        ExpandableLayout expandableLayout = (ExpandableLayout) rootView.findViewById(R.id.expandablelayout_apply_list);
-
-        expandableLayout.addView(createParentView("연장신청", ContextCompat.getColor(getContext(), R.color.applyList1)),
+        mExpandableLayout.addView(createParentView("연장신청", ContextCompat.getColor(getContext(), R.color.applyList1)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList1), R.drawable.fish, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), ExtensionActivity.class));
                     }
                 }));
-        expandableLayout.addView(createParentView("잔류신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
+        mExpandableLayout.addView(createParentView("잔류신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), StayActivity.class));
                     }
                 }));
-        expandableLayout.addView(createParentView("외출신청", ContextCompat.getColor(getContext(), R.color.applyList3)),
+        mExpandableLayout.addView(createParentView("외출신청", ContextCompat.getColor(getContext(), R.color.applyList3)),
                 createGoingoutChildView());
-        expandableLayout.addView(createParentView("상점신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
+        mExpandableLayout.addView(createParentView("상점신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList4), R.drawable.seahorse, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getContext(), MeritActivity.class));
+//                        startActivity(new Intent(getContext(), MeritActivity.class));
                     }
                 }));
+
+        try {
+            loadApplyStatus();
+        } catch (IOException e) {
+            System.out.println("IOException in ApplyListFragment: GET /apply/all");
+            e.printStackTrace();
+        }
     }
 
     private View createParentView(String text, int backgroundColor) {
@@ -194,42 +140,107 @@ public class ApplyListFragment extends Fragment {
         return view;
     }
 
-    private void applyGoingout(boolean sat, boolean sun) throws IOException {
-        try {
-            JSONObject params = new JSONObject();
-            params.put("sat", sat);
-            params.put("sun", sun);
+    private void setExtensionApplyStatus(Class clazz) {
+        View view = mExpandableLayout.getChildAt(1);
+        TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
 
-            HttpBox.put(getContext(), "/apply/goingout")
-                    .putBodyData(params)
-                    .push(new HttpBoxCallback() {
-                        @Override
-                        public void done(Response response) {
-                            int code = response.getCode();
-                            switch (code) {
-                                case HttpBox.HTTP_OK:
-                                    Toast.makeText(getContext(), R.string.apply_ok, Toast.LENGTH_SHORT).show();
-                                    break;
-                                case HttpBox.HTTP_BAD_REQUEST:
-                                    Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
-                                    break;
-                                case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                                    Toast.makeText(getContext(), R.string.goingout_apply_internal_server_error, Toast.LENGTH_SHORT).show();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-
-                        @Override
-                        public void err(Exception e) {
-                            System.out.println("Error in ApplyListFragment: PUT /apply/goingout");
-                            e.printStackTrace();
-                        }
-                    });
-        } catch (JSONException e) {
-            System.out.println("JSONException in ApplyListFragment: PUT /apply/goingout");
-            e.printStackTrace();
+        if (clazz == null) {
+            statusTV.setText(R.string.unapplied);
+        } else {
+            statusTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
         }
+    }
+
+    private void setStayApplyStatus(int value) {
+        View view = mExpandableLayout.getChildAt(3);
+        TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
+
+        if (value == -1) {
+            statusTV.setText(R.string.unapplied);
+        } else {
+            statusTV.setText(StayUtils.getStringFromStayStatus(value));
+        }
+    }
+
+    private void setGoingoutApplyStatus(Goingout goingout) {
+        View view = mExpandableLayout.getChildAt(5);
+        Switch satSwitch = (Switch) view.findViewById(R.id.switch_apply_list_child_goingout_saturday);
+        Switch sunSwitch = (Switch) view.findViewById(R.id.switch_apply_list_child_goingout_sunday);
+
+        if (goingout == null) {
+            satSwitch.setChecked(false);
+            sunSwitch.setChecked(false);
+        } else {
+            satSwitch.setChecked(goingout.isSat());
+            sunSwitch.setChecked(goingout.isSun());
+        }
+    }
+
+    private void loadApplyStatus() throws IOException {
+        DMSService dmsService = HttpManager.createDMSService(getContext());
+        Call<ApplyStatus> call = dmsService.loadApplyStatus();
+        call.enqueue(new Callback<ApplyStatus>() {
+            @Override
+            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+                switch (response.code()) {
+                    case HTTP_OK:
+                        ApplyStatus applyStatus = response.body();
+                        if (applyStatus.isExtensionApplied()) {
+                            int no = applyStatus.getExtensionClass();
+                            String name = applyStatus.getExtensionName();
+                            setExtensionApplyStatus(new Class(no, name));
+                        }
+                        if (applyStatus.isGoingoutApplied()) {
+                            boolean sat = applyStatus.isGoingoutSat();
+                            boolean sun = applyStatus.isGoingoutSun();
+                            setGoingoutApplyStatus(new Goingout(sat, sun));
+                        }
+                        if (applyStatus.isStayApplied()) {
+                            setStayApplyStatus(applyStatus.getStayValue());
+                        }
+                        break;
+                    case HTTP_BAD_REQUEST:
+                        Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR:
+                        Toast.makeText(getContext(), R.string.apply_list_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void applyGoingout(boolean sat, boolean sun) throws IOException {
+        DMSService dmsService = HttpManager.createDMSService(getContext());
+        Call<Void> call = dmsService.applyGoingout(sat, sun);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int code = response.code();
+                switch (code) {
+                    case HTTP_OK:
+                        Toast.makeText(getContext(), R.string.apply_ok, Toast.LENGTH_SHORT).show();
+                        break;
+                    case HttpBox.HTTP_BAD_REQUEST:
+                        Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                        break;
+                    case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                        Toast.makeText(getContext(), R.string.apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

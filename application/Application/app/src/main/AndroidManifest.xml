@@ -23,10 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.LoginActivity"
+        <activity
+            android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.RegisterActivity"
+        <activity
+            android:name=".activities.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.AppcontentArticleActivity" />
         <activity android:name=".activities.FacilityReportArticleActivity" />
@@ -34,13 +35,19 @@
         <activity android:name=".activities.QnAArticleActivity" />
         <activity android:name=".activities.QnAUploadActivity" />
         <activity android:name=".activities.CommentActivity" />
-
-        <activity android:name=".activities.ExtensionActivity"
+        <activity
+            android:name=".activities.ExtensionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.StayActivity"
+        <activity
+            android:name=".activities.StayActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.MeritActivity"
+        <activity
+            android:name=".activities.MeritActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
