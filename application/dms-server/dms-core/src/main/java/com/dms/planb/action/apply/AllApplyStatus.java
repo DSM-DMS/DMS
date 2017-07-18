@@ -56,7 +56,7 @@ public class AllApplyStatus implements Handler<RoutingContext> {
 				responseObject.put("goingout_applied", false);
 			}
 			
-			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "' AND week='", getCurrentWeek(), "'");
+			resultSet = database.executeQuery("SELECT * FROM stay_apply WHERE uid='", uid, "'");
 			if(resultSet.next()) {
 				responseObject.put("stay_applied", true);
 				responseObject.put("value", resultSet.getInt("value"));
@@ -71,17 +71,8 @@ public class AllApplyStatus implements Handler<RoutingContext> {
 			ctx.response().setStatusCode(500).end();
 			ctx.response().close();
 			
+			e.printStackTrace();
 			Log.l("SQLException");
 		}
-	}
-	
-	private String getCurrentWeek() {
-		Calendar c = Calendar.getInstance();
-		
-		String year = String.format("%04d-", c.get(Calendar.YEAR));
-		String month = String.format("%02d-", c.get(Calendar.MONTH) + 1);
-		String week = String.format("%02d", c.get(Calendar.WEEK_OF_MONTH));
-		
-		return year + month + week;
 	}
 }
