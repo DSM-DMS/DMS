@@ -117,13 +117,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white">
 
         <RelativeLayout
             android:id="@+id/layout_my_page_qna_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/selectableItemBackground"
             android:paddingBottom="16dp"
             android:paddingEnd="32dp"
             android:paddingLeft="32dp"
@@ -138,6 +139,7 @@
                 android:text="@string/my_page_qna_list" />
 
             <ImageView
+                android:id="@+id/iv_my_page_arrow1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -150,7 +152,7 @@
             android:id="@+id/layout_my_page_report_facility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/selectableItemBackground"
             android:paddingBottom="16dp"
             android:paddingEnd="32dp"
             android:paddingLeft="32dp"
@@ -165,6 +167,7 @@
                 android:text="@string/my_page_report_facility" />
 
             <ImageView
+                android:id="@+id/iv_my_page_arrow2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -178,13 +181,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white">
 
         <RelativeLayout
             android:id="@+id/layout_my_page_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/selectableItemBackground"
             android:paddingBottom="16dp"
             android:paddingEnd="32dp"
             android:paddingLeft="32dp"
@@ -199,6 +203,7 @@
                 android:text="@string/my_page_change_password" />
 
             <ImageView
+                android:id="@+id/iv_my_page_arrow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -211,7 +216,7 @@
             android:id="@+id/layout_my_page_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/selectableItemBackground"
             android:paddingBottom="16dp"
             android:paddingEnd="32dp"
             android:paddingLeft="32dp"
@@ -226,6 +231,7 @@
                 android:text="@string/my_page_logout" />
 
             <ImageView
+                android:id="@+id/iv_my_page_arrow4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

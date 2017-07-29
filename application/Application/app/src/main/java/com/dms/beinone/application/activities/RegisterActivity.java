@@ -42,8 +42,6 @@ import static com.dms.beinone.application.DMSService.HTTP_INTERNAL_SERVER_ERROR;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private View parentView;
-
     private EditText mCodeET;
     private EditText mIdET;
     private EditText mPasswordET;
@@ -58,9 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        parentView = findViewById(R.id.layout_register);
-        Snackbar.make(parentView, "Hi", Snackbar.LENGTH_SHORT).show();
 
         mCodeET = (EditText) findViewById(R.id.et_register_code);
         mCodeET.setOnFocusChangeListener(new View.OnFocusChangeListener() {

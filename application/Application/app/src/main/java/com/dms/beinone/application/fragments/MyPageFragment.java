@@ -1,13 +1,17 @@
 package com.dms.beinone.application.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
@@ -33,6 +37,8 @@ public class MyPageFragment extends Fragment {
         mExtensionStatusTV = (TextView) view.findViewById(R.id.tv_my_page_extension_status);
         mMeritTV = (TextView) view.findViewById(R.id.tv_my_page_merit);
         mDemeritTV = (TextView) view.findViewById(R.id.tv_my_page_demerit);
+
+        initMenuArrowColor(view);
 
         View qnaListMenu = view.findViewById(R.id.layout_my_page_qna_list);
         qnaListMenu.setOnClickListener(new View.OnClickListener() {
@@ -75,5 +81,17 @@ public class MyPageFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void initMenuArrowColor(View rootView) {
+        ImageView arrowIV1 = (ImageView) rootView.findViewById(R.id.iv_my_page_arrow1);
+        ImageView arrowIV2 = (ImageView) rootView.findViewById(R.id.iv_my_page_arrow2);
+        ImageView arrowIV3 = (ImageView) rootView.findViewById(R.id.iv_my_page_arrow3);
+        ImageView arrowIV4 = (ImageView) rootView.findViewById(R.id.iv_my_page_arrow4);
+
+        arrowIV1.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        arrowIV2.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        arrowIV3.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        arrowIV4.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
     }
 }
