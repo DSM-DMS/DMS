@@ -60,7 +60,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_login"
+                android:background="@drawable/button"
                 android:elevation="4dp"
                 android:src="@drawable/ic_chevron_right_white_24dp" />
         </RelativeLayout>
@@ -117,7 +117,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_login"
+                android:background="@drawable/button"
                 android:elevation="4dp"
                 android:src="@drawable/ic_chevron_right_white_24dp" />
         </RelativeLayout>
@@ -180,7 +180,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_login"
+                android:background="@drawable/button"
                 android:elevation="4dp"
                 android:src="@drawable/ic_chevron_right_white_24dp" />
         </RelativeLayout>
@@ -237,7 +237,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_login"
+                android:background="@drawable/button"
                 android:elevation="4dp"
                 android:src="@drawable/ic_chevron_right_white_24dp" />
         </RelativeLayout>

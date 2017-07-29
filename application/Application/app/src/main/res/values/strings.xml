@@ -36,9 +36,9 @@
     <string name="login_password">비밀번호</string>
     <string name="login_remember">로그인 유지</string>
     <string name="login_login">로그인</string>
-    <string name="login_register">아이디가 없으신가요? 지금 회원가입하세요.</string>
-    <string name="login_noid">아이디를 입력하세요.</string>
-    <string name="login_nopassword">비밀번호를 입력하세요.</string>
+    <string name="login_register"><u>회원가입</u></string>
+    <string name="login_no_id">아이디를 입력하세요.</string>
+    <string name="login_no_password">비밀번호를 입력하세요.</string>
     <string name="login_created">님, 환영합니다.</string>
     <string name="login_bad_request">아이디 또는 비밀번호를 잘못 입력하셨습니다.</string>
     <string name="login_internal_server_error">오류로 인해 로그인에 실패하였습니다.</string>
@@ -46,16 +46,15 @@
     <string name="logout_success">로그아웃하였습니다.</string>
 
     <!-- Register Activity -->
-    <string name="register_uid">가입코드</string>
+    <string name="register_code">회원가입코드 (ex: 7edfea879f584931)</string>
     <string name="register_id">아이디</string>
     <string name="register_password">비밀번호</string>
-    <string name="register_name">이름</string>
-    <string name="register_number">학번</string>
-    <string name="register_sex">성별</string>
-    <string name="register_register">가입하기</string>
-    <string name="register_nouid">가입코드를 입력하세요.</string>
-    <string name="register_noid">아이디를 입력하세요.</string>
-    <string name="register_nopassword">비밀번호를 입력하세요.</string>
+    <string name="register_confirm_password">비밀번호 확인</string>
+    <string name="register_valid_password">비밀번호가 일치합니다.</string>
+    <string name="register_invalid_password">비밀번호가 일치하지 않습니다.</string>
+    <string name="register_no_code">회원가입코드를 입력하세요.</string>
+    <string name="register_no_id">아이디를 입력하세요.</string>
+    <string name="register_no_password">비밀번호를 입력하세요.</string>
     <string name="register_created">회원가입이 완료되었습니다.</string>
     <string name="register_conflict">아이디가 이미 존재합니다.</string>
     <string name="register_failure">회원가입에 실패했습니다.</string>
@@ -201,18 +200,15 @@
     <string name="comment_load_internal_server_error">오류로 인해 댓글을 불러오지 못했습니다.</string>
     <string name="comment_upload_internal_server_error">오류로 인해 댓글을 작성하지 못했습니다.</string>
 
-    <!-- Mypage -->
-    <string name="mypage_merit">상점</string>
-    <string name="mypage_demerit">벌점</string>
-    <string name="mypage_total">총점</string>
-    <string name="mypage_status">상태</string>
-    <string name="mypage_applied">신청됨</string>
-    <string name="mypage_notapplied">미신청</string>
-    <string name="mypage_load_no_content">회원 정보가 없습니다.</string>
-    <string name="mypage_load_internal_server_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
-    <string name="mypage_upload_profile_success">프로필 사진을 변경하였습니다.</string>
-    <string name="mypage_upload_profile_message_notimagefile">이미지 파일이 아닙니다.</string>
-    <string name="mypage_upload_profile_message_needlogin">로그인이 필요합니다.</string>
+    <!-- My Page -->
+    <string name="my_page_merit">상점</string>
+    <string name="my_page_demerit">벌점</string>
+    <string name="my_page_qna_list">작성한 질문 목록</string>
+    <string name="my_page_report_facility">시설물 고장 신고</string>
+    <string name="my_page_change_password">비밀번호 변경</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="my_page_load_no_content">회원 정보가 없습니다.</string>
+    <string name="my_page_load_internal_server_error">오류로 인해 마이페이지를 불러오지 못했습니다.</string>
 
     <!-- Menu -->
     <string name="menu_delete">삭제</string>

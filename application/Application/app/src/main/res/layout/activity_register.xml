@@ -1,74 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dmsbtn="http://schemas.android.com/apk/res-auto"
-    xmlns:dmset="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/bg_change_password"
     android:clickable="true"
     android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_above="@+id/btn_register_register">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <com.dms.beinone.application.views.custom.DMSEditText
-            android:id="@+id/et_register_uid"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="@string/register_uid"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textCursorDrawable="@drawable/dmset_cursor"
-            dmset:dmset_backgroundColor="@android:color/transparent"
-            dmset:dmset_focusStrokeColor="@color/colorPrimary"
-            dmset:dmset_strokeColor="@color/colorPrimary"
-            dmset:dmset_textColor="@android:color/black" />
-
-        <com.dms.beinone.application.views.custom.DMSEditText
+        <EditText
             android:id="@+id/et_register_id"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/register_id"
             android:inputType="text"
-            android:maxLines="1"
-            android:textCursorDrawable="@drawable/dmset_cursor"
-            dmset:dmset_backgroundColor="@android:color/transparent"
-            dmset:dmset_focusStrokeColor="@color/colorPrimary"
-            dmset:dmset_strokeColor="@color/colorPrimary"
-            dmset:dmset_textColor="@android:color/black" />
+            android:maxLines="1" />
 
-        <com.dms.beinone.application.views.custom.DMSEditText
+        <EditText
+            android:id="@+id/et_register_code"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/register_code"
+            android:inputType="text"
+            android:maxLines="1" />
+
+        <EditText
             android:id="@+id/et_register_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:hint="@string/register_password"
             android:inputType="textPassword"
-            android:maxLines="1"
-            android:textCursorDrawable="@drawable/dmset_cursor"
-            dmset:dmset_backgroundColor="@android:color/transparent"
-            dmset:dmset_focusStrokeColor="@color/colorPrimary"
-            dmset:dmset_strokeColor="@color/colorPrimary"
-            dmset:dmset_textColor="@android:color/black" />
+            android:maxLines="1" />
 
+        <EditText
+            android:id="@+id/et_register_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/register_confirm_password"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            android:paddingStart="4dp"
+            android:paddingRight="4dp"
+            android:paddingEnd="4dp">
+
+            <TextView
+                android:id="@+id/tv_register_validate_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_register_validate_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/btn_register_register"
+            android:layout_width="96dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/button"
+            android:src="@drawable/ic_chevron_right_white_24dp" />
     </LinearLayout>
-
-    <com.dms.beinone.application.views.custom.DMSButton
-        android:id="@+id/btn_register_register"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:text="@string/register_register"
-        dmsbtn:dmsbtn_backgroundColor="@android:color/black"
-        dmsbtn:dmsbtn_strokeColor="@android:color/black"
-        dmsbtn:dmsbtn_style="rectangle"
-        dmsbtn:dmsbtn_textColor="@android:color/white"
-        dmsbtn:dmsbtn_touchBackgroundColor="@color/colorPrimary"
-        dmsbtn:dmsbtn_touchStrokeColor="@color/colorPrimary"
-        dmsbtn:dmsbtn_touchTextColor="@android:color/white" />
-
 </RelativeLayout>

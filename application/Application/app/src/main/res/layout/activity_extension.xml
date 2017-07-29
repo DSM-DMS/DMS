@@ -99,7 +99,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="80dp"
             android:layout_marginStart="16dp"
-            android:background="@drawable/btn_login"
+            android:background="@drawable/button"
             android:text="@string/apply"
             android:textColor="@android:color/white"
             android:textSize="20sp" />

@@ -1,6 +1,5 @@
 package com.dms.beinone.application.views.adapters;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -24,7 +23,7 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     private static final int POS_MYPAGE = 3;
 
     public static final int[] mIconResIds =
-            {R.drawable.ic_meal, R.drawable.ic_apply,R.drawable.ic_warning, R.drawable.ic_account};
+            {R.drawable.ic_meal, R.drawable.ic_apply, R.drawable.ic_warning, R.drawable.ic_account};
 
     public MainPagerAdapter(FragmentManager fm) {
         super(fm);

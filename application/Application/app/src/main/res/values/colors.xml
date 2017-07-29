@@ -26,9 +26,12 @@
     <color name="extension2">#FF6B6B</color>
     <color name="extension3">#FFED6B</color>
     <color name="extension4">#6CE23B</color>
+
+    <color name="myPageBackground">#EEEEEE</color>
+    <color name="myPageScoreBackground">#EBF4F9</color>
+
+    <color name="valid">#4CAF50</color>
+    <color name="invalid">#D32F2F</color>
     
     <color name="disabled">#61000000</color>
-
-    <color name="positive">#66BB6A</color>
-    <color name="negative">#EF5350</color>
 </resources>
