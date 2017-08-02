@@ -75,6 +75,11 @@ public class UserManager implements AccountManager {
                 room = rss.getInt(1) + "";
                 seat = rss.getInt(2) + "";
             }
+            int value = 0;
+            rss = database.executeQuery("SELECT value FROM stay_apply WHERE uid='", uid, "'");
+            if(rss.next()) {
+            	value = rss.getInt("value");
+            }
             SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
             if (rs.next()) {
                 Map<String, Object> map = new HashMap<String, Object>();
@@ -84,6 +89,7 @@ public class UserManager implements AccountManager {
                 map.put("demerit", rs.getInt("demerit"));
                 map.put("room", room);
                 map.put("seat", seat);
+                map.put("stay_value", value);
                 result.setSuccess(true);
                 result.setArgs(map);
             }
