@@ -1,8 +1,8 @@
 package com.dms.beinone.application;
 
+import com.dms.beinone.application.models.Account;
 import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
-import com.dms.beinone.application.models.Meal;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -52,4 +52,10 @@ public interface DMSService {
 
     @GET("meal")
     Call<JsonObject> loadMeal(@Query("date") String date);
+
+    @GET("account/student")
+    Call<Account> loadMyPage();
+
+    @POST("account/logout/student")
+    Call<Void> logout();
 }

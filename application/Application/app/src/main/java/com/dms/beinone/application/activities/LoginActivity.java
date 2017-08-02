@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.managers.AccountManager;
 import com.dms.beinone.application.managers.EditTextManager;
 import com.dms.beinone.application.managers.HttpManager;
 
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 switch (code) {
                     case HTTP_CREATED:
                         Toast.makeText(LoginActivity.this, id + getString(R.string.login_created), Toast.LENGTH_SHORT).show();
+                        AccountManager.setLogined(LoginActivity.this, true);
                         finish();
                         break;
                     case HTTP_BAD_REQUEST:
