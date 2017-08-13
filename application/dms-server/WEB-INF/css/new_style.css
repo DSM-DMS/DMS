@@ -1856,13 +1856,13 @@ iframe {
 }
 
 .move-area{/*normally use body*/
-  width: 5vw;
-  height: 10vh;
+  width: 5%;
+  height: 10%;
   background: #ffabab;
   position: absolute;
   bottom: 0;
   z-index: 1;
-  border-radius: 4vh 4vh 0 0;
+  border-radius: 40% 40% 0 0;
   left: 70px;
 }
 
@@ -1908,6 +1908,8 @@ iframe {
   padding: 0;
   height: 200px;
   list-style: none;
+  will-change: left;
+  transition: .2s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 #slider ul li {
