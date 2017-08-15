@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/detail_view"
@@ -41,7 +41,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginEnd="16dp"
             android:text="상세보기"
-            android:textSize="20sp"
+            android:textSize="16sp"
             />
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>
