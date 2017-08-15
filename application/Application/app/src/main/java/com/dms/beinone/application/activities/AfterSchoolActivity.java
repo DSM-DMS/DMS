@@ -1,12 +1,16 @@
 package com.dms.beinone.application.activities;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.media.RatingCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dms.beinone.application.fragments.QuestionFragment;
+import com.dms.beinone.application.models.AfterSchool;
 import com.dms.beinone.application.models.AfterSchoolClass;
 
 import java.util.ArrayList;
@@ -38,6 +43,30 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
         TextView titleTV = (TextView) findViewById(R.id.tv_toolbar_title);
         titleTV.setText("방과후 신청");
+
+
+        TextView detailTextView = (TextView) findViewById(R.id.detail_view);
+        detailTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(AfterSchoolActivity.this,R.style.AlertDialog);
+                Dialog dialog = alertDialog.
+                        setTitle("상세보기")
+.setMessage(R.string.default_intro2)
+                        .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.dismiss();
+                            }
+                        }).create();
+
+                dialog.show();
+            }
+        });
+
+
         ArrayList<AfterSchoolClass> tempData = new ArrayList<>();
         ArrayList<String> dataArray = new ArrayList<>();
         dataArray.add("야구");

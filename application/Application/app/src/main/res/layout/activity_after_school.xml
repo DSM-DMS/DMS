@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/toolbar" />
+        <include layout="@layout/dialog_toolbar" />
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
@@ -32,27 +32,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:text="기간 : 2017-10-11~2017-11-11"
-            android:layout_height="wrap_content"
-            android:id="@+id/date_text"/>
 
         <TextView
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:id="@+id/intro_text"
-            android:text="@string/default_intro"/>
+            android:text="기간 : 2017-10-11~2017-11-11"
+            android:textColor="@color/dark"
+            android:id="@+id/name_text"/>
+
 
     </LinearLayout>
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/question_view_pager"
