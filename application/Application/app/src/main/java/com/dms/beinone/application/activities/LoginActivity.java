@@ -1,5 +1,6 @@
 package com.dms.beinone.application.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.managers.AccountManager;
 import com.dms.beinone.application.managers.EditTextManager;
 import com.dms.beinone.application.managers.HttpManager;
 
@@ -64,10 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                 String password = mPasswordET.getText().toString();
                 boolean remember = mRememberCB.isChecked();
                 if (id.equals("")) {
-                    Toast.makeText(LoginActivity.this, R.string.login_noid, Toast.LENGTH_SHORT)
+                    Toast.makeText(LoginActivity.this, R.string.login_no_id, Toast.LENGTH_SHORT)
                             .show();
                 } else if (password.equals("")) {
-                    Toast.makeText(LoginActivity.this, R.string.login_nopassword, Toast.LENGTH_SHORT)
+                    Toast.makeText(LoginActivity.this, R.string.login_no_password, Toast.LENGTH_SHORT)
                             .show();
                 } else {
                     try {
@@ -80,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        Button registerBtn = (Button) findViewById(R.id.btn_login_register);
-//        registerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-//            }
-//        });
+        View registerMenu = findViewById(R.id.tv_login_register);
+        registerMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
     }
 
     private void login(final String id, final String password, boolean remember) throws IOException {
@@ -99,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 switch (code) {
                     case HTTP_CREATED:
                         Toast.makeText(LoginActivity.this, id + getString(R.string.login_created), Toast.LENGTH_SHORT).show();
+                        AccountManager.setLogined(LoginActivity.this, true);
                         finish();
                         break;
                     case HTTP_BAD_REQUEST:

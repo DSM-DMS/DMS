@@ -1,8 +1,8 @@
 package com.dms.beinone.application;
 
+import com.dms.beinone.application.models.Account;
 import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
-import com.dms.beinone.application.models.Meal;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -23,6 +23,7 @@ public interface DMSService {
     int HTTP_CREATED = 201;
     int HTTP_NO_CONTENT = 204;
     int HTTP_BAD_REQUEST = 400;
+    int HTTP_CONFLICT = 409;
     int HTTP_INTERNAL_SERVER_ERROR = 500;
 
     String SERVER_URL = "http://dsm2015.cafe24.com/";
@@ -30,6 +31,10 @@ public interface DMSService {
     @FormUrlEncoded
     @POST("account/login/student")
     Call<Void> login(@Field("id") String id, @Field("password") String password, @Field("remember") boolean remember);
+
+    @FormUrlEncoded
+    @POST("account/register/student")
+    Call<Void> register(@Field("uid") String uid, @Field("id") String id, @Field("password") String password);
 
     @FormUrlEncoded
     @PUT("apply/goingout")
@@ -48,6 +53,10 @@ public interface DMSService {
     @GET("meal")
     Call<JsonObject> loadMeal(@Query("date") String date);
 
-    @GET("apply/stay")
-    Call<JsonObject> loadStayStaus();
+
+    @GET("account/student")
+    Call<Account> loadMyPage();
+
+    @POST("account/logout/student")
+    Call<Void> logout();
 }

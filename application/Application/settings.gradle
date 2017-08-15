@@ -1,1 +1,1 @@
-include ':app', ':calendarview', ':libk-switchbutton'
+include ':app'

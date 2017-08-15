@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/iv_apply_list_child_goingout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/fish2" />
@@ -100,7 +100,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/iv_apply_list_child_goingout"
             android:layout_marginTop="36dp"
-            android:background="@drawable/btn_login"
+            android:background="@drawable/button"
             android:text="@string/apply"
             android:textColor="@android:color/white" />
     </RelativeLayout>

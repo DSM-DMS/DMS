@@ -76,7 +76,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_login"
+        android:background="@drawable/button"
         android:text="@string/apply"
         android:textSize="20sp"
         android:textColor="@android:color/white" />

@@ -1,0 +1,87 @@
+[
+    {
+        "outputFile": "C:\\Users\\dsm2016\\Documents\\github\\DSM-Dormitory-Management-System\\application\\Application\\calendarview\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v22\\values-v22.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 74,
+                    "endOffset": 125
+                },
+                "from": {
+                    "file": "C:\\Users\\dsm2016\\.android\\build-cache\\b8b02056771998b4588348dea6e54215a4b6c2e8\\output\\res\\values-v22\\values-v22.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 234,
+                        "endColumn": 74,
+                        "endOffset": 304
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 130,
+                    "endColumn": 86,
+                    "endOffset": 212
+                },
+                "from": {
+                    "file": "C:\\Users\\dsm2016\\.android\\build-cache\\b8b02056771998b4588348dea6e54215a4b6c2e8\\output\\res\\values-v22\\values-v22.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 309,
+                        "endColumn": 86,
+                        "endOffset": 391
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 217,
+                    "endLine": 6,
+                    "endColumn": 12,
+                    "endOffset": 393
+                },
+                "from": {
+                    "file": "C:\\Users\\dsm2016\\.android\\build-cache\\b8b02056771998b4588348dea6e54215a4b6c2e8\\output\\res\\values-v22\\values-v22.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 396,
+                        "endLine": 8,
+                        "endColumn": 12,
+                        "endOffset": 572
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 398,
+                    "endLine": 9,
+                    "endColumn": 12,
+                    "endOffset": 586
+                },
+                "from": {
+                    "file": "C:\\Users\\dsm2016\\.android\\build-cache\\b8b02056771998b4588348dea6e54215a4b6c2e8\\output\\res\\values-v22\\values-v22.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 577,
+                        "endLine": 11,
+                        "endColumn": 12,
+                        "endOffset": 765
+                    }
+                }
+            }
+        ]
+    }
+]
