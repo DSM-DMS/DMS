@@ -96,41 +96,6 @@ public class ApplyListFragment extends Fragment {
 
         try {
 
-      /*      DMSService dmsService=HttpManager.createDMSService(getContext());
-            Call<JsonObject> call=dmsService.loadStayStaus();
-            call.enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    int code = response.code();
-                    switch (code) {
-                        case HTTP_OK:
-                            JsonObject jsonObject=response.body();
-                            int num=jsonObject.getAsJsonPrimitive("value").getAsInt();
-                            Log.d("---------------",String.valueOf(num));
-                            Toast.makeText(getContext(), R.string.apply_ok, Toast.LENGTH_SHORT).show();
-                            if(num==4){
-                                TextView textView=(TextView)rootView.findViewById(R.id.tv_apply_list_child_status);
-                              //textView.setText("잔류");
-
-                            }
-                            //name=jsonObject.getAsJsonPrimitive("name").getAsString();
-                            break;
-                        case HttpBox.HTTP_BAD_REQUEST:
-                            Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
-                            break;
-                        case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
-                            Toast.makeText(getContext(), R.string.apply_internal_server_error, Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-
-                }
-            });*/
 
             loadApplyStatus();
         } catch (IOException e) {
@@ -240,7 +205,6 @@ public class ApplyListFragment extends Fragment {
                             int no = applyStatus.getExtensionClass();
                             String name = applyStatus.getExtensionName();
                             setExtensionApplyStatus(new Class(no, name));
-                            Log.d("AAAAAAAAAAAAAAAAA",name);
                         }
                         if (applyStatus.isGoingoutApplied()) {
                             boolean sat = applyStatus.isGoingoutSat();
@@ -297,7 +261,5 @@ public class ApplyListFragment extends Fragment {
     }
 
 
-    private void loadStayStaus(){
 
-    }
 }
