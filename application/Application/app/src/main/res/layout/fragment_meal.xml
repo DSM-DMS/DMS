@@ -23,8 +23,8 @@
         android:layout_marginLeft="80dp"
         android:layout_marginStart="80dp"
         android:layout_marginBottom="46dp"
-        android:elevation="4dp"
         android:background="@drawable/button"
+        android:elevation="4dp"
         android:src="@drawable/ic_chevron_left_white_24dp" />
 
     <ImageButton
@@ -36,14 +36,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="46dp"
         android:layout_marginEnd="80dp"
+
         android:layout_marginRight="80dp"
-<<<<<<< HEAD
-        android:background="@drawable/btn_login"
-        android:elevation="4dp"
-=======
-        android:layout_marginBottom="46dp"
-        android:elevation="4dp"
         android:background="@drawable/button"
->>>>>>> 5788d67dbda43a954db03149fb8bc66a6bd19d4d
+        android:elevation="4dp"
         android:src="@drawable/ic_chevron_right_white_24dp" />
 </RelativeLayout>
