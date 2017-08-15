@@ -47,4 +47,7 @@ public interface DMSService {
 
     @GET("meal")
     Call<JsonObject> loadMeal(@Query("date") String date);
+
+    @GET("apply/stay")
+    Call<JsonObject> loadStayStaus();
 }

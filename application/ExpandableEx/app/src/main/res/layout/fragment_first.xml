@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.example.dsm2016.expandableex.FirstFragment">
+
+    <Button
+        android:id="@+id/expandableButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCFF33"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        android:onClick="expandableButton3"
+        android:paddingRight="10dp"
+        android:text="첫 번째 내용"
+        android:textColor="#000" />
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/expandableLayout4"
+        android:background="#90066da1"
+        android:padding="16dp"
+        app:ael_duration="400"
+        app:ael_expanded="false"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Implements the expand and collapse by sliding logic for a top or a bottom view in a two children view  or layout or any widgets composition.
+             Implements the expand and collapse by sliding logic for a top or a bottom view in a two children view  or layout or any widgets composition." />
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/question_name_text"
+        android:textSize="24sp"
+        android:elevation="16dp"
+        android:text="질문 1"
+        android:textColor="@color/dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginTop="4dp"
+        android:background="@drawable/drop_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/choose_answer_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -31,4 +31,15 @@
 
     <color name="positive">#66BB6A</color>
     <color name="negative">#EF5350</color>
+
+<!--
+    공지사항 색
+-->
+    <color name="black">#000000</color>
+    <color name="tap_layout">#EEEEEE</color> <!--가정통신문 리스트 엑티비티에서 사용-->
+    <color name="question_list">#1565C0</color> <!--메인 엑티비티에서 사용-->
+    <color name="white">#FAFAFA</color>
+    <color name="thin">#BBDEFB</color> <!--연한색깔-->
+    <color name="middle">#90CAF9</color> <!--중간색깔 버튼에 주로 사용-->
+    <color name="dark">#448AFF</color> <!--진한색깔-->
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.activities.AfterSchoolActivity;
 import com.dms.beinone.application.activities.ExtensionActivity;
 import com.dms.beinone.application.activities.StayActivity;
 import com.dms.beinone.application.managers.HttpManager;
@@ -27,6 +29,7 @@ import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
 import com.dms.beinone.application.views.custom.ExpandableLayout;
 import com.dms.boxfox.networking.HttpBox;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
@@ -45,6 +48,7 @@ import static com.dms.beinone.application.DMSService.HTTP_OK;
 public class ApplyListFragment extends Fragment {
 
     private ExpandableLayout mExpandableLayout;
+    private TextView loadStatus;
 
     @Nullable
     @Override
@@ -55,7 +59,7 @@ public class ApplyListFragment extends Fragment {
         return view;
     }
 
-    private void init(View rootView) {
+    private void init(final View rootView) {
         mExpandableLayout = (ExpandableLayout) rootView.findViewById(R.id.expandablelayout_apply_list);
 
         mExpandableLayout.addView(createParentView("연장신청", ContextCompat.getColor(getContext(), R.color.applyList1)),
@@ -66,7 +70,7 @@ public class ApplyListFragment extends Fragment {
                     }
                 }));
         mExpandableLayout.addView(createParentView("잔류신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
-                createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale, new View.OnClickListener() {
+                createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale , new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), StayActivity.class));
@@ -74,15 +78,60 @@ public class ApplyListFragment extends Fragment {
                 }));
         mExpandableLayout.addView(createParentView("외출신청", ContextCompat.getColor(getContext(), R.color.applyList3)),
                 createGoingoutChildView());
-        mExpandableLayout.addView(createParentView("상점신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
+ /*       mExpandableLayout.addView(createParentView("상점신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList4), R.drawable.seahorse, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 //                        startActivity(new Intent(getContext(), MeritActivity.class));
                     }
+                }));*/
+
+        mExpandableLayout.addView(createParentView("방과후 신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
+                createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), AfterSchoolActivity.class));
+                    }
                 }));
 
         try {
+
+      /*      DMSService dmsService=HttpManager.createDMSService(getContext());
+            Call<JsonObject> call=dmsService.loadStayStaus();
+            call.enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    int code = response.code();
+                    switch (code) {
+                        case HTTP_OK:
+                            JsonObject jsonObject=response.body();
+                            int num=jsonObject.getAsJsonPrimitive("value").getAsInt();
+                            Log.d("---------------",String.valueOf(num));
+                            Toast.makeText(getContext(), R.string.apply_ok, Toast.LENGTH_SHORT).show();
+                            if(num==4){
+                                TextView textView=(TextView)rootView.findViewById(R.id.tv_apply_list_child_status);
+                              //textView.setText("잔류");
+
+                            }
+                            //name=jsonObject.getAsJsonPrimitive("name").getAsString();
+                            break;
+                        case HttpBox.HTTP_BAD_REQUEST:
+                            Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                            break;
+                        case HttpBox.HTTP_INTERNAL_SERVER_ERROR:
+                            Toast.makeText(getContext(), R.string.apply_internal_server_error, Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                }
+            });*/
+
             loadApplyStatus();
         } catch (IOException e) {
             System.out.println("IOException in ApplyListFragment: GET /apply/all");
@@ -100,7 +149,7 @@ public class ApplyListFragment extends Fragment {
         return view;
     }
 
-    private View createChildView(int backgroundColor, int image, View.OnClickListener listener) {
+    private View createChildView(int backgroundColor, int image,View.OnClickListener listener) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_apply_list_child, null);
 
         View layout = view.findViewById(R.id.layout_apply_list_child);
@@ -111,6 +160,8 @@ public class ApplyListFragment extends Fragment {
 
         ImageButton enterIB = (ImageButton) view.findViewById(R.id.ib_apply_list_child_enter);
         enterIB.setOnClickListener(listener);
+
+
 
         return view;
     }
@@ -189,6 +240,7 @@ public class ApplyListFragment extends Fragment {
                             int no = applyStatus.getExtensionClass();
                             String name = applyStatus.getExtensionName();
                             setExtensionApplyStatus(new Class(no, name));
+                            Log.d("AAAAAAAAAAAAAAAAA",name);
                         }
                         if (applyStatus.isGoingoutApplied()) {
                             boolean sat = applyStatus.isGoingoutSat();
@@ -242,5 +294,10 @@ public class ApplyListFragment extends Fragment {
                 t.printStackTrace();
             }
         });
+    }
+
+
+    private void loadStayStaus(){
+
     }
 }
