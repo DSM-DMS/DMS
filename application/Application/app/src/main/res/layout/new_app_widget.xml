@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/widget_margin"
-    android:background="#CC"
+    android:background="#00000000"
     >
 
 
@@ -88,6 +88,7 @@
                 android:layout_alignStart="@id/meal_widget_title"
                 android:layout_below="@id/appwidget_text"
                 android:textSize="12sp" />
+
         </RelativeLayout>
 
     </LinearLayout>
