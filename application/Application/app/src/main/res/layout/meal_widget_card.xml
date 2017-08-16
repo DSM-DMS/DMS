@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_meal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="8dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="오늘의 급식"
+                    android:textSize="32sp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <View
+                    android:id="@+id/view_meal_breakfast_line"
+                    android:layout_width="4dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/tv_meal_breakfast_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toEndOf="@id/view_meal_breakfast_line"
+                    android:layout_toRightOf="@id/view_meal_breakfast_line"
+                    android:text="@string/meal_breakfast"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_meal_breakfast_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_meal_breakfast_title"
+                    android:layout_alignStart="@id/tv_meal_breakfast_title"
+                    android:layout_below="@id/tv_meal_breakfast_title" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <View
+                    android:id="@+id/view_meal_lunch_line"
+                    android:layout_width="4dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/tv_meal_lunch_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toEndOf="@id/view_meal_lunch_line"
+                    android:layout_toRightOf="@id/view_meal_lunch_line"
+                    android:text="@string/meal_lunch"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_meal_lunch_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_meal_lunch_title"
+                    android:layout_alignStart="@id/tv_meal_lunch_title"
+                    android:layout_below="@id/tv_meal_lunch_title" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <View
+                    android:id="@+id/view_meal_dinner_line"
+                    android:layout_width="4dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/tv_meal_dinner_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toEndOf="@id/view_meal_dinner_line"
+                    android:layout_toRightOf="@id/view_meal_dinner_line"
+                    android:text="@string/meal_dinner"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_meal_dinner_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_meal_dinner_title"
+                    android:layout_alignStart="@id/tv_meal_dinner_title"
+                    android:layout_below="@id/tv_meal_dinner_title" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.v7.widget.CardView>
