@@ -3,27 +3,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/widget_margin"
-    android:background="@drawable/rounded"
-    >
+    android:background="@drawable/rounded">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/rounded2"
-        >
+        android:background="@drawable/rounded2">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:text="Today Meal"
             android:gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
             android:textColor="@color/white"
             android:layout_marginLeft="15dp"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -34,7 +29,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="6dp"
@@ -51,6 +46,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:textSize="8sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +63,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="28dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="6dp"
@@ -84,25 +80,25 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:textSize="8sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/drop_shadow"
-        android:layout_margin="4dp"
-        >
+        android:layout_margin="4dp">
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:background="@drawable/rounded3"
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="6dp"
             android:gravity="center"
