@@ -1,84 +1,124 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/widget_margin"
-    android:background="#00000000"
     >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="오늘의 급식"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            android:textSize="42sp"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="월요일"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="48sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/meal_widget_breakfast"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginLeft="32dp"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_marginBottom="4dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오늘의 급식"
-                android:textSize="26sp"
-                />
-
-            <LinearLayout
-                android:layout_marginTop="8dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/meal_widget_prev"
-                    android:layout_weight="1"
-                    android:text="Previous"
-                    android:layout_gravity="left"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:background="#00000000"
-                    />
-
-                <Button
-                    android:id="@+id/meal_widget_next"
-                    android:layout_weight="1"
-                    android:text="Next"
-                    android:background="#00000000"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_height="24dp" />
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="6dp">
-
-            <TextView
-                android:id="@+id/appwidget_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="@string/meal_breakfast"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/meal_widget_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/appwidget_text"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
-
+        android:background="@drawable/drop_shadow"
+        android:layout_height="3dp"
+        android:layout_margin="8dp"
+        >
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="월요일"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="48sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/meal_widget_launch"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginLeft="32dp"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/drop_shadow"
+        android:layout_height="3dp"
+        android:layout_margin="8dp"
+        >
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="월요일"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="48sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/meal_widget_diner"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginLeft="32dp"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>
