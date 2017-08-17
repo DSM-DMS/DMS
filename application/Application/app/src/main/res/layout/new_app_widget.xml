@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="월요일"
+            android:text="아침"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
@@ -67,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="월요일"
+            android:text="점심"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
@@ -95,30 +95,28 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="64dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="월요일"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
-            android:textSize="48sp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            />
+            android:text="저녘"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="48sp" />
 
         <TextView
             android:id="@+id/meal_widget_diner"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginLeft="32dp"
             android:layout_gravity="center"
-            android:textSize="24sp"
-            />
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp" />
     </LinearLayout>
 
 </LinearLayout>
