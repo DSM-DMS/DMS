@@ -54,7 +54,7 @@ public class MealWidget extends AppWidgetProvider {
 
         if (mMeal == null) {
             try {
-                loadMeal(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date), context, views);
+                loadMeal("2017-08-22", context, views);
             } catch (IOException e) {
                 System.out.println("IOException in MealCardFragment: loadMeal()");
                 e.printStackTrace();
@@ -90,11 +90,11 @@ public class MealWidget extends AppWidgetProvider {
     private void bind(RemoteViews views) {
         if (mMeal != null) {
             String breakfast = TextUtils.join(", ", mMeal.getBreakfast());
-           // views.setTextViewText("Dd",breakfast);
+            views.setTextViewText(R.id.meal_widget_breakfast,breakfast);
             String lunch = TextUtils.join(", ", mMeal.getLunch());
-            views.setTextViewText(R.id.meal_widget_content,lunch);
+            views.setTextViewText(R.id.meal_widget_launch,lunch);
             String dinner = TextUtils.join(", ", mMeal.getLunch());
-           // views.setTextViewText("Dd",dinner);
+            views.setTextViewText(R.id.meal_widget_diner,dinner);
         }
     }
 

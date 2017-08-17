@@ -62,7 +62,6 @@
         <receiver android:name=".MealWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.appwidget.action.CLICK"></action>
             </intent-filter>
 
             <meta-data
