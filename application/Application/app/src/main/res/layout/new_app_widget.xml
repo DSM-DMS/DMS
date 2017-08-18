@@ -36,23 +36,24 @@
             android:gravity="center"
             android:text="아침"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/meal_widget_breakfast"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_gravity="top"
-            android:layout_marginLeft="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
-            android:textSize="8sp" />
+            android:textSize="10sp"
+            android:layout_marginBottom="6dp"
+            />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="4dp"
+        android:layout_height="3dp"
         android:background="@drawable/drop_shadow"></LinearLayout>
 
     <LinearLayout
@@ -70,16 +71,18 @@
             android:gravity="center"
             android:text="점심"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/meal_widget_launch"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_gravity="top"
-            android:layout_marginLeft="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
-            android:textSize="8sp" />
+            android:textColor="@color/black"
+            android:textSize="10sp" />
 
     </LinearLayout>
 
@@ -87,35 +90,35 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/drop_shadow"
-        android:layout_margin="4dp">
+        >
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/rounded3"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@drawable/rounded3">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="6dp"
             android:gravity="center"
             android:text="저녁"
-            android:layout_gravity="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/meal_widget_diner"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_gravity="top"
-            android:layout_marginLeft="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
-            android:textSize="8sp"
-            />
+            android:textSize="10sp" />
     </LinearLayout>
 
 </LinearLayout>
