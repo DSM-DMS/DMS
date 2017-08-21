@@ -89,13 +89,13 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        Button loginBtn = (Button) view.findViewById(R.id.btn_my_page_login);
+      /*  Button loginBtn = (Button) view.findViewById(R.id.btn_my_page_login);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), LoginActivity.class));
             }
-        });
+        });*/
 
         loadMyPage();
 

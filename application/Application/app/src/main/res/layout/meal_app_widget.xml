@@ -9,17 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/rounded2">
+        android:background="@drawable/rounded2"
+        android:elevation="4dp"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Today Meal"
             android:gravity="center"
-            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:padding="8dp"
             android:textColor="@color/white"
             android:layout_marginLeft="15dp"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -36,6 +39,7 @@
             android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="아침"
+            android:padding="8dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
 
@@ -44,13 +48,19 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="6dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:textSize="10sp" />
+            android:layout_marginTop="6dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="6dp"
+            />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/drop_shadow"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,6 +69,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,17 +87,22 @@
             android:layout_gravity="center"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:textSize="10sp" />
+            android:layout_marginTop="6dp"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/drop_shadow"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/widget_background">
+        android:background="@drawable/rounded3">
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,6 +112,7 @@
             android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="저녁"
+            android:padding="8dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
 
@@ -103,11 +120,12 @@
             android:id="@+id/meal_widget_diner"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:textSize="10sp" />
+            android:layout_marginTop="6dp"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>
