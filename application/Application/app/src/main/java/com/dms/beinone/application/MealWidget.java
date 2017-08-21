@@ -1,13 +1,10 @@
 package com.dms.beinone.application;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -39,24 +36,22 @@ import static com.dms.beinone.application.DMSService.HTTP_OK;
 public class MealWidget extends AppWidgetProvider {
 
     private static Meal mMeal;
+    private ComponentName appWidgetId;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
         // Construct the RemoteViews object
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        DMSService dmsService = HttpManager.createDMSService(context);
-        ComponentName appWidgetId;
-        appWidgetId=new ComponentName(context,MealWidget.class);
+        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.meal_app_widget);
+        appWidgetId = new ComponentName(context, MealWidget.class);
 
-        Calendar calendar = Calendar.getInstance();
-        Date date=new Date();
+        Date date = new Date();
 
         if (mMeal == null) {
             try {
-                loadMeal("2017-08-22", context, views);
+                loadMeal(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date), context, views);
             } catch (IOException e) {
-                System.out.println("IOException in MealCardFragment: loadMeal()");
+                System.out.println("IOException in WidgetMeal error: loadMeal()");
                 e.printStackTrace();
             }
         } else {
@@ -87,6 +82,8 @@ public class MealWidget extends AppWidgetProvider {
         bind(views);
     }
 
+
+    //다이얼로그에서는 RemoteViews 찾아서 거기서 뷰의아이디 찾아주고 데이터바인딩을 진행함
     private void bind(RemoteViews views) {
         if (mMeal != null) {
             String breakfast = TextUtils.join(", ", mMeal.getBreakfast());
