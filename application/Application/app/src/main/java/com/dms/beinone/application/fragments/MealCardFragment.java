@@ -114,7 +114,7 @@ public class MealCardFragment extends Fragment {
             mBreakfastTV.setText(breakfast);
             String lunch = TextUtils.join(", ", mMeal.getLunch());
             mLunchTV.setText(lunch);
-            String dinner = TextUtils.join(", ", mMeal.getLunch());
+            String dinner = TextUtils.join(", ", mMeal.getDinner());
             mDinnerTV.setText(dinner);
         }
     }

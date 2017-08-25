@@ -90,7 +90,7 @@ public class MealWidget extends AppWidgetProvider {
             views.setTextViewText(R.id.meal_widget_breakfast,breakfast);
             String lunch = TextUtils.join(", ", mMeal.getLunch());
             views.setTextViewText(R.id.meal_widget_launch,lunch);
-            String dinner = TextUtils.join(", ", mMeal.getLunch());
+            String dinner = TextUtils.join(", ", mMeal.getDinner());
             views.setTextViewText(R.id.meal_widget_diner,dinner);
         }
     }

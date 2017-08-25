@@ -69,6 +69,9 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
 
+        <activity android:name=".activities.DormitoryRegulationsActivity" />
+        <activity android:name=".activities.DormitoryNoticeActivity" />
+        <activity android:name=".activities.FrequentlyQuestionActivity"></activity>
     </application>
 
 </manifest>

@@ -33,6 +33,8 @@ public class ExpandableLayout extends LinearLayout {
         parentView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if (parentView.isSelected()) {
                     collapse(childView);
                     parentView.setSelected(false);
@@ -52,6 +54,42 @@ public class ExpandableLayout extends LinearLayout {
         });
         childView.setVisibility(View.GONE);
         addView(childView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    public void addView(final View parentView,final View childView,boolean check){
+        addView(parentView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        parentView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parentView.isSelected()) {
+                    collapse(childView);
+                    parentView.setSelected(false);
+                    mSelectedParentView = null;
+                    mSelectedChildView = null;
+                } else {
+                    expand(childView);
+                    parentView.setSelected(true);
+                    if (mSelectedParentView != null) {
+                        collapse(mSelectedChildView);
+                        mSelectedParentView.setSelected(false);
+                    }
+                    mSelectedParentView = parentView;
+                    mSelectedChildView = childView;
+                }
+            }
+        });
+        childView.setVisibility(View.GONE);
+        addView(childView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+        expand(childView);
+        parentView.setSelected(true);
+        if (mSelectedParentView != null) {
+            collapse(mSelectedChildView);
+            mSelectedParentView.setSelected(false);
+        }
+        mSelectedParentView = parentView;
+        mSelectedChildView = childView;
     }
 
     private void expand(final View v) {

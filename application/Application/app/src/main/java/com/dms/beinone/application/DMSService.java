@@ -53,10 +53,10 @@ public interface DMSService {
     @GET("meal")
     Call<JsonObject> loadMeal(@Query("date") String date);
 
-
     @GET("account/student")
     Call<Account> loadMyPage();
 
     @POST("account/logout/student")
     Call<Void> logout();
+
 }
