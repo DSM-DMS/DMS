@@ -18,17 +18,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow_back_white_24dp" />
+            android:src="@drawable/ic_chevron_left_black_24dp" />
 
         <TextView
             android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
+            android:layout_toRightOf="@+id/ib_toolbar_back"
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"
+            android:textColor="#4B81AB"
             android:textSize="20sp" />
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

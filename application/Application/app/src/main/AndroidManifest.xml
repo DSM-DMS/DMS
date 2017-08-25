@@ -69,9 +69,12 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
 
-        <activity android:name=".activities.DormitoryRegulationsActivity" />
-        <activity android:name=".activities.DormitoryNoticeActivity" />
-        <activity android:name=".activities.FrequentlyQuestionActivity"></activity>
+        <activity android:name=".activities.DormitoryRegulationsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.DormitoryNoticeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.FrequentlyQuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
