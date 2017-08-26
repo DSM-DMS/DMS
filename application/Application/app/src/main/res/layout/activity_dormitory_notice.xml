@@ -23,18 +23,52 @@
         app:cardCornerRadius="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <ImageView
+                    android:id="@+id/ib_notice_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="16dp"
+                    android:src="@drawable/notice" />
+
+                <TextView
+                    android:id="@+id/tv_notice_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ib_notice_image"
+                    android:textColor="#000"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            <view
+                android:layout_width="3dp"
+                android:layout_height="match_parent"/>
 
 
-        </RelativeLayout>
-
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></WebView>
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -17,5 +17,8 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
 
         TextView TextView = (TextView) findViewById(R.id.tv_toolbar_title);
         TextView.setText("공지사항");
+
+        TextView textView=(TextView)findViewById(R.id.tv_notice_title);
+        textView.setText("제목");
     }
 }
