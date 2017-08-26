@@ -17,14 +17,7 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dormitory_notice);
 
-        TextView TextView = (TextView) findViewById(R.id.tv_toolbar_title);
-        TextView.setText("공지사항");
-
-        TextView textView=(TextView)findViewById(R.id.tv_notice_title);
-        textView.setText("제목");
-
-        WebView webView=(WebView)findViewById(R.id.notice_webView);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.naver.com/");
+        //여기서 작업하고 아이템 클릭리스너 주고 notcie 액티비티로 가게 하면돼
+        // 힘들면 우선 리사이클 뷰 만든는것만 해봐
     }
 }
