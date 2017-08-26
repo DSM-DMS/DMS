@@ -10,4 +10,10 @@
 
     <!--성현아 이거 리사이클뷰 넣어서 너가 자바코드를 구현하면돼 -->
 
+
+    <Button
+        android:id="@+id/testButton"
+        android:text="다음페이지 확인 바람 -정현-"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
