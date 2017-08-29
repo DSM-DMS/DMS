@@ -743,6 +743,36 @@ $(document).ready(function() {
     //     alert("파이어폭스 브라우저입니다.");
     // }
 
+    //연장신청 시간 보여줌
+    var startTime = '05:30 PM';
+    var endTime = '08:30 PM';
+
+    var formatTime = (function() {
+        function addZero(num) {
+            return (num >= 0 && num < 10) ? "0" + num : num + "";
+        }
+        return function(dt) {
+            var formatted = '';
+
+            if (dt) {
+                var hours24 = dt.getHours();
+                var hours = ((hours24 + 11) % 12) + 1;
+                formatted = [
+                    [addZero(hours), addZero(dt.getMinutes())].join(":"), hours24 > 11 ? "PM" : "AM"
+                ].join(" ");
+            }
+            return formatted;
+        }
+    })();
+
+    var currentTime = formatTime(new Date());
+
+    if (currentTime >= startTime && currentTime <= endTime) {
+        $('#extensionValue').html("연장신청이 가능합니다.");
+    } else {
+        $('#extensionValue').html("연장신청시간이 아닙니다.");
+    }
+
     //show current stay state and extension state
     stayTick = $('#stayTick');
     stayCircle = $('#stayCheckCircle');
