@@ -10,10 +10,21 @@
 
     <!--성현아 이거 리사이클뷰 넣어서 너가 자바코드를 구현하면돼 -->
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        />
 
-    <Button
-        android:id="@+id/testButton"
-        android:text="다음페이지 확인 바람 -정현-"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/dormitory_notice_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>
