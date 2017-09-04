@@ -674,10 +674,12 @@ getSomedayMeal(mealDate, $(".today-meal"));
 
 function getSomedayMeal(day, target) {
         $.ajax({
-        url: "http://dsm2015.cafe24.com/meal",
+        url: "http://dsm2015.cafe24.com:81/meal",
         data: {
-            date: formatDate(day)
-        },
+            year: mealDate.getFullYear(),
+            month: mealDate.getMonth() + 1,
+            day: mealDate.getDate(),
+        },  
         statusCode: {
             200: function(data) {
                 var parsedData = JSON.parse(data);
