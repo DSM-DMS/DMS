@@ -1,5 +1,6 @@
 package com.dms.beinone.application.views.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.activities.Notice;
 import com.dms.beinone.application.models.DormitoryNotice;
 
 import java.util.ArrayList;
@@ -58,7 +60,8 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
             @Override
             public void onClick (View view) {
 
-                
+                Intent intent = new Intent(maContext, Notice.class);
+                maContext.startActivity(intent);
             }
         });
         return vH;
