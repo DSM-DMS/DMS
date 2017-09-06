@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 public class DormitoryNoticeActivity extends AppCompatActivity {
 
+    Context context;
+
     RecyclerView maRecyclerView;
     RecyclerView.Adapter maAdapter;
 
@@ -62,40 +64,7 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
 
-        MaOnTouchListener maOnTouchListener = new MaOnTouchListener(this);
         maAdapter =  new DormitoryNoticeAdapter(this, item);
         maRecyclerView.setAdapter(maAdapter);
-    }
-}
-
-
-
-class MaOnTouchListener implements RecyclerView.OnItemTouchListener {
-
-    Context maContext;
-
-    public MaOnTouchListener (Context context) {
-
-        maContext = context;
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        Log.d("tag1", "helloWorld");
-        return true;
-    }
-
-    @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-        Log.d("tag2", "we can do it");
-    }
-
-    @Override
-    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        Toast.makeText(maContext, "we can do it!!",Toast.LENGTH_SHORT).show();
-        Log.d("tag3", "what should i do");
     }
 }
