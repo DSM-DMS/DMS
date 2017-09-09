@@ -3,7 +3,13 @@ package com.dms.beinone.application;
 import com.dms.beinone.application.models.Account;
 import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
+import com.dms.beinone.application.models.Meal;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -49,9 +55,12 @@ public interface DMSService {
 
     @GET("apply/all")
     Call<ApplyStatus> loadApplyStatus();
-
     @GET("meal")
     Call<JsonObject> loadMeal(@Query("date") String date);
+
+
+    @GET("meal")
+    Call<JsonArray> loadMeal_test(@Query("year") String year , @Query("month")String  month, @Query("day") String day);
 
     @GET("account/student")
     Call<Account> loadMyPage();

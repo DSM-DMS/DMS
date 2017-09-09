@@ -86,7 +86,7 @@ public class ApplyListFragment extends Fragment {
                     }
                 }));*/
 
-        mExpandableLayout.addView(createParentView("방과후 신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
+        mExpandableLayout.addView(createParentView("방과후 신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList4), R.drawable.whale, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

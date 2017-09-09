@@ -46,7 +46,7 @@ public class MealWidget extends AppWidgetProvider {
         appWidgetId = new ComponentName(context, MealWidget.class);
 
         Date date = new Date();
-
+/*
         if (mMeal == null) {
             try {
                 loadMeal(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date), context, views);
@@ -59,7 +59,7 @@ public class MealWidget extends AppWidgetProvider {
         }
 
         // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+        appWidgetManager.updateAppWidget(appWidgetId, views);*/
 
 
     }
@@ -115,7 +115,7 @@ public class MealWidget extends AppWidgetProvider {
         return new Meal(breakfast, lunch, dinner);
     }
 
-    private void loadMeal(String date, final Context context, final RemoteViews views) throws IOException {
+   /* private void loadMeal(String date, final Context context, final RemoteViews views) throws IOException {
         DMSService dmsService = HttpManager.createDMSService(context);
         Call<JsonObject> call = dmsService.loadMeal(date);
         call.enqueue(new Callback<JsonObject>() {
@@ -137,7 +137,7 @@ public class MealWidget extends AppWidgetProvider {
                 t.printStackTrace();
             }
         });
-    }
+    }*/
 
 
 

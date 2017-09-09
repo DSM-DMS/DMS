@@ -30,8 +30,9 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
     private ViewPager question_view_pager_yjh;
     private Button next_button;
-    private ImageButton back_button;
-
+    private ImageButton main_back_button;
+    private Button back_button;
+    private TextView detial_text;
     private int size;
 
     public static int [] currentSet;
@@ -102,7 +103,10 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
         final LinearLayout view = (LinearLayout) findViewById(R.id.current_view_count);
 
+        //next_button=(Button)findViewById(R.id.next_button);
         next_button=(Button)findViewById(R.id.next_button);
+        back_button=(Button)findViewById(R.id.back_button);
+        back_button.setVisibility(View.GONE);
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +114,17 @@ public class AfterSchoolActivity extends AppCompatActivity {
                 question_view_pager_yjh.setCurrentItem(question_view_pager_yjh.getCurrentItem() + 1, true);
             }
         });
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                question_view_pager_yjh.setCurrentItem(question_view_pager_yjh.getCurrentItem() - 1 , true);
+
+            }
+        });
+
+
+
 
         question_view_pager_yjh.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -120,8 +135,10 @@ public class AfterSchoolActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 Log.d("xxx", "onPageSelected: " + position);
-                setNextButtonText(position, size);
+                //setNextButtonText(position, size);
                 setViewCount(view, size, position);
+                setBack_button(position,0);
+                setNext_buttonText(position,size);
             }
 
             @Override
@@ -132,9 +149,9 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
 
         setViewCount(view, size, 0);
-        back_button=(ImageButton)findViewById(R.id.ib_toolbar_back);
+        main_back_button=(ImageButton)findViewById(R.id.ib_toolbar_back);
 
-        back_button.setOnClickListener(new View.OnClickListener() {
+        main_back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -151,7 +168,7 @@ public class AfterSchoolActivity extends AppCompatActivity {
             }else{
                 countView.setBackground(getResources().getDrawable(R.drawable.count_view_shape));
             }
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(50, 50);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30, 30);
             layoutParams.setMargins(8,0,8,0);
             view.addView(countView, layoutParams);
         }
@@ -178,11 +195,26 @@ public class AfterSchoolActivity extends AppCompatActivity {
         }
     }
 
-    private void setNextButtonText(int currentCount, int maxCount) {
+    private void setNext_buttonText(int currentCount, int maxCount) {
+        detial_text=(TextView)findViewById(R.id.detail_view);
+
+
         if(currentCount + 1 == maxCount){
-            next_button.setText("제출하기");
+            next_button.setVisibility(View.GONE);
+            detial_text.setText("제출");
         }else{
-            next_button.setText("다음 문항");
+            next_button.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setBack_button(int currentCount, int minCount) {
+
+        if(currentCount == minCount){
+            back_button.setVisibility(View.GONE);
+
+        }else{
+            back_button.setVisibility(View.VISIBLE);
+
         }
     }
 

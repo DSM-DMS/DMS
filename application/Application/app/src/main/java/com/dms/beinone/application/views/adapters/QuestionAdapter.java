@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.dms.beinone.application.activities.AfterSchoolActivity;
@@ -55,12 +56,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CheckBox checkBox;
+        public RadioButton checkBox;
         private TextView question_name_text;
 
         public ViewHolder(View v, final int position, final int listPosition) {
             super(v);
-            checkBox = (CheckBox) v.findViewById(R.id.choose_class_checkbox);
+            checkBox = (RadioButton) v.findViewById(R.id.choose_class_checkbox);
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
