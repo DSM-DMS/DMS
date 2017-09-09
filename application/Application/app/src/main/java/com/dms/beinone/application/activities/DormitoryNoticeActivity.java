@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class DormitoryNoticeActivity extends AppCompatActivity {
 
     Context context;
-
+    private ImageButton back_button;
     RecyclerView maRecyclerView;
     RecyclerView.Adapter maAdapter;
 
@@ -42,6 +43,14 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
         maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_notice_recycler);
+
+        back_button=(ImageButton) findViewById(R.id.ib_toolbar_back);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

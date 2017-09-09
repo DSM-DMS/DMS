@@ -22,4 +22,11 @@ public class UnscrollableViewPager extends ViewPager {
     public boolean canScrollHorizontally(int direction) {
         return false;
     }
+
+    @Override
+    public boolean canScrollVertically(int direction) {
+        return false;
+    }
+
+
 }
