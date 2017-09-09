@@ -1,6 +1,7 @@
 package com.dms.beinone.application.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,12 +37,9 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dormitory_notice);
 
-        //여기서 작업하고 아이템 클릭리스너 주고 notcie 액티비티로 가게 하면돼
-        // 힘들면 우선 리사이클 뷰 만든는것만 해봐 저거 버튼 코드 지워도됌
-
         TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
         appBarText.setText("공지사항");
-
+        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
         maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_notice_recycler);
 
@@ -50,7 +49,7 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
 
         ArrayList<DormitoryNotice> item = new ArrayList<>();
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
+        item.add(new DormitoryNotice("사감부", "연장신청에 관하여"));
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
