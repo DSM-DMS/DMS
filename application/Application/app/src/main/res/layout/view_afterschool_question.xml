@@ -41,7 +41,7 @@
                     android:layout_centerVertical="true"
                     android:elevation="16dp"
                     android:text="질문 1"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="24sp" />
 
 

@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.DormitoryNoticeActivity;
+import com.dms.beinone.application.activities.DormitoryRegulationsActivity;
 
 /**
  * Created by BeINone on 2017-05-31.
@@ -31,14 +32,24 @@ public class DormitoryListFragment extends Fragment {
 
 
     public void nextPage(View view, final Context context){
-        ImageButton imageButton=(ImageButton)view.findViewById(R.id.ib_dormitory_list_notice);
+        ImageButton notice_button=(ImageButton)view.findViewById(R.id.ib_dormitory_list_notice);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        notice_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, DormitoryNoticeActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+
+        ImageButton regulations_button=(ImageButton)view.findViewById(R.id.ib_dormitory_list_faq);
+        regulations_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, DormitoryRegulationsActivity.class);
+                startActivity(intent);
             }
         });
     }
