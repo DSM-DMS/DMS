@@ -16,13 +16,8 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/notice", method={HttpMethod.GET})
 public class LoadNotice implements Handler<RoutingContext> {
-	public LoadNotice() {
-		
-	}
-	
 	@Override
 	public void handle(RoutingContext ctx) {
-
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
