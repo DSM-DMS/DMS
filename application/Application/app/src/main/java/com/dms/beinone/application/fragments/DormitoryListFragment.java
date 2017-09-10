@@ -20,11 +20,10 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.DormitoryNoticeActivity;
-<<<<<<< HEAD
+
 import com.dms.beinone.application.dialogs.ProblemReportDialog;
-=======
 import com.dms.beinone.application.activities.DormitoryRegulationsActivity;
->>>>>>> 9fe452834ca4fa1539d4cd0d5e8500b0797aae2b
+
 
 /**
  * Created by BeINone on 2017-05-31.
@@ -46,40 +45,37 @@ public class DormitoryListFragment extends Fragment {
 
 
     public void nextPage(View view, final Context context){
-<<<<<<< HEAD
+
         ImageButton noticeButton =(ImageButton)view.findViewById(R.id.ib_dormitory_list_notice);
         final ImageButton problemButton = (ImageButton) view.findViewById(R.id.ib_dormitory_list_facility_report);
         final View.OnClickListener reportListenr;
         final View.OnClickListener cancleListener;
+        final ImageButton notice_button = (ImageButton) view.findViewById(R.id.ib_dormitory_list_notice);
 
-        noticeButton.setOnClickListener(new View.OnClickListener() {
-=======
-        ImageButton notice_button=(ImageButton)view.findViewById(R.id.ib_dormitory_list_notice);
+        notice_button.setOnClickListener(new View.OnClickListener()  {
 
-        notice_button.setOnClickListener(new View.OnClickListener() {
->>>>>>> 9fe452834ca4fa1539d4cd0d5e8500b0797aae2b
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context, DormitoryNoticeActivity.class);
+                @Override
+                public void onClick (View v){
+                Intent intent = new Intent(context, DormitoryNoticeActivity.class);
                 startActivity(intent);
 
-            }
-        });
+                }
+            });
 
-<<<<<<< HEAD
-        reportListenr = new View.OnClickListener() {
+
+        reportListenr =new View.OnClickListener()  {
 
             @Override
-            public void onClick (View view) {
+            public void onClick (View v) {
 
                 Toast.makeText(context, "신고되었습니다.", Toast.LENGTH_SHORT).show();
             }
         };
 
-        cancleListener = new View.OnClickListener() {
+        cancleListener =new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick (View v){
 
                 maDialog.dismiss();
             }
@@ -88,7 +84,7 @@ public class DormitoryListFragment extends Fragment {
         problemButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick (View v){
 
                 maDialog = new ProblemReportDialog(context, reportListenr, cancleListener);
                 WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -98,16 +94,18 @@ public class DormitoryListFragment extends Fragment {
                 maDialog.show();
                 Window window = maDialog.getWindow();
                 window.setAttributes(layoutParams);
-=======
-
-        ImageButton regulations_button=(ImageButton)view.findViewById(R.id.ib_dormitory_list_faq);
-        regulations_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context, DormitoryRegulationsActivity.class);
-                startActivity(intent);
->>>>>>> 9fe452834ca4fa1539d4cd0d5e8500b0797aae2b
             }
+        });
+
+        ImageButton regulations_button = (ImageButton) view.findViewById(R.id.ib_dormitory_list_faq);
+        regulations_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(context, DormitoryRegulationsActivity.class);
+                startActivity(intent);
+
+                }
         });
     }
 }
