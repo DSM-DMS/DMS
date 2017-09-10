@@ -1,5 +1,8 @@
 package org.boxfox.dms.utilities.database;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -144,6 +147,18 @@ public class SafeResultSet {
 
 	public Object getObject(int index) {
 		return rows.get(offset).get(index);
+	}
+
+	public JSONArray convertToJSONArray(){
+		JSONArray arr = new JSONArray();
+		for(Row row : rows){
+			JSONObject object = new JSONObject();
+			for(int i = 0; i< columns.size(); i++){
+				object.put(columns.get(i),row.get(i+1));
+			}
+			arr.add(object);
+		}
+		return arr;
 	}
 
 	private class Row {

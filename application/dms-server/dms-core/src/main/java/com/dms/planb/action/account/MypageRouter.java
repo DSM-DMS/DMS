@@ -59,6 +59,7 @@ public class MypageRouter implements Handler<RoutingContext> {
 				responseObject.put("demerit", datas.get("demerit"));
 				responseObject.put("room", datas.get("room"));
 				responseObject.put("seat", datas.get("seat"));
+				responseObject.put("stay_value", datas.get("stay_value"));
 
 				ctx.response().setStatusCode(200);
 				ctx.response().end(responseObject.toString());

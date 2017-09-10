@@ -9,7 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi:3.11" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.11" level="project" />
@@ -18,7 +19,7 @@
     <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="module" module-name="dms-template" />
     <orderEntry type="module" module-name="dms-parser" />
-    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.3" level="project" />
     <orderEntry type="module" module-name="dms-secure" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk16:1.45" level="project" />
     <orderEntry type="module" module-name="dms-data-utilities" />

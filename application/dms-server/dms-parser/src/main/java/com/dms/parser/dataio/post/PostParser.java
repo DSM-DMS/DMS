@@ -56,10 +56,11 @@ public class PostParser<T> extends Parser {
 		DataSaveable asd;
 		Document doc = ParserUtils.getDoc(url);
 		Element article = doc.getElementsByTag("article").get(0);
-		String title = article.getElementsByTag("h1").get(0).text().replaceAll("제목", "");
-		String writer = article.getElementsByTag("ul").get(0).getElementsByTag("li").get(0).text().replaceAll("작성자","");
-		String dateTime = article.getElementsByTag("ul").get(0).getElementsByTag("li").get(1).text().replaceAll("작성일","");
+		String title = article.getElementsByTag("h1").get(1).text().replaceAll("제목", "");
+		String writer = article.getElementsByClass("infoBox").get(0).getElementsByTag("li").get(0).text().replaceAll("작성자","");
+		String dateTime = article.getElementsByClass("infoBox").get(0).getElementsByTag("li").get(1).text().replaceAll("작성일","");
 		String content = article.getElementsByClass("viewBox").get(0).html();
+
 		Post post = null;
 		try {
 			int num = 0;
