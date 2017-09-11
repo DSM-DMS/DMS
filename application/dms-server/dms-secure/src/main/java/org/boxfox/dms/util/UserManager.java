@@ -15,7 +15,6 @@ import com.dms.utilities.database.DB;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.support.ApplyDataUtil;
 import com.dms.utilities.support.JobResult;
-import com.dms.utilities.support.SecureConfig;
 
 import io.vertx.ext.web.RoutingContext;
 
@@ -23,26 +22,20 @@ import io.vertx.ext.web.RoutingContext;
  * Created by boxfox on 2017-03-04.
  */
 public class UserManager {
-    private static AES256 aes;
     private static SecureManager secureManager;
 
     static {
-        aes = new AES256(SecureConfig.get("AES"));
         secureManager = SecureManager.create(UserManager.class, 10, 8);
-    }
-
-    public static AES256 getAES() {
-        return aes;
     }
 
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
         key = SHA256.encrypt(key);
-        ResultSet rs = DB.executeQuery("select * from account where uid=?", key);
+        ResultSet rs = DB.executeQuery("SELECT * FROM account WHERE uid=?", key);
         if (rs.next() && rs.getString("id") == null) {
             if (!checkIdExists(id)) {
-                int result = DB.executeUpdate("update account set id=?, password=? WHERE uid=?", aes.encrypt(id), SHA256.encrypt(password), key);
+                int result = DB.executeUpdate("UPDATE account set id=?, password=? WHERE uid=?", AES256.encrypt(id), SHA256.encrypt(password), key);
                 if (result == 1) {
                     message = "회원가입에 성공했습니다.";
                     check = true;
@@ -64,7 +57,7 @@ public class UserManager {
         
         String room = "";
         String seat = "";
-        ResultSet rs = DB.executeQuery("select class, seat from extension_apply where uid=?", uid);
+        ResultSet rs = DB.executeQuery("SELECT class, seat FROM extension_apply WHERE uid=?", uid);
         if (rs.next()) {
             room = rs.getInt(1) + "";
             seat = rs.getInt(2) + "";
@@ -75,11 +68,11 @@ public class UserManager {
         	value = rs.getInt("value");
         }
         
-        ResultSet rsForStudentData = DB.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid=?", uid);
+        ResultSet rsForStudentData = DB.executeQuery("SELECT * FROM student_data a join student_score b on a.uid = b.uid WHERE a.uid=?", uid);
         JSONObject result = new JSONObject();
         if (rs.next()) {
-            result.put("number", aes.decrypt(rsForStudentData.getString("number") + ""));
-            result.put("name", aes.decrypt(rsForStudentData.getString("name")));
+            result.put("number", AES256.decrypt(rsForStudentData.getString("number") + ""));
+            result.put("name", AES256.decrypt(rsForStudentData.getString("name")));
             result.put("merit", rsForStudentData.getInt("merit"));
             result.put("demerit", rsForStudentData.getInt("demerit"));
             result.put("room", room);
@@ -100,7 +93,7 @@ public class UserManager {
         if (uid != null) {
             String room = "";
             String seat = "";
-            ResultSet rss = DB.executeQuery("select class, seat from extension_apply where uid=?", uid);
+            ResultSet rss = DB.executeQuery("SELECT class, seat FROM extension_apply WHERE uid=?", uid);
             if (rss.next()) {
                 room = rss.getInt(1) + "";
                 seat = rss.getInt(2) + "";
@@ -111,11 +104,11 @@ public class UserManager {
             if(rss.next()) {
             	value = rss.getInt("value");
             }
-            ResultSet rs = DB.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid=?", uid);
+            ResultSet rs = DB.executeQuery("SELECT * FROM student_data a join student_score b on a.uid = b.uid WHERE a.uid=?", uid);
             if (rs.next()) {
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("number", aes.decrypt(rs.getString("number") + ""));
-                map.put("name", aes.decrypt(rs.getString("name")));
+                map.put("number", AES256.decrypt(rs.getString("number") + ""));
+                map.put("name", AES256.decrypt(rs.getString("name")));
                 map.put("merit", rs.getInt("merit"));
                 map.put("demerit", rs.getInt("demerit"));
                 map.put("room", room);
@@ -131,7 +124,7 @@ public class UserManager {
     public boolean[] getOutStatus(String id) throws SQLException {
         boolean[] list = new boolean[2];
         String uid = getUid(id);
-        ResultSet rs = DB.executeQuery("SELECT sat,sun FROM goingout_apply WHERE uid=?", uid);
+        ResultSet rs = DB.executeQuery("SELECT sat, sun FROM goingout_apply WHERE uid=?", uid);
         if (rs.next()) {
             list[0] = rs.getBoolean(1);
             list[1] = rs.getBoolean(2);
@@ -163,17 +156,17 @@ public class UserManager {
 
     public static String getUid(String id) throws SQLException {
         String uid = null;
-        String idEncrypt = aes.encrypt(id);
+        String idEncrypt = AES256.encrypt(id);
         if (checkIdExists(id))
-            uid = DataBase.getInstance().executeQuery("select uid from account where id='", idEncrypt, "'").nextAndReturn().getString(1);
+            uid = DataBase.getInstance().executeQuery("SELECT uid FROM account WHERE id='", idEncrypt, "'").nextAndReturn().getString(1);
         return uid;
     }
 
     public static boolean checkIdExists(String id) {
         boolean check = false;
-        id = aes.encrypt(id);
+        id = AES256.encrypt(id);
         try {
-            ResultSet rs = DB.executeQuery("select count(*) from account where id='", id, "'");
+            ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM account WHERE id='", id, "'");
             if (rs.getInt(1) == 1) {
                 check = true;
             }
@@ -196,22 +189,22 @@ public class UserManager {
         return result;
     }
     
-    public boolean login(String id, String password) throws SQLException {
+    public static boolean login(String id, String password) throws SQLException {
         boolean check = false;
-        ResultSet rs = DB.executeQuery("select * from account where id=? AND password=?", aes.encrypt(id), SHA256.encrypt(password));
+        ResultSet rs = DB.executeQuery("SELECT * FROM account WHERE id=? AND password=?", AES256.encrypt(id), SHA256.encrypt(password));
         if (rs.next()) {
             check = true;
         }
         return check;
     }
     
-    public String createSession() {
+    public static String createSession() {
         boolean check = true;
         String sessionKey = null;
         do {
             try {
                 sessionKey = UUID.randomUUID().toString();
-                ResultSet rs = DB.executeQuery("select count(*) from account where session_key=?", sessionKey);
+                ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM account WHERE session_key=?", sessionKey);
                 if (rs.next() && rs.getInt(1) == 0)
                     check = false;
             } catch (SQLException e) {
@@ -231,7 +224,7 @@ public class UserManager {
         String result = null;
         if (sessionKey != null) {
             try {
-                ResultSet rs = DB.executeQuery("select id from account where session_key=?", sessionKey);
+                ResultSet rs = DB.executeQuery("SELECT id FROM account WHERE session_key=?", sessionKey);
                 if (rs.next()) {
                     result = rs.getString(1);
                 }else{
@@ -243,23 +236,23 @@ public class UserManager {
             }
         }
         if(result != null) {
-        	return aes.decrypt(result);
+        	return AES256.decrypt(result);
         } else {
         	return null;
         }
     }
     
-    public String getSessionKey(String id) throws SQLException {
+    public static String getSessionKey(String id) throws SQLException {
         String result = null;
-        ResultSet rs = DB.executeQuery("select session_key from account where uid=?", getUid(id));
+        ResultSet rs = DB.executeQuery("SELECT session_key FROM account WHERE uid=?", getUid(id));
         if (rs.next()) {
             result = rs.getString(1);
         }
         return result;
     }
 
-    public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
-        String idEncrypt = aes.encrypt(id);
+    public static boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
+        String idEncrypt = AES256.encrypt(id);
         try {
             String sessionKey = getSessionKey(id);
             if (sessionKey == null) {
@@ -271,7 +264,7 @@ public class UserManager {
                 SessionUtil.registerSession(context, "UserSession", sessionKey);
             }
             if (sessionKey != null) {
-                DB.executeUpdate("update account set session_key=? WHERE id=?", sessionKey, idEncrypt);
+                DB.executeUpdate("UPDATE account set session_key=? WHERE id=?", sessionKey, idEncrypt);
                 return true;
             }
         } catch (Exception e) {
@@ -280,8 +273,8 @@ public class UserManager {
         return false;
     }
     
-    public void removeCookie(RoutingContext context) {
-    	String idEncrypt = aes.encrypt(getIdFromSession(context));
+    public static void removeCookie(RoutingContext context) {
+    	String idEncrypt = AES256.encrypt(getIdFromSession(context));
     	
     	SessionUtil.removeCookie(context, "UserSession");
     	DB.executeUpdate("UPDATE account SET session_key=null WHERE id=?", idEncrypt);

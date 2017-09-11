@@ -11,29 +11,22 @@ import org.boxfox.dms.secure.SecureManager;
 import com.dms.utilities.database.DB;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.support.JobResult;
-import com.dms.utilities.support.SecureConfig;
 
 import io.vertx.ext.web.RoutingContext;
 
 public class AdminManager {
-    private static AES256 aes;
     private static SecureManager secureManager;
 
     static {
-        aes = new AES256(SecureConfig.get("AES"));
         secureManager = SecureManager.create(AdminManager.class, 10, 5);
     }
 
-    public static AES256 getAES() {
-        return aes;
-    }
-    
     public static boolean isAdmin(RoutingContext ctx) {
         boolean check = false;
         String sessionKey = SessionUtil.getRegistredSessionKey(ctx, "AdminSession");
         if (sessionKey != null)
             try {
-                ResultSet rs = DB.executeQuery("select count(*) from admin_account where session_key=?", sessionKey);
+                ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM admin_account WHERE session_key=?", sessionKey);
                 if (rs.next() && rs.getInt(1) > 0) {
                     check = true;
                 } else {
@@ -50,7 +43,7 @@ public class AdminManager {
 
     public static boolean login(String id, String password) throws SQLException {
         boolean check = false;
-        ResultSet rs = DB.executeQuery("select * from admin_account where id=? AND password=?", aes.encrypt(id), SHA256.encrypt(password));
+        ResultSet rs = DB.executeQuery("SELECT * FROM admin_account WHERE id=? AND password=?", AES256.encrypt(id), SHA256.encrypt(password));
         if (rs.next()) {
             check = true;
         }
@@ -63,7 +56,7 @@ public class AdminManager {
         do {
             try {
                 sessionKey = UUID.randomUUID().toString();
-                ResultSet rs = DB.executeQuery("select count(*) from admin_account where session_key=?", sessionKey);
+                ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM admin_account WHERE session_key=?", sessionKey);
                 if (rs.next() && rs.getInt(1) == 0)
                     check = false;
             } catch (SQLException e) {
@@ -83,7 +76,7 @@ public class AdminManager {
         String result = null;
         if (sessionKey != null) {
             try {
-                ResultSet rs = DB.executeQuery("select id from admin_account where session_key=?", sessionKey);
+                ResultSet rs = DB.executeQuery("SELECT id FROM admin_account WHERE session_key=?", sessionKey);
                 if (rs.next()) {
                     result = rs.getString(1);
                 }
@@ -91,12 +84,12 @@ public class AdminManager {
                 e.printStackTrace();
             }
         }
-        return aes.decrypt(result);
+        return AES256.decrypt(result);
     }
 
     public static String getSessionKey(String id) throws SQLException {
         String result = null;
-        ResultSet rs = DB.executeQuery("select session_key from admin_account where id=?", id);
+        ResultSet rs = DB.executeQuery("SELECT session_key FROM admin_account WHERE id=?", id);
         if (rs.next()) {
             result = rs.getString(1);
         }
@@ -104,7 +97,7 @@ public class AdminManager {
     }
 
     public static boolean registerSession(RoutingContext ctx, boolean keepLogin, String id) {
-        String idEncrypt = aes.encrypt(id);
+        String idEncrypt = AES256.encrypt(id);
         try {
             String sessionKey = getSessionKey(id);
             if (sessionKey == null) {
@@ -116,7 +109,7 @@ public class AdminManager {
                 SessionUtil.registerSession(ctx, "AdminSession", sessionKey);
             }
             if (sessionKey != null) {
-                DB.executeUpdate("update admin_account set session_key=? WHERE id=?", sessionKey, idEncrypt);
+                DB.executeUpdate("UPDATE admin_account SET session_key=? WHERE id=?", sessionKey, idEncrypt);
                 return true;
             }
         } catch (Exception e) {
@@ -127,9 +120,9 @@ public class AdminManager {
 
     public static boolean checkIdExists(String id) {
         boolean check = false;
-        id = aes.encrypt(id);
+        id = AES256.encrypt(id);
         try {
-            ResultSet rs = DB.executeQuery("select count(*) from admin_account where id=?", id);
+            ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM admin_account WHERE id=?", id);
             if (rs.getInt(1) == 1) {
                 check = true;
             }
@@ -143,7 +136,7 @@ public class AdminManager {
         boolean check = false;
         String message = null;
         if (!checkIdExists(id)) {
-            int result = DB.executeUpdate("insert into admin_account (id, password, name) values(?, ?, ?)", aes.encrypt(id), SHA256.encrypt(password), aes.encrypt(name));
+            int result = DB.executeUpdate("INSERT INTO admin_account (id, password, name) VALUES(?, ?, ?)", AES256.encrypt(id), SHA256.encrypt(password), AES256.encrypt(name));
             if (result == 1) {
                 message = "회원가입에 성공했습니다.";
                 check = true;

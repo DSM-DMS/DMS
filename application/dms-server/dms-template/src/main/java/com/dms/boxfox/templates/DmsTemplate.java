@@ -6,8 +6,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.dms.utilities.log.Log;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

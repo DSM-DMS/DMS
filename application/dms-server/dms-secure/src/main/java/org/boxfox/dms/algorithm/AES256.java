@@ -1,7 +1,6 @@
 package org.boxfox.dms.algorithm;
 
 import java.io.UnsupportedEncodingException;
-
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -14,14 +13,29 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.*;
+import org.apache.commons.codec.binary.Base64;
 
-import com.dms.utilities.log.Log;
+import com.dms.utilities.support.SecureConfig;
 
 public class AES256 {
-    private String ips;
-    private Key keySpec;
+    private static String ips;
+    private static Key keySpec;
+    private static String key = SecureConfig.get("AES");
 
+    static {
+    	try {
+            byte[] keyBytes = new byte[16];
+            byte[] b = key.getBytes("UTF-8");
+            System.arraycopy(b, 0, keyBytes, 0, keyBytes.length);
+            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
+            ips = key.substring(0, 16);
+            AES256.keySpec = keySpec;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Legacy
     public AES256(String key) {
         try {
             byte[] keyBytes = new byte[16];
@@ -35,7 +49,7 @@ public class AES256 {
         }
     }
 
-    public String encrypt(String str) {
+    public static String encrypt(String str) {
         if (str == null) return null;
         Cipher cipher;
         try {
@@ -55,7 +69,7 @@ public class AES256 {
         return null;
     }
 
-    public String decrypt(String str) {
+    public static String decrypt(String str) {
         if (str == null) return null;
         Cipher cipher;
         try {

@@ -1,13 +1,11 @@
 package org.boxfox.dms.util;
 
-import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.algorithm.AES256;
+import java.sql.SQLException;
 
 import com.dms.utilities.database.DataBase;
-import com.dms.utilities.database.QueryUtils;
 import com.dms.utilities.database.SafeResultSet;
 
-import java.sql.SQLException;
+import io.vertx.ext.web.RoutingContext;
 
 /**
  * Created by boxfox on 2017-03-04.
@@ -15,13 +13,6 @@ import java.sql.SQLException;
 public class Guardian {
     public static final int AES = 1;
     public static final int SHA = 2;
-
-    private static final AES256 aes;
-    private static final String KEY = "asfpialshvlajvhavav";
-
-    static {
-        aes = new AES256(KEY);
-    }
 
     public static String encrypt(int key, String value) {
         switch (key) {
