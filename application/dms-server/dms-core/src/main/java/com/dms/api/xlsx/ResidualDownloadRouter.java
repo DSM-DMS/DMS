@@ -1,4 +1,4 @@
-package com.dms.templates.xlsx;
+package com.dms.api.xlsx;
 
 import java.io.UnsupportedEncodingException;
 
@@ -15,10 +15,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/stay/download", method = {HttpMethod.GET})
 public class ResidualDownloadRouter implements Handler<RoutingContext> {
-    private com.dms.templates.xlsx.ResidualDownload residualDownload;
+    private com.dms.api.xlsx.ResidualDownload residualDownload;
 
     public ResidualDownloadRouter() {
-        residualDownload = new com.dms.templates.xlsx.ResidualDownload();
+        residualDownload = new com.dms.api.xlsx.ResidualDownload();
     }
 
     public void handle(RoutingContext context) {

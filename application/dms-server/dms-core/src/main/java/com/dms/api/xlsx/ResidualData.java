@@ -1,4 +1,4 @@
-package com.dms.templates.xlsx;
+package com.dms.api.xlsx;
 
 /**
  * Created by boxfox on 2017-03-04.

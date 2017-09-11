@@ -1,4 +1,4 @@
-package com.dms.templates.xlsx;
+package com.dms.api.xlsx;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -95,11 +95,11 @@ public class ResidualDownload {
     }
 
     private void initResidualMaps(String date, HashMap<String, String> map) {
-        List<com.dms.templates.xlsx.ResidualData> list = new ArrayList<com.dms.templates.xlsx.ResidualData>();
+        List<com.dms.api.xlsx.ResidualData> list = new ArrayList<com.dms.api.xlsx.ResidualData>();
         try {
             SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT student_data.uid, number, value FROM student_data right join stay_apply_default on student_data.uid = stay_apply_default.uid");
             while (rs.next()) {
-                com.dms.templates.xlsx.ResidualData data = new com.dms.templates.xlsx.ResidualData();
+                com.dms.api.xlsx.ResidualData data = new com.dms.api.xlsx.ResidualData();
                 data.setId(rs.getString("uid"));
                 String uid = UserManager.getAES().decrypt(rs.getString("number"));
                 if (uid == null || uid.length() == 0) continue;
@@ -111,7 +111,7 @@ public class ResidualDownload {
             e.printStackTrace();
         }
 
-        for (com.dms.templates.xlsx.ResidualData user : list) {
+        for (com.dms.api.xlsx.ResidualData user : list) {
             try {
                 int type;
                 String query = QueryUtils.queryBuilder("SELECT value FROM stay_apply where uid='", user.getId(), "'");
