@@ -2,9 +2,9 @@ package com.dms.parser.datamodel.meals;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataSaveable;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

@@ -2,10 +2,10 @@ package com.dms.parser.dataio.post;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.DataSaveable;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -64,12 +64,11 @@ public class PostParser<T> extends Parser {
 		Post post = null;
 		try {
 			int num = 0;
-			SafeResultSet rs = DataBase.getInstance().executeQuery(Query.POST.selectFormat,
-					" ORDER BY `no` DESC LIMIT 1");
+			SafeResultSet rs = DB.executeQuery(Query.POST.selectFormat + " ORDER BY `no` DESC LIMIT 1");
 			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
-			DataBase.getInstance().executeUpdate(
+			DB.executeUpdate(
 					QueryUtils.querySetter(Query.POST.insertFormat, num, category, postNum, "", "", "1999-01-01", ""));
 			post = PostModel.getPost(category, postNum);
 			if (post != null) {

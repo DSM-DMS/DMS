@@ -1,6 +1,6 @@
 package com.dms.parser.dataio;
 
-import org.boxfox.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.DataSaveable;
 
 public abstract class Parser {
 	public static final String URL_MEAL = "http://stu.dje.go.kr/sts_sci_md00_001.do?schulCode=G100000170&schulCrseScCode=4&schulKndScCode=04&schYm=?";
