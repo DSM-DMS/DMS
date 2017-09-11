@@ -1,5 +1,6 @@
 package org.boxfox.dms.util;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,9 @@ import java.util.UUID;
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.secure.SecureManager;
+import org.json.JSONObject;
 
+import com.dms.utilities.database.DB;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.support.ApplyDataUtil;
@@ -20,7 +23,7 @@ import io.vertx.ext.web.RoutingContext;
 /**
  * Created by boxfox on 2017-03-04.
  */
-public class UserManager implements AccountManager {
+public class UserManager {
     private static AES256 aes;
     private static DataBase database;
     private static SecureManager secureManager;
@@ -60,8 +63,39 @@ public class UserManager implements AccountManager {
         }
         return new JobResult(check, message);
     }
+    
+    public static JSONObject getUserInfo(String id) throws SQLException {
+        String uid = getUid(id);
+        
+        String room = "";
+        String seat = "";
+        ResultSet rs = DB.executeQuery("select class, seat from extension_apply where uid=?", uid);
+        if (rs.next()) {
+            room = rs.getInt(1) + "";
+            seat = rs.getInt(2) + "";
+        }
+        int value = 0;
+        rs = DB.executeQuery("SELECT value FROM stay_apply WHERE uid=?", uid);
+        if(rs.next()) {
+        	value = rs.getInt("value");
+        }
+        
+        ResultSet rsForStudentData = DB.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid=?", uid);
+        JSONObject result = new JSONObject();
+        if (rs.next()) {
+            result.put("number", aes.decrypt(rsForStudentData.getString("number") + ""));
+            result.put("name", aes.decrypt(rsForStudentData.getString("name")));
+            result.put("merit", rsForStudentData.getInt("merit"));
+            result.put("demerit", rsForStudentData.getInt("demerit"));
+            result.put("room", room);
+            result.put("seat", seat);
+            result.put("stay_value", value);
+        }
+        
+        return result;
+    }
 
-    public JobResult getUserInfo(String id) throws SQLException {
+    public JobResult getUserInfo_legacy(String id) throws SQLException {
         JobResult result = new JobResult(false);
         if(id == null) {
         	result.setSuccess(false);
@@ -131,7 +165,7 @@ public class UserManager implements AccountManager {
         return status;
     }
 
-    public String getUid(String id) throws SQLException {
+    public static String getUid(String id) throws SQLException {
         String uid = null;
         String idEncrypt = aes.encrypt(id);
         if (checkIdExists(id))
@@ -139,8 +173,7 @@ public class UserManager implements AccountManager {
         return uid;
     }
 
-    @Override
-    public boolean checkIdExists(String id) {
+    public static boolean checkIdExists(String id) {
         boolean check = false;
         id = aes.encrypt(id);
         try {
@@ -167,7 +200,6 @@ public class UserManager implements AccountManager {
         return result;
     }
     
-    @Override
     public boolean login(String id, String password) throws SQLException {
         boolean check = false;
         SafeResultSet rs = database.executeQuery("select * from account where id='", aes.encrypt(id), "' AND password='", SHA256.encrypt(password), "'");
@@ -177,7 +209,6 @@ public class UserManager implements AccountManager {
         return check;
     }
     
-    @Override
     public String createSession() {
         boolean check = true;
         String sessionKey = null;
@@ -195,13 +226,11 @@ public class UserManager implements AccountManager {
         return sessionKey;
     }
     
-    @Override
-    public boolean isLogined(RoutingContext context) {
+    public static boolean isLogined(RoutingContext context) {
         return ((getIdFromSession(context) == null) ? false : true);
     }
     
-    @Override
-    public String getIdFromSession(RoutingContext context) {
+    public static String getIdFromSession(RoutingContext context) {
         String sessionKey = SessionUtil.getRegistredSessionKey(context, "UserSession");
         String result = null;
         if (sessionKey != null) {
@@ -224,7 +253,6 @@ public class UserManager implements AccountManager {
         }
     }
     
-    @Override
     public String getSessionKey(String id) throws SQLException {
         String result = null;
         SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from account where uid = '", getUid(id), "'");
@@ -234,7 +262,6 @@ public class UserManager implements AccountManager {
         return result;
     }
 
-    @Override
     public boolean registerSession(RoutingContext context, boolean keepLogin, String id) {
         String idEncrypt = aes.encrypt(id);
         try {
