@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import com.dms.utilities.database.DB;
 import com.dms.utilities.database.DataBase;
-import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.support.ApplyDataUtil;
 import com.dms.utilities.support.JobResult;
 import com.dms.utilities.support.SecureConfig;
@@ -25,7 +24,6 @@ import io.vertx.ext.web.RoutingContext;
  */
 public class UserManager {
     private static AES256 aes;
-    private static DataBase database;
     private static SecureManager secureManager;
 
     static {
@@ -37,18 +35,14 @@ public class UserManager {
         return aes;
     }
 
-    public UserManager() {
-        database = DataBase.getInstance();
-    }
-
     public JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
         key = SHA256.encrypt(key);
-        SafeResultSet rs = database.executeQuery("select * from account where uid='", (key), "'");
+        ResultSet rs = DB.executeQuery("select * from account where uid=?", key);
         if (rs.next() && rs.getString("id") == null) {
             if (!checkIdExists(id)) {
-                int result = database.executeUpdate("update account set id='", aes.encrypt(id), "', password='", SHA256.encrypt(password), "' where uid='", (key), "'");
+                int result = DB.executeUpdate("update account set id=?, password=? WHERE uid=?", aes.encrypt(id), SHA256.encrypt(password), key);
                 if (result == 1) {
                     message = "회원가입에 성공했습니다.";
                     check = true;
@@ -61,6 +55,7 @@ public class UserManager {
         } else {
             message = "고유번호를 확인해 주세요";
         }
+        
         return new JobResult(check, message);
     }
     
@@ -105,17 +100,18 @@ public class UserManager {
         if (uid != null) {
             String room = "";
             String seat = "";
-            SafeResultSet rss = database.executeQuery("select class, seat from extension_apply where uid='", uid, "'");
+            ResultSet rss = DB.executeQuery("select class, seat from extension_apply where uid=?", uid);
             if (rss.next()) {
                 room = rss.getInt(1) + "";
                 seat = rss.getInt(2) + "";
             }
+            
             int value = 0;
-            rss = database.executeQuery("SELECT value FROM stay_apply WHERE uid='", uid, "'");
+            rss = DB.executeQuery("SELECT value FROM stay_apply WHERE uid=?", uid);
             if(rss.next()) {
             	value = rss.getInt("value");
             }
-            SafeResultSet rs = database.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid='", uid, "'");
+            ResultSet rs = DB.executeQuery("select * from student_data a join student_score b on a.uid = b.uid where a.uid=?", uid);
             if (rs.next()) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("number", aes.decrypt(rs.getString("number") + ""));
@@ -135,7 +131,7 @@ public class UserManager {
     public boolean[] getOutStatus(String id) throws SQLException {
         boolean[] list = new boolean[2];
         String uid = getUid(id);
-        SafeResultSet rs = DataBase.getInstance().executeQuery("SELECT sat,sun FROM goingout_apply WHERE uid='", uid, "'");
+        ResultSet rs = DB.executeQuery("SELECT sat,sun FROM goingout_apply WHERE uid=?", uid);
         if (rs.next()) {
             list[0] = rs.getBoolean(1);
             list[1] = rs.getBoolean(2);
@@ -148,12 +144,12 @@ public class UserManager {
         String status = "";
         try {
             String uid = getUid(id);
-            SafeResultSet rs = database.executeQuery("SELECT value FROM stay_apply WHERE uid='", uid, "' AND week='", week, "'");
+            ResultSet rs = DB.executeQuery("SELECT value FROM stay_apply WHERE uid=? AND week=?", uid, week);
             if (rs.next()) {
                 int value = rs.getInt(1);
                 status = ApplyDataUtil.stayDataToString(value);
             } else {
-                rs = database.executeQuery("SELECT value FROM stay_apply_default WHERE uid='", uid, "'");
+                rs = DB.executeQuery("SELECT value FROM stay_apply_default WHERE uid=?", uid);
                 if (rs.next()) {
                     int value = rs.getInt(1);
                     status = ApplyDataUtil.stayDataToString(value);
@@ -177,8 +173,8 @@ public class UserManager {
         boolean check = false;
         id = aes.encrypt(id);
         try {
-            int result = database.executeQuery("select count(*) from account where id='", id, "'").nextAndReturn().getInt(1);
-            if (result == 1) {
+            ResultSet rs = DB.executeQuery("select count(*) from account where id='", id, "'");
+            if (rs.getInt(1) == 1) {
                 check = true;
             }
         } catch (SQLException e) {
@@ -202,7 +198,7 @@ public class UserManager {
     
     public boolean login(String id, String password) throws SQLException {
         boolean check = false;
-        SafeResultSet rs = database.executeQuery("select * from account where id='", aes.encrypt(id), "' AND password='", SHA256.encrypt(password), "'");
+        ResultSet rs = DB.executeQuery("select * from account where id=? AND password=?", aes.encrypt(id), SHA256.encrypt(password));
         if (rs.next()) {
             check = true;
         }
@@ -215,7 +211,7 @@ public class UserManager {
         do {
             try {
                 sessionKey = UUID.randomUUID().toString();
-                SafeResultSet rs = database.executeQuery("select count(*) from account where session_key='", sessionKey, "'");
+                ResultSet rs = DB.executeQuery("select count(*) from account where session_key=?", sessionKey);
                 if (rs.next() && rs.getInt(1) == 0)
                     check = false;
             } catch (SQLException e) {
@@ -235,7 +231,7 @@ public class UserManager {
         String result = null;
         if (sessionKey != null) {
             try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select id from account where session_key='", sessionKey, "'");
+                ResultSet rs = DB.executeQuery("select id from account where session_key=?", sessionKey);
                 if (rs.next()) {
                     result = rs.getString(1);
                 }else{
@@ -255,7 +251,7 @@ public class UserManager {
     
     public String getSessionKey(String id) throws SQLException {
         String result = null;
-        SafeResultSet rs = DataBase.getInstance().executeQuery("select session_key from account where uid = '", getUid(id), "'");
+        ResultSet rs = DB.executeQuery("select session_key from account where uid=?", getUid(id));
         if (rs.next()) {
             result = rs.getString(1);
         }
@@ -275,7 +271,7 @@ public class UserManager {
                 SessionUtil.registerSession(context, "UserSession", sessionKey);
             }
             if (sessionKey != null) {
-                DataBase.getInstance().executeUpdate("update account set session_key='", sessionKey, "' where id='", idEncrypt, "'");
+                DB.executeUpdate("update account set session_key=? WHERE id=?", sessionKey, idEncrypt);
                 return true;
             }
         } catch (Exception e) {
@@ -288,10 +284,6 @@ public class UserManager {
     	String idEncrypt = aes.encrypt(getIdFromSession(context));
     	
     	SessionUtil.removeCookie(context, "UserSession");
-    	try {
-			DataBase.getInstance().executeUpdate("UPDATE account SET session_key=null WHERE id='", idEncrypt, "'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+    	DB.executeUpdate("UPDATE account SET session_key=null WHERE id=?", idEncrypt);
     }
 }
