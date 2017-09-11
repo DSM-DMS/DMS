@@ -42,7 +42,7 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         appBarText.setText("공지사항");
         appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_notice_recycler);
+        maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_regulations_recycler);
 
         back_button=(ImageButton) findViewById(R.id.ib_toolbar_back);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +54,9 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        if(maRecyclerView == null){
+            Log.e("Error", "e");
+        }
         maRecyclerView.setLayoutManager(linearLayoutManager);
 
         ArrayList<DormitoryNotice> item = new ArrayList<>();
