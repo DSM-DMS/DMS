@@ -15,12 +15,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/login/student", method = {HttpMethod.POST})
 public class LoginStudentRequest implements Handler<RoutingContext> {
-    private UserManager userManager;
     private SecureManager secureManager;
     private SecureManager loginRequestSecureManager;
 
     public LoginStudentRequest() {
-        userManager = new UserManager();
         secureManager = SecureManager.create(this.getClass());
         loginRequestSecureManager = SecureManager.create("StudentLoginRequest", 5,30);
     }
@@ -41,9 +39,9 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
         }
 
             try {
-                boolean check = userManager.login(id, password);
+                boolean check = UserManager.login(id, password);
                 if (check) {
-                    userManager.registerSession(ctx, Boolean.valueOf(remember), id);
+                    UserManager.registerSession(ctx, Boolean.valueOf(remember), id);
 
                     ctx.response().setStatusCode(201).end("<script>window.location.href=document.referrer;</script>");
                     ctx.response().close();

@@ -15,12 +15,10 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/account/login/admin", method = {HttpMethod.POST})
 public class LoginAdminRequest implements Handler<RoutingContext> {
-    private AdminManager adminManager;
     private SecureManager secureManager;
     private SecureManager loginRequestSecureManager;
 
     public LoginAdminRequest() {
-        adminManager = new AdminManager();
         secureManager = SecureManager.create(LoginAdminRequest.class);
         loginRequestSecureManager = SecureManager.create("AdminLoginRequest", 10, 15);
     }
@@ -40,9 +38,9 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
         }
         
         try {
-            boolean check = adminManager.login(id, password);
+            boolean check = AdminManager.login(id, password);
             if (check) {
-            	adminManager.registerSession(ctx, Boolean.valueOf(remember), id);
+            	AdminManager.registerSession(ctx, Boolean.valueOf(remember), id);
             	
             	ctx.response().setStatusCode(201).end();
                 ctx.response().close();
@@ -54,6 +52,7 @@ public class LoginAdminRequest implements Handler<RoutingContext> {
         } catch (SQLException e) {
             ctx.response().setStatusCode(500).end();
             ctx.response().close();
+            
             secureManager.invalidRequest(ctx);
             Log.l("SQLException");
         }
