@@ -18,7 +18,7 @@
         <View
             android:layout_width="8dp"
             android:layout_height="40dp"
-            android:background="@color/cardview_dark_background" />
+            android:background="@color/colorPrimaryDark" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,6 +26,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:text="시설 고장 신고"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="22sp" />
 
     </LinearLayout>
@@ -80,6 +81,7 @@
             android:text="신고"
             android:textSize="18sp"
             android:layout_marginLeft="16dp"
+            android:textColor="@color/colorPrimaryDark"
             />
 
         <Button
@@ -91,6 +93,7 @@
             android:textSize="18sp"
             android:text="취소"
             android:layout_marginRight="16dp"
+            android:textColor="@color/colorPrimaryDark"
             />
     </LinearLayout>
 

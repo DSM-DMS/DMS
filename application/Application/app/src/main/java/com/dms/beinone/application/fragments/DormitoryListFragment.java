@@ -1,5 +1,6 @@
 package com.dms.beinone.application.fragments;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -68,7 +69,29 @@ public class DormitoryListFragment extends Fragment {
             @Override
             public void onClick (View v) {
 
-                Toast.makeText(context, "신고되었습니다.", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("정말로 신고하시겠습니까?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface inteface, int signal){
+
+                        Toast.makeText(context,"신고가 접수 되었습니다.",Toast.LENGTH_SHORT).show();
+                        maDialog.dismiss();
+                   }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialoginterface, int signal) {
+
+                        return;
+                    }
+                });
+
+                AlertDialog maDialg = builder.create();
+                maDialg.show();
             }
         };
 
