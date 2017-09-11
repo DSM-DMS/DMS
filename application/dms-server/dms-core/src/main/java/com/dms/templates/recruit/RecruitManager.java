@@ -4,8 +4,9 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
 
 import io.vertx.ext.web.RoutingContext;
 

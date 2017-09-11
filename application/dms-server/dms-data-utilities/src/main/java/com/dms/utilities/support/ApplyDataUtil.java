@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.actions.support;
+package com.dms.utilities.support;
 
 import java.util.Calendar;
 

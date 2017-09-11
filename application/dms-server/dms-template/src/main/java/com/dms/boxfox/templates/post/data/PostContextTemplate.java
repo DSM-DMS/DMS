@@ -1,11 +1,12 @@
 package com.dms.boxfox.templates.post.data;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
+
 import freemarker.template.TemplateException;
 import org.boxfox.dms.util.AdminManager;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.io.IOException;
 import java.sql.SQLException;

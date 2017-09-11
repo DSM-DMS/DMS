@@ -1,14 +1,14 @@
-package org.boxfox.dms.utilities.database;
+package com.dms.utilities.database;
+
+import static com.dms.utilities.database.QueryUtils.queryBuilder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.boxfox.dms.utilities.config.SecureConfig;
-import org.boxfox.dms.utilities.log.Log;
-
-import static org.boxfox.dms.utilities.database.QueryUtils.queryBuilder;
+import com.dms.utilities.log.Log;
+import com.dms.utilities.support.SecureConfig;
 
 public class DataBase {
 	private static final String DB_TARGET;

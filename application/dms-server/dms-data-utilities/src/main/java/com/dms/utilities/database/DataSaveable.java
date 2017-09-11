@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.database;
+package com.dms.utilities.database;
 
 import java.sql.SQLException;
 

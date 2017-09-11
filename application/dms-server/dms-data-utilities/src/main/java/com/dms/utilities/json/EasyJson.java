@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.json;
+package com.dms.utilities.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

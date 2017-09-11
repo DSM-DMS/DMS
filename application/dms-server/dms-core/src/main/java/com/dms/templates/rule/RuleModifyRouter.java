@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.log.Log;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.log.Log;
+import com.dms.utilities.routing.RouteRegistration;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;

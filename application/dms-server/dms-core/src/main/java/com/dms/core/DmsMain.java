@@ -1,37 +1,14 @@
 package com.dms.core;
 
-/**
- * @author KimSeongrae : Boxfoxs, JoMingyu : PlanB (city7310@naver.com)
- * 
- * -- Daedeok Software Meister High School --
- * Dormitory Management System(DMS) Project
- * 
- * Android Application HTTP Server based Vert.x Framework.
- * 
- * -- Developers' Blog --
- * @see http://boxfoxs.tistory.com/
- * @see http://city7310.blog.me/
- * 
- * -- Work --
- * @since 2017.01.10
- * 
- * @see https://github.com/rlatjdfo112/DSM-Dormitory-System.git
- * @see https://app.asana.com/0/238698310665123/board
- * 
- * -- Libraries -- 
- * @see pom.xml
- */
-
-import org.boxfox.dms.utilities.config.SecureConfig;
-import org.boxfox.dms.utilities.database.DataBase;
-
 import com.dms.parser.dataio.post.PostChangeDetector;
 import com.dms.parser.dataio.post.PostUpdateListener;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.log.Log;
+import com.dms.utilities.log.LogErrorOutputStream;
+import com.dms.utilities.support.SecureConfig;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
-import org.boxfox.dms.utilities.log.Log;
-import org.boxfox.dms.utilities.log.LogErrorOutputStream;
 
 import java.sql.SQLException;
 import java.util.Calendar;

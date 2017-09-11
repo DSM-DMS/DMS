@@ -2,8 +2,8 @@ package com.dms.support;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
 
 public class Afterschool {
 	static DataBase database;

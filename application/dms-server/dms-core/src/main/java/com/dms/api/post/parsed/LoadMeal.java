@@ -1,8 +1,7 @@
 package com.dms.api.post.parsed;
 
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-
 import com.dms.parser.dataio.meal.MealModel;
+import com.dms.utilities.routing.RouteRegistration;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;

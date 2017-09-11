@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.actions;
+package com.dms.utilities.routing;
 
 public class RegisterException extends RuntimeException{
 	public RegisterException(String msg){

@@ -1,9 +1,9 @@
 package org.boxfox.dms.secure;
 
+import com.dms.utilities.log.Log;
 import com.google.common.net.HttpHeaders;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.utilities.log.Log;
 
 /**
  * Created by boxfox on 2017-05-11.

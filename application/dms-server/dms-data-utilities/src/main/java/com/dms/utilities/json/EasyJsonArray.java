@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.json;
+package com.dms.utilities.json;
 
 import java.util.HashMap;
 

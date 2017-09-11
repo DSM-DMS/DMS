@@ -6,13 +6,14 @@ import java.util.UUID;
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.secure.SecureManager;
-import org.boxfox.dms.utilities.actions.support.JobResult;
-import org.boxfox.dms.utilities.config.SecureConfig;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.utilities.log.Log;
+
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.log.Log;
+import com.dms.utilities.support.JobResult;
+import com.dms.utilities.support.SecureConfig;
 
 public class AdminManager implements AccountManager {
     private static AES256 aes;

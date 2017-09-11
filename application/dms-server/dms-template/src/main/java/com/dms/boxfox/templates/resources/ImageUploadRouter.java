@@ -1,5 +1,7 @@
 package com.dms.boxfox.templates.resources;
 
+import com.dms.utilities.log.Log;
+import com.dms.utilities.routing.RouteRegistration;
 import com.google.common.io.Files;
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
@@ -7,8 +9,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.log.Log;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.config;
+package com.dms.utilities.support;
 
 import java.io.*;
 import java.util.HashMap;

@@ -1,7 +1,8 @@
 package com.dms.api.account.login;
 
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
+
+import com.dms.utilities.routing.RouteRegistration;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;

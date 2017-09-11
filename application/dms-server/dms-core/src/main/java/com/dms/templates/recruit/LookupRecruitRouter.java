@@ -1,15 +1,16 @@
 package com.dms.templates.recruit;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.routing.RouteRegistration;
+
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 
 import java.io.IOException;
 import java.sql.SQLException;

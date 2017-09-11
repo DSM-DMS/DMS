@@ -3,9 +3,9 @@ package com.dms.templates.recruit;
 import java.io.IOException;
 
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.utilities.routing.RouteRegistration;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;

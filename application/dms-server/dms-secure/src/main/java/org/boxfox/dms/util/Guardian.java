@@ -2,9 +2,10 @@ package org.boxfox.dms.util;
 
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 
 import java.sql.SQLException;
 

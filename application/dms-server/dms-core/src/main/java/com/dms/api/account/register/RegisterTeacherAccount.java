@@ -7,8 +7,9 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.actions.support.JobResult;
+
+import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.support.JobResult;
 
 @RouteRegistration(path = "/account/register/admin", method = {HttpMethod.POST})
 public class RegisterTeacherAccount implements Handler<RoutingContext> {

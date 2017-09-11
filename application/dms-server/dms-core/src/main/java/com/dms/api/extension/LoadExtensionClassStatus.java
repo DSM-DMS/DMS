@@ -5,13 +5,6 @@ import java.util.HashMap;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.json.EasyJson;
-import org.boxfox.dms.utilities.json.EasyJsonArray;
-import org.boxfox.dms.utilities.json.EasyJsonObject;
-import org.boxfox.dms.utilities.log.Log;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -19,6 +12,14 @@ import io.vertx.ext.web.RoutingContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.json.EasyJson;
+import com.dms.utilities.json.EasyJsonArray;
+import com.dms.utilities.json.EasyJsonObject;
+import com.dms.utilities.log.Log;
+import com.dms.utilities.routing.RouteRegistration;
 
 
 @RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })

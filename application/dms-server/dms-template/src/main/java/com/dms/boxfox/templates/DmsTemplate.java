@@ -6,12 +6,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.dms.utilities.log.Log;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
-import org.boxfox.dms.utilities.log.Log;
 
 public class DmsTemplate {
     private static Configuration configuration;

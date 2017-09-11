@@ -1,8 +1,9 @@
-package org.boxfox.dms.utilities.json;
+package com.dms.utilities.json;
 
-import org.boxfox.dms.utilities.actions.support.Sender;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.dms.utilities.support.Sender;
 
 /**
  * Created by user on 2017-01-25.

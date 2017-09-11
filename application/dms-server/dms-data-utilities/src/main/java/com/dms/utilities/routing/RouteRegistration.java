@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.actions;
+package com.dms.utilities.routing;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

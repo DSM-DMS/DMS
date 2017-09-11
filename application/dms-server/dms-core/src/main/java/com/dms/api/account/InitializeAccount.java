@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import org.boxfox.dms.algorithm.SHA256;
 import org.boxfox.dms.util.AdminManager;
 import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.log.Log;
+
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.log.Log;
+import com.dms.utilities.routing.RouteRegistration;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;

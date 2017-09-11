@@ -1,12 +1,12 @@
-package org.boxfox.dms.utilities.log;
+package com.dms.utilities.log;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
 
 public class Log {
 	private static File logFile;

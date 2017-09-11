@@ -1,6 +1,6 @@
 package com.dms.boxfox.templates.resources;
 
-import org.boxfox.dms.utilities.actions.RouteRegistration;
+import com.dms.utilities.routing.RouteRegistration;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;

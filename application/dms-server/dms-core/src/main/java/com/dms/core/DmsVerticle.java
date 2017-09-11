@@ -2,7 +2,6 @@ package com.dms.core;
 
 import io.vertx.core.http.HttpServerOptions;
 import org.boxfox.dms.secure.RequestSecurePreprocessor;
-import org.boxfox.dms.utilities.actions.RouteRegister;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.web.Router;
@@ -11,7 +10,9 @@ import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
-import org.boxfox.dms.utilities.config.SecureConfig;
+
+import com.dms.utilities.routing.RouteRegister;
+import com.dms.utilities.support.SecureConfig;
 
 public class DmsVerticle extends AbstractVerticle {
     public void start() throws Exception {

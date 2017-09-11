@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.actions.support;
+package com.dms.utilities.support;
 
 /**
  * Created by boxfox on 2017-03-04.

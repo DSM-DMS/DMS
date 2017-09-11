@@ -19,7 +19,7 @@ import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 
-import org.boxfox.dms.utilities.log.Log;
+import com.dms.utilities.log.Log;
 
 
 public class RSA {

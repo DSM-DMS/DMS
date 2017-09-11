@@ -1,4 +1,4 @@
-package org.boxfox.dms.utilities.log;
+package com.dms.utilities.log;
 import java.io.OutputStream;
 import java.io.PrintStream;
  

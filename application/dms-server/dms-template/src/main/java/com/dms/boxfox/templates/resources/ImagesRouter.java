@@ -1,9 +1,10 @@
 package com.dms.boxfox.templates.resources;
 
+import com.dms.utilities.routing.RouteRegistration;
+
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 @RouteRegistration(path = "/images/:filename", method = {HttpMethod.GET})
 public class ImagesRouter implements Handler<RoutingContext> {
