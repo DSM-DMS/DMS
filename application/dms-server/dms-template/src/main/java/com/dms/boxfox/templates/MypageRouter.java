@@ -1,43 +1,36 @@
 package com.dms.boxfox.templates;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Calendar;
+
+import org.boxfox.dms.util.UserManager;
+import org.json.JSONObject;
+
+import com.dms.utilities.routing.RouteRegistration;
+
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.util.UserManager;
-
-import com.dms.utilities.routing.RouteRegistration;
-import com.dms.utilities.support.JobResult;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.HashMap;
 
 @RouteRegistration(path = "/mypage/", method = {HttpMethod.GET})
 public class MypageRouter implements Handler<RoutingContext> {
-    private UserManager userManager;
-
-    public MypageRouter() {
-        this.userManager = new UserManager();
-    }
-
     public void handle(RoutingContext context) {
-        boolean isLogin = userManager.isLogined(context);
+        boolean isLogin = UserManager.isLogined(context);
         if (isLogin) {
             try {
-                JobResult result = userManager.getUserInfo(userManager.getIdFromSession(context));
-                if (result.isSuccess()) {
-                    HashMap<String, Object> infos = (HashMap<String, Object>) result.getArgs()[0];
+                JSONObject result = UserManager.getUserInfo(UserManager.getIdFromSession(context));
+                if (result.length() != 0) {
                     DmsTemplate templates = new DmsTemplate("mypage");
-                    templates.put("name", infos.get("name"));
-                    templates.put("number", infos.get("number"));
-                    templates.put("merit", infos.get("merit"));
-                    templates.put("demerit", infos.get("demerit"));
-                    templates.put("room", infos.get("room"));
-                    templates.put("seat", infos.get("seat"));
-                    templates.put("stay_status", userManager.getStayStatus(userManager.getIdFromSession(context), currentWeek()));
-                    templates.put("profile", userManager.getIdFromSession(context));
+                    templates.put("name", result.getString("name"));
+                    templates.put("number", result.getString("number"));
+                    templates.put("merit", result.getString("merit"));
+                    templates.put("demerit", result.getString("demerit"));
+                    templates.put("room", result.getString("room"));
+                    templates.put("seat", result.getString("seat"));
+                    templates.put("stay_status", UserManager.getStayStatus(UserManager.getIdFromSession(context), currentWeek()));
+                    templates.put("profile", UserManager.getIdFromSession(context));
 
                     context.response().setStatusCode(200);
                     context.response().end(templates.process());

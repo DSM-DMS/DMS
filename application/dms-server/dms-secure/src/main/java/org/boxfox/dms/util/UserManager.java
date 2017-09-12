@@ -133,7 +133,7 @@ public class UserManager {
 
     }
 
-    public String getStayStatus(String id, String week) {
+    public static String getStayStatus(String id, String week) {
         String status = "";
         try {
             String uid = getUid(id);
