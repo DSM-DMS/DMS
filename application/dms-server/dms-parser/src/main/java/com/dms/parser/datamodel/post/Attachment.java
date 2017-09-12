@@ -2,13 +2,13 @@ package com.dms.parser.datamodel.post;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataSaveable;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONObject;
 
 import com.dms.parser.dataio.Parser;
 import com.dms.parser.dataio.Query;
+import com.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 
 public class Attachment extends DataSaveable {
 	private String name, link;

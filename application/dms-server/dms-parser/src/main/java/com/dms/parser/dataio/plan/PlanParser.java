@@ -2,8 +2,6 @@ package com.dms.parser.dataio.plan;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.DataSaveable;
 import org.json.simple.JSONArray;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -12,6 +10,8 @@ import com.dms.parser.dataio.Parser;
 import com.dms.parser.dataio.ParserUtils;
 import com.dms.parser.datamodel.plan.MonthPlan;
 import com.dms.parser.datamodel.plan.Plan;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.DataSaveable;
 
 public class PlanParser extends Parser {
 	public String lists = "";

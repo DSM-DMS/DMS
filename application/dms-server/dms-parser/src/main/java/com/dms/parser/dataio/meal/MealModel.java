@@ -2,12 +2,11 @@ package com.dms.parser.dataio.meal;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-
 import com.dms.parser.dataio.Query;
 import com.dms.parser.datamodel.meals.DayMeal;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 
 public class MealModel{
 

@@ -6,20 +6,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.dms.utilities.database.DataBase;
-import com.dms.utilities.database.QueryUtils;
 import org.json.simple.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import com.dms.parser.dataio.Parser;
 import com.dms.parser.dataio.ParserUtils;
 import com.dms.parser.datamodel.meals.DayMeal;
 import com.dms.parser.datamodel.meals.Meal;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
 
 public class MealParser extends Parser {
-	private Elements mealTables;
 	private int year, month, day;
 	private String url;
 
@@ -29,7 +27,6 @@ public class MealParser extends Parser {
 		this.day = day;
 		url = ParserUtils.getUrl(URL_MEAL, year + String.format("%02d", month));
 		Document doc = ParserUtils.getDoc(url);
-		mealTables = doc.getElementsByClass("meal_table");
 	}
 
 	public DayMeal parse() {

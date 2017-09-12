@@ -3,10 +3,11 @@ package com.dms.parser.datamodel.post;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.boxfox.dms.utilities.database.DataSaveable;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.SafeResultSet;
 
 public class AttachmentList extends DataSaveable{
 	private ArrayList<Attachment> list;

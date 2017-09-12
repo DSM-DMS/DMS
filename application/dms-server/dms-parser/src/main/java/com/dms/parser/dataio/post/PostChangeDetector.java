@@ -6,18 +6,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-import org.boxfox.dms.utilities.log.Log;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONValue;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.dms.parser.dataio.ParserUtils;
 import com.dms.parser.datamodel.post.Post;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.log.Log;
 
 public class PostChangeDetector {
 	private static final String BROAD = "Broad";

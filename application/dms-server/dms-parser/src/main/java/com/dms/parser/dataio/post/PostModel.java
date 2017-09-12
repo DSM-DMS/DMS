@@ -4,12 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
-
 import com.dms.parser.dataio.Query;
 import com.dms.parser.datamodel.post.Post;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 
 public class PostModel {
 	private static String GET_POSTS_FROM_PAGES_QUERY = "select * from app_content where category=? ORDER BY number desc limit ?, 10";

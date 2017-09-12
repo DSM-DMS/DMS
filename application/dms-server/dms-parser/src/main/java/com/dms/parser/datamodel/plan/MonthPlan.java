@@ -3,13 +3,13 @@ package com.dms.parser.datamodel.plan;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.boxfox.dms.utilities.database.DataSaveable;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.dms.parser.dataio.Query;
+import com.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
 
 public class MonthPlan extends DataSaveable {
 	private ArrayList<Plan> dayPlans;

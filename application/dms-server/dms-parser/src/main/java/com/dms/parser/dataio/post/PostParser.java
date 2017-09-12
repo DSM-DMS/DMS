@@ -1,11 +1,8 @@
 package com.dms.parser.dataio.post;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.dms.utilities.database.DataBase;
-import com.dms.utilities.database.DataSaveable;
-import com.dms.utilities.database.QueryUtils;
-import com.dms.utilities.database.SafeResultSet;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -16,6 +13,10 @@ import com.dms.parser.dataio.Query;
 import com.dms.parser.datamodel.post.Attachment;
 import com.dms.parser.datamodel.post.AttachmentList;
 import com.dms.parser.datamodel.post.Post;
+import com.dms.utilities.database.DB;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.DataSaveable;
+import com.dms.utilities.database.QueryUtils;
 
 public class PostParser<T> extends Parser {
 	public static final int CATEGORY_BROAD = 0;
@@ -64,7 +65,7 @@ public class PostParser<T> extends Parser {
 		Post post = null;
 		try {
 			int num = 0;
-			SafeResultSet rs = DB.executeQuery(Query.POST.selectFormat + " ORDER BY `no` DESC LIMIT 1");
+			ResultSet rs = DB.executeQuery(Query.POST.selectFormat + " ORDER BY `no` DESC LIMIT 1");
 			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
