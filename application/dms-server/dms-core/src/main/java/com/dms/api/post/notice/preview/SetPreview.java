@@ -2,8 +2,7 @@ package com.dms.api.post.notice.preview;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.Guardian;
-
+import com.dms.account_manager.Guardian;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.Route;
@@ -12,7 +11,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path="/post/notice/preivew", method={HttpMethod.POST})
+@Route(path="/post/notice/preview", method={HttpMethod.POST})
 public class SetPreview implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {

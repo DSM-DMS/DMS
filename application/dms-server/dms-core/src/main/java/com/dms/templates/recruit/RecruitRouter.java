@@ -2,9 +2,8 @@ package com.dms.templates.recruit;
 
 import java.io.IOException;
 
-import org.boxfox.dms.util.UserManager;
-
-import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.account_manager.UserManager;
+import com.dms.templates.DmsTemplate;
 import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;

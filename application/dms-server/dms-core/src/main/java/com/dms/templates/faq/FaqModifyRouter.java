@@ -3,11 +3,10 @@ package com.dms.templates.faq;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.AdminManager;
-import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
-
-import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.account_manager.AdminManager;
+import com.dms.account_manager.Guardian;
+import com.dms.account_manager.UserManager;
+import com.dms.templates.DmsTemplate;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.log.Log;

@@ -2,8 +2,7 @@ package com.dms.api.goingout;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.UserManager;
-
+import com.dms.account_manager.UserManager;
 import com.dms.utilities.json.EasyJsonObject;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.Route;

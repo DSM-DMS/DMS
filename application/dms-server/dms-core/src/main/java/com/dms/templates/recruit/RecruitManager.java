@@ -3,9 +3,8 @@ package com.dms.templates.recruit;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.util.UserManager;
-
+import com.dms.account_manager.UserManager;
+import com.dms.crypto.AES256;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 

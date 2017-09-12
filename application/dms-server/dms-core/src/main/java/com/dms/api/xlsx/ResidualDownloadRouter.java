@@ -2,8 +2,7 @@ package com.dms.api.xlsx;
 
 import java.io.UnsupportedEncodingException;
 
-import org.boxfox.dms.util.AdminManager;
-
+import com.dms.account_manager.AdminManager;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.Route;
 import com.google.common.net.HttpHeaders;

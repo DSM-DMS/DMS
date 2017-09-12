@@ -1,5 +1,7 @@
 package com.dsm.dms.api.process;
 
+import com.dms.account_manager.Guardian;
+import com.dms.account_manager.UserManager;
 import com.dms.utilities.routing.Route;
 import com.dsm.dms.api.secure.ApiRequestManager;
 import io.vertx.core.Handler;
@@ -7,8 +9,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
 
 import java.sql.SQLException;
 

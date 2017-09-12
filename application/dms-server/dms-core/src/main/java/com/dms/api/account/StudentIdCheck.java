@@ -1,8 +1,7 @@
 package com.dms.api.account;
 
-import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
-
+import com.dms.account_manager.Guardian;
+import com.dms.account_manager.UserManager;
 import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;

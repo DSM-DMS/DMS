@@ -5,11 +5,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.util.AdminManager;
-import org.boxfox.dms.util.UserManager;
-
-import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.account_manager.AdminManager;
+import com.dms.account_manager.UserManager;
+import com.dms.crypto.AES256;
+import com.dms.templates.DmsTemplate;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.routing.Route;

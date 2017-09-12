@@ -3,9 +3,8 @@ package com.dms.api.account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.util.AdminManager;
-
+import com.dms.account_manager.AdminManager;
+import com.dms.crypto.AES256;
 import com.dms.utilities.database.DB;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.Route;

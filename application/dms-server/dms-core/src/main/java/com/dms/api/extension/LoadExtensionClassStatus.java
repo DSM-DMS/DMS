@@ -3,12 +3,12 @@ package com.dms.api.extension;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.util.Guardian;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import com.dms.account_manager.Guardian;
+import com.dms.crypto.AES256;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.json.EasyJson;

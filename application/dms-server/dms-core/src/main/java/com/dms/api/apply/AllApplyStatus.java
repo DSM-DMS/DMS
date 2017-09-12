@@ -2,9 +2,8 @@ package com.dms.api.apply;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
-
+import com.dms.account_manager.Guardian;
+import com.dms.account_manager.UserManager;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.json.EasyJsonObject;

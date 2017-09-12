@@ -2,9 +2,8 @@ package com.dms.api.post.qna;
 
 import java.sql.SQLException;
 
-import org.boxfox.dms.algorithm.AES256;
-import org.boxfox.dms.util.Guardian;
-
+import com.dms.account_manager.Guardian;
+import com.dms.crypto.AES256;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.json.EasyJsonArray;

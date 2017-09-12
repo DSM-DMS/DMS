@@ -2,7 +2,7 @@ package com.dms.templates.template_routers;
 
 import java.io.IOException;
 
-import com.dms.boxfox.templates.DmsTemplate;
+import com.dms.templates.DmsTemplate;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.Route;
 
