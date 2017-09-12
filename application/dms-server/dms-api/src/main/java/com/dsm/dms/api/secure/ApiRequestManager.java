@@ -1,9 +1,9 @@
 package com.dsm.dms.api.secure;
 
-import org.boxfox.dms.utilities.actions.support.JobResult;
-import org.boxfox.dms.utilities.database.DataBase;
-import org.boxfox.dms.utilities.database.QueryUtils;
-import org.boxfox.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.database.DataBase;
+import com.dms.utilities.database.QueryUtils;
+import com.dms.utilities.database.SafeResultSet;
+import com.dms.utilities.support.JobResult;
 
 import java.sql.SQLException;
 import java.util.List;

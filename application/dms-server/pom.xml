@@ -18,27 +18,27 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
-		<!-- Dependency packaging -->
-      		<groupId>org.apache.maven.plugins</groupId>
-      		<artifactId>maven-dependency-plugin</artifactId>
-      		<executions>
-        		<execution>
-           			<id>copy-dependencies</id>
-           			<phase>prepare-package</phase>
-           			<goals>
-              			<goal>copy-dependencies</goal>
-            		</goals>
-            		<configuration>
-               			<outputDirectory>${project.build.directory}/lib</outputDirectory>
-               			<overWriteReleases>false</overWriteReleases>
-               			<overWriteSnapshots>false</overWriteSnapshots>
-               			<overWriteIfNewer>true</overWriteIfNewer>
-            		</configuration>
-        		</execution>
-      		</executions>
-   		</plugin>
+				<!-- Dependency packaging -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -54,10 +54,10 @@
 		<module>dms-core</module>
 		<module>dms-data-utilities</module>
 		<module>dms-secure</module>
-		<module>dms-parser</module>
 		<module>dms-template</module>
-        <module>dms-api</module>
-    </modules>
+		<module>dms-api</module>
+		<module>dms-parser-hotfix</module>
+	</modules>
 
 	<dependencies>
 		<dependency>
@@ -155,5 +155,11 @@
 			<version>${jsonsimple.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
 	</dependencies>
 </project>
