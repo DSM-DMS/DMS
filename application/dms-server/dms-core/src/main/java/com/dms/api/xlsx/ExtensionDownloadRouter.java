@@ -14,7 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.AdminManager;
-import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
@@ -31,19 +30,13 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
     private final String FILE_DIR = "files/";
     private final String[] CLASS_NAMES = {"", "가온실", "나온실", "다온실", "라온실", "3층 독서실", "4층 독서실", "5층 열린교실"};
 	private XSSFWorkbook wb;
-	private AdminManager adminManager;
-
-	public ExtensionDownloadRouter(){
-		adminManager = new AdminManager();
-	}
 
 	@Override
 	public void handle(RoutingContext context) {
-		if(adminManager.isAdmin(context)) {
+		if(AdminManager.isAdmin(context)) {
 			DataBase database = DataBase.getInstance();
 			SafeResultSet resultSet;
 			SafeResultSet extensionStateResultSet;
-			AES256 aes = UserManager.getAES();
 
 			File file = getFile();
 
@@ -58,7 +51,7 @@ public class ExtensionDownloadRouter implements Handler<RoutingContext> {
 							case Cell.CELL_TYPE_NUMERIC:
 								StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 
-								String studentNumber = aes.encrypt(sb.toString().substring(0, 4));
+								String studentNumber = AES256.encrypt(sb.toString().substring(0, 4));
 								int classId = 0;
 
 								resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");

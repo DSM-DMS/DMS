@@ -2,8 +2,8 @@ package com.dms.api.post.qna;
 
 import java.sql.SQLException;
 
+import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
@@ -43,7 +43,7 @@ public class LoadQnaComment implements Handler<RoutingContext> {
 				tempObject = new EasyJsonObject();
 				
 				tempObject.put("no", resultSet.getInt("idx"));
-				tempObject.put("id", UserManager.getAES().decrypt(resultSet.getString("id")));
+				tempObject.put("id", AES256.decrypt(resultSet.getString("id")));
 				tempObject.put("comment_date", resultSet.getString("comment_date"));
 				tempObject.put("content", resultSet.getString("content"));
 				

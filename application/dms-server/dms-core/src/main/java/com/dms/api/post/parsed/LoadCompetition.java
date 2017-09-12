@@ -15,7 +15,7 @@ public class LoadCompetition implements Handler<RoutingContext> {
 		int no = Integer.parseInt(ctx.request().getParam("no"));
 		
 		ctx.response().setStatusCode(200);
-		ctx.response().end(PostModel.getPost(2, no).toString());
+		ctx.response().end(PostModel.getPostsAtPage(2, no).toString());
 		ctx.response().close();
 	}
 }

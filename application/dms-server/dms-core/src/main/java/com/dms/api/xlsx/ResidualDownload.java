@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.boxfox.dms.util.UserManager;
+import org.boxfox.dms.algorithm.AES256;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.QueryUtils;
@@ -102,7 +102,7 @@ public class ResidualDownload {
             while (rs.next()) {
                 com.dms.api.xlsx.ResidualData data = new com.dms.api.xlsx.ResidualData();
                 data.setId(rs.getString("uid"));
-                String uid = UserManager.getAES().decrypt(rs.getString("number"));
+                String uid = AES256.decrypt(rs.getString("number"));
                 if (uid == null || uid.length() == 0) continue;
                 data.setNumber(Integer.valueOf(uid));
                 data.setResidualDefault(rs.getInt("value"));

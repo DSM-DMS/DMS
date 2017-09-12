@@ -3,8 +3,8 @@ package com.dms.api.account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.AdminManager;
-import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DB;
 import com.dms.utilities.log.Log;
@@ -25,7 +25,7 @@ public class InitializeAccount implements Handler<RoutingContext> {
 		}
 
 		String number = ctx.request().getParam("number");
-		String encryptedNumber = UserManager.getAES().encrypt(number);
+		String encryptedNumber = AES256.encrypt(number);
 
 		try {
 			ResultSet rs = DB.executeQuery("SELECT uid FROM student_data WHERE number=?", encryptedNumber);

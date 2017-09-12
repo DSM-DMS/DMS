@@ -3,12 +3,8 @@ package com.dms.api.extension;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
-
-import io.vertx.core.Handler;
-import io.vertx.core.http.HttpMethod;
-import io.vertx.ext.web.RoutingContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -20,6 +16,10 @@ import com.dms.utilities.json.EasyJsonArray;
 import com.dms.utilities.json.EasyJsonObject;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.RouteRegistration;
+
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
 
 
 @RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
@@ -75,7 +75,7 @@ public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 		SafeResultSet resultSet = DataBase.getInstance().executeQuery("SELECT * FROM extension_apply WHERE class=", classId);
 
 		while (resultSet.next()) {
-			map.put(resultSet.getInt("seat"), UserManager.getAES().decrypt(resultSet.getString("name")));
+			map.put(resultSet.getInt("seat"), AES256.decrypt(resultSet.getString("name")));
 		}
 		
 		return map;

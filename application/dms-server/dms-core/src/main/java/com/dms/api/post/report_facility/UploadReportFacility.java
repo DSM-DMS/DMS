@@ -1,15 +1,14 @@
 package com.dms.api.post.report_facility;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
+import org.json.JSONObject;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.RouteRegistration;
-import com.dms.utilities.support.JobResult;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -17,12 +16,6 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path="/post/report", method={HttpMethod.POST})
 public class UploadReportFacility implements Handler<RoutingContext> {
-	private UserManager userManager;
-
-	public UploadReportFacility(){
-		userManager = new UserManager();
-	}
-
 	@Override
 	public void handle(RoutingContext context) {
 
@@ -32,11 +25,11 @@ public class UploadReportFacility implements Handler<RoutingContext> {
 		String content = context.request().getParam("content");
 		int room = Integer.parseInt(context.request().getParam("room"));
         String writer = null;
-		if(userManager.isLogined(context)) {
+		if(UserManager.isLogined(context)) {
 			try {
-                JobResult result = userManager.getUserInfo(userManager.getIdFromSession(context));
-                if (result != null && result.isSuccess()) {
-                    writer = ((Map<String, Object>)result.getArgs()[0]).get("name").toString();
+                JSONObject result = UserManager.getUserInfo(UserManager.getIdFromSession(context));
+                if (result.length() != 0) {
+                    writer = result.getString("name");
                 }
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -16,24 +16,16 @@ import io.vertx.ext.web.RoutingContext;
 
 @RouteRegistration(path = "/post/qna/question", method = {HttpMethod.POST})
 public class UploadQnaQuestion implements Handler<RoutingContext> {
-    private UserManager userManager;
-
-    public UploadQnaQuestion() {
-        userManager = new UserManager();
-    }
-
     @Override
     public void handle(RoutingContext ctx) {
-
         DataBase database = DataBase.getInstance();
-        AES256 aes = UserManager.getAES();
 
         String title = ctx.request().getParam("title");
         String content = ctx.request().getParam("content");
         boolean privacy = Boolean.parseBoolean(ctx.request().getParam("privacy"));
         String uid = null;
         try {
-            uid = userManager.getUid(userManager.getIdFromSession(ctx));
+            uid = UserManager.getUid(UserManager.getIdFromSession(ctx));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -41,7 +33,7 @@ public class UploadQnaQuestion implements Handler<RoutingContext> {
             try {
             	SafeResultSet rs = database.executeQuery("SELECT name FROM student_data WHERE uid='", uid, "'");
             	rs.next();
-            	String name = aes.decrypt(rs.getString("name"));
+            	String name = AES256.decrypt(rs.getString("name"));
                 database.executeUpdate("INSERT INTO qna(title, question_content, question_date, privacy, owner, writer) VALUES('", title, "', '", content, "', now(), ", privacy, ", '", uid, "', '", name, "')");
 
                 ctx.response().setStatusCode(201).end();

@@ -1,16 +1,20 @@
 package com.dms.boxfox.templates.resources;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.boxfox.dms.util.UserManager;
+
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.RouteRegistration;
 import com.google.common.io.Files;
+
 import io.vertx.core.Handler;
-import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.util.UserManager;
-
-import java.io.*;
 
 /**
  * Created by boxfox on 2017-03-15.
@@ -19,16 +23,10 @@ import java.io.*;
 @RouteRegistration(path = "/upload/image/", method = {HttpMethod.POST})
 public class ImageUploadRouter implements Handler<RoutingContext> {
     private static final String[] extensions = {"jpg", "png", "gif"};
-    private UserManager userManager;
 
-    public ImageUploadRouter() {
-        userManager = new UserManager();
-    }
-
-    @Override
     public void handle(RoutingContext context) {
-        if (userManager.isLogined(context)) {
-            String id = userManager.getIdFromSession(context);
+        if (UserManager.isLogined(context)) {
+            String id = UserManager.getIdFromSession(context);
             for (FileUpload upload : context.fileUploads()) {
                 String extension = Files.getFileExtension(upload.fileName());
                 File file = new File(upload.uploadedFileName());

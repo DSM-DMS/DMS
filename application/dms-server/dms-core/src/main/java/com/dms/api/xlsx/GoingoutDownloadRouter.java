@@ -14,7 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.AdminManager;
-import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
@@ -31,28 +30,15 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
 	private final String FILE_DIR = "files/";
 	private XSSFWorkbook wb;
-	private AdminManager adminManager;
-
-	public GoingoutDownloadRouter(){
-		adminManager = new AdminManager();
-	}
 
 	@Override
 	public void handle(RoutingContext context) {
-
-		if(adminManager.isAdmin(context)) {
+		if(AdminManager.isAdmin(context)) {
 
 			DataBase database = DataBase.getInstance();
 			SafeResultSet resultSet;
 			SafeResultSet stayStateResultSet;
 			SafeResultSet stayDefaultResultSet;
-			AES256 aes = UserManager.getAES();
-
-			int year = Integer.parseInt(context.request().getParam("year"));
-			int month = Integer.parseInt(context.request().getParam("month"));
-			int week = Integer.parseInt(context.request().getParam("week"));
-
-			String targetWeek = StringFormatter.format("%4d-%02d-%02d", year, month, week).getValue();
 
 			File file = getFile();
 
@@ -67,7 +53,7 @@ public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 							case Cell.CELL_TYPE_NUMERIC:
 								StringBuilder sb = new StringBuilder(Double.toString(cell.getNumericCellValue()));
 
-								String studentNumber = aes.encrypt(sb.toString().substring(0, 4));
+								String studentNumber = AES256.encrypt(sb.toString().substring(0, 4));
 
 								resultSet = database.executeQuery("SELECT * FROM student_data WHERE number='", studentNumber, "'");
 

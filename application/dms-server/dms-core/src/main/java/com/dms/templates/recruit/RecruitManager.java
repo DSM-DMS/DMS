@@ -3,6 +3,7 @@ package com.dms.templates.recruit;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import org.boxfox.dms.algorithm.AES256;
 import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DataBase;
@@ -27,7 +28,7 @@ public class RecruitManager {
     public boolean isApply(RoutingContext ctx) {
         boolean result = false;
         try {
-            if (DataBase.getInstance().executeQuery("select count(*) from recruit where uid='", userManager.getUid(userManager.getIdFromSession(ctx)), "'").nextAndReturn().getInt(1) > 0) {
+            if (DataBase.getInstance().executeQuery("select count(*) from recruit where uid='", UserManager.getUid(UserManager.getIdFromSession(ctx)), "'").nextAndReturn().getInt(1) > 0) {
                 result = true;
             }
         } catch (SQLException e) {
@@ -43,8 +44,8 @@ public class RecruitManager {
         int day = c.get(Calendar.DAY_OF_MONTH);
         if ((month == 5 && day > 29) || (month == 6 && day <= 2)) {
             try {
-                SafeResultSet rs = DataBase.getInstance().executeQuery("select number from student_data where uid='", userManager.getUid(userManager.getIdFromSession(ctx)), "'");
-                if (rs.next() && !UserManager.getAES().decrypt(rs.getString(1)).startsWith("3")) {
+                SafeResultSet rs = DataBase.getInstance().executeQuery("select number from student_data where uid='", UserManager.getUid(UserManager.getIdFromSession(ctx)), "'");
+                if (rs.next() && !AES256.decrypt(rs.getString(1)).startsWith("3")) {
                     result = true;
                 }
             } catch (SQLException e) {
