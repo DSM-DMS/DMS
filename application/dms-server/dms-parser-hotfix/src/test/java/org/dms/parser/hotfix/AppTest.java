@@ -1,4 +1,4 @@
-package org.dms.parser;
+package org.dms.parser.hotfix;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
