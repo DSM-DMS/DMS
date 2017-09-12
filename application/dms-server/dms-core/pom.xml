@@ -3,6 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>3.8.1</junit.version>
+		<netty.version>4.1.5.Final</netty.version>
+		<mysql.version>6.0.5</mysql.version>
+		<jsonsimple.version>1.1.1</jsonsimple.version>
+		<main.class>com.dms.core.DmsMain</main.class>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -28,37 +37,28 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.dms.planb.core.DmsMain</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
 				<executions>
 					<execution>
-						<id>copy</id>
-						<phase>install</phase>
+						<id>make-assembly</id>
+						<phase>package</phase>
 						<goals>
-							<goal>copy-dependencies</goal>
+							<goal>single</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>
-								${project.build.directory}/lib
-							</outputDirectory>
+							<archive>
+								<manifest>
+									<mainClass>${main.class}</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 
@@ -71,38 +71,29 @@
 	<artifactId>dms-core</artifactId>
 	<name>dms-core</name>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<junit.version>3.8.1</junit.version>
-		<netty.version>4.1.5.Final</netty.version>
-		<mysql.version>6.0.5</mysql.version>
-		<jsonsimple.version>1.1.1</jsonsimple.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.apache.poi</groupId>
-    		<artifactId>poi</artifactId>
-    		<version>3.11</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.11</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.apache.xmlbeans</groupId>
-    		<artifactId>xmlbeans</artifactId>
-    		<version>2.6.0</version>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>2.6.0</version>
 		</dependency>
 
 		<!-- dms dependency -->
@@ -111,6 +102,19 @@
 			<artifactId>dms-template</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
+		<!-- dms dependency -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>dms-parser</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
 	</dependencies>
 </project>

@@ -1,21 +1,21 @@
 package com.dsm.dms.api.process;
 
+import com.dms.account_manager.Guardian;
+import com.dms.account_manager.UserManager;
+import com.dms.utilities.routing.Route;
 import com.dsm.dms.api.secure.ApiRequestManager;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
-import org.boxfox.dms.util.Guardian;
-import org.boxfox.dms.util.UserManager;
-import org.boxfox.dms.utilities.actions.RouteRegistration;
 
 import java.sql.SQLException;
 
 /**
  * Created by boxfox on 2017-04-05.
  */
-@RouteRegistration(path = "/api/host/", method = {HttpMethod.PUT})
+@Route(path = "/api/host/", method = {HttpMethod.PUT})
 public class APIHostAddRouter implements Handler<RoutingContext> {
     private ApiRequestManager requestManager;
     private UserManager userManager;
