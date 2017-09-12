@@ -166,7 +166,8 @@ public class UserManager {
         boolean check = false;
         id = AES256.encrypt(id);
         try {
-            ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM account WHERE id='", id, "'");
+            ResultSet rs = DB.executeQuery("SELECT COUNT(*) FROM account WHERE id=?", id);
+            rs.next();
             if (rs.getInt(1) == 1) {
                 check = true;
             }

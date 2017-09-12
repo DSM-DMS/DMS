@@ -11,28 +11,22 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path = "/", method = {HttpMethod.GET})
+@Route(path = "/", method = { HttpMethod.GET })
 public class IndexRouter implements Handler<RoutingContext> {
-	private UserManager userManager;
-
-    public IndexRouter() {
-        userManager = new UserManager();
-    }
-
-    public void handle(RoutingContext context) {
-        String htmlName = "nonLogin_new_index";
-        if (userManager.isLogined(context)) {
-            htmlName = "new_index";
-        }
-        DmsTemplate templates = new DmsTemplate(htmlName);
-        try {
-            context.response().setStatusCode(200);
-            context.response().end(templates.process());
-            context.response().close();
-        } catch (TemplateException e) {
-            Log.l("TemplateException");
-        } catch (IOException e) {
-            Log.l("IOException");
-        }
-    }
+	public void handle(RoutingContext context) {
+		String htmlName = "nonLogin_new_index";
+		if (UserManager.isLogined(context)) {
+			htmlName = "new_index";
+		}
+		DmsTemplate templates = new DmsTemplate(htmlName);
+		try {
+			context.response().setStatusCode(200);
+			context.response().end(templates.process());
+			context.response().close();
+		} catch (TemplateException e) {
+			Log.l("TemplateException");
+		} catch (IOException e) {
+			Log.l("IOException");
+		}
+	}
 }

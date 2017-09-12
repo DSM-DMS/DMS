@@ -15,7 +15,7 @@ public class CssRouter implements Handler<RoutingContext> {
         } else {
             context.response().sendFile("./WEB-INF/css/" + context.request().getParam("filename"));
             if (!context.response().ended())
-                context.response().end("Resource Not Found");
+                context.response().end("CSS Not Found");
         }
     }
 }

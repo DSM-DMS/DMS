@@ -1,26 +1,15 @@
 package com.dms.templates.apply;
 
+import java.io.IOException;
+
 import com.dms.account_manager.UserManager;
-import com.dms.parser.dataio.meal.MealModel;
 import com.dms.templates.DmsTemplate;
-import com.dms.utilities.database.DataBase;
-import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
 
 @Route(path = "/extensionapply/", method = {HttpMethod.GET})
 public class ExtensionRouter implements Handler<RoutingContext> {

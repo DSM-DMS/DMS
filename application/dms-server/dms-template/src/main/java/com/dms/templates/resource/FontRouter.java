@@ -15,7 +15,7 @@ public class FontRouter implements Handler<RoutingContext> {
         } else {
             context.response().sendFile("./WEB-INF/fonts/" + context.request().getParam("filename"));
             if (!context.response().ended())
-                context.response().end("Resource Not Found");
+                context.response().end("Font Not Found");
         }
     }
 }

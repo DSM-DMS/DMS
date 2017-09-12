@@ -15,7 +15,7 @@ public class ImagesRouter implements Handler<RoutingContext> {
         } else {
             context.response().sendFile("./WEB-INF/images/"  + context.request().getParam("filename"));
             if (!context.response().ended())
-                context.response().end("Resource Not Found");
+                context.response().end("Images Not Found");
         }
     }
 }
