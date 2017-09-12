@@ -31,7 +31,7 @@ public class DormitoryRegulationsActivity extends AppCompatActivity {
         appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
 
-        maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_notice_recycler);
+        maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_regulations_recycler);
 
         back_button=(ImageButton) findViewById(R.id.ib_toolbar_back);
         back_button.setOnClickListener(new View.OnClickListener() {
