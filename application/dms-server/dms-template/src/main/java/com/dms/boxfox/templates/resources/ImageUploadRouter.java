@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.google.common.io.Files;
 
 import io.vertx.core.Handler;
@@ -20,7 +20,7 @@ import io.vertx.ext.web.RoutingContext;
  * Created by boxfox on 2017-03-15.
  */
 
-@RouteRegistration(path = "/upload/image/", method = {HttpMethod.POST})
+@Route(path = "/upload/image/", method = {HttpMethod.POST})
 public class ImageUploadRouter implements Handler<RoutingContext> {
     private static final String[] extensions = {"jpg", "png", "gif"};
 

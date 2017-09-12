@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DataBase;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -14,7 +14,7 @@ import io.vertx.ext.web.RoutingContext;
 /**
  * Created by boxfox on 2017-05-29.
  */
-@RouteRegistration(path = "/recruit/apply", method = {HttpMethod.POST})
+@Route(path = "/recruit/apply", method = {HttpMethod.POST})
 public class ApplyRecruit implements Handler<RoutingContext> {
     private UserManager userManager;
     private RecruitManager recruitManager;

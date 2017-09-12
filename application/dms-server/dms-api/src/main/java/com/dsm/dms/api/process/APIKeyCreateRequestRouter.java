@@ -1,6 +1,6 @@
 package com.dsm.dms.api.process;
 
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.dsm.dms.api.secure.ApiRequestManager;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * Created by boxfox on 2017-04-05.
  */
-@RouteRegistration(path = "/api/create/", method = {HttpMethod.POST})
+@Route(path = "/api/create/", method = {HttpMethod.POST})
 public class APIKeyCreateRequestRouter implements Handler<RoutingContext> {
     private ApiRequestManager requestManager;
     private UserManager userManager;

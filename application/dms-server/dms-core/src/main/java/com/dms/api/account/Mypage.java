@@ -7,13 +7,13 @@ import org.boxfox.dms.util.UserManager;
 import org.json.JSONObject;
 
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/account/student", method = { HttpMethod.GET })
+@Route(path = "/account/student", method = { HttpMethod.GET })
 public class Mypage implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {

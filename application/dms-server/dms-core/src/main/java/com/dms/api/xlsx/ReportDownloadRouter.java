@@ -13,14 +13,14 @@ import org.boxfox.dms.util.AdminManager;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.google.common.net.HttpHeaders;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/report/download", method={HttpMethod.GET})
+@Route(path = "/report/download", method={HttpMethod.GET})
 public class ReportDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "시설고장신고포맷.xlsx";
     private final String FILE_DIR = "files/";

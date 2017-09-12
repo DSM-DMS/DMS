@@ -1,13 +1,13 @@
 package com.dms.api.post.parsed;
 
 import com.dms.parser.dataio.meal.MealModel;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/school/meal", method={HttpMethod.GET})
+@Route(path="/school/meal", method={HttpMethod.GET})
 public class LoadMeal implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {

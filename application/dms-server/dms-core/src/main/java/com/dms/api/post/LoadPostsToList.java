@@ -12,9 +12,9 @@ import org.json.simple.JSONArray;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.json.EasyJsonObject;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
-@RouteRegistration(path="/post/list/:category", method={HttpMethod.GET})
+@Route(path="/post/list/:category", method={HttpMethod.GET})
 public class LoadPostsToList implements Handler<RoutingContext> {
 	private static final String [] CATEGORY_LIST = {"faq", "rule", "notice"};
 	//faq, facility report는 보안고려

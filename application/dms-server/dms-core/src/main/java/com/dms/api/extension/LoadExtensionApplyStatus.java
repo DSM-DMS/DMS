@@ -9,13 +9,13 @@ import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.json.EasyJsonObject;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/apply/extension", method={HttpMethod.GET})
+@Route(path="/apply/extension", method={HttpMethod.GET})
 public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
 	UserManager userManager;
 	

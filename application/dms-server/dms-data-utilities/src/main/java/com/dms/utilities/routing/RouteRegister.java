@@ -58,9 +58,9 @@ public class RouteRegister {
 
     private void searchRouters(RouteRegister register, String pacakge) {
         Reflections reflections = new Reflections(pacakge);
-        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(RouteRegistration.class);
+        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Route.class);
         for (Class<?> c : annotated) {
-            RouteRegistration annotation = c.getAnnotation(RouteRegistration.class);
+            Route annotation = c.getAnnotation(Route.class);
             try {
                 if (annotation.method().length > 0)
                     register.registerRouter(annotation.method()[0], annotation.path(),

@@ -6,14 +6,14 @@ import org.boxfox.dms.util.Guardian;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @Deprecated
-@RouteRegistration(path="/post/report", method={HttpMethod.PUT})
+@Route(path="/post/report", method={HttpMethod.PUT})
 public class UploadReportResult implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext context) {

@@ -8,14 +8,14 @@ import org.boxfox.dms.util.UserManager;
 
 import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/notice/write", method={HttpMethod.GET})
+@Route(path="/post/notice/write", method={HttpMethod.GET})
 public class NoticeWriteRouter implements Handler<RoutingContext> {
 	private AdminManager adminManager;
 	

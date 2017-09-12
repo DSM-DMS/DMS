@@ -6,13 +6,13 @@ import org.boxfox.dms.util.Guardian;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/qna/answer", method = {HttpMethod.PUT})
+@Route(path = "/post/qna/answer", method = {HttpMethod.PUT})
 public class UploadQnaAnswer implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext ctx) {

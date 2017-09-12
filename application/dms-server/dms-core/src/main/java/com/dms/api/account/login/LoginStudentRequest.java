@@ -7,13 +7,13 @@ import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/account/login/student", method = {HttpMethod.POST})
+@Route(path = "/account/login/student", method = {HttpMethod.POST})
 public class LoginStudentRequest implements Handler<RoutingContext> {
     private SecureManager secureManager;
     private SecureManager loginRequestSecureManager;

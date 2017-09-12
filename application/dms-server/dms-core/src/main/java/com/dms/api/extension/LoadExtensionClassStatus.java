@@ -15,14 +15,14 @@ import com.dms.utilities.json.EasyJson;
 import com.dms.utilities.json.EasyJsonArray;
 import com.dms.utilities.json.EasyJsonObject;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 
-@RouteRegistration(path = "/apply/extension/class", method = { HttpMethod.GET })
+@Route(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
 	public LoadExtensionClassStatus() {
 		

@@ -4,14 +4,14 @@ import java.io.IOException;
 
 import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/admin/login", method = { HttpMethod.GET })
+@Route(path = "/admin/login", method = { HttpMethod.GET })
 public class AdminLoginPageRouter implements Handler<RoutingContext> {
 	public void handle(RoutingContext context) {
 		DmsTemplate templates = new DmsTemplate("admin_login");

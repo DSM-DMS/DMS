@@ -12,7 +12,7 @@ import org.boxfox.dms.util.UserManager;
 import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -21,7 +21,7 @@ import io.vertx.ext.web.RoutingContext;
 
 /**
  * Created by boxfox on 2017-05-31.
- */@RouteRegistration(path = "/recruit/lookup", method = {HttpMethod.GET})
+ */@Route(path = "/recruit/lookup", method = {HttpMethod.GET})
 public class LookupRecruitRouter implements Handler<RoutingContext> {
     public void handle(RoutingContext context) {
         int code = 400;

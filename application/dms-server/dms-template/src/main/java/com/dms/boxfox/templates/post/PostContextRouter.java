@@ -5,7 +5,7 @@ import com.dms.boxfox.templates.post.data.PostContextTemplate;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.QueryUtils;
 import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by boxfox on 2017-03-12.
  */
-@RouteRegistration(path = "/post/content", method = {HttpMethod.GET})
+@Route(path = "/post/content", method = {HttpMethod.GET})
 public class PostContextRouter implements Handler<RoutingContext> {
     private UserManager userManager;
     private List<PostContextTemplate> categories;

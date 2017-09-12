@@ -5,7 +5,7 @@ import com.dms.boxfox.templates.post.data.PostTemplate;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.QueryUtils;
 import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 
-@RouteRegistration(path = "/post", method = {HttpMethod.GET})
+@Route(path = "/post", method = {HttpMethod.GET})
 public class PostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
     private DataBase db;

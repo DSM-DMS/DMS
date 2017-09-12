@@ -3,13 +3,13 @@ package com.dms.api.account;
 import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/account/idcheck/student", method={ HttpMethod.POST })
+@Route(path="/account/idcheck/student", method={ HttpMethod.POST })
 public class StudentIdCheck implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {

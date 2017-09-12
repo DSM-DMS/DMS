@@ -6,13 +6,13 @@ import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.json.EasyJsonObject;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/apply/goingout", method={HttpMethod.GET})
+@Route(path="/apply/goingout", method={HttpMethod.GET})
 public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
 	UserManager userManager;
 	

@@ -1,7 +1,7 @@
 package com.dms.boxfox.templates.apply;
 
 import com.dms.boxfox.templates.DmsTemplate;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.dms.utilities.support.JobResult;
 
 import freemarker.template.TemplateException;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
 
-@RouteRegistration(path = "/out/", method = {HttpMethod.GET})
+@Route(path = "/out/", method = {HttpMethod.GET})
 public class OutpageRouter implements Handler<RoutingContext> {
     private UserManager userManager;
 

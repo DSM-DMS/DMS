@@ -8,13 +8,13 @@ import org.boxfox.dms.util.AdminManager;
 
 import com.dms.utilities.database.DB;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/account/initialize", method = { HttpMethod.POST })
+@Route(path = "/account/initialize", method = { HttpMethod.POST })
 public class InitializeAccount implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {

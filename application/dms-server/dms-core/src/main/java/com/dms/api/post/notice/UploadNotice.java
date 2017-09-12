@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import org.boxfox.dms.util.Guardian;
 
 import com.dms.utilities.database.DataBase;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/post/notice", method={HttpMethod.POST})
+@Route(path="/post/notice", method={HttpMethod.POST})
 public class UploadNotice implements Handler<RoutingContext> {
 	public UploadNotice() {
 		

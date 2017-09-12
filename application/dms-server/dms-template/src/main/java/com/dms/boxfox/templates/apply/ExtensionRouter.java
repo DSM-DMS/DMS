@@ -4,7 +4,7 @@ import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.parser.dataio.meal.MealModel;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-@RouteRegistration(path = "/extensionapply/", method = {HttpMethod.GET})
+@Route(path = "/extensionapply/", method = {HttpMethod.GET})
 public class ExtensionRouter implements Handler<RoutingContext> {
     private UserManager userManager;
 

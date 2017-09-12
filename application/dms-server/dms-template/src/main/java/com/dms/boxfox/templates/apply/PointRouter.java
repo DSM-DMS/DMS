@@ -2,7 +2,7 @@ package com.dms.boxfox.templates.apply;
 
 import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
@@ -12,7 +12,7 @@ import org.boxfox.dms.util.UserManager;
 
 import java.io.IOException;
 
-@RouteRegistration(path="/point", method={HttpMethod.GET})
+@Route(path="/point", method={HttpMethod.GET})
 public class PointRouter implements Handler<RoutingContext> {
 private UserManager userManager;
 

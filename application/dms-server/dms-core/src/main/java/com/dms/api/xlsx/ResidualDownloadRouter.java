@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 import org.boxfox.dms.util.AdminManager;
 
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.google.common.net.HttpHeaders;
 import com.sun.javafx.binding.StringFormatter;
 
@@ -13,7 +13,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/stay/download", method = {HttpMethod.GET})
+@Route(path = "/stay/download", method = {HttpMethod.GET})
 public class ResidualDownloadRouter implements Handler<RoutingContext> {
     private com.dms.api.xlsx.ResidualDownload residualDownload;
 

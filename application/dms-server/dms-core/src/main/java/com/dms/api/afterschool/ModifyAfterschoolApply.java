@@ -7,13 +7,13 @@ import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/apply/afterschool", method={HttpMethod.PATCH})
+@Route(path="/apply/afterschool", method={HttpMethod.PATCH})
 public class ModifyAfterschoolApply implements Handler<RoutingContext> {
 	private UserManager userManager;
 	

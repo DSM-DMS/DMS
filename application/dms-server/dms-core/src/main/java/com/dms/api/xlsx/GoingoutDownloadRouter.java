@@ -17,7 +17,7 @@ import org.boxfox.dms.util.AdminManager;
 
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.google.common.net.HttpHeaders;
 import com.sun.javafx.binding.StringFormatter;
 
@@ -25,7 +25,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/goingout/download", method = { HttpMethod.GET })
+@Route(path = "/goingout/download", method = { HttpMethod.GET })
 public class GoingoutDownloadRouter implements Handler<RoutingContext> {
 	private final String FORMAT_XLSX_FILE = "잔류조사포맷.xlsx";
 	private final String FILE_DIR = "files/";

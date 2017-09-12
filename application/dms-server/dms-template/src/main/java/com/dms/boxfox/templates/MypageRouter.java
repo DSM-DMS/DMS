@@ -7,14 +7,14 @@ import java.util.Calendar;
 import org.boxfox.dms.util.UserManager;
 import org.json.JSONObject;
 
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/mypage/", method = {HttpMethod.GET})
+@Route(path = "/mypage/", method = {HttpMethod.GET})
 public class MypageRouter implements Handler<RoutingContext> {
     public void handle(RoutingContext context) {
         boolean isLogin = UserManager.isLogined(context);

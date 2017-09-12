@@ -5,14 +5,14 @@ import java.io.IOException;
 import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/", method = {HttpMethod.GET})
+@Route(path = "/", method = {HttpMethod.GET})
 public class IndexRouter implements Handler<RoutingContext> {
 	private UserManager userManager;
 

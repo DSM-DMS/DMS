@@ -7,14 +7,14 @@ import org.boxfox.dms.util.Guardian;
 import org.boxfox.dms.util.UserManager;
 
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 import com.dms.utilities.support.JobResult;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/account/register/student", method = {HttpMethod.POST})
+@Route(path = "/account/register/student", method = {HttpMethod.POST})
 public class RegisterStudentAccount implements Handler<RoutingContext> {
     private UserManager userManager;
     private SecureManager secureManager;

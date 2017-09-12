@@ -10,14 +10,14 @@ import com.dms.boxfox.templates.DmsTemplate;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import freemarker.template.TemplateException;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path = "/post/rule/modify", method = {HttpMethod.GET})
+@Route(path = "/post/rule/modify", method = {HttpMethod.GET})
 public class RuleModifyRouter implements Handler<RoutingContext> {
 	private AdminManager adminManager;
 	

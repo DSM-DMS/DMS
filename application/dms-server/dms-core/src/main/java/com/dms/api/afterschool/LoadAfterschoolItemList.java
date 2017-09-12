@@ -9,13 +9,13 @@ import com.dms.utilities.database.SafeResultSet;
 import com.dms.utilities.json.EasyJsonArray;
 import com.dms.utilities.json.EasyJsonObject;
 import com.dms.utilities.log.Log;
-import com.dms.utilities.routing.RouteRegistration;
+import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@RouteRegistration(path="/apply/afterschool/item", method={HttpMethod.GET})
+@Route(path="/apply/afterschool/item", method={HttpMethod.GET})
 public class LoadAfterschoolItemList implements Handler<RoutingContext> {
 	public LoadAfterschoolItemList() {
 		
