@@ -56,7 +56,6 @@
 		<module>dms-parser</module>
 		<module>dms-template</module>
 		<module>dms-api</module>
-    <module>dms-parser2</module>
   </modules>
 
 	<dependencies>
