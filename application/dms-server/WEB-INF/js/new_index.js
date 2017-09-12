@@ -432,23 +432,60 @@ function fillListCard(data, target) {
     target.append(newCard);
 }
 
+// function setNoticePreview() {
+//     $.ajax({
+//         url: "http://dsm2015.cafe24.com/post/notice/preview",
+//         type: "GET",
+//         statusCode: {
+//             200: function(data) {
+//                 var parsedData = JSON.parse(data);
+//                 $("#notice-title").html(parsedData.title);
+//                 $(".notice-content-container p").html((parsedData.content));
+//             },
+//             204: function(data) {
+//                 $("#notice-title").text("");
+//                 $(".notice-content-container p").text("글이 없습니다.");
+//             }
+//         },
+//         error: function() {
+//             console.log("error");
+//         }
+//     });
+// }
+
 function setNoticePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/notice",
+        url: "http://dsm2015.cafe24.com/post/notice/preview",
         type: "GET",
-        data: {
-            page: 1,
-            limit: 1
-        },
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").html(parsedData[0].title);
-                $(".notice-content-container p").html((parsedData[0].content));
+                var parsedData = JSON.parse(data);
+                $("#notice-title").html(parsedData.title);
+                $(".notice-content-container p").html((parsedData.content));
             },
-            204: function(data) {
-                $("#notice-title").text("");
-                $(".notice-content-container p").text("글이 없습니다.");
+            204: function() {
+                $.ajax({
+                    url: "http://dsm2015.cafe24.com/post/list/notice",
+                    type: "GET",
+                    data: {
+                        page: 1,
+                        limit: 1
+                    },
+                    statusCode: {
+                        200: function(data) {
+                            var parsedData = JSON.parse(data).result;
+                            $("#notice-title").text(parsedData[0].title);
+                            $(".notice-content-container p").html(parsedData[0].content)
+                        },
+                        204: function(data) {
+                            $("#notice-title").text("");
+                            $(".notice-content-container p").text("글이 없습니다.");
+                        }
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
             }
         },
         error: function() {

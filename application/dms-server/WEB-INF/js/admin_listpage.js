@@ -1,12 +1,3 @@
-$('.edit').on('click', function() {
-    var postNum = $(this).parent().first().text().split(' ')[0];
-    redirect("post/notice/modify?no=" + postNum);
-});
-
-$('.delete').on('click', function() {
-    var postNum = $(this).parent().first().text().split(' ')[0];
-})
-
 $(".write-btn").click(function() {
     // $.ajax({
     //     url: "post/" + getAllUrlParams(document.URL).category + "write",
@@ -74,6 +65,24 @@ $(".delete").on('click', function(e) {
         },
         error: function(data) {
             alert("삭제에 실패했어요. TT");
+        }
+    });
+});
+
+$(".preview").on('click', function(e) {
+    e.stopPropagation();
+    var no = $(this).parent().parent().children().first().text();
+    $.ajax({
+        url: "/post/notice/preview",
+        data: {
+            no: Number(no)
+        },
+        type: 'POST',
+        success: function(data) {
+            alert("프리뷰로 설정되었습니다.");
+        },
+        error: function(data) {
+            alert("프리뷰 설정을 실패했습니다.");
         }
     });
 });

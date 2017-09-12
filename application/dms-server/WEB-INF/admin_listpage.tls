@@ -77,6 +77,11 @@
                                     <td>
                                         <a class="btn btn-success delete">삭제</a>
                                     </td>
+                                    <#if Title == "공지사항">
+                                        <td>
+                                            <a class="btn btn-success preview">프리뷰</a>
+                                        </td>
+                                    </#if>
                                 </tr>
                             </#list>
                         </tbody>
