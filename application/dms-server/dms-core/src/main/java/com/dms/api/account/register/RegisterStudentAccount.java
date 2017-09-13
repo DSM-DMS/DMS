@@ -15,26 +15,23 @@ import io.vertx.ext.web.RoutingContext;
 
 @Route(path = "/account/register/student", method = {HttpMethod.POST})
 public class RegisterStudentAccount implements Handler<RoutingContext> {
-    private UserManager userManager;
     private SecureManager secureManager;
     private SecureManager registerRequestSecureManager;
 
     public RegisterStudentAccount() {
-        userManager = new UserManager();
         secureManager = SecureManager.create(this.getClass());
         registerRequestSecureManager = SecureManager.create("RegisterRequestSecureManager", 5,10);
     }
 
     @Override
     public void handle(RoutingContext ctx) {
-
         String uid = ctx.request().getParam("uid");
         String id = ctx.request().getParam("id");
         String password = ctx.request().getParam("password");
         
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
-                JobResult result = userManager.register(uid, id, password);
+                JobResult result = UserManager.register(uid, id, password);
                 if (result.isSuccess()) {
                     ctx.response().setStatusCode(201);
                     ctx.response().setStatusMessage(result.getMessage()).end();

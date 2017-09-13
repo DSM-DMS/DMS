@@ -28,7 +28,7 @@ public class UserManager {
         secureManager = SecureManager.create(UserManager.class, 10, 8);
     }
 
-    public JobResult register(String key, String id, String password) throws SQLException {
+    public static JobResult register(String key, String id, String password) throws SQLException {
         boolean check = false;
         String message = null;
         key = SHA256.encrypt(key);
