@@ -12,22 +12,20 @@ import android.widget.TextView;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.FaqActivity;
-import com.dms.beinone.application.activities.NoticeActivity;
-import com.dms.beinone.application.models.DormitoryNotice;
 import com.dms.beinone.application.models.Notice;
 
 import java.util.ArrayList;
 
-public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNoticeAdapter.ViewHolder> {
+public class DormitoryFaqAdapter extends RecyclerView.Adapter<DormitoryFaqAdapter.ViewHolder> {
 
     WebView webView;
-    Context maContext;
+    Context mContext;
     private ArrayList<Notice> items;
 
-    public  DormitoryNoticeAdapter (Context context, ArrayList<Notice> arrayList){
+    public DormitoryFaqAdapter(Context context, ArrayList<Notice> arrayList){
 
         items = arrayList;
-        maContext = context;
+        mContext = context;
     }
 
 
@@ -47,12 +45,12 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
         v.Dormitory_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(maContext,Notice.class);
+                Intent intent=new Intent(mContext,FaqActivity.class);
                 String title=items.get(position).getTitle();
                 String content=items.get(position).getContent();
                 intent.putExtra("title",title);
                 intent.putExtra("content",content);
-                maContext.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
     }

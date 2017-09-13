@@ -26,19 +26,6 @@
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--
-            <activity
-            android:name=".activities.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        -->
-        <!--
-            <activity android:name=".activities.AppcontentArticleActivity" />
-        <activity android:name=".activities.FacilityReportArticleActivity" />
-        <activity android:name=".activities.FacilityReportUploadActivity" />
-        <activity android:name=".activities.QnAArticleActivity" />
-        <activity android:name=".activities.QnAUploadActivity" />
-        <activity android:name=".activities.CommentActivity" />
-        -->
         <activity
             android:name=".activities.AfterSchoolActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -48,17 +35,7 @@
         <activity
             android:name=".activities.StayActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--
-            <activity
-            android:name=".activities."
-            android:theme="@style/AppTheme.NoActionBar" />
-        -->
-        <!--
-            <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        -->
+
         <receiver android:name=".MealWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -70,7 +47,7 @@
         </receiver>
 
         <activity
-            android:name=".activities.DormitoryRegulationsActivity"
+            android:name=".activities.DormitoryFaqActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.DormitoryNoticeActivity"
@@ -80,6 +57,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.NoticeActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.FaqActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+      
     </application>
 
 </manifest>

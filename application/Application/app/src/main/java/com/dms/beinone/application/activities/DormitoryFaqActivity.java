@@ -15,6 +15,7 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.DormitoryNotice;
 import com.dms.beinone.application.models.Notice;
+import com.dms.beinone.application.views.adapters.DormitoryFaqAdapter;
 import com.dms.beinone.application.views.adapters.DormitoryNoticeAdapter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -25,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DormitoryRegulationsActivity extends AppCompatActivity {
+public class DormitoryFaqActivity extends AppCompatActivity {
 
     private RecyclerView maRecyclerView;
     private ImageButton back_button;
@@ -66,7 +67,7 @@ public class DormitoryRegulationsActivity extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("FAG",response.body().toString());
                 arrayList=getFaqJsonParser(response.body().getAsJsonArray("result"));
-                maRecyclerView.setAdapter(new DormitoryNoticeAdapter(getApplicationContext(),arrayList));
+                maRecyclerView.setAdapter(new DormitoryFaqAdapter(getApplicationContext(),arrayList));
             }
 
             @Override
