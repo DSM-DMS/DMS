@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="16dp" />
+        android:layout_height="16dp"
+        android:layout_marginTop="4dp"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <View
             android:layout_width="8dp"
             android:layout_height="40dp"
-            android:background="@color/cardview_dark_background"
-            />
+            android:background="@color/colorPrimaryDark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Service Eror Report"
-            android:textSize="25dp"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            />
+            android:text="시설 고장 신고"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
 
     </LinearLayout>
 
@@ -38,7 +39,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="Title"
-        android:textSize="26dp"
+        android:textSize="20sp"
         />
 
     <EditText
@@ -47,12 +48,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="26dp"
+        android:textSize="20sp"
         android:hint="Room Number"
         android:layout_marginTop="8dp"
         />
 
     <EditText
+        android:gravity="top"
+        android:padding="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
@@ -62,28 +65,35 @@
         />
 
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        >
 
         <Button
+            android:id="@+id/report_button"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="report"
-            android:textSize="22dp"
+            android:background="#00000000"
+            android:text="신고"
+            android:textSize="18sp"
             android:layout_marginLeft="16dp"
+            android:textColor="@color/colorPrimaryDark"
             />
 
         <Button
+            android:id="@+id/cancle_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
-            android:textSize="22dp"
-            android:text="cancle"
+            android:background="#00000000"
+            android:textSize="18sp"
+            android:text="취소"
             android:layout_marginRight="16dp"
+            android:textColor="@color/colorPrimaryDark"
             />
     </LinearLayout>
 

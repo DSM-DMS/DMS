@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.dms.beinone.application.R;
 
-public class Notice extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

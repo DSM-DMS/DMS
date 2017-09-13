@@ -7,6 +7,6 @@
         />
 
     <corners
-        android:radius="16dip"
+        android:radius="8dip"
         />
 </shape>

@@ -78,7 +78,7 @@
         <activity
             android:name=".activities.FrequentlyQuestionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.Notice"
+        <activity android:name=".activities.NoticeActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,22 +1,19 @@
 package com.dms.beinone.application.views.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.activities.Notice;
+import com.dms.beinone.application.activities.NoticeActivity;
 import com.dms.beinone.application.models.DormitoryNotice;
+import com.dms.beinone.application.models.Notice;
 
 import java.util.ArrayList;
 
@@ -24,54 +21,39 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
 
     WebView webView;
     Context maContext;
-    private ArrayList<DormitoryNotice> items;
+    private ArrayList<Notice> items;
 
-    public  DormitoryNoticeAdapter (Context context, ArrayList<DormitoryNotice> arrayList){
+    public  DormitoryNoticeAdapter (Context context, ArrayList<Notice> arrayList){
 
         items = arrayList;
         maContext = context;
     }
 
-    public DormitoryNoticeAdapter(Context context) {
-
-        this.maContext = context;
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView DormitoryTitle;
-        TextView DormitoryBackOffice;
-
-        public ViewHolder(View view)  {
-
-            super(view);
-
-            DormitoryTitle = (TextView) view.findViewById(R.id.dormitory_notice_item_title);
-            DormitoryBackOffice = (TextView) view.findViewById(R.id.dormitory_back_office);
-        }
-    }
 
     @Override
     public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_same_item, parent, false);
         ViewHolder vH = new ViewHolder(v);
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-
-                Intent intent = new Intent(maContext, Notice.class);
-                maContext.startActivity(intent);
-            }
-        });
         return vH;
     }
 
     @Override
-    public void onBindViewHolder (ViewHolder v, int position) {
+    public void onBindViewHolder (ViewHolder v, final int position) {
 
-        v.DormitoryBackOffice.setText(items.get(position).getBackOffice());
-        v.DormitoryTitle.setText(items.get(position).getNoticeTitle());
+        v.DormitoryBackOffice.setText(items.get(position).getWriter());
+        v.DormitoryTitle.setText(items.get(position).getTitle());
+        v.Dormitory_next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(maContext,NoticeActivity.class);
+                String title=items.get(position).getTitle();
+                String content=items.get(position).getContent();
+                intent.putExtra("title",title);
+                intent.putExtra("contnet",content);
+                maContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -79,4 +61,21 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
 
         return items.size();
     }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView DormitoryTitle;
+        TextView DormitoryBackOffice;
+        ImageView Dormitory_next_button;
+
+
+        public ViewHolder(View view)  {
+
+            super(view);
+            Dormitory_next_button=(ImageView)view.findViewById(R.id.ib_notice_next);
+            DormitoryTitle = (TextView) view.findViewById(R.id.dormitory_notice_item_title);
+            DormitoryBackOffice = (TextView) view.findViewById(R.id.dormitory_back_office);
+        }
+    }
+
 }

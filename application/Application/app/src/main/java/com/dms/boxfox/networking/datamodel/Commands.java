@@ -13,7 +13,7 @@ package com.dms.boxfox.networking.datamodel;
  */
 public class Commands {
     /*
-     * Notice, Newsletter, Competition, Plan, Meal will parsed in
+     * NoticeActivity, Newsletter, Competition, Plan, Meal will parsed in
      * dms-data-utilities
      */
     public static final int REGISTER_STUDENT_ACC = 100;

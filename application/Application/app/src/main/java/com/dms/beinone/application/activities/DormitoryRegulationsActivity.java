@@ -28,6 +28,25 @@ public class DormitoryRegulationsActivity extends AppCompatActivity {
 
         TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
         appBarText.setText("자주하는 질문");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
 
@@ -61,7 +80,7 @@ public class DormitoryRegulationsActivity extends AppCompatActivity {
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
         item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
 
-        maAdapter =  new DormitoryNoticeAdapter(this, item);
+        //maAdapter =  new DormitoryNoticeAdapter(this, item);
         maRecyclerView.setAdapter(maAdapter);
     }
 }

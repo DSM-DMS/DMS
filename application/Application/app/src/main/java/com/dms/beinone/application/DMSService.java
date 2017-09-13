@@ -7,6 +7,7 @@ import com.dms.beinone.application.models.Meal;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -67,5 +68,11 @@ public interface DMSService {
 
     @POST("account/logout/student")
     Call<Void> logout();
+
+    @GET("post/list/fag")
+    Call<JsonArray> loadFag();
+
+    @GET("post/list/notice")
+    Call<JsonObject> loadNotice();
 
 }
