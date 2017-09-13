@@ -22,7 +22,6 @@ import java.util.List;
  * Created by boxfox on 2017-03-10.
  */
 
-
 @Route(path = "/post", method = {HttpMethod.GET})
 public class PostBoardRouter implements Handler<RoutingContext> {
     private static List<PostTemplate> categories;
