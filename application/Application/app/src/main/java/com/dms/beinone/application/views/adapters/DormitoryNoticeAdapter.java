@@ -50,7 +50,7 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
                 String title=items.get(position).getTitle();
                 String content=items.get(position).getContent();
                 intent.putExtra("title",title);
-                intent.putExtra("contnet",content);
+                intent.putExtra("content",content);
                 maContext.startActivity(intent);
             }
         });

@@ -18,11 +18,11 @@ public class NoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
 
-        TextView TextView = (TextView) findViewById(R.id.tv_toolbar_title);
-        TextView.setText("공지사항");
+        TextView toolbar_title = (TextView) findViewById(R.id.tv_toolbar_title);
+        toolbar_title.setText("공지사항");
 
-        TextView textView=(TextView)findViewById(R.id.tv_notice_title);
-        textView.setText("제목");
+        TextView title_TextView=(TextView)findViewById(R.id.tv_notice_title);
+        title_TextView.setText("제목");
 
         ImageView imageView=(ImageView)findViewById(R.id.ib_toolbar_back);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -34,9 +34,15 @@ public class NoticeActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent=getIntent();
+        String title=intent.getStringExtra("title");
+        String content=intent.getStringExtra("content");
 
+        title_TextView.setText(title);
         WebView webView=(WebView)findViewById(R.id.notice_webView);
+        webView.loadData(content,"text/html; charset=utf-8", "UTF-8");
+        webView.getSettings().setBuiltInZoomControls(true);
+
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.naver.com/");
     }
 }
