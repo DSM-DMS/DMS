@@ -18,6 +18,12 @@ public class Notice {
         this.writer = writer;
     }
 
+    public Notice(int no,String title,String content){
+        this.no=no;
+        this.title=title;
+        this.content=content;
+    }
+
     public int getNo() {
         return no;
     }

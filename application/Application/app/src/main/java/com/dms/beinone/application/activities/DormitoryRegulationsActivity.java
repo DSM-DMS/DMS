@@ -4,22 +4,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.DormitoryNotice;
+import com.dms.beinone.application.models.Notice;
 import com.dms.beinone.application.views.adapters.DormitoryNoticeAdapter;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DormitoryRegulationsActivity extends AppCompatActivity {
 
     private RecyclerView maRecyclerView;
     private ImageButton back_button;
-    RecyclerView.Adapter maAdapter;
+
+    private ArrayList<Notice> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,25 +39,6 @@ public class DormitoryRegulationsActivity extends AppCompatActivity {
 
         TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
         appBarText.setText("자주하는 질문");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
 
@@ -64,23 +56,51 @@ public class DormitoryRegulationsActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         maRecyclerView.setLayoutManager(linearLayoutManager);
 
-        ArrayList<DormitoryNotice> item = new ArrayList<>();
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부", "연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
-        item.add(new DormitoryNotice("사감부","연장신청에 관하여"));
 
-        //maAdapter =  new DormitoryNoticeAdapter(this, item);
-        maRecyclerView.setAdapter(maAdapter);
+
+
+
+        DMSService service= HttpManager.createDMSService(getApplicationContext());
+        service.loadFag().enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.d("FAG",response.body().toString());
+                arrayList=getFaqJsonParser(response.body().getAsJsonArray("result"));
+                maRecyclerView.setAdapter(new DormitoryNoticeAdapter(getApplicationContext(),arrayList));
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    public ArrayList<Notice> getFaqJsonParser(JsonArray jsonArray){
+        arrayList=new ArrayList<>();
+
+        for(int i=0;i<jsonArray.size();i++){
+            JsonObject jsonObject= (JsonObject) jsonArray.get(i);
+            int no=jsonObject.get("no").getAsInt();
+            String title=jsonObject.get("title").toString();
+            String content= jsonObject.get("content").toString();
+
+            arrayList.add(new Notice(no,title,content));
+        }
+
+        return  arrayList;
     }
 }

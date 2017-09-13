@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.activities.FaqActivity;
 import com.dms.beinone.application.activities.NoticeActivity;
 import com.dms.beinone.application.models.DormitoryNotice;
 import com.dms.beinone.application.models.Notice;
@@ -46,7 +47,7 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
         v.Dormitory_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(maContext,NoticeActivity.class);
+                Intent intent=new Intent(maContext,FaqActivity.class);
                 String title=items.get(position).getTitle();
                 String content=items.get(position).getContent();
                 intent.putExtra("title",title);

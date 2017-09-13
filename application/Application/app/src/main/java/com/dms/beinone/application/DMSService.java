@@ -69,8 +69,8 @@ public interface DMSService {
     @POST("account/logout/student")
     Call<Void> logout();
 
-    @GET("post/list/fag")
-    Call<JsonArray> loadFag();
+    @GET("post/list/faq")
+    Call<JsonObject> loadFag();
 
     @GET("post/list/notice")
     Call<JsonObject> loadNotice();
