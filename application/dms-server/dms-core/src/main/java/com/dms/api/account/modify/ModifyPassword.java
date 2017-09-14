@@ -5,8 +5,7 @@ import java.sql.SQLException;
 import com.dms.account_manager.Guardian;
 import com.dms.account_manager.UserManager;
 import com.dms.crypto.SHA256;
-import com.dms.utilities.database.DataBase;
-import com.dms.utilities.log.Log;
+import com.dms.utilities.database.DB;
 import com.dms.utilities.routing.Route;
 
 import io.vertx.core.Handler;
@@ -15,22 +14,13 @@ import io.vertx.ext.web.RoutingContext;
 
 @Route(path="/account/password/student", method={HttpMethod.PATCH})
 public class ModifyPassword implements Handler<RoutingContext> {
-	UserManager userManager;
-	
-	public ModifyPassword() {
-		userManager = new UserManager();
-	}
-	
 	@Override
 	public void handle(RoutingContext ctx) {
-
-		DataBase database = DataBase.getInstance();
-		
-		String id = userManager.getIdFromSession(ctx);
+		String id = UserManager.getIdFromSession(ctx);
         String uid = null;
         try {
             if (id != null) {
-                uid = userManager.getUid(id);
+                uid = UserManager.getUid(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,16 +34,9 @@ public class ModifyPassword implements Handler<RoutingContext> {
         	return;
         }
 		
-		try {
-			database.executeUpdate("UPDATE account SET password='", encryptedPassword, "' WHERE uid='", uid, "'");
-			
-			ctx.response().setStatusCode(200).end();
-			ctx.response().close();
-		} catch(SQLException e) {
-			ctx.response().setStatusCode(500).end();
-			ctx.response().close();
-			
-			Log.l("SQLException");
-		}
+		DB.executeUpdate("UPDATE account SET password=? WHERE uid=?", encryptedPassword, uid);
+		
+		ctx.response().setStatusCode(200).end();
+		ctx.response().close();
 	}
 }

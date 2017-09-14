@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -71,20 +72,35 @@ public class ResidualDownload {
         XSSFSheet sheet = workbook.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
         for (rowindex = 1; rowindex < rows; rowindex++) {
+        	// Row만큼
             XSSFRow row = sheet.getRow(rowindex);
             if (row != null) {
+            	// Row가 null이 아니면
                 int cells = row.getPhysicalNumberOfCells();
+                // 셀 갯수
                 for (columnindex = 0; columnindex <= cells; columnindex++) {
+                	// 셀 갯수만큼
                     XSSFCell cell = row.getCell(columnindex);
+                    // row에서 셀 얻어오기
                     if (cell != null && cell.getCellType() == 0) {
+                    	// 0 = Cell.CELL_TYPE_NUMERIC
+                    	// 학번임을 확인
                         String sNum = (String.valueOf((int) cell.getNumericCellValue()));
                         if (sNum != null) {
-                            cell = row.getCell(++columnindex);
+                        	// 학번이 null이 아니면
+                            cell = row.getCell(columnindex + 1);
+                            // 오른쪽 셀 얻어오기
                             if (cell.getCellType() == 1) {
+                            	// 1 = Cell.CELL_TYPE_STRING
+                            	// 학생 이름임을 확인
                                 String type = map.get(sNum);
+                                // 학번을 통해 잔류 상태 얻어오기
                                 if (type != null) {
-                                    cell = row.getCell(++columnindex);
+                                	// 잔류 상태가 null이 아니면
+                                    cell = row.getCell(columnindex + 2);
+                                    // 오른쪽 셀 얻어오기
                                     cell.setCellValue(type);
+                                    // 잔류 상태 채우기
                                 }
                             }
                         }
