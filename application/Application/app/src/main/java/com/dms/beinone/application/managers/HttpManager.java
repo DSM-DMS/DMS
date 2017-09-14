@@ -32,4 +32,21 @@ public class HttpManager {
                 .build()
                 .create(DMSService.class);
     }
+
+
+    public static DMSService createDMSService_MEAL(Context context){
+        PersistentCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                .build();
+
+        return new Retrofit.Builder()
+                .baseUrl(DMSService.SERVER_MEAL_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+                .create(DMSService.class);
+    }
 }

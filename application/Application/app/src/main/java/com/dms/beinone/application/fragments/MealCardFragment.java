@@ -87,33 +87,15 @@ public class MealCardFragment extends Fragment {
         setDate(date);
         if (mMeal == null) {
             try {
-                String ALL_DATE=new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
+                String ALL_DATE = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
 
-                int idx=ALL_DATE.indexOf("-");
+                int idx = ALL_DATE.indexOf("-");
 
-               /* String year=ALL_DATE.substring(0,idx);
-                String month=ALL_DATE.substring(idx+1,7);
-                String day=ALL_DATE.substring(8,10);*/
-               /*T서버 오류 풀리면 이거로 서버 통신 진행*/
+                String year = ALL_DATE.substring(0, idx);
+                String month = ALL_DATE.substring(idx + 1, 7);
+                String day = ALL_DATE.substring(8, 10);
 
-
-                DMSService service=HttpManager.createDMSService(getContext());
-                service.loadMeal_test("2017","9","6").enqueue(new Callback<JsonArray>() {
-                    @Override
-                    public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                        Log.d("ABC",response.toString());
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonArray> call, Throwable t) {
-
-                    }
-                });
-                //loadMeal(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
-
-
-                //String test=new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
-                //loadMeal(year,month,day);
+                loadMeal(year, month, day);
             } catch (Exception e) {
                 System.out.println("IOException in MealCardFragment: loadMeal()");
                 e.printStackTrace();
@@ -164,22 +146,20 @@ public class MealCardFragment extends Fragment {
         return new Meal(breakfast, lunch, dinner);
     }
 
-  /*  private void loadMeal(int year,int month,int day) throws IOException {
-        DMSService dmsService = HttpManager.createDMSService(getContext());
-        Call<JsonObject> call = dmsService.loadMeal_test(year, month, day);
+    private void loadMeal(String year, String month, String day) throws IOException {
+        DMSService dmsService = HttpManager.createDMSService_MEAL(getContext());
+        Call<JsonObject> call = dmsService.loadMeal(year, month, day);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 switch (response.code()) {
                     case HTTP_OK:
-
-                        //Meal meal = parseMealJson(response.body());
-                        Log.d("========",response.body().toString());
-                        //setMeal(meal);
+                        Log.d("MEAL", response.body().toString());
+                        setMeal(parseMealJson(response.body()));
                         break;
                     case HTTP_INTERNAL_SERVER_ERROR:
                         Toast.makeText(getContext(), R.string.meal_internal_server_error, Toast.LENGTH_SHORT).show();
-                        Log.d("========",response.message().toString());
+                        Log.d("MEAL_ERROR", response.message().toString());
                         break;
                 }
             }
@@ -189,5 +169,5 @@ public class MealCardFragment extends Fragment {
                 t.printStackTrace();
             }
         });
-    }*/
+    }
 }

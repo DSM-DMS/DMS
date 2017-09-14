@@ -34,6 +34,7 @@ public interface DMSService {
     int HTTP_INTERNAL_SERVER_ERROR = 500;
 
     String SERVER_URL = "http://dsm2015.cafe24.com/";
+    String SERVER_MEAL_URL =  "http://dsm2015.cafe24.com:81";
 
     @FormUrlEncoded
     @POST("account/login/student")
@@ -56,12 +57,9 @@ public interface DMSService {
 
     @GET("apply/all")
     Call<ApplyStatus> loadApplyStatus();
-    @GET("meal")
-    Call<JsonObject> loadMeal(@Query("date") String date);
-
 
     @GET("meal")
-    Call<JsonArray> loadMeal_test(@Query("year") String year , @Query("month")String  month, @Query("day") String day);
+    Call<JsonObject> loadMeal(@Query("year") String year , @Query("month")String  month, @Query("day") String day);
 
     @GET("account/student")
     Call<Account> loadMyPage();

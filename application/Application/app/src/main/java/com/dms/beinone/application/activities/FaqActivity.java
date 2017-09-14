@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.views.adapters.DormitoryFaqAdapter;
 
 public class FaqActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class FaqActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),DormitoryNoticeActivity.class);
+                Intent intent=new Intent(getApplicationContext(),DormitoryFaqActivity.class);
                 startActivity(intent);
                 finish();
             }
