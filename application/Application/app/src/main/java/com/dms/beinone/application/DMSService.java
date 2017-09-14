@@ -51,6 +51,7 @@ public interface DMSService {
     @GET("apply/extension/class")
     Call<Class> loadExtensionClass(@Query("option") String option, @Query("class") int clazz);
 
+
     @FormUrlEncoded
     @PUT("apply/extension")
     Call<Void> applyExtension(@Field("class") int clazz, @Field("seat") int seat);
