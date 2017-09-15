@@ -19,7 +19,7 @@ public class LoadItemList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
 		try {
-			ResultSet rs = DB.executeQuery("SELECT * FROM afterschool_list");
+			ResultSet rs = DB.executeQuery("SELECT * FROM afterschool_items");
 			JSONArray response = new JSONArray();
 
 			while (rs.next()) {
@@ -27,14 +27,9 @@ public class LoadItemList implements Handler<RoutingContext> {
 
 				afterschool.put("no", rs.getInt("no"));
 				afterschool.put("title", rs.getString("title"));
-				// afterschool.put("target", rs.getInt("target"));
-				// afterschool.put("place", rs.getString("place"));
 				afterschool.put("on_monday", rs.getBoolean("on_monday"));
 				afterschool.put("on_tuesday", rs.getBoolean("on_tuesday"));
-				// afterschool.put("on_wednesday", rs.getBoolean("on_wednesday"));
 				afterschool.put("on_saturday", rs.getBoolean("on_saturday"));
-				// afterschool.put("instructor", rs.getString("instructor"));
-				// afterschool.put("personnel", rs.getInt("personnel"));
 
 				response.put(afterschool);
 			}
