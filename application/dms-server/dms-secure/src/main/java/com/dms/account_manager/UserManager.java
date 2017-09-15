@@ -103,7 +103,7 @@ public class UserManager {
         return result;
     }
 
-    public boolean[] getOutStatus(String id) throws SQLException {
+    public static boolean[] getOutStatus(String id) throws SQLException {
         boolean[] list = new boolean[2];
         String uid = getUid(id);
         ResultSet rs = DB.executeQuery("SELECT sat, sun FROM goingout_apply WHERE uid=?", uid);

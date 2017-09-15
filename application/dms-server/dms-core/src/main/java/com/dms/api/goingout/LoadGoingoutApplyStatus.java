@@ -13,21 +13,14 @@ import io.vertx.ext.web.RoutingContext;
 
 @Route(path="/apply/goingout", method={HttpMethod.GET})
 public class LoadGoingoutApplyStatus implements Handler<RoutingContext> {
-	UserManager userManager;
-	
-	public LoadGoingoutApplyStatus() {
-		userManager = new UserManager();
-	}
-	
 	@Override
 	public void handle(RoutingContext ctx) {
-
 		EasyJsonObject responseObject = new EasyJsonObject();
 
-        if(userManager.isLogined(ctx)) {
+        if(UserManager.isLogined(ctx)) {
 			try {
-				userManager.getUserInfo(userManager.getIdFromSession(ctx));
-				boolean[] status = userManager.getOutStatus(userManager.getIdFromSession(ctx));
+				UserManager.getUserInfo(UserManager.getIdFromSession(ctx));
+				boolean[] status = UserManager.getOutStatus(UserManager.getIdFromSession(ctx));
 				responseObject.put("sat", status[0]);
 				responseObject.put("sun", status[1]);
 				ctx.response().setStatusCode(200).end(responseObject.toString());

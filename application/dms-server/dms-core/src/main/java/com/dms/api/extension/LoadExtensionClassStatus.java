@@ -21,16 +21,10 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-
 @Route(path = "/apply/extension/class", method = { HttpMethod.GET })
 public class LoadExtensionClassStatus implements Handler<RoutingContext> {
-	public LoadExtensionClassStatus() {
-		
-	}
-	
 	@Override
 	public void handle(RoutingContext ctx) {
-
 		EasyJson json = null;
 
 		String option = ctx.request().getParam("option");

@@ -16,25 +16,18 @@ import io.vertx.ext.web.RoutingContext;
 
 @Route(path="/apply/extension", method={HttpMethod.GET})
 public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
-	UserManager userManager;
-	
-	public LoadExtensionApplyStatus() {
-		userManager = new UserManager();
-	}
-	
 	@Override
 	public void handle(RoutingContext ctx) {
-
 		DataBase database = DataBase.getInstance();
 		SafeResultSet resultSet;
 		EasyJsonObject responseObject = new EasyJsonObject();
 		
-		String id = userManager.getIdFromSession(ctx);
+		String id = UserManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
             if (id != null) {
-                uid = userManager.getUid(id);
+                uid = UserManager.getUid(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();

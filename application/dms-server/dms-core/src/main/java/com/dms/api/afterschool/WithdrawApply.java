@@ -11,7 +11,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path = "/apply/afterschool", method = { HttpMethod.DELETE })
+@Route(path = "/afterschool", method = { HttpMethod.DELETE })
 public class WithdrawApply implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
@@ -26,7 +26,7 @@ public class WithdrawApply implements Handler<RoutingContext> {
 			e.printStackTrace();
 		}
 
-		int no = Integer.parseInt(ctx.request().getParam("no"));
+		int no = Integer.parseInt(ctx.request().getFormAttribute("no"));
 
 		if (!Guardian.checkParameters(id, uid, no)) {
 			ctx.response().setStatusCode(400).end();

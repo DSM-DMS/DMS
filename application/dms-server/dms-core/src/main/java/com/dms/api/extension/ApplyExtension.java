@@ -16,23 +16,16 @@ import io.vertx.ext.web.RoutingContext;
 
 @Route(path = "/apply/extension", method = {HttpMethod.PUT})
 public class ApplyExtension implements Handler<RoutingContext> {
-    private UserManager userManager;
-
-    public ApplyExtension() {
-        userManager = new UserManager();
-    }
-
     @Override
     public void handle(RoutingContext ctx) {
-
         DataBase database = DataBase.getInstance();
 
-        String id = userManager.getIdFromSession(ctx);
+        String id = UserManager.getIdFromSession(ctx);
         String uid = null;
         
         try {
             if (id != null) {
-                uid = userManager.getUid(id);
+                uid = UserManager.getUid(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();

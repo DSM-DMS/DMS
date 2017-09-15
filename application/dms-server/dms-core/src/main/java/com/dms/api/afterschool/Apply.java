@@ -26,7 +26,7 @@ public class Apply implements Handler<RoutingContext> {
 			e.printStackTrace();
 		}
 
-		int no = Integer.parseInt(ctx.request().getParam("no"));
+		int no = Integer.parseInt(ctx.request().getFormAttribute("no"));
 
 		if (!Guardian.checkParameters(id, uid, no)) {
 			ctx.response().setStatusCode(400).end();
