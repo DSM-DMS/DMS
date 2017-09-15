@@ -1,11 +1,12 @@
 package com.dms.api.post.faq;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.json.JSONObject;
+
 import com.dms.account_manager.Guardian;
-import com.dms.utilities.database.DataBase;
-import com.dms.utilities.database.SafeResultSet;
-import com.dms.utilities.json.EasyJsonObject;
+import com.dms.utilities.database.DB;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.routing.Route;
 
@@ -18,11 +19,6 @@ public class LoadFaq implements Handler<RoutingContext> {
 	@Deprecated
 	@Override
 	public void handle(RoutingContext ctx) {
-
-		DataBase database = DataBase.getInstance();
-		SafeResultSet resultSet;
-		EasyJsonObject responseObject = new EasyJsonObject();
-		
 		int no = Integer.parseInt(ctx.request().getParam("no"));
 		if(!Guardian.checkParameters(no)) {
             ctx.response().setStatusCode(400).end();
@@ -31,14 +27,15 @@ public class LoadFaq implements Handler<RoutingContext> {
         }
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM faq WHERE no=", no);
+			ResultSet rs = DB.executeQuery("SELECT * FROM faq WHERE no=", no);
+			JSONObject response = new JSONObject();
 			
-			if(resultSet.next()) {
-				responseObject.put("title", resultSet.getString("title"));
-				responseObject.put("content", resultSet.getString("content"));
+			if(rs.next()) {
+				response.put("title", rs.getString("title"));
+				response.put("content", rs.getString("content"));
 				
 				ctx.response().setStatusCode(200);
-				ctx.response().end(responseObject.toString());
+				ctx.response().end(response.toString());
 				ctx.response().close();
 			} else {
 				ctx.response().setStatusCode(204).end();
