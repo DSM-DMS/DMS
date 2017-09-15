@@ -24,7 +24,6 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext ctx) {
-
         String id = ctx.request().getParam("id");
         String password = ctx.request().getParam("password");
         String remember = ctx.request().getParam("remember");
@@ -46,7 +45,7 @@ public class LoginStudentRequest implements Handler<RoutingContext> {
                     ctx.response().close();
                 } else {
                     loginRequestSecureManager.invalidRequest(ctx);
-                    ctx.response().setStatusCode(400).end();
+                    ctx.response().setStatusCode(204).end();
                     ctx.response().close();
                 }
             } catch (SQLException e) {
