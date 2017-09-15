@@ -55,29 +55,11 @@ public class UserManager {
     public static JSONObject getUserInfo(String id) throws SQLException {
         String uid = getUid(id);
         
-        String room = "";
-        String seat = "";
-        ResultSet rs = DB.executeQuery("SELECT class, seat FROM extension_apply WHERE uid=?", uid);
-        if (rs.next()) {
-            room = rs.getInt(1) + "";
-            seat = rs.getInt(2) + "";
-        }
-        int value = 0;
-        rs = DB.executeQuery("SELECT value FROM stay_apply WHERE uid=?", uid);
-        if(rs.next()) {
-        	value = rs.getInt("value");
-        }
-        
-        ResultSet rsForStudentData = DB.executeQuery("SELECT * FROM student_data a join student_score b on a.uid = b.uid WHERE a.uid=?", uid);
+        ResultSet rsForStudentData = DB.executeQuery("SELECT * FROM student_data WHERE uid=?", uid);
         JSONObject result = new JSONObject();
-        if (rs.next()) {
+        if (rsForStudentData.next()) {
             result.put("number", AES256.decrypt(rsForStudentData.getString("number") + ""));
             result.put("name", AES256.decrypt(rsForStudentData.getString("name")));
-            result.put("merit", rsForStudentData.getInt("merit"));
-            result.put("demerit", rsForStudentData.getInt("demerit"));
-            result.put("room", room);
-            result.put("seat", seat);
-            result.put("stay_value", value);
         }
         
         return result;
