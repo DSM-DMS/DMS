@@ -9,7 +9,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
 @Route(path = "/afterschool/item", method = { HttpMethod.POST })
-public class UploadAfterschoolItem implements Handler<RoutingContext> {
+public class UploadItem implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
 		String title = ctx.request().getParam("title");

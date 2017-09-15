@@ -14,8 +14,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path = "afterschool/item", method = { HttpMethod.GET })
-public class LoadAfterschoolItemList implements Handler<RoutingContext> {
+@Route(path = "/afterschool/item/list", method = { HttpMethod.GET })
+public class LoadItemList implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
 		try {
