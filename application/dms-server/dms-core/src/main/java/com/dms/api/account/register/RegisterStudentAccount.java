@@ -25,9 +25,9 @@ public class RegisterStudentAccount implements Handler<RoutingContext> {
 
     @Override
     public void handle(RoutingContext ctx) {
-        String uid = ctx.request().getParam("uid");
-        String id = ctx.request().getParam("id");
-        String password = ctx.request().getParam("password");
+        String uid = ctx.request().getFormAttribute("uid");
+        String id = ctx.request().getFormAttribute("id");
+        String password = ctx.request().getFormAttribute("password");
         
         try {
             if (Guardian.checkParameters(uid, id, password) && uid.length() > 0 && id.length() > 0 && password.length() > 0) {
@@ -37,7 +37,7 @@ public class RegisterStudentAccount implements Handler<RoutingContext> {
                     ctx.response().setStatusMessage(result.getMessage()).end();
                 } else {
                     // Conflict
-                    ctx.response().setStatusCode(409);
+                    ctx.response().setStatusCode(204);
                     ctx.response().setStatusMessage(result.getMessage()).end();
                     registerRequestSecureManager.invalidRequest(ctx);
                 }

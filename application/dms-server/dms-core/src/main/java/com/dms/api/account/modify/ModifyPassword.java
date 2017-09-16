@@ -26,7 +26,7 @@ public class ModifyPassword implements Handler<RoutingContext> {
             e.printStackTrace();
         }
         
-		String encryptedPassword = SHA256.encrypt(ctx.request().getParam("password"));
+		String encryptedPassword = SHA256.encrypt(ctx.request().getFormAttribute("password"));
 		
 		if(!Guardian.checkParameters(uid, encryptedPassword)) {
         	ctx.response().setStatusCode(400).end();

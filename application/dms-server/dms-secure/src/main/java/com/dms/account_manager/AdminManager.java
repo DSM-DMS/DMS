@@ -131,7 +131,7 @@ public class AdminManager {
         return check;
     }
 
-    public JobResult register(String id, String password, String name) throws SQLException {
+    public static JobResult register(String id, String password, String name) throws SQLException {
         boolean check = false;
         String message = null;
         if (!checkIdExists(id)) {

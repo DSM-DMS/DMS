@@ -13,12 +13,6 @@ import com.dms.utilities.support.JobResult;
 
 @Route(path = "/account/register/admin", method = {HttpMethod.POST})
 public class RegisterTeacherAccount implements Handler<RoutingContext> {
-    private AdminManager adminManager;
-
-    public RegisterTeacherAccount() {
-        adminManager = new AdminManager();
-    }
-
     @Override
     public void handle(RoutingContext ctx) {
         if (!AdminManager.isAdmin(ctx)) {
@@ -27,20 +21,20 @@ public class RegisterTeacherAccount implements Handler<RoutingContext> {
             return;
         }
 
-        String id = ctx.request().getParam("id");
-        String password = ctx.request().getParam("password");
-        String passwordConfirm = ctx.request().getParam("password-confirm");
-        String name = ctx.request().getParam("name");
+        String id = ctx.request().getFormAttribute("id");
+        String password = ctx.request().getFormAttribute("password");
+        String passwordConfirm = ctx.request().getFormAttribute("password-confirm");
+        String name = ctx.request().getFormAttribute("name");
         if (!Guardian.checkParameters(id, password, passwordConfirm, name)) {
             ctx.response().setStatusCode(400).end();
             ctx.response().close();
         } else {
-            if (!password.equals(passwordConfirm) || adminManager.checkIdExists(id)) {
+            if (!password.equals(passwordConfirm) || AdminManager.checkIdExists(id)) {
                 ctx.response().setStatusCode(204).end();
                 ctx.response().close();
             }else{
                 try {
-                    JobResult result = adminManager.register(id, password, name);
+                    JobResult result = AdminManager.register(id, password, name);
                     if(result.isSuccess()){
                         ctx.response().setStatusCode(200).end();
                         ctx.response().close();
