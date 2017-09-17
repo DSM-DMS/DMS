@@ -42,7 +42,6 @@ public class DormitoryFaqActivity extends AppCompatActivity {
         appBarText.setText("자주하는 질문");
         appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
 
-
         maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_regulations_recycler);
 
         back_button=(ImageButton) findViewById(R.id.ib_toolbar_back);
@@ -57,12 +56,9 @@ public class DormitoryFaqActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         maRecyclerView.setLayoutManager(linearLayoutManager);
 
-
-
-
-
         DMSService service= HttpManager.createDMSService(getApplicationContext());
         service.loadFag().enqueue(new Callback<JsonObject>() {
+
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("FAG",response.body().toString());
@@ -75,19 +71,6 @@ public class DormitoryFaqActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public ArrayList<Notice> getFaqJsonParser(JsonArray jsonArray){

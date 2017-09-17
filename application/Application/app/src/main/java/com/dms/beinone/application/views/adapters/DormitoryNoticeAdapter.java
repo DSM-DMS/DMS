@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.activities.FaqActivity;
-import com.dms.beinone.application.activities.NoticeActivity;
-import com.dms.beinone.application.models.DormitoryNotice;
 import com.dms.beinone.application.models.Notice;
 
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
     @Override
     public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_same_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_item, parent, false);
         ViewHolder vH = new ViewHolder(v);
         return vH;
     }

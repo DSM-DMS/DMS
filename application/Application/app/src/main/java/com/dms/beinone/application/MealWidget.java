@@ -75,8 +75,6 @@ public class MealWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-
-
     private void setMeal(Meal meal,RemoteViews views) {
         mMeal = meal;
         bind(views);

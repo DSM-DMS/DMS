@@ -32,7 +32,7 @@ public class DormitoryFaqAdapter extends RecyclerView.Adapter<DormitoryFaqAdapte
     @Override
     public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_same_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_item, parent, false);
         ViewHolder vH = new ViewHolder(v);
         return vH;
     }
@@ -40,7 +40,7 @@ public class DormitoryFaqAdapter extends RecyclerView.Adapter<DormitoryFaqAdapte
     @Override
     public void onBindViewHolder (ViewHolder v, final int position) {
 
-        v.DormitoryBackOffice.setText(items.get(position).getWriter());
+//        v.DormitoryBackOffice.setText(items.get(position).getWriter());
         v.DormitoryTitle.setText(items.get(position).getTitle());
         v.Dormitory_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class DormitoryFaqAdapter extends RecyclerView.Adapter<DormitoryFaqAdapte
         TextView DormitoryTitle;
         TextView DormitoryBackOffice;
         ImageView Dormitory_next_button;
-
+        TextView DormitoryNormalText;
 
         public ViewHolder(View view)  {
 
@@ -74,6 +74,7 @@ public class DormitoryFaqAdapter extends RecyclerView.Adapter<DormitoryFaqAdapte
             Dormitory_next_button=(ImageView)view.findViewById(R.id.ib_notice_next);
             DormitoryTitle = (TextView) view.findViewById(R.id.dormitory_notice_item_title);
             DormitoryBackOffice = (TextView) view.findViewById(R.id.dormitory_back_office);
+            DormitoryNormalText = (TextView) view.findViewById(R.id.normal_text);
         }
     }
 

@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/dormitory_notice_item_title"
             android:layout_alignBottom="@id/dormitory_notice_item_title"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
             android:src="@drawable/notice_item_icon1"
             />
