@@ -110,8 +110,6 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         }
         maRecyclerView.setLayoutManager(linearLayoutManager);
 
-
-
     }
 
     public void loadNotice(){

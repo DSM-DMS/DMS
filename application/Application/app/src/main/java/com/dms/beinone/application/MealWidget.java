@@ -86,12 +86,12 @@ public class MealWidget extends AppWidgetProvider {
     //다이얼로그에서는 RemoteViews 찾아서 거기서 뷰의아이디 찾아주고 데이터바인딩을 진행함
     private void bind(RemoteViews views) {
         if (mMeal != null) {
-            String breakfast = TextUtils.join(", ", mMeal.getBreakfast());
-            views.setTextViewText(R.id.meal_widget_breakfast,breakfast);
-            String lunch = TextUtils.join(", ", mMeal.getLunch());
-            views.setTextViewText(R.id.meal_widget_launch,lunch);
-            String dinner = TextUtils.join(", ", mMeal.getDinner());
-            views.setTextViewText(R.id.meal_widget_diner,dinner);
+            String breakfast = TextUtils.join("\n", mMeal.getBreakfast());
+            views.setTextViewText(R.id.meal_widget_content,breakfast);
+//            String lunch = TextUtils.join(", ", mMeal.getLunch());
+//            views.setTextViewText(R.id.meal_widget_launch,lunch);
+//            String dinner = TextUtils.join(", ", mMeal.getDinner());
+//            views.setTextViewText(R.id.meal_widget_diner,dinner);
         }
     }
 
@@ -138,8 +138,6 @@ public class MealWidget extends AppWidgetProvider {
             }
         });
     }*/
-
-
 
 }
 
