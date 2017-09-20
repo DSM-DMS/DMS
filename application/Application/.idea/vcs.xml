@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="D:\GitHub\DSM-Dormitory-Management-System\application\Application\DSM-Dormitory-Management-System" vcs="Git" />
   </component>
 </project>

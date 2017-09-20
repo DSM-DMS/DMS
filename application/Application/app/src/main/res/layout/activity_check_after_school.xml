@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신청기간 : "
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        <TextView
+            android:id="@+id/after_school_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-9-15 ~ 2017-9-20"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/check_after_school_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/default_intro2" />
+
+    <FrameLayout
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="@drawable/rounded4"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="280dp"
+            android:layout_height="130dp">
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                >
+
+                <TextView
+                    android:text="월요일 : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="22sp"
+                    />
+
+                <TextView
+                    android:id="@+id/check_after_school_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="생각을 여는 독서반"
+                    android:textSize="22sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                >
+
+                <TextView
+                    android:text="화요일 : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="22sp"
+                    />
+
+                <TextView
+                    android:id="@+id/check_after_school_thuseday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="생각을 여는 독서반"
+                    android:textSize="22sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                >
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="토요일 : "
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/check_after_school_friday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="22sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <ImageButton
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>
