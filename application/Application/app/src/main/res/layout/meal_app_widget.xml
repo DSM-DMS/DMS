@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/meal_widget_time"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="아침"
