@@ -2043,3 +2043,72 @@ a.control_next {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
 }
+.aft-date{
+    width:25%;
+    margin:0 auto;
+    display:inline-block;
+    color:white;
+    font-weight: bold;
+}
+.aft-date span{
+    margin-left:40%;
+    border-radius:50px;
+    background-color: #ACACAC;
+    padding:10px;
+    font-size:30px;
+    cursor: pointer;
+}
+
+.aft-list {
+    height: 270px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.aft-list ul {
+    list-style-type: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: 350px;
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin:0;
+    width:187.5px;
+}
+
+.aft-list li {
+    position: relative;
+    padding: 10px;
+    padding-left: 40px;
+    margin: 10px 0px;
+    height: 30px;
+}
+
+.aft-list label {
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.aft-list label:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    position: absolute;
+    left: 7px;
+    top: calc(50% - 13px);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+#aft-tue-list{
+    padding-left:25%;
+}
+#aft-weekend-list{
+    padding-left:50%;
+}
+#aft-apply-btn{
+    margin-left:34.5%;
+}

@@ -104,6 +104,12 @@ var $dormListWindow = $(".rule-window");
 var $faqBtn = $(".faq-btn");
 var $closeFaqButton = $("#faq-going-out-window");
 var $faqListWindow = $(".faq-window");
+/**
+ * aftershcooc-request
+ */
+var $aftsch = $(".aftsch-btn");
+var $closeAftSchButton = $("#close-aft-window");
+var $aftListWindow = $(".aft-window");
 
 /**
  * Facility
@@ -127,7 +133,6 @@ var $password = $("#pass");
  * Point
  */
 var $openPointButton = $(".point-btn");
-
 /**
  * Notice
  */
@@ -860,6 +865,46 @@ function stayDoCheck() {
     tl1.timeScale(.8);
 
 }
+/**============================================================
+ * afterschool-request
+=============================================================== */
+$aftsch.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
+    $aftListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+$closeAftSchButton.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
+    $aftListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+$("#aft-date-mon span").click(function(){
+    $("#aft-tue-list").hide();
+    $("#aft-weekend-list").hide();
+    $("#aft-mon-list").slideDown();
+});
+$("#aft-date-tue span").click(function(){
+    $("#aft-mon-list").hide();
+    $("#aft-weekend-list").hide();
+    $("#aft-tue-list").slideDown();
+});
+$("#aft-date-weekend span").click(function(){
+    $("#aft-mon-list").hide();
+    $("#aft-tue-list").hide();
+    $("#aft-weekend-list").slideDown();
+});
+$("#aft-apply-btn").click(function() {
+    $stayPaperplane.addClass("send-paperplane");
+
+});
 
 /** ======================================================================================
  * Login
