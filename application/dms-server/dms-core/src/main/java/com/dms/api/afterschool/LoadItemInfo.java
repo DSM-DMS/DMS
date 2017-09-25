@@ -25,6 +25,7 @@ public class LoadItemInfo implements Handler<RoutingContext> {
 				
 				response.put("no", rs.getInt("no"));
 				response.put("title", rs.getString("title"));
+				response.put("target", rs.getInt("target"));
 				response.put("on_monday", rs.getBoolean("on_monday"));
 				response.put("on_tuesday", rs.getBoolean("on_tuesday"));
 				response.put("on_saturday", rs.getBoolean("on_saturday"));
