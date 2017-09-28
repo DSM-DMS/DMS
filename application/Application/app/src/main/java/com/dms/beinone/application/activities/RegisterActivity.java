@@ -3,7 +3,6 @@ package com.dms.beinone.application.activities;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -19,12 +18,6 @@ import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.managers.EditTextManager;
 import com.dms.beinone.application.managers.HttpManager;
-import com.dms.boxfox.networking.HttpBox;
-import com.dms.boxfox.networking.HttpBoxCallback;
-import com.dms.boxfox.networking.datamodel.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -55,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_join_membership);
 
         mCodeET = (EditText) findViewById(R.id.et_register_code);
         mCodeET.setOnFocusChangeListener(new View.OnFocusChangeListener() {

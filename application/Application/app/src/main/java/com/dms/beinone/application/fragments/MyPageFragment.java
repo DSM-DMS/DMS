@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.activities.ChangePasswordActivity;
 import com.dms.beinone.application.activities.LoginActivity;
 import com.dms.beinone.application.dialogs.LogoutDialogFragment;
 import com.dms.beinone.application.managers.AccountManager;
@@ -51,6 +52,7 @@ public class MyPageFragment extends Fragment {
     private TextView mDemeritTV;
     private View mLogoutMenu;
     private TextView mLogoutTV;
+    private View mChangePassword;
 
     @Nullable
     @Override
@@ -63,12 +65,12 @@ public class MyPageFragment extends Fragment {
         mDemeritTV = (TextView) view.findViewById(R.id.tv_my_page_demerit);
         mLogoutMenu = view.findViewById(R.id.layout_my_page_logout);
         mLogoutTV = (TextView) view.findViewById(R.id.tv_my_page_logout);
-
-
+        mChangePassword = view.findViewById(R.id.layout_my_page_change_password);
 
         initMenuArrowColor(view);
 
         View qnaListMenu = view.findViewById(R.id.layout_my_page_qna_list);
+
         qnaListMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +90,7 @@ public class MyPageFragment extends Fragment {
         changePasswordMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), ChangePasswordActivity.class));
             }
         });
 

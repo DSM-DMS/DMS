@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/meal_widget_content"
         android:layout_width="214dp"
-        android:layout_height="50dp"
+        android:layout_height="42dp"
         android:layout_marginLeft="54dp"
         android:text="sadasdddsadasdasdasdasdasdadadasdasdasdsadasdasdasds"
         android:textColor="@color/colorPrimary"
@@ -34,7 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp"
         >
 
         <ImageButton

@@ -60,7 +60,10 @@
         <activity android:name=".activities.FaqActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
-      
+        <activity android:name=".activities.ChangePasswordActivity">
+        </activity>
+        <activity android:name=".activities.JoinMembershipActivity">
+        </activity>
     </application>
 
 </manifest>
