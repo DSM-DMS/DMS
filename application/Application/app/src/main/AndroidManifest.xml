@@ -62,8 +62,6 @@
         </activity>
         <activity android:name=".activities.ChangePasswordActivity">
         </activity>
-        <activity android:name=".activities.JoinMembershipActivity">
-        </activity>
     </application>
 
 </manifest>
