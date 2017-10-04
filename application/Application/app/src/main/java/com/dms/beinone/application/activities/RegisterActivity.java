@@ -174,6 +174,8 @@ public class RegisterActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
+                finish();
             }
         });
     }
