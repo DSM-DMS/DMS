@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -75,7 +75,7 @@
             android:id="@+id/btn_register_register"
             android:layout_width="96dp"
             android:layout_height="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:src="@drawable/ic_chevron_right_white_24dp" />
     </LinearLayout>
