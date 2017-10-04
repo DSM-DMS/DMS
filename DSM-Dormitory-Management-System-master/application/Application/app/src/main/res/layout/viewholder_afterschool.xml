@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_afterschool_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/tv_afterschool_instructor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_afterschool_title"
+            android:layout_marginBottom="4dp"
+            android:textSize="@dimen/text_subtext" />
+
+        <TextView
+            android:id="@+id/tv_afterschool_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_afterschool_instructor"
+            android:textSize="@dimen/text_subtext" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_afterschool_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/afterschool_monday"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+                <TextView
+                    android:id="@+id/tv_afterschool_tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/afterschool_tuesday"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+                <TextView
+                    android:id="@+id/tv_afterschool_wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/afterschool_wednesday"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+                <TextView
+                    android:id="@+id/tv_afterschool_saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/afterschool_saturday"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_afterschool_grade1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/afterschool_grade1"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+                <TextView
+                    android:id="@+id/tv_afterschool_grade2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/afterschool_grade2"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+                <TextView
+                    android:id="@+id/tv_afterschool_grade3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/afterschool_grade3"
+                    android:textColor="@color/disabled"
+                    android:textSize="@dimen/text_subtext" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

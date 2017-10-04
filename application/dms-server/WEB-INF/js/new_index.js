@@ -111,6 +111,10 @@ var $aftsch = $(".aftsch-btn");
 var $closeAftSchButton = $("#close-aft-window");
 var $aftListWindow = $(".aft-window");
 
+var $aftMon = $("#aft-mon-list ul");
+var $aftTue = $("#aft-tue-list ul");
+var $aftSat = $("#aft-weekend-list ul");
+
 /**
  * Facility
  */
@@ -876,6 +880,49 @@ $aftsch.on("click", function() {
     $menu.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
+
+    
+    $.ajax({
+        url: "/afterschool/item/list",
+        type: "GET",
+        statusCode:{
+            200:function(){
+                var templ1 = '<li><input type="radio" name="';
+                var templ2 = '" value="';
+                var templ3 = '"><label>';
+                var templ4 = '</label><div class="bullet"><div class="line zero"></div><div class="line one"></div><div class="line two"></div><div class="line three"></div><div class="line four"></div><div class="line five"></div><div class="line six"></div><div class="line seven"></div></div></li>';
+                
+                var mondayAft = document.createDocumentFragment();
+                var tuesdayAft = document.createDocumentFragment();
+                var saturdayAft = document.createDocumentFragment();
+
+                var aftList = Jquery.parseJSON(data);
+                for(var i=1;i<=aftList.length;i++){
+                    if(aftList[i].on_monday == true){
+                        var monList = templ1 + "2" + templ2 + aftList[i].no.toString() + templ3 + aftList[i].title + templ4;
+                        mondayAft.appendChild(monList);
+                    }
+                    else if(aftList[i].on_tuesday == true){
+                        var tueList = templ1 + "3" + templ2 + aftList[i].no.toString() + templ3 + aftList[i].title + templ4;
+                        tuesdayAft.appendChild(tueList);
+                    }
+                    else if(aftList[i].on_saturday == true){
+                        var satList = templ1 + "4" + templ2 + aftList[i].no.toString() + templ3 + aftList[i].title + templ4;
+                        saturdayAft.appendChild(satList);
+                    }
+                    else{
+                        console.log("123");
+                    }
+                }
+
+                aftMon.appendChild(mondayAft);
+                aftTue.appendChild(tuesdayAft);
+                aftSat.appendChild(saturdayAft);
+
+                aftMon.appendChild
+            },      
+        }
+    });
 });
 $closeAftSchButton.on("click", function() {
     $openStayButton.prop("disabled", false);

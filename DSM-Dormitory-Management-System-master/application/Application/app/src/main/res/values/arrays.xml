@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="change_default_status">
+        <item>금요귀가</item>
+        <item>토요귀가</item>
+        <item>토요귀사</item>
+        <item>잔류</item>
+    </string-array>
+    <string-array name="apply_extension">
+        <item>가온실</item>
+        <item>나온실</item>
+        <item>다온실</item>
+        <item>라온실</item>
+    </string-array>
+</resources>
