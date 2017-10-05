@@ -1,2 +1,0 @@
-# DSM-Dormitory-System
-

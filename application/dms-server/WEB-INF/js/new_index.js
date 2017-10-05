@@ -920,7 +920,10 @@ $aftsch.on("click", function() {
                 aftSat.appendChild(saturdayAft);
 
                 aftMon.appendChild
-            },      
+            },  
+            204:function(){
+                console.log("aftsch_");
+            }    
         }
     });
 });
