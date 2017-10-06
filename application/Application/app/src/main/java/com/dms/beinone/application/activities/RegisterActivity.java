@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                 EditTextManager.hideKeyboard(RegisterActivity.this, (EditText) v);
             }
         });
+
         mCodeET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -197,6 +198,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void validatePassword() {
         String password = mPasswordET.getText().toString();
         String confirm = mConfirmPasswordET.getText().toString();
+
         if (confirm.equals(password)) {
             mValidatePasswordTV.setText(R.string.register_valid_password);
             int validColor = ContextCompat.getColor(this, R.color.valid);
@@ -216,6 +218,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerStudentAccount(String uid, String id, String password) throws IOException {
         DMSService dmsService = HttpManager.createDMSService(this);
+        DMSService dmsService1 = HttpManager.createDMSService(this);
         Call<Void> call = dmsService.register(uid, id, password);
         call.enqueue(new Callback<Void>() {
             @Override

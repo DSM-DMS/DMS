@@ -28,6 +28,7 @@ public class QuestionFragment extends Fragment {
     AfterSchoolClass data;
     int position;
 
+
     @SuppressLint("ValidFragment")
     public QuestionFragment(AfterSchoolClass data, int position){
         this.data = data;

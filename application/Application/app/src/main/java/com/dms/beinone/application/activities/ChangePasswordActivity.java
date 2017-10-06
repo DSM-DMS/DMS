@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.managers.EditTextManager;
@@ -31,7 +32,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private TextView tvCheckPasswordEquals;
 
     @Override
-    public void onCreate(Bundle SavedInstanceState) {
+    protected void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_change_password);
 
@@ -43,11 +44,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         etExistingPassword = (EditText) findViewById(R.id.et_existing_password);
         etExistingPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-
-                EditTextManager.hideKeyboard(ChangePasswordActivity.this, (EditText) view);
+                EditTextManager.hideKeyboard(ChangePasswordActivity.this, (EditText)view);
             }
         });
 
@@ -64,6 +63,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                checkEquals();
                 checkInput();
             }
         });
@@ -89,8 +89,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkInput();
                 checkEquals();
+                checkInput();
             }
         });
 
@@ -99,7 +99,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-
                 EditTextManager.hideKeyboard(ChangePasswordActivity.this, (EditText) view);
             }
         });
@@ -117,8 +116,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkInput();
                 checkEquals();
+                checkInput();
             }
         });
 
@@ -134,16 +133,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private void checkInput () {
 
-        String existingPassword = etChangePassword.getText().toString();
+        String existingPassword = etExistingPassword.getText().toString();
         String changePassword = etChangePassword.getText().toString();
         String confirmPassword = etConfirmPassword.getText().toString();
-
-        Log.e("check","ID : "+existingPassword);
 
         if(!existingPassword.isEmpty() && !changePassword.isEmpty() && !confirmPassword.isEmpty() && checkPassword) {
 
             ibChangeButton.setEnabled(true);
             ibChangeButton.setClickable(true);
+        } else {
+
+            ibChangeButton.setEnabled(false);
+            ibChangeButton.setClickable(false);
         }
     }
 
@@ -151,24 +152,43 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         String changePassword = etChangePassword.getText().toString();
         String confirmPassword = etConfirmPassword.getText().toString();
+        String existPassword = etExistingPassword.getText().toString();
 
-        if(changePassword.equals(confirmPassword)) {
-
-            checkPassword = true;
-            int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.valid);
-            tvCheckPasswordEquals.setText("비밀번호가 일치합니다.");
-            tvCheckPasswordEquals.setTextColor(checkColor);
-            ivCheckPasswordEquals.setImageResource(R.drawable.ic_done_white_18dp);
-            ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
-        }
-        else {
-
-            checkPassword = false;
+        // 기존 비밀번호와 새 비밀번호가 일치하는지 확인하는 조건문 새 비밀번호와 확인이 공백이 아닐때만 판별
+        if((!changePassword.isEmpty() && existPassword.equals(changePassword)) || (existPassword.equals(confirmPassword) && !confirmPassword.isEmpty())) {
+            checkPassword=false;
             int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.invalid);
-            tvCheckPasswordEquals.setText("비밀번호가 일치하지 않습니다.");
+            tvCheckPasswordEquals.setText("기존 비밀번호와 새 비밀번호가 일치합니다.");
             tvCheckPasswordEquals.setTextColor(checkColor);
             ivCheckPasswordEquals.setImageResource(R.drawable.ic_warning_white_18dp);
             ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
+        }
+        else {
+            // 새 비밀번호가 확인과 일치하는지 확인하는 조건문 단 새 비밀번호와 확인이 공백이 아닐때만 판별
+            if (changePassword.equals(confirmPassword) && !changePassword.isEmpty()) {
+                checkPassword = true;
+                int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.valid);
+                tvCheckPasswordEquals.setText("비밀번호가 일치합니다.");
+                tvCheckPasswordEquals.setTextColor(checkColor);
+                ivCheckPasswordEquals.setImageResource(R.drawable.ic_done_white_18dp);
+                ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
+                ivCheckPasswordEquals.setVisibility(View.VISIBLE);
+            }
+            // 새 비밀번호와 확인이 서로 일치하지 않음을 확인하는 조건문 단 새 비밀번호와 확인이 공백이 아닐때만 판별
+            else if(!changePassword.isEmpty() || !confirmPassword.isEmpty()){
+                checkPassword = false;
+                int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.invalid);
+                tvCheckPasswordEquals.setText("비밀번호가 일치하지 않습니다.");
+                tvCheckPasswordEquals.setTextColor(checkColor);
+                ivCheckPasswordEquals.setImageResource(R.drawable.ic_warning_white_18dp);
+                ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
+                ivCheckPasswordEquals.setVisibility(View.VISIBLE);
+            }
+            // 새 비밀번호와 확인이 공백임을 확인하는 조건문
+            else if (changePassword.isEmpty() && confirmPassword.isEmpty()){
+                tvCheckPasswordEquals.setText("");
+                ivCheckPasswordEquals.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }
