@@ -2,6 +2,7 @@ package com.dms.beinone.application.dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,12 +27,17 @@ import static com.dms.beinone.application.DMSService.HTTP_CREATED;
 
 public class LogoutDialogFragment extends DialogFragment {
 
+    private Context context;
+
+    public LogoutDialogFragment (Context context) {
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getContext())
-                .setTitle(R.string.logout_dialog_title)
-                .setMessage(R.string.logout_dialog_message)
+                .setTitle(R.string.logout_dialog_message)
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -57,7 +63,7 @@ public class LogoutDialogFragment extends DialogFragment {
                 int code = response.code();
                 switch (code) {
                     case HTTP_CREATED:
-                        AccountManager.setLogined(getContext(), false);
+                        AccountManager.setLogined(context, false);
                         Toast.makeText(getContext(), getString(R.string.logout_created), Toast.LENGTH_SHORT).show();
                         dismiss();
                         break;

@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
@@ -37,23 +38,27 @@ public interface DMSService {
     String SERVER_MEAL_URL =  "http://dsm2015.cafe24.com:81";
 
     @FormUrlEncoded
-    @POST("account/login/student")
+    @POST("/account/login/student")
     Call<Void> login(@Field("id") String id, @Field("password") String password, @Field("remember") boolean remember);
 
     @FormUrlEncoded
-    @POST("account/register/student")
+    @POST("/account/register/student")
     Call<Void> register(@Field("uid") String uid, @Field("id") String id, @Field("password") String password);
 
     @FormUrlEncoded
-    @PUT("apply/goingout")
+    @PATCH("/account/password/student")
+    Call<Void> change(@Field("exist") String exist, @Field("change") String change);
+
+    @FormUrlEncoded
+    @PUT("/apply/goingout")
     Call<Void> applyGoingout(@Field("sat") boolean sat, @Field("sun") boolean sun);
 
-    @GET("apply/extension/class")
+    @GET("/apply/extension/class")
     Call<Class> loadExtensionClass(@Query("option") String option, @Query("class") int clazz);
 
 
     @FormUrlEncoded
-    @PUT("apply/extension")
+    @PUT("/apply/extension")
     Call<Void> applyExtension(@Field("class") int clazz, @Field("seat") int seat);
 
     @GET("apply/all")

@@ -38,6 +38,7 @@
     <string name="http_bad_request">잘못된 요청입니다.</string>
 
     <!-- Login Activity -->
+    <string name="login_no_id_password">아이디와 비밀번호를 입력하세요</string>
     <string name="login_id">아이디</string>
     <string name="login_password">비밀번호</string>
     <string name="login_remember">로그인 유지</string>
@@ -65,6 +66,14 @@
     <string name="register_conflict">아이디가 이미 존재합니다.</string>
     <string name="register_failure">회원가입에 실패했습니다.</string>
     <string name="register_internal_server_error">오류로 인해 회원가입에 실패했습니다.</string>
+
+    <!--changePassword Activity-->
+    <string name="change_check_exist">기존 비밀번호와 새 비밀번호가 일치합니다</string>
+    <string name="change_check_confirm_fail">비밀번호가 일치하지 않습니다.</string>
+    <string name="change_check_confirm_succes">비밀번호가 일치합니다.</string>
+    <string name="change_eror_HTTP_OK">비밀번호가 변경되었습니다.</string>
+    <string name="change_eror_HTTP_BAD">기존 비밀번호가 틀리셨습니다.</string>
+    <string name="change_eror_HTTP_INTERNAL_SERVER_EROR">오류로 인해 비밀번호 변경에 실패하셨습니다.</string>
 
     <!-- Apply List Fragment -->
     <string name="apply_list_load_internal_server_error">오류로 인해 신청 정보를 불러오지 못했습니다.</string>

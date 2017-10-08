@@ -66,9 +66,14 @@ public class LoginActivity extends AppCompatActivity {
                 String id = mIdET.getText().toString();
                 String password = mPasswordET.getText().toString();
                 boolean remember = mRememberCB.isChecked();
-                if (id.equals("")) {
+
+                if (id.equals("") && password.equals("")){
+                    Toast.makeText(LoginActivity.this,R.string.login_no_id_password,Toast.LENGTH_SHORT).show();
+                }
+                else if (id.equals("")) {
                     Toast.makeText(LoginActivity.this, R.string.login_no_id, Toast.LENGTH_SHORT)
                             .show();
+
                 } else if (password.equals("")) {
                     Toast.makeText(LoginActivity.this, R.string.login_no_password, Toast.LENGTH_SHORT)
                             .show();

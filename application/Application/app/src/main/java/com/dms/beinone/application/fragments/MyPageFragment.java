@@ -150,7 +150,7 @@ public class MyPageFragment extends Fragment {
             mLogoutMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LogoutDialogFragment logoutDialogFragment = new LogoutDialogFragment();
+                    LogoutDialogFragment logoutDialogFragment = new LogoutDialogFragment(getContext());
                     logoutDialogFragment.setTargetFragment(MyPageFragment.this, REQUEST_CODE_LOGOUT_DIALOG);
                     logoutDialogFragment.show(getChildFragmentManager(), null);
                 }
@@ -180,7 +180,6 @@ public class MyPageFragment extends Fragment {
                         Toast.makeText(getContext(), R.string.my_page_load_no_content, Toast.LENGTH_SHORT).show();
                         break;
                     case HTTP_BAD_REQUEST:
-
                         break;
                     case HTTP_INTERNAL_SERVER_ERROR:
                         Toast.makeText(getContext(), R.string.my_page_load_internal_server_error, Toast.LENGTH_SHORT).show();

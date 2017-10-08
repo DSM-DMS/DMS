@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -175,8 +176,6 @@ public class RegisterActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-                finish();
             }
         });
     }
@@ -218,7 +217,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerStudentAccount(String uid, String id, String password) throws IOException {
         DMSService dmsService = HttpManager.createDMSService(this);
-        DMSService dmsService1 = HttpManager.createDMSService(this);
         Call<Void> call = dmsService.register(uid, id, password);
         call.enqueue(new Callback<Void>() {
             @Override

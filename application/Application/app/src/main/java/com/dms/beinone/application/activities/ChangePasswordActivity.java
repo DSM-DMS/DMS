@@ -11,11 +11,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dms.beinone.application.DMSService;
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.managers.EditTextManager;
+import com.dms.beinone.application.managers.HttpManager;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.dms.beinone.application.DMSService.HTTP_BAD_REQUEST;
+import static com.dms.beinone.application.DMSService.HTTP_CREATED;
+import static com.dms.beinone.application.DMSService.HTTP_INTERNAL_SERVER_ERROR;
+import static com.dms.beinone.application.DMSService.HTTP_OK;
 
 /**
  * Created by dsm2017 on 2017-09-27.
@@ -126,7 +140,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick (View view) {
 
-                finish();
+                String change = etChangePassword.getText().toString().trim();
+                String exist = etExistingPassword.getText().toString().trim();
+                changePassword(exist, change);
             }
         });
     }
@@ -158,7 +174,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         if((!changePassword.isEmpty() && existPassword.equals(changePassword)) || (existPassword.equals(confirmPassword) && !confirmPassword.isEmpty())) {
             checkPassword=false;
             int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.invalid);
-            tvCheckPasswordEquals.setText("기존 비밀번호와 새 비밀번호가 일치합니다.");
+            tvCheckPasswordEquals.setText(R.string.change_check_exist);
             tvCheckPasswordEquals.setTextColor(checkColor);
             ivCheckPasswordEquals.setImageResource(R.drawable.ic_warning_white_18dp);
             ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
@@ -168,7 +184,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             if (changePassword.equals(confirmPassword) && !changePassword.isEmpty()) {
                 checkPassword = true;
                 int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.valid);
-                tvCheckPasswordEquals.setText("비밀번호가 일치합니다.");
+                tvCheckPasswordEquals.setText(R.string.change_check_confirm_succes);
                 tvCheckPasswordEquals.setTextColor(checkColor);
                 ivCheckPasswordEquals.setImageResource(R.drawable.ic_done_white_18dp);
                 ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
@@ -178,7 +194,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             else if(!changePassword.isEmpty() || !confirmPassword.isEmpty()){
                 checkPassword = false;
                 int checkColor = ContextCompat.getColor(ChangePasswordActivity.this, R.color.invalid);
-                tvCheckPasswordEquals.setText("비밀번호가 일치하지 않습니다.");
+                tvCheckPasswordEquals.setText(R.string.change_check_confirm_fail);
                 tvCheckPasswordEquals.setTextColor(checkColor);
                 ivCheckPasswordEquals.setImageResource(R.drawable.ic_warning_white_18dp);
                 ivCheckPasswordEquals.setColorFilter(checkColor, PorterDuff.Mode.MULTIPLY);
@@ -190,5 +206,39 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 ivCheckPasswordEquals.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    private void changePassword (final String existPassword, final String changePassword) {
+
+        DMSService dmsService = HttpManager.createDMSService(this);
+        Call<Void> call = dmsService.change(existPassword, changePassword);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                int code = response.code();
+
+                switch (code) {
+
+                    case HTTP_OK:
+                        Toast.makeText(ChangePasswordActivity.this, R.string.change_eror_HTTP_OK, Toast.LENGTH_SHORT).show();
+                        finish();
+                        break;
+                    case HTTP_BAD_REQUEST:
+                        Toast.makeText(ChangePasswordActivity.this, R.string.change_eror_HTTP_BAD, Toast.LENGTH_SHORT).show();
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR:
+                        Toast.makeText(ChangePasswordActivity.this, R.string.change_eror_HTTP_INTERNAL_SERVER_EROR, Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
