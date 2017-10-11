@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class ApplyDataUtil {
     //this class change to .config file later
 	private static String EXTENSION_APPLY_START = "17:30";
-	private static String EXTENSION_APPLY_LIMIT = "20:30";
+	private static String EXTENSION_APPLY_LIMIT = "22:00";
 
     public static boolean canApplyStay(String week) {
         Calendar calendar = Calendar.getInstance();
@@ -58,6 +58,7 @@ public class ApplyDataUtil {
         	check = true;
         }
         
+        System.out.println(check);
         return check;
     }
 
