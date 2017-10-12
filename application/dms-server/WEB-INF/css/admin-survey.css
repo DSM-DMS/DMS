@@ -1,0 +1,20 @@
+.date-input {
+    width: 60px;
+}
+
+#choice-modal {
+    border: 1px solid blue;
+    padding: 10px;
+    display: none;
+    position: absolute;
+    top: 97%;
+    right: 1%;
+}
+
+#survey-btns{
+    float: right;
+}
+
+#survey-btns > input{
+    margin-top:10px;
+}

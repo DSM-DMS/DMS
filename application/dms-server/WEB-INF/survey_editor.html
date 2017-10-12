@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DMS</title>
+    <link rel="stylesheet" href="./css/admin-survey.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./js/admin_survey.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>DSM Dormitory System</h1>
+    </div>
+
+    <div class="main">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-block">
+                    <div class="underbar-title border-blue"><input id="survey-title" style=" width:400px;" class="clear-input" type="text" name="title" value="" placeholder="설문의 제목을 쓰세요"></div>
+                    <div>
+                        <p>시작일</p><input  type="text" name="" value="" placeholder="YYYY" class="start-date"> <p style="display: inline-block">년</p>
+                        <input type="text" name="" value="" placeholder="MM" class="start-date"> <p style="display: inline-block">월</p>
+                        <input type="text" name="" value="" placeholder="DD" class="start-date"> <p style="display: inline-block">일</p>
+                        <p>종료일</p><input  type="text" name="" value="" placeholder="YYYY" class="finish-date"> <p style="display: inline-block">년</p>
+                        <input  type="text" name="" value="" placeholder="MM" class="finish-date"> <p style="display: inline-block">월</p>
+                        <input type="text" name="" value="" placeholder="DD" class="finish-date"> <p style="display: inline-block">일</p>
+                    </div>
+                    <div id="survey-contents"></div>
+                    <div id="survey-btns">
+                        <input class="btn btn-default" type="button" name="" value="추가" onclick=kind()>
+                        <input class="btn btn-default finish-btn" type="button" name="" value="완료">
+                        <div id="choice-modal">
+                            <input class=" btn btn-default" type="button" name="" value="주관식" onclick=addShortAnswerQuestion()>
+                            <input class=" btn btn-default" type="button" name="" value="객관식" onclick=addMultipleChoice()>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- <script src="js/ckeditor/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
+</html>
