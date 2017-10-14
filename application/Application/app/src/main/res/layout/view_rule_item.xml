@@ -11,6 +11,7 @@
         android:id="@+id/dormitory_notice_item_title"
         android:text="제목"
         android:layout_width="250dp"
+        android:layout_centerVertical="true"
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:layout_marginLeft="16dp"
@@ -19,35 +20,9 @@
         android:ellipsize="end"
         />
 
-    <LinearLayout
-        android:layout_below="@id/dormitory_notice_item_title"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        >
 
-        <TextView
-            android:id="@+id/normal_text"
-            android:layout_below="@id/dormitory_notice_item_title"
-            android:text="담당부서 : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/dormitory_notice_item_title"
-            android:textSize="12dp"
-            />
 
-        <TextView
-            android:id="@+id/dormitory_back_office"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/normal_text"
-            android:layout_alignTop="@+id/normal_text"
-            android:text="사감부"
-            android:textSize="12dp"
-            />
+
 
        <!-- <ImageView
             android:id="@+id/dormitory_icon_new"
@@ -59,7 +34,6 @@
             android:layout_marginBottom="4dp"
             android:src="@drawable/notice_item_icon1"
             />-->
-    </LinearLayout>
 
     <ImageButton
         android:id="@+id/ib_notice_next"

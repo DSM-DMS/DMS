@@ -79,4 +79,7 @@ public interface DMSService {
     @GET("post/list/notice")
     Call<JsonObject> loadNotice();
 
+    @GET("post/list/rule")
+    Call<JsonObject> loadRule();
+
 }

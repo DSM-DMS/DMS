@@ -11,28 +11,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dms.beinone.application.R;
-import com.dms.beinone.application.activities.NoticeActivity;
+import com.dms.beinone.application.activities.FaqActivity;
+import com.dms.beinone.application.activities.RuleActivity;
 import com.dms.beinone.application.models.Notice;
 
 import java.util.ArrayList;
 
-public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNoticeAdapter.ViewHolder> {
+public class DormitoryRuleAdapter extends RecyclerView.Adapter<DormitoryRuleAdapter.ViewHolder> {
 
     WebView webView;
-    Context maContext;
+    Context mContext;
     private ArrayList<Notice> items;
 
-    public  DormitoryNoticeAdapter (Context context, ArrayList<Notice> arrayList){
+    public DormitoryRuleAdapter(Context context, ArrayList<Notice> arrayList){
 
         items = arrayList;
-        maContext = context;
+        mContext = context;
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_rule_item, parent, false);
         ViewHolder vH = new ViewHolder(v);
         return vH;
     }
@@ -40,17 +41,17 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
     @Override
     public void onBindViewHolder (ViewHolder v, final int position) {
 
-        v.DormitoryBackOffice.setText(items.get(position).getWriter());
+//        v.DormitoryBackOffice.setText(items.get(position).getWriter());
         v.DormitoryTitle.setText(items.get(position).getTitle());
         v.Dormitory_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(maContext,NoticeActivity.class);
+                Intent intent=new Intent(mContext,RuleActivity.class);
                 String title=items.get(position).getTitle();
                 String content=items.get(position).getContent();
                 intent.putExtra("title",title);
                 intent.putExtra("content",content);
-                maContext.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
     }
@@ -66,7 +67,7 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
         TextView DormitoryTitle;
         TextView DormitoryBackOffice;
         ImageView Dormitory_next_button;
-
+        TextView DormitoryNormalText;
 
         public ViewHolder(View view)  {
 
@@ -74,6 +75,7 @@ public class DormitoryNoticeAdapter extends RecyclerView.Adapter<DormitoryNotice
             Dormitory_next_button=(ImageView)view.findViewById(R.id.ib_notice_next);
             DormitoryTitle = (TextView) view.findViewById(R.id.dormitory_notice_item_title);
             DormitoryBackOffice = (TextView) view.findViewById(R.id.dormitory_back_office);
+            DormitoryNormalText = (TextView) view.findViewById(R.id.normal_text);
         }
     }
 

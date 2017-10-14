@@ -53,18 +53,21 @@
             android:name=".activities.DormitoryNoticeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.FrequentlyQuestionActivity"
+            android:name=".activities.NoticeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.NoticeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.FaqActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
-        <activity android:name=".activities.ChangePasswordActivity">
-        </activity>
-        <activity android:name=".activities.RegisterActivity">
-            
-        </activity>
+        <activity
+            android:name=".activities.FaqActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".activities.RuleActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".activities.DormitoryRuleActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".activities.ChangePasswordActivity"></activity>
+        <activity android:name=".activities.RegisterActivity"></activity>
+        <activity android:name=".activities.SurveyListActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

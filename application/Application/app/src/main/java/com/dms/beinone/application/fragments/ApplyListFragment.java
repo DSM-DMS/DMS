@@ -21,6 +21,7 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.AfterSchoolActivity;
 import com.dms.beinone.application.activities.ExtensionActivity;
 import com.dms.beinone.application.activities.StayActivity;
+import com.dms.beinone.application.activities.SurveyListActivity;
 import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
@@ -86,11 +87,11 @@ public class ApplyListFragment extends Fragment {
                     }
                 }));*/
 
-        mExpandableLayout.addView(createParentView("방과후 신청", ContextCompat.getColor(getContext(), R.color.applyList4)),
+        mExpandableLayout.addView(createParentView("설문 조사", ContextCompat.getColor(getContext(), R.color.applyList4)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList4), R.drawable.whale, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getContext(), AfterSchoolActivity.class));
+                        startActivity(new Intent(getContext(), SurveyListActivity.class));
                     }
                 }));
 

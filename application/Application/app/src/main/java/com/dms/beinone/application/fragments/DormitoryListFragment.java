@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.DormitoryNoticeActivity;
+import com.dms.beinone.application.activities.DormitoryRuleActivity;
 import com.dms.beinone.application.dialogs.ProblemReportDialog;
 import com.dms.beinone.application.activities.DormitoryFaqActivity;
 
@@ -49,6 +50,16 @@ public class DormitoryListFragment extends Fragment {
         final View.OnClickListener cancleListener;
         final ImageButton notice_button = (ImageButton) view.findViewById(R.id.ib_dormitory_list_notice);
         final ImageButton faq_button=(ImageButton)view.findViewById(R.id.ib_dormitory_list_faq);
+        final ImageButton rule_button=(ImageButton)view.findViewById(R.id.ib_dormitory_list_rule);
+
+        rule_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DormitoryRuleActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         ib_notice_button.setOnClickListener(new View.OnClickListener()  {
             @Override
