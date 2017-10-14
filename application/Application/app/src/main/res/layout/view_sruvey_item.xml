@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_marginTop="8dp"
+    >
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:id="@+id/dormitory_survey_item_title"
+        android:text="제목"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="#000000"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:layout_below="@id/dormitory_survey_item_title"
+        android:layout_marginTop="6dp"
+        android:id="@+id/dormitory_survey_item_date"
+        android:text="2017-06-31~2017-07-31"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="#000000"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
+
+
+
+
+
+       <!-- <ImageView
+            android:id="@+id/dormitory_icon_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/dormitory_notice_item_title"
+            android:layout_alignBottom="@id/dormitory_notice_item_title"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/notice_item_icon1"
+            />-->
+
+    <ImageButton
+        android:id="@+id/ib_notice_next"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="@drawable/notice_item_right_arrow_black_24dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_alignParentBottom="true"
+        >
+    </View>
+
+</RelativeLayout>

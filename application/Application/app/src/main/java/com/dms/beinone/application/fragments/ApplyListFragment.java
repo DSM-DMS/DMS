@@ -161,6 +161,8 @@ public class ApplyListFragment extends Fragment {
         View view = mExpandableLayout.getChildAt(1);
         TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
 
+        statusTV.setText("미신청");
+
         if (clazz == null) {
             statusTV.setText(R.string.unapplied);
         } else {
@@ -171,6 +173,8 @@ public class ApplyListFragment extends Fragment {
     private void setStayApplyStatus(int value) {
         View view = mExpandableLayout.getChildAt(3);
         TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
+
+
 
         if (value == -1) {
             statusTV.setText(R.string.unapplied);
