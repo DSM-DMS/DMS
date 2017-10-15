@@ -13,6 +13,7 @@ public class UploadItem implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
 		String title = ctx.request().getParam("title");
+		int target = Integer.parseInt(ctx.request().getFormAttribute("target"));
 		boolean onMonday = Boolean.parseBoolean(ctx.request().getParam("on_monday"));
 		boolean onTuesday = Boolean.parseBoolean(ctx.request().getParam("on_tuesday"));
 		boolean onSaturday = Boolean.parseBoolean(ctx.request().getParam("on_saturday"));
@@ -23,7 +24,7 @@ public class UploadItem implements Handler<RoutingContext> {
 			return;
 		}
 
-		DB.executeUpdate("INSERT INTO afterschool_items(title, on_monday, on_tuesday, on_saturday) VALUES(?, ?, ?, ?)", title, onMonday, onTuesday, onSaturday);
+		DB.executeUpdate("INSERT INTO afterschool_items(title, target, on_monday, on_tuesday, on_saturday) VALUES(?, ?, ?, ?, ?)", title, target, onMonday, onTuesday, onSaturday);
 
 		ctx.response().setStatusCode(201).end();
 		ctx.response().close();

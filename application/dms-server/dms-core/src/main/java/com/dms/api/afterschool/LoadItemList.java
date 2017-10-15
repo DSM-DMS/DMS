@@ -27,6 +27,7 @@ public class LoadItemList implements Handler<RoutingContext> {
 
 				afterschool.put("no", rs.getInt("no"));
 				afterschool.put("title", rs.getString("title"));
+				afterschool.put("target", rs.getInt("target"));
 				afterschool.put("on_monday", rs.getBoolean("on_monday"));
 				afterschool.put("on_tuesday", rs.getBoolean("on_tuesday"));
 				afterschool.put("on_saturday", rs.getBoolean("on_saturday"));

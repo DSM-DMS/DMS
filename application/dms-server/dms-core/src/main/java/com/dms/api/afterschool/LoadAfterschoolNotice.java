@@ -12,23 +12,17 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path = "/afterschool/item", method = { HttpMethod.GET })
-public class LoadItemInfo implements Handler<RoutingContext> {
+@Route(path = "/afterschool/notice", method = { HttpMethod.GET})
+public class LoadAfterschoolNotice implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
-		int no = Integer.parseInt(ctx.request().getParam("no"));
-		
-		ResultSet rs = DB.executeQuery("SELECT * FROM afterschool_items WHERE no=?", no);
+		ResultSet rs = DB.executeQuery("SELCET * FROM afterschool_notice");
+		JSONObject response = new JSONObject();
 		try {
 			if(rs.next()) {
-				JSONObject response = new JSONObject();
-				
-				response.put("no", rs.getInt("no"));
-				response.put("title", rs.getString("title"));
-				response.put("target", rs.getInt("target"));
-				response.put("on_monday", rs.getBoolean("on_monday"));
-				response.put("on_tuesday", rs.getBoolean("on_tuesday"));
-				response.put("on_saturday", rs.getBoolean("on_saturday"));
+				response.put("start_date", rs.getString("start_date"));
+				response.put("end_date", rs.getString("end_date"));
+				response.put("content", rs.getString("content"));
 				
 				ctx.response().setStatusCode(200);
 				ctx.response().end(response.toString());

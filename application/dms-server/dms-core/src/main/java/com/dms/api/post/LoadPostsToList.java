@@ -34,7 +34,7 @@ public class LoadPostsToList implements Handler<RoutingContext> {
 				} else {
 					int page = Integer.parseInt(ctx.request().getParam("page"));
 					int limit = Integer.parseInt(ctx.request().getParam("limit"));
-					rs = DB.executeQuery("SELECT * FROM "+category+" order by no desc limit ", ((page - 1) * limit), ", ", limit);
+					rs = DB.executeQuery("SELECT * FROM "+category+" order by no desc limit ?, ?", ((page - 1) * limit), limit);
 				}
 				
 				JSONObject response = new JSONObject();
@@ -58,7 +58,7 @@ public class LoadPostsToList implements Handler<RoutingContext> {
 					posts.add(post);
 				}
 				
-				response.put("num_if_post", posts.size());
+				response.put("num_of_post", posts.size());
 				response.put("result", posts);
 				
 				ctx.response().setStatusCode(200);
