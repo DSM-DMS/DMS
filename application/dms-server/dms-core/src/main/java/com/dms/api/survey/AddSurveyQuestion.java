@@ -18,7 +18,7 @@ public class AddSurveyQuestion implements Handler<RoutingContext> {
 			return;
 		}
 		
-		int surveyIdx = Integer.parseInt(ctx.request().getFormAttribute("idx"));
+		int surveyNo = Integer.parseInt(ctx.request().getFormAttribute("survey_no"));
 		String title = ctx.request().getFormAttribute("title");
 		boolean isObjective = Boolean.parseBoolean(ctx.request().getFormAttribute("is_objective"));
 		
@@ -26,9 +26,9 @@ public class AddSurveyQuestion implements Handler<RoutingContext> {
 			// true면 객관식, false면 주관식
 			String objects = ctx.request().getFormAttribute("objects");
 			
-			DB.executeUpdate("INSERT INTO survey_question(survey_idx, title, is_objective, objects) VALUES(?, ?, ?, ?)", surveyIdx, title, isObjective, objects);
+			DB.executeUpdate("INSERT INTO survey_question(survey_no, title, is_objective, objects) VALUES(?, ?, ?, ?)", surveyNo, title, isObjective, objects);
 		} else {
-			DB.executeUpdate("INSERT INTO survey_question(survey_idx, title, is_objective) VALUES(?, ?, ?)", surveyIdx, title, isObjective);
+			DB.executeUpdate("INSERT INTO survey_question(survey_no, title, is_objective) VALUES(?, ?, ?)", surveyNo, title, isObjective);
 		}
 		
 		ctx.response().setStatusCode(201).end();

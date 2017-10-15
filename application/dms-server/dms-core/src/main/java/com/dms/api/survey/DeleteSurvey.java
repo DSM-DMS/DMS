@@ -18,9 +18,9 @@ public class DeleteSurvey implements Handler<RoutingContext> {
 			return;
 		}
 		
-		int no = Integer.parseInt(ctx.request().getFormAttribute("no"));
+		int surveyNo = Integer.parseInt(ctx.request().getFormAttribute("survey_no"));
 		
-		DB.executeUpdate("DELETE FROM survey WHERE no=?", no);
+		DB.executeUpdate("DELETE FROM survey WHERE no=?", surveyNo);
 		
 		ctx.response().setStatusCode(200).end();
 		ctx.response().close();

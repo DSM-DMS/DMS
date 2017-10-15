@@ -14,7 +14,8 @@ import io.vertx.ext.web.RoutingContext;
 public class AnswerSurvey implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
-		int no = Integer.parseInt(ctx.request().getFormAttribute("no"));
+		int questionNo = Integer.parseInt(ctx.request().getFormAttribute("question_no"));
+		
 		String uid = null;
 		try {
 			uid = UserManager.getUid(UserManager.getIdFromSession(ctx));
@@ -23,7 +24,7 @@ public class AnswerSurvey implements Handler<RoutingContext> {
 		}
 		String data = ctx.request().getFormAttribute("data");
 		
-		DB.executeUpdate("INSERT INTO survey_answer VALUES(?, ?, ?)", no, uid, data);
+		DB.executeUpdate("INSERT INTO survey_answer VALUES(?, ?, ?)", questionNo, uid, data);
 		
 		ctx.response().setStatusCode(201).end();
 		ctx.response().close();

@@ -24,13 +24,10 @@ public class LoadSurvey implements Handler<RoutingContext> {
 			while(rs.next()) {
 				JSONObject survey = new JSONObject();
 				
+				survey.put("survey_no", rs.getInt("no"));
 				survey.put("start_date", rs.getString("start_date"));
 				survey.put("end_date", rs.getString("end_date"));
 				survey.put("title", rs.getString("title"));
-				survey.put("is_objective", rs.getBoolean("is_objective"));
-				if(rs.getBoolean("is_objective")) {
-					survey.put("objects", rs.getString("objects"));
-				}
 				
 				response.put(survey);
 			}
