@@ -21,16 +21,8 @@ public class AddSurvey implements Handler<RoutingContext> {
 		String startDate = ctx.request().getFormAttribute("start_date");
 		String endDate = ctx.request().getFormAttribute("end_date");
 		String title = ctx.request().getFormAttribute("title");
-		boolean isObjective = Boolean.parseBoolean(ctx.request().getFormAttribute("is_objective"));
-		// true면 객관식, false면 주관식
 		
-		if(isObjective) {
-			String objects = ctx.request().getFormAttribute("objects");
-			
-			DB.executeUpdate("INSERT INTO survey(start_date, end_date, title, is_objective, objects) VALUES(?, ?, ?, ?, ?)", startDate, endDate, title, isObjective, objects);
-		} else {
-			DB.executeUpdate("INSERT INTO survey(start_date, end_date, title, is_objective) VALUES(?, ?, ?, ?)", startDate, endDate, title, isObjective);
-		}
+		DB.executeUpdate("INSERT INTO survey(start_date, end_date, title) VALUES(?, ?, ?)", startDate, endDate, title);
 		
 		ctx.response().setStatusCode(201).end();
 		ctx.response().close();
