@@ -29,6 +29,7 @@ var $closeModal = $(".btn-close");
  */
 var $menu = $("#menu");
 var $menu2 = $("#menu2");
+var $menuWrapper = $menu.parent();
 var $page1 = $("#page1");
 var $page2 = $("#page2");
 var $menuPagenation = $("#menu-pagenation");
@@ -339,6 +340,7 @@ $openExtensionButton.on("click", function() {
     $extensionWindow.toggleClass("fade-in");
     $menu2.toggleClass("fade-out");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -349,6 +351,7 @@ $closeExtensionButton.on("click", function() {
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
 
@@ -361,6 +364,7 @@ $noticeMoreBtn.on("click", function() {
         $panel.toggleClass("left-move");
         $menu.toggleClass("fade-out");
         $menu2.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
         $menuPagenation.toggleClass("fade-out");
     } else if (selectedCategory == "rule") {
         $openStayButton.prop("disabled", true);
@@ -368,6 +372,7 @@ $noticeMoreBtn.on("click", function() {
         $dormListWindow.toggleClass("fade-in");
         $panel.toggleClass("left-move");
         $menu.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
         $menu2.toggleClass("fade-out");
         $menuPagenation.toggleClass("fade-out");
     } else if (selectedCategory == "faq") {
@@ -376,6 +381,7 @@ $noticeMoreBtn.on("click", function() {
         $faqListWindow.toggleClass("fade-in");
         $panel.toggleClass("left-move");
         $menu.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
         $menu2.toggleClass("fade-out");
         $menuPagenation.toggleClass("fade-out");
     }
@@ -385,6 +391,7 @@ $closeNoticeButton.on("click", function() {
     $noticeListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -516,6 +523,7 @@ $openMyPageButton.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -526,6 +534,7 @@ $closeMypageWindow.on("click", function() {
     $mypageWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -537,6 +546,7 @@ $dormRule.on("click", function() {
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -547,6 +557,7 @@ $closeDormRuleButton.on("click", function() {
     $dormListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -653,6 +664,7 @@ $closeFaqButton.on("click", function() {
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -663,6 +675,7 @@ $faqBtn.on("click", function() {
     $faqListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -766,6 +779,7 @@ $openStayButton.click(function() {
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
     setStayValue(stayDate);
@@ -777,6 +791,7 @@ $closeStayButton.on("click", function() {
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -878,6 +893,7 @@ $aftsch.on("click", function() {
     $aftListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 
@@ -933,6 +949,7 @@ $closeAftSchButton.on("click", function() {
     $aftListWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
@@ -1068,6 +1085,7 @@ $openGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
     setGoingOutValue(goingOutDate);
@@ -1080,6 +1098,7 @@ $closeGoingOutButton.on("click", function() {
     $panel.toggleClass("left-move");
     $goingOutWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
+    $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
 });
