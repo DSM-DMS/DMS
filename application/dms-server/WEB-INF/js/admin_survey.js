@@ -48,10 +48,10 @@ function kind() {
 }
 $(document).ready(function () {
     $(".finish-btn").click(function () {
-        let title = $("#survey-title").value;
+        let title = $("#survey-title")[0].value;
         let startDate = $(".start-date")[0].value + '-' + $(".start-date")[1].value + '-' + $(".start-date")[2].value;
         let finishDate = $(".finish-date")[0].value + '-' + $(".finish-date")[1].value + '-' + $(".finish-date")[2].value;
-
+        let grade = $("#grade")[0].value;
         let surveys = {};
         for (var i = 0; i < surveyCnt; i++) {
             let choices = [];
@@ -76,6 +76,10 @@ $(document).ready(function () {
             } else survey = currentSurvey.value;
             surveys[i] = survey;
         }
+        console.log(title);
+        console.log(startDate);
+        console.log(finishDate);
+        console.log(grade);
         console.log(surveys);
         // $.ajax({
         //     url: "/survey",

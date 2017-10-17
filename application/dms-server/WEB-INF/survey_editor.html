@@ -26,12 +26,18 @@
                 <div class="card-block">
                     <div class="underbar-title border-blue"><input id="survey-title" style=" width:400px;" class="clear-input" type="text" name="title" value="" placeholder="설문의 제목을 쓰세요"></div>
                     <div>
-                        <p>시작일</p><input  type="text" name="" value="" placeholder="YYYY" class="start-date"> <p style="display: inline-block">년</p>
-                        <input type="text" name="" value="" placeholder="MM" class="start-date"> <p style="display: inline-block">월</p>
-                        <input type="text" name="" value="" placeholder="DD" class="start-date"> <p style="display: inline-block">일</p>
-                        <p>종료일</p><input  type="text" name="" value="" placeholder="YYYY" class="finish-date"> <p style="display: inline-block">년</p>
-                        <input  type="text" name="" value="" placeholder="MM" class="finish-date"> <p style="display: inline-block">월</p>
-                        <input type="text" name="" value="" placeholder="DD" class="finish-date"> <p style="display: inline-block">일</p>
+                        <p>시작일</p><input  type="text" name="" value="" placeholder="YYYY" class="start-date" maxlength="4"> <p style="display: inline-block">년</p>
+                        <input type="text" name="" value="" placeholder="MM" class="start-date" maxlength="2"> <p style="display: inline-block">월</p>
+                        <input type="text" name="" value="" placeholder="DD" class="start-date" maxlength="2"> <p style="display: inline-block">일</p>
+                        <p>종료일</p><input  type="text" name="" value="" placeholder="YYYY" class="finish-date" maxlength="4"> <p style="display: inline-block">년</p>
+                        <input  type="text" name="" value="" placeholder="MM" class="finish-date" maxlength="2"> <p style="display: inline-block">월</p>
+                        <input type="text" name="" value="" placeholder="DD" class="finish-date" maxlength="2"> <p style="display: inline-block">일</p>
+                        <select id="grade">
+                            <option value="1">1학년</option>
+                            <option value="2">2학년</option>
+                            <option value="3">3학년</option>
+                            <option value="all">제한 없음</option>
+                        </select>
                     </div>
                     <div id="survey-contents"></div>
                     <div id="survey-btns">

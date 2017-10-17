@@ -104,6 +104,14 @@ var $dormListWindow = $(".rule-window");
 var $faqBtn = $(".faq-btn");
 var $closeFaqButton = $("#faq-going-out-window");
 var $faqListWindow = $(".faq-window");
+
+/**
+ * Domitory survey
+ */
+var $surveyBtn = $(".survey-btn");
+var $closeSurveyButton = $("#survey-going-out-window");
+var $surveyListWindow = $(".survey-window");
+
 /**
  * aftershcooc-request
  */
@@ -703,6 +711,45 @@ function setFaqPreview() {
                 $("#notice-title").text("");
                 $(".notice-content-container p").text("글이 없습니다.");
             }
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+/** ======================================================================================
+ * survey
+========================================================================================== */
+$closeSurveyButton.on("click", function() {
+    $openStayButton.prop("disabled", true);
+    $openExtensionButton.prop("disabled", true);
+    $surveyListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
+$surveyBtn.on("click", function() {
+    $openStayButton.prop("disabled", false);
+    $openExtensionButton.prop("disabled", false);
+    $surveyListWindow.toggleClass("fade-in");
+    $panel.toggleClass("left-move");
+    $menu.toggleClass("fade-out");
+    $menu2.toggleClass("fade-out");
+    $menuPagenation.toggleClass("fade-out");
+});
+
+function getSurveyList() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/list/faq",
+        type: "GET",
+        success: function(data) {
+            var parsedData = JSON.parse(data).result;
+            parsedData.forEach(function(data) {
+                fillListCard(data, $(".faq-window .list-box-container"));
+            });
         },
         error: function() {
             console.log("error");
@@ -1455,7 +1502,7 @@ $(document).ready(function() {
 
     //연장신청 시간 보여줌
     var startTime = '05:30 PM';
-    var endTime = '08:30 PM';
+    var endTime = '10:00 PM';
 
     var formatTime = (function() {
         function addZero(num) {
