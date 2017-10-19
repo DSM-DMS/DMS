@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_jwt import JWT
 
 import preprocessor
-import config
 
 
 def create_app():
@@ -13,12 +12,7 @@ def create_app():
     :rtype: Flask
     """
     app = Flask(__name__)
-    app.config.update(
-        SECRET_KEY=config.SECRET_KEY,
-        JWT_AUTH_URL_RULE='/signin',
-        JWT_AUTH_USERNAME_KEY='id',
-        JWT_AUTH_PASSWORD_KEY='pw'
-    )
+    app.config.from_pyfile('config.py')
 
     CORS(app)
     # JWT(app, authenticate, identity)

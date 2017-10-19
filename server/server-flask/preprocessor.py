@@ -36,4 +36,4 @@ def add_resources(app):
 
     :rtype: None
     """
-    api = Api(app, api_version=config.API_VERSION, title=config.API_TITLE, description=config.API_DESCRIPTION)
+    api = Api(app, api_version=app.config['API_VER'], title=app.config['API_TITLE'], description=app.config['API_DESC'])
