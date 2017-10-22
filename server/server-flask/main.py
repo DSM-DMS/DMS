@@ -18,10 +18,10 @@ def create_app():
     CORS(app)
 
     app.config['JWT_AUTH_URL_RULE'] = '/auth/student'
-    JWT(app, jwt.student_auth, jwt.student_id)
+    JWT(app, jwt.student_auth, jwt.identity)
 
     app.config['JWT_AUTH_URL_RULE'] = '/auth/admin'
-    JWT(app, jwt.admin_auth, jwt.admin_id)
+    JWT(app, jwt.admin_auth, jwt.identity)
 
     preprocessor.decorate(app)
     preprocessor.add_resources(app)

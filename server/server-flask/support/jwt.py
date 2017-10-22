@@ -1,24 +1,20 @@
-class Student:
-    def __init__(self, id):
-        self.id = id
+from db.models.account import AdminModel, StudentModel
 
 
-class Admin:
+class Model:
     def __init__(self, id):
         self.id = id
 
 
 def student_auth(id, pw):
-    pass
-
-
-def student_id(payload):
-    return payload['identity']
+    if id and pw and StudentModel.objects(id=id, pw=pw):
+        return Model(id=id)
 
 
 def admin_auth(id, pw):
-    pass
+    if id and pw and AdminModel.objects(id=id, pw=pw):
+        return Model(id=id)
 
 
-def admin_id(payload):
+def identity(payload):
     return payload['identity']
