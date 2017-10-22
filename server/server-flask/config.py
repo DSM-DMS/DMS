@@ -10,7 +10,6 @@ API_DESC = '''
 '''.format(PORT)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-JWT_AUTH_URL_RULE = '/signin'
 JWT_AUTH_USERNAME_KEY = 'id'
 JWT_AUTH_PASSWORD_KEY = 'pw'
 
