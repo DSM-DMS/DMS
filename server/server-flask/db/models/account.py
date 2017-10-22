@@ -1,3 +1,5 @@
+from datetime import date
+
 from db.mongo import *
 
 
@@ -11,7 +13,7 @@ class AccountBase(Document):
     id = StringField(primary_key=True)
     pw = StringField(required=True)
     name = StringField(required=True)
-    
+    signup_date = StringField(required=True, default=str(date.today()))
     meta = {'allow_inheritance': True}
 
 
