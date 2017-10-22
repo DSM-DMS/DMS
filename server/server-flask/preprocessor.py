@@ -1,8 +1,8 @@
+from logging import INFO, Formatter
+from logging.handlers import RotatingFileHandler
+
 from flask import Flask, current_app
 from flask_restful_swagger_2 import Api
-
-from logging import Formatter, INFO
-from logging.handlers import RotatingFileHandler
 
 
 def decorate(app):

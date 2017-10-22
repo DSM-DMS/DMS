@@ -1,7 +1,7 @@
 from datetime import date
 
-from db.mongo import *
 from db.models.apply import AfterSchoolModel, ExtensionModel, StayModel
+from db.mongo import *
 
 
 class SignupRequiredModel(Document):

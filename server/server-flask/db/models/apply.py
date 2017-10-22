@@ -1,5 +1,6 @@
-from db.mongo import *
 from datetime import date
+
+from db.mongo import *
 
 
 class ApplyBase(EmbeddedDocument):
