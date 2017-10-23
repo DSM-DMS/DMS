@@ -21,7 +21,7 @@ class AccountBase(Document):
 
 class StudentModel(AccountBase):
     number = IntField(required=True)
-    afterschool_applies = ListField(EmbeddedDocumentField(AfterSchoolApplyModel))
+    afterschool_applies = EmbeddedDocumentField(AfterSchoolApplyModel)
     extension_applies = EmbeddedDocumentField(ExtensionApplyModel)
     goingout_applies = EmbeddedDocumentField(GoingoutApplyModel)
     stay_applies = EmbeddedDocumentField(StayApplyModel)

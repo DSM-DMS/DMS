@@ -9,7 +9,7 @@ class ApplyBase(EmbeddedDocument):
 
 
 class AfterSchoolApplyModel(ApplyBase):
-    no = IntField(required=True)
+    applied_ids = ListField(StringField(required=True))
 
 
 class ExtensionApplyModel(ApplyBase):
