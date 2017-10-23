@@ -1,6 +1,6 @@
 from datetime import date
 
-from db.models.apply import AfterSchoolModel, ExtensionModel, StayModel
+from db.models.apply import AfterSchoolModel, ExtensionModel, GoingoutModel, StayModel
 from db.mongo import *
 
 
@@ -23,6 +23,7 @@ class StudentModel(AccountBase):
     number = IntField(required=True)
     afterschool_applies = ListField(EmbeddedDocumentField(AfterSchoolModel))
     extension_applies = EmbeddedDocumentField(ExtensionModel)
+    goingout_applies = EmbeddedDocumentField(GoingoutModel)
     stay_applies = EmbeddedDocumentField(StayModel)
 
 

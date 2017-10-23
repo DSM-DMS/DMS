@@ -17,5 +17,10 @@ class ExtensionModel(ApplyBase):
     seat = IntField(required=True)
 
 
+class GoingoutModel(ApplyBase):
+    on_saturday = BooleanField(required=True, default=False)
+    on_sunday = BooleanField(required=True, default=False)
+
+
 class StayModel(ApplyBase):
     value = IntField(required=True)
