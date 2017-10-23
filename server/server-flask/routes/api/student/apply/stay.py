@@ -14,7 +14,7 @@ class Stay(Resource):
 
     @jwt_required()
     def post(self):
-        value = request.form.get('value')
+        value = request.form.get('value', int)
         student = StudentModel.objects(id=current_identity).first()
         student.update(stay_applies=StayApplyModel(value=value))
 
