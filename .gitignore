@@ -1,3 +1,10 @@
 target/
 *.log
 *.cnf
+*.pyc
+server/server-flask/.idea/misc.xml
+server/server-flask/.idea/modules.xml
+server/server-flask/.idea/Server.iml
+server/server-flask/.idea/workspace.xml
+server/server-flask/.idea/server-flask.iml
+*.xml___jb_tmp___
