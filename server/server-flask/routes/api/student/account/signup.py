@@ -1,6 +1,7 @@
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import SignupRequiredModel, StudentModel
+
 from . import signup_doc
 
 
@@ -24,12 +25,14 @@ class Signup(Resource):
 
         student = SignupRequiredModel.objects(uuid=uuid).first()
         if student:
-            # Signup required UUID
+            # Valid UUID
             if StudentModel.objects(id=id):
-                # ID Already exists
+                # ID already exists
                 return '', 204
             else:
-                StudentModel(id=id, pw=pw, name=student.name, number=student.number).save()
+                StudentModel(id=id, pw=pw, name=student.name, number=student.number, uuid=uuid).save()
+                student.delete()
+                # Delete existing 'signup required' data
 
                 return '', 201
         else:
