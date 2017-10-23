@@ -1,6 +1,7 @@
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.school_data import MealModel
+
 from . import meal_doc
 
 

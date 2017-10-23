@@ -10,12 +10,12 @@ class Stay(Resource):
     def get(self):
         student = StudentModel.objects(id=current_identity).first()
 
-        return {'value': student.stay_applies.value}, 200
+        return {'value': student.stay_apply.value}, 200
 
     @jwt_required()
     def post(self):
-        value = request.form.get('value', int)
+        value = request.form.get('value', type=int)
         student = StudentModel.objects(id=current_identity).first()
-        student.update(stay_applies=StayApplyModel(value=value))
+        student.update(stay_apply=StayApplyModel(value=value))
 
         return '', 201
