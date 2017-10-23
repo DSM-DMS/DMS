@@ -10,8 +10,8 @@ class Goingout(Resource):
     def get(self):
         student = StudentModel.objects(id=current_identity).first()
 
-        return {'sat': student.stay_applies.on_saturday,
-                'sun': student.stay_applies.on_sunday}, 200
+        return {'sat': student.goingout_applies.on_saturday,
+                'sun': student.goingout_applies.on_sunday}, 200
 
     @jwt_required()
     def post(self):
