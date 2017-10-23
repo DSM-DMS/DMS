@@ -1,6 +1,5 @@
 from datetime import date
 
-from db.models.afterschool import AfterSchoolItemModel
 from db.mongo import *
 
 
@@ -10,7 +9,8 @@ class ApplyBase(EmbeddedDocument):
 
 
 class AfterSchoolApplyModel(ApplyBase):
-    applied = ListField(ReferenceField(AfterSchoolItemModel))
+    applied = ListField(StringField())
+    # ReferenceField에서 EmbeddedDocument인 AfterSchoolItemModel 참조 불가
 
 
 class ExtensionApplyModel(ApplyBase):
@@ -24,4 +24,4 @@ class GoingoutApplyModel(ApplyBase):
 
 
 class StayApplyModel(ApplyBase):
-    value = IntField(required=True)
+    value = IntField(required=True, default=4)
