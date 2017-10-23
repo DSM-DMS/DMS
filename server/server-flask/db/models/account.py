@@ -1,6 +1,6 @@
 from datetime import date
 
-from db.models.apply import AfterSchoolModel, ExtensionModel, GoingoutModel, StayModel
+from db.models.apply import AfterSchoolApplyModel, ExtensionApplyModel, GoingoutApplyModel, StayApplyModel
 from db.mongo import *
 
 
@@ -21,10 +21,10 @@ class AccountBase(Document):
 
 class StudentModel(AccountBase):
     number = IntField(required=True)
-    afterschool_applies = ListField(EmbeddedDocumentField(AfterSchoolModel))
-    extension_applies = EmbeddedDocumentField(ExtensionModel)
-    goingout_applies = EmbeddedDocumentField(GoingoutModel)
-    stay_applies = EmbeddedDocumentField(StayModel)
+    afterschool_applies = ListField(EmbeddedDocumentField(AfterSchoolApplyModel))
+    extension_applies = EmbeddedDocumentField(ExtensionApplyModel)
+    goingout_applies = EmbeddedDocumentField(GoingoutApplyModel)
+    stay_applies = EmbeddedDocumentField(StayApplyModel)
 
 
 class AdminModel(AccountBase):

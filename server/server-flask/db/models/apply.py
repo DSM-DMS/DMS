@@ -8,19 +8,19 @@ class ApplyBase(EmbeddedDocument):
     meta = {'allow_inheritance': True}
 
 
-class AfterSchoolModel(ApplyBase):
+class AfterSchoolApplyModel(ApplyBase):
     no = IntField(required=True)
 
 
-class ExtensionModel(ApplyBase):
+class ExtensionApplyModel(ApplyBase):
     cls = IntField(required=True)
     seat = IntField(required=True)
 
 
-class GoingoutModel(ApplyBase):
+class GoingoutApplyModel(ApplyBase):
     on_saturday = BooleanField(required=True, default=False)
     on_sunday = BooleanField(required=True, default=False)
 
 
-class StayModel(ApplyBase):
+class StayApplyModel(ApplyBase):
     value = IntField(required=True)
