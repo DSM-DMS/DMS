@@ -1,5 +1,6 @@
 from datetime import date
 
+from db.models.afterschool import AfterSchoolItemModel
 from db.mongo import *
 
 
@@ -9,7 +10,7 @@ class ApplyBase(EmbeddedDocument):
 
 
 class AfterSchoolApplyModel(ApplyBase):
-    applied_ids = ListField(StringField(required=True))
+    applied = ListField(ReferenceField(AfterSchoolItemModel))
 
 
 class ExtensionApplyModel(ApplyBase):

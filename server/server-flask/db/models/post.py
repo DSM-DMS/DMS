@@ -1,12 +1,13 @@
 from datetime import date
 
+from db.models.account import AdminModel
 from db.mongo import *
 
 
 class PostBase(Document):
     title = StringField(required=True)
     content = StringField(required=True)
-    writer = StringField(required=True)
+    writer = ReferenceField(AdminModel, required=True)
     pinned = BooleanField(required=True, default=False)
 
     write_date = StringField(required=True, default=str(date.today()))
