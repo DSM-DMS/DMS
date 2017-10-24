@@ -16,3 +16,6 @@ flask_restful_swagger_2 == 0.35
 
 # db\mongo.py: 1
 mongoengine == 0.13.0
+
+# api\admin\apply\stay.py: 4
+openpyxl == 2.4.9
