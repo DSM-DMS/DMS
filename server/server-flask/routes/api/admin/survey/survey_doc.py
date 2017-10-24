@@ -27,22 +27,10 @@ ADD_SURVEY = {
             'type': 'str'
         },
         {
-            'name': 'target_1st',
-            'description': '1학년 대상 여부',
+            'name': 'target',
+            'description': '대상 학년',
             'in': 'formData',
-            'type': 'bool'
-        },
-        {
-            'name': 'target_2st',
-            'description': '2학년 대상 여부',
-            'in': 'formData',
-            'type': 'bool'
-        },
-        {
-            'name': 'target_3st',
-            'description': '3학년 대상 여부',
-            'in': 'formData',
-            'type': 'bool'
+            'type': 'list'
         }
     ],
     'responses': {
@@ -82,7 +70,7 @@ ADD_QUESTION ={
         },
         {
             'name': 'choice_paper',
-            'description': '객관식 선택지',
+            'description': '객관식 선택지(optional)',
             'in': 'formData',
             'type': 'list'
         }

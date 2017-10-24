@@ -20,7 +20,7 @@ class Survey(Resource):
             title = request.form.get('title')
             start_date = request.form.get('start_date')
             end_date = request.form.get('end_date')
-            target = request.form.get('target', type=int)
+            target = request.form.get('target', type=list)
 
             SurveyModel(
                 title=title,
