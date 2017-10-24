@@ -14,7 +14,7 @@ class SurveyModel(Document):
     title = StringField(required=True)
     start_date = StringField(required=True)
     end_date = StringField(required=True)
-    target = IntField(required=True)
+    target = ListField(IntField())
     questions = ListField(EmbeddedDocumentField(QuestionModel))
 
     creation_date = StringField(required=True, default=str(date.today()))
@@ -22,5 +22,5 @@ class SurveyModel(Document):
 
 class AnswerModel(Document):
     answer_student = ReferenceField(StudentModel)
-    survey = ReferenceField(SurveyModel)
-    answers = ListField(StringField())
+    question = ReferenceField(QuestionModel)
+    answer = StringField()
