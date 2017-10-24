@@ -7,13 +7,13 @@ from . import helper
 
 
 class FAQList(Resource):
-    @swagger.doc(faq_doc.FAQ_LIST)
+    @swagger.doc(faq_doc.FAQ_LIST_GET)
     def get(self):
         return helper.list(FAQModel), 200
 
 
 class FAQ(Resource):
-    @swagger.doc(faq_doc.FAQ)
+    @swagger.doc(faq_doc.FAQ_GET)
     def get(self):
         id = request.args.get('id')
 

@@ -1,4 +1,4 @@
-ADD_SURVEY = {
+SURVEY_POST = {
     'tags': ['관리자 - 설문조사'],
     'description': '설문조사 등록',
     'parameters': [
@@ -40,7 +40,7 @@ ADD_SURVEY = {
     }
 }
 
-ADD_QUESTION ={
+QUESTION_POST ={
     'tags': ['관리자 - 설문조사'],
     'description': '설문조사에 질문 등록',
     'parameters': [

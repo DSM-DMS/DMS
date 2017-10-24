@@ -8,7 +8,7 @@ from . import dms_system_doc
 
 
 class BugReport(Resource):
-    @swagger.doc(dms_system_doc.BUG_REPORT)
+    @swagger.doc(dms_system_doc.BUG_REPORT_POST)
     @jwt_required()
     def post(self):
         author = StudentModel.objects(id=current_identity).first()

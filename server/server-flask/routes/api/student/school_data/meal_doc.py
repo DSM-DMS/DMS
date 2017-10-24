@@ -1,4 +1,4 @@
-MEAL = {
+MEAL_GET = {
     'tags': ['급식'],
     'description': '급식 정보 조회',
     'parameters': [

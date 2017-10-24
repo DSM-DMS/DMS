@@ -6,7 +6,7 @@ from . import signup_doc
 
 
 class UUIDVerification(Resource):
-    @swagger.doc(signup_doc.UUID_VERIFICATION)
+    @swagger.doc(signup_doc.UUID_VERIFICATION_POST)
     def post(self):
         uuid = request.form.get('uuid')
 
@@ -17,7 +17,7 @@ class UUIDVerification(Resource):
 
 
 class Signup(Resource):
-    @swagger.doc(signup_doc.SIGNUP)
+    @swagger.doc(signup_doc.SIGNUP_POST)
     def post(self):
         uuid = request.form.get('uuid')
         id = request.form.get('id')

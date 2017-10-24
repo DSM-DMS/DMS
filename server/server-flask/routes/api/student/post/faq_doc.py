@@ -1,4 +1,4 @@
-FAQ_LIST = {
+FAQ_LIST_GET = {
     'tags': ['게시글'],
     'description': 'FAQ 리스트',
     'responses': {
@@ -30,7 +30,7 @@ FAQ_LIST = {
     }
 }
 
-FAQ = {
+FAQ_GET = {
     'tags': ['게시글'],
     'description': 'FAQ 내용 조회',
     'parameters': [

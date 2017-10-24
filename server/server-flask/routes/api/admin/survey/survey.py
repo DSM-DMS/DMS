@@ -10,7 +10,7 @@ from . import survey_doc
 
 
 class Survey(Resource):
-    @swagger.doc(survey_doc.ADD_SURVEY)
+    @swagger.doc(survey_doc.SURVEY_POST)
     @jwt_required()
     def post(self):
         if not AdminModel.objects(id=current_identity):
@@ -32,8 +32,8 @@ class Survey(Resource):
             return '', 201
 
 
-class AddQuestion(Resource):
-    @swagger.doc(survey_doc.ADD_QUESTION)
+class Question(Resource):
+    @swagger.doc(survey_doc.QUESTION_POST)
     @jwt_required()
     def post(self):
         if not AdminModel.objects(id=current_identity):

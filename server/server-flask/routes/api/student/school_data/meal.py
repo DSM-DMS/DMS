@@ -6,7 +6,7 @@ from . import meal_doc
 
 
 class Meal(Resource):
-    @swagger.doc(meal_doc.MEAL)
+    @swagger.doc(meal_doc.MEAL_GET)
     def get(self):
         date = request.args.get('date')
 

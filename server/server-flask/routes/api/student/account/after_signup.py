@@ -7,7 +7,7 @@ from . import after_signup_doc
 
 
 class ChangePW(Resource):
-    @swagger.doc(after_signup_doc.CHANGE_PW)
+    @swagger.doc(after_signup_doc.CHANGE_PW_POST)
     @jwt_required()
     def post(self):
         current_pw = request.form.get('current_pw')
@@ -24,7 +24,7 @@ class ChangePW(Resource):
 
 
 class ChangeNumber(Resource):
-    @swagger.doc(after_signup_doc.CHANGE_NUMBER)
+    @swagger.doc(after_signup_doc.CHANGE_NUMBER_POST)
     @jwt_required()
     def post(self):
         new_number = request.form.get('new_number')

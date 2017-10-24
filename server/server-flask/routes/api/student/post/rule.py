@@ -7,13 +7,13 @@ from . import helper
 
 
 class RuleList(Resource):
-    @swagger.doc(rule_doc.RULE_LIST)
+    @swagger.doc(rule_doc.RULE_LIST_GET)
     def get(self):
         return helper.list(RuleModel), 200
 
 
 class Rule(Resource):
-    @swagger.doc(rule_doc.RULE)
+    @swagger.doc(rule_doc.RULE_GET)
     def get(self):
         id = request.args.get('id')
 

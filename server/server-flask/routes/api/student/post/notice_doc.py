@@ -1,4 +1,4 @@
-NOTICE_LIST = {
+NOTICE_LIST_GET = {
     'tags': ['게시글'],
     'description': '공지사항 리스트',
     'responses': {
@@ -30,7 +30,7 @@ NOTICE_LIST = {
     }
 }
 
-NOTICE = {
+NOTICE_GET = {
     'tags': ['게시글'],
     'description': '공지사항 내용 조회',
     'parameters': [

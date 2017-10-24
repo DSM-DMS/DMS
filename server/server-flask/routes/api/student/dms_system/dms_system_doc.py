@@ -1,4 +1,4 @@
-BUG_REPORT = {
+BUG_REPORT_POST = {
     'tags': ['DMS 시스템'],
     'description': '버그 신고',
     'parameters': [

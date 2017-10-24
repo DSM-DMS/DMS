@@ -7,13 +7,13 @@ from . import helper
 
 
 class NoticeList(Resource):
-    @swagger.doc(notice_doc.NOTICE_LIST)
+    @swagger.doc(notice_doc.NOTICE_LIST_GET)
     def get(self):
         return helper.list(NoticeModel), 200
 
 
 class Notice(Resource):
-    @swagger.doc(notice_doc.NOTICE)
+    @swagger.doc(notice_doc.NOTICE_GET)
     def get(self):
         id = request.args.get('id')
 

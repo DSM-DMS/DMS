@@ -1,9 +1,9 @@
-RULE_LIST = {
+RULE_LIST_GET = {
     'tags': ['게시글'],
     'description': '기숙사규정 리스트',
     'responses': {
         '200': {
-            'description': '공지사항 리스트 조회 성공',
+            'description': '기숙사규정 리스트 조회 성공',
             'examples': {
                 'application/json': [
                     {
@@ -30,7 +30,7 @@ RULE_LIST = {
     }
 }
 
-RULE = {
+RULE_GET = {
     'tags': ['게시글'],
     'description': '기숙사규정 내용 조회',
     'parameters': [

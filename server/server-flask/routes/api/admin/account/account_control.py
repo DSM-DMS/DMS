@@ -6,7 +6,7 @@ from . import account_control_doc
 
 
 class InitializeAccount(Resource):
-    @swagger.doc(account_control_doc.INITIALIZE_ACCOUNT)
+    @swagger.doc(account_control_doc.INITIALIZE_ACCOUNT_POST)
     @jwt_required()
     def post(self):
         if not AdminModel.objects(id=current_identity):
