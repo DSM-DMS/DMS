@@ -20,7 +20,7 @@ class CheckExtension(Resource):
             for column1, column2 in zip(['B', 'F', 'J', 'N'], ['D', 'H', 'L', 'P']):
                 student = StudentModel.objects(number=ws[column1+row]).first()
                 status = ''
-                cls = student.extension_apply.cls
+                cls = student.extension_apply.class_
 
                 if not student:
                     continue
