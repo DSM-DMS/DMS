@@ -1,4 +1,4 @@
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import FAQModel
 
@@ -14,9 +14,7 @@ class FAQList(Resource):
 
 class FAQ(Resource):
     @swagger.doc(faq_doc.FAQ_GET)
-    def get(self):
-        id = request.args.get('id')
-
+    def get(self, id):
         faq = helper.inquire(FAQModel, id)
 
         return (faq, 200) if faq else ('', 204)

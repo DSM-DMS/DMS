@@ -1,4 +1,4 @@
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import RuleModel
 
@@ -14,9 +14,7 @@ class RuleList(Resource):
 
 class Rule(Resource):
     @swagger.doc(rule_doc.RULE_GET)
-    def get(self):
-        id = request.args.get('id')
-
+    def get(self, id):
         rule = helper.inquire(RuleModel, id)
 
         return (rule, 200) if rule else ('', 204)

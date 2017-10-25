@@ -45,7 +45,7 @@ SURVEY_GET = {
         {
             'name': 'id',
             'description': '설문조사 ID',
-            'in': 'query',
+            'in': 'path',
             'type': 'str'
         }
     ],
@@ -84,7 +84,7 @@ SURVEY_POST = {
         {
             'name': 'id',
             'description': '질문 ID',
-            'in': 'formData',
+            'in': 'path',
             'type': 'str'
         },
         {

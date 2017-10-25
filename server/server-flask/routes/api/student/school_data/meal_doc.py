@@ -5,7 +5,7 @@ MEAL_GET = {
         {
             'name': 'date',
             'description': '급식 정보를 조회할 날짜(YYYY-MM-DD)',
-            'in': 'query',
+            'in': 'path',
             'type': 'str'
         }
     ],

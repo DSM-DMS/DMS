@@ -37,7 +37,7 @@ RULE_GET = {
         {
             'name': 'id',
             'description': '조회할 기숙사규정 아이템의 ID',
-            'in': 'query',
+            'in': 'path',
             'type': 'str'
         }
     ],

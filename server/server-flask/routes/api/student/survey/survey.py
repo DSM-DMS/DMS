@@ -25,9 +25,7 @@ class SurveyList(Resource):
 class Survey(Resource):
     @swagger.doc(survey_doc.SURVEY_GET)
     @jwt_required()
-    def get(self):
-        id = request.args.get('id')
-
+    def get(self, id):
         questions = [{
             'id': str(question.id),
             'title': question.title,
@@ -44,8 +42,7 @@ class Survey(Resource):
 
     @swagger.doc(survey_doc.SURVEY_POST)
     @jwt_required()
-    def post(self):
-        id = request.form.get('id')
+    def post(self, id):
         answer = request.form.get('answer')
 
         AnswerModel.objects(answer_student=StudentModel(id=current_identity), question=QuestionModel(id=id)).delete()

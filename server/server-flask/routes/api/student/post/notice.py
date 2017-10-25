@@ -1,4 +1,4 @@
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import NoticeModel
 
@@ -14,9 +14,7 @@ class NoticeList(Resource):
 
 class Notice(Resource):
     @swagger.doc(notice_doc.NOTICE_GET)
-    def get(self):
-        id = request.args.get('id')
-
+    def get(self, id):
         notice = helper.inquire(NoticeModel, id)
 
         return (notice, 200) if notice else ('', 204)

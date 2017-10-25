@@ -37,7 +37,7 @@ NOTICE_GET = {
         {
             'name': 'id',
             'description': '조회할 공지사항 아이템의 ID',
-            'in': 'query',
+            'in': 'path',
             'type': 'str'
         }
     ],
