@@ -21,10 +21,13 @@ class AccountBase(Document):
 
 class StudentModel(AccountBase):
     number = IntField(required=True)
-    afterschool_applies = EmbeddedDocumentField(AfterSchoolApplyModel)
-    extension_applies = EmbeddedDocumentField(ExtensionApplyModel)
-    goingout_applies = EmbeddedDocumentField(GoingoutApplyModel)
-    stay_applies = EmbeddedDocumentField(StayApplyModel)
+    uuid = StringField(required=True)
+    afterschool_apply = EmbeddedDocumentField(AfterSchoolApplyModel)
+    extension_apply = EmbeddedDocumentField(ExtensionApplyModel)
+    goingout_apply = EmbeddedDocumentField(GoingoutApplyModel, default=GoingoutApplyModel())
+    # Default sat=False, sun=False
+    stay_apply = EmbeddedDocumentField(StayApplyModel, default=StayApplyModel())
+    # Default value=4
 
 
 class AdminModel(AccountBase):

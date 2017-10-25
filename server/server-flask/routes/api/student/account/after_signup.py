@@ -1,12 +1,13 @@
-from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
+from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
+
 from . import after_signup_doc
 
 
 class ChangePW(Resource):
-    @swagger.doc(after_signup_doc.CHANGE_PW)
+    @swagger.doc(after_signup_doc.CHANGE_PW_POST)
     @jwt_required()
     def post(self):
         current_pw = request.form.get('current_pw')
@@ -14,7 +15,8 @@ class ChangePW(Resource):
 
         student = StudentModel.objects(id=current_identity, pw=current_pw).first()
         if not student:
-            return '', 204
+            # Forbidden
+            return '', 403
         else:
             student.update(pw=new_pw)
 
@@ -22,7 +24,7 @@ class ChangePW(Resource):
 
 
 class ChangeNumber(Resource):
-    @swagger.doc(after_signup_doc.CHANGE_NUMBER)
+    @swagger.doc(after_signup_doc.CHANGE_NUMBER_POST)
     @jwt_required()
     def post(self):
         new_number = request.form.get('new_number')

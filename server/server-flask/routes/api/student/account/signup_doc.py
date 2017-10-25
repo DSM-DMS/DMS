@@ -1,4 +1,4 @@
-UUID_VERIFICATION = {
+UUID_VERIFICATION_POST = {
     'tags': ['회원가입'],
     'description': 'UUID 유효성 검사',
     'parameters': [
@@ -19,7 +19,7 @@ UUID_VERIFICATION = {
     }
 }
 
-SIGNUP = {
+SIGNUP_POST = {
     'tags': ['회원가입'],
     'description': '회원가입',
     'parameters': [

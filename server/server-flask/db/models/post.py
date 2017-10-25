@@ -7,7 +7,7 @@ from db.mongo import *
 class PostBase(Document):
     title = StringField(required=True)
     content = StringField(required=True)
-    writer = ReferenceField(AdminModel, required=True)
+    author = ReferenceField(AdminModel)
     pinned = BooleanField(required=True, default=False)
 
     write_date = StringField(required=True, default=str(date.today()))

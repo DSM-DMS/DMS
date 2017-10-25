@@ -2,8 +2,9 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt import JWT
 
-import preprocessor
-from support import jwt
+import jwt
+import logger
+import resource
 
 
 def create_app():
@@ -23,13 +24,13 @@ def create_app():
     app.config['JWT_AUTH_URL_RULE'] = '/auth/admin'
     JWT(app, jwt.admin_auth, jwt.identity)
 
-    preprocessor.decorate(app)
-    preprocessor.add_resources(app)
+    logger.decorate(app)
+    resource.deploy(app)
 
     return app
 
-app = create_app()
+_app = create_app()
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    _app.run(threaded=True, debug=True)

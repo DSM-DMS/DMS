@@ -1,6 +1,6 @@
 from datetime import date
 
-from schapi import SchoolAPI, DAEJEON
+from schapi import DAEJEON, SchoolAPI
 
 from db.models.school_data import MealModel
 

@@ -1,5 +1,5 @@
 from mongoengine import *
 
-from main import app
+from config import DB_NAME
 
-connect(app.config['DB_NAME'])
+connect(DB_NAME)
