@@ -14,7 +14,7 @@ class AfterSchoolApplyModel(ApplyBase):
 
 
 class ExtensionApplyModel(ApplyBase):
-    cls = IntField(required=True)
+    class_ = IntField(required=True)
     seat = IntField(required=True)
 
 

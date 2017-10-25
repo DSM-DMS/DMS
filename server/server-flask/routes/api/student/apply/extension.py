@@ -11,16 +11,16 @@ class Extension(Resource):
         student = StudentModel.objects(id=current_identity).first()
 
         return {
-            'cls': student.extension_apply.cls,
+            'class': student.extension_apply.class_,
             'seat': student.extension_apply.seat
         }, 200
 
     @jwt_required()
     def post(self):
-        cls = request.form.get('cls', type=int)
+        class_ = request.form.get('class', type=int)
         seat = request.form.get('seat', type=int)
 
         student = StudentModel.objects(id=current_identity).first()
-        student.update(extension_applies=ExtensionApplyModel(cls=cls, seat=seat))
+        student.update(extension_applies=ExtensionApplyModel(class_=class_, seat=seat))
 
         return '', 201

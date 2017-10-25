@@ -11,15 +11,16 @@ class Goingout(Resource):
         student = StudentModel.objects(id=current_identity).first()
 
         return {
-            'sat': student.goingout_applies.on_saturday,
-            'sun': student.goingout_applies.on_sunday
+            'sat': student.goingout_apply.on_saturday,
+            'sun': student.goingout_apply.on_sunday
         }, 200
 
     @jwt_required()
     def post(self):
         sat = request.form.get('sat', type=bool)
         sun = request.form.get('sun', type=bool)
+
         student = StudentModel.objects(id=current_identity).first()
-        student.update(goingout_applies=GoingoutApplyModel(on_saturday=sat, on_sunday=sun))
+        student.update(goingout_apply=GoingoutApplyModel(on_saturday=sat, on_sunday=sun))
 
         return '', 201
