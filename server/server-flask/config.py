@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 PORT = 81
 
@@ -14,6 +15,7 @@ API_DESC = '''
 SECRET_KEY = os.getenv('SECRET_KEY')
 JWT_AUTH_USERNAME_KEY = 'id'
 JWT_AUTH_PASSWORD_KEY = 'pw'
+JWT_EXPIRATION_DELTA = timedelta(days=365)
 
 MYSQL_PW = os.getenv('MYSQL_PW')
 DB_NAME = 'dms'
