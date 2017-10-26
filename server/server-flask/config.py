@@ -1,6 +1,6 @@
 import os
 
-PORT = 80
+PORT = 81
 
 API_VER = '0.1'
 API_TITLE = 'DMS'

@@ -1,3 +1,4 @@
+from flask import Blueprint, Flask
 from flask_restful_swagger_2 import Api
 
 
@@ -7,8 +8,6 @@ def deploy(app):
 
     :rtype: None
     """
-    api = Api(app, api_version=app.config['API_VER'], title=app.config['API_TITLE'], description=app.config['API_DESC'])
-
     def deploy_admin():
         from routes.api.admin.account.account_control import InitializeAccount
         from routes.api.admin.account.new_account import NewAccount
@@ -17,15 +16,20 @@ def deploy(app):
         from routes.api.admin.post.rule import Rule
         from routes.api.admin.survey.survey import Survey, Question
 
-        api.add_resource(InitializeAccount, '/admin/initialize-account')
-        api.add_resource(NewAccount, '/admin/new-account')
+        blueprint = Blueprint('admin', __name__)
+        admin_api = Api(blueprint, api_spec_url='/api/admin', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Admin API', description=app.config['API_DESC'])
 
-        api.add_resource(FAQ, '/admin/faq')
-        api.add_resource(Notice, '/admin/notice')
-        api.add_resource(Rule, '/admin/rule')
+        admin_api.add_resource(InitializeAccount, '/admin/initialize-account')
+        admin_api.add_resource(NewAccount, '/admin/new-account')
 
-        api.add_resource(Survey, '/admin/survey')
-        api.add_resource(Question, '/admin/survey/question')
+        admin_api.add_resource(FAQ, '/admin/faq')
+        admin_api.add_resource(Notice, '/admin/notice')
+        admin_api.add_resource(Rule, '/admin/rule')
+
+        admin_api.add_resource(Survey, '/admin/survey')
+        admin_api.add_resource(Question, '/admin/survey/question')
+
+        app.register_blueprint(blueprint)
 
     def deploy_developer():
         pass
@@ -48,28 +52,33 @@ def deploy(app):
 
         from routes.api.student.survey.survey import SurveyList, Survey
 
-        api.add_resource(ChangePW, '/change/pw')
-        api.add_resource(ChangeNumber, '/change/number')
-        api.add_resource(UUIDVerification, '/uuid-verify')
-        api.add_resource(Signup, '/signup')
+        blueprint = Blueprint('student', __name__)
+        student_api = Api(blueprint, api_spec_url='/api/student', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Student API', description=app.config['API_DESC'])
 
-        api.add_resource(Extension, '/extension')
-        api.add_resource(Goingout, '/goingout')
-        api.add_resource(Stay, '/stay')
+        student_api.add_resource(ChangePW, '/change/pw')
+        student_api.add_resource(ChangeNumber, '/change/number')
+        student_api.add_resource(UUIDVerification, '/uuid-verify')
+        student_api.add_resource(Signup, '/signup')
 
-        api.add_resource(BugReport, '/bug-report')
+        student_api.add_resource(Extension, '/extension')
+        student_api.add_resource(Goingout, '/goingout')
+        student_api.add_resource(Stay, '/stay')
 
-        api.add_resource(FAQList, '/faq')
-        api.add_resource(FAQ, '/faq/<id>')
-        api.add_resource(NoticeList, '/notice')
-        api.add_resource(Notice, '/notice/<id>')
-        api.add_resource(RuleList, '/rule')
-        api.add_resource(Rule, '/rule/<id>')
+        student_api.add_resource(BugReport, '/bug-report')
 
-        api.add_resource(Meal, '/meal/<date>')
+        student_api.add_resource(FAQList, '/faq')
+        student_api.add_resource(FAQ, '/faq/<id>')
+        student_api.add_resource(NoticeList, '/notice')
+        student_api.add_resource(Notice, '/notice/<id>')
+        student_api.add_resource(RuleList, '/rule')
+        student_api.add_resource(Rule, '/rule/<id>')
 
-        api.add_resource(SurveyList, '/survey')
-        api.add_resource(Survey, '/survey/<id>')
+        student_api.add_resource(Meal, '/meal/<date>')
+
+        student_api.add_resource(SurveyList, '/survey')
+        student_api.add_resource(Survey, '/survey/<id>')
+
+        app.register_blueprint(blueprint)
 
     deploy_admin()
     deploy_developer()
