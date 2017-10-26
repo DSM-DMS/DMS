@@ -2,9 +2,12 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt import JWT
 
-import jwt
+import auth
 import logger
 import resource
+
+from support import db_migrator
+from support.api_interaction import meal
 
 
 def create_app():
@@ -19,10 +22,10 @@ def create_app():
     CORS(app)
 
     app.config['JWT_AUTH_URL_RULE'] = '/auth/student'
-    JWT(app, jwt.student_auth, jwt.identity)
+    JWT(app, auth.student_auth, auth.identity)
 
     app.config['JWT_AUTH_URL_RULE'] = '/auth/admin'
-    JWT(app, jwt.admin_auth, jwt.identity)
+    JWT(app, auth.admin_auth, auth.identity)
 
     logger.decorate(app)
     resource.deploy(app)
@@ -33,4 +36,6 @@ _app = create_app()
 
 
 if __name__ == '__main__':
-    _app.run(threaded=True, debug=True)
+    db_migrator.migrate_posts()
+    meal.parse()
+    _app.run(port=_app.config['PORT'], threaded=True, debug=True)
