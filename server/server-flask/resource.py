@@ -8,6 +8,16 @@ def deploy(app):
 
     :rtype: None
     """
+    def deploy_auth():
+        from routes.api.auth.authentication import AdminAuth, StudentAuth
+
+        blueprint = Blueprint('auth', __name__)
+
+        api = Api(blueprint, api_spec_url='/api/auth', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Authentication API', description=app.config['API_DESC'])
+
+        api.add_resource(AdminAuth, '/auth/admin')
+        api.add_resource(StudentAuth, '/auth/student')
+
     def deploy_admin():
         from routes.api.admin.account.account_control import InitializeAccount
         from routes.api.admin.account.new_account import NewAccount
@@ -102,6 +112,7 @@ def deploy(app):
 
         app.register_blueprint(blueprint)
 
+    deploy_auth()
     deploy_admin()
     deploy_developer()
     deploy_student()

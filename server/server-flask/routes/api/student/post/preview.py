@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.post import FAQModel, NoticeModel, RuleModel

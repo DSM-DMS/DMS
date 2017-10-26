@@ -1,6 +1,6 @@
 import openpyxl
 from flask import send_from_directory
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.account import AdminModel, StudentModel
@@ -10,12 +10,12 @@ from . import stay_doc
 
 class Stay(Resource):
     @swagger.doc(stay_doc.STAY_GET)
-    @jwt_required()
+    @jwt_required
     def get(self):
         """
         잔류신청 엑셀 다운로드
         """
-        admin = AdminModel.objects(id=current_identity)
+        admin = AdminModel.objects(id=get_jwt_identity())
 
         if not admin:
             return '', 403

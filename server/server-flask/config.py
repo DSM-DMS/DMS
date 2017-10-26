@@ -13,9 +13,10 @@ API_DESC = '''
 '''.format(PORT)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-JWT_AUTH_USERNAME_KEY = 'id'
-JWT_AUTH_PASSWORD_KEY = 'pw'
-JWT_EXPIRATION_DELTA = timedelta(days=365)
+JWT_SECRET_KEY = SECRET_KEY
+JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=365)
+JWT_HEADER_TYPE = 'JWT'
+# http://flask-jwt-extended.readthedocs.io/en/latest/options.html
 
 MYSQL_PW = os.getenv('MYSQL_PW')
 DB_NAME = 'dms'

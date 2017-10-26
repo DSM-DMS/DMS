@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
@@ -10,12 +10,12 @@ from . import preview_doc
 
 class FAQPreview(Resource):
     @swagger.doc(preview_doc.FAQ_PREVIEW_GET)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         FAQ 프리뷰 설정
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -30,12 +30,12 @@ class FAQPreview(Resource):
 
 class NoticePreview(Resource):
     @swagger.doc(preview_doc.NOTICE_PREVIEW_GET)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         공지사항 프리뷰 설정
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -50,12 +50,12 @@ class NoticePreview(Resource):
 
 class RulePreview(Resource):
     @swagger.doc(preview_doc.RULE_PREVIEW_GET)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         기숙사규정 프리뷰 설정
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)

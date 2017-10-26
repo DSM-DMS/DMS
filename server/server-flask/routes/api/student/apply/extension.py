@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
@@ -10,12 +10,12 @@ from . import extension_doc
 
 class Extension(Resource):
     @swagger.doc(extension_doc.EXTENSION_GET)
-    @jwt_required()
+    @jwt_required
     def get(self):
         """
         연장신청 정보 조회
         """
-        student = StudentModel.objects(id=current_identity).first()
+        student = StudentModel.objects(id=get_jwt_identity()).first()
 
         if not student.extension_apply:
             return Response('', 204)
@@ -26,7 +26,7 @@ class Extension(Resource):
         }, 200
 
     @swagger.doc(extension_doc.EXTENSION_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         연장신청
@@ -34,7 +34,7 @@ class Extension(Resource):
         class_ = request.form.get('class', type=int)
         seat = request.form.get('seat', type=int)
 
-        student = StudentModel.objects(id=current_identity).first()
+        student = StudentModel.objects(id=get_jwt_identity()).first()
         student.update(extension_apply=ExtensionApplyModel(class_=class_, seat=seat))
 
         return Response('', 201)
