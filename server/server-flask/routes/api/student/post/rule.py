@@ -3,8 +3,7 @@ from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import RuleModel
 
-from . import rule_doc
-from . import helper
+from . import helper, rule_doc
 
 
 class RuleList(Resource):

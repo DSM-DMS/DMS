@@ -1,6 +1,6 @@
 from flask import Response
-from flask_restful import Resource, request
 from flask_jwt import current_identity, jwt_required
+from flask_restful import Resource, request
 
 from db.models.account import StudentModel
 from db.models.apply import ExtensionApplyModel

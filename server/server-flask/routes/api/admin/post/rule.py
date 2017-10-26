@@ -1,12 +1,11 @@
 from flask import Response
-from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
+from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.post import RuleModel
 
-from . import rule_doc
-from . import helper
+from . import helper, rule_doc
 
 
 class Rule(Resource):

@@ -3,8 +3,7 @@ from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import NoticeModel
 
-from . import notice_doc
-from . import helper
+from . import helper, notice_doc
 
 
 class NoticeList(Resource):

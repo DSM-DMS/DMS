@@ -3,8 +3,7 @@ from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import FAQModel
 
-from . import faq_doc
-from . import helper
+from . import faq_doc, helper
 
 
 class FAQList(Resource):
