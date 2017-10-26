@@ -392,8 +392,14 @@ $classSelect.on("click", "td", function(e) {
 });
 
 $openExtensionButton.on("click", function() {
-    $openStayButton.prop("disabled", true);
-    $openExtensionButton.prop("disabled", true);
+    if($stayWindow.hasClass("fade-in")) {
+        $panel.toggleClass("left-move");
+        $stayWindow.toggleClass("fade-in");
+        $menu.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu2.toggleClass("fade-out");
@@ -403,8 +409,6 @@ $openExtensionButton.on("click", function() {
 });
 
 $closeExtensionButton.on("click", function() {
-    $openStayButton.prop("disabled", false);
-    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
@@ -871,8 +875,14 @@ var setStayValue = function(thisDate) {
 setStayValue(stayDate);
 
 $openStayButton.click(function() {
-    $openStayButton.prop("disabled", true);
-    $openExtensionButton.prop("disabled", true);
+    if($extensionWindow.hasClass("fade-in")) {
+        $panel.toggleClass("left-move");
+        $extensionWindow.toggleClass("fade-in");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -883,8 +893,6 @@ $openStayButton.click(function() {
 });
 
 $closeStayButton.on("click", function() {
-    $openStayButton.prop("disabled", false);
-    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
