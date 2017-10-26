@@ -1,3 +1,4 @@
+from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import SignupRequiredModel, StudentModel
@@ -11,9 +12,9 @@ class UUIDVerification(Resource):
         uuid = request.form.get('uuid')
 
         if SignupRequiredModel.objects(uuid=uuid):
-            return '', 201
+            return Response('', 201)
         else:
-            return '', 204
+            return Response('', 204)
 
 
 class Signup(Resource):
@@ -28,12 +29,12 @@ class Signup(Resource):
             # Valid UUID
             if StudentModel.objects(id=id):
                 # ID already exists
-                return '', 204
+                return Response('', 204)
             else:
                 StudentModel(id=id, pw=pw, name=student.name, number=student.number, uuid=uuid).save()
                 student.delete()
                 # Delete existing 'signup required' data
 
-                return '', 201
+                return Response('', 201)
         else:
-            return '', 400
+            return Response('', 400)

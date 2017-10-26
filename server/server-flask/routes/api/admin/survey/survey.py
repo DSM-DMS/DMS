@@ -1,5 +1,6 @@
 import json
 
+from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
 
@@ -13,51 +14,49 @@ class Survey(Resource):
     @swagger.doc(survey_doc.SURVEY_POST)
     @jwt_required()
     def post(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        설문조사 set 등록
+        """
+        admin = AdminModel.objects(id=current_identity).first()
+        if not admin:
             # Forbidden
-            return '', 403
-        else:
-            title = request.form.get('title')
-            start_date = request.form.get('start_date')
-            end_date = request.form.get('end_date')
-            target = request.form.get('target', type=list)
+            return Response('', 403)
 
-            SurveyModel(
-                title=title,
-                start_date=start_date,
-                end_date=end_date,
-                target=target
-            ).save()
+        title = request.form.get('title')
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        target = request.form.get('target', type=list)
 
-            return '', 201
+        SurveyModel(
+            title=title,
+            start_date=start_date,
+            end_date=end_date,
+            target=target
+        ).save()
+
+        return Response('', 201)
 
 
 class Question(Resource):
     @swagger.doc(survey_doc.QUESTION_POST)
     @jwt_required()
     def post(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        설문조사에 질문 등록
+        """
+        admin = AdminModel.objects(id=current_identity).first()
+        if not admin:
             # Forbidden
-            return '', 403
+            return Response('', 403)
+
+        id = request.form.get('id')
+        title = request.form.get('title')
+        is_objective = request.form.get('is_objective')
+
+        if is_objective:
+            choice_paper = json.loads(request.form.get('choice_paper'))
+            QuestionModel(survey_id=id, title=title, is_objective=True, choice_paper=choice_paper).save()
         else:
-            id = request.form.get('id')
-            title = request.form.get('title')
-            is_objective = request.form.get('is_objective')
+            QuestionModel(survey_id=id, title=title, is_objective=False).save()
 
-            survey = SurveyModel.objects(id=id).first()
-            question = None
-
-            if is_objective:
-                global question
-
-                choice_paper = json.loads(request.form.get('choice_paper'))
-                question = QuestionModel(title=title, is_objective=True, choice_paper=choice_paper)
-            else:
-                global question
-
-                question = QuestionModel(title=title, is_objective=False)
-
-            survey.questions.append(question)
-            survey.update(questions=survey.questions)
-
-            return '', 201
+        return Response('', 201)

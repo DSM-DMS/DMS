@@ -1,3 +1,4 @@
+from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
 
@@ -9,19 +10,23 @@ class NewAccount(Resource):
     @swagger.doc(new_account_doc.NEW_ACCOUNT_POST)
     @jwt_required()
     def post(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        새로운 관리자 계정 추가
+        """
+        admin = AdminModel.objects(id=current_identity).first()
+        if not admin:
             # Forbidden
-            return '', 403
+            return Response('', 403)
+
+        id = request.form.get('id')
+        pw = request.form.get('pw')
+        name = request.form.get('name')
+        # New account data
+
+        if AdminModel.objects(id=id):
+            # ID already exists
+            return Response('', 204)
         else:
-            id = request.form.get('id')
-            pw = request.form.get('pw')
-            name = request.form.get('name')
-            # New account data
+            AdminModel(id=id, pw=pw, name=name).save()
 
-            if AdminModel.objects(id=id):
-                # ID already exists
-                return'', 204
-            else:
-                AdminModel(id=id, pw=pw, name=name).save()
-
-                return '', 201
+            return Response('', 201)

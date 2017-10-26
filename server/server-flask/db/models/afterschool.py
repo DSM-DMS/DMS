@@ -1,12 +1,14 @@
+from bson.objectid import ObjectId
 from db.mongo import *
 
 
 class AfterSchoolItemModel(EmbeddedDocument):
+    id = ObjectIdField(primary_key=True, default=ObjectId())
     title = StringField(required=True)
     on_monday = BooleanField(required=True, default=False)
     on_tuesday = BooleanField(required=True, default=False)
     on_saturday = BooleanField(required=True, default=False)
-    target = IntField(required=True)
+    target = ListField(IntField())
 
 
 class AfterSchoolModel(Document):
