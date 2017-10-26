@@ -1,7 +1,7 @@
 import os
 from datetime import timedelta
 
-PORT = 81
+PORT = 3000
 
 API_VER = '0.1'
 API_TITLE = 'DMS'

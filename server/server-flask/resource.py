@@ -12,7 +12,7 @@ def deploy(app):
         from routes.api.admin.account.account_control import InitializeAccount
         from routes.api.admin.account.new_account import NewAccount
 
-        from routes.api.admin.apply.afterschool import AfterSchool
+        from routes.api.admin.apply.afterschool import AfterSchool, AfterSchoolItem
         from routes.api.admin.apply.extension import Extension
         from routes.api.admin.apply.goingout import Goingout
         from routes.api.admin.apply.stay import Stay
@@ -20,16 +20,19 @@ def deploy(app):
         from routes.api.admin.post.faq import FAQ
         from routes.api.admin.post.notice import Notice
         from routes.api.admin.post.rule import Rule
+        from routes.api.admin.post.preview import FAQPreview, NoticePreview, RulePreview
 
         from routes.api.admin.survey.survey import Survey, Question
 
         blueprint = Blueprint('admin', __name__)
+
         api = Api(blueprint, api_spec_url='/api/admin', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Admin API', description=app.config['API_DESC'])
 
         api.add_resource(InitializeAccount, '/admin/initialize-account')
         api.add_resource(NewAccount, '/admin/new-account')
 
         api.add_resource(AfterSchool, '/admin/afterschool')
+        api.add_resource(AfterSchoolItem, '/admin/afterschool/item')
         api.add_resource(Extension, '/admin/extension')
         api.add_resource(Goingout, '/admin/goingout')
         api.add_resource(Stay, '/admin/stay')
@@ -37,6 +40,9 @@ def deploy(app):
         api.add_resource(FAQ, '/admin/faq')
         api.add_resource(Notice, '/admin/notice')
         api.add_resource(Rule, '/admin/rule')
+        api.add_resource(FAQPreview, '/admin/faq/preview')
+        api.add_resource(NoticePreview, '/admin/notice/preview')
+        api.add_resource(RulePreview, '/admin/notice/preview')
 
         api.add_resource(Survey, '/admin/survey')
         api.add_resource(Question, '/admin/survey/question')
@@ -59,6 +65,7 @@ def deploy(app):
         from routes.api.student.post.faq import FAQList, FAQ
         from routes.api.student.post.notice import NoticeList, Notice
         from routes.api.student.post.rule import RuleList, Rule
+        from routes.api.student.post.preview import FAQPreview, NoticePreview, RulePreview
 
         from routes.api.student.school_data.meal import Meal
 
@@ -84,6 +91,9 @@ def deploy(app):
         api.add_resource(Notice, '/notice/<id>')
         api.add_resource(RuleList, '/rule')
         api.add_resource(Rule, '/rule/<id>')
+        api.add_resource(FAQPreview, '/faq/preview')
+        api.add_resource(NoticePreview, '/notice/preview')
+        api.add_resource(RulePreview, '/notice/preview')
 
         api.add_resource(Meal, '/meal/<date>')
 
