@@ -1,3 +1,4 @@
+from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
 
@@ -12,43 +13,53 @@ class Notice(Resource):
     @swagger.doc(notice_doc.NOTICE_POST)
     @jwt_required()
     def post(self):
+        """
+        공지사항 업로드
+        """
         admin = AdminModel.objects(id=current_identity).first()
-
         if not admin:
             # Forbidden
-            return '', 403
-        else:
-            title = request.form.get('title')
-            content = request.form.get('content')
+            return Response('', 403)
 
-            helper.post(NoticeModel, title, content, admin)
+        title = request.form.get('title')
+        content = request.form.get('content')
 
-            return '', 201
+        helper.post(NoticeModel, title, content, admin)
+
+        return Response('', 201)
 
     @swagger.doc(notice_doc.NOTICE_PATCH)
     @jwt_required()
     def patch(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        공지사항 내용 수정
+        """
+        admin = AdminModel.objects(id=current_identity).first()
+        if not admin:
             # Forbidden
-            return '', 403
-        else:
-            id = request.form.get('id')
-            title = request.form.get('title')
-            content = request.form.get('content')
+            return Response('', 403)
 
-            helper.patch(NoticeModel, id, title, content)
+        id = request.form.get('id')
+        title = request.form.get('title')
+        content = request.form.get('content')
 
-            return '', 200
+        helper.patch(NoticeModel, id, title, content)
+
+        return Response('', 200)
 
     @swagger.doc(notice_doc.NOTICE_DELETE)
     @jwt_required()
     def delete(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        공지사항 제거
+        """
+        admin = AdminModel.objects(id=current_identity).first()
+        if not admin:
             # Forbidden
-            return '', 403
-        else:
-            id = request.form.get('id')
+            return Response('', 403)
 
-            helper.delete(NoticeModel, id)
+        id = request.form.get('id')
 
-            return '', 200
+        helper.delete(NoticeModel, id)
+
+        return Response('', 200)

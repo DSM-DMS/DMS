@@ -1,3 +1,4 @@
+from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
 
@@ -11,6 +12,9 @@ class SurveyList(Resource):
     @swagger.doc(survey_doc.SURVEY_LIST_GET)
     @jwt_required()
     def get(self):
+        """
+        설문조사 리스트 조회
+        """
         student_number = StudentModel.objects(id=current_identity).first().number
 
         return [{
@@ -26,16 +30,21 @@ class Survey(Resource):
     @swagger.doc(survey_doc.SURVEY_GET)
     @jwt_required()
     def get(self, id):
+        """
+        설문조사 내용 조회
+        """
         questions = [{
             'id': str(question.id),
             'title': question.title,
             'is_objective': question.is_objective,
             'choice_paper': question.choice_paper
-        } for question in SurveyModel.objects(id=id).first().questions]
+        } for question in QuestionModel.objects(survey_id=id)]
         # Question data
 
+        answer_student = StudentModel.objects(id=current_identity).first()
+
         for question in questions:
-            answer = AnswerModel.objects(answer_student=StudentModel(id=current_identity), id=question['id']).first()
+            answer = AnswerModel.objects(answer_student=answer_student, question=QuestionModel.objects(id=question['id']).first()).first()
             question['answer'] = answer.answer if answer else None
 
         return questions, 200
@@ -43,9 +52,15 @@ class Survey(Resource):
     @swagger.doc(survey_doc.SURVEY_POST)
     @jwt_required()
     def post(self, id):
+        """
+        설문조사 답변 업로드
+        """
         answer = request.form.get('answer')
 
-        AnswerModel.objects(answer_student=StudentModel(id=current_identity), question=QuestionModel(id=id)).delete()
-        AnswerModel(answer_student=StudentModel(id=current_identity), question=QuestionModel(id=id), answer=answer).save()
+        answer_student = StudentModel.objects(id=current_identity).first()
+        question = QuestionModel.objects(id=id).first()
 
-        return '', 201
+        AnswerModel.objects(answer_student=answer_student, question=question).delete()
+        AnswerModel(answer_student=answer_student, question=question, answer=answer).save()
+
+        return Response('', 201)

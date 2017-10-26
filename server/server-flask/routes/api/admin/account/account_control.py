@@ -1,3 +1,4 @@
+from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 from flask_jwt import current_identity, jwt_required
 
@@ -9,18 +10,22 @@ class InitializeAccount(Resource):
     @swagger.doc(account_control_doc.INITIALIZE_ACCOUNT_POST)
     @jwt_required()
     def post(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        학생 계정 초기화
+        """
+        admin = AdminModel.objects(id=current_identity).first()
+        if not admin:
             # Forbidden
-            return '', 403
-        else:
-            number = request.form.get('number', type=int)
-            # Number to initialize
+            return Response('', 403)
 
-            student = StudentModel.objects(number=number).first()
-            # Get model
-            SignupRequiredModel(uuid=student.uuid, name=student.name, number=student.number).save()
-            # Move to 'signup required'
-            student.delete()
-            # Delete existing student account
+        number = request.form.get('number', type=int)
+        # Number to initialize
 
-            return '', 201
+        student = StudentModel.objects(number=number).first()
+        # Get model
+        SignupRequiredModel(uuid=student.uuid, name=student.name, number=student.number).save()
+        # Move to 'signup required'
+        student.delete()
+        # Delete existing student account
+
+        return Response('', 201)
