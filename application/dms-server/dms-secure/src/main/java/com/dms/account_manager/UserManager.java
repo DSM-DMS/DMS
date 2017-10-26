@@ -62,6 +62,7 @@ public class UserManager {
         if (rsForStudentData.next()) {
             result.put("number", AES256.decrypt(rsForStudentData.getString("number") + ""));
             result.put("name", AES256.decrypt(rsForStudentData.getString("name")));
+            result.put("uuid", rsForStudentData.getString("uid"));
         }
         
         return result;
