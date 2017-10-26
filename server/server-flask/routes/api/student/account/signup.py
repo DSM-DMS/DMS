@@ -31,7 +31,7 @@ class Signup(Resource):
                 # ID already exists
                 return Response('', 204)
             else:
-                StudentModel(id=id, pw=pw, name=student.name, number=student.number, uuid=uuid).save()
+                StudentModel(id=id, pw=pw, name=student.name, number=student.number).save()
                 student.delete()
                 # Delete existing 'signup required' data
 

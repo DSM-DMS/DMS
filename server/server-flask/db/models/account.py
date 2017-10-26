@@ -21,7 +21,6 @@ class AccountBase(Document):
 
 class StudentModel(AccountBase):
     number = IntField(required=True)
-    uuid = StringField(required=True)
     afterschool_apply = EmbeddedDocumentField(AfterSchoolApplyModel)
     extension_apply = EmbeddedDocumentField(ExtensionApplyModel)
     goingout_apply = EmbeddedDocumentField(GoingoutApplyModel, default=GoingoutApplyModel())
