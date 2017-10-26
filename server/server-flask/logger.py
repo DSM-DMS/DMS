@@ -32,11 +32,6 @@ def decorate(app):
 
         return response
 
-    @app.teardown_request
-    def teardown_request(exception):
-        if not exception:
-            current_app.logger.info('Teardown request successfully.')
-
     @app.teardown_appcontext
     def teardown_appcontext(exception):
         if not exception:
