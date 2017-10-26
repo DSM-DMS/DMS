@@ -53,7 +53,9 @@ public class UserManager {
     }
     
     public static JSONObject getUserInfo(String id) throws SQLException {
-        String uid = getUid(id);
+        System.out.println("GetUserInfo " + id);
+    	String uid = getUid(id);
+        System.out.println(uid);
         
         ResultSet rsForStudentData = DB.executeQuery("SELECT * FROM student_data WHERE uid=?", uid);
         JSONObject result = new JSONObject();
