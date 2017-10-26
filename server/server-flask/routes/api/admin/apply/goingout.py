@@ -1,16 +1,22 @@
 from flask import send_from_directory
-from flask_restful import Resource
+from flask_restful_swagger_2 import Resource, swagger
 from flask_jwt import current_identity, jwt_required
-
 import openpyxl
 
 from db.models.account import AdminModel, StudentModel
+from . import goingout_doc
 
 
-class CheckGoingout(Resource):
+class Goingout(Resource):
+    @swagger.doc(goingout_doc.GOINGOUT_GET)
     @jwt_required()
     def get(self):
-        if not AdminModel.objects(id=current_identity):
+        """
+        외출신청 엑셀 다운로드
+        """
+        admin = AdminModel.objects(id=current_identity)
+
+        if not admin:
             return '', 403
 
         wb = openpyxl.load_workbook('명렬표.xlsx')
