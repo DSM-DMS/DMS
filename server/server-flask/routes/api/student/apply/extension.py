@@ -1,12 +1,15 @@
 from flask import Response
 from flask_jwt import current_identity, jwt_required
-from flask_restful import Resource, request
+from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.apply import ExtensionApplyModel
 
+from . import extension_doc
+
 
 class Extension(Resource):
+    @swagger.doc(extension_doc.EXTENSION_GET)
     @jwt_required()
     def get(self):
         """
@@ -14,11 +17,15 @@ class Extension(Resource):
         """
         student = StudentModel.objects(id=current_identity).first()
 
+        if not student.extension_apply:
+            return Response('', 204)
+
         return {
             'class': student.extension_apply.class_,
             'seat': student.extension_apply.seat
         }, 200
 
+    @swagger.doc(extension_doc.EXTENSION_POST)
     @jwt_required()
     def post(self):
         """
