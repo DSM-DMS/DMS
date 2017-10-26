@@ -9,6 +9,9 @@ from . import signup_doc
 class UUIDVerification(Resource):
     @swagger.doc(signup_doc.UUID_VERIFICATION_POST)
     def post(self):
+        """
+        UUID 검사
+        """
         uuid = request.form.get('uuid')
 
         if SignupRequiredModel.objects(uuid=uuid):
@@ -20,6 +23,9 @@ class UUIDVerification(Resource):
 class Signup(Resource):
     @swagger.doc(signup_doc.SIGNUP_POST)
     def post(self):
+        """
+        회원가입
+        """
         uuid = request.form.get('uuid')
         id = request.form.get('id')
         pw = request.form.get('pw')
