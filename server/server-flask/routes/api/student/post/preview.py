@@ -28,9 +28,9 @@ class NoticePreview(Resource):
         """
         공지사항 프리뷰 조회
         """
-        notice = FAQModel.objects(pinned=True).first()
+        notice = NoticeModel.objects(pinned=True).first()
         if not notice:
-            notice = FAQModel.objects().first()
+            notice = NoticeModel.objects().first()
             if not notice:
                 return Response('', 204)
 
@@ -45,7 +45,7 @@ class RulePreview(Resource):
         """
         rule = RuleModel.objects(pinned=True).first()
         if not rule:
-            rule = FAQModel.objects().first()
+            rule = RuleModel.objects().first()
             if not rule:
                 return Response('', 204)
 

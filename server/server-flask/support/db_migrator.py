@@ -22,12 +22,12 @@ def migrate_apply(id, uuid):
     cursor = connection.cursor(DictCursor)
 
     cursor.execute("SELECT * FROM goingout_apply WHERE uid='{0}'".format(uuid))
-    result = cursor.fetchall()[0]
-    goingout_apply = GoingoutApplyModel(on_saturday=result['sat'], on_sunday=result['sun'])
+    result = cursor.fetchall()
+    goingout_apply = GoingoutApplyModel(on_saturday=result[0]['sat'], on_sunday=result[0]['sun']) if result else None
 
     cursor.execute("SELECT * FROM stay_apply WHERE uid='{0}'".format(uuid))
-    result = cursor.fetchall()[0]
-    stay_apply = StayApplyModel(value=result['value'])
+    result = cursor.fetchall()
+    stay_apply = StayApplyModel(value=result[0]['value']) if result else None
 
     student.update(goingout_apply=goingout_apply, stay_apply=stay_apply)
 
