@@ -15,7 +15,7 @@ class AccountBase(Document):
     pw = StringField(required=True)
     name = StringField(required=True)
     signup_date = StringField(required=True, default=str(date.today()))
-    
+
     meta = {'allow_inheritance': True}
 
 
@@ -23,7 +23,7 @@ class StudentModel(AccountBase):
     number = IntField(required=True)
     afterschool_apply = EmbeddedDocumentField(AfterSchoolApplyModel)
     extension_apply = EmbeddedDocumentField(ExtensionApplyModel)
-    goingout_apply = EmbeddedDocumentField(GoingoutApplyModel, default=GoingoutApplyModel())
+    goingout_apply = EmbeddedDocumentField(GoingoutApplyModel)
     # Default sat=False, sun=False
     stay_apply = EmbeddedDocumentField(StayApplyModel, default=StayApplyModel())
     # Default value=4
