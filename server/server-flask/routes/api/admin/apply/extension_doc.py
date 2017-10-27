@@ -1,5 +1,5 @@
 EXTENSION_GET = {
-    'tags': ['관리자 - 신청 정보'],
+    'tags': ['신청 정보'],
     'description': '연장신청 정보 다운로드',
     'parameters': [
         {

@@ -1,5 +1,5 @@
 FAQ_POST = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': 'FAQ 업로드',
     'parameters': [
         {
@@ -29,7 +29,7 @@ FAQ_POST = {
 }
 
 FAQ_PATCH = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': 'FAQ 수정',
     'parameters': [
         {
@@ -65,7 +65,7 @@ FAQ_PATCH = {
 }
 
 FAQ_DELETE = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': 'FAQ 삭제',
     'parameters': [
         {

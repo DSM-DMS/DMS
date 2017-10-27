@@ -1,5 +1,5 @@
 NOTICE_POST = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': '공지사항 업로드',
     'parameters': [
         {
@@ -29,7 +29,7 @@ NOTICE_POST = {
 }
 
 NOTICE_PATCH = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': '공지사항 수정',
     'parameters': [
         {
@@ -65,7 +65,7 @@ NOTICE_PATCH = {
 }
 
 NOTICE_DELETE = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': '공지사항 삭제',
     'parameters': [
         {
