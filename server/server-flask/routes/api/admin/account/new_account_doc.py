@@ -1,5 +1,5 @@
 NEW_ACCOUNT_POST = {
-    'tags': ['관리자 - 계정'],
+    'tags': ['계정'],
     'description': '관리자 계정 생성',
     'parameters': [
         {

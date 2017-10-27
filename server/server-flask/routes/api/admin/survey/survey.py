@@ -1,7 +1,7 @@
 import json
 
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
@@ -12,12 +12,12 @@ from . import survey_doc
 
 class Survey(Resource):
     @swagger.doc(survey_doc.SURVEY_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         설문조사 set 등록
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -39,12 +39,12 @@ class Survey(Resource):
 
 class Question(Resource):
     @swagger.doc(survey_doc.QUESTION_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         설문조사에 질문 등록
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)

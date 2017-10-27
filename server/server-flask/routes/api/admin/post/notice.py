@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
@@ -10,12 +10,12 @@ from . import helper, notice_doc
 
 class Notice(Resource):
     @swagger.doc(notice_doc.NOTICE_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         공지사항 업로드
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -28,12 +28,12 @@ class Notice(Resource):
         return Response('', 201)
 
     @swagger.doc(notice_doc.NOTICE_PATCH)
-    @jwt_required()
+    @jwt_required
     def patch(self):
         """
         공지사항 내용 수정
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -47,12 +47,12 @@ class Notice(Resource):
         return Response('', 200)
 
     @swagger.doc(notice_doc.NOTICE_DELETE)
-    @jwt_required()
+    @jwt_required
     def delete(self):
         """
         공지사항 제거
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)

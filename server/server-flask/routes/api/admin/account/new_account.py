@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
@@ -9,12 +9,12 @@ from . import new_account_doc
 
 class NewAccount(Resource):
     @swagger.doc(new_account_doc.NEW_ACCOUNT_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         새로운 관리자 계정 추가
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)

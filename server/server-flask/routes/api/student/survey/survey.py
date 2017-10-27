@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
@@ -10,12 +10,12 @@ from . import survey_doc
 
 class SurveyList(Resource):
     @swagger.doc(survey_doc.SURVEY_LIST_GET)
-    @jwt_required()
+    @jwt_required
     def get(self):
         """
         설문조사 리스트 조회
         """
-        student_number = StudentModel.objects(id=current_identity).first().number
+        student_number = StudentModel.objects(id=get_jwt_identity()).first().number
 
         return [{
             'id': str(survey.id),
@@ -28,7 +28,7 @@ class SurveyList(Resource):
 
 class Survey(Resource):
     @swagger.doc(survey_doc.SURVEY_GET)
-    @jwt_required()
+    @jwt_required
     def get(self, id):
         """
         설문조사 내용 조회
@@ -41,7 +41,7 @@ class Survey(Resource):
         } for question in QuestionModel.objects(survey_id=id)]
         # Question data
 
-        answer_student = StudentModel.objects(id=current_identity).first()
+        answer_student = StudentModel.objects(id=get_jwt_identity()).first()
 
         for question in questions:
             answer = AnswerModel.objects(answer_student=answer_student, question=QuestionModel.objects(id=question['id']).first()).first()
@@ -50,14 +50,14 @@ class Survey(Resource):
         return questions, 200
 
     @swagger.doc(survey_doc.SURVEY_POST)
-    @jwt_required()
+    @jwt_required
     def post(self, id):
         """
         설문조사 답변 업로드
         """
         answer = request.form.get('answer')
 
-        answer_student = StudentModel.objects(id=current_identity).first()
+        answer_student = StudentModel.objects(id=get_jwt_identity()).first()
         question = QuestionModel.objects(id=id).first()
 
         AnswerModel.objects(answer_student=answer_student, question=question).delete()
