@@ -18,7 +18,10 @@ class Goingout(Resource):
         student = StudentModel.objects(id=get_jwt_identity()).first()
 
         if not student.goingout_apply:
-            return Response('', 204)
+            return {
+                'sat': False,
+                'sun': False
+            }
 
         return {
             'sat': student.goingout_apply.on_saturday,
@@ -31,8 +34,8 @@ class Goingout(Resource):
         """
         외출신청
         """
-        sat = request.form.get('sat', type=bool)
-        sun = request.form.get('sun', type=bool)
+        sat = request.form.get('sat').upper() == 'TRUE'
+        sun = request.form.get('sun').upper() == 'TRUE'
 
         student = StudentModel.objects(id=get_jwt_identity()).first()
         student.update(goingout_apply=GoingoutApplyModel(on_saturday=sat, on_sunday=sun))

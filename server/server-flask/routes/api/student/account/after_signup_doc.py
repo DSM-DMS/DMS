@@ -45,7 +45,7 @@ CHANGE_NUMBER_POST = {
             'name': 'new_number',
             'description': '바꿀 학번',
             'in': 'formData',
-            'type': 'str'
+            'type': 'int'
         }
     ],
     'responses': {
