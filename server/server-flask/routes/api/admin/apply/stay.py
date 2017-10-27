@@ -25,22 +25,30 @@ class Stay(Resource):
 
         for row in map(str, range(3, 68)):
             for column1, column2 in zip(['B', 'F', 'J', 'N'], ['D', 'H', 'L', 'P']):
-                student = StudentModel.objects(number=ws[column1+row]).first()
-                status = ''
-                value = student.stay_apply.value
+                if ws[column1+row].value == '학번':
+                    continue
 
+                number = int(ws[column1 + row].value) if ws[column1 + row].value else None
+                if not number:
+                    continue
+
+                student = StudentModel.objects(number=number).first()
                 if not student:
                     continue
 
-                if value == '1':
+                status = ''
+                value = student.stay_apply.value if student.stay_apply else None
+
+                if value == 1:
                     status = '금요 귀가'
-                elif value == '2':
+                elif value == 2:
                     status = '토요 귀가'
-                elif value == '3':
+                elif value == 3:
                     status = '토요 귀사'
-                elif value == '4':
+                elif value == 4:
                     status = '잔류'
                 ws[column2+row] = status
 
         wb.save('명렬표.xlsx')
-        return send_from_directory('주소오오오', '명렬표.xlsx'), 200
+
+        return send_from_directory('.', '명렬표.xlsx')

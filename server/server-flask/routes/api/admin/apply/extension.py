@@ -25,30 +25,37 @@ class Extension(Resource):
 
         for row in map(str, range(3, 68)):
             for column1, column2 in zip(['B', 'F', 'J', 'N'], ['D', 'H', 'L', 'P']):
-                student = StudentModel.objects(number=ws[column1+row]).first()
-                status = ''
-                class_ = student.extension_apply.class_
+                if ws[column1+row].value == '학번':
+                    continue
 
+                number = int(ws[column1+row].value) if ws[column1+row].value else None
+                if not number:
+                    continue
+
+                student = StudentModel.objects(number=number).first()
                 if not student:
                     continue
 
-                if class_ == '1':
+                status = ''
+                class_ = student.extension_apply.class_ if student.extension_apply else None
+
+                if class_ == 1:
                     status = '가온실'
-                elif class_ == '2':
+                elif class_ == 2:
                     status = '나온실'
-                elif class_ == '3':
+                elif class_ == 3:
                     status = '다온실'
-                elif class_ == '4':
+                elif class_ == 4:
                     status = '라온실'
-                elif class_ == '5':
+                elif class_ == 5:
                     status = '3층 독서실'
-                elif class_ == '6':
+                elif class_ == 6:
                     status = '4층 독서실'
-                elif class_ == '7':
+                elif class_ == 7:
                     status = '5층 독서실'
 
                 ws[column2+row] = status
 
         wb.save('명렬표.xlsx')
         
-        return send_from_directory('주소오오오', '명렬표.xlsx'), 200
+        return send_from_directory('.', '명렬표.xlsx')

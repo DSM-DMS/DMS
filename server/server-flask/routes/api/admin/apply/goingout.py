@@ -25,15 +25,22 @@ class Goingout(Resource):
 
         for row in map(str, range(3, 68)):
             for column1, column2, column3 in zip(['B', 'F', 'J', 'N'], ['D', 'H', 'L', 'P'], ['E', 'I', 'M', 'Q']):
-                student = StudentModel.objects(number=ws[column1+row]).first()
-
-                if not student:
+                if ws[column1+row].value == '학번':
                     continue
 
-                sat = '토요 외출' if student.goingout_applies.on_saturday else ''
-                sun = '일요 외출' if student.goingout_applies.on_sunday else ''
+                number = int(ws[column1 + row].value) if ws[column1 + row].value else None
+                if not number:
+                    continue
+
+                student = StudentModel.objects(number=number).first()
+                if not student or not student.goingout_apply:
+                    continue
+
+                sat = '토요 외출' if student.goingout_apply.on_saturday else ''
+                sun = '일요 외출' if student.goingout_apply.on_sunday else ''
                 ws[column2+row] = sat
                 ws[column3+row] = sun
 
         wb.save('명렬표.xlsx')
-        return send_from_directory('주소오오오', '명렬표.xlsx'), 200
+
+        return send_from_directory('.', '명렬표.xlsx')
