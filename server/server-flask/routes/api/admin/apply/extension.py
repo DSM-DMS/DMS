@@ -20,7 +20,7 @@ class Extension(Resource):
         if not admin:
             return '', 403
 
-        wb = openpyxl.load_workbook('명렬표.xlsx')
+        wb = openpyxl.load_workbook('연장 명렬표.xlsx')
         ws = wb.active
 
         for row in map(str, range(3, 68)):
@@ -28,18 +28,13 @@ class Extension(Resource):
                 if ws[column1+row].value == '학번':
                     continue
 
-                number = int(ws[column1+row].value) if ws[column1+row].value else None
-                if not number:
-                    continue
-
+                number = int(ws[column1+row].value or 0)
                 student = StudentModel.objects(number=number).first()
-                if not student:
-                    continue
+                class_ = student.extension_apply.class_ or 0
 
-                status = ''
-                class_ = student.extension_apply.class_ if student.extension_apply else None
-
-                if class_ == 1:
+                if class_ == 0:
+                    status = ''
+                elif class_ == 1:
                     status = '가온실'
                 elif class_ == 2:
                     status = '나온실'
@@ -58,4 +53,4 @@ class Extension(Resource):
 
         wb.save('명렬표.xlsx')
         
-        return send_from_directory('.', '명렬표.xlsx')
+        return send_from_directory('.', '연장 명렬표.xlsx')

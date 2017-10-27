@@ -20,7 +20,7 @@ class Stay(Resource):
         if not admin:
             return '', 403
 
-        wb = openpyxl.load_workbook('명렬표.xlsx')
+        wb = openpyxl.load_workbook('잔류 명렬표.xlsx')
         ws = wb.active
 
         for row in map(str, range(3, 68)):
@@ -28,18 +28,13 @@ class Stay(Resource):
                 if ws[column1+row].value == '학번':
                     continue
 
-                number = int(ws[column1 + row].value) if ws[column1 + row].value else None
-                if not number:
-                    continue
-
+                number = int(ws[column1 + row].value or 0)
                 student = StudentModel.objects(number=number).first()
-                if not student:
-                    continue
+                value = student.stay_apply.value or 0
 
-                status = ''
-                value = student.stay_apply.value if student.stay_apply else None
-
-                if value == 1:
+                if value == 0:
+                    status = 0
+                elif value == 1:
                     status = '금요 귀가'
                 elif value == 2:
                     status = '토요 귀가'
@@ -51,4 +46,4 @@ class Stay(Resource):
 
         wb.save('명렬표.xlsx')
 
-        return send_from_directory('.', '명렬표.xlsx')
+        return send_from_directory('.', '잔류 명렬표.xlsx')
