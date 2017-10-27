@@ -20,7 +20,7 @@ class Goingout(Resource):
         if not admin:
             return '', 403
 
-        wb = openpyxl.load_workbook('명렬표.xlsx')
+        wb = openpyxl.load_workbook('외출 명렬표.xlsx')
         ws = wb.active
 
         for row in map(str, range(3, 68)):
@@ -28,12 +28,9 @@ class Goingout(Resource):
                 if ws[column1+row].value == '학번':
                     continue
 
-                number = int(ws[column1 + row].value) if ws[column1 + row].value else None
-                if not number:
-                    continue
-
+                number = int(ws[column1 + row].value or 0)
                 student = StudentModel.objects(number=number).first()
-                if not student or not student.goingout_apply:
+                if not (student and student.goingout_apply):
                     continue
 
                 sat = '토요 외출' if student.goingout_apply.on_saturday else ''
@@ -43,4 +40,4 @@ class Goingout(Resource):
 
         wb.save('명렬표.xlsx')
 
-        return send_from_directory('.', '명렬표.xlsx')
+        return send_from_directory('.', '외출 명렬표.xlsx')
