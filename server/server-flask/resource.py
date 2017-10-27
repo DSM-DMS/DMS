@@ -8,17 +8,9 @@ def deploy(app):
 
     :rtype: None
     """
-    def deploy_auth():
-        from routes.api.auth.authentication import AdminAuth, StudentAuth
-
-        blueprint = Blueprint('auth', __name__)
-
-        api = Api(blueprint, api_spec_url='/api/auth', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Authentication API', description=app.config['API_DESC'])
-
-        api.add_resource(AdminAuth, '/auth/admin')
-        api.add_resource(StudentAuth, '/auth/student')
-
     def deploy_admin():
+        from routes.api.auth.authentication import AdminAuth
+
         from routes.api.admin.account.account_control import InitializeAccount
         from routes.api.admin.account.new_account import NewAccount
 
@@ -37,6 +29,8 @@ def deploy(app):
         blueprint = Blueprint('admin', __name__)
 
         api = Api(blueprint, api_spec_url='/api/admin', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Admin API', description=app.config['API_DESC'])
+
+        api.add_resource(AdminAuth, '/auth/admin')
 
         api.add_resource(InitializeAccount, '/admin/initialize-account')
         api.add_resource(NewAccount, '/admin/new-account')
@@ -63,6 +57,8 @@ def deploy(app):
         pass
 
     def deploy_student():
+        from routes.api.auth.authentication import StudentAuth
+
         from routes.api.student.account.after_signup import ChangePW, ChangeNumber
         from routes.api.student.account.signup import UUIDVerification, Signup
 
@@ -84,6 +80,8 @@ def deploy(app):
         blueprint = Blueprint('student', __name__)
         api = Api(blueprint, api_spec_url='/api/student', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Student API', description=app.config['API_DESC'])
 
+        api.add_resource(StudentAuth, '/auth/student')
+
         api.add_resource(ChangePW, '/change/pw')
         api.add_resource(ChangeNumber, '/change/number')
         api.add_resource(UUIDVerification, '/uuid-verify')
@@ -103,7 +101,7 @@ def deploy(app):
         api.add_resource(Rule, '/rule/<id>')
         api.add_resource(FAQPreview, '/faq/preview')
         api.add_resource(NoticePreview, '/notice/preview')
-        api.add_resource(RulePreview, '/notice/preview')
+        api.add_resource(RulePreview, '/rule/preview')
 
         api.add_resource(Meal, '/meal/<date>')
 
@@ -112,7 +110,6 @@ def deploy(app):
 
         app.register_blueprint(blueprint)
 
-    deploy_auth()
     deploy_admin()
     deploy_developer()
     deploy_student()
