@@ -14,6 +14,9 @@ from . import authentication_doc
 class AdminAuth(Resource):
     @swagger.doc(authentication_doc.AUTH_POST)
     def post(self):
+        """
+        로그인
+        """
         id = request.form.get('id')
         pw = request.form.get('pw')
 
@@ -30,6 +33,9 @@ class AdminAuth(Resource):
 class StudentAuth(Resource):
     @swagger.doc(authentication_doc.AUTH_POST)
     def post(self):
+        """
+        로그인
+        """
         id = request.form.get('id')
         pw = request.form.get('pw')
 
@@ -52,7 +58,7 @@ class StudentAuth(Resource):
 
                 return {
                     'access_token': create_access_token(identity=id)
-                }
+                }, 201
             else:
                 return {
                     'msg': 'Authentication Failed.'

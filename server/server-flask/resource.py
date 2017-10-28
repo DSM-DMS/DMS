@@ -46,7 +46,7 @@ def deploy(app):
         api.add_resource(Rule, '/admin/rule')
         api.add_resource(FAQPreview, '/admin/faq/preview')
         api.add_resource(NoticePreview, '/admin/notice/preview')
-        api.add_resource(RulePreview, '/admin/notice/preview')
+        api.add_resource(RulePreview, '/admin/rule/preview')
 
         api.add_resource(Survey, '/admin/survey')
         api.add_resource(Question, '/admin/survey/question')
