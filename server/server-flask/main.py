@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
 import logger
-import resource
 
 from support import db_migrator
 from support.api_interaction import meal
@@ -22,7 +21,10 @@ def create_app():
     JWTManager(app)
 
     logger.decorate(app)
-    resource.deploy(app)
+
+    from blueprints import all_blueprints
+    for bp in all_blueprints:
+        app.register_blueprint(bp)
 
     return app
 
@@ -30,7 +32,7 @@ _app = create_app()
 
 
 if __name__ == '__main__':
-    db_migrator.migrate_posts()
-    meal.parse()
+    # db_migrator.migrate_posts()
+    # meal.parse()
 
     _app.run(port=_app.config['PORT'], threaded=True, debug=True)

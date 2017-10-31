@@ -6,10 +6,12 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.apply import StayApplyModel
-from routes.swagger_docs.student import stay_doc
+from routes.api.student.apply import stay_doc
 
 
 class Stay(Resource):
+    uri = '/stay'
+
     @swagger.doc(stay_doc.STAY_GET)
     @jwt_required
     def get(self):

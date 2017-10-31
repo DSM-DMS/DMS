@@ -9,10 +9,9 @@ def deploy(app):
     :rtype: None
     """
     def deploy_admin():
-        from routes.api.auth.authentication import AdminAuth
-
         from routes.api.admin.account.account_control import InitializeAccount
         from routes.api.admin.account.new_account import NewAccount
+        from routes.api.admin.account.auth import Auth
 
         from routes.api.admin.apply.afterschool import AfterSchool, AfterSchoolItem
         from routes.api.admin.apply.extension import Extension
@@ -30,7 +29,7 @@ def deploy(app):
 
         api = Api(blueprint, api_spec_url='/api/admin', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Admin API', description=app.config['API_DESC'])
 
-        api.add_resource(AdminAuth, '/auth/admin')
+        api.add_resource(Auth, '/auth/admin')
 
         api.add_resource(InitializeAccount, '/admin/initialize-account')
         api.add_resource(NewAccount, '/admin/new-account')
@@ -57,10 +56,9 @@ def deploy(app):
         pass
 
     def deploy_student():
-        from routes.api.auth.authentication import StudentAuth
-
         from routes.api.student.account.after_signup import ChangePW, ChangeNumber
         from routes.api.student.account.signup import IDVerification, UUIDVerification, Signup
+        from routes.api.student.account.auth import Auth
 
         from routes.api.student.apply.extension import Extension
         from routes.api.student.apply.goingout import Goingout
@@ -80,7 +78,7 @@ def deploy(app):
         blueprint = Blueprint('student', __name__)
         api = Api(blueprint, api_spec_url='/api/student', api_version=app.config['API_VER'], title=app.config['API_TITLE'] + ' Student API', description=app.config['API_DESC'])
 
-        api.add_resource(StudentAuth, '/auth/student')
+        api.add_resource(Auth, '/auth/student')
 
         api.add_resource(ChangePW, '/change/pw')
         api.add_resource(ChangeNumber, '/change/number')

@@ -8,6 +8,8 @@ from routes.api.admin.post import notice_doc
 
 
 class Notice(Resource):
+    uri = '/admin/notice'
+
     @swagger.doc(notice_doc.NOTICE_POST)
     @jwt_required
     def post(self):

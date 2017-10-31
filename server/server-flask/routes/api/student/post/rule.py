@@ -2,11 +2,13 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import RuleModel
-from routes.swagger_docs.student import rule_doc
+from routes.api.student.post import rule_doc
 from support import post_inquire_helper
 
 
 class RuleList(Resource):
+    uri = '/rule'
+
     @swagger.doc(rule_doc.RULE_LIST_GET)
     def get(self):
         """
@@ -16,6 +18,8 @@ class RuleList(Resource):
 
 
 class Rule(Resource):
+    uri = '/rule/<id>'
+
     @swagger.doc(rule_doc.RULE_GET)
     def get(self, id):
         """

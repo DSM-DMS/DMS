@@ -2,11 +2,13 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import FAQModel, NoticeModel, RuleModel
-from routes.swagger_docs.student import preview_doc
+from routes.api.student.post import preview_doc
 from support import post_inquire_helper
 
 
 class FAQPreview(Resource):
+    uri = '/preview/faq'
+
     @swagger.doc(preview_doc.FAQ_PREVIEW_GET)
     def get(self):
         """
@@ -22,6 +24,8 @@ class FAQPreview(Resource):
 
 
 class NoticePreview(Resource):
+    uri = '/preview/notice'
+
     @swagger.doc(preview_doc.NOTICE_PREVIEW_GET)
     def get(self):
         """
@@ -37,6 +41,8 @@ class NoticePreview(Resource):
 
 
 class RulePreview(Resource):
+    uri = '/preview/rule'
+
     @swagger.doc(preview_doc.RULE_PREVIEW_GET)
     def get(self):
         """

@@ -8,6 +8,8 @@ from routes.api.admin.post import preview_doc
 
 
 class FAQPreview(Resource):
+    uri = '/admin/preview/faq'
+
     @swagger.doc(preview_doc.FAQ_PREVIEW_GET)
     @jwt_required
     def post(self):
@@ -28,6 +30,8 @@ class FAQPreview(Resource):
 
 
 class NoticePreview(Resource):
+    uri = '/admin/preview/notice'
+
     @swagger.doc(preview_doc.NOTICE_PREVIEW_GET)
     @jwt_required
     def post(self):
@@ -48,6 +52,8 @@ class NoticePreview(Resource):
 
 
 class RulePreview(Resource):
+    uri = '/admin/preview/rule'
+
     @swagger.doc(preview_doc.RULE_PREVIEW_GET)
     @jwt_required
     def post(self):

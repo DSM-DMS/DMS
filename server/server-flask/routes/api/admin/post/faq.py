@@ -8,6 +8,8 @@ from routes.api.admin.post import faq_doc
 
 
 class FAQ(Resource):
+    uri = '/admin/faq'
+
     @swagger.doc(faq_doc.FAQ_POST)
     @jwt_required
     def post(self):

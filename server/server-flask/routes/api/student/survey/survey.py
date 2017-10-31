@@ -4,10 +4,12 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.survey import AnswerModel, QuestionModel, SurveyModel
-from routes.swagger_docs.student import survey_doc
+from routes.api.student.survey import survey_doc
 
 
 class SurveyList(Resource):
+    uri = '/survey'
+
     @swagger.doc(survey_doc.SURVEY_LIST_GET)
     @jwt_required
     def get(self):
@@ -26,6 +28,8 @@ class SurveyList(Resource):
 
 
 class Survey(Resource):
+    uri = '/survey/<id>'
+
     @swagger.doc(survey_doc.SURVEY_GET)
     @jwt_required
     def get(self, id):

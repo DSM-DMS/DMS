@@ -5,7 +5,9 @@ from db.models.account import AdminModel
 from routes.api.admin.account import auth_doc
 
 
-class AdminAuth(Resource):
+class Auth(Resource):
+    uri = '/auth/admin'
+
     @swagger.doc(auth_doc.AUTH_POST)
     def post(self):
         """

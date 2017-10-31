@@ -9,7 +9,9 @@ from routes.api.student.account import auth_doc
 from support import db_migrator
 
 
-class StudentAuth(Resource):
+class Auth(Resource):
+    uri = '/auth/student'
+
     @swagger.doc(auth_doc.AUTH_POST)
     def post(self):
         """

@@ -2,11 +2,13 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import NoticeModel
-from routes.swagger_docs.student import notice_doc
+from routes.api.student.post import notice_doc
 from support import post_inquire_helper
 
 
 class NoticeList(Resource):
+    uri = '/notice'
+
     @swagger.doc(notice_doc.NOTICE_LIST_GET)
     def get(self):
         """
@@ -16,6 +18,8 @@ class NoticeList(Resource):
 
 
 class Notice(Resource):
+    uri = '/notice/<id>'
+
     @swagger.doc(notice_doc.NOTICE_GET)
     def get(self, id):
         """

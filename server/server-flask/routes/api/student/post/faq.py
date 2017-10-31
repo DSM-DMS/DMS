@@ -2,11 +2,13 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import FAQModel
-from routes.swagger_docs.student.post import faq_doc
+from routes.api.student.post import faq_doc
 from support import post_inquire_helper
 
 
 class FAQList(Resource):
+    uri = '/faq'
+
     @swagger.doc(faq_doc.FAQ_LIST_GET)
     def get(self):
         """
@@ -16,6 +18,8 @@ class FAQList(Resource):
 
 
 class FAQ(Resource):
+    uri = '/faq/<id>'
+
     @swagger.doc(faq_doc.FAQ_GET)
     def get(self, id):
         """

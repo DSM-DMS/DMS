@@ -2,10 +2,12 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.school_data import MealModel
-from routes.swagger_docs.student import meal_doc
+from routes.api.student.school_data import meal_doc
 
 
 class Meal(Resource):
+    uri = '/meal/<date>'
+
     @swagger.doc(meal_doc.MEAL_GET)
     def get(self, date):
         """

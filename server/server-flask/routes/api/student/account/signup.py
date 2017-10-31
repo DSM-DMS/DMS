@@ -2,10 +2,12 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import SignupRequiredModel, StudentModel
-from routes.swagger_docs.student import signup_doc
+from routes.api.student.account import signup_doc
 
 
 class IDVerification(Resource):
+    uri = '/verify/id'
+
     @swagger.doc(signup_doc.ID_VERIFICATION_POST)
     def post(self):
         """
@@ -21,6 +23,8 @@ class IDVerification(Resource):
 
 
 class UUIDVerification(Resource):
+    uri = '/verify/uuid'
+
     @swagger.doc(signup_doc.UUID_VERIFICATION_POST)
     def post(self):
         """
@@ -35,6 +39,8 @@ class UUIDVerification(Resource):
 
 
 class Signup(Resource):
+    uri = '/signup'
+
     @swagger.doc(signup_doc.SIGNUP_POST)
     def post(self):
         """

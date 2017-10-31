@@ -7,6 +7,8 @@ from routes.api.admin.account import new_account_doc
 
 
 class NewAccount(Resource):
+    uri = '/admin/new-account'
+
     @swagger.doc(new_account_doc.NEW_ACCOUNT_POST)
     @jwt_required
     def post(self):

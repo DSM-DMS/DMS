@@ -4,10 +4,12 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.apply import GoingoutApplyModel
-from routes.swagger_docs.student import goingout_doc
+from routes.api.student.apply import goingout_doc
 
 
 class Goingout(Resource):
+    uri = '/goingout'
+
     @swagger.doc(goingout_doc.GOINGOUT_GET)
     @jwt_required
     def get(self):

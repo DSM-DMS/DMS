@@ -4,10 +4,12 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.dms_system import BugReportModel
-from routes.swagger_docs.student import dms_system_doc
+from routes.api.student.dms_system import dms_system_doc
 
 
 class BugReport(Resource):
+    uri = '/bug-report'
+
     @swagger.doc(dms_system_doc.BUG_REPORT_POST)
     @jwt_required
     def post(self):
