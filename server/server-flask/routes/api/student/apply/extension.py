@@ -1,3 +1,5 @@
+from datetime import datetime, time
+
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
@@ -6,6 +8,9 @@ from db.models.account import StudentModel
 from db.models.apply import ExtensionApplyModel
 
 from . import extension_doc
+
+APPLY_START = time(17, 30)
+APPLY_END = time(22, 0)
 
 
 class Extension(Resource):
@@ -31,6 +36,11 @@ class Extension(Resource):
         """
         연장신청
         """
+        now = datetime.now().time()
+
+        if APPLY_START > now or now > APPLY_END:
+            return Response('', 204)
+
         class_ = request.form.get('class', type=int)
         seat = request.form.get('seat', type=int)
 
