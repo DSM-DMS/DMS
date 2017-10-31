@@ -6,6 +6,21 @@ from db.models.account import SignupRequiredModel, StudentModel
 from . import signup_doc
 
 
+class IDVerification(Resource):
+    @swagger.doc(signup_doc.ID_VERIFICATION_POST)
+    def post(self):
+        """
+        ID 중복체크
+        """
+        id = request.form.get('id')
+
+        if StudentModel.objects(id=id):
+            # ID already exists
+            return Response('', 204)
+        else:
+            return Response('', 201)
+
+
 class UUIDVerification(Resource):
     @swagger.doc(signup_doc.UUID_VERIFICATION_POST)
     def post(self):
@@ -33,14 +48,10 @@ class Signup(Resource):
         student = SignupRequiredModel.objects(uuid=uuid).first()
         if student:
             # Valid UUID
-            if StudentModel.objects(id=id):
-                # ID already exists
-                return Response('', 204)
-            else:
-                StudentModel(id=id, pw=pw, name=student.name, number=student.number).save()
-                student.delete()
-                # Delete existing 'signup required' data
+            StudentModel(id=id, pw=pw, name=student.name, number=student.number).save()
+            student.delete()
+            # Delete existing 'signup required' data
 
-                return Response('', 201)
+            return Response('', 201)
         else:
             return Response('', 400)

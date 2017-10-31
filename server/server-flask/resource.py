@@ -60,7 +60,7 @@ def deploy(app):
         from routes.api.auth.authentication import StudentAuth
 
         from routes.api.student.account.after_signup import ChangePW, ChangeNumber
-        from routes.api.student.account.signup import UUIDVerification, Signup
+        from routes.api.student.account.signup import IDVerification, UUIDVerification, Signup
 
         from routes.api.student.apply.extension import Extension
         from routes.api.student.apply.goingout import Goingout
@@ -84,7 +84,8 @@ def deploy(app):
 
         api.add_resource(ChangePW, '/change/pw')
         api.add_resource(ChangeNumber, '/change/number')
-        api.add_resource(UUIDVerification, '/uuid-verify')
+        api.add_resource(IDVerification, '/verify/id')
+        api.add_resource(UUIDVerification, '/verify/uuid')
         api.add_resource(Signup, '/signup')
 
         api.add_resource(Extension, '/extension')
