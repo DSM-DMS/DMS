@@ -4,7 +4,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.account import AdminModel, StudentModel
-from routes.swagger_docs.admin.apply import extension_doc
+from routes.api.admin.apply import extension_doc
 
 
 class Extension(Resource):

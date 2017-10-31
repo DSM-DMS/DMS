@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
-from routes.swagger_docs.admin.account import new_account_doc
+from routes.api.admin.account import new_account_doc
 
 
 class NewAccount(Resource):

@@ -5,7 +5,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel, SignupRequiredModel, StudentModel
-from routes.swagger_docs.admin.account import account_control_doc
+from routes.api.admin.account import account_control_doc
 
 
 class InitializeAccount(Resource):

@@ -2,7 +2,7 @@ from flask_jwt_extended import create_access_token
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
-from routes.swagger_docs.admin.account import auth_doc
+from routes.api.admin.account import auth_doc
 
 
 class AdminAuth(Resource):

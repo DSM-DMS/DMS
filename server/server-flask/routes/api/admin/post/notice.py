@@ -4,7 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.post import NoticeModel
-from routes.swagger_docs.admin.post import notice_doc
+from routes.api.admin.post import notice_doc
 
 
 class Notice(Resource):
