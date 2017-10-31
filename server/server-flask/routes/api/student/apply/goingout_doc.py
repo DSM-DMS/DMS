@@ -50,10 +50,7 @@ GOINGOUT_POST = {
     ],
     'responses': {
         '201': {
-            'description': '연장신청 성공'
-        },
-        '204': {
-            'description': '연장신청 실패(신청 가능 시간 아님)'
+            'description': '외출신청 성공'
         }
     }
 }

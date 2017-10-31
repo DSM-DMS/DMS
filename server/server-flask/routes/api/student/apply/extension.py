@@ -38,7 +38,7 @@ class Extension(Resource):
         """
         now = datetime.now().time()
 
-        if APPLY_START > now or now > APPLY_END:
+        if not APPLY_START < now < APPLY_END:
             return Response('', 204)
 
         class_ = request.form.get('class', type=int)
