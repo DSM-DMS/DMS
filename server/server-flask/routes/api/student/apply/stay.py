@@ -1,3 +1,5 @@
+from datetime import datetime, time
+
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
@@ -28,6 +30,14 @@ class Stay(Resource):
         """
         잔류신청
         """
+        today = datetime.today()
+
+        if (today.weekday() == 3 and today.time() > time(20, 30))\
+                or 6 > today.weekday() > 3\
+                or (today.weekday() == 6 and today.time() < time(20, 30)):
+            # 목요일 8시 30분 이후, 또는 금요일과 토요일 사이, 또는 일요일 8시 30분 이전
+            return Response('', 204)
+
         value = request.form.get('value', type=int)
 
         student = StudentModel.objects(id=get_jwt_identity()).first()
