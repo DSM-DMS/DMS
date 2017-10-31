@@ -6,8 +6,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.apply import StayApplyModel
-
-from . import stay_doc
+from routes.swagger_docs.student import stay_doc
 
 
 class Stay(Resource):

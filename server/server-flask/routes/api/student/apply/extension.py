@@ -6,8 +6,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.apply import ExtensionApplyModel
-
-from . import extension_doc
+from routes.swagger_docs.student import extension_doc
 
 APPLY_START = time(17, 30)
 APPLY_END = time(22, 0)

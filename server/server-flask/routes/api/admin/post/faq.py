@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.post import FAQModel
-
-from . import faq_doc, helper
+from routes.swagger_docs.admin.post import faq_doc
 
 
 class FAQ(Resource):
@@ -23,7 +22,7 @@ class FAQ(Resource):
         title = request.form.get('title')
         content = request.form.get('content')
 
-        helper.post(FAQModel, title, content, admin)
+        FAQModel(title=title, content=content, author=admin).save()
 
         return Response('', 201)
 
@@ -42,7 +41,8 @@ class FAQ(Resource):
         title = request.form.get('title')
         content = request.form.get('content')
 
-        helper.patch(FAQModel, id, title, content)
+        post = FAQModel.objects(id=id).first()
+        post.update(title=title, content=content)
 
         return Response('', 200)
 
@@ -59,6 +59,6 @@ class FAQ(Resource):
 
         id = request.form.get('id')
 
-        helper.delete(FAQModel, id)
+        FAQModel.objects(id=id).first().delete()
 
         return Response('', 200)

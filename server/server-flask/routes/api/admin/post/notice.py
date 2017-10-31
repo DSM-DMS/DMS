@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.post import NoticeModel
-
-from . import helper, notice_doc
+from routes.swagger_docs.admin.post import notice_doc
 
 
 class Notice(Resource):
@@ -23,7 +22,7 @@ class Notice(Resource):
         title = request.form.get('title')
         content = request.form.get('content')
 
-        helper.post(NoticeModel, title, content, admin)
+        NoticeModel(title = title, content = content, author = admin).save()
 
         return Response('', 201)
 
@@ -42,7 +41,8 @@ class Notice(Resource):
         title = request.form.get('title')
         content = request.form.get('content')
 
-        helper.patch(NoticeModel, id, title, content)
+        post = NoticeModel.objects(id=id).first()
+        post.update(title=title, content=content)
 
         return Response('', 200)
 
@@ -59,6 +59,6 @@ class Notice(Resource):
 
         id = request.form.get('id')
 
-        helper.delete(NoticeModel, id)
+        NoticeModel.objects(id=id).first().delete()
 
         return Response('', 200)

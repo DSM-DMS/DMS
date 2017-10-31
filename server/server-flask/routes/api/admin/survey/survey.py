@@ -6,8 +6,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.survey import QuestionModel, SurveyModel
-
-from . import survey_doc
+from routes.swagger_docs.admin.survey import survey_doc
 
 
 class Survey(Resource):

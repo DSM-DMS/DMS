@@ -3,8 +3,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
-
-from . import after_signup_doc
+from routes.swagger_docs.student import after_signup_doc
 
 
 class ChangePW(Resource):

@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.post import FAQModel, NoticeModel, RuleModel
-
-from . import preview_doc
+from routes.swagger_docs.admin.post import preview_doc
 
 
 class FAQPreview(Resource):

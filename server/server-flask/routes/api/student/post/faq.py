@@ -2,8 +2,8 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import FAQModel
-
-from . import faq_doc, helper
+from routes.swagger_docs.student.post import faq_doc
+from support import post_inquire_helper
 
 
 class FAQList(Resource):
@@ -12,7 +12,7 @@ class FAQList(Resource):
         """
         FAQ 목록 조회
         """
-        return helper.list(FAQModel), 200
+        return post_inquire_helper.list(FAQModel), 200
 
 
 class FAQ(Resource):
@@ -21,6 +21,6 @@ class FAQ(Resource):
         """
         FAQ 내용 조회
         """
-        faq = helper.inquire(FAQModel, id)
+        faq = post_inquire_helper.inquire(FAQModel, id)
 
         return (faq, 200) if faq else Response('', 204)

@@ -1,10 +1,9 @@
 from flask import Response
-from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import FAQModel, NoticeModel, RuleModel
-
-from . import helper, preview_doc
+from routes.swagger_docs.student import preview_doc
+from support import post_inquire_helper
 
 
 class FAQPreview(Resource):
@@ -19,7 +18,7 @@ class FAQPreview(Resource):
             if not faq:
                 return Response('', 204)
 
-        return helper.inquire(FAQModel, faq.id), 200
+        return post_inquire_helper.inquire(FAQModel, faq.id), 200
 
 
 class NoticePreview(Resource):
@@ -34,7 +33,7 @@ class NoticePreview(Resource):
             if not notice:
                 return Response('', 204)
 
-        return helper.inquire(NoticeModel, notice.id), 200
+        return post_inquire_helper.inquire(NoticeModel, notice.id), 200
 
 
 class RulePreview(Resource):
@@ -49,4 +48,4 @@ class RulePreview(Resource):
             if not rule:
                 return Response('', 204)
 
-        return helper.inquire(RuleModel, rule.id), 200
+        return post_inquire_helper.inquire(RuleModel, rule.id), 200

@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.post import RuleModel
-
-from . import helper, rule_doc
+from routes.swagger_docs.admin.post import rule_doc
 
 
 class Rule(Resource):
@@ -23,7 +22,7 @@ class Rule(Resource):
         title = request.form.get('title')
         content = request.form.get('content')
 
-        helper.post(RuleModel, title, content, admin)
+        RuleModel(title=title, content=content, author=admin).save()
 
         return Response('', 201)
 
@@ -42,7 +41,8 @@ class Rule(Resource):
         title = request.form.get('title')
         content = request.form.get('content')
 
-        helper.patch(RuleModel, id, title, content)
+        post = RuleModel.objects(id=id).first()
+        post.update(title=title, content=content)
 
         return Response('', 200)
 
@@ -59,6 +59,6 @@ class Rule(Resource):
 
         id = request.form.get('id')
 
-        helper.delete(RuleModel, id)
+        RuleModel.objects(id=id).first().delete()
 
         return Response('', 200)

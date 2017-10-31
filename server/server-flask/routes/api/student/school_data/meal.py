@@ -2,8 +2,7 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.school_data import MealModel
-
-from . import meal_doc
+from routes.swagger_docs.student import meal_doc
 
 
 class Meal(Resource):

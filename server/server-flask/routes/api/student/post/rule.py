@@ -2,8 +2,8 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import RuleModel
-
-from . import helper, rule_doc
+from routes.swagger_docs.student import rule_doc
+from support import post_inquire_helper
 
 
 class RuleList(Resource):
@@ -12,7 +12,7 @@ class RuleList(Resource):
         """
         기숙사규정 목록 조회
         """
-        return helper.list(RuleModel), 200
+        return post_inquire_helper.list(RuleModel), 200
 
 
 class Rule(Resource):
@@ -21,6 +21,6 @@ class Rule(Resource):
         """
         기숙사규정 내용 조회
         """
-        rule = helper.inquire(RuleModel, id)
+        rule = post_inquire_helper.inquire(RuleModel, id)
 
         return (rule, 200) if rule else Response('', 204)

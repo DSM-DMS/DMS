@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.dms_system import BugReportModel
-
-from . import dms_system_doc
+from routes.swagger_docs.student import dms_system_doc
 
 
 class BugReport(Resource):

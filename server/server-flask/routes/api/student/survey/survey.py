@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
 from db.models.survey import AnswerModel, QuestionModel, SurveyModel
-
-from . import survey_doc
+from routes.swagger_docs.student import survey_doc
 
 
 class SurveyList(Resource):

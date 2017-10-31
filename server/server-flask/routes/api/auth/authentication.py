@@ -1,14 +1,12 @@
 import json
-import requests
 
+import requests
 from flask_jwt_extended import create_access_token
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel, StudentModel
-
+from routes.swagger_docs.auth import authentication_doc
 from support import db_migrator
-
-from . import authentication_doc
 
 
 class AdminAuth(Resource):

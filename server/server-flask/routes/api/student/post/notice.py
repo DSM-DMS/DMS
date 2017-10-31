@@ -2,8 +2,8 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.post import NoticeModel
-
-from . import helper, notice_doc
+from routes.swagger_docs.student import notice_doc
+from support import post_inquire_helper
 
 
 class NoticeList(Resource):
@@ -12,7 +12,7 @@ class NoticeList(Resource):
         """
         공지사항 목록 조회
         """
-        return helper.list(NoticeModel), 200
+        return post_inquire_helper.list(NoticeModel), 200
 
 
 class Notice(Resource):
@@ -21,6 +21,6 @@ class Notice(Resource):
         """
         공지사항 내용 조회
         """
-        notice = helper.inquire(NoticeModel, id)
+        notice = post_inquire_helper.inquire(NoticeModel, id)
 
         return (notice, 200) if notice else Response('', 204)

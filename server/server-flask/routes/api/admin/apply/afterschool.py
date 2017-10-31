@@ -4,8 +4,7 @@ from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import AdminModel
 from db.models.afterschool import AfterSchoolItemModel, AfterSchoolModel
-
-from . import afterschool_doc
+from routes.swagger_docs.admin.apply import afterschool_doc
 
 
 class AfterSchool(Resource):
