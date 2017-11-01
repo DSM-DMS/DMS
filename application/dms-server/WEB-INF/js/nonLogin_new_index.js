@@ -688,29 +688,24 @@ $modalButton.click(function(e) {
 getSomedayMeal(mealDate, $(".today-meal"));
 
 function getSomedayMeal(day, target) {
-        $.ajax({
-        url: "http://dsm2015.cafe24.com:81/meal",
-        data: {
-            year: mealDate.getFullYear(),
-            month: mealDate.getMonth() + 1,
-            day: mealDate.getDate(),
-        },  
-        statusCode: {
-            200: function(data) {
-                var parsedData = JSON.parse(data);
-                var domArr = target.find(".meal-card p");
-                $(domArr[0]).html(JSON.parse(parsedData.breakfast).toString().replace(/,/gi, "<br>"));
-                $(domArr[1]).html(JSON.parse(parsedData.lunch).toString().replace(/,/gi, "<br>"));
-                $(domArr[2]).html(JSON.parse(parsedData.dinner).toString().replace(/,/gi, "<br>"));
-            },
-            error: function() {
-                var domArr = $(".meal-content p");
-                $(domArr[0]).text("급식이 없습니다.");
-                $(domArr[1]).text("급식이 없습니다.");
-                $(domArr[2]).text("급식이 없습니다.");
-            }
+    $.ajax({
+    url: "http://dsm2015.cafe24.com:3000/meal/" + formatDate(mealDate),
+    statusCode: {
+        200: function(data) {
+            var parsedData = JSON.parse(data);
+            var domArr = target.find(".meal-card p");
+            $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
+            $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
+            $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
+        },
+        error: function() {
+            var domArr = $(".meal-content p");
+            $(domArr[0]).text("급식이 없습니다.");
+            $(domArr[1]).text("급식이 없습니다.");
+            $(domArr[2]).text("급식이 없습니다.");
         }
-    });
+    }
+});
 }
 
 function getNextDay(date) {
