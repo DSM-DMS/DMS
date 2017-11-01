@@ -692,7 +692,7 @@ function getSomedayMeal(day, target) {
     url: "http://dsm2015.cafe24.com:3000/meal/" + formatDate(mealDate),
     statusCode: {
         200: function(data) {
-            var parsedData = JSON.parse(data);
+            var parsedData = data;
             var domArr = target.find(".meal-card p");
             $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
             $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
