@@ -19,23 +19,24 @@
       <div class="card-wrapper">
         <div class="card">
         <div class="card-block">
-        <div class="underbar-title border-blue">${Title}</div>
+        <div class="underbar-title border-blue">{{ Title }}</div>
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
-                                        <#list Heads as head>
-                                            <th>${head}</th>
-                                        </#list>
+                                        {% for head in Heads %}
+                                            <th>{{ head }}</th>
+                                        {% endfor %}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list List as list>
+                                        {% for list in List %}
                                         <tr>
-                                            <#list Columns as column>
-                                                <td>${list[column]}</td>
-                                            </#list>
+                                            {% for column in Columns %}
+                                                <td>{{ list[column] }}</td>
+                                            {% endfor %}
                                         </tr>
                                         </#list>
+                                        {% endfor %}
                                 </tbody>
                             </table>
         </div>

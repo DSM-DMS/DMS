@@ -113,8 +113,8 @@
 </body>
 
 <script type="text/javascript">
-var satBool = ${status_1?c};
-var sunBool = ${status_2?c};
+var satBool = {{ status_1?c }};
+var sunBool = {{ status_2?c }};
 </script>
 <script src="/js/script.js"></script>
 <script src="/js/go_out_apply.js"></script>

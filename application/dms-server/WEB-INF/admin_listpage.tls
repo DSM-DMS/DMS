@@ -56,34 +56,34 @@
         <div class="card-wrapper">
             <div class="card">
                 <div class="card-block">
-                    <div class="underbar-title border-blue">${Title}<input class="btn btn-primary write-btn" type="button" name="" value="글 쓰기"></div>
+                    <div class="underbar-title border-blue">{{ Title }}<input class="btn btn-primary write-btn" type="button" name="" value="글 쓰기"></div>
                     <table class="table table-sm table-hover">
                         <thead>
                             <tr>
-                                <#list Heads as head>
-                                    <th>${head}</th>
-                                </#list>
+                                {% for head in Heads %}
+                                    <th>{{ head }}</th>
+                                {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
-                            <#list List as list>
+                            {% for list in List %}
                                 <tr>
-                                    <#list Columns as column>
-                                        <td>${list[column]}</td>
-                                    </#list>
+                                    {% for column in Columns %}
+                                        <td>{{ list[column] }}</td>
+                                    {% endfor %}
                                     <td>
                                         <a class="btn btn-success edit">수정</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-success delete">삭제</a>
                                     </td>
-                                    <#if Title == "공지사항">
+                                    {% if Title == "공지사항" %}
                                         <td>
                                             <a class="btn btn-success preview">프리뷰</a>
                                         </td>
-                                    </#if>
+                                    {% endif %}
                                 </tr>
-                            </#list>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

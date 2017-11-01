@@ -56,7 +56,7 @@
         <div class="card-wrapper">
             <div class="card">
                 <div class="card-block question">
-                    <div class="underbar-title border-blue">${title}<span class="subinfo">${subinfo}</span></div>
+                    <div class="underbar-title border-blue">{{ title }}<span class="subinfo">{{ subinfo }}</span></div>
 
                     <!-- 수정삭제 버튼임 자신의 글이 아니면, 숨겨야함 -->
                     <div class="content-button-container">
@@ -64,11 +64,11 @@
                     </div>
 
                     <div class="content question">
-                        ${content}
+                        {{ content }}
                     </div>
                 </div>
                 <div class="card-block answer">
-                    <div class="underbar-title border-red">답변<span class="subinfo">${answer_subinfo}</span></div>
+                    <div class="underbar-title border-red">답변<span class="subinfo">{{ answer_subinfo }}</span></div>
 
                     <!-- 수정삭제 버튼임. 관리자가 아니면, 숨겨야함 -->
                     <div class="content-button-container">
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="content answer">
-                        ${answer_content}
+                        {{ answer_content }}
                     </div>
                 </div>
                 <div class="card-block">

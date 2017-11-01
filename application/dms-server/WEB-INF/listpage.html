@@ -54,7 +54,7 @@
       <div class="card-wrapper">
         <div class="card">
         <div class="card-block">
-        <div class="underbar-title border-blue">${title}</div>
+        <div class="underbar-title border-blue">{{ title }}</div>
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
@@ -63,12 +63,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <#list Rules as rule>
+                                        {% for rule in Rules %}
                                         <tr>
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
+                                            <th scope="row">{{ rule.no }}</th>
+                                            <td>{{ rule.title }}</td>
                                         </tr>
-                                        </#list>
+                                        {% endfor %}
                                 </tbody>
                             </table>
         </div>

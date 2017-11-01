@@ -18,11 +18,11 @@
     </div>
   </div>
   <div class="form">
-    <#if isLogin==true>
-        <#if isApply==true>
+    {% if isLogin==true %}
+        {% if isApply==true %}
         <h3>Team DMS 에 지원해주셔서 감사합니다.</h3>
         <h3>6월 4일 심사 결과가 발표됩니다!</h3>
-        <#else>
+        {% else %}
     <h3>지원하기</h3>
     <form id="recruit-form" action="/recruit/apply" method="POST" class="login-form">
       <input name="language" type="text" placeholder="사용해본 언어(컴마로 구분)"/>
@@ -37,21 +37,21 @@
               <option value="designer">Designer</option>
               <option value="project-manager">Tester / PM</option>
             </select>
-              <#if canApply==true>
+              {% if canApply==true %}
             <input type="submit" value="지원하기"/>
-              <#else>
+              {% else %}
             <input type="submit" style="background-color: #3B5998 !important;" value="지원이 불가능합니다." disabled=""/>
-              </#if>
+              {% endif %}
     </form>
-      </#if>
-    <#else>
+      {% endif %}
+    {% else %}
     <h3>로그인 후 지원가능합니다.</h3>
     <form action="/account/login/student/" method="POST" class="login-form">
       <input name="id" type="text" placeholder="아이디"/>
         <input name="password" type="password" placeholder="비밀번호"/>
       <input type="submit" value="로그인"/>
     </form>
-    </#if>
+    {% endif %}
   </div>
 </div>
 </body>

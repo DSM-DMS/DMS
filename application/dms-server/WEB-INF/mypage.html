@@ -145,8 +145,8 @@
                                 <div class="col-lg-6 mypage-component-container mypage-point">
                                     <div class="card mypage-component">
                                         <div class="card-block">
-                                            <h4>상점 : <span>${merit}</span></h4>
-                                            <h4>벌점 : <span>${demerit}</span></h4>
+                                            <h4>상점 : <span>{{ merit }}</span></h4>
+                                            <h4>벌점 : <span>{{ demerit }}</span></h4>
                                             <a class="move-a" href="#">상점신청 하러가기</a>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                         <div class="card-block">
                                             <h4>연장학습 신청상태</h4>
                                             <div class="simple-container">
-                                                <span>${class} ${seat}</span>
+                                                <span>{{ class }} {{ seat }}</span>
                                             </div>
                                             <div class="detail-container">
 
@@ -211,11 +211,11 @@
                                         <div class="card-block">
                                             <h4>잔류신청 상태</h4>
                                             <div class="simple-container">
-                                                <p>이번 주 : ${status}</p>
+                                                <p>이번 주 : {{ status }}</p>
                                             </div>
                                             <div class="detail-container">
-                                                <p>이번 주 : ${status}</p>
-                                                <p>다음 주 : ${status}</p>
+                                                <p>이번 주 : {{ status }}</p>
+                                                <p>다음 주 : {{ status }}</p>
                                             </div>
                                             <a class="move-a" href="#">잔류신청 하러가기</a>
                                             <span class="moreinfo-span">클릭하여 자세히보기</span>
