@@ -8,37 +8,25 @@ import config as cf
 
 
 def _modules(packages):
-    modules = []
+    modules = set()
 
     def search(target):
         for loader, name, is_package in pkgutil.iter_modules(target.__path__):
             if is_package:
                 search(loader.find_module(name).load_module(name))
             else:
-                modules.append((loader, name))
+                modules.add((loader, name))
 
-    for package in packages:
-        search(package)
+    for pkg in packages:
+        search(pkg)
 
     return modules
 
-_global_resources = []
+_global_resources = set()
 
 
-def _factory(packages, endpoint, url_prefix='', api_spec_url='/api/swagger', api_ver=cf.API_VER, api_title=cf.API_TITLE, api_desc=cf.API_DESC):
-    """
-    :param packages: Package for Auto Route
-    :type packages: list
-
-    :param url_prefix: URL Prefix of Blueprint
-    :type url_prefix: str
-
-    :param api_spec_url: Swagger API Spec URL. default ='/api/swagger'
-    :type api_spec_url: str
-
-    :rtype: Blueprint
-    """
-    bp = Blueprint(endpoint, __name__, url_prefix=url_prefix)
+def _factory(packages, bp_endpoint, url_prefix='', api_spec_url='/api/swagger', api_ver=cf.API_VER, api_title=cf.API_TITLE, api_desc=cf.API_DESC):
+    bp = Blueprint(bp_endpoint, __name__, url_prefix=url_prefix)
     api = Api(bp, api_spec_url=api_spec_url, api_version=api_ver, title=api_title, description=api_desc)
 
     resources = set()
@@ -46,15 +34,15 @@ def _factory(packages, endpoint, url_prefix='', api_spec_url='/api/swagger', api
     for loader, name in _modules(packages):
         module_ = loader.find_module(name).load_module(name)
         try:
-            for resource in module_.Resource.__subclasses__():
-                if resource not in _global_resources:
-                    resources.add(resource)
-                    _global_resources.append(resource)
+            for res in module_.Resource.__subclasses__():
+                if res not in _global_resources:
+                    resources.add(res)
+                    _global_resources.add(res)
         except AttributeError:
             pass
 
-    for resource in resources:
-        api.add_resource(resource, resource.uri)
+    for res in resources:
+        api.add_resource(res, res.uri)
 
     return bp
 
