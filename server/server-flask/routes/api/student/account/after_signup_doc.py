@@ -54,3 +54,32 @@ CHANGE_NUMBER_POST = {
         }
     }
 }
+
+MYPAGE_GET = {
+    {
+        'tags': ['계정 정보'],
+        'description': '마이페이지 정보 조회',
+        'parameters': [
+            {
+                'name': 'Authorization',
+                'description': 'JWT Token',
+                'in': 'header',
+                'type': 'str',
+                'required': True
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': '마이페이지 조회 성공',
+                'examples': {
+                    'application/json': {
+                        'name': '조민규'
+                    }
+                }
+            },
+            '204': {
+                'description': '해당 학생 정보 없음(재로그인 필요)'
+            }
+        }
+    }
+}
