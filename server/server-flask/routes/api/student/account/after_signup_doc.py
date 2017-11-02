@@ -73,7 +73,14 @@ MYPAGE_GET = {
                 'description': '마이페이지 조회 성공',
                 'examples': {
                     'application/json': {
-                        'name': '조민규'
+                        'name': '조민규',
+                        'signup_date': '2017-10-10',
+                        'number': 20120,
+                        'extension_class': None,
+                        'extension_seat': None,
+                        'goingout_sat': True,
+                        'goingout_sun': False,
+                        'stay_value': 4
                     }
                 }
             },
