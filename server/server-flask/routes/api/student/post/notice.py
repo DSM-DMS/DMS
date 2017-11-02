@@ -1,3 +1,5 @@
+import json
+
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
@@ -14,7 +16,9 @@ class NoticeList(Resource):
         """
         공지사항 목록 조회
         """
-        return post_inquire_helper.list(NoticeModel), 200
+        notice_list = post_inquire_helper.list(NoticeModel)
+
+        return Response(json.dumps(notice_list, ensure_ascii=False), 200)
 
 
 class Notice(Resource):
@@ -27,4 +31,4 @@ class Notice(Resource):
         """
         notice = post_inquire_helper.inquire(NoticeModel, id)
 
-        return (notice, 200) if notice else Response('', 204)
+        return Response(json.dumps(notice, ensure_ascii=False), 200) if notice else Response('', 204)

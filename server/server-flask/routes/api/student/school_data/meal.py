@@ -1,3 +1,5 @@
+import json
+
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
@@ -18,8 +20,8 @@ class Meal(Resource):
         if not meal:
             return Response('', 204)
         else:
-            return {
+            return Response(json.dumps({
                 'breakfast': meal.breakfast,
                 'lunch': meal.lunch,
                 'dinner': meal.dinner
-            }, 200
+            }, ensure_ascii=False), 200)

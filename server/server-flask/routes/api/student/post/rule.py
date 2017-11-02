@@ -1,3 +1,5 @@
+import json
+
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
@@ -14,7 +16,9 @@ class RuleList(Resource):
         """
         기숙사규정 목록 조회
         """
-        return post_inquire_helper.list(RuleModel), 200
+        rule_list = post_inquire_helper.list(RuleModel)
+
+        return Response(json.dumps(rule_list, ensure_ascii=False), 200)
 
 
 class Rule(Resource):
@@ -27,4 +31,4 @@ class Rule(Resource):
         """
         rule = post_inquire_helper.inquire(RuleModel, id)
 
-        return (rule, 200) if rule else Response('', 204)
+        return Response(json.dumps(rule, ensure_ascii=False), 200) if rule else Response('', 204)

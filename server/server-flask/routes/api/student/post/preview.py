@@ -1,3 +1,5 @@
+import json
+
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
@@ -20,7 +22,9 @@ class FAQPreview(Resource):
             if not faq:
                 return Response('', 204)
 
-        return post_inquire_helper.inquire(FAQModel, faq.id), 200
+        faq = post_inquire_helper.inquire(FAQModel, faq.id)
+
+        return Response(json.dumps(faq, ensure_ascii=False), 200)
 
 
 class NoticePreview(Resource):
@@ -37,7 +41,9 @@ class NoticePreview(Resource):
             if not notice:
                 return Response('', 204)
 
-        return post_inquire_helper.inquire(NoticeModel, notice.id), 200
+        notice = post_inquire_helper.inquire(NoticeModel, notice.id)
+
+        return Response(json.dumps(notice, ensure_ascii=False), 200)
 
 
 class RulePreview(Resource):
@@ -54,4 +60,6 @@ class RulePreview(Resource):
             if not rule:
                 return Response('', 204)
 
-        return post_inquire_helper.inquire(RuleModel, rule.id), 200
+        rule = post_inquire_helper.inquire(RuleModel, rule.id)
+
+        return Response(json.dumps(rule, ensure_ascii=False), 200)

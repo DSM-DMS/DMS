@@ -1,3 +1,5 @@
+import json
+
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
@@ -18,12 +20,12 @@ class SurveyList(Resource):
         """
         student_number = StudentModel.objects(id=get_jwt_identity()).first().number
 
-        return [{
+        return Response(json.dumps([{
             'id': str(survey.id),
             'title': survey.title,
             'start_date': survey.start_date,
             'end_date': survey.end_date
-        } for survey in SurveyModel.objects if str(student_number)[0] in survey.target], 200
+        } for survey in SurveyModel.objects if str(student_number)[0] in survey.target], ensure_ascii=False), 200)
         # Filter by student number
 
 
@@ -50,7 +52,7 @@ class Survey(Resource):
             answer = AnswerModel.objects(answer_student=answer_student, question=QuestionModel.objects(id=question['id']).first()).first()
             question['answer'] = answer.answer if answer else None
 
-        return questions, 200
+        return Response(json.dumps(questions, ensure_ascii=False), 200)
 
     @swagger.doc(survey_doc.SURVEY_POST)
     @jwt_required
