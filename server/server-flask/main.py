@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
-from flask_jwt import JWT
+from flask_jwt_extended import JWTManager
 
-import jwt
 import logger
-import resource
+
+from support import db_migrator
+from support.api_interaction import meal
 
 
 def create_app():
@@ -17,15 +18,13 @@ def create_app():
     app.config.from_pyfile('config.py')
 
     CORS(app)
-
-    app.config['JWT_AUTH_URL_RULE'] = '/auth/student'
-    JWT(app, jwt.student_auth, jwt.identity)
-
-    app.config['JWT_AUTH_URL_RULE'] = '/auth/admin'
-    JWT(app, jwt.admin_auth, jwt.identity)
+    JWTManager(app)
 
     logger.decorate(app)
-    resource.deploy(app)
+
+    from blueprints import all_blueprints
+    for bp in all_blueprints:
+        app.register_blueprint(bp)
 
     return app
 
@@ -33,4 +32,7 @@ _app = create_app()
 
 
 if __name__ == '__main__':
-    _app.run(threaded=True, debug=True)
+    # db_migrator.migrate_posts()
+    # meal.parse()
+
+    _app.run(port=_app.config['PORT'], threaded=True, debug=True)

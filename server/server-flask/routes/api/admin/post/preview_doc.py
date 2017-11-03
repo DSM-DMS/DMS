@@ -1,6 +1,6 @@
-FAQ_POST = {
-    'tags': ['게시글'],
-    'description': 'FAQ 업로드',
+FAQ_PREVIEW_GET = {
+    'tags': ['게시글 프리뷰'],
+    'description': 'FAQ 프리뷰 설정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -10,15 +10,8 @@ FAQ_POST = {
             'required': True
         },
         {
-            'name': 'title',
-            'description': 'FAQ 제목',
-            'in': 'formData',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'content',
-            'description': 'FAQ 내용',
+            'name': 'id',
+            'description': 'FAQ ID',
             'in': 'formData',
             'type': 'str',
             'required': True
@@ -26,14 +19,14 @@ FAQ_POST = {
     ],
     'responses': {
         '201': {
-            'description': 'FAQ 업로드 성공'
+            'description': '프리뷰 설정 성공'
         }
     }
 }
 
-FAQ_PATCH = {
-    'tags': ['게시글'],
-    'description': 'FAQ 수정',
+NOTICE_PREVIEW_GET = {
+    'tags': ['게시글 프리뷰'],
+    'description': '공지사항 프리뷰 설정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -44,36 +37,22 @@ FAQ_PATCH = {
         },
         {
             'name': 'id',
-            'description': '수정할 FAQ ID',
-            'in': 'formData',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'title',
-            'description': 'FAQ 제목',
-            'in': 'formData',
-            'type': 'str',
-            'required': True
-        },
-        {
-            'name': 'content',
-            'description': 'FAQ 내용',
+            'description': '공지사항 ID',
             'in': 'formData',
             'type': 'str',
             'required': True
         }
     ],
     'responses': {
-        '200': {
-            'description': '수정 성공'
+        '201': {
+            'description': '프리뷰 설정 성공'
         }
     }
 }
 
-FAQ_DELETE = {
-    'tags': ['게시글'],
-    'description': 'FAQ 삭제',
+RULE_PREVIEW_GET = {
+    'tags': ['게시글 프리뷰'],
+    'description': '기숙사규정 프리뷰 설정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -84,15 +63,15 @@ FAQ_DELETE = {
         },
         {
             'name': 'id',
-            'description': '삭제할 FAQ ID',
+            'description': '기숙사규정 ID',
             'in': 'formData',
             'type': 'str',
             'required': True
         }
     ],
     'responses': {
-        '200': {
-            'description': '삭제 성공'
+        '201': {
+            'description': '프리뷰 설정 성공'
         }
     }
 }

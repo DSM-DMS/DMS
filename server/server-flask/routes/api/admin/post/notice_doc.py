@@ -1,24 +1,27 @@
 NOTICE_POST = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': '공지사항 업로드',
     'parameters': [
         {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': '공지사항 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': '공지사항 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -29,32 +32,36 @@ NOTICE_POST = {
 }
 
 NOTICE_PATCH = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': '공지사항 수정',
     'parameters': [
         {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '수정할 공지사항 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': '공지사항 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': '공지사항 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -65,20 +72,22 @@ NOTICE_PATCH = {
 }
 
 NOTICE_DELETE = {
-    'tags': ['관리자 - 게시글'],
+    'tags': ['게시글'],
     'description': '공지사항 삭제',
     'parameters': [
         {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '삭제할 공지사항 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

@@ -10,7 +10,7 @@ api = SchoolAPI(DAEJEON, 'G100000170')
 def _parse(year, month):
     for index, meal in enumerate(api.get_monthly(year, month)):
         MealModel(
-            date='{0}-{1:02d}-01'.format(year, month, index + 1),
+            date='{0}-{1:02d}-{2:02d}'.format(year, month, index + 1),
             breakfast=meal.pop('breakfast', ['급식이 없습니다.']),
             lunch=meal.pop('lunch', ['급식이 없습니다.']),
             dinner=meal.pop('dinner', ['급식이 없습니다.'])).save()

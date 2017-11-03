@@ -1,12 +1,13 @@
 GOINGOUT_GET = {
-    'tags': ['관리자 - 신청 정보'],
+    'tags': ['신청 정보'],
     'description': '외출신청 정보 다운로드',
     'parameters': [
         {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

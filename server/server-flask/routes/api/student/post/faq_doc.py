@@ -38,7 +38,8 @@ FAQ_GET = {
             'name': 'id',
             'description': '조회할 FAQ 아이템의 ID',
             'in': 'path',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

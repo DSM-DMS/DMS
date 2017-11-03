@@ -1,12 +1,15 @@
+import json
+
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
 from db.models.school_data import MealModel
-
-from . import meal_doc
+from routes.api.student.school_data import meal_doc
 
 
 class Meal(Resource):
+    uri = '/meal/<date>'
+
     @swagger.doc(meal_doc.MEAL_GET)
     def get(self, date):
         """
@@ -17,8 +20,8 @@ class Meal(Resource):
         if not meal:
             return Response('', 204)
         else:
-            return {
+            return Response(json.dumps({
                 'breakfast': meal.breakfast,
                 'lunch': meal.lunch,
                 'dinner': meal.dinner
-            }, 200
+            }, ensure_ascii=False), 200)

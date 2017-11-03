@@ -1,30 +1,34 @@
 NEW_ACCOUNT_POST = {
-    'tags': ['관리자 - 계정'],
+    'tags': ['계정'],
     'description': '관리자 계정 생성',
     'parameters': [
         {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '생성할 관리자 계정 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'pw',
             'description': '생성할 관리자 계정 PW',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'name',
             'description': '생성활 관리자 계정 이름',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

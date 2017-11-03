@@ -2,13 +2,34 @@ from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import SignupRequiredModel, StudentModel
+from routes.api.student.account import signup_doc
 
-from . import signup_doc
+
+class IDVerification(Resource):
+    uri = '/verify/id'
+
+    @swagger.doc(signup_doc.ID_VERIFICATION_POST)
+    def post(self):
+        """
+        ID 중복체크
+        """
+        id = request.form.get('id')
+
+        if StudentModel.objects(id=id):
+            # ID already exists
+            return Response('', 204)
+        else:
+            return Response('', 201)
 
 
 class UUIDVerification(Resource):
+    uri = '/verify/uuid'
+
     @swagger.doc(signup_doc.UUID_VERIFICATION_POST)
     def post(self):
+        """
+        UUID 검사
+        """
         uuid = request.form.get('uuid')
 
         if SignupRequiredModel.objects(uuid=uuid):
@@ -18,8 +39,13 @@ class UUIDVerification(Resource):
 
 
 class Signup(Resource):
+    uri = '/signup'
+
     @swagger.doc(signup_doc.SIGNUP_POST)
     def post(self):
+        """
+        회원가입
+        """
         uuid = request.form.get('uuid')
         id = request.form.get('id')
         pw = request.form.get('pw')
@@ -27,14 +53,10 @@ class Signup(Resource):
         student = SignupRequiredModel.objects(uuid=uuid).first()
         if student:
             # Valid UUID
-            if StudentModel.objects(id=id):
-                # ID already exists
-                return Response('', 204)
-            else:
-                StudentModel(id=id, pw=pw, name=student.name, number=student.number, uuid=uuid).save()
-                student.delete()
-                # Delete existing 'signup required' data
+            StudentModel(id=id, pw=pw, name=student.name, number=student.number).save()
+            student.delete()
+            # Delete existing 'signup required' data
 
-                return Response('', 201)
+            return Response('', 201)
         else:
             return Response('', 400)

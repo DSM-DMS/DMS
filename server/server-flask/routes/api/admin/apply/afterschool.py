@@ -1,21 +1,22 @@
 from flask import Response
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
-from flask_jwt import current_identity, jwt_required
 
 from db.models.account import AdminModel
-from db.models.afterschool import AfterSchoolModel, AfterSchoolItemModel
-
-from . import afterschool_doc
+from db.models.afterschool import AfterSchoolItemModel, AfterSchoolModel
+from routes.api.admin.apply import afterschool_doc
 
 
 class AfterSchool(Resource):
+    uri = '/admin/afterschool'
+
     @swagger.doc(afterschool_doc.AFTERSCHOOL_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         방과후 신청 set 추가
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -29,12 +30,12 @@ class AfterSchool(Resource):
         return Response('', 201)
 
     @swagger.doc(afterschool_doc.AFTERSCHOOL_DELETE)
-    @jwt_required()
+    @jwt_required
     def delete(self):
         """
         방과후 신청 set 제거
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -47,13 +48,15 @@ class AfterSchool(Resource):
 
 
 class AfterSchoolItem(Resource):
+    uri = '/admin/afterschool/item'
+
     @swagger.doc(afterschool_doc.AFTERSCHOOL_ITEM_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         방과후 아이템 추가
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)
@@ -78,12 +81,12 @@ class AfterSchoolItem(Resource):
         return Response('', 201)
 
     @swagger.doc(afterschool_doc.AFTERSCHOOL_ITEM_DELETE)
-    @jwt_required()
+    @jwt_required
     def delete(self):
         """
         방과후 아이템 제거
         """
-        admin = AdminModel.objects(id=current_identity).first()
+        admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
             # Forbidden
             return Response('', 403)

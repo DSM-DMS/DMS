@@ -30,6 +30,10 @@ def decorate(app):
     def after_request(response):
         current_app.logger.info('Respond : {0}'.format(response.status))
 
+        response.headers['X-Powered-By'] = 'PlanB'
+        response.headers['Content-Type'] = 'application/json; charset=utf8'
+        # Fix encoding problem
+
         return response
 
     @app.teardown_appcontext

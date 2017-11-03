@@ -1,21 +1,24 @@
+import json
+
 from flask import Response
-from flask_jwt import current_identity, jwt_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
 from db.models.account import StudentModel
-
-from . import after_signup_doc
+from routes.api.student.account import after_signup_doc
 
 
 class ChangePW(Resource):
+    uri = '/change/pw'
+
     @swagger.doc(after_signup_doc.CHANGE_PW_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         비밀번호 변경
         """
         current_pw = request.form.get('current_pw')
-        student = StudentModel.objects(id=current_identity, pw=current_pw).first()
+        student = StudentModel.objects(id=get_jwt_identity(), pw=current_pw).first()
         if not student:
             # Forbidden
             return Response('', 403)
@@ -28,14 +31,42 @@ class ChangePW(Resource):
 
 
 class ChangeNumber(Resource):
+    uri = '/change/number'
+
     @swagger.doc(after_signup_doc.CHANGE_NUMBER_POST)
-    @jwt_required()
+    @jwt_required
     def post(self):
         """
         학번 변경
         """
-        new_number = request.form.get('new_number')
+        new_number = request.form.get('new_number', type=int)
 
-        StudentModel.objects(id=current_identity).first().update(number=new_number)
+        StudentModel.objects(id=get_jwt_identity()).first().update(number=new_number)
 
         return Response('', 201)
+
+
+class MyPage(Resource):
+    uri = '/mypage'
+
+    @swagger.doc(after_signup_doc.MYPAGE_GET)
+    @jwt_required
+    def get(self):
+        """
+        마이페이지
+        """
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+
+        if not student:
+            return Response('', 204)
+
+        return Response(json.dumps({
+            'name': student.name,
+            'signup_date': student.signup_date,
+            'number': student.number,
+            'extension_class': student.extension_apply.class_ if student.extension_apply else None,
+            'extension_seat': student.extension_apply.seat if student.extension_apply else None,
+            'goingout_sat': student.goingout_apply.on_saturday if student.goingout_apply else None,
+            'goingout_sun': student.goingout_apply.on_sunday if student.goingout_apply else None,
+            'stay_value': student.stay_apply.value if student.stay_apply else None
+        }, ensure_ascii=False), 200)
