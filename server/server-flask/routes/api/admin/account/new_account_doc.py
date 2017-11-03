@@ -6,25 +6,29 @@ NEW_ACCOUNT_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '생성할 관리자 계정 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'pw',
             'description': '생성할 관리자 계정 PW',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'name',
             'description': '생성활 관리자 계정 이름',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

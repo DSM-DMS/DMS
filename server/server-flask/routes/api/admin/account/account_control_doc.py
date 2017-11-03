@@ -6,13 +6,15 @@ INITIALIZE_ACCOUNT_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'number',
             'description': '초기화할 학생의 학번',
             'in': 'formData',
-            'type': 'int'
+            'type': 'int',
+            'required': True
         }
     ],
     'responses': {

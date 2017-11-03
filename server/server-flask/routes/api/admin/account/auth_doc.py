@@ -6,13 +6,15 @@ AUTH_POST = {
             'name': 'id',
             'description': 'ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'pw',
             'description': '비밀번호',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
