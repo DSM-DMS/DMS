@@ -6,13 +6,15 @@ FAQ_PREVIEW_GET = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': 'FAQ ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -30,13 +32,15 @@ NOTICE_PREVIEW_GET = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '공지사항 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -54,13 +58,15 @@ RULE_PREVIEW_GET = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '기숙사규정 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

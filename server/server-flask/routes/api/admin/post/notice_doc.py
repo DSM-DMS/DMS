@@ -6,19 +6,22 @@ NOTICE_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': '공지사항 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': '공지사항 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -36,25 +39,29 @@ NOTICE_PATCH = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '수정할 공지사항 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': '공지사항 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': '공지사항 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -72,13 +79,15 @@ NOTICE_DELETE = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '삭제할 공지사항 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

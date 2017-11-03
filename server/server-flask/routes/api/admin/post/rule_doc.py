@@ -6,19 +6,22 @@ RULE_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': '기숙사규정 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': '기숙사규정 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -36,25 +39,29 @@ RULE_PATCH = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '수정할 기숙사규정 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': '기숙사규정 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': '기숙사규정 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -72,13 +79,15 @@ RULE_DELETE = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '삭제할 기숙사규정 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {

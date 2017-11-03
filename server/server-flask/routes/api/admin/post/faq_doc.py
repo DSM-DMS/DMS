@@ -6,19 +6,22 @@ FAQ_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': 'FAQ 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': 'FAQ 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -36,25 +39,29 @@ FAQ_PATCH = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '수정할 FAQ ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'title',
             'description': 'FAQ 제목',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'content',
             'description': 'FAQ 내용',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -72,13 +79,15 @@ FAQ_DELETE = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '삭제할 FAQ ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
