@@ -6,7 +6,8 @@ GOINGOUT_GET = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -33,19 +34,22 @@ GOINGOUT_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'sat',
             'description': '토요일 외출 여부',
             'in': 'formData',
-            'type': 'bool'
+            'type': 'bool',
+            'required': True
         },
         {
             'name': 'sun',
             'description': '일요일 외출 여부',
             'in': 'formData',
-            'type': 'bool'
+            'type': 'bool',
+            'required': True
         }
     ],
     'responses': {

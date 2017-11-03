@@ -6,7 +6,8 @@ STAY_GET = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -33,7 +34,8 @@ STAY_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'value',
@@ -45,7 +47,8 @@ STAY_POST = {
             4: 잔류
             ''',
             'in': 'formData',
-            'type': 'int'
+            'type': 'int',
+            'required': True
         }
     ],
     'responses': {

@@ -6,7 +6,8 @@ EXTENSION_GET = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -33,7 +34,8 @@ EXTENSION_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'class',
@@ -48,13 +50,15 @@ EXTENSION_POST = {
             7: 5층 열린교실
             ''',
             'in': 'formData',
-            'type': 'int'
+            'type': 'int',
+            'required': True
         },
         {
             'name': 'seat',
             'description': '연장 학습실 자리 번호',
             'in': 'formData',
-            'type': 'int'
+            'type': 'int',
+            'required': True
         }
     ],
     'responses': {
