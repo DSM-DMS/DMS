@@ -6,19 +6,22 @@ CHANGE_PW_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'current_pw',
             'description': '현재 비밀번호',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'new_pw',
             'description': '바꿀 비밀번호',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -39,13 +42,15 @@ CHANGE_NUMBER_POST = {
             'name': 'Authorization',
             'description': 'JWT Token',
             'in': 'header',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'new_number',
             'description': '바꿀 학번',
             'in': 'formData',
-            'type': 'int'
+            'type': 'int',
+            'required': True
         }
     ],
     'responses': {

@@ -6,7 +6,8 @@ ID_VERIFICATION_POST = {
             'name': 'id',
             'description': '중복 여부를 체크할 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -27,7 +28,8 @@ UUID_VERIFICATION_POST = {
             'name': 'uuid',
             'description': '가입 가능 여부를 체크할 UUID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
@@ -48,19 +50,22 @@ SIGNUP_POST = {
             'name': 'uuid',
             'description': 'UUID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'id',
             'description': '사용자 ID',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         },
         {
             'name': 'pw',
             'description': '사용자 PW',
             'in': 'formData',
-            'type': 'str'
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
