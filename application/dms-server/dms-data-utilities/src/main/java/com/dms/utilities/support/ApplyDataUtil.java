@@ -5,7 +5,8 @@ import java.util.Calendar;
 public class ApplyDataUtil {
     //this class change to .config file later
 	private static String EXTENSION_APPLY_START = "17:30";
-	private static String EXTENSION_APPLY_LIMIT = "22:00";
+	private static String EXTENSION_APPLY_LIMIT_11 = "20:31";
+	private static String EXTENSION_APPLY_LIMIT_12 = "22:01";
 
     public static boolean canApplyStay(String week) {
         Calendar calendar = Calendar.getInstance();
@@ -43,7 +44,7 @@ public class ApplyDataUtil {
         return check;
     }
 
-    public static boolean canApplyExtension() {
+    public static boolean canApplyExtension11() {
         boolean check = false;
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
@@ -51,14 +52,31 @@ public class ApplyDataUtil {
 
         int setHourStart = Integer.valueOf(EXTENSION_APPLY_START.split(":")[0]);
         int setMinuteStart = Integer.valueOf(EXTENSION_APPLY_START.split(":")[1]);
-        int setHourLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT.split(":")[0]);
-        int setMinuteLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT.split(":")[1]);
+        int setHourLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT_11.split(":")[0]);
+        int setMinuteLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT_11.split(":")[1]);
         
         if((hour > setHourStart || (hour == setHourStart && minute > setMinuteStart)) && (hour < setHourLimit || (hour == setHourLimit && minute < setMinuteLimit))) {
         	check = true;
         }
         
-        System.out.println(check);
+        return check;
+    }
+    
+    public static boolean canApplyExtension12() {
+        boolean check = false;
+        Calendar currentTime = Calendar.getInstance();
+        int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = currentTime.get(Calendar.MINUTE);
+
+        int setHourStart = Integer.valueOf(EXTENSION_APPLY_START.split(":")[0]);
+        int setMinuteStart = Integer.valueOf(EXTENSION_APPLY_START.split(":")[1]);
+        int setHourLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT_12.split(":")[0]);
+        int setMinuteLimit = Integer.valueOf(EXTENSION_APPLY_LIMIT_12.split(":")[1]);
+        
+        if((hour > setHourStart || (hour == setHourStart && minute > setMinuteStart)) && (hour < setHourLimit || (hour == setHourLimit && minute < setMinuteLimit))) {
+        	check = true;
+        }
+        
         return check;
     }
 

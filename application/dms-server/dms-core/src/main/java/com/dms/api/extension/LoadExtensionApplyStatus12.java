@@ -14,8 +14,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path="/apply/extension", method={HttpMethod.GET})
-public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
+@Route(path="/apply/extension/12", method={HttpMethod.GET})
+public class LoadExtensionApplyStatus12 implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
 		DataBase database = DataBase.getInstance();
@@ -40,7 +40,7 @@ public class LoadExtensionApplyStatus implements Handler<RoutingContext> {
         }
 		
 		try {
-			resultSet = database.executeQuery("SELECT * FROM extension_apply WHERE uid='", uid, "'");
+			resultSet = database.executeQuery("SELECT * FROM extension_apply_12 WHERE uid='", uid, "'");
 			
 			if(resultSet.next()) {
 				responseObject.put("class", resultSet.getInt("class"));
