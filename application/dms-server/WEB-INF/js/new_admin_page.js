@@ -5,6 +5,7 @@ var $facilityDownload = $("#facility-download");
 var $noticeManagement = $("#notice-management");
 var $dormRuleManagement = $("#dorm-rule-management");
 var $faqManagement = $("#faq-management");
+var $surveyManagement = $("#survey-management");
 var $qnaManagement = $("#qna-management");
 var $deleteAccount = $("#delete-account");
 var $createAdminAccount = $("#create-admin-account");
@@ -120,6 +121,10 @@ $qnaManagement.on('click', function() {
 
 $faqManagement.on('click', function() {
     location.href = 'http://dsm2015.cafe24.com/post/admin?category=faq'
+})
+
+$surveyManagement.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/post/admin?category=survey'
 })
 
 $deleteAccount.on('click', function() {

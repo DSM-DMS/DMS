@@ -587,31 +587,7 @@ function getRuleList() {
     });
 }
 
-function setRulePreview() {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/rule",
-        type: "GET",
-        data: {
-            page: 1,
-            limit: 1
-        },
-        statusCode: {
-            200: function(data) {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(parsedData[0].content);
-            },
-            204: function(data) {
-                $("#notice-title").text("");
-                $(".notice-content-container p").text("글이 없습니다.");
-            }
-        },
-        error: function() {
-            console.log("error");
-        }
-    });
-}
-
+   
 /** ======================================================================================
  * mypage
 ========================================================================================== */
@@ -754,14 +730,16 @@ $surveyBtn.on("click", function() {
     $menuPagenation.toggleClass("fade-out");
 });
 
+getSurveyList();
+
 function getSurveyList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/faq",
+        url: "http://dsm2015.cafe24.com/survey",
         type: "GET",
         success: function(data) {
             var parsedData = JSON.parse(data).result;
             parsedData.forEach(function(data) {
-                fillListCard(data, $(".faq-window .list-box-container"));
+                fillListCard(data, $(".survey-window .list-box-container"));
             });
         },
         error: function() {
@@ -769,7 +747,6 @@ function getSurveyList() {
         }
     });
 }
-
 /** ======================================================================================
  * Stay
 ========================================================================================== */

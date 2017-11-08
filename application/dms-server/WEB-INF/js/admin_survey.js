@@ -81,17 +81,67 @@ $(document).ready(function () {
         console.log(finishDate);
         console.log(grade);
         console.log(surveys);
-        // $.ajax({
-        //     url: "/survey",
-        //     data: {
-        //     },
-        //     type: 'post',
-        //     success: function (data) {
-        //         alert("성공" + data)
-        //     },
-        //     error: function (data) {
-        //         alert("실패 ㅠㅠ" + data);
-        //     }
-        // });
+        $.ajax({
+            url: "/admin/survey",
+            data: {
+                title: title,
+                start_date: startDate,
+                end_date: finishDate,
+                target: grade
+            },
+            type: 'post',
+            statusCode: {
+                201: function () {
+                }
+            },
+            error: function (e) {
+                alert('설문조사 추가에 실패했습니다.');
+            }
+        });
+
+        $.ajax({
+            url: "/survey",
+            type: 'GET',
+            statusCode: {
+                200: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        let id = data[i].id;
+                        for (var j = 0; i < surveys.length; i++) {
+                            let title=surveys[i];
+                            let is_objective=false;
+                            let choice_paper=null;
+
+                            if(surveys[i].choices){
+                                title=surveys[i].title;
+                                choice_paper=surveys[i].choices;
+                                is_objective=true;
+                            }
+
+                            $.ajax({
+                                url: "/admin/survey/question",
+                                data: {
+                                    id: id,
+                                    title: title,
+                                    is_objective: is_objective,
+                                    choice_paper: choice_paper
+                                },
+                                type: 'post',
+                                statusCode: {
+                                    201: function () {
+                                        alert('설문조사 추가 완료');
+                                    }
+                                },
+                                error: function (e) {
+                                    alert('설문조사 추가에 실패했습니다.');
+                                }
+                            });
+                        }
+
+                    }
+                }
+            },
+            error: function (e) {}
+        });
     });
 });
