@@ -79,18 +79,18 @@
         </div>
         <div class="icon-menu-item text-center" onclick="redirect('mypage')">
             <img src="/images/man.png" />
-            <#if isLogin==false>
+            {% if isLogin==false %}
                 <div>로그인</div>
-                <#else>
+            {% else %}
                 <div>내정보</div>
-            </#if>
+            {% endif %}
         </div>
-        <#if isLogin==true>
+        {% if isLogin==true %}
           <div class="icon-menu-item text-center" onclick="logout()">
               <img src="./images/logout.ico" />
               <div>로그아웃</div>
           </div>
-        </#if>
+        {% endif %}
     </div>
     <div class="main">
         <div class="card-wrapper">
@@ -109,13 +109,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <#list Notices as notice>
-                                            <tr onclick="viewPost('notice', ${notice.no})">
-                                                <th scope="row">${notice.no}</th>
-                                                <td>${notice.title}</td>
-                                                <td>${notice.writer}</td>
+                                        {% for notice in Notices %}\
+                                            <tr onclick="viewPost('notice', {{ notice.no }})">
+                                                <th scope="row">{{ notice.no }}</th>
+                                                <td>{{ notice.title }}</td>
+                                                <td>{{ notice.writer }}</td>
                                             </tr>
-                                        </#list>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -126,20 +126,20 @@
                                 <div class="mornig meal">
                                     <div class="info">
                                         <h4 class="col-2 text-center">아침</h4>
-                                        <p class="col-9 menu">${Breakfast}</p>
-                                        <p class="col-9 allergy">${BreakfastAllergy}</p>
+                                        <p class="col-9 menu">{{ Breakfast }}</p>
+                                        <p class="col-9 allergy">{{ BreakfastAllergy }}</p>
                                     </div> <img class="allergy-arrow" src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
                                 <div class="lunch meal">
                                     <div class="info">
                                         <h4 class="col-2 text-center">점심</h4>
-                                        <p class="col-9 menu">${Lunch}</p>
-                                        <p class="col-9 allergy">${LunchAllergy}</p>
+                                        <p class="col-9 menu">{{ Lunch }}</p>
+                                        <p class="col-9 allergy">{{ LunchAllergy }}</p>
                                     </div> <img class="allergy-arrow" src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
                                 <div class="dinner meal">
                                     <div class="info">
                                         <h4 class="col-2 text-center">저녁</h4>
-                                        <p class="col-9 menu">${Dinner}</p>
-                                        <p class="col-9 allergy">${DinnerAllergy}</p>
+                                        <p class="col-9 menu">{{ Dinner }}</p>
+                                        <p class="col-9 allergy">{{ DinnerAllergy }}</p>
                                     </div> <img class="allergy-arrow" src="./images/arrow.png" alt="arrow image to see allergy" onclick="showAllergy(this)"> </div>
                             </div>
                         </div>
@@ -148,11 +148,11 @@
             </div>
         </div>
         <div class="row padding">
-            <#list Notification as notifi>
-            <div class="col card ${notifi.styleClass}">
-                <div class="card-block card-block-notice" style="color: white">${notifi.text}</div>
+            {% for notifi in Notification %}
+            <div class="col card {{ notifi.styleClass }}">
+                <div class="card-block card-block-notice" style="color: white">{{ notifi.text }}</div>
             </div>
-            </#list>
+            {% endfor %}
         </div>
 
         <div class="row padding">
@@ -193,12 +193,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <#list Rules as rule>
-                                        <tr onclick="viewPost('rule', ${rule.no})">
-                                            <th scope="row">${rule.no}</th>
-                                            <td>${rule.title}</td>
+                                    {% for rule in Rules %}
+                                        <tr onclick="viewPost('rule', {{ rule.no }})">
+                                            <th scope="row">{{ rule.no }}</th>
+                                            <td>{{ rule.title }}</td>
                                         </tr>
-                                    </#list>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -214,12 +214,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <#list Faqs as faq>
-                                        <tr onclick="viewPost('faq', ${faq.no})">
-                                            <th scope="row">${faq.no}</th>
-                                            <td>${faq.title}</td>
+                                    {% for faq in Faqs %}
+                                        <tr onclick="viewPost('faq', {{ faq.no }})">
+                                            <th scope="row">{{ faq.no }}</th>
+                                            <td>{{ faq.title }}</td>
                                         </tr>
-                                    </#list>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -230,8 +230,7 @@
     </div>
 
 
-
-    <#if isLogin==false>
+    {% if isLogin==false %}
         <!-- Login  modal-->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -303,7 +302,7 @@
                 </div>
             </div>
         </div>
-    </#if>
+    {% endif %}
     <!-- Bug report Modal -->
     <div class="modal fade" id="bugModal" role="dialog">
         <div class="modal-dialog">
@@ -335,7 +334,7 @@
     </div>
 </body>
 <script type="text/javascript">
-    var isLogin = ${isLogin?c};
+    var isLogin = {{ isLogin?c }};
 </script>
 <script src="/js/script.js"></script>
 

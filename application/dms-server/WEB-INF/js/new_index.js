@@ -315,35 +315,91 @@ function getClassData(classId) {
 getClassData(1);
 
 $classSelect.on("click", "td", function(e) {
-    selectedClass.css({
-        transition: "0.2s ease-in",
-        backgroundColor: "rgba(0, 0, 0, 0)"
-    });
-    selectedClass = $(this);
     $(this).css({
         transition: "0.2s ease-in",
         backgroundColor: "rgba(255, 255, 255, .2)"
     });
     if ($(this).attr('id') === "extension-gaon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(1);
+        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-naon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(2);
+        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-daon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(3);
+        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-laon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(4);
+        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-three") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(5);
+        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-four") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(6);
+        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-five") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
         getClassData(7);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-cancel") {
+        let $cancelButton = $(this);
+        $.ajax({
+            url: "/apply/extension",
+            type: "DELETE",
+            success: function() {
+                alert("연장학습 신청이 취소되었습니다.");
+                window.location.href = "/";
+            },
+            error: function() {
+                $cancelButton.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(event){ 
+                    alert("연장학습 취소 중 에러가 발생하였습니다.");
+                    window.location.href = "/";
+                });
+                $cancelButton.css({
+                    transition: "0.2s ease-in",
+                    backgroundColor: "rgba(0, 0, 0, 0)"
+                });
+            }
+        });
     }
 });
 
 $openExtensionButton.on("click", function() {
-    $openStayButton.prop("disabled", true);
-    $openExtensionButton.prop("disabled", true);
+    if($stayWindow.hasClass("fade-in")) {
+        $panel.toggleClass("left-move");
+        $stayWindow.toggleClass("fade-in");
+        $menu.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu2.toggleClass("fade-out");
@@ -353,8 +409,6 @@ $openExtensionButton.on("click", function() {
 });
 
 $closeExtensionButton.on("click", function() {
-    $openStayButton.prop("disabled", false);
-    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $extensionWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
@@ -798,8 +852,14 @@ var setStayValue = function(thisDate) {
 setStayValue(stayDate);
 
 $openStayButton.click(function() {
-    $openStayButton.prop("disabled", true);
-    $openExtensionButton.prop("disabled", true);
+    if($extensionWindow.hasClass("fade-in")) {
+        $panel.toggleClass("left-move");
+        $extensionWindow.toggleClass("fade-in");
+        $menu.toggleClass("fade-out");
+        $menu2.toggleClass("fade-out");
+        $menuWrapper.toggleClass("fade-out");
+        $menuPagenation.toggleClass("fade-out");
+    }
     $stayWindow.toggleClass("fade-in");
     $panel.toggleClass("left-move");
     $menu.toggleClass("fade-out");
@@ -810,8 +870,6 @@ $openStayButton.click(function() {
 });
 
 $closeStayButton.on("click", function() {
-    $openStayButton.prop("disabled", false);
-    $openExtensionButton.prop("disabled", false);
     $panel.toggleClass("left-move");
     $stayWindow.toggleClass("fade-in");
     $menu.toggleClass("fade-out");
@@ -1445,19 +1503,14 @@ getSomedayMeal(mealDate, $(".today-meal"));
 
 function getSomedayMeal(day, target) {
         $.ajax({
-        url: "http://dsm2015.cafe24.com:81/meal",
-        data: {
-            year: mealDate.getFullYear(),
-            month: mealDate.getMonth() + 1,
-            day: mealDate.getDate(),
-        },
+        url: "http://dsm2015.cafe24.com:3000/meal/" + formatDate(mealDate),
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data);
+                var parsedData = data;
                 var domArr = target.find(".meal-card p");
-                $(domArr[0]).html(JSON.parse(parsedData.breakfast).toString().replace(/,/gi, "<br>"));
-                $(domArr[1]).html(JSON.parse(parsedData.lunch).toString().replace(/,/gi, "<br>"));
-                $(domArr[2]).html(JSON.parse(parsedData.dinner).toString().replace(/,/gi, "<br>"));
+                $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
             },
             error: function() {
                 var domArr = $(".meal-content p");
