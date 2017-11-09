@@ -14,7 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path="/apply/extension/11", method={HttpMethod.GET})
+@Route(path="/apply/extension", method={HttpMethod.GET})
 public class LoadExtensionApplyStatus11 implements Handler<RoutingContext> {
 	@Override
 	public void handle(RoutingContext ctx) {
