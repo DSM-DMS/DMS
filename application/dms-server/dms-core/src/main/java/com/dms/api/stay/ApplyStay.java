@@ -27,9 +27,8 @@ public class ApplyStay implements Handler<RoutingContext> {
 		
 		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 		int hour = c.get(Calendar.HOUR);
-		int minute = c.get(Calendar.MINUTE);
 		
-		if(dayOfWeek >= 6 /* 금요일 이상 */ || dayOfWeek == 5 && hour > 20 /* 금요일이고 9시 이후 */ || dayOfWeek == 5 && hour == 20 && minute > 30 /* 금요일이고 8시 30분 이후 */) {
+		if(dayOfWeek >= 6 /* 금요일 이상 */ || dayOfWeek == 5 && hour > 21) {
 			ctx.response().setStatusCode(204).end();
 			ctx.response().close();
 		}
