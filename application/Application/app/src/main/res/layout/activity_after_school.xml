@@ -60,8 +60,10 @@
             </View>
 
             
-            <Button
-                android:id="@+id/back_button"
+            <ImageButton
+                android:id="@+id/back_button_after"
+                android:src="@drawable/ic_chevron_left_white_24dp"
+                android:background="@color/colorPrimaryDark"
                 android:layout_width="30dp"
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
@@ -69,8 +71,10 @@
                 android:layout_marginLeft="4dp" />
 
 
-            <Button
-                android:id="@+id/next_button"
+            <ImageButton
+                android:id="@+id/next_button_after"
+                android:src="@drawable/ic_chevron_right_white_24dp"
+                android:background="@color/colorPrimaryDark"
                 android:layout_width="30dp"
                 android:layout_height="80dp"
                 android:layout_alignParentRight="true"
@@ -93,7 +97,7 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/current_view_count"
+            android:id="@+id/current_view_count_after"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

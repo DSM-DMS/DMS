@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/layout_survey_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/dialog_toolbar" />
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/survey_title"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="모범학생 설문 조사"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/survey_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="2017-11- 6 ~ 2017-11-9"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp" />
+
+    <com.dms.beinone.application.views.custom.UnscrollableViewPager
+        android:id="@+id/survey_viewpager"
+        android:layout_marginTop="22dp"
+        android:layout_width="280dp"
+        android:layout_height="380dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        >
+    </com.dms.beinone.application.views.custom.UnscrollableViewPager>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:id="@+id/current_view_count_survey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/seahorse"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

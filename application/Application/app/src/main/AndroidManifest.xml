@@ -68,6 +68,10 @@
         <activity android:name=".activities.RegisterActivity"></activity>
         <activity android:name=".activities.SurveyListActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".activities.SurveyPageActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

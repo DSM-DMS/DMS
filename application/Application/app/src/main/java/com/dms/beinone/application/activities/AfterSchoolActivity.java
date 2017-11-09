@@ -8,9 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.media.RatingCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dms.beinone.application.fragments.QuestionFragment;
-import com.dms.beinone.application.models.AfterSchool;
 import com.dms.beinone.application.models.AfterSchoolClass;
 
 import java.util.ArrayList;
@@ -29,9 +26,9 @@ import com.dms.beinone.application.R;
 public class AfterSchoolActivity extends AppCompatActivity {
 
     private ViewPager question_view_pager_yjh;
-    private Button next_button;
+    private ImageButton next_button;
     private ImageButton main_back_button;
-    private Button back_button;
+    private ImageButton back_button;
     private TextView detial_text;
     private int size;
 
@@ -100,11 +97,11 @@ public class AfterSchoolActivity extends AppCompatActivity {
         question_view_pager_yjh=(ViewPager)findViewById(R.id.question_view_pager);
         question_view_pager_yjh.setAdapter(new QuestionPagerAdapter(getSupportFragmentManager(), tempData));
 
-        final LinearLayout view = (LinearLayout) findViewById(R.id.current_view_count);
+        final LinearLayout view = (LinearLayout) findViewById(R.id.current_view_count_after);
 
         //next_button=(Button)findViewById(R.id.next_button);
-        next_button=(Button)findViewById(R.id.next_button);
-        back_button=(Button)findViewById(R.id.back_button);
+        next_button=(ImageButton)findViewById(R.id.next_button_after);
+        back_button=(ImageButton)findViewById(R.id.back_button_after);
         back_button.setVisibility(View.GONE);
 
         next_button.setOnClickListener(new View.OnClickListener() {
