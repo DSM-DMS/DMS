@@ -64,11 +64,11 @@ public class LogoutDialogFragment extends DialogFragment {
                 switch (code) {
                     case HTTP_CREATED:
                         AccountManager.setLogined(context, false);
-                        Toast.makeText(getContext(), getString(R.string.logout_created), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.logout_created), Toast.LENGTH_SHORT).show();
                         dismiss();
                         break;
                     default:
-                        Toast.makeText(getContext(), R.string.logout_failed, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.logout_failed, Toast.LENGTH_SHORT).show();
                         break;
                 }
                 getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, getActivity().getIntent());

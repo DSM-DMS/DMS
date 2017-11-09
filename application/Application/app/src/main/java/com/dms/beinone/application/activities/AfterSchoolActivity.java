@@ -89,7 +89,6 @@ public class AfterSchoolActivity extends AppCompatActivity {
         dataArray2.add("배드민턴");
         dataArray2.add("축구");
 
-
         tempData.add(new AfterSchoolClass("월요일", dataArray));
         tempData.add(new AfterSchoolClass("화요일", dataArray1));
         tempData.add(new AfterSchoolClass("토요일", dataArray2));
@@ -122,9 +121,6 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
         question_view_pager_yjh.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

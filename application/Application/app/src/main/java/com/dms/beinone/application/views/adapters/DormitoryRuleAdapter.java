@@ -51,6 +51,7 @@ public class DormitoryRuleAdapter extends RecyclerView.Adapter<DormitoryRuleAdap
                 String content=items.get(position).getContent();
                 intent.putExtra("title",title);
                 intent.putExtra("content",content);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });

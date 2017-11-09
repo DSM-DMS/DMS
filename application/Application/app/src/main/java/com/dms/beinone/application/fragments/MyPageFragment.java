@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +26,15 @@ import com.dms.beinone.application.dialogs.LogoutDialogFragment;
 import com.dms.beinone.application.managers.AccountManager;
 import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.Account;
+import com.dms.beinone.application.models.ApplyStatus;
+import com.dms.beinone.application.models.Class;
+import com.dms.beinone.application.models.Goingout;
 import com.dms.beinone.application.models.Meal;
 import com.dms.beinone.application.utils.ExtensionUtils;
+import com.dms.beinone.application.utils.StayUtils;
 import com.google.gson.JsonObject;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,6 +73,15 @@ public class MyPageFragment extends Fragment {
         mLogoutMenu = view.findViewById(R.id.layout_my_page_logout);
         mLogoutTV = (TextView) view.findViewById(R.id.tv_my_page_logout);
         mChangePassword = view.findViewById(R.id.layout_my_page_change_password);
+
+        mMeritTV.setText("0");
+        mDemeritTV.setText("0");
+
+     /*   try {
+            loadApplyStatus();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
         initMenuArrowColor(view);
 
@@ -134,6 +150,7 @@ public class MyPageFragment extends Fragment {
         arrowIV2.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         arrowIV3.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         arrowIV4.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+
     }
 
     private void bind(Account account) {
@@ -142,6 +159,62 @@ public class MyPageFragment extends Fragment {
         mExtensionStatusTV.setText(extensionStatus);
         mMeritTV.setText(account.getMerit());
         mDemeritTV.setText(account.getDemerit());
+    }
+
+ /*   private void loadApplyStatus() throws IOException {
+        DMSService dmsService = HttpManager.createDMSService(getContext());
+        Call<ApplyStatus> call = dmsService.loadApplyStatus();
+        call.enqueue(new Callback<ApplyStatus>() {
+            @Override
+            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+
+                Log.d("MYPAGE",response.body().toString());
+                switch (response.code()) {
+                    case HTTP_OK:
+                        ApplyStatus applyStatus = response.body();
+                        if (applyStatus.isExtensionApplied()) {
+                            int no = applyStatus.getExtensionClass();
+                            String name = applyStatus.getExtensionName();
+                            setExtensionApplyStatus(new Class(no, name));
+                        }
+
+                        if (applyStatus.isStayApplied()) {
+                            setStayApplyStatus(applyStatus.getStayValue());
+                        }
+                        break;
+                    case HTTP_BAD_REQUEST:
+                        Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR:
+                        Toast.makeText(getContext(), R.string.apply_list_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }*/
+
+
+    private void setExtensionApplyStatus(Class clazz) {
+        mExtensionStatusTV.setText("미신청");
+
+        if (clazz == null) {
+            mExtensionStatusTV.setText(R.string.unapplied);
+        } else {
+            mExtensionStatusTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
+        }
+    }
+
+    private void setStayApplyStatus(int value) {
+        if (value == -1) {
+            mStayStatusTV.setText(R.string.unapplied);
+        } else {
+            mStayStatusTV.setText(StayUtils.getStringFromStayStatus(value));
+        }
     }
 
     private void setLogoutMenu() {
@@ -172,6 +245,7 @@ public class MyPageFragment extends Fragment {
         call.enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
+                Log.d("MYPAGE",String.valueOf(response.code()));
                 switch (response.code()) {
                     case HTTP_OK:
                         bind(response.body());

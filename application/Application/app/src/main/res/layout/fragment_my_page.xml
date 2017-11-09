@@ -28,17 +28,27 @@
                 android:gravity="end"
                 android:orientation="vertical">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <ImageView
+                    android:id="@+id/while_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/rounded_whale" />
+                    android:src="@drawable/rounded_whale"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
                 <TextView
+                    android:layout_alignLeft="@+id/while_image"
+                    android:layout_below="@+id/while_image"
                     android:id="@+id/tv_my_page_stay_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:textSize="24sp" />
+
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -50,17 +60,28 @@
                 android:gravity="start"
                 android:orientation="vertical">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                 <ImageView
+                    android:id="@+id/fish_image"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/rounded_fish" />
 
                 <TextView
+                    android:layout_alignRight="@+id/fish_image"
+                    android:layout_below="@+id/fish_image"
                     android:id="@+id/tv_my_page_extension_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 

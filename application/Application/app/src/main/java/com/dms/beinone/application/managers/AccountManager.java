@@ -9,8 +9,8 @@ import android.content.SharedPreferences;
 
 public class AccountManager {
 
-    private static final String PREFS_NAME_ACCOUNT = "accountPrefs";
-    private static final String PREFS_KEY_LOGINED = "logined";
+    private static final String PREFS_NAME_ACCOUNT = "accountPrefs"; //파일이름
+    private static final String PREFS_KEY_LOGINED = "logined"; //키값
 
     public static void setLogined(Context context, boolean logined) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME_ACCOUNT, Context.MODE_PRIVATE);

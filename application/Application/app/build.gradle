@@ -38,8 +38,10 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'commons-codec:commons-codec:1.9'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.github.florent37:bubbletab:1.0.0'
     testCompile 'junit:junit:4.12'
 }
