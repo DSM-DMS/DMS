@@ -211,7 +211,6 @@ body {
     background: #48CFAD;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 ::selection {
     background: none;
@@ -1043,7 +1042,7 @@ input[type="radio"]:checked~.bullet .line.seven {
     /*margin-top: 14vh;
     height: 72vh;
     width: 36vh;*/
-    margin-top: 14%;
+    margin-top: 3%;
     height: 72%;
     width: 25%;
     margin-left: 5%;
@@ -1077,7 +1076,7 @@ input[type="radio"]:checked~.bullet .line.seven {
 .extension-seat-container {
     /*margin-top: 14vh;
     height: 85vh;*/
-    margin-top: 14%;
+    margin-top: 3%;
     height: 79%;
     float: left;
     margin-left: 8%;
@@ -1149,8 +1148,72 @@ input[type="radio"]:checked~.bullet .line.seven {
     height: 4.75vh;
     opacity: 0;
 }
+#extension-apply-window #extension-time-select{
+    margin-left:5%;
+    margin-top:3%;
+    color: white;
+}
 
+.extension-time-selecter {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 35px;
+}
 
+#extension-time-checking {
+    display: none;
+}
+
+#extension-apply-window #extension-time-select .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#extension-apply-window #extension-time-select .slider:before {
+  position: absolute;
+  content: "";
+  height: 28px;
+  width: 30px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#extension-apply-window #extension-time-select input:checked + .slider {
+  background-color: #607d8b;
+}
+
+#extension-apply-window #extension-time-select input:focus + .slider {
+  box-shadow: 0 0 1px #607d8b;
+}
+
+#extension-apply-window #extension-time-select input:checked + .slider:before {
+  -webkit-transform: translateX(44px);
+  -ms-transform: translateX(44px);
+  transform: translateX(44px);
+}
+#extension-apply-window #extension-time-select .slider.round {
+  border-radius: 25px;
+}
+
+#extension-apply-window #extension-time-select .slider.round:before {
+  border-radius: 25px;
+}
+.extension-time-intro{
+    display: inline-block;
+    font-size:20px;
+    margin: 0 0 0 0;
+}
 /*modal------------------------------------------------------------*/
 
 .page-wrapper {

@@ -49,6 +49,7 @@ var $four = $("#extension-four");
 var $five = $("#extension-five");
 var selectedClass = $("#extension-gaon");
 var $classSelect = $(".extension-class-select");
+var $timeSelectCheckbox = $("extension-time-checking");
 
 /**
  * Going out
@@ -297,97 +298,188 @@ selectedClass.css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
-
-function getClassData(classId) {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/apply/extension/class",
-        type: "GET",
-        data: {
-            "option": "map",
-            "class": classId
-        },
-        success: function(data) {
-            drawSeats(JSON.parse(data).map, classId);
-        }
-    });
-}
-
-getClassData(1);
-
-$classSelect.on("click", "td", function(e) {
-    $(this).css({
-        transition: "0.2s ease-in",
-        backgroundColor: "rgba(255, 255, 255, .2)"
-    });
-    if ($(this).attr('id') === "extension-gaon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(1);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-naon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(2);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-daon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(3);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-laon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(4);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-three") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(5);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-four") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(6);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-five") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
-        getClassData(7);
-        selectedClass = $(this);
-    } else if ($(this).attr('id') === "extension-cancel") {
-        let $cancelButton = $(this);
+function getClassData(classId,time) {
+    if(time == 1){
         $.ajax({
-            url: "/apply/extension",
-            type: "DELETE",
-            success: function() {
-                alert("연장학습 신청이 취소되었습니다.");
-                window.location.href = "/";
+            url: "http://dsm2015.cafe24.com/apply/extension/class/11",
+            type: "GET",
+            data: {
+                "option": "map",
+                "class": classId
             },
-            error: function() {
-                $cancelButton.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(event){ 
-                    alert("연장학습 취소 중 에러가 발생하였습니다.");
-                    window.location.href = "/";
-                });
-                $cancelButton.css({
-                    transition: "0.2s ease-in",
-                    backgroundColor: "rgba(0, 0, 0, 0)"
-                });
+            success: function(data) {
+                drawSeats(JSON.parse(data).map, classId);
             }
         });
+    }
+    else if(time == 2){
+        $.ajax({
+            url: "htpp://dsm2015.cafe24.com/apply/extension/class/12",
+            type: "GET",
+            data: {
+                "option": "map",
+                "class": classId
+            },
+            success: function(data) {
+                drawSeats(JSON.parse(data.map), classId);
+            }
+        })
+    }
+}
+
+getClassData(1,1);
+
+$classSelect.on("click", "td", function(e) {
+    if($timeSelectCheckbox.prop("checked")){
+        $(this).css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(255, 255, 255, .2)"
+        });
+        if ($(this).attr('id') === "extension-gaon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(1,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-naon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(2,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-daon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(3,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-laon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(4,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-three") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(5,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-four") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(6,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-five") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(7,2);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-cancel") {
+            let $cancelButton = $(this);
+            $.ajax({
+                url: "/apply/extension/12",
+                type: "DELETE",
+                success: function() {
+                    alert("연장학습 신청이 취소되었습니다.");
+                    window.location.href = "/";
+                },
+                error: function() {
+                    $cancelButton.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(event){ 
+                        alert("연장학습 취소 중 에러가 발생하였습니다.");
+                        window.location.href = "/";
+                    });
+                    $cancelButton.css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
+                    });
+                }
+            });
+        }
+    } else{
+        $(this).css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(255, 255, 255, .2)"
+        });
+        if ($(this).attr('id') === "extension-gaon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(1,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-naon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(2,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-daon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(3,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-laon") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(4,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-three") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(5,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-four") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(6,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-five") {
+            selectedClass.css({
+                transition: "0.2s ease-in",
+                backgroundColor: "rgba(0, 0, 0, 0)"
+            });
+            getClassData(7,1);
+            selectedClass = $(this);
+        } else if ($(this).attr('id') === "extension-cancel") {
+            let $cancelButton = $(this);
+            $.ajax({
+                url: "/apply/extension/11",
+                type: "DELETE",
+                success: function() {
+                    alert("연장학습 신청이 취소되었습니다.");
+                    window.location.href = "/";
+                },
+                error: function() {
+                    $cancelButton.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(event){ 
+                        alert("연장학습 취소 중 에러가 발생하였습니다.");
+                        window.location.href = "/";
+                    });
+                    $cancelButton.css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
+                    });
+                }
+            });
+        }
     }
 });
 
@@ -1266,32 +1358,62 @@ function drawSeats(mapData, classId) {
 }
 
 function extentionApply(classId, id) {
-    $.ajax({
-        url: "http://dsm2015.cafe24.com/apply/extension",
-        type: "PUT",
-        data: {
-            "class": classId,
-            "seat": id
-        },
-        statusCode: {
-            200: function() {
-                alert("신청 완료되었습니다.");
-                getClassData(classId);
+    if($timeSelectCheckbox.prop("checked")){
+        $.ajax({
+            url: "http://dsm2015.cafe24.com/apply/extension/12",
+            type: "PUT",
+            data: {
+                "class": classId,
+                "seat": id
             },
-            204: function() {
-                alert("신청가능한 시간이 아닙니다.");
-                getClassData(classId);
+            statusCode: {
+                200: function() {
+                    alert("신청 완료되었습니다.");
+                    getClassData(classId);
+                },
+                204: function() {
+                    alert("신청가능한 시간이 아닙니다.");
+                    getClassData(classId);
+                },
+                500: function() {
+                    alert("신청중에 오류가 발생하였습니다.");
+                    getClassData(classId);
+                }
             },
-            500: function() {
+            error: function(request, status, error) {
                 alert("신청중에 오류가 발생하였습니다.");
                 getClassData(classId);
             }
-        },
-        error: function(request, status, error) {
-            alert("신청중에 오류가 발생하였습니다.");
-            getClassData(classId);
-        }
-    });
+        });
+    }
+    else{
+        $.ajax({
+            url: "http://dsm2015.cafe24.com/apply/extension/11",
+            type: "PUT",
+            data: {
+                "class": classId,
+                "seat": id
+            },
+            statusCode: {
+                200: function() {
+                    alert("신청 완료되었습니다.");
+                    getClassData(classId);
+                },
+                204: function() {
+                    alert("신청가능한 시간이 아닙니다.");
+                    getClassData(classId);
+                },
+                500: function() {
+                    alert("신청중에 오류가 발생하였습니다.");
+                    getClassData(classId);
+                }
+            },
+            error: function(request, status, error) {
+                alert("신청중에 오류가 발생하였습니다.");
+                getClassData(classId);
+            }
+        });
+    }
 }
 
 function extensionDoCheck() {
