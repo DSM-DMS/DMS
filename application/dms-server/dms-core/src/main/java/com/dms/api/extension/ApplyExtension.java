@@ -14,8 +14,8 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.RoutingContext;
 
-@Route(path = "/apply/extension/11", method = {HttpMethod.PUT})
-public class ApplyExtension11 implements Handler<RoutingContext> {
+@Route(path = "/apply/extension", method = {HttpMethod.PUT})
+public class ApplyExtension implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext ctx) {
         String id = UserManager.getIdFromSession(ctx);
@@ -44,7 +44,7 @@ public class ApplyExtension11 implements Handler<RoutingContext> {
             if (rs.next()) {
                 name = rs.getString(1);
             }
-            if (!ApplyDataUtil.canApplyExtension11()) {
+            if (!ApplyDataUtil.canApplyExtension12()) {
                 ctx.response().setStatusCode(204).end();
                 ctx.response().close();
             } else {
