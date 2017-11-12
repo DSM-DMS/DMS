@@ -22,8 +22,9 @@ class AccountBase(Document):
 class StudentModel(AccountBase):
     number = IntField(required=True)
     afterschool_apply = EmbeddedDocumentField(AfterSchoolApplyModel)
-    extension_apply = EmbeddedDocumentField(ExtensionApplyModel)
-    goingout_apply = EmbeddedDocumentField(GoingoutApplyModel)
+    extension_apply_11 = EmbeddedDocumentField(ExtensionApplyModel)
+    extension_apply_12 = EmbeddedDocumentField(ExtensionApplyModel)
+    goingout_apply = EmbeddedDocumentField(GoingoutApplyModel, default=GoingoutApplyModel())
     # Default sat=False, sun=False
     stay_apply = EmbeddedDocumentField(StayApplyModel, default=StayApplyModel())
     # Default value=4
