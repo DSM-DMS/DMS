@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
+import config as cf
 import logger
 
 from support import db_migrator
@@ -35,4 +36,4 @@ if __name__ == '__main__':
     # db_migrator.migrate_posts()
     # meal.parse()
 
-    _app.run(port=_app.config['PORT'], threaded=True, debug=True)
+    _app.run(host=cf.HOST, port=cf.PORT, threaded=True, debug=True)

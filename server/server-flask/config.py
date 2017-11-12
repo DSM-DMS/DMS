@@ -1,7 +1,8 @@
 import os
+import socket
 from datetime import timedelta
 
-PORT = 3000
+HOST, PORT = socket.gethostbyname(socket.gethostname()), 3000
 
 API_VER = '0.1'
 API_TITLE = 'DMS'
