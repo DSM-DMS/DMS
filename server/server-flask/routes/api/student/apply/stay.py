@@ -33,10 +33,10 @@ class Stay(Resource):
         """
         today = datetime.today()
 
-        if (today.weekday() == 3 and today.time() > time(20, 30))\
+        if (today.weekday() == 3 and today.time() > time(22, 00))\
                 or 6 > today.weekday() > 3\
                 or (today.weekday() == 6 and today.time() < time(20, 30)):
-            # 목요일 8시 30분 이후, 또는 금요일과 토요일 사이, 또는 일요일 8시 30분 이전
+            # 목요일 10시 이후, 또는 금요일과 토요일 사이, 또는 일요일 8시 30분 이전
             return Response('', 204)
 
         value = request.form.get('value', type=int)
