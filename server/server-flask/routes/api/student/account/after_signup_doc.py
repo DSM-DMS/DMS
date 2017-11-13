@@ -80,8 +80,10 @@ MYPAGE_GET = {
                     'name': '조민규',
                     'signup_date': '2017-10-10',
                     'number': 20120,
-                    'extension_class': None,
-                    'extension_seat': None,
+                    'extension_11_class': 2,
+                    'extension_11_seat': 13,
+                    'extension_12_class': None,
+                    'extension_12_seat': None,
                     'goingout_sat': True,
                     'goingout_sun': False,
                     'stay_value': 4

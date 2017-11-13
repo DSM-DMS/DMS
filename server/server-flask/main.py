@@ -36,4 +36,4 @@ if __name__ == '__main__':
     # db_migrator.migrate_posts()
     # meal.parse()
 
-    _app.run(host=cf.HOST, port=cf.PORT, threaded=True, debug=True)
+    _app.run(host=cf.HOST, port=cf.PORT, threaded=True)

@@ -64,8 +64,10 @@ class MyPage(Resource):
             'name': student.name,
             'signup_date': student.signup_date,
             'number': student.number,
-            'extension_class': student.extension_apply.class_ if student.extension_apply else None,
-            'extension_seat': student.extension_apply.seat if student.extension_apply else None,
+            'extension_11_class': student.extension_apply_11.class_ if student.extension_apply_11 else None,
+            'extension_11_seat': student.extension_apply_11.seat if student.extension_apply_11 else None,
+            'extension_12_class': student.extension_apply_12.class_ if student.extension_apply_12 else None,
+            'extension_12_seat': student.extension_apply_12.seat if student.extension_apply_12 else None,
             'goingout_sat': student.goingout_apply.on_saturday if student.goingout_apply else None,
             'goingout_sun': student.goingout_apply.on_sunday if student.goingout_apply else None,
             'stay_value': student.stay_apply.value if student.stay_apply else None
