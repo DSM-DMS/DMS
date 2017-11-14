@@ -50,6 +50,7 @@ var $five = $("#extension-five");
 var selectedClass = $("#extension-gaon");
 var $classSelect = $(".extension-class-select");
 var $timeSelectCheckbox = $("extension-time-checking");
+var $timeSelect = 1;
 
 /**
  * Going out
@@ -298,6 +299,12 @@ selectedClass.css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
+$("#extension-time-checking").on("change",function(){
+    if($timeSelect == 1)
+        $timeSelect = 2;
+    else if($timeSelect == 2)
+        $timeSelect = 1;
+});
 function getClassData(classId,time) {
     if(time == 1){
         $.ajax({
@@ -327,67 +334,67 @@ function getClassData(classId,time) {
     }
 }
 
-getClassData(1,1);
+getClassData(1,$timeSelect);
 
 $classSelect.on("click", "td", function(e) {
-    if($timeSelectCheckbox.prop("checked")){
-        $(this).css({
+    $(this).css({
+        transition: "0.2s ease-in",
+        backgroundColor: "rgba(255, 255, 255, .2)"
+    });
+    if ($(this).attr('id') === "extension-gaon") {
+        selectedClass.css({
             transition: "0.2s ease-in",
-            backgroundColor: "rgba(255, 255, 255, .2)"
+            backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        if ($(this).attr('id') === "extension-gaon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(1,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-naon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(2,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-daon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(3,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-laon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(4,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-three") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(5,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-four") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(6,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-five") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(7,2);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-cancel") {
-            let $cancelButton = $(this);
+        getClassData(1,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-naon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
+        getClassData(2,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-daon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
+        getClassData(3,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-laon") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
+        getClassData(4,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-three") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
+        getClassData(5,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-four") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
+        getClassData(6,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-five") {
+        selectedClass.css({
+            transition: "0.2s ease-in",
+            backgroundColor: "rgba(0, 0, 0, 0)"
+        });
+        getClassData(7,$timeSelect);
+        selectedClass = $(this);
+    } else if ($(this).attr('id') === "extension-cancel") {
+        let $cancelButton = $(this);
+        if($timeSelect == 1){
             $.ajax({
-                url: "/apply/extension/12",
+                url: "/apply/extension/11",
                 type: "DELETE",
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
@@ -405,64 +412,9 @@ $classSelect.on("click", "td", function(e) {
                 }
             });
         }
-    } else{
-        $(this).css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(255, 255, 255, .2)"
-        });
-        if ($(this).attr('id') === "extension-gaon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(1,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-naon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(2,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-daon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(3,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-laon") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(4,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-three") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(5,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-four") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(6,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-five") {
-            selectedClass.css({
-                transition: "0.2s ease-in",
-                backgroundColor: "rgba(0, 0, 0, 0)"
-            });
-            getClassData(7,1);
-            selectedClass = $(this);
-        } else if ($(this).attr('id') === "extension-cancel") {
-            let $cancelButton = $(this);
+        if($timeSelect == 2){
             $.ajax({
-                url: "/apply/extension/11",
+                url: "/apply/extension/12",
                 type: "DELETE",
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
