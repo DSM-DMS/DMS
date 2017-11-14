@@ -147,7 +147,7 @@ public class MealCardFragment extends Fragment {
     }
 
     private void loadMeal(String year, String month, String day) throws IOException {
-        DMSService dmsService = HttpManager.createDMSService_MEAL(getContext());
+        DMSService dmsService = HttpManager.createDMSService(getContext());
         Call<JsonObject> call = dmsService.loadMeal(year, month, day);
         call.enqueue(new Callback<JsonObject>() {
             @Override

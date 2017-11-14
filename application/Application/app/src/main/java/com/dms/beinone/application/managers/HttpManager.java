@@ -26,7 +26,7 @@ public class HttpManager {
                 .build();
 
         return new Retrofit.Builder()
-                .baseUrl(DMSService.SERVER_URL)
+                .baseUrl(DMSService.SERVER_STUDENT_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
@@ -34,7 +34,7 @@ public class HttpManager {
     }
 
 
-    public static DMSService createDMSService_MEAL(Context context){
+    public static DMSService createDMSServiceForAdmin(Context context){
         PersistentCookieJar cookieJar =
                 new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
 
@@ -43,7 +43,7 @@ public class HttpManager {
                 .build();
 
         return new Retrofit.Builder()
-                .baseUrl(DMSService.SERVER_MEAL_URL)
+                        .baseUrl(DMSService.SERVER_ADMIN_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
