@@ -1,7 +1,7 @@
+import os
+
 import pymysql
 from pymysql.cursors import DictCursor
-
-import config
 
 from db.models.account import StudentModel
 from db.models.apply import GoingoutApplyModel, StayApplyModel
@@ -10,7 +10,7 @@ from db.models.post import FAQModel, NoticeModel, RuleModel
 connection = pymysql.connect(
     host='localhost',
     user='root',
-    password=config.MYSQL_PW,
+    password=os.getenv('MYSQL_PW'),
     db='dsm_dms',
     charset='utf8'
 )

@@ -3,8 +3,11 @@ import pkgutil
 from flask import Blueprint
 from flask_restful_swagger_2 import Api
 
+import config
+
 from routes.api import admin, developer, student
-import config as cf
+
+cf = config.Config()
 
 
 def _modules(packages):
@@ -46,7 +49,7 @@ def _factory(packages, bp_endpoint, url_prefix='', api_spec_url='/api/swagger', 
 
     return bp
 
-bp_admin = _factory([admin], 'Admin', api_spec_url='/api/admin', api_title='DMS Admin API')
+bp_admin = _factory([admin], 'Admin', url_prefix='/admin', api_spec_url='/api/admin', api_title='DMS Admin API')
 bp_student = _factory([student], 'Student', api_spec_url='/api/student', api_title='DMS Student API')
 
 all_blueprints = (bp_admin, bp_student)
