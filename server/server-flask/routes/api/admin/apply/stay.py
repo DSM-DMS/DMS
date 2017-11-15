@@ -9,7 +9,7 @@ from routes.api.admin.apply import stay_doc
 
 
 class Stay(Resource):
-    uri = '/admin/stay'
+    uri = '/stay'
 
     @swagger.doc(stay_doc.STAY_GET)
     @jwt_required

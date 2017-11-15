@@ -9,7 +9,7 @@ from routes.api.admin.apply import goingout_doc
 
 
 class Goingout(Resource):
-    uri = '/admin/goingout'
+    uri = '/goingout'
 
     @swagger.doc(goingout_doc.GOINGOUT_GET)
     @jwt_required

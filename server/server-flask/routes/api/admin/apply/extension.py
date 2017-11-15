@@ -9,7 +9,7 @@ from routes.api.admin.apply import extension_doc
 
 
 class Extension11(Resource):
-    uri = '/admin/extension'
+    uri = '/extension'
 
     @swagger.doc(extension_doc.EXTENSION_GET)
     @jwt_required
@@ -59,7 +59,7 @@ class Extension11(Resource):
 
 
 class Extension12(Resource):
-    uri = '/admin/extension'
+    uri = '/extension'
 
     @swagger.doc(extension_doc.EXTENSION_GET)
     @jwt_required
