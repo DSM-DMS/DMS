@@ -1,5 +1,3 @@
-from mongoengine import *
+from flask_mongoengine import MongoEngine
 
-from config import DB_NAME
-
-connect(DB_NAME)
+db = MongoEngine()

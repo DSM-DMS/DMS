@@ -1,13 +1,13 @@
-from db.mongo import *
+from db.mongo import db
 
 
-class MealModel(Document):
-    date = StringField(primary_key=True)
-    breakfast = ListField(required=True)
-    lunch = ListField(required=True)
-    dinner = ListField(required=True)
+class MealModel(db.Document):
+    date = db.StringField(primary_key=True)
+    breakfast = db.ListField(required=True)
+    lunch = db.ListField(required=True)
+    dinner = db.ListField(required=True)
 
 
-class ScheduleModel(Document):
-    date = StringField(primary_key=True)
-    schedules = ListField(required=True)
+class ScheduleModel(db.Document):
+    date = db.StringField(primary_key=True)
+    schedules = db.ListField(required=True)
