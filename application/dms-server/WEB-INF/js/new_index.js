@@ -50,7 +50,7 @@ var $five = $("#extension-five");
 var selectedClass = $("#extension-gaon");
 var $classSelect = $(".extension-class-select");
 var $timeSelectCheckbox = $("extension-time-checking");
-var $timeSelect = 1;
+var timeSelect = true;
 
 /**
  * Going out
@@ -300,13 +300,13 @@ selectedClass.css({
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
 $("#extension-time-checking").on("change",function(){
-    if($timeSelect == 1)
-        $timeSelect = 2;
-    else if($timeSelect == 2)
-        $timeSelect = 1;
+    if(timeSelect == true)
+        timeSelect = false;
+    else if(timeSelect == false)
+        timeSelect = true;
 });
 function getClassData(classId,time) {
-    if(time == 1){
+    if(time){
         $.ajax({
             url: "http://dsm2015.cafe24.com/apply/extension/class/11",
             type: "GET",
@@ -319,7 +319,7 @@ function getClassData(classId,time) {
             }
         });
     }
-    else if(time == 2){
+    else if(time){
         $.ajax({
             url: "htpp://dsm2015.cafe24.com/apply/extension/class/12",
             type: "GET",
@@ -334,7 +334,7 @@ function getClassData(classId,time) {
     }
 }
 
-getClassData(1,$timeSelect);
+getClassData(1,timeSelect);
 
 $classSelect.on("click", "td", function(e) {
     $(this).css({
@@ -346,53 +346,53 @@ $classSelect.on("click", "td", function(e) {
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(1,$timeSelect);
+        getClassData(1,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-naon") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(2,$timeSelect);
+        getClassData(2,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-daon") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(3,$timeSelect);
+        getClassData(3,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-laon") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(4,$timeSelect);
+        getClassData(4,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-three") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(5,$timeSelect);
+        getClassData(5,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-four") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(6,$timeSelect);
+        getClassData(6,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-five") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(7,$timeSelect);
+        getClassData(7,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-cancel") {
         let $cancelButton = $(this);
-        if($timeSelect == 1){
+        if(timeSelect){
             $.ajax({
                 url: "/apply/extension/11",
                 type: "DELETE",
@@ -412,7 +412,7 @@ $classSelect.on("click", "td", function(e) {
                 }
             });
         }
-        if($timeSelect == 2){
+        if(timeSelect){
             $.ajax({
                 url: "/apply/extension/12",
                 type: "DELETE",
