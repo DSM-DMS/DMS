@@ -412,7 +412,7 @@ $classSelect.on("click", "td", function(e) {
                 }
             });
         }
-        if(timeSelect){
+        else if(timeSelect){
             $.ajax({
                 url: "/apply/extension/12",
                 type: "DELETE",
@@ -1310,9 +1310,9 @@ function drawSeats(mapData, classId) {
 }
 
 function extentionApply(classId, id) {
-    if($timeSelectCheckbox.prop("checked")){
+    if(timeSelect){
         $.ajax({
-            url: "http://dsm2015.cafe24.com/apply/extension/12",
+            url: "http://dsm2015.cafe24.com/apply/extension/11",
             type: "PUT",
             data: {
                 "class": classId,
@@ -1340,7 +1340,7 @@ function extentionApply(classId, id) {
     }
     else{
         $.ajax({
-            url: "http://dsm2015.cafe24.com/apply/extension/11",
+            url: "http://dsm2015.cafe24.com/apply/extension/12",
             type: "PUT",
             data: {
                 "class": classId,
