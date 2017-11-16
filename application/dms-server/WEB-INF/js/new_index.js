@@ -299,12 +299,11 @@ selectedClass.css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
+
 $("#extension-time-checking").on("change",function(){
-    if(timeSelect == true)
-        timeSelect = false;
-    else if(timeSelect == false)
-        timeSelect = true;
+    timeSelect = !timeSelect;
 });
+
 function getClassData(classId,time) {
     if(time){
         $.ajax({
@@ -1346,20 +1345,20 @@ function extentionApply(classId, id) {
             statusCode: {
                 200: function() {
                     alert("신청 완료되었습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 204: function() {
                     alert("신청가능한 시간이 아닙니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 500: function() {
                     alert("신청중에 오류가 발생하였습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 }
             },
             error: function(request, status, error) {
                 alert("신청중에 오류가 발생하였습니다.");
-                getClassData(classId);
+                getClassData(classId, timeSelect);
             }
         });
     }
@@ -1374,20 +1373,20 @@ function extentionApply(classId, id) {
             statusCode: {
                 200: function() {
                     alert("신청 완료되었습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 204: function() {
                     alert("신청가능한 시간이 아닙니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 500: function() {
                     alert("신청중에 오류가 발생하였습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 }
             },
             error: function(request, status, error) {
                 alert("신청중에 오류가 발생하였습니다.");
-                getClassData(classId);
+                getClassData(classId, timeSelect);
             }
         });
     }
