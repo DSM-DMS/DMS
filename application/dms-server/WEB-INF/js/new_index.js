@@ -51,6 +51,7 @@ var selectedClass = $("#extension-gaon");
 var $classSelect = $(".extension-class-select");
 var $timeSelectCheckbox = $("extension-time-checking");
 var timeSelect = true;
+var nowClassSelect = 1;
 
 /**
  * Going out
@@ -332,7 +333,7 @@ function getClassData(classId,time) {
     }
 }
 
-getClassData(1,timeSelect);
+getClassData(nowClassSelect,timeSelect);
 
 $classSelect.on("click", "td", function(e) {
     $(this).css({
@@ -344,49 +345,56 @@ $classSelect.on("click", "td", function(e) {
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(1,timeSelect);
+        nowClassSelect = 1;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-naon") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(2,timeSelect);
+        nowClassSelect = 2;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-daon") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(3,timeSelect);
+        nowClassSelect = 3;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-laon") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(4,timeSelect);
+        nowClassSelect = 4;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-three") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(5,timeSelect);
+        nowClassSelect = 5;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-four") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(6,timeSelect);
+        nowClassSelect = 6;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-five") {
         selectedClass.css({
             transition: "0.2s ease-in",
             backgroundColor: "rgba(0, 0, 0, 0)"
         });
-        getClassData(7,timeSelect);
+        nowClassSelect = 7;
+        getClassData(nowClassSelect,timeSelect);
         selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-cancel") {
         let $cancelButton = $(this);
