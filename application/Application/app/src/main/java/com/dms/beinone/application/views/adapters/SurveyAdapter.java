@@ -14,15 +14,16 @@ import com.dms.beinone.application.R;
 import com.dms.beinone.application.activities.RuleActivity;
 import com.dms.beinone.application.models.Notice;
 import com.dms.beinone.application.models.Survey;
+import com.dms.beinone.application.models.SurveyList;
 
 import java.util.ArrayList;
 
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder> {
 
     Context mContext;
-    private ArrayList<Survey> items;
+    private ArrayList<SurveyList> items;
 
-    public SurveyAdapter(Context context, ArrayList<Survey> arrayList){
+    public SurveyAdapter(Context context, ArrayList<SurveyList> arrayList){
 
         items = arrayList;
         mContext = context;

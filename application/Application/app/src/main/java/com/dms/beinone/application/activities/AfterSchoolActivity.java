@@ -94,7 +94,7 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
         currentSet = new int[size];
 
-        question_view_pager_yjh=(ViewPager)findViewById(R.id.question_view_pager);
+        question_view_pager_yjh = (ViewPager)findViewById(R.id.question_view_pager);
         question_view_pager_yjh.setAdapter(new QuestionPagerAdapter(getSupportFragmentManager(), tempData));
 
         final LinearLayout view = (LinearLayout) findViewById(R.id.current_view_count_after);
@@ -210,6 +210,4 @@ public class AfterSchoolActivity extends AppCompatActivity {
 
         }
     }
-
-
 }

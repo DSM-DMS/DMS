@@ -34,7 +34,7 @@ public interface DMSService {
     int HTTP_CONFLICT = 409;
     int HTTP_INTERNAL_SERVER_ERROR = 500;
 
-    String SERVER_URL = "http://dsm2015.cafe24.com/";
+    String SERVER_URL = "http://dsm2015.cafe24.com:3000";
     String SERVER_MEAL_URL =  "http://dsm2015.cafe24.com:81";
 
     @FormUrlEncoded

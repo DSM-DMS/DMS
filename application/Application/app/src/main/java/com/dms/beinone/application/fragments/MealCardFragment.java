@@ -115,7 +115,12 @@ public class MealCardFragment extends Fragment {
     }
 
     private void setMeal(Meal meal) {
-        mMeal = meal;
+        if(meal !=null){
+            mMeal = meal;
+        }
+
+
+
         bind();
     }
 
@@ -131,23 +136,33 @@ public class MealCardFragment extends Fragment {
     }
 
     private Meal parseMealJson(JsonObject mealJson) {
-        String breakfastArrStr = mealJson.get("breakfast").getAsString();
-        JsonArray breakfastJsonArr = new JsonParser().parse(breakfastArrStr).getAsJsonArray();
-        List<String> breakfast = new Gson().fromJson(breakfastJsonArr, new TypeToken<List<String>>(){}.getType());
 
-        String lunchArrStr = mealJson.get("lunch").getAsString();
-        JsonArray lunchJsonArr = new JsonParser().parse(lunchArrStr).getAsJsonArray();
-        List<String> lunch = new Gson().fromJson(lunchJsonArr, new TypeToken<List<String>>(){}.getType());
+        try{
+            if(mealJson !=null){
+                String breakfastArrStr = mealJson.get("breakfast").getAsString();
+                JsonArray breakfastJsonArr = new JsonParser().parse(breakfastArrStr).getAsJsonArray();
+                List<String> breakfast = new Gson().fromJson(breakfastJsonArr, new TypeToken<List<String>>(){}.getType());
 
-        String dinnerArrStr = mealJson.get("dinner").getAsString();
-        JsonArray dinnerJsonArr = new JsonParser().parse(dinnerArrStr).getAsJsonArray();
-        List<String> dinner = new Gson().fromJson(dinnerJsonArr, new TypeToken<List<String>>(){}.getType());
+                String lunchArrStr = mealJson.get("lunch").getAsString();
+                JsonArray lunchJsonArr = new JsonParser().parse(lunchArrStr).getAsJsonArray();
+                List<String> lunch = new Gson().fromJson(lunchJsonArr, new TypeToken<List<String>>(){}.getType());
 
-        return new Meal(breakfast, lunch, dinner);
+                String dinnerArrStr = mealJson.get("dinner").getAsString();
+                JsonArray dinnerJsonArr = new JsonParser().parse(dinnerArrStr).getAsJsonArray();
+                List<String> dinner = new Gson().fromJson(dinnerJsonArr, new TypeToken<List<String>>(){}.getType());
+
+                return new Meal(breakfast, lunch, dinner);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
     }
 
     private void loadMeal(String year, String month, String day) throws IOException {
-        DMSService dmsService = HttpManager.createDMSService_MEAL(getContext());
+        DMSService dmsService = HttpManager.createDMSService(getContext());
         Call<JsonObject> call = dmsService.loadMeal(year, month, day);
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -155,7 +170,8 @@ public class MealCardFragment extends Fragment {
                 switch (response.code()) {
                     case HTTP_OK:
                         Log.d("MEAL", response.body().toString());
-                        setMeal(parseMealJson(response.body()));
+
+                        setMeal(parseMealJson(response.body().getAsJsonObject()));
                         break;
                     case HTTP_INTERNAL_SERVER_ERROR:
                         Toast.makeText(getContext(), R.string.meal_internal_server_error, Toast.LENGTH_SHORT).show();
@@ -163,6 +179,7 @@ public class MealCardFragment extends Fragment {
                         break;
                 }
             }
+
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {

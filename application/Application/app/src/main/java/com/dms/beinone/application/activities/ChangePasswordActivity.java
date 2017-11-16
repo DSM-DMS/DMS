@@ -44,6 +44,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private EditText etExistingPassword;
     private ImageView ivCheckPasswordEquals;
     private TextView tvCheckPasswordEquals;
+    private TextView tv_title;
+    private ImageButton back_button;
 
     @Override
     protected void onCreate(Bundle SavedInstanceState) {
@@ -55,6 +57,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         ibChangeButton = (ImageButton) findViewById(R.id.btn_change_password);
         ibChangeButton.setEnabled(false);
         ibChangeButton.setClickable(false);
+
+
+        setEventBinding();
+
+
 
         etExistingPassword = (EditText) findViewById(R.id.et_existing_password);
         etExistingPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -77,7 +84,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkEquals();
+                checkEquals(etChangePassword.toString(),etConfirmPassword.toString(),etExistingPassword.toString());
                 checkInput();
             }
         });
@@ -103,7 +110,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkEquals();
+                checkEquals(etChangePassword.toString(),etConfirmPassword.toString(),etExistingPassword.toString());
                 checkInput();
             }
         });
@@ -130,7 +137,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                checkEquals();
+                checkEquals(etChangePassword.toString(),etConfirmPassword.toString(),etExistingPassword.toString());
                 checkInput();
             }
         });
@@ -164,11 +171,21 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
     }
 
-    private void checkEquals () {
+    private void setEventBinding(){
+        tv_title=(TextView)findViewById(R.id.tv_toolbar_title);
+        tv_title.setText("비밀번호 변경");
 
-        String changePassword = etChangePassword.getText().toString();
-        String confirmPassword = etConfirmPassword.getText().toString();
-        String existPassword = etExistingPassword.getText().toString();
+        back_button=(ImageButton)findViewById(R.id.ib_toolbar_back);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+
+    private void checkEquals (String changePassword,String confirmPassword,String existPassword) {
 
         // 기존 비밀번호와 새 비밀번호가 일치하는지 확인하는 조건문 새 비밀번호와 확인이 공백이 아닐때만 판별
         if((!changePassword.isEmpty() && existPassword.equals(changePassword)) || (existPassword.equals(confirmPassword) && !confirmPassword.isEmpty())) {

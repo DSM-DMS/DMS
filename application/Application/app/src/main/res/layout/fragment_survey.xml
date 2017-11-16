@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="문항 1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/survey_question_textw"
+        android:textSize="24sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@color/colorPrimaryDark"
+        >
+
+    </View>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/survey_fragment_reclyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

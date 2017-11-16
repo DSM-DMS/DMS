@@ -1,5 +1,7 @@
 package com.dms.beinone.application.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by 윤정현 on 2017-10-14.
  */
@@ -7,10 +9,12 @@ package com.dms.beinone.application.models;
 public class Survey {
     String title;
     String date;
+    ArrayList<String> questionList;
 
-    public Survey(String title, String date) {
+    public Survey(String title, String date, ArrayList<String> questionList) {
         this.title = title;
         this.date = date;
+        this.questionList = questionList;
     }
 
     public String getTitle() {
@@ -29,6 +33,13 @@ public class Survey {
         this.date = date;
     }
 
+    public void setQuestionList(ArrayList<String > questionList) {
 
+        this.questionList = questionList;
+    }
 
+    public ArrayList<String> getQuestionList() {
+
+        return questionList;
+    }
 }

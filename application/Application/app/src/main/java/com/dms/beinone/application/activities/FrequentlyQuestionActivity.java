@@ -1,4 +1,3 @@
-/*
 package com.dms.beinone.application.activities;
 
 import android.support.v7.app.AppCompatActivity;
@@ -14,4 +13,3 @@ public class FrequentlyQuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_frequently_question);
     }
 }
-*/
