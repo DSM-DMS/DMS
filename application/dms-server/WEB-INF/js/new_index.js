@@ -319,7 +319,7 @@ function getClassData(classId,time) {
         });
     } else {
         $.ajax({
-            url: "htpp://dsm2015.cafe24.com/apply/extension/class/12",
+            url: "http://dsm2015.cafe24.com/apply/extension/class/12",
             type: "GET",
             data: {
                 "option": "map",
