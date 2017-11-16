@@ -2,8 +2,6 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
-from db.mongo import db
-
 import config as cf
 from logger import Logger
 
@@ -27,7 +25,6 @@ def create_app(config_name):
 
     cors.init_app(app)
     jwt.init_app(app)
-    db.init_app(app)
     logger.init_app(app)
 
     from blueprints import all_blueprints

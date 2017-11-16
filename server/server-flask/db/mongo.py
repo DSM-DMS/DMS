@@ -1,3 +1,3 @@
-from flask_mongoengine import MongoEngine
+from mongoengine import *
 
-db = MongoEngine()
+connect('dms')

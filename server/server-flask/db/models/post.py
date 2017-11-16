@@ -1,16 +1,16 @@
 from datetime import date
 
 from db.models.account import AdminModel
-from db.mongo import db
+from db.mongo import *
 
 
-class PostBase(db.Document):
-    title = db.StringField(required=True)
-    content = db.StringField(required=True)
-    author = db.ReferenceField(AdminModel, required=True)
-    pinned = db.BooleanField(required=True, default=False)
+class PostBase(Document):
+    title = StringField(required=True)
+    content = StringField(required=True)
+    author = ReferenceField(AdminModel, required=True)
+    pinned = BooleanField(required=True, default=False)
 
-    write_date = db.StringField(required=True, default=str(date.today()))
+    write_date = StringField(required=True, default=str(date.today()))
     meta = {'allow_inheritance': True}
 
 

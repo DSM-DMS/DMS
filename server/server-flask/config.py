@@ -42,20 +42,20 @@ JWT Access Token의 유효기간은 {2}일, Refresh Token의 유효기간은 {3}
 class DevConfig(Config):
     DEBUG = True
 
-    MONGODB_SETTINGS = {
-        'db': 'dms.dev',
-        'host': 'localhost',
-    }
+    # MONGODB_SETTINGS = {
+    #     'db': 'dms.dev',
+    #     'host': 'localhost',
+    # }
     # Port : default 27017
 
 
 class ProductionConfig(Config):
     DEBUG = False
 
-    MONGODB_SETTINGS = {
-        'db': 'dms.production',
-        'host': 'localhost',
-    }
+    # MONGODB_SETTINGS = {
+    #     'db': 'dms.production',
+    #     'host': 'localhost',
+    # }
     # Port : default 27017
 
 

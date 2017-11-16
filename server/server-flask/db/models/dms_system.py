@@ -1,12 +1,12 @@
 from datetime import date
 
 from db.models.account import StudentModel
-from db.mongo import db
+from db.mongo import *
 
 
-class BugReportModel(db.Document):
-    author = db.ReferenceField(StudentModel)
-    title = db.StringField(required=True)
-    content = db.StringField(required=True)
+class BugReportModel(Document):
+    author = ReferenceField(StudentModel)
+    title = StringField(required=True)
+    content = StringField(required=True)
 
-    report_date = db.StringField(required=True, default=str(date.today()))
+    report_date = StringField(required=True, default=str(date.today()))
