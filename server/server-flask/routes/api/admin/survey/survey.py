@@ -10,7 +10,7 @@ from routes.api.admin.survey import survey_doc
 
 
 class Survey(Resource):
-    uri = '/admin/survey'
+    uri = '/survey'
 
     @swagger.doc(survey_doc.SURVEY_POST)
     @jwt_required
@@ -39,7 +39,7 @@ class Survey(Resource):
 
 
 class Question(Resource):
-    uri = '/admin/survey/question'
+    uri = '/survey/question'
 
     @swagger.doc(survey_doc.QUESTION_POST)
     @jwt_required

@@ -15,8 +15,7 @@ STAY_GET = {
             'description': '잔류신청 정보 조회 성공',
             'examples': {
                 'application/json': {
-                    'sat': True,
-                    'sun': False
+                    'value': 4
                 }
             }
         },

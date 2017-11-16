@@ -2,25 +2,30 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
-import logger
+import config as cf
+from logger import Logger
 
-from support import db_migrator
-from support.api_interaction import meal
+# from support import db_migrator
+# from support.api_interaction import meal
+
+cors = CORS()
+jwt = JWTManager()
+logger = Logger()
 
 
-def create_app():
+def create_app(config_name):
     """
     Creates Flask instance & initialize
 
     :rtype: Flask
     """
     app = Flask(__name__)
+    app.config.from_object(cf.config[config_name])
     app.config.from_pyfile('config.py')
 
-    CORS(app)
-    JWTManager(app)
-
-    logger.decorate(app)
+    cors.init_app(app)
+    jwt.init_app(app)
+    logger.init_app(app)
 
     from blueprints import all_blueprints
     for bp in all_blueprints:
@@ -28,11 +33,11 @@ def create_app():
 
     return app
 
-_app = create_app()
+_app = create_app('dev')
 
 
 if __name__ == '__main__':
     # db_migrator.migrate_posts()
     # meal.parse()
 
-    _app.run(port=_app.config['PORT'], threaded=True, debug=True)
+    _app.run(host=_app.config['HOST'], port=_app.config['PORT'], threaded=True)

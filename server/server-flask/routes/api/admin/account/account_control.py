@@ -9,7 +9,7 @@ from routes.api.admin.account import account_control_doc
 
 
 class InitializeAccount(Resource):
-    uri = '/admin/initialize-account'
+    uri = '/initialize-account'
 
     @swagger.doc(account_control_doc.INITIALIZE_ACCOUNT_POST)
     @jwt_required

@@ -8,7 +8,7 @@ from routes.api.admin.apply import afterschool_doc
 
 
 class AfterSchool(Resource):
-    uri = '/admin/afterschool'
+    uri = '/afterschool'
 
     @swagger.doc(afterschool_doc.AFTERSCHOOL_POST)
     @jwt_required
@@ -48,7 +48,7 @@ class AfterSchool(Resource):
 
 
 class AfterSchoolItem(Resource):
-    uri = '/admin/afterschool/item'
+    uri = '/afterschool/item'
 
     @swagger.doc(afterschool_doc.AFTERSCHOOL_ITEM_POST)
     @jwt_required
