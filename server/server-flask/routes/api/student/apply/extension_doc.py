@@ -70,3 +70,61 @@ EXTENSION_POST = {
         }
     }
 }
+
+EXTENSION_MAP_GET = {
+    'tags': ['신청'],
+    'description': '연장신청 지도 조회',
+    'parameters': [
+        {
+            'name': 'class_',
+            'description': '지도를 조회할 학습실 번호',
+            'in': 'formData',
+            'type': 'int',
+            'required': True
+        }
+    ],
+    'responses': {
+        '200': {
+            'description': '지도 조회 성공',
+            'examples': {
+                'application/json(가온실)': [
+                    [
+                        1,
+                        2,
+                        0,
+                        3,
+                        4
+                    ],
+                    [
+                        5,
+                        6,
+                        0,
+                        "조민규",
+                        8
+                    ],
+                    [
+                        9,
+                        10,
+                        0,
+                        11,
+                        12
+                    ],
+                    [
+                        13,
+                        14,
+                        0,
+                        15,
+                        16
+                    ],
+                    [
+                        17,
+                        18,
+                        0,
+                        19,
+                        20
+                    ]
+                ]
+            }
+        }
+    }
+}
