@@ -1055,11 +1055,6 @@ input[type="radio"]:checked~.bullet .line.seven {
     border-radius: 999px;
     width: 120px;
     height: 120px;
-}
-
-#extension-apply-window .extension-class-select td:hover {
-    transition: 0.2s ease-in;
-    background-color: rgba(255, 255, 255, .2);
     cursor: pointer;
 }
 

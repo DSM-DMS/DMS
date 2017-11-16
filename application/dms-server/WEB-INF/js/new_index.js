@@ -47,7 +47,6 @@ var $laon = $("#extension-laon");
 var $three = $("#extension-three");
 var $four = $("#extension-four");
 var $five = $("#extension-five");
-var selectedClass = $("#extension-gaon");
 var $classSelect = $(".extension-class-select");
 var $timeSelectCheckbox = $("extension-time-checking");
 var timeSelect = true;
@@ -295,13 +294,14 @@ $closeModal.on("click", function() {
 /** ======================================================================================
  * Extension
 ========================================================================================== */
-selectedClass.css({
+$("#extension-gaon").css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
 
 $("#extension-time-checking").on("change",function(){
     timeSelect = !timeSelect;
+    getClassData(1, timeSelect);
 });
 
 function getClassData(classId,time) {
@@ -335,59 +335,29 @@ function getClassData(classId,time) {
 getClassData(1,timeSelect);
 
 $classSelect.on("click", "td", function(e) {
+    $(".extension-class-select td").css({
+        transition: "0.2s ease-in",
+        backgroundColor: "rgba(0, 0, 0, 0)"
+    });
+
     $(this).css({
         transition: "0.2s ease-in",
         backgroundColor: "rgba(255, 255, 255, .2)"
     });
     if ($(this).attr('id') === "extension-gaon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(1,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-naon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(2,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-daon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(3,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-laon") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(4,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-three") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(5,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-four") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(6,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-five") {
-        selectedClass.css({
-            transition: "0.2s ease-in",
-            backgroundColor: "rgba(0, 0, 0, 0)"
-        });
         getClassData(7,timeSelect);
-        selectedClass = $(this);
     } else if ($(this).attr('id') === "extension-cancel") {
         let $cancelButton = $(this);
         if(timeSelect){
@@ -396,33 +366,80 @@ $classSelect.on("click", "td", function(e) {
                 type: "DELETE",
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
-                    window.location.href = "/";
+                    getClassData(1, timeSelect);
+                    
+                    $(".extension-class-select td").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
+                    });
+
+                    $("#extension-gaon").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(255, 255, 255, .2)"
+                    })
+
+                    $cancelButton.css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
+                    });
                 },
                 error: function() {
-                    $cancelButton.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(event){ 
-                        alert("연장학습 취소 중 에러가 발생하였습니다.");
-                        window.location.href = "/";
+                    alert("연장학습 취소 중 에러가 발생하였습니다.");
+                    getClassData(1, timeSelect);
+
+                    $(".extension-class-select td").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
                     });
+
+                    $("#extension-gaon").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(255, 255, 255, .2)"
+                    })
+
                     $cancelButton.css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(0, 0, 0, 0)"
                     });
                 }
             });
-        }
-        else if(timeSelect){
+        } else {
             $.ajax({
                 url: "/apply/extension/12",
                 type: "DELETE",
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
-                    window.location.href = "/";
+                    getClassData(1, timeSelect);
+                    
+                    $(".extension-class-select td").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
+                    });
+
+                    $("#extension-gaon").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(255, 255, 255, .2)"
+                    })
+
+                    $cancelButton.css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
+                    });
                 },
                 error: function() {
-                    $cancelButton.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(event){ 
-                        alert("연장학습 취소 중 에러가 발생하였습니다.");
-                        window.location.href = "/";
+                    alert("연장학습 취소 중 에러가 발생하였습니다.");
+                    getClassData(1, timeSelect)
+
+                    $(".extension-class-select td").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(0, 0, 0, 0)"
                     });
+
+                    $("#extension-gaon").css({
+                        transition: "0.2s ease-in",
+                        backgroundColor: "rgba(255, 255, 255, .2)"
+                    })
+
                     $cancelButton.css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(0, 0, 0, 0)"
