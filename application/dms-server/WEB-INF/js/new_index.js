@@ -326,7 +326,7 @@ function getClassData(classId,time) {
                 "class": classId
             },
             success: function(data) {
-                drawSeats(JSON.parse(data.map), classId);
+                drawSeats(JSON.parse(data).map, classId);
             }
         })
     }
