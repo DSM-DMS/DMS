@@ -1,4 +1,5 @@
 from datetime import datetime, time
+import json
 
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -9,12 +10,54 @@ from db.models.apply import ExtensionApplyModel
 from routes.api.student.apply import extension_doc
 
 APPLY_START = time(17, 30)
-APPLY_END_11 = time(20, 30)
-APPLY_END_12 = time(22, 0)
+APPLY_END_11 = time(23, 30)
+APPLY_END_12 = time(23, 59)
+
+MAPS = {
+    1: [
+        [1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1]
+    ],
+    2: [
+        [1, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 0, 1],
+        [1, 0, 1, 1, 0, 1],
+        [1, 0, 1, 1, 0, 1],
+        [1, 0, 0, 0, 0, 1],
+        [0, 1, 1, 1, 1, 0]
+    ],
+    3: [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+    ],
+    4: [
+        [1, 1, 0, 0, 1, 1],
+        [1, 1, 0, 0, 1, 1],
+        [0, 0, 1, 1, 0, 0],
+        [0, 0, 1, 1, 0, 0],
+        [1, 1, 0, 0, 1, 1],
+        [1, 1, 0, 0, 1, 1]
+    ],
+    5: [
+
+    ],
+    6: [
+
+    ],
+    7: [
+
+    ]
+}
 
 
 class Extension11(Resource):
-    uri = '/extension'
+    uri = '/extension/11'
 
     @swagger.doc(extension_doc.EXTENSION_GET)
     @jwt_required
@@ -53,7 +96,7 @@ class Extension11(Resource):
 
 
 class Extension12(Resource):
-    uri = '/extension'
+    uri = '/extension/12'
 
     @swagger.doc(extension_doc.EXTENSION_GET)
     @jwt_required
@@ -89,3 +132,61 @@ class Extension12(Resource):
         student.update(extension_apply_12=ExtensionApplyModel(class_=class_, seat=seat))
 
         return Response('', 201)
+
+
+class ExtensionMap11(Resource):
+    uri = '/extension/map/11'
+
+    @swagger.doc(extension_doc.EXTENSION_MAP_GET)
+    def get(self):
+        """
+        11시 연장신청 지도 조회
+        """
+        class_ = request.args.get('class', type=int)
+
+        map_ = MAPS[class_]
+
+        applied_students = {student.extension_apply_11.seat: student.name for student in StudentModel.objects() if student.extension_apply_11.class_ == class_}
+
+        seat_count = 1
+
+        for i, row in enumerate(map_):
+            for j, seat in enumerate(row):
+                if map_[i][j]:
+                    if seat_count in applied_students:
+                        map_[i][j] = applied_students[seat_count]
+                    else:
+                        map_[i][j] = seat_count
+
+                    seat_count += 1
+
+        return Response(json.dumps(map_, ensure_ascii=False), 200)
+
+
+class ExtensionMap12(Resource):
+    uri = '/extension/map/12'
+
+    @swagger.doc(extension_doc.EXTENSION_MAP_GET)
+    def get(self):
+        """
+        12시 연장신청 지도 조회
+        """
+        class_ = request.args.get('class', type=int)
+
+        map_ = MAPS[class_]
+
+        applied_students = {student.extension_apply_12.seat: student.name for student in StudentModel.objects() if student.extension_apply_12.class_ == class_}
+
+        seat_count = 1
+
+        for i, row in enumerate(map_):
+            for j, seat in enumerate(row):
+                if map_[i][j]:
+                    if seat_count in applied_students:
+                        map_[i][j] = applied_students[seat_count]
+                    else:
+                        map_[i][j] = seat_count
+
+                    seat_count += 1
+
+        return Response(json.dumps(map_, ensure_ascii=False), 200)
