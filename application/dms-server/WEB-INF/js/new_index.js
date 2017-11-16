@@ -299,12 +299,11 @@ selectedClass.css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
+
 $("#extension-time-checking").on("change",function(){
-    if(timeSelect == true)
-        timeSelect = false;
-    else if(timeSelect == false)
-        timeSelect = true;
+    timeSelect = !timeSelect;
 });
+
 function getClassData(classId,time) {
     if(time){
         $.ajax({
@@ -318,8 +317,7 @@ function getClassData(classId,time) {
                 drawSeats(JSON.parse(data).map, classId);
             }
         });
-    }
-    else if(time){
+    } else {
         $.ajax({
             url: "http://dsm2015.cafe24.com/apply/extension/class/12",
             type: "GET",
@@ -328,7 +326,7 @@ function getClassData(classId,time) {
                 "class": classId
             },
             success: function(data) {
-                drawSeats(JSON.parse(data.map), classId);
+                drawSeats(JSON.parse(data).map, classId);
             }
         })
     }
@@ -678,6 +676,31 @@ function getRuleList() {
             parsedData.forEach(function(data) {
                 fillListCard(data, $(".rule-window .list-box-container"));
             });
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
+function setRulePreview() {
+    $.ajax({
+        url: "http://dsm2015.cafe24.com/post/list/rule",
+        type: "GET",
+        data: {
+            page: 1,
+            limit: 1
+        },
+        statusCode: {
+            200: function(data) {
+                var parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData[0].title);
+                $(".notice-content-container p").html(parsedData[0].content);
+            },
+            204: function(data) {
+                $("#notice-title").text("");
+                $(".notice-content-container p").text("글이 없습니다.");
+            }
         },
         error: function() {
             console.log("error");
@@ -1321,24 +1344,23 @@ function extentionApply(classId, id) {
             statusCode: {
                 200: function() {
                     alert("신청 완료되었습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 204: function() {
                     alert("신청가능한 시간이 아닙니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 500: function() {
                     alert("신청중에 오류가 발생하였습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 }
             },
             error: function(request, status, error) {
                 alert("신청중에 오류가 발생하였습니다.");
-                getClassData(classId);
+                getClassData(classId, timeSelect);
             }
         });
-    }
-    else{
+    } else {
         $.ajax({
             url: "http://dsm2015.cafe24.com/apply/extension/12",
             type: "PUT",
@@ -1349,20 +1371,20 @@ function extentionApply(classId, id) {
             statusCode: {
                 200: function() {
                     alert("신청 완료되었습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 204: function() {
                     alert("신청가능한 시간이 아닙니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 },
                 500: function() {
                     alert("신청중에 오류가 발생하였습니다.");
-                    getClassData(classId);
+                    getClassData(classId, timeSelect);
                 }
             },
             error: function(request, status, error) {
                 alert("신청중에 오류가 발생하였습니다.");
-                getClassData(classId);
+                getClassData(classId, timeSelect);
             }
         });
     }
