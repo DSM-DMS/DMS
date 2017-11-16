@@ -50,6 +50,7 @@ var $five = $("#extension-five");
 var $classSelect = $(".extension-class-select");
 var $timeSelectCheckbox = $("extension-time-checking");
 var timeSelect = true;
+var selectedClass = 1;
 
 /**
  * Going out
@@ -294,14 +295,14 @@ $closeModal.on("click", function() {
 /** ======================================================================================
  * Extension
 ========================================================================================== */
-$("#extension-gaon").css({
+$gaon.css({
     transition: "0.2s ease-in",
     backgroundColor: "rgba(255, 255, 255, .2)"
 });
 
 $("#extension-time-checking").on("change",function(){
     timeSelect = !timeSelect;
-    getClassData(1, timeSelect);
+    getClassData(selectedClass, timeSelect);
 });
 
 function getClassData(classId,time) {
@@ -332,7 +333,7 @@ function getClassData(classId,time) {
     }
 }
 
-getClassData(1,timeSelect);
+getClassData(selectedClass,timeSelect);
 
 $classSelect.on("click", "td", function(e) {
     $(".extension-class-select td").css({
@@ -345,19 +346,26 @@ $classSelect.on("click", "td", function(e) {
         backgroundColor: "rgba(255, 255, 255, .2)"
     });
     if ($(this).attr('id') === "extension-gaon") {
-        getClassData(1,timeSelect);
+        selectedClass = 1;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-naon") {
-        getClassData(2,timeSelect);
+        selectedClass = 2;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-daon") {
-        getClassData(3,timeSelect);
+        selectedClass = 3;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-laon") {
-        getClassData(4,timeSelect);
+        selectedClass = 4;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-three") {
-        getClassData(5,timeSelect);
+        selectedClass = 5;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-four") {
-        getClassData(6,timeSelect);
+        selectedClass = 6;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-five") {
-        getClassData(7,timeSelect);
+        selectedClass = 7;
+        getClassData(selectedClass, timeSelect);
     } else if ($(this).attr('id') === "extension-cancel") {
         let $cancelButton = $(this);
         if(timeSelect){
@@ -366,17 +374,17 @@ $classSelect.on("click", "td", function(e) {
                 type: "DELETE",
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
-                    getClassData(1, timeSelect);
+                    getClassData(selectedClass, timeSelect);
                     
                     $(".extension-class-select td").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(0, 0, 0, 0)"
                     });
 
-                    $("#extension-gaon").css({
+                    $(".extension-class-select td:eq(" + String(selectedClass - 1) +")").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(255, 255, 255, .2)"
-                    })
+                    });
 
                     $cancelButton.css({
                         transition: "0.2s ease-in",
@@ -385,17 +393,17 @@ $classSelect.on("click", "td", function(e) {
                 },
                 error: function() {
                     alert("연장학습 취소 중 에러가 발생하였습니다.");
-                    getClassData(1, timeSelect);
+                    getClassData(selectedClass, timeSelect);
 
                     $(".extension-class-select td").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(0, 0, 0, 0)"
                     });
 
-                    $("#extension-gaon").css({
+                    $(".extension-class-select td:eq(" + String(selectedClass - 1) +")").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(255, 255, 255, .2)"
-                    })
+                    });
 
                     $cancelButton.css({
                         transition: "0.2s ease-in",
@@ -409,17 +417,17 @@ $classSelect.on("click", "td", function(e) {
                 type: "DELETE",
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
-                    getClassData(1, timeSelect);
+                    getClassData(selectedClass, timeSelect);
                     
                     $(".extension-class-select td").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(0, 0, 0, 0)"
                     });
 
-                    $("#extension-gaon").css({
+                    $(".extension-class-select td:eq(" + String(selectedClass - 1) +")").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(255, 255, 255, .2)"
-                    })
+                    });
 
                     $cancelButton.css({
                         transition: "0.2s ease-in",
@@ -428,17 +436,17 @@ $classSelect.on("click", "td", function(e) {
                 },
                 error: function() {
                     alert("연장학습 취소 중 에러가 발생하였습니다.");
-                    getClassData(1, timeSelect)
+                    getClassData(selectedClass, timeSelect)
 
                     $(".extension-class-select td").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(0, 0, 0, 0)"
                     });
 
-                    $("#extension-gaon").css({
+                    $(".extension-class-select td:eq(" + String(selectedClass - 1) +")").css({
                         transition: "0.2s ease-in",
                         backgroundColor: "rgba(255, 255, 255, .2)"
-                    })
+                    });
 
                     $cancelButton.css({
                         transition: "0.2s ease-in",
