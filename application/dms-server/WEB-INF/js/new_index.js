@@ -317,8 +317,7 @@ function getClassData(classId,time) {
                 drawSeats(JSON.parse(data).map, classId);
             }
         });
-    }
-    else if(time){
+    } else {
         $.ajax({
             url: "htpp://dsm2015.cafe24.com/apply/extension/class/12",
             type: "GET",
@@ -1361,8 +1360,7 @@ function extentionApply(classId, id) {
                 getClassData(classId, timeSelect);
             }
         });
-    }
-    else{
+    } else {
         $.ajax({
             url: "http://dsm2015.cafe24.com/apply/extension/12",
             type: "PUT",
