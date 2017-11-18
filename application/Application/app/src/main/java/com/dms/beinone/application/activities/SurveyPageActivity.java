@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -32,7 +33,6 @@ public class SurveyPageActivity extends AppCompatActivity{
     public ArrayList<String> answerList;
     private String title;
     private String date;
-    private int size;
 
     public static int SurveyCurrentItem[];
 
@@ -73,7 +73,7 @@ public class SurveyPageActivity extends AppCompatActivity{
 
         ArrayList<Survey> surveyArrayList = new ArrayList<>();
         surveyArrayList.add(new Survey(date, title, answerList));
-        survey_viewpager.setAdapter(new SurveyViewPagerAdapter(surveyArrayList, getSupportFragmentManager()));
+        survey_viewpager.setAdapter(new SurveyViewPagerAdapter(getApplicationContext(), surveyArrayList, getSupportFragmentManager()));
 
          survey_next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +88,29 @@ public class SurveyPageActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 survey_viewpager.setCurrentItem(survey_viewpager.getCurrentItem() - 1 , true);
+            }
+        });
+
+        final int size = surveyArrayList.size();
+        final LinearLayout view = (LinearLayout) findViewById(R.id.survey_current_view_count);
+        survey_viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.d("xxx", "onPageSelected: " + position);
+                //setNextButtonText(position, size);
+                setViewCount(view, size, position);
+                setBack_button(position,0);
+                setNext_button(position,size);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }

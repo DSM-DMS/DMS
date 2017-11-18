@@ -1,5 +1,6 @@
 package com.dms.beinone.application.views.adapters;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,17 +17,19 @@ import java.util.ArrayList;
 public class SurveyViewPagerAdapter extends FragmentPagerAdapter{
 
     private ArrayList<Survey> surveyArrayList;
+    private Context context;
 
-    public SurveyViewPagerAdapter (ArrayList<Survey> surveyArrayList, FragmentManager fm) {
+    public SurveyViewPagerAdapter (Context context, ArrayList<Survey> surveyArrayList, FragmentManager fm) {
 
         super(fm);
+        this.context = context;
         this.surveyArrayList = surveyArrayList;
     }
 
     @Override
     public Fragment getItem (int position) {
 
-        return null;
+        return new SurveyFragment(context, surveyArrayList.get(position), position);
     }
 
     @Override

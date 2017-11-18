@@ -36,6 +36,9 @@ public interface DMSService {
 
     String SERVER_URL = "http://dsm2015.cafe24.com:3000";
     String SERVER_MEAL_URL =  "http://dsm2015.cafe24.com:81";
+    String SERVER_STUDENT_URL = "http://dsm2015.cafe24.com:3000/";
+    String SERVER_ADMIN_URL =  "http://dsm2015.cafe24.com:3000/";
+
 
     @FormUrlEncoded
     @POST("/account/login/student")

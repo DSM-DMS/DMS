@@ -1,5 +1,6 @@
 package com.dms.beinone.application.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dms.beinone.application.R;
+import com.dms.beinone.application.models.Survey;
 import com.dms.beinone.application.views.adapters.SurveyRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -20,14 +22,17 @@ import java.util.ArrayList;
 
 public class SurveyFragment extends Fragment {
 
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView surveyRecyclerView;
-    ArrayList<String> questionList;
-    int index = 1;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView surveyRecyclerView;
+    private Survey questionList;
+    private int position;
+    private Context context;
 
-    public SurveyFragment (ArrayList<String> questionList) {
+    public SurveyFragment (Context context, Survey questionList, int position) {
 
+        this.context = context;
         this.questionList = questionList;
+        this.position = position;
     }
 
     @Override
@@ -39,12 +44,7 @@ public class SurveyFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
         surveyRecyclerView.setLayoutManager(layoutManager);
-        surveyRecyclerView.setAdapter(new SurveyRecyclerAdapter(questionList));
+        surveyRecyclerView.setAdapter(new SurveyRecyclerAdapter(context ,questionList.getQuestionList(), position));
         return view;
-    }
-
-    private void setNumber () {
-
-
     }
 }
