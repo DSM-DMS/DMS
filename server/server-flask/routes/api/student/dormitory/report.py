@@ -13,6 +13,9 @@ class Report(Resource):
     @swagger.doc(report_doc.REPORT_POST)
     @jwt_required
     def post(self):
+        """
+        시설고장신고
+        """
         author = StudentModel.objects(id=get_jwt_identity()).first()
         title = request.form.get('title')
         room = request.form.get('room', type=int)

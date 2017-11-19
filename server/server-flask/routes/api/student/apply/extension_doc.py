@@ -76,7 +76,7 @@ EXTENSION_MAP_GET = {
     'description': '연장신청 지도 조회',
     'parameters': [
         {
-            'name': 'class_',
+            'name': 'class',
             'description': '지도를 조회할 학습실 번호',
             'in': 'formData',
             'type': 'int',

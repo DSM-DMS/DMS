@@ -22,12 +22,12 @@ MAPS = {
         [1, 1, 0, 1, 1]
     ],
     2: [
-        [1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 1],
-        [0, 1, 1, 1, 1, 0]
+        [1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 0, 1, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 1],
+        [0, 0, 1, 1, 1, 0, 0]
     ],
     3: [
         [1, 1, 1, 1],
@@ -45,13 +45,37 @@ MAPS = {
         [1, 1, 0, 0, 1, 1]
     ],
     5: [
-
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0]
     ],
     6: [
-
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0]
     ],
     7: [
-
+        [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+        [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+        [1, 1, 1, 0, 0, 1, 0, 0, 0, 0],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
     ]
 }
 
@@ -146,7 +170,7 @@ class ExtensionMap11(Resource):
 
         map_ = MAPS[class_]
 
-        applied_students = {student.extension_apply_11.seat: student.name for student in StudentModel.objects() if student.extension_apply_11.class_ == class_}
+        applied_students = {student.extension_apply_11.seat: student.name for student in StudentModel.objects() if student.extension_apply_11 and student.extension_apply_11.class_ == class_}
 
         seat_count = 1
 
@@ -175,7 +199,7 @@ class ExtensionMap12(Resource):
 
         map_ = MAPS[class_]
 
-        applied_students = {student.extension_apply_12.seat: student.name for student in StudentModel.objects() if student.extension_apply_12.class_ == class_}
+        applied_students = {student.extension_apply_12.seat: student.name for student in StudentModel.objects() if student.extension_apply_12 and student.extension_apply_12.class_ == class_}
 
         seat_count = 1
 
