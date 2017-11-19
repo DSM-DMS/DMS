@@ -2,6 +2,7 @@ package com.dms.core;
 
 import com.dms.parser.dataio.post.PostChangeDetector;
 import com.dms.parser.dataio.post.PostUpdateListener;
+import com.dms.utilities.database.DB;
 import com.dms.utilities.database.DataBase;
 import com.dms.utilities.log.Log;
 import com.dms.utilities.log.LogErrorOutputStream;
@@ -41,21 +42,19 @@ class DmsMain {
 				Calendar currentTime = Calendar.getInstance();
 				int dayOfWeek = currentTime.get(Calendar.DAY_OF_WEEK);
 				int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-				int minute = currentTime.get(Calendar.MINUTE);
+				
 				Log.l("Post Update", "Day of week : "+dayOfWeek+"  hour : "+hour);
 				if (dayOfWeek == Calendar.MONDAY&& hour<5) {
 					try {
+						DB.executeUpdate("DELETE FROM goingout_apply");
 						DataBase.getInstance().executeUpdate("delete from goingout_apply");
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
 				if (hour >= 0 && hour <= 8) {
-					try {
-						DataBase.getInstance().executeUpdate("delete from extension_apply");
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					DB.executeUpdate("DELETE FROM extension_apply");
+					DB.executeUpdate("DELETE FROM extension_apply_12");
 				}
 			}
 		});
