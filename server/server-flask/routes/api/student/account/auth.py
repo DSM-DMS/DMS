@@ -4,9 +4,9 @@ import requests
 from flask_jwt_extended import create_access_token
 from flask_restful_swagger_2 import Resource, request, swagger
 
-from db.models.account import StudentModel
+#from db.models.account import StudentModel
 from routes.api.student.account import auth_doc
-from support import db_migrator
+#from support import db_migrator
 
 
 class Auth(Resource):

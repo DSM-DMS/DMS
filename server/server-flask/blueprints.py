@@ -5,7 +5,7 @@ from flask_restful_swagger_2 import Api
 
 import config
 
-from routes.api import admin, developer, student
+from routes.api import admin, developer, student, index
 
 cf = config.Config()
 
@@ -51,5 +51,6 @@ def _factory(packages, bp_endpoint, url_prefix='', api_spec_url='/api/swagger', 
 
 bp_admin = _factory([admin], 'Admin', url_prefix='/admin', api_spec_url='/api/admin', api_title='DMS Admin API')
 bp_student = _factory([student], 'Student', api_spec_url='/api/student', api_title='DMS Student API')
+bp_index = _factory([index], 'Index')
 
-all_blueprints = (bp_admin, bp_student)
+all_blueprints = (bp_admin, bp_student, bp_index)

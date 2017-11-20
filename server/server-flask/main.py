@@ -40,4 +40,4 @@ if __name__ == '__main__':
     # db_migrator.migrate_posts()
     # meal.parse()
 
-    _app.run(host=_app.config['HOST'], port=_app.config['PORT'], threaded=True)
+    _app.run(threaded=True)
