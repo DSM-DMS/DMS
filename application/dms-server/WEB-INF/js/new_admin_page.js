@@ -1,5 +1,6 @@
 var $stayDownload = $("#stay-download");
-var $extensionDownload = $("#extension-download");
+var $extension11Download = $("#extension11-download");
+var $extension12Download = $("#extension12-download")
 var $goingOutDownload = $("#going-out-download");
 var $facilityDownload = $("#facility-download");
 var $noticeManagement = $("#notice-management");
@@ -86,8 +87,12 @@ $stayDownload.on('click', function() {
     location.href = 'http://dsm2015.cafe24.com/stay/download?year=' + year + '&month=' + month + '&week=' + week;
 });
 
-$extensionDownload.on('click', function() {
-    location.href = 'http://dsm2015.cafe24.com/extension/download';
+$extension11Download.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/extension/download/11';
+});
+
+$extension12Download.on('click', function() {
+    location.href = 'http://dsm2015.cafe24.com/extension/download/12';
 });
 
 $goingOutDownload.on('click', function() {
