@@ -2,15 +2,15 @@ from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
+from app.docs.admin.post.preview import *
 from app.models.account import AdminModel
 from app.models.post import FAQModel, NoticeModel, RuleModel
-from app.docs.admin.post import preview
 
 
 class FAQPreview(Resource):
     uri = '/preview/faq'
 
-    @swagger.doc(preview.FAQ_PREVIEW_GET)
+    @swagger.doc(FAQ_PREVIEW_GET)
     @jwt_required
     def post(self):
         """
@@ -32,7 +32,7 @@ class FAQPreview(Resource):
 class NoticePreview(Resource):
     uri = '/preview/notice'
 
-    @swagger.doc(preview.NOTICE_PREVIEW_GET)
+    @swagger.doc(NOTICE_PREVIEW_GET)
     @jwt_required
     def post(self):
         """
@@ -54,7 +54,7 @@ class NoticePreview(Resource):
 class RulePreview(Resource):
     uri = '/preview/rule'
 
-    @swagger.doc(preview.RULE_PREVIEW_GET)
+    @swagger.doc(RULE_PREVIEW_GET)
     @jwt_required
     def post(self):
         """

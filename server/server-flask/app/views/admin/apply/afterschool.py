@@ -2,15 +2,15 @@ from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
+from app.docs.admin.apply.afterschool import *
 from app.models.account import AdminModel
 from app.models.afterschool import AfterSchoolItemModel, AfterSchoolModel
-from app.docs.admin.apply import afterschool
 
 
 class AfterSchool(Resource):
     uri = '/afterschool'
 
-    @swagger.doc(afterschool.AFTERSCHOOL_POST)
+    @swagger.doc(AFTERSCHOOL_POST)
     @jwt_required
     def post(self):
         """
@@ -29,7 +29,7 @@ class AfterSchool(Resource):
 
         return Response('', 201)
 
-    @swagger.doc(afterschool.AFTERSCHOOL_DELETE)
+    @swagger.doc(AFTERSCHOOL_DELETE)
     @jwt_required
     def delete(self):
         """
@@ -50,7 +50,7 @@ class AfterSchool(Resource):
 class AfterSchoolItem(Resource):
     uri = '/afterschool/item'
 
-    @swagger.doc(afterschool.AFTERSCHOOL_ITEM_POST)
+    @swagger.doc(AFTERSCHOOL_ITEM_POST)
     @jwt_required
     def post(self):
         """
@@ -73,14 +73,14 @@ class AfterSchoolItem(Resource):
         if not afterschool:
             return Response('', 204)
 
-        afterschool_items = afterschool.items
+        afterschool_items = items
         afterschool_items.append(AfterSchoolItemModel(title=title, on_monday=on_monday, on_tuesday=on_tuesday, on_saturday=on_saturday, target=target))
 
-        afterschool.update(items=afterschool_items)
+        update(items=afterschool_items)
 
         return Response('', 201)
 
-    @swagger.doc(afterschool.AFTERSCHOOL_ITEM_DELETE)
+    @swagger.doc(AFTERSCHOOL_ITEM_DELETE)
     @jwt_required
     def delete(self):
         """
@@ -95,9 +95,9 @@ class AfterSchoolItem(Resource):
 
         afterschool = AfterSchoolModel.objects().first()
 
-        afterschool_items = afterschool.items
+        afterschool_items = items
         afterschool_items.remove(AfterSchoolItemModel(id=id))
 
-        afterschool.update(items=afterschool_items)
+        update(items=afterschool_items)
 
         return Response('', 200)

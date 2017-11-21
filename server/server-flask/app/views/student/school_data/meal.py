@@ -3,14 +3,14 @@ import json
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
+from app.docs.student.school_data.meal import *
 from app.models.school_data import MealModel
-from app.docs.student.school_data import meal
 
 
 class Meal(Resource):
     uri = '/meal/<date>'
 
-    @swagger.doc(meal.MEAL_GET)
+    @swagger.doc(MEAL_GET)
     def get(self, date):
         """
         급식 정보 조회

@@ -8,7 +8,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', '85c145a16bd6f6e1f3e104ca78c6a102')
 # Secret key for any 3-rd party libraries
 
 JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=3)
-JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=60)
+JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=1000)
 JWT_HEADER_TYPE = 'JWT'
 # http://flask-jwt-extended.readthedocs.io/en/latest/options.html
 

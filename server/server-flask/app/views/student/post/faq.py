@@ -3,15 +3,15 @@ import json
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
+from app.docs.student.post.faq import *
 from app.models.post import FAQModel
-from app.docs.student.post import faq
 from support import post_inquire_helper
 
 
 class FAQList(Resource):
     uri = '/faq'
 
-    @swagger.doc(faq.FAQ_LIST_GET)
+    @swagger.doc(FAQ_LIST_GET)
     def get(self):
         """
         FAQ 목록 조회
@@ -24,7 +24,7 @@ class FAQList(Resource):
 class FAQ(Resource):
     uri = '/faq/<id>'
 
-    @swagger.doc(faq.FAQ_GET)
+    @swagger.doc(FAQ_GET)
     def get(self, id):
         """
         FAQ 내용 조회

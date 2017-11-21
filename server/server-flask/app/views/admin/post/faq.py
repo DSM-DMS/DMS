@@ -2,15 +2,15 @@ from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
+from app.docs.admin.post.faq import *
 from app.models.account import AdminModel
 from app.models.post import FAQModel
-from app.docs.admin.post import faq
 
 
 class FAQ(Resource):
     uri = '/faq'
 
-    @swagger.doc(faq.FAQ_POST)
+    @swagger.doc(FAQ_POST)
     @jwt_required
     def post(self):
         """
@@ -28,7 +28,7 @@ class FAQ(Resource):
 
         return Response('', 201)
 
-    @swagger.doc(faq.FAQ_PATCH)
+    @swagger.doc(FAQ_PATCH)
     @jwt_required
     def patch(self):
         """
@@ -48,7 +48,7 @@ class FAQ(Resource):
 
         return Response('', 200)
 
-    @swagger.doc(faq.FAQ_DELETE)
+    @swagger.doc(FAQ_DELETE)
     @jwt_required
     def delete(self):
         """

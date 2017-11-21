@@ -1,14 +1,14 @@
 from flask import Response
 from flask_restful_swagger_2 import Resource, request, swagger
 
+from app.docs.student.account.signup import *
 from app.models.account import SignupRequiredModel, StudentModel
-from app.docs.student.account import signup
 
 
 class IDVerification(Resource):
     uri = '/verify/id'
 
-    @swagger.doc(signup.ID_VERIFICATION_POST)
+    @swagger.doc(ID_VERIFICATION_POST)
     def post(self):
         """
         ID 중복체크
@@ -25,7 +25,7 @@ class IDVerification(Resource):
 class UUIDVerification(Resource):
     uri = '/verify/uuid'
 
-    @swagger.doc(signup.UUID_VERIFICATION_POST)
+    @swagger.doc(UUID_VERIFICATION_POST)
     def post(self):
         """
         UUID 검사
@@ -41,7 +41,7 @@ class UUIDVerification(Resource):
 class Signup(Resource):
     uri = '/signup'
 
-    @swagger.doc(signup.SIGNUP_POST)
+    @swagger.doc(SIGNUP_POST)
     def post(self):
         """
         회원가입

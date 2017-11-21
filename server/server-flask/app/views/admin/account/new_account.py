@@ -2,14 +2,14 @@ from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
+from app.docs.admin.account.new_account import *
 from app.models.account import AdminModel
-from app.docs.admin.account import new_account
 
 
 class NewAccount(Resource):
     uri = '/new-account'
 
-    @swagger.doc(new_account.NEW_ACCOUNT_POST)
+    @swagger.doc(NEW_ACCOUNT_POST)
     @jwt_required
     def post(self):
         """

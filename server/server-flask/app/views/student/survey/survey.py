@@ -4,15 +4,15 @@ from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful_swagger_2 import Resource, request, swagger
 
+from app.docs.student.survey.survey import *
 from app.models.account import StudentModel
 from app.models.survey import AnswerModel, QuestionModel, SurveyModel
-from app.docs.student.survey import survey
 
 
 class SurveyList(Resource):
     uri = '/survey'
 
-    @swagger.doc(survey.SURVEY_LIST_GET)
+    @swagger.doc(SURVEY_LIST_GET)
     @jwt_required
     def get(self):
         """
@@ -32,7 +32,7 @@ class SurveyList(Resource):
 class Survey(Resource):
     uri = '/survey/<id>'
 
-    @swagger.doc(survey.SURVEY_GET)
+    @swagger.doc(SURVEY_GET)
     @jwt_required
     def get(self, id):
         """
@@ -54,7 +54,7 @@ class Survey(Resource):
 
         return Response(json.dumps(questions, ensure_ascii=False), 200)
 
-    @swagger.doc(survey.SURVEY_POST)
+    @swagger.doc(SURVEY_POST)
     @jwt_required
     def post(self, id):
         """

@@ -3,15 +3,15 @@ import json
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
+from app.docs.student.post.notice import *
 from app.models.post import NoticeModel
-from app.docs.student.post import notice
 from support import post_inquire_helper
 
 
 class NoticeList(Resource):
     uri = '/notice'
 
-    @swagger.doc(notice.NOTICE_LIST_GET)
+    @swagger.doc(NOTICE_LIST_GET)
     def get(self):
         """
         공지사항 목록 조회
@@ -24,7 +24,7 @@ class NoticeList(Resource):
 class Notice(Resource):
     uri = '/notice/<id>'
 
-    @swagger.doc(notice.NOTICE_GET)
+    @swagger.doc(NOTICE_GET)
     def get(self, id):
         """
         공지사항 내용 조회

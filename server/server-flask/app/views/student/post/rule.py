@@ -3,15 +3,15 @@ import json
 from flask import Response
 from flask_restful_swagger_2 import Resource, swagger
 
+from app.docs.student.post.rule import *
 from app.models.post import RuleModel
-from app.docs.student.post import rule
 from support import post_inquire_helper
 
 
 class RuleList(Resource):
     uri = '/rule'
 
-    @swagger.doc(rule.RULE_LIST_GET)
+    @swagger.doc(RULE_LIST_GET)
     def get(self):
         """
         기숙사규정 목록 조회
@@ -24,7 +24,7 @@ class RuleList(Resource):
 class Rule(Resource):
     uri = '/rule/<id>'
 
-    @swagger.doc(rule.RULE_GET)
+    @swagger.doc(RULE_GET)
     def get(self, id):
         """
         기숙사규정 내용 조회
