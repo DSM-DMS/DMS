@@ -31,4 +31,4 @@ class Notice(Resource):
         """
         notice = post_inquire_helper.inquire(NoticeModel, id)
 
-        return Response(json.dumps(notice, ensure_ascii=False), 200) if notice else Response('', 204)
+        return Response(json.dumps(notice, ensure_ascii=False), 200, content_type='application/json; charset=utf8') if notice else Response('', 204)

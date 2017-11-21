@@ -184,7 +184,7 @@ class ExtensionMap11(Resource):
 
                     seat_count += 1
 
-        return Response(json.dumps(map_, ensure_ascii=False), 200)
+        return Response(json.dumps(map_, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
 
 class ExtensionMap12(Resource):
@@ -213,4 +213,4 @@ class ExtensionMap12(Resource):
 
                     seat_count += 1
 
-        return Response(json.dumps(map_, ensure_ascii=False), 200)
+        return Response(json.dumps(map_, ensure_ascii=False), 200, content_type='application/json; charset=utf8')

@@ -25,7 +25,7 @@ class SurveyList(Resource):
             'title': survey.title,
             'start_date': survey.start_date,
             'end_date': survey.end_date
-        } for survey in SurveyModel.objects if str(student_number)[0] in survey.target], ensure_ascii=False), 200)
+        } for survey in SurveyModel.objects if str(student_number)[0] in survey.target], ensure_ascii=False), 200, content_type='application/json; charset=utf8')
         # Filter by student number
 
 
@@ -52,7 +52,7 @@ class Survey(Resource):
             answer = AnswerModel.objects(answer_student=answer_student, question=QuestionModel.objects(id=question['id']).first()).first()
             question['answer'] = answer.answer if answer else None
 
-        return Response(json.dumps(questions, ensure_ascii=False), 200)
+        return Response(json.dumps(questions, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
     @swagger.doc(SURVEY_POST)
     @jwt_required

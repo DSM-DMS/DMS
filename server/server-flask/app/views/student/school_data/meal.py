@@ -24,4 +24,4 @@ class Meal(Resource):
                 'breakfast': meal.breakfast,
                 'lunch': meal.lunch,
                 'dinner': meal.dinner
-            }, ensure_ascii=False), 200)
+            }, ensure_ascii=False), 200, content_type='application/json; charset=utf8')

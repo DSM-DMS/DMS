@@ -18,7 +18,7 @@ class RuleList(Resource):
         """
         rule_list = post_inquire_helper.list(RuleModel)
 
-        return Response(json.dumps(rule_list, ensure_ascii=False), 200)
+        return Response(json.dumps(rule_list, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
 
 class Rule(Resource):
@@ -31,4 +31,4 @@ class Rule(Resource):
         """
         rule = post_inquire_helper.inquire(RuleModel, id)
 
-        return Response(json.dumps(rule, ensure_ascii=False), 200) if rule else Response('', 204)
+        return Response(json.dumps(rule, ensure_ascii=False), 200, content_type='application/json; charset=utf8') if rule else Response('', 204)

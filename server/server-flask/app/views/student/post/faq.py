@@ -18,7 +18,7 @@ class FAQList(Resource):
         """
         faq_list = post_inquire_helper.list(FAQModel)
 
-        return Response(json.dumps(faq_list, ensure_ascii=False), 200)
+        return Response(json.dumps(faq_list, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
 
 class FAQ(Resource):
@@ -31,4 +31,4 @@ class FAQ(Resource):
         """
         faq = post_inquire_helper.inquire(FAQModel, id)
 
-        return Response(json.dumps(faq, ensure_ascii=False), 200) if faq else Response('', 204)
+        return Response(json.dumps(faq, ensure_ascii=False), 200, content_type='application/json; charset=utf8') if faq else Response('', 204)

@@ -71,4 +71,4 @@ class MyPage(Resource):
             'goingout_sat': student.goingout_apply.on_saturday if student.goingout_apply else None,
             'goingout_sun': student.goingout_apply.on_sunday if student.goingout_apply else None,
             'stay_value': student.stay_apply.value if student.stay_apply else None
-        }, ensure_ascii=False), 200)
+        }, ensure_ascii=False), 200, content_type='application/json; charset=utf8')

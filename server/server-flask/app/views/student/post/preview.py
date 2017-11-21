@@ -24,7 +24,7 @@ class FAQPreview(Resource):
 
         faq = post_inquire_helper.inquire(FAQModel, faq.id)
 
-        return Response(json.dumps(faq, ensure_ascii=False), 200)
+        return Response(json.dumps(faq, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
 
 class NoticePreview(Resource):
@@ -43,7 +43,7 @@ class NoticePreview(Resource):
 
         notice = post_inquire_helper.inquire(NoticeModel, notice.id)
 
-        return Response(json.dumps(notice, ensure_ascii=False), 200)
+        return Response(json.dumps(notice, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
 
 class RulePreview(Resource):
@@ -62,4 +62,4 @@ class RulePreview(Resource):
 
         rule = post_inquire_helper.inquire(RuleModel, rule.id)
 
-        return Response(json.dumps(rule, ensure_ascii=False), 200)
+        return Response(json.dumps(rule, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
