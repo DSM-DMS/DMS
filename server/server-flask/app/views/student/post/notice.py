@@ -18,7 +18,7 @@ class NoticeList(Resource):
         """
         notice_list = post_inquire_helper.list(NoticeModel)
 
-        return Response(json.dumps(notice_list, ensure_ascii=False), 200)
+        return Response(json.dumps(notice_list, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
 
 
 class Notice(Resource):

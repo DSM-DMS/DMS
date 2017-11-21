@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DMS</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('css',filename='style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -19,35 +19,35 @@
 
     <div class="row slider-menu-container hides">
         <div class="menu-controller show">
-            <img src="/images/arrow.png">
+            <img src="{{ url_for('images',filename='arrow.png') }}">
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/megaphone.png" />
+            <img src="{{ url_for('images',filename='megaphone.png') }}" />
             <div>공지사항</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/writing.png" />
+            <img src="{{ url_for('images',filename='writing.png') }}" />
             <div>연장신청</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/settings.png" />
+            <img src="{{ url_for('images',filename='settings.png') }}" />
             <div>수리신고</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/chicken.png" />
+            <img src="{{ url_for('images',filename='chicken.png') }}" />
             <div>학교급식</div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/crown.png" />
+            <img src="{{ url_for('images',filename='crown.png') }}" />
             <div>상점신청</div>
         </div>
         <div class="icon-menu-item text-center">
-            <a href="#bugModal" data-toggle="modal"><img src="/images/bug.png" /></a>
+            <a href="#bugModal" data-toggle="modal"><img src="{{ url_for('images',filename='bug.png') }}" /></a>
             <div><a href="#bugModal" data-toggle="modal">버그신고</a><br>
             </div>
         </div>
         <div class="icon-menu-item text-center">
-            <img src="/images/man.png" />
+            <img src="{{ url_for('images',filename='man.png') }}" />
             <div>내정보</div>
         </div>
     </div>
@@ -139,6 +139,6 @@
         </div>
     </div>
 </body>
-<script src="/js/admin_listpage.js"></script>
+<script src="{{ url_for('js',filename='admin_listpage.js') }}"></script>
 
 </html>

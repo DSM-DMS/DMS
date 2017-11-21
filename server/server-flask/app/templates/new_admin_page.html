@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <link rel="stylesheet" href="/css/admin-style.css">
+    <link rel="stylesheet" href="{{ url_for('css',filename='admin-style.css') }}">
 </head>
 
 <body>
     <div id="background-image">
-        <img src="/images/wallpaper10.jpg">
+        <img src="{{ url_for('images',filename='wallpaper10.jpg') }}">
     </div>
     <p class="admin-title">관리자 페이지</p>
     <div id="stay-download" class="button">
@@ -26,7 +26,7 @@
             <div></div>
         </div>
     </div>
-    <div id="extension-download" class="button">
+    <div id="extension11-download" class="button">
         <div class="hex">
             <div></div>
             <div></div>
@@ -34,7 +34,21 @@
         </div>
         <div class="hex">
             <div>
-                <p>연장신청<br>다운로드</p>
+                <p>11시 연장신청<br>다운로드</p>
+            </div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="extension12-download" class="button">
+        <div class="hex">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hex">
+            <div>
+                <p>12시 연장신청<br>다운로드</p>
             </div>
             <div></div>
             <div></div>
@@ -233,8 +247,8 @@
             </div>
         </div>
     </div>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/new_admin_page.js"></script>
+    <script src="{{ url_for('js',filename='jquery.js') }}"></script>
+    <script src="{{ url_for('js',filename='new_admin_page.js') }}"></script>
 </body>
 
 </html>
