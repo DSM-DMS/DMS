@@ -62,7 +62,6 @@ var $goingOutApplyButton = $("#going-out-apply-btn");
 var $goingOutPaperplane = $("#going-out-apply-btn i");
 var $saturdayContainer = $(".saturday-container");
 var $sundayContainer = $(".sunday-container");
-var goingOutDate = new Date();
 
 /**
  * My page
@@ -76,21 +75,18 @@ var $passwordChangeReq = $(".password-change button");
 /**
  * Stay
  */
-
 var $openStayButton = $("#open-stay-apply")
 var $stayWindow = $(".stay-window");
 var $stayApplyButton = $("#stay-apply-btn");
 var $stayPaperplane = $("#stay-apply-btn i");
 var $closeStayButton = $("#close-stay-window");
-var stayDate = new Date();
+
 /**
  * Meal
  */
-
 var mealDate = new Date();
 var $prevMenuBtn = $("#previous-menu");
 var $nextMenuBtn = $("#next-menu");
-
 var $mealNavigationButton = $(".meal-navigation-button");
 var $mealCardContainer = $(".meal-card-container");
 
@@ -308,26 +304,24 @@ $("#extension-time-checking").on("change",function(){
 function getClassData(classId,time) {
     if(time){
         $.ajax({
-            url: "http://dsm2015.cafe24.com/apply/extension/class/11",
+            url: "/extension/map/11",
             type: "GET",
             data: {
-                "option": "map",
                 "class": classId
             },
             success: function(data) {
-                drawSeats(JSON.parse(data).map, classId);
+                drawSeats(JSON.parse(data), classId);
             }
         });
     } else {
         $.ajax({
-            url: "http://dsm2015.cafe24.com/apply/extension/class/12",
+            url: "/extension/map/12",
             type: "GET",
             data: {
-                "option": "map",
                 "class": classId
             },
             success: function(data) {
-                drawSeats(JSON.parse(data).map, classId);
+                drawSeats(JSON.parse(data), classId);
             }
         })
     }
@@ -370,8 +364,11 @@ $classSelect.on("click", "td", function(e) {
         let $cancelButton = $(this);
         if(timeSelect){
             $.ajax({
-                url: "/apply/extension/11",
+                url: "/extension/11",
                 type: "DELETE",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+                },              
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
                     getClassData(selectedClass, timeSelect);
@@ -413,8 +410,11 @@ $classSelect.on("click", "td", function(e) {
             });
         } else {
             $.ajax({
-                url: "/apply/extension/12",
+                url: "/extension/12",
                 type: "DELETE",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+                },              
                 success: function() {
                     alert("연장학습 신청이 취소되었습니다.");
                     getClassData(selectedClass, timeSelect);
@@ -527,10 +527,10 @@ $closeNoticeButton.on("click", function() {
 
 function getNoticeList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/notice",
+        url: "/notice",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
+            var parsedData = JSON.parse(data);
             parsedData.forEach(function(data) {
                 fillListCard(data, $(".notice-window .list-box-container"));
             });
@@ -549,76 +549,59 @@ function fillListCard(data, target) {
     });
     newCard.append($('<p/>', {
         "class": "list-box-writer",
-        text: "사감부"
+        text: data.author
     }));
     newCard.append($('<p/>', {
         "class": "list-box-title",
         text: data.title
     }));
-    // newCard.append($('<p/>', {
-    //     "class": "list-box-no-content",
-    //     html: data.content
-    // }));
+    
     newCard.on('click', function() {
-        if (!$(".list-box p").hasClass("list-box-no-content")) {
-            $(this).css('width', '100%');
-            $(this).css('height', 'auto');
-            $(this).append($('<p/>', {
-                "class": "list-box-no-content",
-                html: data.content
-            }));
-            $(".list-box-no-content").css('opacity', '1');
-        } else {
-            $(this).css('width', '20vh');
-            $(this).css('height', '20vh');
-            $(this).children(".list-box-no-content").detach();
-        }
+        $.ajax({
+            url: "/notice/" + data.id,
+            type: "GET",
+            success: function(detail) {
+                let temp = JSON.parse(detail);
+                if (!$(".list-box p").hasClass("list-box-no-content")) {
+                    $(this).css('width', '100%');
+                    $(this).css('height', 'auto');
+                    $(this).append($('<p/>', {
+                        "class": "list-box-no-content",
+                        html: temp.content
+                    }));
+                    $(".list-box-no-content").css('opacity', '1');
+                } else {
+                    $(this).css('width', '20vh');
+                    $(this).css('height', '20vh');
+                    $(this).children(".list-box-no-content").detach();
+                }
+            },
+            error: function() {
+                console.log("error");
+            }
+        });
+        
     });
     target.append(newCard);
 }
 
-// function setNoticePreview() {
-//     $.ajax({
-//         url: "http://dsm2015.cafe24.com/post/notice/preview",
-//         type: "GET",
-//         statusCode: {
-//             200: function(data) {
-//                 var parsedData = JSON.parse(data);
-//                 $("#notice-title").html(parsedData.title);
-//                 $(".notice-content-container p").html((parsedData.content));
-//             },
-//             204: function(data) {
-//                 $("#notice-title").text("");
-//                 $(".notice-content-container p").text("글이 없습니다.");
-//             }
-//         },
-//         error: function() {
-//             console.log("error");
-//         }
-//     });
-// }
-
 function setNoticePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/notice/preview",
+        url: "/preview/notice",
         type: "GET",
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data);
+                let parsedData = JSON.parse(data);
                 $("#notice-title").html(parsedData.title);
-                $(".notice-content-container p").html((parsedData.content));
+                $(".notice-content-container p").html(parsedData.content);
             },
             204: function() {
                 $.ajax({
-                    url: "http://dsm2015.cafe24.com/post/list/notice",
+                    url: "/notice",
                     type: "GET",
-                    data: {
-                        page: 1,
-                        limit: 1
-                    },
                     statusCode: {
                         200: function(data) {
-                            var parsedData = JSON.parse(data).result;
+                            var parsedData = JSON.parse(data);
                             $("#notice-title").text(parsedData[0].title);
                             $(".notice-content-container p").html(parsedData[0].content)
                         },
@@ -694,10 +677,10 @@ getRuleList();
 
 function getRuleList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/rule",
+        url: "/rule",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
+            let parsedData = JSON.parse(data);
             parsedData.forEach(function(data) {
                 fillListCard(data, $(".rule-window .list-box-container"));
             });
@@ -710,21 +693,33 @@ function getRuleList() {
 
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/rule",
+        url: "/preview/rule",
         type: "GET",
-        data: {
-            page: 1,
-            limit: 1
-        },
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(parsedData[0].content);
+                let parsedData = JSON.parse(data);
+                $("#notice-title").text(parsedData.title);
+                $(".notice-content-container p").html(parsedData.content);
             },
             204: function(data) {
-                $("#notice-title").text("");
-                $(".notice-content-container p").text("글이 없습니다.");
+                $.ajax({
+                    url: "/rule",
+                    type: "GET",
+                    statusCode: {
+                        200: function(data) {
+                            var parsedData = JSON.parse(data);
+                            $("#notice-title").text(parsedData[0].title);
+                            $(".notice-content-container p").html(parsedData[0].content)
+                        },
+                        204: function(data) {
+                            $("#notice-title").text("");
+                            $(".notice-content-container p").text("글이 없습니다.");
+                        }
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
             }
         },
         error: function() {
@@ -768,6 +763,9 @@ function getStudentInfo() {
     $.ajax({
         url: "/account/student",
         method: "get",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
         success: function(data) {
             fillStudentData(JSON.parse(data));
         },
@@ -814,10 +812,10 @@ getFaqList();
 
 function getFaqList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/faq",
+        url: "/faq",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
+            var parsedData = JSON.parse(data);
             parsedData.forEach(function(data) {
                 fillListCard(data, $(".faq-window .list-box-container"));
             });
@@ -830,21 +828,33 @@ function getFaqList() {
 
 function setFaqPreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/faq",
+        url: "/preview/faq",
         type: "GET",
-        data: {
-            page: 1,
-            limit: 1
-        },
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(parsedData[0].content);
+                let parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData.title);
+                $(".notice-content-container p").html(parsedData.content);
             },
             204: function(data) {
-                $("#notice-title").text("");
-                $(".notice-content-container p").text("글이 없습니다.");
+                $.ajax({
+                    url: "/faq",
+                    type: "GET",
+                    statusCode: {
+                        200: function(data) {
+                            var parsedData = JSON.parse(data);
+                            $("#notice-title").text(parsedData[0].title);
+                            $(".notice-content-container p").html(parsedData[0].content)
+                        },
+                        204: function(data) {
+                            $("#notice-title").text("");
+                            $(".notice-content-container p").text("글이 없습니다.");
+                        }
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
             }
         },
         error: function() {
@@ -880,10 +890,13 @@ getSurveyList();
 
 function getSurveyList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/survey",
+        url: "/survey",
         type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
+            var parsedData = JSON.parse(data);
             parsedData.forEach(function(data) {
                 fillListCard(data, $(".survey-window .list-box-container"));
             });
@@ -896,15 +909,13 @@ function getSurveyList() {
 /** ======================================================================================
  * Stay
 ========================================================================================== */
-var setStayValue = function(thisDate) {
-    var weekData = makeWeekFormat(thisDate)
-
+function setStayValue() {
     $.ajax({
-        url: "/apply/stay",
+        url: "/stay",
         type: "GET",
-        data: {
-            "week": weekData
-        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         success: function(data) {
             try {
                 switch (jQuery.parseJSON(data).value) {
@@ -941,7 +952,7 @@ var setStayValue = function(thisDate) {
     });
 };
 
-setStayValue(stayDate);
+setStayValue();
 
 $openStayButton.click(function() {
     if($extensionWindow.hasClass("fade-in")) {
@@ -958,7 +969,7 @@ $openStayButton.click(function() {
     $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
-    setStayValue(stayDate);
+    setStayValue();
 });
 
 $closeStayButton.on("click", function() {
@@ -983,19 +994,19 @@ $stayApplyButton.on("click", function() {
 
     var applySendDataValue = $(":radio[name=1]:checked").val();
 
-    console.log(applySendDataValue);
-
     $.ajax({
-        url: "/apply/stay",
-        type: "PUT",
-        async: false,
+        url: "/stay",
+        type: "POST",
         data: {
             "value": applySendDataValue
         },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         statusCode: {
             200: function() {
                 alert('신청되었습니다.');
-                setStayValue(stayDate);
+                setStayValue();
                 $stayPaperplane.removeClass("send-paperplane");
             },
             204: function() {
@@ -1117,6 +1128,7 @@ $aftsch.on("click", function() {
         }
     });
 });
+
 $closeAftSchButton.on("click", function() {
     $openStayButton.prop("disabled", false);
     $openExtensionButton.prop("disabled", false);
@@ -1151,30 +1163,9 @@ $("#aft-apply-btn").click(function() {
  * Login
 ========================================================================================== */
 $openLoginButton.on("click", function() {
-    $.ajax({
-        url: "/account/logout/student",
-        type: "POST",
-        success: function() {
-            console.log("logout");
-            setCookie('UserSession', '', '-1');
-            setCookie('vertx-web.session', '', '-1');
-            deleteCookie('UserSession');
-            deleteCookie('vertx-web.session');
-            window.location.reload();
-        },
-        error: function() {
-            alert("로그아웃에 실패했어요 TT");
-        }
-    });
+    deleteCookie("JWT");
+    window.location.href = "/";
 });
-
-
-function setCookie(name, value, d) {
-    document.cookie = name + '=' + escape(value) + '; path=/' + (d ? '; expires=' + (function(t) {
-        t.setDate(t.getDate() + d);
-        return t
-    })(new Date).toGMTString() : '');
-}
 
 function deleteCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -1192,8 +1183,11 @@ $bugBtn.on("click", function() {
 
 $(".report-bug").on("click", function() {
     $.ajax({
-        url: "/post/bug",
+        url: "/bug-report",
         type: "POST",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         data: {
             title: $("#bug-title").val(),
             content: $("#bug-content").val()
@@ -1230,20 +1224,16 @@ $openPointButton.on("click", function() {
 /** ======================================================================================
  * Going out
 ========================================================================================== */
-var setGoingOutValue = function(thisDate) {
-    var weekData = makeWeekFormat(thisDate)
-
+function setGoingOutValue() {
     $.ajax({
-        url: "/apply/goingout",
+        url: "/goingout",
         type: "GET",
-        data: {
-            "week": weekData
-        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         success: function(data) {
-            try {
-                $saturdayContainer.toggleClass("select", jQuery.parseJSON(data).sat);
-                $sundayContainer.toggleClass("select", jQuery.parseJSON(data).sun);
-            } catch (err) {}
+            $saturdayContainer.toggleClass("select", JSON.parse(data).sat);
+            $sundayContainer.toggleClass("select", JSON.parse(data).sun);
         },
         error: function(xhr) {
             console.log(xhr.status);
@@ -1251,7 +1241,7 @@ var setGoingOutValue = function(thisDate) {
     });
 };
 
-setGoingOutValue(goingOutDate);
+setGoingOutValue();
 
 $openGoingOutButton.on("click", function() {
     $openStayButton.prop("disabled", true);
@@ -1262,7 +1252,7 @@ $openGoingOutButton.on("click", function() {
     $menuWrapper.toggleClass("fade-out");
     $menu2.toggleClass("fade-out");
     $menuPagenation.toggleClass("fade-out");
-    setGoingOutValue(goingOutDate);
+    setGoingOutValue();
     return false;
 });
 
@@ -1291,7 +1281,10 @@ $goingOutApplyButton.on('click', function() {
 
     $.ajax({
         url: "/apply/goingout",
-        type: "PUT",
+        type: "POST",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         data: {
             "sat": satVal,
             "sun": sunVal
@@ -1360,8 +1353,11 @@ function drawSeats(mapData, classId) {
 function extentionApply(classId, id) {
     if(timeSelect){
         $.ajax({
-            url: "http://dsm2015.cafe24.com/apply/extension/11",
-            type: "PUT",
+            url: "/extension/11",
+            type: "POST",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+            },          
             data: {
                 "class": classId,
                 "seat": id
@@ -1387,8 +1383,11 @@ function extentionApply(classId, id) {
         });
     } else {
         $.ajax({
-            url: "http://dsm2015.cafe24.com/apply/extension/12",
-            type: "PUT",
+            url: "/extension/12",
+            type: "POST",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+            },          
             data: {
                 "class": classId,
                 "seat": id
@@ -1624,17 +1623,17 @@ getSomedayMeal(mealDate, $(".today-meal"));
 
 function getSomedayMeal(day, target) {
         $.ajax({
-        url: "http://dsm2015.cafe24.com:3000/meal/" + formatDate(mealDate),
+        url: "/meal/" + formatDate(mealDate),
         statusCode: {
             200: function(data) {
-                var parsedData = data;
-                var domArr = target.find(".meal-card p");
+                let parsedData = JSON.parse(data);
+                let domArr = target.find(".meal-card p");
                 $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
                 $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
                 $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
             },
             error: function() {
-                var domArr = $(".meal-content p");
+                let domArr = $(".meal-content p");
                 $(domArr[0]).text("급식이 없습니다.");
                 $(domArr[1]).text("급식이 없습니다.");
                 $(domArr[2]).text("급식이 없습니다.");
@@ -1939,3 +1938,19 @@ $(".left-menu").on("click", function() {
         left: 0
     });
 });
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}

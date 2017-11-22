@@ -276,10 +276,10 @@ $noticeMoreBtn.on("click", function() {
 
 function getNoticeList() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/notice",
+        url: "/notice",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data).result;
+            var parsedData = JSON.parse(data);
             parsedData.forEach(function(data) {
                 fillListCard(data, $(".notice-window .list-box-container"));
             });
@@ -314,25 +314,21 @@ function fillListCard(data, target) {
 
 function setNoticePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/notice/preview",
+        url: "/preview/notice",
         type: "GET",
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data);
+                let parsedData = JSON.parse(data);
                 $("#notice-title").html(parsedData.title);
-                $(".notice-content-container p").html((parsedData.content));
+                $(".notice-content-container p").html(parsedData.content);
             },
             204: function() {
                 $.ajax({
-                    url: "http://dsm2015.cafe24.com/post/list/notice",
+                    url: "/notice",
                     type: "GET",
-                    data: {
-                        page: 1,
-                        limit: 1
-                    },
                     statusCode: {
                         200: function(data) {
-                            var parsedData = JSON.parse(data).result;
+                            var parsedData = JSON.parse(data);
                             $("#notice-title").text(parsedData[0].title);
                             $(".notice-content-container p").html(parsedData[0].content)
                         },
@@ -397,15 +393,16 @@ $openLoginButton.on("click", function() {
 
 function doLogin(){
     $.ajax({
-        url: "/account/login/student",
+        url: "/auth/student",
         type: "POST",
         data: {
-            id: $(".login-input #name").val(),
-            password: $(".login-input #pass").val(),
-            remember: $(".login-check input:checked").val()
+            "id": $(".login-input #name").val(),
+            "pw": $(".login-input #pass").val()
         },
-        success: function(data, status) {
-            location.reload();
+        success: function(data) {
+            let parsedData = JSON.parse(data);
+            setCookie("JWT", parsedData.access_token, 3);
+            window.location.href = "/";
         },
         error: function(xhr) {
             alert("로그인에 실패했습니다.");
@@ -435,15 +432,20 @@ $bugBtn.on("click", function() {
 
 $(".report-bug").on("click", function() {
     $.ajax({
-        url: "/post/bug",
+        url: "/bug-report",
         type: "POST",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },          
         data: {
             title: $("#bug-title").val(),
             content: $("#bug-content").val()
         },
         success: function() {
             alert("버그를 제보해 주셔서 고맙습니다!");
-            $("#bugModal button:nth-child(2)").click();
+            $(".bug-modal input").val("");
+            $(".bug-modal textarea").val("");
+            $(".bug-modal .btn-close").click();
         },
         error: function() {
             alert("버그신고에 실패했어요 TT");
@@ -689,23 +691,23 @@ getSomedayMeal(mealDate, $(".today-meal"));
 
 function getSomedayMeal(day, target) {
     $.ajax({
-    url: "http://dsm2015.cafe24.com:3000/meal/" + formatDate(mealDate),
-    statusCode: {
-        200: function(data) {
-            var parsedData = data;
-            var domArr = target.find(".meal-card p");
-            $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
-            $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
-            $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
-        },
-        error: function() {
-            var domArr = $(".meal-content p");
-            $(domArr[0]).text("급식이 없습니다.");
-            $(domArr[1]).text("급식이 없습니다.");
-            $(domArr[2]).text("급식이 없습니다.");
+        url: "/meal/" + formatDate(mealDate),
+        statusCode: {
+            200: function(data) {
+                let parsedData = JSON.parse(data);
+                let domArr = target.find(".meal-card p");
+                $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
+            },
+            error: function() {
+                let domArr = $(".meal-content p");
+                $(domArr[0]).text("급식이 없습니다.");
+                $(domArr[1]).text("급식이 없습니다.");
+                $(domArr[2]).text("급식이 없습니다.");
+            }
         }
-    }
-});
+    });
 }
 
 function getNextDay(date) {
@@ -875,21 +877,33 @@ $(document).ready(function() {
 ========================================================================================== */
 function setRulePreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/rule",
+        url: "/preview/rule",
         type: "GET",
-        data: {
-            page: 1,
-            limit: 1
-        },
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(parsedData[0].content);
+                let parsedData = JSON.parse(data);
+                $("#notice-title").text(parsedData.title);
+                $(".notice-content-container p").html(parsedData.content);
             },
             204: function(data) {
-                $("#notice-title").text("");
-                $(".notice-content-container p").text("글이 없습니다.");
+                $.ajax({
+                    url: "/rule",
+                    type: "GET",
+                    statusCode: {
+                        200: function(data) {
+                            var parsedData = JSON.parse(data);
+                            $("#notice-title").text(parsedData[0].title);
+                            $(".notice-content-container p").html(parsedData[0].content)
+                        },
+                        204: function(data) {
+                            $("#notice-title").text("");
+                            $(".notice-content-container p").text("글이 없습니다.");
+                        }
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
             }
         },
         error: function() {
@@ -900,21 +914,33 @@ function setRulePreview() {
 
 function setFaqPreview() {
     $.ajax({
-        url: "http://dsm2015.cafe24.com/post/list/faq",
+        url: "/preview/faq",
         type: "GET",
-        data: {
-            page: 1,
-            limit: 1
-        },
         statusCode: {
             200: function(data) {
-                var parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData[0].title);
-                $(".notice-content-container p").html(parsedData[0].content);
+                let parsedData = JSON.parse(data).result;
+                $("#notice-title").text(parsedData.title);
+                $(".notice-content-container p").html(parsedData.content);
             },
             204: function(data) {
-                $("#notice-title").text("");
-                $(".notice-content-container p").text("글이 없습니다.");
+                $.ajax({
+                    url: "/faq",
+                    type: "GET",
+                    statusCode: {
+                        200: function(data) {
+                            var parsedData = JSON.parse(data);
+                            $("#notice-title").text(parsedData[0].title);
+                            $(".notice-content-container p").html(parsedData[0].content)
+                        },
+                        204: function(data) {
+                            $("#notice-title").text("");
+                            $(".notice-content-container p").text("글이 없습니다.");
+                        }
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
             }
         },
         error: function() {
@@ -991,3 +1017,10 @@ $("body").mousemove(function(event) {
     'transform': 'rotate(' + rot + 'deg)'
   });
 });
+
+function setCookie(cname,cvalue,exdays) {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
