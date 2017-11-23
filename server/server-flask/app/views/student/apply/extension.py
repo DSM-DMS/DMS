@@ -11,8 +11,8 @@ from app.models.account import StudentModel
 from app.models.apply import ExtensionApplyModel
 
 APPLY_START = time(17, 30)
-APPLY_END_11 = time(23, 30)
-APPLY_END_12 = time(23, 59)
+APPLY_END_11 = time(20, 30)
+APPLY_END_12 = time(22, 0)
 
 MAPS = {
     1: [

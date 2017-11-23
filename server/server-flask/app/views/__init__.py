@@ -9,9 +9,6 @@ from app.views import admin, student
 
 class ViewInjector(object):
     def __init__(self, app=None):
-        """
-        :type app: Flask
-        """
         self._global_resources = set()
 
         if app is not None:
@@ -49,9 +46,6 @@ class ViewInjector(object):
             api.add_resource(res, res.uri)
 
     def init_app(self, app):
-        """
-        :type app: Flask
-        """
         Swagger(app, template=TEMPLATE)
 
         api = Api(app)
