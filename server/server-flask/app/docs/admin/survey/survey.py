@@ -1,5 +1,5 @@
 SURVEY_POST = {
-    'tags': ['설문조사'],
+    'tags': ['설문조사 관리'],
     'description': '설문조사 등록',
     'parameters': [
         {
@@ -45,8 +45,8 @@ SURVEY_POST = {
     }
 }
 
-QUESTION_POST ={
-    'tags': ['설문조사'],
+QUESTION_POST = {
+    'tags': ['설문조사 관리'],
     'description': '설문조사에 질문 등록',
     'parameters': [
         {

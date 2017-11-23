@@ -1,5 +1,5 @@
 RULE_POST = {
-    'tags': ['게시글'],
+    'tags': ['게시글 관리'],
     'description': '기숙사규정 업로드',
     'parameters': [
         {
@@ -32,7 +32,7 @@ RULE_POST = {
 }
 
 RULE_PATCH = {
-    'tags': ['게시글'],
+    'tags': ['게시글 관리'],
     'description': '기숙사규정 수정',
     'parameters': [
         {
@@ -72,7 +72,7 @@ RULE_PATCH = {
 }
 
 RULE_DELETE = {
-    'tags': ['게시글'],
+    'tags': ['게시글 관리'],
     'description': '기숙사규정 삭제',
     'parameters': [
         {

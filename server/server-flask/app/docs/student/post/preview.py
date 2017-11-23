@@ -1,5 +1,5 @@
 FAQ_PREVIEW_GET = {
-    'tags': ['프리뷰'],
+    'tags': ['게시글'],
     'description': 'FAQ 프리뷰 조회',
     'responses': {
         '200': {
@@ -21,7 +21,7 @@ FAQ_PREVIEW_GET = {
 }
 
 NOTICE_PREVIEW_GET = {
-    'tags': ['프리뷰'],
+    'tags': ['게시글'],
     'description': '공지사항 프리뷰 조회',
     'responses': {
         '200': {
@@ -43,7 +43,7 @@ NOTICE_PREVIEW_GET = {
 }
 
 RULE_PREVIEW_GET = {
-    'tags': ['프리뷰'],
+    'tags': ['게시글'],
     'description': '기숙사규정 프리뷰 조회',
     'responses': {
         '200': {

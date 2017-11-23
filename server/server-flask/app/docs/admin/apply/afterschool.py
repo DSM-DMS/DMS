@@ -1,5 +1,5 @@
 AFTERSCHOOL_POST = {
-    'tags': ['방과후 신청'],
+    'tags': ['방과후 신청 관리'],
     'description': '방과후 신청 set 추가',
     'parameters': [
         {
@@ -39,7 +39,7 @@ AFTERSCHOOL_POST = {
 }
 
 AFTERSCHOOL_DELETE = {
-    'tags': ['방과후 신청'],
+    'tags': ['방과후 신청 관리'],
     'description': '방과후 신청 set 제거',
     'parameters': [
         {
@@ -65,7 +65,7 @@ AFTERSCHOOL_DELETE = {
 }
 
 AFTERSCHOOL_ITEM_POST = {
-    'tags': ['방과후 신청'],
+    'tags': ['방과후 신청 관리'],
     'description': '방과후 아이템 추가',
     'parameters': [
         {
@@ -129,7 +129,7 @@ AFTERSCHOOL_ITEM_POST = {
 }
 
 AFTERSCHOOL_ITEM_DELETE = {
-    'tags': ['방과후 신청'],
+    'tags': ['방과후 신청 관리'],
     'description': '방과후 아이템 제거',
     'parameters': [
         {

@@ -1,5 +1,5 @@
 FAQ_PREVIEW_GET = {
-    'tags': ['게시글 프리뷰'],
+    'tags': ['게시글 관리'],
     'description': 'FAQ 프리뷰 설정',
     'parameters': [
         {
@@ -25,7 +25,7 @@ FAQ_PREVIEW_GET = {
 }
 
 NOTICE_PREVIEW_GET = {
-    'tags': ['게시글 프리뷰'],
+    'tags': ['게시글 관리'],
     'description': '공지사항 프리뷰 설정',
     'parameters': [
         {
@@ -51,7 +51,7 @@ NOTICE_PREVIEW_GET = {
 }
 
 RULE_PREVIEW_GET = {
-    'tags': ['게시글 프리뷰'],
+    'tags': ['게시글 관리'],
     'description': '기숙사규정 프리뷰 설정',
     'parameters': [
         {

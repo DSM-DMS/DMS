@@ -1,16 +1,17 @@
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful import Resource, request
+from flasgger import swag_from
 
 from app.docs.admin.post.rule import *
 from app.models.account import AdminModel
 from app.models.post import RuleModel
 
 
-class Rule(Resource):
-    uri = '/rule'
+class AdminRule(Resource):
+    uri = '/admin/rule'
 
-    @swagger.doc(RULE_POST)
+    @swag_from(RULE_POST)
     @jwt_required
     def post(self):
         """
@@ -28,7 +29,7 @@ class Rule(Resource):
 
         return Response('', 201)
 
-    @swagger.doc(RULE_PATCH)
+    @swag_from(RULE_PATCH)
     @jwt_required
     def patch(self):
         """
@@ -48,7 +49,7 @@ class Rule(Resource):
 
         return Response('', 200)
 
-    @swagger.doc(RULE_DELETE)
+    @swag_from(RULE_DELETE)
     @jwt_required
     def delete(self):
         """

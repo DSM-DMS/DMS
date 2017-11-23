@@ -1,7 +1,8 @@
 import json
 
 from flask import Response
-from flask_restful_swagger_2 import Resource, swagger
+from flask_restful import Resource
+from flasgger import swag_from
 
 from app.docs.student.post.preview import *
 from app.models.post import FAQModel, NoticeModel, RuleModel
@@ -11,7 +12,7 @@ from support import post_inquire_helper
 class FAQPreview(Resource):
     uri = '/preview/faq'
 
-    @swagger.doc(FAQ_PREVIEW_GET)
+    @swag_from(FAQ_PREVIEW_GET)
     def get(self):
         """
         FAQ 프리뷰 조회
@@ -30,7 +31,7 @@ class FAQPreview(Resource):
 class NoticePreview(Resource):
     uri = '/preview/notice'
 
-    @swagger.doc(NOTICE_PREVIEW_GET)
+    @swag_from(NOTICE_PREVIEW_GET)
     def get(self):
         """
         공지사항 프리뷰 조회
@@ -49,7 +50,7 @@ class NoticePreview(Resource):
 class RulePreview(Resource):
     uri = '/preview/rule'
 
-    @swagger.doc(RULE_PREVIEW_GET)
+    @swag_from(RULE_PREVIEW_GET)
     def get(self):
         """
         기숙사규정 프리뷰 조회

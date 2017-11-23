@@ -1,5 +1,5 @@
 INITIALIZE_ACCOUNT_POST = {
-    'tags': ['계정'],
+    'tags': ['관리자 계정'],
     'description': '학생 계정 초기화',
     'parameters': [
         {

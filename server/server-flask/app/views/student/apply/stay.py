@@ -2,7 +2,8 @@ from datetime import datetime, time
 
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful import Resource, request
+from flasgger import swag_from
 
 from app.docs.student.apply.stay import *
 from app.models.account import StudentModel
@@ -12,7 +13,7 @@ from app.models.apply import StayApplyModel
 class Stay(Resource):
     uri = '/stay'
 
-    @swagger.doc(STAY_GET)
+    @swag_from(STAY_GET)
     @jwt_required
     def get(self):
         """
@@ -25,7 +26,7 @@ class Stay(Resource):
 
         return {'value': student.stay_apply.value}, 200
 
-    @swagger.doc(STAY_POST)
+    @swag_from(STAY_POST)
     @jwt_required
     def post(self):
         """

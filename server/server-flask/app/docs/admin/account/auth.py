@@ -1,5 +1,5 @@
 AUTH_POST = {
-    'tags': ['계정'],
+    'tags': ['관리자 계정'],
     'description': '로그인',
     'parameters': [
         {

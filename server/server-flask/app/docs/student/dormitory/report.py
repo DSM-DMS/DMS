@@ -1,5 +1,5 @@
 REPORT_POST = {
-    'tags': ['기숙사 관련'],
+    'tags': ['기숙사'],
     'description': '시설고장신고',
     'parameters': [
         {

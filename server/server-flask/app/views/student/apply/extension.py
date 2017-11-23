@@ -3,7 +3,8 @@ import json
 
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful import Resource, request
+from flasgger import swag_from
 
 from app.docs.student.apply.extension import *
 from app.models.account import StudentModel
@@ -83,7 +84,7 @@ MAPS = {
 class Extension11(Resource):
     uri = '/extension/11'
 
-    @swagger.doc(EXTENSION_GET)
+    @swag_from(EXTENSION_GET)
     @jwt_required
     def get(self):
         """
@@ -99,7 +100,7 @@ class Extension11(Resource):
             'seat': student.extension_apply_11.seat
         }, 200
 
-    @swagger.doc(EXTENSION_POST)
+    @swag_from(EXTENSION_POST)
     @jwt_required
     def post(self):
         """
@@ -122,7 +123,7 @@ class Extension11(Resource):
 class Extension12(Resource):
     uri = '/extension/12'
 
-    @swagger.doc(EXTENSION_GET)
+    @swag_from(EXTENSION_GET)
     @jwt_required
     def get(self):
         """
@@ -138,7 +139,7 @@ class Extension12(Resource):
             'seat': student.extension_apply_12.seat
         }, 200
 
-    @swagger.doc(EXTENSION_POST)
+    @swag_from(EXTENSION_POST)
     @jwt_required
     def post(self):
         """
@@ -161,7 +162,7 @@ class Extension12(Resource):
 class ExtensionMap11(Resource):
     uri = '/extension/map/11'
 
-    @swagger.doc(EXTENSION_MAP_GET)
+    @swag_from(EXTENSION_MAP_GET)
     def get(self):
         """
         11시 연장신청 지도 조회
@@ -190,7 +191,7 @@ class ExtensionMap11(Resource):
 class ExtensionMap12(Resource):
     uri = '/extension/map/12'
 
-    @swagger.doc(EXTENSION_MAP_GET)
+    @swag_from(EXTENSION_MAP_GET)
     def get(self):
         """
         12시 연장신청 지도 조회

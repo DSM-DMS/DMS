@@ -1,7 +1,8 @@
 import json
 
 from flask import Response
-from flask_restful_swagger_2 import Resource, swagger
+from flask_restful import Resource
+from flasgger import swag_from
 
 from app.docs.student.school_data.meal import *
 from app.models.school_data import MealModel
@@ -10,7 +11,7 @@ from app.models.school_data import MealModel
 class Meal(Resource):
     uri = '/meal/<date>'
 
-    @swagger.doc(MEAL_GET)
+    @swag_from(MEAL_GET)
     def get(self, date):
         """
         급식 정보 조회

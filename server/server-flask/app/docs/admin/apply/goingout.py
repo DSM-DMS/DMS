@@ -1,5 +1,5 @@
 GOINGOUT_GET = {
-    'tags': ['신청 정보'],
+    'tags': ['신청 정보 관리'],
     'description': '외출신청 정보 다운로드',
     'parameters': [
         {
