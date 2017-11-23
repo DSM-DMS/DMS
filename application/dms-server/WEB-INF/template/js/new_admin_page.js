@@ -75,37 +75,67 @@ function getWeek(date) {
 }
 
 $stayDownload.on('click', function() {
-    var today = new Date();
-    var week = getWeek(today);
-    if (week == 0) {
-        today.setMonth(today.getMonth() + 1);
-        week = 1;
-    }
-    var year = today.getFullYear();
-    var month = today.getMonth() + 1;
+    $.ajax({
+        url: "/admin/stay",
+        type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
+        success: function () {
 
-    location.href = 'http://dsm2015.cafe24.com/stay/download?year=' + year + '&month=' + month + '&week=' + week;
+        },
+        error: function () {
+
+        }
+    });
 });
 
 $extension11Download.on('click', function() {
-    location.href = 'http://dsm2015.cafe24.com/extension/download/11';
+    $.ajax({
+        url: "/admin/extension11",
+        type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
+        success: function () {
+
+        },
+        error: function () {
+
+        }
+    });
 });
 
 $extension12Download.on('click', function() {
-    location.href = 'http://dsm2015.cafe24.com/extension/download/12';
+    $.ajax({
+        url: "/admin/extension12",
+        type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
+        success: function () {
+
+        },
+        error: function () {
+
+        }
+    });
 });
 
 $goingOutDownload.on('click', function() {
-    var today = new Date();
-    var week = getWeek(today);
-    if (week == 0) {
-        today.setMonth(today.getMonth() + 1);
-        week = 1;
-    }
-    var year = today.getFullYear();
-    var month = today.getMonth() + 1;
+    $.ajax({
+        url: "/admin/goingout",
+        type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
+        success: function () {
 
-    location.href = 'http://dsm2015.cafe24.com/goingout/download?year=' + year + '&month=' + month + '&week=' + week;
+        },
+        error: function () {
+
+        }
+    });
 });
 
 $facilityDownload.on('click', function() {
@@ -136,13 +166,17 @@ $deleteAccount.on('click', function() {
     $('.delete-account-modal-wrapper').toggleClass('open');
     console.log("click")
 });
+
 $(".account-reset").on("click", function() {
     $.ajax({
-        url: "/account/initialize",
+        url: "/admin/initialize-account",
         type: "POST",
         data: {
             number: $("#uid").val()
         },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
         complete: function(e, xhr, settings) {
             if (e.status === 200) {
                 alert("삭제가 완료되었습니다.");
@@ -151,7 +185,7 @@ $(".account-reset").on("click", function() {
 
             }
         }
-    })
+    });
 });
 
 $(".new-admin-button").on("click", function() {
@@ -163,9 +197,16 @@ $(".new-admin-button").on("click", function() {
         }
     }
     $.ajax({
-        url: "/account/register/admin",
+        url: "/admin/new-account",
         type: "POST",
-        data: $("#create-admin-form").serialize(),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+        },              
+        data: {
+            "id": $('#admin-id').val(),
+            "pw": $('#admin-password').val(),
+            "name": $('#admin-name').val()
+        },
         complete: function(xhr, textStatus) {
             var statusCode = xhr.status;
             if (statusCode == 200) {
