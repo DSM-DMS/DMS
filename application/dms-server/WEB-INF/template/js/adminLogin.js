@@ -1,14 +1,13 @@
 $('#btn-signup').on('click', function() {
     $.ajax({
-        url: "/account/login/admin",
+        url: "/admin/auth",
         type: "POST",
         data: {
             "id": $('#login-username').val(),
             "pw": $('#login-password').val()
         },
         success: function(data) {
-            let parsedData = JSON.parse(data);
-            setCookie("JWT", parsedData.access_token, 3);
+            setCookie("JWT", data.access_token, 3);
             location.href = '/admin';
         },
         error: function(xhr) {
