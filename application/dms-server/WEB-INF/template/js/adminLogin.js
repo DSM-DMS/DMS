@@ -8,7 +8,17 @@ $('#btn-signup').on('click', function() {
         },
         success: function(data) {
             setCookie("JWT", data.access_token, 3);
-            location.href = '/admin';
+            $.ajax({
+                url: "/admin",
+                type: "GET",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
+                },          
+                success: function(data) {
+                },
+                error: function(xhr) {
+                },
+            });
         },
         error: function(xhr) {
             $("#login-warn").show();
