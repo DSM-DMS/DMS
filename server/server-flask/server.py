@@ -1,6 +1,7 @@
 import threading
 
 from app import app
+from support.api_interaction import meal
 from support.apply_initializer.initializer import initialize
 
 
