@@ -279,8 +279,7 @@ function getNoticeList() {
         url: "/notice",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data);
-            parsedData.forEach(function(data) {
+            data.forEach(function(data) {
                 fillListCard(data, $(".notice-window .list-box-container"));
             });
         },
@@ -318,9 +317,8 @@ function setNoticePreview() {
         type: "GET",
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data);
-                $("#notice-title").html(parsedData.title);
-                $(".notice-content-container p").html(parsedData.content);
+                $("#notice-title").html(data.title);
+                $(".notice-content-container p").html(data.content);
             },
             204: function() {
                 $.ajax({
@@ -328,13 +326,14 @@ function setNoticePreview() {
                     type: "GET",
                     statusCode: {
                         200: function(data) {
-                            var parsedData = JSON.parse(data);
-                            $("#notice-title").text(parsedData[0].title);
-                            $(".notice-content-container p").html(parsedData[0].content)
-                        },
-                        204: function(data) {
-                            $("#notice-title").text("");
-                            $(".notice-content-container p").text("글이 없습니다.");
+                            if(data.length!=0){
+                                $("#notice-title").text(data[0].title);
+                                $(".notice-content-container p").html(data[0].content)
+                            }else{
+                                $("#notice-title").text("");
+                                $(".notice-content-container p").text("글이 없습니다.");
+                            }
+
                         }
                     },
                     error: function() {
@@ -400,8 +399,7 @@ function doLogin(){
             "pw": $(".login-input #pass").val()
         },
         success: function(data) {
-            let parsedData = JSON.parse(data);
-            setCookie("JWT", parsedData.access_token, 3);
+            setCookie("JWT", data.access_token, 3);
             window.location.href = "/";
         },
         error: function(xhr) {
@@ -694,11 +692,10 @@ function getSomedayMeal(day, target) {
         url: "/meal/" + formatDate(mealDate),
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data);
                 let domArr = target.find(".meal-card p");
-                $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
-                $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
-                $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
+                $(domArr[0]).html(data.breakfast.toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(data.lunch.toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(data.dinner.toString().replace(/,/gi, "<br>"));
             },
             error: function() {
                 let domArr = $(".meal-content p");
@@ -881,9 +878,8 @@ function setRulePreview() {
         type: "GET",
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data);
-                $("#notice-title").text(parsedData.title);
-                $(".notice-content-container p").html(parsedData.content);
+                $("#notice-title").text(data.title);
+                $(".notice-content-container p").html(data.content);
             },
             204: function(data) {
                 $.ajax({
@@ -891,13 +887,14 @@ function setRulePreview() {
                     type: "GET",
                     statusCode: {
                         200: function(data) {
-                            var parsedData = JSON.parse(data);
-                            $("#notice-title").text(parsedData[0].title);
-                            $(".notice-content-container p").html(parsedData[0].content)
-                        },
-                        204: function(data) {
-                            $("#notice-title").text("");
-                            $(".notice-content-container p").text("글이 없습니다.");
+                            if(data.length!=0){
+                                $("#notice-title").text("");
+                                $(".notice-content-container p").text("글이 없습니다.");
+                            }else{
+
+                            $("#notice-title").text(data[0].title);
+                            $(".notice-content-container p").html(data[0].content)
+                            }
                         }
                     },
                     error: function() {
@@ -918,9 +915,8 @@ function setFaqPreview() {
         type: "GET",
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData.title);
-                $(".notice-content-container p").html(parsedData.content);
+                $("#notice-title").text(data.title);
+                $(".notice-content-container p").html(data.content);
             },
             204: function(data) {
                 $.ajax({
@@ -928,13 +924,15 @@ function setFaqPreview() {
                     type: "GET",
                     statusCode: {
                         200: function(data) {
-                            var parsedData = JSON.parse(data);
-                            $("#notice-title").text(parsedData[0].title);
-                            $(".notice-content-container p").html(parsedData[0].content)
-                        },
-                        204: function(data) {
-                            $("#notice-title").text("");
-                            $(".notice-content-container p").text("글이 없습니다.");
+                            if(data.length!=0){
+                                $("#notice-title").text(data[0].title);
+                                $(".notice-content-container p").html(data[0].content)
+                            }else{
+                                $("#notice-title").text("");
+                                $(".notice-content-container p").text("글이 없습니다.");
+
+                            }
+
                         }
                     },
                     error: function() {
@@ -1023,20 +1021,4 @@ function setCookie(cname,cvalue,exdays) {
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires=" + d.toGMTString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
 }
