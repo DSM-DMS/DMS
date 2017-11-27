@@ -310,7 +310,7 @@ function getClassData(classId,time) {
                 "class": classId
             },
             success: function(data) {
-                drawSeats(JSON.parse(data), classId);
+                drawSeats(data, classId);
             }
         });
     } else {
@@ -321,7 +321,7 @@ function getClassData(classId,time) {
                 "class": classId
             },
             success: function(data) {
-                drawSeats(JSON.parse(data), classId);
+                drawSeats(data, classId);
             }
         })
     }
@@ -530,9 +530,8 @@ function getNoticeList() {
         url: "/notice",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data);
-            parsedData.forEach(function(data) {
-                fillListCard(data, $(".notice-window .list-box-container"));
+            data.forEach(function(card) {
+                fillListCard(card, $(".notice-window .list-box-container"));
             });
         },
         error: function() {
@@ -561,7 +560,7 @@ function fillListCard(data, target) {
             url: "/notice/" + data.id,
             type: "GET",
             success: function(detail) {
-                let temp = JSON.parse(detail);
+                let temp = detail;
                 if (!$(".list-box p").hasClass("list-box-no-content")) {
                     $(this).css('width', '100%');
                     $(this).css('height', 'auto');
@@ -591,21 +590,18 @@ function setNoticePreview() {
         type: "GET",
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data);
-                $("#notice-title").html(parsedData.title);
-                $(".notice-content-container p").html(parsedData.content);
+                $("#notice-title").html(data.title);
+                $(".notice-content-container p").html(data.content);
             },
             204: function() {
                 $.ajax({
                     url: "/notice",
                     type: "GET",
-                    statusCode: {
-                        200: function(data) {
-                            var parsedData = JSON.parse(data);
-                            $("#notice-title").text(parsedData[0].title);
-                            $(".notice-content-container p").html(parsedData[0].content)
-                        },
-                        204: function(data) {
+                    success: function(data) {
+                        if(!!data.length) {
+                            $("#notice-title").text(data[0].title);
+                            $(".notice-content-container p").html(data[0].content)    
+                        } else {
                             $("#notice-title").text("");
                             $(".notice-content-container p").text("글이 없습니다.");
                         }
@@ -680,9 +676,8 @@ function getRuleList() {
         url: "/rule",
         type: "GET",
         success: function(data) {
-            let parsedData = JSON.parse(data);
-            parsedData.forEach(function(data) {
-                fillListCard(data, $(".rule-window .list-box-container"));
+            data.forEach(function(card) {
+                fillListCard(card, $(".rule-window .list-box-container"));
             });
         },
         error: function() {
@@ -697,21 +692,18 @@ function setRulePreview() {
         type: "GET",
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data);
-                $("#notice-title").text(parsedData.title);
-                $(".notice-content-container p").html(parsedData.content);
+                $("#notice-title").text(data.title);
+                $(".notice-content-container p").html(data.content);
             },
             204: function(data) {
                 $.ajax({
                     url: "/rule",
                     type: "GET",
-                    statusCode: {
-                        200: function(data) {
-                            var parsedData = JSON.parse(data);
-                            $("#notice-title").text(parsedData[0].title);
-                            $(".notice-content-container p").html(parsedData[0].content)
-                        },
-                        204: function(data) {
+                    success: function(data) {
+                        if(!!data.length) {
+                            $("#notice-title").text(data[0].title);
+                            $(".notice-content-container p").html(data[0].content)
+                        } else {
                             $("#notice-title").text("");
                             $(".notice-content-container p").text("글이 없습니다.");
                         }
@@ -767,7 +759,7 @@ function getStudentInfo() {
             xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
         },              
         success: function(data) {
-            fillStudentData(JSON.parse(data));
+            fillStudentData(data);
         },
         error: function() {
             console.log("error");
@@ -815,9 +807,8 @@ function getFaqList() {
         url: "/faq",
         type: "GET",
         success: function(data) {
-            var parsedData = JSON.parse(data);
-            parsedData.forEach(function(data) {
-                fillListCard(data, $(".faq-window .list-box-container"));
+            data.forEach(function(card) {
+                fillListCard(card, $(".faq-window .list-box-container"));
             });
         },
         error: function() {
@@ -832,21 +823,18 @@ function setFaqPreview() {
         type: "GET",
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data).result;
-                $("#notice-title").text(parsedData.title);
-                $(".notice-content-container p").html(parsedData.content);
+                $("#notice-title").text(data.title);
+                $(".notice-content-container p").html(data.content);
             },
             204: function(data) {
                 $.ajax({
                     url: "/faq",
                     type: "GET",
-                    statusCode: {
-                        200: function(data) {
-                            var parsedData = JSON.parse(data);
-                            $("#notice-title").text(parsedData[0].title);
-                            $(".notice-content-container p").html(parsedData[0].content)
-                        },
-                        204: function(data) {
+                    success: function(data) {
+                        if(!!data.length) {
+                            $("#notice-title").text(data[0].title);
+                            $(".notice-content-container p").html(data[0].content)
+                        } else {
                             $("#notice-title").text("");
                             $(".notice-content-container p").text("글이 없습니다.");
                         }
@@ -896,9 +884,8 @@ function getSurveyList() {
             xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
         },          
         success: function(data) {
-            var parsedData = JSON.parse(data);
-            parsedData.forEach(function(data) {
-                fillListCard(data, $(".survey-window .list-box-container"));
+            data.forEach(function(card) {
+                fillListCard(card, $(".survey-window .list-box-container"));
             });
         },
         error: function() {
@@ -918,7 +905,7 @@ function setStayValue() {
         },          
         success: function(data) {
             try {
-                switch (jQuery.parseJSON(data).value) {
+                switch (data.value) {
                     case 1:
                         $('#stayValue').text('금요귀가');
                         $(":radio[name=1][value=1]").prop('checked', true);
@@ -1097,7 +1084,7 @@ $aftsch.on("click", function() {
                 var tuesdayAft = document.createDocumentFragment();
                 var saturdayAft = document.createDocumentFragment();
 
-                var aftList = Jquery.parseJSON(data);
+                var aftList = data;
                 for(var i=1;i<=aftList.length;i++){
                     if(aftList[i].on_monday == true){
                         var monList = templ1 + "2" + templ2 + aftList[i].no.toString() + templ3 + aftList[i].title + templ4;
@@ -1232,8 +1219,8 @@ function setGoingOutValue() {
             xhr.setRequestHeader ("Authorization", "JWT " + getCookie("JWT"));
         },          
         success: function(data) {
-            $saturdayContainer.toggleClass("select", JSON.parse(data).sat);
-            $sundayContainer.toggleClass("select", JSON.parse(data).sun);
+            $saturdayContainer.toggleClass("select", data.sat);
+            $sundayContainer.toggleClass("select", data.sun);
         },
         error: function(xhr) {
             console.log(xhr.status);
@@ -1626,11 +1613,10 @@ function getSomedayMeal(day, target) {
         url: "/meal/" + formatDate(mealDate),
         statusCode: {
             200: function(data) {
-                let parsedData = JSON.parse(data);
                 let domArr = target.find(".meal-card p");
-                $(domArr[0]).html(parsedData.breakfast.toString().replace(/,/gi, "<br>"));
-                $(domArr[1]).html(parsedData.lunch.toString().replace(/,/gi, "<br>"));
-                $(domArr[2]).html(parsedData.dinner.toString().replace(/,/gi, "<br>"));
+                $(domArr[0]).html(data.breakfast.toString().replace(/,/gi, "<br>"));
+                $(domArr[1]).html(data.lunch.toString().replace(/,/gi, "<br>"));
+                $(domArr[2]).html(data.dinner.toString().replace(/,/gi, "<br>"));
             },
             error: function() {
                 let domArr = $(".meal-content p");
