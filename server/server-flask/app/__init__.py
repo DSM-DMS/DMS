@@ -42,4 +42,4 @@ def create_app(config_name):
 
     return app_
 
-app = create_app('../config/dev.py')
+app = create_app('../config/production.py')
