@@ -922,29 +922,13 @@ input[type="radio"]:checked~.bullet .line.seven {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 50%;
     right: 0;
     margin-left: auto;
     margin-right: auto;
     height: 80%;
     transition: 0.3s ease;
-    justify-content: space-between;
-}
-
-#menu2 {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    height: 80%;
-    transition: 0.3s ease;
-    opacity: 0;
-    z-index: -1;
     justify-content: space-between;
 }
 

@@ -12,24 +12,24 @@
     <meta name="location" content="Republic of Korea">
     <meta name="distribution" content="Boxfox">
     <meta charset="UTF-8">
-    <script src="./js/jquery.js"></script>
+    <script src="{{ url_for('static',filename='js/jquery.js') }}"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="./css/snack_bar.css" type='text/css'>
-    <script src="./js/snack_bar.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='js/jquery.js') }}" type='text/css'>
+    <script src="{{ url_for('static',filename='js/snack_bar.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             //showSnackbar();
         });
     </script>
 
-    <link rel="stylesheet" href="./css/new_style.css">
-    <link rel="stylesheet" href="./css/clock.css">
-    <link rel="stylesheet" href="./css/font-awesome.min.css" type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/new_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/clock.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css') }}" type='text/css'>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <script src='./js/DrawSVGPlugin.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="{{ url_for('static',filename='js/DrawSVGPlugin.min.js') }}"></script>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
         <img src="./images/sana2.jpg">
     </div>  -->
     <div id="background-image">
-        <img src=".\images\wallpaper10.jpg">
+        <img src="{{ url_for('static',filename='images/wallpaper10.jpg') }}">
         <!--<svg xmlns="http://www.w3.org/2000/svg" class="svgBlur" width="120%" height="120%" transform="scale(1.3)">
             <filter id="svgBlurFilter">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
@@ -57,31 +57,31 @@
             <div class="left-menu-container">
                 <div class="left-selected-meneBar">
 
-                </div>
+                </div> 
                 <div class="left-menu notice-preview-btn">
-                    <img src=".\images\list.svg" />
+                    <img src="{{ url_for('static',filename='images/list.svg') }}" />
                 </div>
                 <div class="left-menu dorm-rule-preview-btn rule-preview-btn">
-                    <img src=".\images\notebook-color.svg" />
+                    <img src="{{ url_for('static',filename='images/notebook-color.svg') }}" />
                 </div>
                 <div class="left-menu faq-preview-btn">
-                    <img src=".\images\question-color.svg" />
+                    <img src="{{ url_for('static',filename='images/qusetion-color.svg') }}" />
                 </div>
 
                 <div class="left-menu-contact">
                     <div class="left-menu">
                         <a href="https://goo.gl/07Iwy3">
-                            <img src=".\images\facebook-logo.svg" />
+                            <img src="{{ url_for('static',filename='images/facebook-logo.svg') }}" />
                         </a>
                     </div>
                     <div class="left-menu">
                         <a href="https://goo.gl/nHJJUb">
-                            <img src=".\images\github-logo.svg" />
+                            <img src="{{ url_for('static',filename='images/github-logo.svg') }}" />
                         </a>
                     </div>
                     <div class="left-menu">
                         <a href="">
-                            <img src=".\images\settings.svg" />
+                            <img src="{{ url_for('static',filename='images/settings.svg') }}" />
                         </a>
                     </div>
                 </div>
@@ -132,65 +132,65 @@
                     <p></p>
                 </div>
                 <div class="meal-content-container">
-                    <img src=".\images\left-arrow.svg" class="hvr-shrink control_prev">
+                    <img src="{{ url_for('static',filename='images/left-arrow.svg') }}" class="hvr-shrink control_prev">
                     <div id="slider">
                         <ul>
                             <li class="today-meal">
                                 <div class="meal-card">
-                                    <img src=".\images\cereals.svg">
+                                    <img src="{{ url_for('static',filename='images/cereals.svg') }}">
                                     <span>아침</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                                 <div class="meal-card">
-                                    <img src=".\images\chicken-leg.svg">
+                                    <img src="{{ url_for('static',filename='images/chicken-leg.svg') }}">
                                     <span>점심</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                                 <div class="meal-card">
-                                    <img src=".\images\soup.svg">
+                                    <img src="{{ url_for('static',filename='images/soup.svg') }}">
                                     <span>저녁</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                             </li>
                             <li class="tomorrow-meal">
                                 <div class="meal-card">
-                                    <img src=".\images\cereals.svg">
+                                    <img src="{{ url_for('static',filename='images/cereals.svg') }}">
                                     <span>아침</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                                 <div class="meal-card">
-                                    <img src=".\images\chicken-leg.svg">
+                                    <img src="{{ url_for('static',filename='images/chicken-leg.svg') }}">
                                     <span>점심</span>
                                     <p>급식이 없습니다</p>
                                </div>
                                 <div class="meal-card">
-                                    <img src=".\images\soup.svg">
+                                    <img src="{{ url_for('static',filename='images/soup.svg') }}">
                                     <span>저녁</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                             </li>
                             <li class="yesterday-meal">
                                 <div class="meal-card">
-                                    <img src=".\images\cereals.svg">
+                                    <img src="{{ url_for('static',filename='images/cereal.svg') }}">
                                     <span>아침</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                                 <div class="meal-card">
-                                    <img src=".\images\chicken-leg.svg">
+                                    <img src="{{ url_for('static',filename='images/chicken-leg.svg') }}">
                                     <span>점심</span>
                                     <p>급식이 없습니다</p>      
                                </div>
                                 <div class="meal-card">
-                                    <img src=".\images\soup.svg">
+                                    <img src="{{ url_for('static',filename='images/soup.svg') }}">
                                     <span>저녁</span>
                                     <p>급식이 없습니다</p>
                                 </div>
                             </li>
                         </ul>  
                     </div>
-                    <img src=".\images\right-arrow.svg" class="hvr-shrink control_next">
+                    <img src="{{ url_for('static',filename='images/right-arrow.svg') }}" class="hvr-shrink control_next">
                 </div>
-                <img src="./images/curved.svg" class="curved-image" />
+                <img src="{{ url_for('static',filename='images/curved.svg') }}" class="curved-image" />
             </div>
         </div>
         <div id="right-panel">
@@ -207,7 +207,7 @@
                     </svg>
                     <p id="stayValue"></p>
                 </div>
-                <img id="stayIcon" src=".\images\stay-not-applied.svg" />
+                <img id="stayIcon" src="{{ url_for('static',filename='images/stay-not-applied.svg') }}" />
                 <button id="open-stay-apply" class="hvr-shrink">잔류 신청</button>
             </div>
             <div id="extension-apply-container">
@@ -223,7 +223,7 @@
                     </svg>
                     <p id="extensionValue">연장신청이 가능합니다</p>
                 </div>
-                <script src="./js/clock.js"></script>
+                <script src="{{ url_for('static',filename='js/clock.js') }}"></script>
                 <ul id="clock-in">
                     <li id="sec"></li>
                     <li id="hour"></li>
@@ -238,45 +238,45 @@
     <div class="menu-wrapper">
         <div id="menu">
             <div class="menu-item hvr-float login-btn">
-                <img src=".\images\login.svg">
+                <img src="{{ url_for('static',filename='images/login.svg') }}">
                 <span>로그인</span>
             </div>
             <div class="menu-item hvr-float mypage-btn">
-                <img src=".\images\user.svg">
+                <img src="{{ url_for('static',filename='images/user.svg') }}">
                 <span>내 정보</span>
             </div>
             <div class="menu-item hvr-float goingOut-btn">
-                <img src=".\images\run.svg">
+                <img src="{{ url_for('static',filename='images/run.svg') }}">
                 <span>외출 신청</span>
             </div>
             <div class="menu-item hvr-float facility-btn">
-                <img src=".\images\repair.svg">
+                <img src="{{ url_for('static',filename='images/repair.svg') }}">
                 <span>시설고장 신고</span>
             </div>
             <div class="menu-item hvr-float bug-btn">
-                <img src=".\images\bug.svg">
+                <img src="{{ url_for('static',filename='images/bug.svg') }}">
                 <span>버그 신고</span>
             </div>
         </div>
         <div id="menu2">
             <div class="dorm-rule menu-item hvr-float">
-                <img src=".\images\notebook.svg">
+                <img src="{{ url_for('static',filename='images/notebook.svg') }}">
                 <span>기숙사 규정</span>
             </div>
             <div class="menu-item hvr-float faq-btn">
-                <img src=".\images\question.svg">
+                <img src="{{ url_for('static',filename='images/question.svg') }}">
                 <span>자주하는 질문</span>
             </div>
             <div class="menu-item hvr-float point-btn">
-                <img src=".\images\coin.svg">
+                <img src="{{ url_for('static',filename='images/coin.svg') }}">
                 <span>상점 신청</span>
             </div>
             <div class="menu-item hvr-float" style="opacity:0">
-                <img src=".\images\question.svg">
+                <img src="{{ url_for('static',filename='images/question.svg') }}">
                 <span>빈 공간 유지</span>
             </div>
             <div class="menu-item hvr-float" style="opacity:0">
-                <img src=".\images\coin.svg">
+                <img src="{{ url_for('static',filename='images/coin.svg') }}">
                 <span>빈 공간 유지</span>
             </div>
         </div>
@@ -460,7 +460,7 @@
             <div class='eye'></div>
         </div>
     </section>
-    <script src="./js/nonLogin_new_index.js"></script>
+    <script src="{{ url_for('static',filename='js/new_index.js') }}"></script>
 </body>
 
 </html>
