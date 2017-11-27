@@ -1,5 +1,5 @@
 FAQ_POST = {
-    'tags': ['게시글'],
+    'tags': ['게시글 관리'],
     'description': 'FAQ 업로드',
     'parameters': [
         {
@@ -32,7 +32,7 @@ FAQ_POST = {
 }
 
 FAQ_PATCH = {
-    'tags': ['게시글'],
+    'tags': ['게시글 관리'],
     'description': 'FAQ 수정',
     'parameters': [
         {
@@ -72,7 +72,7 @@ FAQ_PATCH = {
 }
 
 FAQ_DELETE = {
-    'tags': ['게시글'],
+    'tags': ['게시글 관리'],
     'description': 'FAQ 삭제',
     'parameters': [
         {

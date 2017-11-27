@@ -2,16 +2,17 @@ import openpyxl
 
 from flask import send_from_directory
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask_restful_swagger_2 import Resource, swagger
+from flask_restful import Resource
+from flasgger import swag_from
 
 from app.docs.admin.apply.stay import *
 from app.models.account import AdminModel, StudentModel
 
 
-class Stay(Resource):
-    uri = '/stay'
+class AdminStay(Resource):
+    uri = '/admin/stay'
 
-    @swagger.doc(STAY_GET)
+    @swag_from(STAY_GET)
     @jwt_required
     def get(self):
         """

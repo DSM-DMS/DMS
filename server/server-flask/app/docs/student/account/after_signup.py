@@ -1,5 +1,5 @@
 CHANGE_PW_POST = {
-    'tags': ['계정 정보 변경'],
+    'tags': ['계정'],
     'description': '비밀번호 변경',
     'parameters': [
         {
@@ -35,7 +35,7 @@ CHANGE_PW_POST = {
 }
 
 CHANGE_NUMBER_POST = {
-    'tags': ['계정 정보 변경'],
+    'tags': ['계정'],
     'description': '학번 변경',
     'parameters': [
         {
@@ -61,7 +61,7 @@ CHANGE_NUMBER_POST = {
 }
 
 MYPAGE_GET = {
-    'tags': ['계정 정보'],
+    'tags': ['계정'],
     'description': '마이페이지 정보 조회',
     'parameters': [
         {

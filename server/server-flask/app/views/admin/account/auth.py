@@ -1,14 +1,15 @@
 from flask_jwt_extended import create_access_token
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful import Resource, request
+from flasgger import swag_from
 
 from app.docs.admin.account.auth import *
 from app.models.account import AdminModel
 
 
-class Auth(Resource):
-    uri = '/auth/admin'
+class AdminAuth(Resource):
+    uri = '/admin/auth'
 
-    @swagger.doc(AUTH_POST)
+    @swag_from(AUTH_POST)
     def post(self):
         """
         로그인

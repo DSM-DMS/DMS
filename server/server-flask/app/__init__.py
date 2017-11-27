@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 
 from app.middleware import Logger
 from app.models import Mongo
-from app.views import Swagger
+from app.views import ViewInjector
 
 cors = CORS()
 # To Swagger, or Support AJAX
@@ -19,7 +19,7 @@ logger = Logger()
 db = Mongo()
 # To handle MongoDB
 
-swagger = Swagger()
+view_injector = ViewInjector()
 # To Swagger Documentation
 
 
@@ -38,8 +38,8 @@ def create_app(config_name):
     jwt.init_app(app_)
     logger.init_app(app_)
     db.init_app(app_)
-    swagger.init_app(app_)
+    view_injector.init_app(app_)
 
     return app_
 
-app = create_app('../config/dev.py')
+app = create_app('../config/production.py')

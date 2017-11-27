@@ -1,16 +1,17 @@
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask_restful_swagger_2 import Resource, request, swagger
+from flask_restful import Resource, request
+from flasgger import swag_from
 
 from app.docs.admin.apply.afterschool import *
 from app.models.account import AdminModel
 from app.models.afterschool import AfterSchoolItemModel, AfterSchoolModel
 
 
-class AfterSchool(Resource):
-    uri = '/afterschool'
+class AdminAfterSchool(Resource):
+    uri = '/admin/afterschool'
 
-    @swagger.doc(AFTERSCHOOL_POST)
+    @swag_from(AFTERSCHOOL_POST)
     @jwt_required
     def post(self):
         """
@@ -29,7 +30,7 @@ class AfterSchool(Resource):
 
         return Response('', 201)
 
-    @swagger.doc(AFTERSCHOOL_DELETE)
+    @swag_from(AFTERSCHOOL_DELETE)
     @jwt_required
     def delete(self):
         """
@@ -47,10 +48,10 @@ class AfterSchool(Resource):
         return Response('', 200)
 
 
-class AfterSchoolItem(Resource):
-    uri = '/afterschool/item'
+class AdminAfterSchoolItem(Resource):
+    uri = '/admin/afterschool/item'
 
-    @swagger.doc(AFTERSCHOOL_ITEM_POST)
+    @swag_from(AFTERSCHOOL_ITEM_POST)
     @jwt_required
     def post(self):
         """
@@ -73,14 +74,14 @@ class AfterSchoolItem(Resource):
         if not afterschool:
             return Response('', 204)
 
-        afterschool_items = items
+        afterschool_items = afterschool.items
         afterschool_items.append(AfterSchoolItemModel(title=title, on_monday=on_monday, on_tuesday=on_tuesday, on_saturday=on_saturday, target=target))
 
-        update(items=afterschool_items)
+        afterschool.update(items=afterschool_items)
 
         return Response('', 201)
 
-    @swagger.doc(AFTERSCHOOL_ITEM_DELETE)
+    @swag_from(AFTERSCHOOL_ITEM_DELETE)
     @jwt_required
     def delete(self):
         """
@@ -95,9 +96,9 @@ class AfterSchoolItem(Resource):
 
         afterschool = AfterSchoolModel.objects().first()
 
-        afterschool_items = items
+        afterschool_items = afterschool.items
         afterschool_items.remove(AfterSchoolItemModel(id=id))
 
-        update(items=afterschool_items)
+        afterschool.update(items=afterschool_items)
 
         return Response('', 200)
