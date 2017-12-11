@@ -19,7 +19,11 @@ class SurveyList(Resource):
         """
         설문조사 리스트 조회
         """
-        student_number = StudentModel.objects(id=get_jwt_identity()).first().number
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
+        student_number = student.number
 
         return Response(json.dumps([{
             'id': str(survey.id),
@@ -39,6 +43,10 @@ class Survey(Resource):
         """
         설문조사 내용 조회
         """
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
         questions = [{
             'id': str(question.id),
             'title': question.title,
@@ -47,10 +55,8 @@ class Survey(Resource):
         } for question in QuestionModel.objects(survey_id=id)]
         # Question data
 
-        answer_student = StudentModel.objects(id=get_jwt_identity()).first()
-
         for question in questions:
-            answer = AnswerModel.objects(answer_student=answer_student, question=QuestionModel.objects(id=question['id']).first()).first()
+            answer = AnswerModel.objects(answer_student=student, question=QuestionModel.objects(id=question['id']).first()).first()
             question['answer'] = answer.answer if answer else None
 
         return Response(json.dumps(questions, ensure_ascii=False), 200, content_type='application/json; charset=utf8')
@@ -61,12 +67,15 @@ class Survey(Resource):
         """
         설문조사 답변 업로드
         """
-        answer = request.form.get('answer')
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
-        answer_student = StudentModel.objects(id=get_jwt_identity()).first()
+        answer = request.form['answer']
+
         question = QuestionModel.objects(id=id).first()
 
-        AnswerModel.objects(answer_student=answer_student, question=question).delete()
-        AnswerModel(answer_student=answer_student, question=question, answer=answer).save()
+        AnswerModel.objects(answer_student=student, question=question).delete()
+        AnswerModel(answer_student=student, question=question, answer=answer).save()
 
         return Response('', 201)

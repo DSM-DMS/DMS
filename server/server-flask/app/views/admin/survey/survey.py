@@ -21,7 +21,6 @@ class AdminSurvey(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         title = request.form.get('title')
@@ -50,7 +49,6 @@ class AdminSurveyQuestion(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         id = request.form.get('id')

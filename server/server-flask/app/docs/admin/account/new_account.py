@@ -37,6 +37,9 @@ NEW_ACCOUNT_POST = {
         },
         '204': {
             'description': '계정 생성 실패(이미 존재하는 ID)'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

@@ -41,6 +41,9 @@ SURVEY_POST = {
     'responses': {
         '201': {
             'description': '설문조사 등록 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -88,6 +91,9 @@ QUESTION_POST = {
     'responses': {
         '201': {
             'description': '질문 추가 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

@@ -25,6 +25,9 @@ INITIALIZE_ACCOUNT_POST = {
                     'uuid': 'd27a3b'
                 }
             }
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

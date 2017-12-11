@@ -1,4 +1,5 @@
 import json
+from hashlib import sha256
 
 from flask import Response
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -18,13 +19,24 @@ class ChangePW(Resource):
         """
         비밀번호 변경
         """
-        current_pw = request.form.get('current_pw')
-        student = StudentModel.objects(id=get_jwt_identity(), pw=current_pw).first()
+        student = StudentModel.objects(id=get_jwt_identity()).first()
         if not student:
-            # Forbidden
+            return Response('', 403)
+
+        current_pw = request.form['current_pw']
+
+        m = sha256()
+        m.update(current_pw.encode('utf-8'))
+        current_pw = m.hexdigest()
+
+        if not StudentModel.objects(id=get_jwt_identity(), pw=current_pw):
             return Response('', 403)
 
         new_pw = request.form.get('new_pw')
+
+        m = sha256()
+        m.update(new_pw.encode('utf-8'))
+        new_pw = m.hexdigest()
 
         student.update(pw=new_pw)
 
@@ -40,9 +52,13 @@ class ChangeNumber(Resource):
         """
         학번 변경
         """
-        new_number = request.form.get('new_number', type=int)
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
-        StudentModel.objects(id=get_jwt_identity()).first().update(number=new_number)
+        new_number = int(request.form['new_number'])
+
+        student.update(number=new_number)
 
         return Response('', 201)
 
@@ -59,7 +75,7 @@ class MyPage(Resource):
         student = StudentModel.objects(id=get_jwt_identity()).first()
 
         if not student:
-            return Response('', 204)
+            return Response('', 403)
 
         return Response(json.dumps({
             'name': student.name,

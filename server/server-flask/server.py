@@ -10,4 +10,4 @@ if __name__ == '__main__':
     # meal.parse()
 
     threading.Thread(target=initialize).start()
-    app.run(host=app.config['HOST'], port=app.config['PORT'], debug=app.debug, threaded=True)
+    app.run(host=app.config['HOST'], port=app.config['PORT'], debug=app.debug)

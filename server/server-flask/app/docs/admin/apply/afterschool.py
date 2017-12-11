@@ -34,6 +34,9 @@ AFTERSCHOOL_POST = {
     'responses': {
         '201': {
             'description': '방과후 신청 set 추가 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -60,6 +63,9 @@ AFTERSCHOOL_DELETE = {
     'responses': {
         '200': {
             'description': '방과후 신청 set 제거 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -124,6 +130,9 @@ AFTERSCHOOL_ITEM_POST = {
         },
         '204': {
             'description': '아이템 추가 실패(존재하지 않는 방과후 set ID)'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -150,6 +159,9 @@ AFTERSCHOOL_ITEM_DELETE = {
     'responses': {
         '200': {
             'description': '아이템 제거 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

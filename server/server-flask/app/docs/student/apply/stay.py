@@ -21,6 +21,9 @@ STAY_GET = {
         },
         '204': {
             'description': '잔류신청 정보 없음'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -56,6 +59,9 @@ STAY_POST = {
         },
         '204': {
             'description': '잔류신청 실패(신청 가능 시간 아님)'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

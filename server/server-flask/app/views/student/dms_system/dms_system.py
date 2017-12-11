@@ -17,10 +17,13 @@ class BugReport(Resource):
         """
         DMS 버그 신고
         """
-        author = StudentModel.objects(id=get_jwt_identity()).first()
-        title = request.form.get('title')
-        content = request.form.get('content')
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
-        BugReportModel(author=author, title=title, content=content).save()
+        title = request.form['title']
+        content = request.form['content']
+
+        BugReportModel(author=student, title=title, content=content).save()
 
         return Response('', 201)

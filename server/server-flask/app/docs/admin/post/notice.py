@@ -27,6 +27,9 @@ NOTICE_POST = {
     'responses': {
         '201': {
             'description': '공지사항 업로드 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -67,6 +70,9 @@ NOTICE_PATCH = {
     'responses': {
         '200': {
             'description': '수정 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -93,6 +99,9 @@ NOTICE_DELETE = {
     'responses': {
         '200': {
             'description': '삭제 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

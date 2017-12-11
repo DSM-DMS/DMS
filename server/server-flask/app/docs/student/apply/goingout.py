@@ -22,6 +22,9 @@ GOINGOUT_GET = {
         },
         '204': {
             'description': '외출신청 정보 없음'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -55,6 +58,9 @@ GOINGOUT_POST = {
     'responses': {
         '201': {
             'description': '외출신청 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

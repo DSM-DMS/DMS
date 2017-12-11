@@ -1,9 +1,7 @@
 import pkgutil
 
 from flask_restful import Api
-from flasgger import Swagger
 
-from app.docs import TEMPLATE
 from app.views import admin, student
 
 
@@ -46,7 +44,5 @@ class ViewInjector(object):
             api.add_resource(res, res.uri)
 
     def init_app(self, app):
-        Swagger(app, template=TEMPLATE)
-
         api = Api(app)
         self._factory(api, [admin, student])

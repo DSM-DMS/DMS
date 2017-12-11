@@ -17,11 +17,14 @@ class Report(Resource):
         """
         시설고장신고
         """
-        author = StudentModel.objects(id=get_jwt_identity()).first()
-        title = request.form.get('title')
-        room = request.form.get('room', type=int)
-        content = request.form.get('content')
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
-        ReportModel(author=author, title=title, room=room, content=content).save()
+        title = request.form['title']
+        room = int(request.form['room'])
+        content = request.form['content']
+
+        ReportModel(author=student, title=title, room=room, content=content).save()
 
         return Response('', 201)

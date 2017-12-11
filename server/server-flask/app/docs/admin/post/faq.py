@@ -27,6 +27,9 @@ FAQ_POST = {
     'responses': {
         '201': {
             'description': 'FAQ 업로드 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -67,6 +70,9 @@ FAQ_PATCH = {
     'responses': {
         '200': {
             'description': '수정 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -93,6 +99,9 @@ FAQ_DELETE = {
     'responses': {
         '200': {
             'description': '삭제 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

@@ -1,6 +1,6 @@
 import openpyxl
 
-from flask import send_from_directory
+from flask import Response, send_from_directory
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restful import Resource
 from flasgger import swag_from
@@ -19,9 +19,8 @@ class AdminGoingout(Resource):
         외출신청 엑셀 다운로드
         """
         admin = AdminModel.objects(id=get_jwt_identity())
-
         if not admin:
-            return '', 403
+            return Response('', 403)
 
         wb = openpyxl.load_workbook('외출 명렬표.xlsx')
         ws = wb.active
@@ -43,4 +42,4 @@ class AdminGoingout(Resource):
 
         wb.save('명렬표.xlsx')
 
-        return send_from_directory('.', '외출 명렬표.xlsx')
+        return send_from_directory('.', '외출 명렬표.xlsx'), 200
