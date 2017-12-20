@@ -42,17 +42,17 @@ def migrate_posts():
     cursor.execute('SELECT * FROM faq')
     faqs = cursor.fetchall()
     for faq in faqs:
-        FAQModel(title=faq['title'], content=faq['content']).save()
+        FAQModel(title=faq['title'], content=faq['content'], author='사감실').save()
 
     cursor.execute('SELECT * FROM notice')
     notices = cursor.fetchall()
     for notice in notices:
-        NoticeModel(title=notice['title'], content=notice['content']).save()
+        NoticeModel(title=notice['title'], content=notice['content'], author='사감실').save()
 
     cursor.execute('SELECT * FROM rule')
     rules = cursor.fetchall()
     for rule in rules:
-        RuleModel(title=rule['title'], content=rule['content']).save()
+        RuleModel(title=rule['title'], content=rule['content'], author='사감실').save()
 
 
 if __name__ == '__main__':
