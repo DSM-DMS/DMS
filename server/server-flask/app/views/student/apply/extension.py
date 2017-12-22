@@ -207,6 +207,7 @@ class ExtensionMap12(Resource):
     uri = '/extension/map/12'
 
     @swag_from(EXTENSION_MAP_GET)
+    @jwt_required
     def get(self):
         """
         12시 연장신청 지도 조회
