@@ -20,6 +20,9 @@ FAQ_PREVIEW_GET = {
     'responses': {
         '201': {
             'description': '프리뷰 설정 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -46,6 +49,9 @@ NOTICE_PREVIEW_GET = {
     'responses': {
         '201': {
             'description': '프리뷰 설정 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -72,6 +78,9 @@ RULE_PREVIEW_GET = {
     'responses': {
         '201': {
             'description': '프리뷰 설정 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

@@ -20,7 +20,6 @@ class AdminInitializeAccount(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         number = request.form.get('number', type=int)

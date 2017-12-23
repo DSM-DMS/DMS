@@ -27,6 +27,9 @@ BUG_REPORT_POST = {
     'responses': {
         '201': {
             'description': '버그 신고 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

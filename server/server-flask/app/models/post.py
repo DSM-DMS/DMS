@@ -7,7 +7,7 @@ from app.models.account import AdminModel
 class PostBase(Document):
     title = StringField(required=True)
     content = StringField(required=True)
-    author = ReferenceField(AdminModel, required=True)
+    author = StringField(required=True)
     pinned = BooleanField(required=True, default=False)
 
     write_date = StringField(required=True, default=str(date.today()))

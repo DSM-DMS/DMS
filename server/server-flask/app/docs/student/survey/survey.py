@@ -29,6 +29,9 @@ SURVEY_LIST_GET = {
                     }
                 ]
             }
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -70,6 +73,9 @@ SURVEY_GET = {
                     }
                 ]
             }
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -103,6 +109,9 @@ SURVEY_POST = {
     'responses': {
         '201': {
             'description': '답변 남기기 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

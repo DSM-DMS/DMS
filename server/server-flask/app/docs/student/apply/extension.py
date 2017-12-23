@@ -22,6 +22,9 @@ EXTENSION_GET = {
         },
         '204': {
             'description': '연장신청 정보 없음'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -67,6 +70,9 @@ EXTENSION_POST = {
         },
         '204': {
             'description': '연장신청 실패(신청 가능 시간 아님)'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -125,6 +131,9 @@ EXTENSION_MAP_GET = {
                     ]
                 ]
             }
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

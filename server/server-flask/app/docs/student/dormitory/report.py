@@ -34,6 +34,9 @@ REPORT_POST = {
     'responses': {
         '201': {
             'description': '시설고장신고 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }

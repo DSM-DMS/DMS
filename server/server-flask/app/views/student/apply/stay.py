@@ -20,6 +20,8 @@ class Stay(Resource):
         잔류신청 정보 조회
         """
         student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
         if not student.stay_apply:
             return Response('', 204)
@@ -32,6 +34,10 @@ class Stay(Resource):
         """
         잔류신청
         """
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
         today = datetime.today()
 
         if (today.weekday() == 3 and today.time() > time(22, 00))\
@@ -40,9 +46,8 @@ class Stay(Resource):
             # 목요일 10시 이후, 또는 금요일과 토요일 사이, 또는 일요일 8시 30분 이전
             return Response('', 204)
 
-        value = request.form.get('value', type=int)
+        value = int(request.form['value'])
 
-        student = StudentModel.objects(id=get_jwt_identity()).first()
         student.update(stay_apply=StayApplyModel(value=value))
 
         return Response('', 201)

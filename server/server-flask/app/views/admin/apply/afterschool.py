@@ -19,7 +19,6 @@ class AdminAfterSchool(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         start_date = request.form.get('start_date')
@@ -38,7 +37,6 @@ class AdminAfterSchool(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         id = request.form.get('id')
@@ -59,7 +57,6 @@ class AdminAfterSchoolItem(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         id = request.form.get('id')
@@ -89,7 +86,6 @@ class AdminAfterSchoolItem(Resource):
         """
         admin = AdminModel.objects(id=get_jwt_identity()).first()
         if not admin:
-            # Forbidden
             return Response('', 403)
 
         id = request.form.get('id')

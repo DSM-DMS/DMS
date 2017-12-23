@@ -1,3 +1,5 @@
+from hashlib import sha256
+
 from flask import Response
 from flask_restful import Resource, request
 from flasgger import swag_from
@@ -14,7 +16,7 @@ class IDVerification(Resource):
         """
         ID 중복체크
         """
-        id = request.form.get('id')
+        id = request.form['id']
 
         if StudentModel.objects(id=id):
             # ID already exists
@@ -31,7 +33,7 @@ class UUIDVerification(Resource):
         """
         UUID 검사
         """
-        uuid = request.form.get('uuid')
+        uuid = request.form['uuid']
 
         if SignupRequiredModel.objects(uuid=uuid):
             return Response('', 201)
@@ -47,9 +49,13 @@ class Signup(Resource):
         """
         회원가입
         """
-        uuid = request.form.get('uuid')
-        id = request.form.get('id')
-        pw = request.form.get('pw')
+        uuid = request.form['uuid']
+        id = request.form['id']
+        pw = request.form['pw']
+
+        m = sha256()
+        m.update(pw.encode('utf-8'))
+        pw = m.hexdigest()
 
         student = SignupRequiredModel.objects(uuid=uuid).first()
         if student:
@@ -60,4 +66,4 @@ class Signup(Resource):
 
             return Response('', 201)
         else:
-            return Response('', 400)
+            return Response('', 204)

@@ -29,7 +29,7 @@ CHANGE_PW_POST = {
             'description': '비밀번호 변경 성공'
         },
         '403': {
-            'description': '비밀번호 변경 실패(틀린 비밀번호)'
+            'description': '비밀번호 변경 실패(틀린 비밀번호), 또는 권한 없음'
         }
     }
 }
@@ -56,6 +56,9 @@ CHANGE_NUMBER_POST = {
     'responses': {
         '201': {
             'description': '학번 변경 성공'
+        },
+        '403': {
+            'description': '권한 없음'
         }
     }
 }
@@ -90,7 +93,7 @@ MYPAGE_GET = {
                 }
             }
         },
-        '204': {
+        '403': {
             'description': '해당 학생 정보 없음(재로그인 필요)'
         }
     }

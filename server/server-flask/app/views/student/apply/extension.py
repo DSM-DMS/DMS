@@ -91,6 +91,8 @@ class Extension11(Resource):
         11시 연장신청 정보 조회
         """
         student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
         if not student.extension_apply_11:
             return Response('', 204)
@@ -106,15 +108,18 @@ class Extension11(Resource):
         """
         11시 연장신청
         """
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
         now = datetime.now().time()
 
         if not APPLY_START < now < APPLY_END_11:
             return Response('', 204)
 
-        class_ = request.form.get('class', type=int)
-        seat = request.form.get('seat', type=int)
+        class_ = int(request.form['class'])
+        seat = int(request.form['seat'])
 
-        student = StudentModel.objects(id=get_jwt_identity()).first()
         student.update(extension_apply_11=ExtensionApplyModel(class_=class_, seat=seat))
 
         return Response('', 201)
@@ -130,6 +135,8 @@ class Extension12(Resource):
         12시 연장신청 정보 조회
         """
         student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
 
         if not student.extension_apply_12:
             return Response('', 204)
@@ -145,15 +152,18 @@ class Extension12(Resource):
         """
         12시 연장신청
         """
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
         now = datetime.now().time()
 
         if not APPLY_START < now < APPLY_END_12:
             return Response('', 204)
 
-        class_ = request.form.get('class', type=int)
-        seat = request.form.get('seat', type=int)
+        class_ = int(request.form['class'])
+        seat = int(request.form['seat'])
 
-        student = StudentModel.objects(id=get_jwt_identity()).first()
         student.update(extension_apply_12=ExtensionApplyModel(class_=class_, seat=seat))
 
         return Response('', 201)
@@ -163,11 +173,16 @@ class ExtensionMap11(Resource):
     uri = '/extension/map/11'
 
     @swag_from(EXTENSION_MAP_GET)
+    @jwt_required
     def get(self):
         """
         11시 연장신청 지도 조회
         """
-        class_ = request.args.get('class', type=int)
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
+        class_ = int(request.args['class'])
 
         map_ = MAPS[class_]
 
@@ -192,11 +207,16 @@ class ExtensionMap12(Resource):
     uri = '/extension/map/12'
 
     @swag_from(EXTENSION_MAP_GET)
+    @jwt_required
     def get(self):
         """
         12시 연장신청 지도 조회
         """
-        class_ = request.args.get('class', type=int)
+        student = StudentModel.objects(id=get_jwt_identity()).first()
+        if not student:
+            return Response('', 403)
+
+        class_ = int(request.args['class'])
 
         map_ = MAPS[class_]
 
